@@ -1,6 +1,7 @@
 import React from 'react';
-import MyProfilePicture from './MyProfilePicture';
-import Personal from './Personal';
+import MyProfilePicture from './UserPageComponents/MyProfilePicture';
+import MyPublicProfile from './UserPageComponents/MyPublicProfile';
+
 
 const UserPage = () => {
   // const [user, setUser] = useState();
@@ -25,8 +26,8 @@ const UserPage = () => {
   return (
     <div className='grid grid-cols-4 gap-x-4 font-source'>
       <div className='col-span-1 bg-gray-200/40'></div>
-      <div className='col-span-2 bg-gray-200/40'>
-        <Personal />
+      <div className='col-span-2 bg-gray-200/40 overflow-x-hidden'>
+        <MyPublicProfile />
       </div>
       <div className='col-span-1'>
         <MyProfilePicture />

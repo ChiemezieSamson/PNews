@@ -49,7 +49,7 @@ const Personal = () => {
         {userInformations.map((userInfo) => {
           return (
             <label htmlFor={userInfo.inputid} className='tracking-wide font-medium' key={userInfo.id}>
-              <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block mt-4 text-sm font-medium text-slate-700">
+              <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block mt-4 text-sm font-medium text-slate-700 capitalize">
                 {userInfo.name}
               </span>
               <div className='relative'>
@@ -76,7 +76,7 @@ const Personal = () => {
 
       {/* User first name and last name are inside the form tag  */}
       <div>
-        <h3 className='text-3xl font-normal my-1 pr-2 text-[#282a35]'>User Name</h3>
+        <h3 className='text-3xl font-normal my-1 pr-2 text-[#282a35] capitalize'>User Name</h3>
         <small className='text-sm font-normal text-[#798488] my-1'><p>For Account and Public Profile</p></small>
       </div>
 
@@ -86,7 +86,7 @@ const Personal = () => {
 
         {/* The login password and email are outside the tag but connected with the ' form ' attribute */}
       <div className='mt-5'>
-        <h3 className='text-3xl font-normal my-1 pr-2'>Login</h3>
+        <h3 className='text-3xl font-normal my-1 pr-2 text-[#282a35]  capitalize'>Login</h3>
         <small className='text-sm font-normal text-[#798488] my-1'><p>Your Login Credentials</p></small>
       </div>
 
@@ -95,7 +95,7 @@ const Personal = () => {
       </div>
 
       <div className='mt-7 p-2 grid place-items-end'>
-      <button className='text-[#798488] bg-gray-300 border-0 py-2.5 px-8 rounded-full cursor-pointer text-base shadow-[#444] 
+      <button className='text-[#798488] bg-gray-300 capitalize border-0 py-2.5 px-8 rounded-full cursor-pointer text-base shadow-[#444] 
         shadow-sm' type='submit' form='userinformation'>Save</button>
       </div>
     </div>

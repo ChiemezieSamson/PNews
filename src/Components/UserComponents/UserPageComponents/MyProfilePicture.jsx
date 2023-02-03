@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Posts } from '../../data'
+import { Posts } from '../../../data'
 
 
 const MyProfilePicture = () => {
@@ -9,6 +9,7 @@ const MyProfilePicture = () => {
 
   const handleNickNameInput = () => {
     setAddNickName(change => !change)
+    setUserProfileImage(true)
   }
 
   const handleUpdateNickName = (e) => {
@@ -18,7 +19,7 @@ const MyProfilePicture = () => {
   return (
     <div className='px-3 mb-12 bg-gray-200/40 pb-5 pt-5'>
       <div className='font-semibold px-3 mb-9'>
-        <p className='text-[#282a35] text-2xl'>My Profile picture</p>
+        <p className='text-[#282a35] text-2xl capitalize'>My Profile picture</p>
         <small className='text-xs text-[#798488]'>Add a photo of you to be easily recognized</small>
       </div>
       <div>
@@ -39,7 +40,7 @@ const MyProfilePicture = () => {
       </div>
         
         <div className='px-3 pb-5'>
-          <h3 className='text-xl font-semibold text-[#282a35]'>Nebeolisa Chiemezie Samson</h3>
+          <h3 className='text-xl font-semibold text-[#282a35] capitalize'>Nebeolisa Chiemezie Samson</h3>
           <label htmlFor="usernickname" className={`text-sm capitalize italic hover:text-red-400 text-red-700 
           tracking-widest underline underline-offset-2 ${addNickName && "hidden"}`} 
           onClick={handleNickNameInput}>{nickName}</label>
