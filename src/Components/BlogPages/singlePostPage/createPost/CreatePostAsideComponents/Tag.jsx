@@ -17,7 +17,8 @@ const Tag = () => {
 
   const handleAddTag = () => {
     let id = newAddTag.length - 1
-    let newId = newAddTag[id].id
+    let newId
+    id > 0 ? newId = newAddTag[id].id : newId = 1
     let addedTag = {id: newId + 1, tag: addTag.toLowerCase()}
     const checktag = newAddTag.map(tag => tag.tag)
      
@@ -45,10 +46,10 @@ const Tag = () => {
   }
 
   const handleDeletTag = (e) => {
-    tagChoosed.includes(e.target.parentElement.firstChild.textContent.toLowerCase()) ?
+    const checktag = newAddTag.map(tag => tag.tag)
+    checktag.includes(e.target.parentElement.firstChild.textContent.toLowerCase()) ?
     setTagChoosed((list) => {
-      let newlist = list.filter(item => item !==  e.target.parentElement.firstChild.textContent)
-      e.target.parentElement.remove()
+      let newlist = list.filter(item => item.tag !==  e.target.parentElement.firstChild.textContent)
       return newlist}): e.target.parentElement.remove()
   }
   

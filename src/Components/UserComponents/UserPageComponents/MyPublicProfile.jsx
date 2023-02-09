@@ -8,7 +8,7 @@ const MyPublicProfile = () => {
   const UserContacts = [
     {
       id: 1,
-      icon: <FaEnvelopeOpen />,
+      icon: <FaEnvelopeOpen className='inline-block align-text-top'/>,
       name: "Email",
       inputtype: "email",
       inputid: "usercontactemail",
@@ -16,7 +16,7 @@ const MyPublicProfile = () => {
     },
     {
       id: 2,
-      icon: <FaPhoneAlt />,
+      icon: <FaPhoneAlt className='inline-block align-text-top'/>,
       name: "Phone",
       inputtype: "tel",
       inputid: "usercontactphone",
@@ -24,7 +24,7 @@ const MyPublicProfile = () => {
     },
     {
       id: 3,
-      icon: <FaLinkedinIn />,
+      icon: <FaLinkedinIn className='inline-block align-text-top'/>,
       name: "Linkedin",
       inputtype: "url",
       inputid: "usercontactlinkedin",
@@ -32,7 +32,7 @@ const MyPublicProfile = () => {
     },
     {
       id: 4,
-      icon: <FaTwitter />,
+      icon: <FaTwitter className='inline-block align-text-top'/>,
       name: "Twitter",
       inputtype: "url",
       inputid: "usercontacttwitter",
@@ -40,7 +40,7 @@ const MyPublicProfile = () => {
     },
     {
       id: 5,
-      icon: <FaFacebookF />,
+      icon: <FaFacebookF className='inline-block align-text-top'/>,
       name: "Facebook",
       inputtype: "url",
       inputid: "usercontactfacebook",
@@ -48,7 +48,7 @@ const MyPublicProfile = () => {
     },
     {
       id: 6,
-      icon: <FaInstagram />,
+      icon: <FaInstagram className='inline-block align-text-top'/>,
       name: "Instagram",
       inputtype: "url",
       inputid: "usercontactinstagram",
@@ -56,7 +56,7 @@ const MyPublicProfile = () => {
     },
     {
       id: 7,
-      icon: <FaYoutubeSquare />,
+      icon: <FaYoutubeSquare className='inline-block align-text-top'/>,
       name: "YouTube",
       inputtype: "url",
       inputid: "usercontactyoutube",
@@ -64,7 +64,7 @@ const MyPublicProfile = () => {
     },
     {
       id: 8,
-      icon: <FaGlobe />,
+      icon: <FaGlobe className='inline-block align-text-top'/>,
       name: "Website",
       inputtype: "url",
       inputid: "usercontactwebsite",
@@ -72,10 +72,8 @@ const MyPublicProfile = () => {
     },
   ]
 
-  console.log(UserContacts)
-
   return (
-    <div className='text-left px-5 mt-8 font-source pt-7 pb-12'>
+    <div className='text-left px-5 mt-8 font-source pt-7 pb-5'>
       <div>
         <UserInfoHeading head={"Public URL"} text={"Share your accomplishments with the world"}/>
         <small className='text-sm font-normal my-1 italic text-[#f93d53]'>
@@ -119,8 +117,34 @@ const MyPublicProfile = () => {
       <div>
         <UserInfoHeading head={"Contact Me"} text={"How visitors will get in touch with you"}/>
         
-        <form id='userpublicinformation' name='userpublicinformation'>
+        <form id='userpublicinformation' name='userpublicinformation' className='my-7'>
+          {UserContacts.map((userPublicInfo) => {
+            return (
+              <label htmlFor={userPublicInfo.inputid} key={userPublicInfo.id} className="grid grid-cols-4 gap-x-4">
+                <span className='text-[#282a35] text-lg py-1 mt-1 whitespace-nowrap col-span-1'>
+                  {userPublicInfo.icon}
+                  <span className='text-[#282a35] text-lg min-w-fit p-1 ml-4 font-semibold inline-block'>
+                    {userPublicInfo.name}
+                  </span>
+                </span>
 
+                <div className='w-full col-span-3'>
+                  <input 
+                  type={userPublicInfo.inputtype} 
+                  id={userPublicInfo.inputid} 
+                  name={userPublicInfo.inputid}  
+                  placeholder={userPublicInfo.placeholder}
+                  className="invalid:border-red-400 invalid:shadow-red-400 placeholder:text-[#798488]"
+                  />
+                </div>
+              </label>
+            )
+          })}
+
+          <div className='mt-5 p-2 grid place-items-end'>
+            <button className='text-[#798488] bg-gray-300 capitalize border-0 py-2.5 px-8 rounded-full cursor-pointer text-base shadow-[#444] 
+              shadow-sm' type='submit' form='userinformation'>Save</button>
+          </div>
         </form>
 
       </div>

@@ -15,6 +15,9 @@ import SinglePost from "./Components/BlogPages/singlePostPage/singlePost/SingleP
 import WritePost from "./Components/BlogPages/singlePostPage/writePost/WritePost";
 import EditPost from "./Components/BlogPages/singlePostPage/editPost/EditPost";
 import UserPage from "./Components/UserComponents/UserPage";
+import Personal from "./Components/UserComponents/UserPageComponents/Personal";
+import MyPublicProfile from "./Components/UserComponents/UserPageComponents/MyPublicProfile";
+import SingAndSecurity from "./Components/UserComponents/UserPageComponents/SingAndSecurity";
 
 const App = createBrowserRouter([
 	{
@@ -93,16 +96,30 @@ const App = createBrowserRouter([
 				element: <SinglePost />,
 			},
 			{
-				path: "writePost",
+				path: "writepost",
 				element: <WritePost />,
 			},
 			{
-				path: "editPost",
+				path: "editpost",
 				element: <EditPost />,
 			},
 			{
-				path: "userPage",
+				path: "userpage",
 				element: <UserPage />,
+				children: [
+					{
+						index: true,
+						element: <Personal />,
+					},
+					{
+						path: "/userpage/:securityId",
+						element: <SingAndSecurity />,
+					},
+					{
+						path: "/userpage/:publicprofileId",
+						element: <MyPublicProfile />,
+					},
+				],
 			},
 			{
 				path: "logo",

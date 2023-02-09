@@ -19,9 +19,9 @@ const Footer = () => {
       <CopyWrite />
 
       <Link to={"single"}>SinglePost</Link>
-      <Link to={"writePost"}>WritePost</Link>
-      <Link to={"editPost"}>EditPost</Link>
-      <Link to={"userPage"}>UserPage</Link>
+      <Link to={"writepost"}>WritePost</Link>
+      <Link to={"editpost"}>EditPost</Link>
+      <Link to={"userpage"}>UserPage</Link>
       
     </section>
   )

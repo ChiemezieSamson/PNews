@@ -48,7 +48,7 @@
   select {
     
     @apply bg-transparent w-full border-slate-400 shadow-inner focus:shadow-slate-400/60
-    focus:outline-none focus:border-gray-400 focus:ring-0 mb-5 mt-1.5 caret-black
+    focus:outline-none focus:border-gray-400 focus:ring-0 mb-5 mt-1.5 caret-black rounded
   }
 }
 

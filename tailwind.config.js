@@ -19,9 +19,6 @@ module.exports = {
 				round: ["Varela Round", "sans-serif"],
 				poppins: ["poppins", "sans-serif"],
 				lora: ["Lora", "serif"],
-				manrope: ["manrope", "sans-serif"],
-				montserrat: ["montserrat", "sans-serif"],
-				source: ["source", "sans-serif"],
 				josefin: ["Josefin Sans", "sans-serif"],
 			},
 			gridTemplateRows: {

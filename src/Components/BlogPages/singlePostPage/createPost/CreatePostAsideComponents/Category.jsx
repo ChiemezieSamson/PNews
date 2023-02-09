@@ -106,11 +106,11 @@ const Category = () => {
         {/* Add new category  */}
         <div className='py-1'>
           <span className='grid grid-cols-2 gap-x-3'>
-            <span className='text-blue-400 underline mt-3 mb-3 inline-block text-sm cursor-pointer
-            hover:text-blue-500' onClick={handleOpenAddNewCat}>Add New Category</span>
-            <span className={`text-[#a7a7a7] underline mt-3 mb-3 inline-block text-sm cursor-pointer
+            <button className='text-blue-400 underline mt-3 mb-3 inline-block text-sm cursor-pointer
+            hover:text-blue-500' onClick={handleOpenAddNewCat}>Add New Category</button>
+            <button className={`text-[#a7a7a7] underline mt-3 mb-3 inline-block text-sm cursor-pointer
             hover:text-red-400  ${checkedItemArry.length === 0 ? "hidden" : "inline" }`} 
-            onClick={handleDeletCat}>Remove Category</span>
+            onClick={handleDeletCat}>Remove Category</button>
           </span>
           
 

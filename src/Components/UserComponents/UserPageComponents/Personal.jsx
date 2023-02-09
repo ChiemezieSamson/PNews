@@ -1,5 +1,6 @@
 import React from 'react'
 import { FaCheckDouble } from "react-icons/fa";
+import { UserInfoHeading } from '../../ButtonAndOthers/SharedAssets';
 
 const Personal = () => {
 
@@ -72,14 +73,11 @@ const Personal = () => {
   }
 
   return (
-    <div className='text-left px-5 mt-8 font-source pt-7 pb-12'>
+    <div className='text-left px-5 mt-8 font-source pt-7 pb-5'>
 
       {/* User first name and last name are inside the form tag  */}
-      <div>
-        <h3 className='text-3xl font-normal my-1 pr-2 text-[#282a35] capitalize'>User Name</h3>
-        <small className='text-sm font-normal text-[#798488] my-1'><p>For Account and Public Profile</p></small>
-      </div>
-
+      <UserInfoHeading head={"User Name"} text={"For Account and Public Profile"}/>
+      
       <form id='userinformation' name='userinfoform' className='py-3 my-0.5'> 
         <UserInput userInformations={userPersonalInfor.slice(0, 3)}/>                 
       </form> 
@@ -94,7 +92,7 @@ const Personal = () => {
         <UserInput userInformations={userPersonalInfor.slice(3, 5)}/>        
       </div>
 
-      <div className='mt-7 p-2 grid place-items-end'>
+      <div className='mt-5 p-2 grid place-items-end'>
       <button className='text-[#798488] bg-gray-300 capitalize border-0 py-2.5 px-8 rounded-full cursor-pointer text-base shadow-[#444] 
         shadow-sm' type='submit' form='userinformation'>Save</button>
       </div>
