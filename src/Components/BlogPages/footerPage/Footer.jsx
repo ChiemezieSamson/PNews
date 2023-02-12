@@ -22,6 +22,7 @@ const Footer = () => {
       <Link to={"writepost"}>WritePost</Link>
       <Link to={"editpost"}>EditPost</Link>
       <Link to={"userpage"}>UserPage</Link>
+      <Link to={"login"}>LogIn</Link>
       
     </section>
   )

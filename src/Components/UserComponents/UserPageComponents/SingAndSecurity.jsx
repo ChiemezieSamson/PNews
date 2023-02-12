@@ -1,6 +1,7 @@
 import { UserInfoHeading } from '../../ButtonAndOthers/SharedAssets'
 import Email from './SecurityComponents/Email'
 import ChangePassword from './SecurityComponents/ChangePassword'
+import LogOutOrDeletUser from './SecurityComponents/LogOutOrDeletUser'
 
 const SingAndSecurity = () => {
 
@@ -11,8 +12,7 @@ const SingAndSecurity = () => {
       <div className='divide-y divide-solid divide-slate-500 mt-8'>
         <Email />
         <ChangePassword />
-        
-
+        <LogOutOrDeletUser />
       </div>
     </div>
   )

@@ -18,6 +18,7 @@ import UserPage from "./Components/UserComponents/UserPage";
 import Personal from "./Components/UserComponents/UserPageComponents/Personal";
 import MyPublicProfile from "./Components/UserComponents/UserPageComponents/MyPublicProfile";
 import SingAndSecurity from "./Components/UserComponents/UserPageComponents/SingAndSecurity";
+import LogIn from "./Components/LogIn/LogIn";
 
 const App = createBrowserRouter([
 	{
@@ -102,6 +103,10 @@ const App = createBrowserRouter([
 			{
 				path: "editpost",
 				element: <EditPost />,
+			},
+			{
+				path: "login",
+				element: <LogIn />,
 			},
 			{
 				path: "userpage",

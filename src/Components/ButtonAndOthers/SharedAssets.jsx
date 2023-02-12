@@ -390,8 +390,24 @@ export const PostsShortInfoComponent = ({post}) => (
 export const UserInfoHeading = ({head, text}) => {
  return (
   <div>
-    <h3 className='text-3xl font-normal my-1 pr-2 text-[#282a35] capitalize'>{head}</h3>
+    <h3 className='text-2xl sm:text-3xl font-normal my-1 pr-2 text-[#282a35] capitalize'>{head}</h3>
     <small className='text-sm font-normal text-[#798488] my-1'><p>{text}</p></small>
   </div>
  )
+}
+
+export const SinginAndSecurityIntro = ({text}) => {
+  return (
+    <div className='font-medium tracking-wide font-josefin'>
+      <p>{text}</p>
+    </div>
+  )
+}
+
+export const PasswordVerificationAuth = () => {
+  return (
+   <div>
+
+   </div>
+  )
 }

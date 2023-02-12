@@ -1,5 +1,6 @@
 import React, { useRef, useState } from 'react'
 import { Hanbugar3, WritePostAsideOpenClosebar } from '../../../ButtonAndOthers/Buttons'
+import { SinginAndSecurityIntro } from '../../../ButtonAndOthers/SharedAssets'
 
 
 const secondaryEmails = [
@@ -22,7 +23,7 @@ const Email = () => {
   const [primaryEmail, setPrimaryEmail] = useState("myemailexample@email2.com")
   const [openGetUserPasswordForMakeAndRemove, setOpenGetUserPasswordForMakeAndRemove] = useState(false)
   const [emailOfTheClickedButton, setEmailOfTheClickedButton] = useState("")
-  const [textContentOfTheClickedButton, setTextContentOfTheClickedButton] = useState("")
+  const [textContentOfTheClickedButton, setTextContentOfTheClickedButton] = useState("Make primary")
   const ButtonRef = useRef();
   
   const handleOpenCloseChild = () => {
@@ -150,9 +151,7 @@ const Email = () => {
 
    
         <div className={`${openCat? "block" : "hidden"} mt-2 mb-10 px-3 text-[#444]`}>
-          <div className='font-medium tracking-wide font-josefin'>
-            <p>Emails you've added</p>
-          </div>
+          <SinginAndSecurityIntro text={"Emails you've added"} />
 
             {/* the primary and secondary emails display starts here */}
 
@@ -168,7 +167,7 @@ const Email = () => {
              <h6 className='text-sm font-bold text-[#282a35] mb-4'>Secondary email</h6>                
                 {secondaryEmaillist.map(email => {
                   return (
-                    <div className='flex justify-between mt-5' key={email.id}>    
+                    <div className='sm:grid sm:grid-flow-col sm:justify-between mt-5' key={email.id}>    
                       <p>{email.email}</p>          
                       <span className='text-sm text-gray-400 inline-block'>   
 
@@ -178,8 +177,8 @@ const Email = () => {
                         type='button' 
                         id='makeprimaryemailbutton'
                         name='makeprimaryemailbutton'
-                        className='mx-2 cursor-pointer hover:bg-[#e4e4e4] tracking-wider px-1 inline-block rounded-md
-                          hover:shadow hover:shadow-gray-400'
+                        className='sm:mx-2 mr-2 cursor-pointer hover:bg-[#e4e4e4] tracking-wider sm:px-1 pr-1 inline-block rounded-md
+                          hover:shadow hover:shadow-gray-400 transition-all duration-200 ease-linear'
                           onClick={handleMakePrimaryButton}>
                           Make primary
                         </button>
@@ -191,7 +190,7 @@ const Email = () => {
                         id='removeemailbutton'
                         name='removeemailbutton'
                         className='mx-2 cursor-pointer hover:bg-[#e4e4e4] tracking-wider px-1 inline-block rounded-md
-                        hover:shadow hover:shadow-gray-400' 
+                        hover:shadow hover:shadow-gray-400 transition-all duration-200 ease-linear' 
                         onClick={handleRemoveEmailButton}>
                           Remove
                         </button>
@@ -215,6 +214,7 @@ const Email = () => {
               </button>
             </div>
 
+              {/* The hidden part where you add your new email section start here */}
             <div className={`${openAddnewCat? "block" : "hidden"}`}>
               <div className='mb-5 py-1'>
                 <h6 className='text-sm font-bold text-[#282a35] mb-4'>Add a new email</h6>
@@ -263,7 +263,7 @@ const Email = () => {
 
          {/* The box to enter user password before the secondary email will be made your primary email is here */}
 
-        <div className={`${openGetUserPasswordForMakeAndRemove ? "fixed inset-0 p-0.5 -translate-x-[0] translate-y-0 grid place-content-center"
+        <div className={`${openGetUserPasswordForMakeAndRemove ? "fixed z-50 inset-0 p-0.5 -translate-x-[0] translate-y-0 grid place-content-center"
             : "-translate-x-[200%] translate-y-full hidden transition-all duration-500 ease-linear"}`}>
           <div className='shadow-md shadow-gray-400 max-w-[300px] bg-white py-7 px-5 rounded-md relative '>
             <h6 className='font-bold text-lg text-[#444] mb-4'>Enter Password</h6>
@@ -281,19 +281,21 @@ const Email = () => {
               className='placeholder:text-[#798488] invalid:border-red-400 invalid:shadow-red-400'
               onChange={handleGetUserpassword}
               required/>
-              <span >
+              <div className='grid grid-flow-col justify-between'>
                 <button type='submit' 
                 id='usermakeordeletemail' 
                 name='usermakeordeletemail' 
-                className='mx-2 cursor-pointer bg-[#e4e4e4] tracking-wider px-1 rounded-md shadow shadow-gray-400 text-sm'
+                className='mx-1 cursor-pointer bg-[#e4e4e4] tracking-wider px-1 rounded-md shadow shadow-gray-400 text-sm
+                transition-all duration-200 ease-linear hover:bg-blue-400 hover:text-white'
                 ref={ButtonRef}
                 >{textContentOfTheClickedButton}</button>
                 <button 
                 type='submit' 
                 id='forgetPassword' 
                 name='forgetPassword'
-                className='px-1 mx-2 cursor-pointer tracking-wider text-blue-500 text-sm'>Forgot password</button>
-              </span>
+                className='px-1 mx-1 cursor-pointer tracking-wider text-blue-500 text-sm 
+                transition-all duration-200 ease-linear hover:text-blue-700'>Forgot password</button>
+              </div>
             </form>
 
               {/* cancle button used on the Enter Password box */}

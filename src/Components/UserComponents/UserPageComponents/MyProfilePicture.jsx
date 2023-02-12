@@ -17,7 +17,7 @@ const MyProfilePicture = () => {
   }
 
   return (
-    <div className='px-3 mb-12 bg-gray-200/40 pb-5 pt-5'>
+    <div className='px-3 mb-12 bg-gray-200/40 pb-5 pt-5 rounded-md'>
       <div className='font-semibold px-3 mb-9'>
         <p className='text-[#282a35] text-2xl capitalize'>My Profile picture</p>
         <small className='text-xs text-[#798488]'>Add a photo of you to be easily recognized</small>

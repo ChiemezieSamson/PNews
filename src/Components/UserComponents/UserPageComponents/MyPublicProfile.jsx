@@ -82,8 +82,8 @@ const MyPublicProfile = () => {
 
         {/* Nickname for the user start here */}
       <div className='py-2 mt-3'>
-        <label htmlFor="usernickname" className='flex gap-x-2.5'>
-          <span className='text-[#282a35] text-lg font-semibold mt-3'>NickName:</span>
+        <label htmlFor="usernickname" className='sm:flex sm:gap-x-2.5'>
+          <span className='text-[#282a35] sm:text-lg font-semibold mt-3'>NickName:</span>
           <div className='w-full'>
             <input 
             type="email" 
@@ -93,7 +93,7 @@ const MyPublicProfile = () => {
             placeholder='@"nickname"'
             form='userpublicinformation'/>
             <p className='text-sm font-normal text-[#798488] mx-4 italic'>No use of  
-              <span className='text-base px-1 font-semibold'>&#91; &#8208; &#64; &#33; &#35; &#36; &#37; &#43; &#x204E; &#38; 
+              <span className='text-sm sm:text-base px-1 font-semibold'>&#91; &#8208; &#64; &#33; &#35; &#36; &#37; &#43; &#x204E; &#38; 
               &#60; &#62; &#8242; &#8243; &#8260; &#8901; &#93;</span> etc on Nick name.</p>
           </div>
         </label>
@@ -120,15 +120,15 @@ const MyPublicProfile = () => {
         <form id='userpublicinformation' name='userpublicinformation' className='my-7'>
           {UserContacts.map((userPublicInfo) => {
             return (
-              <label htmlFor={userPublicInfo.inputid} key={userPublicInfo.id} className="grid grid-cols-4 gap-x-4">
-                <span className='text-[#282a35] text-lg py-1 mt-1 whitespace-nowrap col-span-1'>
+              <label htmlFor={userPublicInfo.inputid} key={userPublicInfo.id} className="sm:grid sm:grid-cols-4 sm:gap-x-4">
+                <span className='text-[#282a35] sm:text-lg py-1 mt-1 whitespace-nowrap sm:col-span-1'>
                   {userPublicInfo.icon}
-                  <span className='text-[#282a35] text-lg min-w-fit p-1 ml-4 font-semibold inline-block'>
+                  <span className='text-[#282a35] min-w-fit p-1 ml-4 font-semibold inline-block'>
                     {userPublicInfo.name}
                   </span>
                 </span>
 
-                <div className='w-full col-span-3'>
+                <div className='w-full sm:col-span-3'>
                   <input 
                   type={userPublicInfo.inputtype} 
                   id={userPublicInfo.inputid} 

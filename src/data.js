@@ -304,3 +304,22 @@ export const User = {
 	website: "",
 	location: "",
 };
+
+// const [user, setUser] = useState();
+
+// const handleInputChange = e => {
+//   setUser({
+//     ...user,
+//     [e.target.name]: e.target.value
+//   });
+// };
+
+// const handleSocialLinksChange = e => {
+//   setUser({
+//     ...user,
+//     socialLinks: {
+//       ...user.socialLinks,
+//       [e.target.name]: e.target.value
+//     }
+//   });
+// };
