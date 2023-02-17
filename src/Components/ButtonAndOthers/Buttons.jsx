@@ -2,7 +2,7 @@ import React from "react";
 import { useState, useEffect} from "react";
 import {FaBars,FaChevronUp,FaEllipsisH,FaEllipsisV,FaRegStar,FaStar,FaTimes} from "react-icons/fa"
 import { FaChevronDown, FaChevronRight } from "react-icons/fa";
-import { useWindowSize } from "./SharedAssets";
+import { useWindowSize } from "../SharedAsset/SharedAssets";
 
 
 export const Hanbugar = ({open_close_smallscreen_sidebar, sidebar_state}) => {

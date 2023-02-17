@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { FaFacebookSquare, FaFlickr, FaInstagram,  FaRegClock, FaRegComment, FaShareAlt, FaSoundcloud, FaTwitter} from 'react-icons/fa';
-import { CatSideBarHanbugar } from './Buttons';
+import { CatSideBarHanbugar } from '../ButtonAndOthers/Buttons';
 
 const HeadTitle = ({blackletters, redletters}) => {
   return (

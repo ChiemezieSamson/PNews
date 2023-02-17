@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { FaMapPin, FaChevronLeft, FaChevronRight} from "react-icons/fa";
 import { Posts } from '../../../data';
 import { StarComponent } from '../../ButtonAndOthers/Buttons';
-import { CategoriesComponent, overLay, PostTitleLarge, TimeComponent, useWindowSize } from '../../ButtonAndOthers/SharedAssets';
+import { CategoriesComponent, overLay, PostTitleLarge, TimeComponent, useWindowSize } from '../../SharedAsset/SharedAssets';
 
 
 

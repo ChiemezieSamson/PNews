@@ -1,7 +1,7 @@
 import React from 'react'
 import { Posts } from '../../../data'
 import { StarComponent } from '../../ButtonAndOthers/Buttons'
-import { CategoriesComponent, overLay, TimeComponent} from '../../ButtonAndOthers/SharedAssets'
+import { CategoriesComponent, overLay, TimeComponent} from '../../SharedAsset/SharedAssets'
 
 const ImageComponent = () => {
   

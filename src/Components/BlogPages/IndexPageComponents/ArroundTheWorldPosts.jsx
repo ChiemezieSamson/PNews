@@ -1,5 +1,5 @@
 import React from 'react'
-import { AdminComponentColor, CategoriesComponentBotton, CatSidebarHanbugar, CommentComponetColor, PostsShortInfoComponent, PostTitleMedium, PostTitleMedium2, TimeComponentColor, useWindowSize } from '../../ButtonAndOthers/SharedAssets'
+import { AdminComponentColor, CategoriesComponentBotton, CatSidebarHanbugar, CommentComponetColor, PostsShortInfoComponent, PostTitleMedium, PostTitleMedium2, TimeComponentColor, useWindowSize } from '../../SharedAsset/SharedAssets'
 import { Posts } from '../../../data';
 import { ReadmoreButton } from '../../ButtonAndOthers/Buttons';
 

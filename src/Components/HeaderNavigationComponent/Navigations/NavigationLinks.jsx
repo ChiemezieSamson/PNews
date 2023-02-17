@@ -1,10 +1,10 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import { useState, useEffect} from "react";
-import {Hanbugar, NavLinksAndArrows} from "../ButtonAndOthers/Buttons"
-import { HoverLinsks, SmallScreenHoverLinsks } from "./HoverLinks";
-import { useWindowSize } from "../ButtonAndOthers/SharedAssets";
-import { Posts } from "../../data";
+import {Hanbugar, NavLinksAndArrows} from "../../ButtonAndOthers/Buttons"
+import { HoverLinsks, SmallScreenHoverLinsks } from "../HoverLinks";
+import { useWindowSize } from "../../SharedAsset/SharedAssets";
+import { Posts } from "../../../data";
 
 
 

@@ -1,6 +1,6 @@
 import { JustTimeComponet, JustTimeComponetStar} from '../SharedComponents'
 import { Posts } from '../../../../data'
-import { MainDivider } from '../../../ButtonAndOthers/SharedAssets'
+import { MainDivider } from '../../../SharedAsset/SharedAssets'
 import TrendingCommentsLatest from './TrendingCommentsLatest'
 
 const EditorsChioceAndDontMiss = () => {

@@ -1,6 +1,6 @@
 import React from 'react'
 import { Posts } from '../../../../data'
-import { MainDivider, SharedCount } from '../../../ButtonAndOthers/SharedAssets'
+import { MainDivider, SharedCount } from '../../../SharedAsset/SharedAssets'
 
 const PopularPost = () => {
   return (

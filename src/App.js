@@ -19,6 +19,7 @@ import Personal from "./Components/UserComponents/UserPageComponents/Personal";
 import MyPublicProfile from "./Components/UserComponents/UserPageComponents/MyPublicProfile";
 import SingAndSecurity from "./Components/UserComponents/UserPageComponents/SingAndSecurity";
 import LogIn from "./Components/LogIn/LogIn";
+import RegistrationForm from "./Components/Registration/Registration";
 
 const App = createBrowserRouter([
 	{
@@ -107,6 +108,10 @@ const App = createBrowserRouter([
 			{
 				path: "login",
 				element: <LogIn />,
+			},
+			{
+				path: "registrationForm",
+				element: <RegistrationForm />,
 			},
 			{
 				path: "userpage",

@@ -1,6 +1,6 @@
 import React from 'react'
 import { Posts } from '../../../../data'
-import { MainDivider, SocialLinks } from '../../../ButtonAndOthers/SharedAssets'
+import { MainDivider, SocialLinks } from '../../../SharedAsset/SharedAssets'
 import { JustTimeComponet, JustTimeComponetStar } from '../SharedComponents'
 import { HomeAndPigSocialLinks } from '../../../../data'
 

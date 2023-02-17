@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react'
 import { Hanbugar3, WritePostAsideOpenClosebar } from '../../../ButtonAndOthers/Buttons'
-import { SinginAndSecurityIntro } from '../../../ButtonAndOthers/SharedAssets'
+import { SinginAndSecurityIntro } from '../../../SharedAsset/SharedAssets'
 
 
 const secondaryEmails = [

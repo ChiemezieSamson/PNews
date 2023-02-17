@@ -1,6 +1,6 @@
 import React from 'react'
 import Chinonye from "../../../asset/images/chinonye.jpg"
-import { NavDirectionAndPageName, NewsLetter } from '../../ButtonAndOthers/SharedAssets'
+import { NavDirectionAndPageName, NewsLetter } from '../../SharedAsset/SharedAssets'
 
 const About = () => {
   return (

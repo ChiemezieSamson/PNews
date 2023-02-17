@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { WritePostAsideOpenClosebar } from '../../../ButtonAndOthers/Buttons'
-import { SinginAndSecurityIntro } from '../../../ButtonAndOthers/SharedAssets'
+import { SinginAndSecurityIntro } from '../../../SharedAsset/SharedAssets'
 
 const ChangePassword = () => {
   const [openCat, setOpenCat] = useState(false)

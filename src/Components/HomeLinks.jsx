@@ -1,6 +1,6 @@
 import { useState, React, useEffect } from "react";
 import { Outlet, ScrollRestoration } from "react-router-dom"
-import NavigationLinks from "./HeaderNavigationComponent/NavigationLinks";
+import NavigationLinks from "./HeaderNavigationComponent/Navigations/NavigationLinks";
 import SocialNewsletter from "./HeaderNavigationComponent/Social_newsLetter";
 import FullSreenSidebar from "./HeaderNavigationComponent/FullScree_SideBar";
 // import {HoverLinsks } from "./HeaderNavigationComponent/HoverLinks";

@@ -1,7 +1,7 @@
 import React from "react";
 import StickyBox from "react-sticky-box";
 import { Posts } from "../../../data";
-import { AdminComponent, CategoriesComponent, NavDirectionAndPageName, overLay, TimeComponent, useWindowSize } from "../../ButtonAndOthers/SharedAssets";
+import { AdminComponent, CategoriesComponent, NavDirectionAndPageName, overLay, TimeComponent, useWindowSize } from "../../SharedAsset/SharedAssets";
 import Aside from "../asidePage/Aside";
 import { PagesBlogPostComponent } from "../IndexPageComponents/SharedComponents";
 

@@ -1,6 +1,6 @@
 import React from 'react'
 import { FaClock, FaEnvelope, FaFax, FaMapMarkerAlt, FaPhoneAlt } from 'react-icons/fa'
-import { NavDirectionAndPageName } from '../../ButtonAndOthers/SharedAssets'
+import { NavDirectionAndPageName } from '../../SharedAsset/SharedAssets'
 
 const ContactUs = () => {
 

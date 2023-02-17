@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { FaEnvelope, FaFacebookSquare, FaMinus, FaPlus, FaRedo, FaRegComment, FaShare, FaTwitter } from 'react-icons/fa'
 import { BiFontFamily } from "react-icons/bi";
 import StickyBox from "react-sticky-box";
-import { CategoriesComponentBotton, PagesDivider, PostTitleMedium, PostTitleSmall, TimeComponentColor, useHover, useWindowSize } from '../../../ButtonAndOthers/SharedAssets';
+import { CategoriesComponentBotton, PagesDivider, PostTitleMedium, PostTitleSmall, TimeComponentColor, useHover, useWindowSize } from '../../../SharedAsset/SharedAssets';
 import { Posts, SocialMediaIcons } from '../../../../data';
 import Aside from '../../asidePage/Aside';
 

@@ -1,6 +1,6 @@
 import React from 'react'
 import { Posts } from '../../../data'
-import { NewsLetter, PagesDivider, PostTitleMedium2, SocialLinks, TimeComponent } from '../../ButtonAndOthers/SharedAssets'
+import { NewsLetter, PagesDivider, PostTitleMedium2, SocialLinks, TimeComponent } from '../../SharedAsset/SharedAssets'
 import TrendingCommentsLatest from '../IndexPageComponents/IndexPageComponentAsideComponent.jsx/TrendingCommentsLatest'
 import { JustTimeComponet } from '../IndexPageComponents/SharedComponents'
 

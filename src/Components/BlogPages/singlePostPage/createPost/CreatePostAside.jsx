@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { FaGripHorizontal, FaGripVertical } from 'react-icons/fa'
-import { useWindowSize } from '../../../ButtonAndOthers/SharedAssets'
+import { useWindowSize } from '../../../SharedAsset/SharedAssets'
 import { Hanbugar3 } from "../../../ButtonAndOthers/Buttons"
 import Author from './CreatePostAsideComponents/Author'
 import Category from './CreatePostAsideComponents/Category'

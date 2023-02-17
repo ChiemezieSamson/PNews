@@ -1,8 +1,8 @@
 import React from "react";
 import StickyBox from "react-sticky-box";
 import { Posts } from "../../../data";
-import { CategoriesComponent, NavDirectionAndPageName, overLay, TimeComponent } from "../../ButtonAndOthers/SharedAssets";
-import { SharedBlogPageStyleTwo } from "../../ButtonAndOthers/SharedBlogPageStyle_1st_Component";
+import { CategoriesComponent, NavDirectionAndPageName, overLay, TimeComponent } from "../../SharedAsset/SharedAssets";
+import { SharedBlogPageStyleTwo } from "../../SharedAsset/SharedBlogPageStyle_1st_Component";
 import Aside from "../asidePage/Aside";
 import { PagesBlogPostComponent } from "../IndexPageComponents/SharedComponents";
 

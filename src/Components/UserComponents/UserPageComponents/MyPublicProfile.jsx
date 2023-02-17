@@ -1,6 +1,6 @@
 import React from 'react'
 import { FaEnvelopeOpen, FaFacebookF, FaGlobe, FaInstagram, FaLinkedinIn, FaPhoneAlt, FaTwitter, FaYoutubeSquare } from 'react-icons/fa'
-import { UserInfoHeading } from '../../ButtonAndOthers/SharedAssets'
+import { UserInfoHeading } from '../../SharedAsset/SharedAssets'
 
 const MyPublicProfile = () => {
 

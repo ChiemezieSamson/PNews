@@ -1,6 +1,6 @@
 import React from 'react'
 import { Posts } from '../../../data'
-import { CatSidebarHanbugar } from '../../ButtonAndOthers/SharedAssets'
+import { CatSidebarHanbugar } from '../../SharedAsset/SharedAssets'
 import { JustTimeComponet, JustTimeComponetStar} from './SharedComponents'
 
 const TechPosts = () => {

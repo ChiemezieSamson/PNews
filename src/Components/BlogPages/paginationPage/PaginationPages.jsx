@@ -1,7 +1,7 @@
 import React from 'react'
 import StickyBox from "react-sticky-box";
 import { HomeAndPigSocialLinks, Posts } from '../../../data';
-import { PagesDivider, SocialLinks } from '../../ButtonAndOthers/SharedAssets';
+import { PagesDivider, SocialLinks } from '../../SharedAsset/SharedAssets';
 import { JustTimeComponetCatBlock, JustTimeComponetStar } from '../IndexPageComponents/SharedComponents';
 
 

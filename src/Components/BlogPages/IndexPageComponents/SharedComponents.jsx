@@ -1,6 +1,6 @@
 import React from 'react'
 import { ReadmoreButton, StarComponent } from '../../ButtonAndOthers/Buttons'
-import { AdminComponentColor, CategoriesComponentBotton, CommentComponetColor, PostsShortInfoComponent, PostTitleMedium, PostTitleMedium2, PostTitleSmall, TimeComponentColor, useWindowSize } from '../../ButtonAndOthers/SharedAssets'
+import { AdminComponentColor, CategoriesComponentBotton, CommentComponetColor, PostsShortInfoComponent, PostTitleMedium, PostTitleMedium2, PostTitleSmall, TimeComponentColor, useWindowSize } from '../../SharedAsset/SharedAssets'
 
 
 export const JustTimeComponet = ({Posts}) => {

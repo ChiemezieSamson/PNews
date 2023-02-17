@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { NavLink, Outlet } from 'react-router-dom';
-import { useWindowSize } from '../ButtonAndOthers/SharedAssets';
+import { useWindowSize } from '../SharedAsset/SharedAssets';
 import MyProfilePicture from './UserPageComponents/MyProfilePicture';
 
 const UserPages = [

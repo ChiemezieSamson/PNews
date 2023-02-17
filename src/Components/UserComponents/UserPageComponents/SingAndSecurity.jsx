@@ -1,4 +1,4 @@
-import { UserInfoHeading } from '../../ButtonAndOthers/SharedAssets'
+import { UserInfoHeading } from '../../SharedAsset/SharedAssets'
 import Email from './SecurityComponents/Email'
 import ChangePassword from './SecurityComponents/ChangePassword'
 import LogOutOrDeletUser from './SecurityComponents/LogOutOrDeletUser'

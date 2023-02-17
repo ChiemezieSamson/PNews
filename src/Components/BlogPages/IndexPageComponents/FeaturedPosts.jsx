@@ -1,7 +1,7 @@
 import React from 'react'
 import { JustTimeComponet } from './SharedComponents';
 import { Posts } from '../../../data';
-import { AdminComponentColor, CategoriesComponentBotton, MainDivider, PostsShortInfoComponent, PostTitleMedium2, TimeComponentColor } from '../../ButtonAndOthers/SharedAssets';
+import { AdminComponentColor, CategoriesComponentBotton, MainDivider, PostsShortInfoComponent, PostTitleMedium2, TimeComponentColor } from '../../SharedAsset/SharedAssets';
 import { ReadmoreButton, StarComponent } from '../../ButtonAndOthers/Buttons';
 
 
