@@ -10,7 +10,7 @@ import PopularPost from "./IndexPageComponents/IndexPageComponentAsideComponent.
 import StayConnectedAndRecommended from "./IndexPageComponents/IndexPageComponentAsideComponent.jsx/StayConnectedAndRecommended";
 import EditorsChioceAndDontMiss from "./IndexPageComponents/IndexPageComponentAsideComponent.jsx/EditorsChioceAndDontMiss";
 import ArroundTheWorldPosts from "./IndexPageComponents/ArroundTheWorldPosts";
-import PaginationPages from "./paginationPage/PaginationPages";
+import PaginationFunctions from "./PaginationComponents/PaginationControl/PaginationFunctions/PaginationFunctions";
 
 
 const IndexPage = () => {
@@ -41,6 +41,9 @@ const IndexPage = () => {
       <div className="md:grid md:grid-cols-3">
         <span className="col-span-2 md:mr-[4%]">
           <LatestPosts />
+          <div className="grid grid-flow-col justify-center w-full">
+            <PaginationFunctions />
+          </div>
         </span>
         <span className="col-span-1 md:ml-[4%]">
           <StickyBox offsetTop={0} offsetBottom={0}>
@@ -49,7 +52,6 @@ const IndexPage = () => {
         </span>
       </div>
       
-      <PaginationPages />
     </div>
   )
 }

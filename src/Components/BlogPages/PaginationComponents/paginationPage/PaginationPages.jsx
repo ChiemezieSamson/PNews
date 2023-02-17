@@ -1,15 +1,16 @@
 import React from 'react'
 import StickyBox from "react-sticky-box";
-import { HomeAndPigSocialLinks, Posts } from '../../../data';
-import { PagesDivider, SocialLinks } from '../../SharedAsset/SharedAssets';
-import { JustTimeComponetCatBlock, JustTimeComponetStar } from '../IndexPageComponents/SharedComponents';
+import { HomeAndPigSocialLinks, Posts } from '../../../../data';
+import { PagesDivider, SocialLinks } from '../../../SharedAsset/SharedAssets';
+import { JustTimeComponetCatBlock, JustTimeComponetStar } from '../../IndexPageComponents/SharedComponents';
+import Pagination from '../PaginationControl/Pagination';
 
 
 
 const PaginationPages = () => {
  
   return (
-    <section className='md:grid md:grid-cols-3 mt-7'>
+    <div className='md:grid md:grid-cols-3 mt-7'>
       <div className="col-span-2 md:mr-[3%]">
         <PagesDivider text={"Lastest Post"} />
 
@@ -40,8 +41,10 @@ const PaginationPages = () => {
           </div>
         </StickyBox>
       </aside>
+
+      <Pagination />
      
-    </section>
+    </div>
   )
 }
 
