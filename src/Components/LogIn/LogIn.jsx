@@ -2,7 +2,7 @@ import React from 'react'
 
 const LogIn = () => {
   return (
-    <div className='py-10 text-left grid place-content-center h-[70vh] justify-center bg-gradient-to-b from-gray-300/40 to-white/50'>
+    <div className='py-10 text-left grid place-content-center h-auto lg:h-[70vh] justify-center bg-gradient-to-b from-gray-300/40 to-white/50'>
        <div className="md:w-[28rem] max-w-sm font-lora p-6">
 
         {/* login title */}
@@ -47,7 +47,7 @@ const LogIn = () => {
 
         {/* login register button */}
         <div className='border border-solid border-gray-400 rounded-md text-center p-4 text-sm tracking-wide mt-5 
-        shadow shadow-gray-500'>
+          shadow shadow-gray-500'>
           <span>New this place?</span>
           <button className='cursor-pointer border-0 inline-block text-blue-600 mx-2'>
             <span>Create an accont</span>

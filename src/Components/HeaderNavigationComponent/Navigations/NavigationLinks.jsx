@@ -4,7 +4,7 @@ import { useState, useEffect} from "react";
 import {Hanbugar, NavLinksAndArrows} from "../../ButtonAndOthers/Buttons"
 import { HoverLinsks, SmallScreenHoverLinsks } from "../HoverLinks";
 import { useWindowSize } from "../../SharedAsset/SharedAssets";
-import { Posts } from "../../../data";
+import { ParentCategories, Posts } from "../../../data";
 
 
 
@@ -26,8 +26,17 @@ const NavigationLinks = () => {
   const [arrowDownClick2, setArrowDownClick2] = useState(false)
   const [arrowDownClick3, setArrowDownClick3] = useState(false)
   const [showhoverlinks , setShowHoverlinks] = useState(false)
+  const [getTheNavlinkTextContent, setGetTheNavlinkTextContent] =useState()
   const size = useWindowSize()
 
+
+  // if hovered get the textcontent of the hovered navigation so that it can be used to display the categories under it
+  // const handleGetTheNavlinkTextContent = (e) => {
+  //     setGetTheNavlinkTextContent(() => e.target.firstChild)
+  //     console.log(getTheNavlinkTextContent);
+  // }
+  
+  
   const handle_hideShowNavLinks = () => {
     setHideShowNavLinks((hideShowNavLinks) => !hideShowNavLinks)
   }
@@ -93,9 +102,11 @@ const NavigationLinks = () => {
     setArrowDownClick3(() => false)
   }
 
-  const onHover = () => {
+  const onHover = (e) => {
     setHover((hover) => !hover)
     onshowHoverlinks()
+    setGetTheNavlinkTextContent(() => e.target.parentElement.firstChild.textContent)
+    console.log(getTheNavlinkTextContent);
   }
 
   const onHoverOut = () => {
@@ -184,8 +195,8 @@ const NavigationLinks = () => {
           <span className="nav-link"></span>
             {
               sticky === "" && size.width >= 768 ? 
-              <span className="inline-block text-[10px] py-4 px-4 thearrows" onMouseOver={onHover} onMouseOut={onHover}> 
-              <NavLinksAndArrows />
+              <span className="inline-block text-[10px] py-4 px-4 thearrows relative after:absolute after:inset-0 after:z-20" onMouseOver={onHover} onMouseOut={onHover}> 
+                <NavLinksAndArrows />             
               </span> : size.width <= 768 ? 
               <span className="inline-block text-[10px] py-4 px-4 thearrows" onMouseOver={onHover} onMouseOut={onHover}>
               <NavLinksAndArrows handle_ArrowsClick={handle_ArrowsClick} handle_ArrowsButton={handle_ArrowsButton} arrowDown={arrowDown} arrowRight={arrowRight}/>
@@ -194,8 +205,8 @@ const NavigationLinks = () => {
 
           {/* ===== block of hoverable links small screen are here ====== */}
           <span className="hidden medium_hover blockOfHoverLink2 absolute inset-x-0 top-full z-50" data-visible={window.scrollY > 201 && size.width > 768 ? "" : hover} aria-required={arrowDownClick}
-            onMouseOver={onHover}  onMouseOut={onHover}>
-            <SmallScreenHoverLinsks sublink={Posts.slice(0, 6)}/>
+            onMouseOver={onHover}  onMouseOut={onHover}>            
+              <SmallScreenHoverLinsks sublink={Posts.slice(0, 6)}/>          
           </span>
         </li>  
 
@@ -225,7 +236,7 @@ const NavigationLinks = () => {
         </li>
 
         <li className="md:inline-block relative hover:bg-lime-400 md:hover:bg-transparent">
-						<NavLink to="/business"	className={({ isActive }) => isActive ? myLinkStyleActive : myLinkStyle	}>Business</NavLink>
+						<NavLink to="/business"	className={({ isActive }) => isActive ? myLinkStyleActive : myLinkStyle }>Business</NavLink>
 						<span className="nav-link"></span>
             {
               sticky === "" && size.width >= 768 ? 
@@ -255,7 +266,7 @@ const NavigationLinks = () => {
       <div className="relative z-50 max-w-6xl mx-auto">
         <div className="blockOfHoverLink hidden transition-[display] duration-700 ease-linear absolute top-0 left-0"
             data-visible={window.scrollY > 201 && size.width > 768 ? "" : showhoverlinks} onMouseOver={onshowHoverlinks} onMouseOut={onshowHoverlinks}>
-          <HoverLinsks sublink={[1,2,3,4,5,6]} blogPost={Posts.slice(0, 6)} trendingTags={[1,2,3,4]}/>
+          <HoverLinsks sublink={ParentCategories} blogPost={Posts.slice(0, 6)} trendingTags={[1,2,3,4]}/>
         </div>        
       </div>
     </section>

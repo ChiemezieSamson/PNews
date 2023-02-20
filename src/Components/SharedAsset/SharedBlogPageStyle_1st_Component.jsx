@@ -1,5 +1,8 @@
 import React from 'react'
-import { AdminComponent, CategoriesComponent, overLay, PostTitleLarge, TimeComponent, useWindowSize } from './SharedAssets'
+import Aside from '../BlogPages/asidePage/Aside'
+import StickyBox from "react-sticky-box";
+import { PagesBlogPostComponent } from '../BlogPages/IndexPageComponents/SharedComponents'
+import { AdminComponent, CategoriesComponent, NavDirectionAndPageName, overLay, PostTitleLarge, TimeComponent, useWindowSize } from './SharedAssets'
 
 export const SharedBlogPageStyleOne = ({Posts}) => {
   const size = useWindowSize()
@@ -126,3 +129,27 @@ export const SharedBlogPageStyleTwo = ({Posts}) => {
   )
 }
 
+
+export const GeneralCategorisePages = ({ThreeFirstPost, DriectionName, PagePost}) => {
+  return (
+    <section className="text-left">
+
+      <SharedBlogPageStyleOne Posts={ThreeFirstPost} />
+      
+      <div className='md:grid md:grid-cols-3'>
+        <div className="col-span-2 md:mr-[3%]">
+          <NavDirectionAndPageName page={DriectionName} />
+        
+          <PagesBlogPostComponent Posts={PagePost} />
+        </div>
+        <aside className="col-span-1 mt-8 md:ml-[3%]">
+          <StickyBox
+            offsetTop={0} offsetBottom={0}>
+            <Aside />
+          </StickyBox>
+        </aside>
+      </div>
+      
+    </section>
+  )
+}

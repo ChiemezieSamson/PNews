@@ -155,6 +155,60 @@ export const Posts = [
 	},
 ];
 
+export const ParentCategories = {
+	books: {
+		mainTags: ["fashion", "food", "health", "travel"],
+		trendingtag: [
+			"trump Inauguration",
+			"United Stated",
+			"election results",
+			"white House",
+		],
+	},
+	lifestyle: {
+		mainTags: ["gaming", "movie", "music", "sports"],
+		trendingtag: [
+			"nintendo switch",
+			"ces 2017",
+			"mark zuckerberg",
+			"playstation 4 pro",
+			"sillicon valley",
+			"internet",
+		],
+	},
+	favorite: {
+		mainTags: ["apps", "gadget", "mobile", "startup"],
+		trendingtag: [
+			"golden globes",
+			"game of thrones",
+			"motoGp 2017",
+			"esport",
+			"fashion week",
+			"jorge lorenzo",
+		],
+	},
+	business: {
+		mainTags: ["business", "politics", "science", "world"],
+		trendingtag: [
+			"golden globes",
+			"game of thrones",
+			"motoGp 2017",
+			"election results",
+		],
+	},
+	random: {
+		mainTags: ["news", "review", "entertainment", "featured"],
+		trendingtag: [
+			"nintendo switch",
+			"ces 2017",
+			"mark zuckerberg",
+			"playstation 4 pro",
+			"esport",
+			"fashion week",
+		],
+	},
+};
+
 export const cats = [
 	"apps",
 	"business",

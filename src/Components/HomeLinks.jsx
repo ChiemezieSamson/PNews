@@ -1,12 +1,13 @@
 import { useState, React, useEffect } from "react";
 import { Outlet, ScrollRestoration } from "react-router-dom"
-import NavigationLinks from "./HeaderNavigationComponent/Navigations/NavigationLinks";
+// import NavigationLinks from "./HeaderNavigationComponent/Navigations/NavigationLinks";
 import SocialNewsletter from "./HeaderNavigationComponent/Social_newsLetter";
 import FullSreenSidebar from "./HeaderNavigationComponent/FullScree_SideBar";
 // import {HoverLinsks } from "./HeaderNavigationComponent/HoverLinks";
 
 import { FaChevronUp } from "react-icons/fa";
 import Footer from "./BlogPages/footerPage/Footer";
+import HeaderNavigations from "./HeaderNavigationComponent/Navigations/HeaderNavigations";
 // import { Posts } from "../data";
 
 
@@ -72,7 +73,7 @@ const HomeLinks = () => {
 
         {/* ===== Home hero and navigations start here ===== */}
         <div className="relative z-50">
-          <NavigationLinks/>
+          <HeaderNavigations/>
         </div>
       </header>
 

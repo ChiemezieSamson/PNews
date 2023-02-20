@@ -55,9 +55,8 @@ const SinglePost = () => {
 
   return (
     <article className='text-left md:grid grid-cols-3'>
-      <div className='col-span-2 md:mr-[4%]'>
+      <div className='col-span-2 md:mr-[4%] overflow-x-hidden'>
         <article>
-
           {/* navigation display */}
 
           <span className="inline-block lg:mb-8 lg:mt-8 mb-4">
