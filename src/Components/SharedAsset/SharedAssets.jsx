@@ -233,7 +233,7 @@ export const useHover = () => {
 
 
 export const overLay = () => {
-  const overLay = `after:absolute after:inset-0 cursor-pointer
+  const overLay = `after:absolute after:inset-0 cursor-grab
   after:bg-gradient-to-bl from-[#b3ffab] via-cyan-300 to-[#12fff7] transition-all duration-500 delay-200 ease-linear
   hover:after:opacity-50 after:opacity-0 after:transition-opacity after:ease-in-out
   after:duration-300 after:delay-150 before:absolute before:z-10 before:inset-0 before:bg-black/30`
@@ -404,10 +404,3 @@ export const SinginAndSecurityIntro = ({text}) => {
   )
 }
 
-export const PasswordVerificationAuth = () => {
-  return (
-   <div>
-
-   </div>
-  )
-}

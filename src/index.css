@@ -161,17 +161,13 @@
   }
 
   .Instagramsidebar[data-visible="true"],
-  .blockOfHoverLink[data-visible="true"],
   .backtotop[data-visible="true"]
    {
     display: block;
     opacity: 1.0;
   }
 
-  .arrows[data-visible="true"],
-  .blockOfHoverLink2[aria-required="true"]{
-    display: inline;
-  }
+  
 
   .trending:nth-child(1)[data-visible="1"] {
     display: block;
@@ -347,10 +343,5 @@
     .nav-link {
       display: inline-block;
     }
-
-    .blockOfHoverLink2[data-visible="true"] {
-      display: inline;
-    }
-  
   }
 }

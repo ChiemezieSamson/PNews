@@ -157,7 +157,7 @@ export const Posts = [
 
 export const ParentCategories = {
 	books: {
-		mainTags: ["fashion", "food", "health", "travel"],
+		maintags: ["fashion", "food", "health", "travel"],
 		trendingtag: [
 			"trump Inauguration",
 			"United Stated",
@@ -166,7 +166,7 @@ export const ParentCategories = {
 		],
 	},
 	lifestyle: {
-		mainTags: ["gaming", "movie", "music", "sports"],
+		maintags: ["gaming", "movie", "music", "sports"],
 		trendingtag: [
 			"nintendo switch",
 			"ces 2017",
@@ -177,7 +177,7 @@ export const ParentCategories = {
 		],
 	},
 	favorite: {
-		mainTags: ["apps", "gadget", "mobile", "startup"],
+		maintags: ["apps", "gadget", "mobile", "startup"],
 		trendingtag: [
 			"golden globes",
 			"game of thrones",
@@ -188,7 +188,7 @@ export const ParentCategories = {
 		],
 	},
 	business: {
-		mainTags: ["business", "politics", "science", "world"],
+		maintags: ["business", "politics", "science", "world"],
 		trendingtag: [
 			"golden globes",
 			"game of thrones",
@@ -197,7 +197,7 @@ export const ParentCategories = {
 		],
 	},
 	random: {
-		mainTags: ["news", "review", "entertainment", "featured"],
+		maintags: ["news", "review", "entertainment", "featured"],
 		trendingtag: [
 			"nintendo switch",
 			"ces 2017",
@@ -377,3 +377,31 @@ export const User = {
 //     }
 //   });
 // };
+
+export const navItems = [
+	{
+		id: 1,
+		url: "/books",
+		name: "Books",
+	},
+	{
+		id: 2,
+		url: "/lifestyle",
+		name: "Lifestyle",
+	},
+	{
+		id: 3,
+		url: "/favorite",
+		name: "Favorite",
+	},
+	{
+		id: 4,
+		url: "/business",
+		name: "Business",
+	},
+	{
+		id: 5,
+		url: "/quotes",
+		name: "Quotes",
+	},
+];

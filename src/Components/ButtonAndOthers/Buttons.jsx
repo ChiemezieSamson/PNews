@@ -5,8 +5,8 @@ import { FaChevronDown, FaChevronRight } from "react-icons/fa";
 import { useWindowSize } from "../SharedAsset/SharedAssets";
 
 
-export const Hanbugar = ({open_close_smallscreen_sidebar, sidebar_state}) => {
-  const [state, setState] = useState(sidebar_state)
+export const Hanbugar = ({open_close_smallscreen_sidebar}) => {
+  const [state, setState] = useState(false)
   const size = useWindowSize()
 
   const handle_toggle = () => {
@@ -15,16 +15,14 @@ export const Hanbugar = ({open_close_smallscreen_sidebar, sidebar_state}) => {
   }
   
   useEffect (() => {
-    if (size.width >= 768) {
-      setState(() => false)
-    } 
-  },[state,size])
+    size.width >= 768  &&  setState(() => false)
+  },[size])
 
   return(
       <button className="" aria-controls="primary-navigation"
       onClick={handle_toggle}
       >
-        {state === false ? <FaBars /> : <FaTimes /> }
+        {state ? <FaTimes /> : <FaBars /> }
         <span className="hidden">Menu</span>
       </button>
   )
@@ -67,19 +65,11 @@ export const Hanbugar3 = ({closesidebar}) => {
 }
 
 
-export const NavLinksAndArrows = ({handle_ArrowsClick, handle_ArrowsButton, arrowDown, arrowRight}) => {
- 
-	const handle_Arrows = () => {
-      handle_ArrowsButton()
-      handle_ArrowsClick()		
-	};
-
+export const NavLinksAndArrows = () => {
 	return (
-		<span>
-			<span className="md:hidden">
-			<FaChevronRight className="arrows mt-[2px] hidden align-text-top" onClick={handle_Arrows} data-visible={arrowRight}/> 
-			</span>
-			<FaChevronDown className="arrows mt-[2px] align-text-top hidden md:inline" onClick={handle_Arrows} data-visible={arrowDown}/>
+		<span className="inline-block px-3">
+      <FaChevronDown className="hidden align-text-top mt-[2px] my-1 group-hover:inline-block"/> 
+      <FaChevronRight className="inline-block align-text-top mt-[2px] my-1 group-hover:hidden"/>
 		</span>		
 	);
 };

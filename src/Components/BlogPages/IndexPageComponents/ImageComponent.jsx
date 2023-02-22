@@ -4,7 +4,7 @@ import { StarComponent } from '../../ButtonAndOthers/Buttons'
 import { CategoriesComponent, overLay, TimeComponent} from '../../SharedAsset/SharedAssets'
 
 const ImageComponent = () => {
-  
+ 
   return (
     <section className='cursor-pointer mb-7 mt-12'>
       <div className="overflowScroll mt-2 lg:mt-0 col-span-2 overflow-x-auto scroll-px-4 overscroll-x-contain overflow-y-hidden snap-mandatory">
@@ -13,9 +13,8 @@ const ImageComponent = () => {
           return (
         <li key={post.id} className={`relative snap-start min-w-[350px] ${overLay()} m-0 p-0 group overflow-clip`}>
           <img src={post.image} alt="IndexImage"  className="h-full w-full object-cover group-hover:scale-110
-                  transition-all duration-500 delay-200 ease-linear scale-100" loading="lazy"/>
-          
-          <div className="absolute bottom-[12%] text-white inset-x-0 flex content-center justify-center z-20 transition-all duration-500 delay-200 ease-linear translate-y-10 
+                  transition-all duration-500 delay-200 ease-linear scale-100" loading="lazy"/>         
+          <div className="absolute bottom-[12%] text-white inset-x-0 grid px-2 place-items-center z-20 transition-all duration-500 delay-200 ease-linear translate-y-10 
                group-hover:translate-y-0">
                 <div className="w-[93%] text-center">
                   <CategoriesComponent cat={post.cat} />
