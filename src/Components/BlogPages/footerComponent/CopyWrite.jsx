@@ -1,24 +1,9 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { otherPages } from '../../../data'
 
 const CopyWrite = () => {
-  let otherPages = [
-  {
-    id: 1, 
-    page: "About",
-    to: "about"
-  },
-  {
-    id: 2, 
-    page: "Contact Us",
-    to: "contactus"
-  },
-  {
-    id: 3, 
-    page: "Privacy & Policy",
-    to: "privacy&policy"
-  },
-  ]
+ 
   return (
     <section>  
       <div className='flex flex-col-reverse xs:flex-row text-center content-center justify-between pb-7 pt-3 '>

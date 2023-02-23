@@ -1,36 +1,8 @@
 import React from 'react'
-import { FaClock, FaEnvelope, FaFax, FaMapMarkerAlt, FaPhoneAlt } from 'react-icons/fa'
+import { ContactInfo } from '../../../data'
 import { NavDirectionAndPageName } from '../../SharedAsset/SharedAssets'
 
 const ContactUs = () => {
-
-  const ContactInfo = [
-    {
-      id: 1,
-      icon: <FaMapMarkerAlt className='inline-block'/>,
-      text: "639,Longmei Avenue Jiangning Campus, Nanjing"
-    },
-    {
-      id: 2,
-      icon: <FaPhoneAlt className='inline-block'/>,
-      text: "(0361) 888 1234"
-    },
-    {
-      id: 3,
-      icon: <FaFax className='inline-block'/>,
-      text: "(0361) 888 1234"
-    },
-    {
-      id: 4,
-      icon: <FaEnvelope className='inline-block'/>,
-      text: "contact@yourwebsite.com"
-    },
-    {
-      id: 5,
-      icon: <FaClock className='inline-block'/>,
-      text: "Opening Days: Mon - Sat"
-    },
-  ]
  
   return (
     <section className='text-left'>

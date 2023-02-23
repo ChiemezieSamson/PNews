@@ -1,5 +1,4 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 import { useWindowSize } from '../../SharedAsset/SharedAssets'
 import Categories from '../footerComponent/Categories'
 import CopyWrite from '../footerComponent/CopyWrite'
@@ -15,16 +14,7 @@ const Footer = () => {
         <Categories />
         <NewsLetter />
       </div>
-
       <CopyWrite />
-
-      <Link to={"single"}>SinglePost</Link>
-      <Link to={"writepost"}>WritePost</Link>
-      <Link to={"editpost"}>EditPost</Link>
-      <Link to={"userpage"}>UserPage</Link>
-      <Link to={"login"}>LogIn</Link>
-      <Link to={"registrationForm"}>RegistrationForm</Link>
-      
     </section>
   )
 }

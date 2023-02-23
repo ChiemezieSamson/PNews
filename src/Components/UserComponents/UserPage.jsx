@@ -1,25 +1,8 @@
 import React, { useState } from 'react';
 import { NavLink, Outlet } from 'react-router-dom';
+import { UserPages } from '../../data';
 import { useWindowSize } from '../SharedAsset/SharedAssets';
 import MyProfilePicture from './UserPageComponents/MyProfilePicture';
-
-const UserPages = [
-  {
-  id: 1,
-  name: "My Profile",
-  toUrl: "/userpage"
-  },
-  {
-  id: 2,
-  name: "My Public Profile",
-  toUrl: "/userpage/publicprofile"
-  },
-  {
-  id: 3,
-  name: "Sign in & security",
-  toUrl: "/userpage/security"
-  },
-]
 
 const UserPage = () => {
   const size = useWindowSize()

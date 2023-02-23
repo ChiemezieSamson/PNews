@@ -15,7 +15,7 @@ const CreatePostComponents = ({state}) => {
           autoFocus={true} required form="post_form"/>
         </div>
 
-        <img src={Posts[4].image} alt="postImage" className='w-full h-80 rounded-xl object-cover' loading="lazy"/>
+        <img key={Posts[4].image} src={Posts[4].image || null} alt="postImage" className='w-full h-80 rounded-xl object-cover' loading="lazy"/>
 
         {/* write post form */}
         <form className="mt-2.5" id="post_form">

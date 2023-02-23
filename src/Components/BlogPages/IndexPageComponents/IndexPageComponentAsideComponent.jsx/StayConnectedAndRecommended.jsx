@@ -1,8 +1,7 @@
 import React from 'react'
-import { Posts } from '../../../../data'
+import { Posts, SocialMediaIcons } from '../../../../data'
 import { MainDivider, SocialLinks } from '../../../SharedAsset/SharedAssets'
 import { JustTimeComponet, JustTimeComponetStar } from '../SharedComponents'
-import { HomeAndPigSocialLinks } from '../../../../data'
 
 const Recommended = () => {
   
@@ -13,7 +12,7 @@ const Recommended = () => {
         <MainDivider firstletter={"Stay Connected"} />
 
         <div className='pt-1'>
-          <SocialLinks others={HomeAndPigSocialLinks}/>
+          <SocialLinks others={SocialMediaIcons}/>
         </div>
         
       </div>

@@ -1,76 +1,8 @@
 import React from 'react'
-import { FaEnvelopeOpen, FaFacebookF, FaGlobe, FaInstagram, FaLinkedinIn, FaPhoneAlt, FaTwitter, FaYoutubeSquare } from 'react-icons/fa'
+import { UserContacts } from '../../../data'
 import { UserInfoHeading } from '../../SharedAsset/SharedAssets'
 
 const MyPublicProfile = () => {
-
-
-  const UserContacts = [
-    {
-      id: 1,
-      icon: <FaEnvelopeOpen className='inline-block align-text-top'/>,
-      name: "Email",
-      inputtype: "email",
-      inputid: "usercontactemail",
-      placeholder: "example@email.com"
-    },
-    {
-      id: 2,
-      icon: <FaPhoneAlt className='inline-block align-text-top'/>,
-      name: "Phone",
-      inputtype: "tel",
-      inputid: "usercontactphone",
-      placeholder: "(+)number"
-    },
-    {
-      id: 3,
-      icon: <FaLinkedinIn className='inline-block align-text-top'/>,
-      name: "Linkedin",
-      inputtype: "url",
-      inputid: "usercontactlinkedin",
-      placeholder: "https://www.example.com"
-    },
-    {
-      id: 4,
-      icon: <FaTwitter className='inline-block align-text-top'/>,
-      name: "Twitter",
-      inputtype: "url",
-      inputid: "usercontacttwitter",
-      placeholder: "https://www.example.com"
-    },
-    {
-      id: 5,
-      icon: <FaFacebookF className='inline-block align-text-top'/>,
-      name: "Facebook",
-      inputtype: "url",
-      inputid: "usercontactfacebook",
-      placeholder: "https://www.example.com"
-    },
-    {
-      id: 6,
-      icon: <FaInstagram className='inline-block align-text-top'/>,
-      name: "Instagram",
-      inputtype: "url",
-      inputid: "usercontactinstagram",
-      placeholder: "https://www.example.com"
-    },
-    {
-      id: 7,
-      icon: <FaYoutubeSquare className='inline-block align-text-top'/>,
-      name: "YouTube",
-      inputtype: "url",
-      inputid: "usercontactyoutube",
-      placeholder: "https://www.example.com"
-    },
-    {
-      id: 8,
-      icon: <FaGlobe className='inline-block align-text-top'/>,
-      name: "Website",
-      inputtype: "url",
-      inputid: "usercontactwebsite",
-      placeholder: "https://www.example.com"
-    },
-  ]
 
   return (
     <div className='text-left px-5 mt-8 font-source pt-7 pb-5'>

@@ -1,29 +1,20 @@
 import { useState, React, useEffect } from "react";
 import { Outlet, ScrollRestoration } from "react-router-dom"
-// import NavigationLinks from "./HeaderNavigationComponent/Navigations/NavigationLinks";
 import SocialNewsletter from "./HeaderNavigationComponent/Social_newsLetter";
 import FullSreenSidebar from "./HeaderNavigationComponent/FullScree_SideBar";
-// import {HoverLinsks } from "./HeaderNavigationComponent/HoverLinks";
-
 import { FaChevronUp } from "react-icons/fa";
 import Footer from "./BlogPages/footerPage/Footer";
 import HeaderNavigations from "./HeaderNavigationComponent/Navigations/HeaderNavigations";
-// import { Posts } from "../data";
 
 
 const HomeLinks = () => {
   const [showFullSideBAr, setShowFullSideBAr] = useState(false)
   const [backToTop, setBackToTop] = useState("")
-  // const [showhoverlinks , setShowHoverlinks] = useState(false)
  
   
   const handle_showFullSideBAr = () => {
     setShowFullSideBAr((change) => !change)
   }
-
-  // const onshowHoverlinks = () => {
-  //   setShowHoverlinks((showhoverlinks) => !showhoverlinks)
-  // }
   
   const handleCloseInstaSidebar = () => {
     setShowFullSideBAr(() => false)
@@ -76,14 +67,6 @@ const HomeLinks = () => {
           <HeaderNavigations/>
         </div>
       </header>
-
-      {/* ===== block of hoverable links large screen are here ======
-      <div className="relative z-50 max-w-6xl mx-auto">
-        <div className="blockOfHoverLink hidden transition-[display] duration-700 ease-linear absolute top-0 left-0"
-            data-visible={showhoverlinks} onMouseOver={onshowHoverlinks} onMouseOut={onshowHoverlinks}>
-         {window.scrollY > 201 ? "" : <HoverLinsks sublink={[1,2,3,4,5,6]} blogPost={Posts.slice(0, 6)} trendingTags={[1,2,3,4]}/>}
-        </div>        
-      </div> */}
 
       {/* Block for all the out let is here */}
       <div className="w-full">

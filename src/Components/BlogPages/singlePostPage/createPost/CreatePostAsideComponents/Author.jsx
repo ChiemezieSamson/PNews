@@ -1,24 +1,8 @@
 import React from 'react'
+import { users } from '../../../../../data'
 
 const Author = () => {
-  const users = [
-    {
-      id: 1,
-      name: "user1"
-    },
-    {
-      id: 2,
-      name: "user2"
-    },
-    {
-      id: 3,
-      name: "user3"
-    },
-    {
-      id: 4,
-      name: "user4"
-    },
-]
+  
   return (
      //* Author selection start here */
     <div className='pt-5 mb-3 px-3'>

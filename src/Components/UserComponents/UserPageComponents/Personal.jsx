@@ -1,48 +1,9 @@
 import React from 'react'
 import { FaCheckDouble } from "react-icons/fa";
+import { userPersonalInfor } from '../../../data';
 import { UserInfoHeading } from '../../SharedAsset/SharedAssets';
 
 const Personal = () => {
-
-  const userPersonalInfor = [
-    {
-      id: "1",
-      name: "First Name",
-      type: "text",
-      inputid: "userfirstname",
-      text: "Please provide your first name."
-    },
-    {
-      id: "2",
-      name: "Last Name",
-      type: "text",
-      inputid: "userlastname",
-      text: "Please provide your last name."
-    },
-    {
-      id: "3",
-      name: "Location",
-      type: "text",
-      inputid: "userlocation",
-      text: "Please provide your location."
-    },
-    {
-      id: "4",
-      name: "Email",
-      type: "email",
-      inputid: "useremail",
-      text: "Please provide a valid email address.",
-      form: "userinformation"
-    },
-    {
-      id: "5",
-      name: "Password",
-      type: "password",
-      inputid: "userpassword",
-      text: "Please provide a valid password.",
-      form: "userinformation"
-    }
-  ]
 
   const UserInput = ({userInformations}) => {
     return (

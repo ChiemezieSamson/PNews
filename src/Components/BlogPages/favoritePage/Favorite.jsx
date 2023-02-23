@@ -7,9 +7,7 @@ import Aside from "../asidePage/Aside";
 import { PagesBlogPostComponent } from "../IndexPageComponents/SharedComponents";
 
 
-
 const Favorite = () => {
-
   return (
     <section className="text-left">
 

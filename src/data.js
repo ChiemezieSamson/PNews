@@ -12,14 +12,22 @@ import pix11 from "../src/asset/images/pix11.jpg";
 import pix12 from "../src/asset/images/pix12.jpg";
 import pix13 from "../src/asset/images/pix13.jpg";
 import {
+	FaClock,
+	FaEnvelope,
+	FaEnvelopeOpen,
 	FaFacebook,
-	FaFlickr,
+	FaFacebookF,
+	FaFax,
+	FaGlobe,
 	FaInstagram,
 	FaLinkedin,
+	FaLinkedinIn,
+	FaMapMarkerAlt,
+	FaPhoneAlt,
 	FaRss,
-	FaSoundcloud,
 	FaTwitter,
 	FaYoutube,
+	FaYoutubeSquare,
 } from "react-icons/fa";
 
 export const Posts = [
@@ -237,30 +245,8 @@ export const cats = [
 export const SocialMediaIcons = [
 	{
 		id: 1,
-		icon: <FaInstagram />,
-	},
-	{
-		id: 2,
-		icon: <FaFacebook />,
-	},
-	{
-		id: 3,
-		icon: <FaTwitter />,
-	},
-	{
-		id: 4,
-		icon: <FaYoutube />,
-	},
-	{
-		id: 5,
-		icon: <FaLinkedin />,
-	},
-];
-
-export const HomeAndPigSocialLinks = [
-	{
-		id: 1,
-		icon: <FaInstagram className="text-white inline-block" />,
+		icon: <FaInstagram className="inline-block" />,
+		socialLinks: "text-[#e4405f]",
 		number: 87.1 + "k",
 		text: "Followers",
 		bg: "bg-[#e4405f]",
@@ -268,7 +254,8 @@ export const HomeAndPigSocialLinks = [
 	},
 	{
 		id: 2,
-		icon: <FaFlickr className="text-white inline-block" />,
+		icon: <FaFacebook className="inline-block" />,
+		socialLinks: "text-[#f07]",
 		number: 649,
 		text: "Followers",
 		bg: "bg-[#f07]",
@@ -276,7 +263,8 @@ export const HomeAndPigSocialLinks = [
 	},
 	{
 		id: 3,
-		icon: <FaSoundcloud className="text-white inline-block" />,
+		icon: <FaTwitter className="inline-block" />,
+		socialLinks: "text-[#ffae00]",
 		number: 23.7 + "k",
 		text: "Followers",
 		bg: "bg-[#ffae00]",
@@ -284,7 +272,26 @@ export const HomeAndPigSocialLinks = [
 	},
 	{
 		id: 4,
-		icon: <FaRss className="text-white inline-block" />,
+		icon: <FaYoutube className="inline-block" />,
+		socialLinks: "text-[#e4405f]",
+		number: 25.7 + "k",
+		text: "Followers",
+		bg: "bg-[#ff6f00]",
+		hv: "hover:bg-[#ff6f00]/70",
+	},
+	{
+		id: 5,
+		icon: <FaLinkedin className="inline-block" />,
+		socialLinks: "text-blue-400",
+		number: 28.7 + "k",
+		text: "Followers",
+		bg: "bg-blue-400",
+		hv: "hover:bg-blue-700/70",
+	},
+	{
+		id: 6,
+		icon: <FaRss className="inline-block" />,
+		socialLinks: "text-[#ff6f00]",
 		number: 99,
 		text: "Subscribers",
 		bg: "bg-[#ff6f00]",
@@ -343,8 +350,15 @@ export const tags = [
 ];
 
 export const User = {
-	name: "",
-	email: "",
+	name: { firstName: "", LastName: "" },
+	nickName: "",
+	email: {
+		primary: "",
+		secondary: [
+			{ id: 1, email: "myemailexample@email.com" },
+			{ id: 2, email: "myemailexample1@email.com" },
+		],
+	},
 	bio: "",
 	profileImage: "",
 	socialLinks: {
@@ -403,5 +417,202 @@ export const navItems = [
 		id: 5,
 		url: "/quotes",
 		name: "Quotes",
+	},
+];
+
+export const ContactInfo = [
+	{
+		id: 1,
+		icon: <FaMapMarkerAlt className="inline-block" />,
+		text: "639,Longmei Avenue Jiangning Campus, Nanjing",
+	},
+	{
+		id: 2,
+		icon: <FaPhoneAlt className="inline-block" />,
+		text: "(0361) 888 1234",
+	},
+	{
+		id: 3,
+		icon: <FaFax className="inline-block" />,
+		text: "(0361) 888 1234",
+	},
+	{
+		id: 4,
+		icon: <FaEnvelope className="inline-block" />,
+		text: "contact@yourwebsite.com",
+	},
+	{
+		id: 5,
+		icon: <FaClock className="inline-block" />,
+		text: "Opening Days: Mon - Sat",
+	},
+];
+
+export const otherPages = [
+	{
+		id: 1,
+		page: "About",
+		to: "about",
+	},
+	{
+		id: 2,
+		page: "Contact Us",
+		to: "contactus",
+	},
+	{
+		id: 3,
+		page: "Privacy & Policy",
+		to: "privacy&policy",
+	},
+];
+
+// export const secondaryEmails = [
+// 	{id: 1, email: "myemailexample@email.com"},{id: 2,email: "myemailexample1@email.com"},
+// ];
+
+export const users = [
+	{
+		id: 1,
+		name: "user1",
+	},
+	{
+		id: 2,
+		name: "user2",
+	},
+	{
+		id: 3,
+		name: "user3",
+	},
+	{
+		id: 4,
+		name: "user4",
+	},
+];
+
+export const sampleMarkup = `<p>My post Becoming a more effective learner can take time and It always takes practice and determination to establish new habits. Starting a new field of skills, career, work or learning something </p>
+                        <p>new always seems to be the difficult thing Most of us have to pass through. It takes extra energy, time and sometimes strength for most of us to concentrate and dissect what is in front of us. ...! |</p>`;
+
+export const UserContacts = [
+	{
+		id: 1,
+		icon: <FaEnvelopeOpen className="inline-block align-text-top" />,
+		name: "Email",
+		inputtype: "email",
+		inputid: "usercontactemail",
+		placeholder: "example@email.com",
+	},
+	{
+		id: 2,
+		icon: <FaPhoneAlt className="inline-block align-text-top" />,
+		name: "Phone",
+		inputtype: "tel",
+		inputid: "usercontactphone",
+		placeholder: "(+)number",
+	},
+	{
+		id: 3,
+		icon: <FaLinkedinIn className="inline-block align-text-top" />,
+		name: "Linkedin",
+		inputtype: "url",
+		inputid: "usercontactlinkedin",
+		placeholder: "https://www.example.com",
+	},
+	{
+		id: 4,
+		icon: <FaTwitter className="inline-block align-text-top" />,
+		name: "Twitter",
+		inputtype: "url",
+		inputid: "usercontacttwitter",
+		placeholder: "https://www.example.com",
+	},
+	{
+		id: 5,
+		icon: <FaFacebookF className="inline-block align-text-top" />,
+		name: "Facebook",
+		inputtype: "url",
+		inputid: "usercontactfacebook",
+		placeholder: "https://www.example.com",
+	},
+	{
+		id: 6,
+		icon: <FaInstagram className="inline-block align-text-top" />,
+		name: "Instagram",
+		inputtype: "url",
+		inputid: "usercontactinstagram",
+		placeholder: "https://www.example.com",
+	},
+	{
+		id: 7,
+		icon: <FaYoutubeSquare className="inline-block align-text-top" />,
+		name: "YouTube",
+		inputtype: "url",
+		inputid: "usercontactyoutube",
+		placeholder: "https://www.example.com",
+	},
+	{
+		id: 8,
+		icon: <FaGlobe className="inline-block align-text-top" />,
+		name: "Website",
+		inputtype: "url",
+		inputid: "usercontactwebsite",
+		placeholder: "https://www.example.com",
+	},
+];
+
+export const userPersonalInfor = [
+	{
+		id: "1",
+		name: "First Name",
+		type: "text",
+		inputid: "userfirstname",
+		text: "Please provide your first name.",
+	},
+	{
+		id: "2",
+		name: "Last Name",
+		type: "text",
+		inputid: "userlastname",
+		text: "Please provide your last name.",
+	},
+	{
+		id: "3",
+		name: "Location",
+		type: "text",
+		inputid: "userlocation",
+		text: "Please provide your location.",
+	},
+	{
+		id: "4",
+		name: "Email",
+		type: "email",
+		inputid: "useremail",
+		text: "Please provide a valid email address.",
+		form: "userinformation",
+	},
+	{
+		id: "5",
+		name: "Password",
+		type: "password",
+		inputid: "userpassword",
+		text: "Please provide a valid password.",
+		form: "userinformation",
+	},
+];
+
+export const UserPages = [
+	{
+		id: 1,
+		name: "My Profile",
+		toUrl: "/userpage",
+	},
+	{
+		id: 2,
+		name: "My Public Profile",
+		toUrl: "/userpage/publicprofile",
+	},
+	{
+		id: 3,
+		name: "Sign in & security",
+		toUrl: "/userpage/security",
 	},
 ];

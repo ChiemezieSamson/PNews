@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { FaFacebookSquare, FaFlickr, FaInstagram,  FaRegClock, FaRegComment, FaShareAlt, FaSoundcloud, FaTwitter} from 'react-icons/fa';
+import { FaFacebookSquare,   FaRegClock, FaRegComment, FaShareAlt, FaTwitter} from 'react-icons/fa';
+import { SocialMediaIcons } from '../../data';
 import { CatSideBarHanbugar } from '../ButtonAndOthers/Buttons';
 
 const HeadTitle = ({blackletters, redletters}) => {
@@ -142,36 +143,16 @@ export const CatSidebarHanbugar = ({initial, blackletters, redletters}) => {
 
 export const SocialLinks = ({others}) => {
 
-  const links = [
-    {
-      id: 1,
-      icon: <FaInstagram className='text-[#e4405f] inline-block'/>,
-      number: 87.1 + "k",
-      text: "Followers"
-    },
-    {
-      id: 2,
-      icon: <FaFlickr className='text-[#f07] inline-block'/>,
-      number: 649,
-      text: "Followers"
-    },
-    {
-      id: 3,
-      icon: <FaSoundcloud className='text-[#ffae00] inline-block'/>,
-      number: 23.7 + "k",
-      text: "Followers"
-    },
-  ]
   return (
     <ul className='grid grid-cols-3 text-center mt-4'>
-      {(others ? others : links).map((link) => {
+      {(others ? others : SocialMediaIcons.slice(0, 5)).map((link) => {
         return (
-          <li key={link.id} className={`text-xl ${link.bg ? link.bg : "bg-[#fff]"} font-bold ${link.hv ? link.hv : "hover:bg-slate-200/75"} cursor-pointer border border-solid border-[#e0e0e0]
+          <li key={link.id} className={`text-xl ${others ? link.bg : "bg-[#fff]"} font-bold ${others ? link.hv : "hover:bg-slate-200/75"} cursor-pointer border border-solid border-[#e0e0e0]
           transition-all duration-200 ease-linear`}>
-            <span className={`${link.bg ? "text-white" : "text-[#53585c]"}`}>
-              <span className='block text-3xl'>{link.icon}</span>
+            <span className={`${others ? "text-white" : "text-[#53585c]"}`}>
+              <span className={`block text-3xl ${others ? "text-white" : link.socialLinks}`}>{link.icon}</span>
               <span className='block'>{link.number}</span>
-              <small className={`${link.bg ? "text-white" : "text-[#a0a0a0]"} prose text-xs`}>{link.text}</small>
+              <small className={`${others ? "text-white" : "text-[#a0a0a0]"} prose text-xs`}>{link.text}</small>
             </span>
           </li>
         )

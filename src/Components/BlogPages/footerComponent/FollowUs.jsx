@@ -1,10 +1,8 @@
 import React from 'react'
-import { FaBehance, FaDribbble, FaFacebookF, FaInstagram, FaTwitter } from 'react-icons/fa'
-// import MyLogo from "../../../asset/images/LogoMakr-4rVg69.png"
+import {  SocialMediaIcons } from '../../../data'
 
 const FollowUs = () => {
-  const social = [<FaFacebookF className='inline'/>, <FaTwitter className='inline'/>, 
-  <FaInstagram className='inline'/>, <FaBehance className='inline'/>, <FaDribbble  className='inline'/>]
+  
   return (
     <section className='lg:pb-8 pb-4'>
       <div className='relative'>
@@ -23,12 +21,12 @@ const FollowUs = () => {
       
       <b className='my-3 inline-block capitalize text-[#a8a8aa] font-bold'>Follow Us</b>
       <ul className='whitespace-nowrap'>
-       {social.map((icon, index) => {
+       {SocialMediaIcons.slice(0, 5).map((icon) => {
         return (
-          <li key={index} className="m-1 inline-block">
+          <li key={icon.id} className="m-1 inline-block">
             <span className='text-base w-[38px] inline-block leading-9 whitespace-nowrap text-center
              text-[#eee] bg-zinc-600/50 rounded hover:bg-[#f70d28] transition-all duration-500 delay-200 ease-linear'>
-              {icon}
+              {icon.icon}
             </span>
           </li>
         )

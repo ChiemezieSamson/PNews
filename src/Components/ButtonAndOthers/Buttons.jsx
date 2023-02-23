@@ -2,6 +2,7 @@ import React from "react";
 import { useState, useEffect} from "react";
 import {FaBars,FaChevronUp,FaEllipsisH,FaEllipsisV,FaRegStar,FaStar,FaTimes} from "react-icons/fa"
 import { FaChevronDown, FaChevronRight } from "react-icons/fa";
+import { useFetcher } from "react-router-dom";
 import { useWindowSize } from "../SharedAsset/SharedAssets";
 
 
@@ -108,6 +109,31 @@ export const StarComponent = ({color}) => {
       {state === false ? <FaRegStar className='p-[1px] -mt-0.5 inline-block'/> : <FaStar className='p-[1px] -mt-0.5 inline-block'/> }
     </button>
   )
+}
+
+
+export const Favorite = ({ contact }) => {
+  // yes, this is a `let` for later
+  const fetcher = useFetcher()
+  let favorite = contact.favorite;
+  if (fetcher.formData) {
+    favorite = fetcher.formData.get("favorite") === "true";
+  }
+  return (
+    <fetcher.Form method="post">
+      <button
+        name="favorite"
+        value={favorite ? "false" : "true"}
+        aria-label={
+          favorite
+            ? "Remove from favorites"
+            : "Add to favorites"
+        }
+      >
+        {favorite ? "★" : "☆"}
+      </button>
+    </fetcher.Form>
+  );
 }
 
 

@@ -1,25 +1,15 @@
 import React, { useRef, useState } from 'react'
+import { User } from '../../../../data'
 import { Hanbugar3, WritePostAsideOpenClosebar } from '../../../ButtonAndOthers/Buttons'
 import { SinginAndSecurityIntro } from '../../../SharedAsset/SharedAssets'
 
-
-const secondaryEmails = [
-  {
-    id: 1,
-    email: "myemailexample@email.com"
-  },
-  {
-    id: 2,
-    email: "myemailexample1@email.com"
-  },
-]
 
 const Email = () => {
   const [openCat, setOpenCat] = useState(false)
   const [openAddnewCat, setOpenAddnewCat] = useState(false)
   const [newEmail, setNewEmail] = useState("")
   const [getUserpassword, setGetUserpassword] = useState("")
-  const [secondaryEmaillist, setsecondaryEmaillist] = useState(secondaryEmails)
+  const [secondaryEmaillist, setsecondaryEmaillist] = useState(User.email.secondary)
   const [primaryEmail, setPrimaryEmail] = useState("myemailexample@email2.com")
   const [openGetUserPasswordForMakeAndRemove, setOpenGetUserPasswordForMakeAndRemove] = useState(false)
   const [emailOfTheClickedButton, setEmailOfTheClickedButton] = useState("")

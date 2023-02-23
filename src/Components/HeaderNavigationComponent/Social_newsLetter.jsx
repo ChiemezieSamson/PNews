@@ -27,7 +27,7 @@ const SocialNewsletter = ({opensidebar}) => {
 
     {/* ===== social start here ==== */}
     <ul className="pt-1 list-none m-0 p-0 flex gap-4">
-      {SocialMediaIcons.map((icon) => {
+      {SocialMediaIcons.slice(0, 5).map((icon) => {
         return (
           <li key={icon.id}>
             <span className="no-underline text-black text-lg">{icon.icon}</span>

@@ -20,12 +20,19 @@ import MyPublicProfile from "./Components/UserComponents/UserPageComponents/MyPu
 import SingAndSecurity from "./Components/UserComponents/UserPageComponents/SingAndSecurity";
 import LogIn from "./Components/LogIn/LogIn";
 import RegistrationForm from "./Components/Registration/Registration";
+import Category from "./Components/BlogPages/CategoriesPage/Category";
+import {
+	// lodingData as rootLoader,
+	action as rootAction,
+} from "./Components/DataLoader/LodingData";
 
 const App = createBrowserRouter([
 	{
 		path: "/",
 		element: <HomeLinks />,
 		errorElement: <NotFound />,
+		// loader: rootLoader,
+		action: rootAction,
 		children: [
 			{
 				index: true,
@@ -37,7 +44,7 @@ const App = createBrowserRouter([
 				children: [
 					{
 						path: "/books/:booksId",
-						element: <></>,
+						element: <Category />,
 					},
 				],
 			},
@@ -47,7 +54,7 @@ const App = createBrowserRouter([
 				children: [
 					{
 						path: "/lifestyle/:lifestyleId",
-						element: <></>,
+						element: <Category />,
 					},
 				],
 			},
@@ -57,7 +64,7 @@ const App = createBrowserRouter([
 				children: [
 					{
 						path: "/favorite/:favoriteId",
-						element: <></>,
+						element: <Category />,
 					},
 				],
 			},
@@ -67,7 +74,7 @@ const App = createBrowserRouter([
 				children: [
 					{
 						path: "/business/:businessId",
-						element: <></>,
+						element: <Category />,
 					},
 				],
 			},
@@ -77,7 +84,7 @@ const App = createBrowserRouter([
 				children: [
 					{
 						path: "/quotes/:quotesId",
-						element: <></>,
+						element: <Category />,
 					},
 				],
 			},
