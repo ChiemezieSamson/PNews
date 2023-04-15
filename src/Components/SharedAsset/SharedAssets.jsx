@@ -2,6 +2,8 @@ import React, { useEffect, useRef, useState } from 'react';
 import { FaFacebookSquare,   FaRegClock, FaRegComment, FaShareAlt, FaTwitter} from 'react-icons/fa';
 import { SocialMediaIcons } from '../../data';
 import { CatSideBarHanbugar } from '../ButtonAndOthers/Buttons';
+import Preview from '../BlogPages/singlePostPage/createPost/editorPreview/Preview';
+import { Link } from 'react-router-dom';
 
 const HeadTitle = ({blackletters, redletters}) => {
   return (
@@ -15,37 +17,37 @@ const HeadTitle = ({blackletters, redletters}) => {
 }
 
 
-export const PostTitleLarge = ({post}) => (
+export const PostTitleLarge = ({post, postId}) => (
   <h2 className="tracking-wide capitalize font-lora text-lg imgxs:text-xl md:text-lg lg:text-3xl font-bold">
-    <span className='cursor-pointer'  title='title'>
+    <Link to={`/single/${postId}`} className='cursor-pointer'  title='title'>
       {post}
-    </span>
+    </Link>
   </h2>
 )
 
 
-export const PostTitleMedium = ({post}) => (
+export const PostTitleMedium = ({post, postId}) => (
   <h3 className="capitalize tracking-wide text-black font-lora md:text-base text-base imgxs:text-xl lg:text-lg font-extrabold">
-    <span className='hover:text-[#f70d28] cursor-pointer transition-all duration-200 ease-linear' title="title">
+    <Link to={`/single/${postId}`} className='hover:text-[#f70d28] cursor-pointer transition-all duration-200 ease-linear' title="title">
       {post}
-    </span>
+    </Link>
   </h3>
 )
 
-export const PostTitleMedium2 = ({post}) => (
+export const PostTitleMedium2 = ({post, postId}) => (
   <h3 className="capitalize tracking-wide font-lora text-base imgxs:text-xl md:text-lg lg:text-xl font-extrabold">
-    <span className='hover:text-[#f70d28] cursor-pointer transition-all duration-200 ease-linear'  title='title'>
+    <Link to={`/single/${postId}`} className='hover:text-[#f70d28] cursor-pointer transition-all duration-200 ease-linear'  title='title'>
       {post}
-    </span>
+    </Link>
   </h3>
 )
 
 
-export const PostTitleSmall = ({post}) => (
+export const PostTitleSmall = ({post, postId}) => (
   <h4 className="capitalize font-lora tracking-wide font-extrabold text-black lg:text-base text-sm imgxs:text-base -mt-1.5 pb-1 md:text-[13px]">
-    <span className='hover:text-[#f70d28] cursor-pointer transition-all duration-200 ease-linear' title='title'>
+    <Link to={`/single/${postId}`} className='hover:text-[#f70d28] cursor-pointer transition-all duration-200 ease-linear' title='title'>
       {post}
-    </span>
+    </Link>
   </h4>
 )
 
@@ -362,11 +364,17 @@ export const AdminComponentColor = () => {
 }
 
 
-export const PostsShortInfoComponent = ({post}) => (
-  <p className="text-ellipsis prose text-[#54595f] md:text-[13px] leading-[20px] text-sm imgxs:text-[15px] lg:text-base">
-    {post.substring(0, 120)} . . .
-  </p>
-)
+export const PostsShortInfoComponent = ({post}) => {
+  const postContent =  (<Preview postContent={post}/>)
+  const textExtract = postContent.props.postContent.blocks[0].text
+
+  return (
+    <div className="text-ellipsis prose text-[#54595f] md:text-[13px] leading-[20px] text-sm imgxs:text-[15px] lg:text-base">
+      {textExtract.substring(0, 120)} . . .
+    </div>
+  )
+
+}
 
 export const UserInfoHeading = ({head, text}) => {
  return (

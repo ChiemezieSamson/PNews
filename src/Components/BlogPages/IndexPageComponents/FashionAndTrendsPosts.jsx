@@ -1,9 +1,10 @@
 import React from 'react'
 import { CategoriesComponentBotton, CatSidebarHanbugar, PostTitleMedium, PostTitleSmall, TimeComponentColor, useWindowSize } from '../../SharedAsset/SharedAssets'
-import { Posts } from '../../../data';
+import { useSelector } from 'react-redux';
 
 
 const FashionAndTrendsPosts = () => {
+  const Posts = useSelector(state => state.posts)
   const size = useWindowSize()
 
   return (
@@ -24,12 +25,12 @@ const FashionAndTrendsPosts = () => {
             <li key={post.id} className="md:mr-[6%] mb-7 last:mb-0 md:mb-0">
 
               <div className="basis-1/6 md:basis-1/3 mb-1 min-w-[90px] relative">
-                <img src={post.image} alt={"posts"} className="w-full h-44 imgxs:h-[240px] md:h-36 lg:h-48 object-cover cursor-pointer" loading="lazy"/>
-                <CategoriesComponentBotton cat={post.cat} />
+                <img src={post.postImage} alt={"posts"} className="w-full h-44 imgxs:h-[240px] md:h-36 lg:h-48 object-cover cursor-pointer" loading="lazy"/>
+                <CategoriesComponentBotton cat={post.postCategory[0]} />
               </div>
 
               <div className="basis-5/6 md:basis-2/3 pt-1">
-                {size.width > 768 ? <PostTitleSmall post={post.title} /> : <PostTitleMedium post={post.title}/>}
+                {size.width > 768 ? <PostTitleSmall post={post.postTitle} postId={post.id}/> : <PostTitleMedium post={post.postTitle} postId={post.id}/>}
                 <TimeComponentColor time={post.date}/>
               </div>
             </li>

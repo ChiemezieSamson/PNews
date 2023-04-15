@@ -1,10 +1,11 @@
 import React from 'react'
-import { Posts, SocialMediaIcons } from '../../../../data'
+import { useSelector } from 'react-redux'
+import { SocialMediaIcons } from '../../../../data'
 import { MainDivider, SocialLinks } from '../../../SharedAsset/SharedAssets'
 import { JustTimeComponet, JustTimeComponetStar } from '../SharedComponents'
 
 const Recommended = () => {
-  
+  const Posts = useSelector(state => state.posts)
   return (
     <section className='mt-2.5'>
 

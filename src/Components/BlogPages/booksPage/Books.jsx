@@ -1,12 +1,13 @@
 import React from "react";
 import StickyBox from "react-sticky-box";
-import { Posts } from "../../../data";
+import { useSelector } from "react-redux";
 import { NavDirectionAndPageName } from "../../SharedAsset/SharedAssets";
 import { SharedBlogPageStyleOne } from "../../SharedAsset/SharedBlogPageStyle_1st_Component";
 import Aside from "../asidePage/Aside";
 import { PagesBlogPostComponent } from "../IndexPageComponents/SharedComponents";
 
 const Books = () => {
+  const Posts = useSelector(state => state.posts)
   return (
     <section className="text-left">
 

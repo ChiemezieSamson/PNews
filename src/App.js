@@ -43,7 +43,7 @@ const App = createBrowserRouter([
 				element: <Books />,
 				children: [
 					{
-						path: "/books/:booksId",
+						path: "/books/:postId",
 						element: <Category />,
 					},
 				],
@@ -53,7 +53,7 @@ const App = createBrowserRouter([
 				element: <LifeStyle />,
 				children: [
 					{
-						path: "/lifestyle/:lifestyleId",
+						path: "/lifestyle/:postId",
 						element: <Category />,
 					},
 				],
@@ -63,7 +63,7 @@ const App = createBrowserRouter([
 				element: <Favorite />,
 				children: [
 					{
-						path: "/favorite/:favoriteId",
+						path: "/favorite/:postId",
 						element: <Category />,
 					},
 				],
@@ -73,7 +73,7 @@ const App = createBrowserRouter([
 				element: <Business />,
 				children: [
 					{
-						path: "/business/:businessId",
+						path: "/business/:postId",
 						element: <Category />,
 					},
 				],
@@ -83,7 +83,7 @@ const App = createBrowserRouter([
 				element: <Quotes />,
 				children: [
 					{
-						path: "/quotes/:quotesId",
+						path: "/quotes/:postId",
 						element: <Category />,
 					},
 				],
@@ -101,7 +101,7 @@ const App = createBrowserRouter([
 				element: <ContactUs />,
 			},
 			{
-				path: "single",
+				path: "single/:postId",
 				element: <SinglePost />,
 			},
 			{
@@ -109,7 +109,7 @@ const App = createBrowserRouter([
 				element: <WritePost />,
 			},
 			{
-				path: "editpost",
+				path: "editpost/:postId",
 				element: <EditPost />,
 			},
 			{

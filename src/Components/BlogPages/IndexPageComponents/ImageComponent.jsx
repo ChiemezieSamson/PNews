@@ -1,10 +1,12 @@
 import React from 'react'
-import { Posts } from '../../../data'
+import { useSelector } from 'react-redux'
 import { StarComponent } from '../../ButtonAndOthers/Buttons'
 import { CategoriesComponent, overLay, TimeComponent} from '../../SharedAsset/SharedAssets'
+import { Link } from 'react-router-dom'
 
 const ImageComponent = () => {
- 
+  const Posts = useSelector(state => state.posts)
+
   return (
     <section className='cursor-pointer mb-7 mt-12'>
       <div className="overflowScroll mt-2 lg:mt-0 col-span-2 overflow-x-auto scroll-px-4 overscroll-x-contain overflow-y-hidden snap-mandatory">
@@ -12,16 +14,16 @@ const ImageComponent = () => {
         {Posts.slice(0, 7).map((post) => {
           return (
         <li key={post.id} className={`relative snap-start min-w-[350px] ${overLay()} m-0 p-0 group overflow-clip`}>
-          <img src={post.image} alt="IndexImage"  className="h-full w-full object-cover group-hover:scale-110
+          <img src={post.postImage} alt="IndexImage"  className="h-full w-full object-cover group-hover:scale-110
                   transition-all duration-500 delay-200 ease-linear scale-100" loading="lazy"/>         
           <div className="absolute bottom-[12%] text-white inset-x-0 grid px-2 place-items-center z-20 transition-all duration-500 delay-200 ease-linear translate-y-10 
                group-hover:translate-y-0">
                 <div className="w-[93%] text-center">
-                  <CategoriesComponent cat={post.cat} />
+                  <CategoriesComponent cat={post.postCategory[0]} />
                   <h3 className="capitalize tracking-wide font-lora md:text-base text-lg lg:text-xl font-extrabold">
-                    <span className='cursor-pointer'>
-                      {post.title}
-                    </span>
+                    <Link to={`/single/${post.id}`} className='cursor-pointer'>
+                      {post.postTitle}
+                    </Link>
                   </h3>
                   <span className="mt-2 inline-block transition-all duration-500 delay-200 ease-linear translate-y-32 opacity-0 invisible cursor-pointer
                       group-hover:opacity-100 group-hover:visible group-hover:translate-y-0">

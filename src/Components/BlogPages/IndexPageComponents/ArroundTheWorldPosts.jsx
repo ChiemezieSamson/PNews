@@ -1,9 +1,10 @@
 import React from 'react'
 import { AdminComponentColor, CategoriesComponentBotton, CatSidebarHanbugar, CommentComponetColor, PostsShortInfoComponent, PostTitleMedium, PostTitleMedium2, TimeComponentColor, useWindowSize } from '../../SharedAsset/SharedAssets'
-import { Posts } from '../../../data';
+import { useSelector } from "react-redux"
 import { ReadmoreButton } from '../../ButtonAndOthers/Buttons';
 
 const ArroundTheWorldPosts = () => {
+  const Posts = useSelector(state => state.posts)
   const size = useWindowSize()
  
   return (
@@ -17,23 +18,23 @@ const ArroundTheWorldPosts = () => {
       <div className='md:grid md:grid-cols-2 pb-7 pt-2'>
         <div className='md:row-span-3 mt-0.5 text-black md:mr-[3%]'>
           <div className="relative mb-4 mx-auto">
-            <img src={Posts[11].image} alt="game" className="w-full max-h-44 imgxs:min-h-[240px] object-cover cursor-pointer md:min-h-[400px] lg:min-h-[500px] xl:min-h-[600px]" loading="lazy"/>
-            <CategoriesComponentBotton cat={Posts[11].cat} />
+            <img src={Posts[11].postImage} alt="game" className="w-full max-h-44 imgxs:min-h-[240px] object-cover cursor-pointer md:min-h-[400px] lg:min-h-[500px] xl:min-h-[600px]" loading="lazy"/>
+            <CategoriesComponentBotton cat={Posts[11].postCategory[0]} />
           </div>
 
-          <PostTitleMedium2 post={Posts[3].title} />
+          <PostTitleMedium2 post={Posts[11].postTitle} postId={Posts[11].id}/>
 
           <span className="mt-2 mb-4 inline-block">
             <span className='mr-4 inline-block'>
               <AdminComponentColor />
             </span>
             
-            <TimeComponentColor time={Posts[3].date}/>
+            <TimeComponentColor time={Posts[11].date}/>
           </span>
 
           {size.width > 519 && 
           <>
-            <PostsShortInfoComponent post={Posts[3].content}/>
+            <PostsShortInfoComponent post={Posts[11].postContent}/>
             <ReadmoreButton />
           </>}
         </div>
@@ -43,11 +44,11 @@ const ArroundTheWorldPosts = () => {
             return (
               <li key={post.id} className="mb-3.5">
                 <div className="relative mb-4">
-                  <img src={post.image} alt={"game"} className="w-full h-44 imgxs:h-[240px] md:h-36 lg:h-48 xl:h-[250px] object-cover cursor-pointer" loading="lazy"/>
-                  <CategoriesComponentBotton cat={post.cat} />
+                  <img src={post.postImage} alt={"game"} className="w-full h-44 imgxs:h-[240px] md:h-36 lg:h-48 xl:h-[250px] object-cover cursor-pointer" loading="lazy"/>
+                  <CategoriesComponentBotton cat={post.postCategory[0]} />
                 </div>
 
-                <PostTitleMedium post={post.title} />
+                <PostTitleMedium post={post.postTitle} postId={post.id}/>
 
                 <span className="mt-2 mb-2 inline-block">
                   <span className='mr-4'>
@@ -61,7 +62,7 @@ const ArroundTheWorldPosts = () => {
 
                 {size.width > 519 && 
                 <>
-                  <PostsShortInfoComponent post={post.content} />
+                  <PostsShortInfoComponent post={post.postContent} />
                   <ReadmoreButton />
                 </>}
               </li>

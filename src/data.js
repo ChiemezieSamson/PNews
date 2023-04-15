@@ -14,152 +14,3696 @@ import pix13 from "../src/asset/images/pix13.jpg";
 import {
 	FaClock,
 	FaEnvelope,
-	FaEnvelopeOpen,
 	FaFacebook,
-	FaFacebookF,
 	FaFax,
-	FaGlobe,
 	FaInstagram,
 	FaLinkedin,
-	FaLinkedinIn,
 	FaMapMarkerAlt,
 	FaPhoneAlt,
 	FaRss,
 	FaTwitter,
 	FaYoutube,
-	FaYoutubeSquare,
 } from "react-icons/fa";
 
 export const Posts = [
 	{
-		id: 1,
-		image: pix1,
-		title: "Lorem ipsum dolor sit amet consectetur adipi elit 1",
-		cat: "Fashion",
-		content:
-			"Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea, omnis autem, magnam consequuntur accusamus ab tenetur exercitationem quos ipsum eum ducimus quas earum. Sint eveniet pariatur nisi, dicta porro animi!",
+		id: "1",
+		postAuthor: "Danny",
+		postImage: pix1,
+		postTitle: "Lorem ipsum dolor sit amet consectetur adipi elit 1",
+		postCategory: ["Fashion"],
+		postContent: {
+			blocks: [
+				{
+					key: "f7gmk",
+					text: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Fugit ducimus eligendi quo alias, sit, labore minus expedita possimus temporibus quaerat, esse rem iusto voluptates tenetur debitis? Quisquam culpa libero fuga. Ipsum dolor sit amet consectetur adipisicing elit. Fugit ducimus eligendi quo alias, sit, labore eligendi quo alias, sit, labore.",
+					type: "unstyled",
+					depth: 0,
+					inlineStyleRanges: [
+						{ offset: 0, length: 348, style: "color-rgb(68,68,68)" },
+						{ offset: 0, length: 348, style: "fontsize-16" },
+						{
+							offset: 0,
+							length: 348,
+							style:
+								'fontfamily--apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif',
+						},
+					],
+					entityRanges: [],
+					data: { "text-align": "left" },
+				},
+				{
+					key: "fcnru",
+					text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque saepe architecto, nulla eum odit autem tempora officiis commodi aliquid, recusandae expedita atque deleniti magni aperiam nobis at non adipisci eligendi. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur tempora nesciunt illo, quibusdam beatae veritatis vero nam ex, possimus harum recusandae numquam eius quod sed, laborum nulla vitae aut minima!",
+					type: "unstyled",
+					depth: 0,
+					inlineStyleRanges: [
+						{ offset: 0, length: 431, style: "color-rgb(68,68,68)" },
+						{ offset: 0, length: 431, style: "fontsize-16" },
+						{
+							offset: 0,
+							length: 431,
+							style:
+								'fontfamily--apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif',
+						},
+					],
+					entityRanges: [],
+					data: { "text-align": "left" },
+				},
+				{
+					key: "5rsc",
+					text: "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptatem ipsa quibusdam sed reprehenderit! Quae quam, eum ea minus laborum impedit? Voluptatem, tempora. Dolorum ratione, tempora quod ipsam fugiat deleniti doloremque? Lorem, ipsum dolor sit amet consectetur adipisicing elit. Blanditiis dignissimos explicabo maxime debitis? Blanditiis, debitis vel esse, tenetur cum magni temporibus consectetur laboriosam beatae quasi architecto consequatur culpa? Deserunt, modi! Lorem ipsum dolor sit amet consectetur, adipisicing elit. Debitis est ea ipsam tempora illo iure nemo temporibus adipisci quibusdam aperiam nam doloremque ab a, dolorem laborum? Unde minima ipsam aspernatur. ",
+					type: "unstyled",
+					depth: 0,
+					inlineStyleRanges: [
+						{ offset: 0, length: 684, style: "color-rgb(68,68,68)" },
+						{ offset: 0, length: 684, style: "fontsize-16" },
+						{
+							offset: 0,
+							length: 684,
+							style:
+								'fontfamily--apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif',
+						},
+					],
+					entityRanges: [],
+					data: { "text-align": "left" },
+				},
+				{
+					key: "7d4jd",
+					text: "The truth is you don't know what is going to happen tomorrow. Life is a crazy ride, and nothing is guaranteed. ",
+					type: "blockquote",
+					depth: 0,
+					inlineStyleRanges: [
+						{ offset: 0, length: 110, style: "color-rgb(122,122,122)" },
+						{ offset: 0, length: 110, style: "fontsize-22" },
+						{ offset: 0, length: 110, style: "fontfamily-Lora, serif" },
+					],
+					entityRanges: [],
+					data: {},
+				},
+				{
+					key: "a6uk5",
+					text: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eius odit quis saepe ab iure asperiores, eos et vero iusto quibusdam est atque ad, eum sit similique veritatis itaque voluptatem aperiam. vero iusto quibusdam est atque ad, eum sit similique veritatis itaque ",
+					type: "unstyled",
+					depth: 0,
+					inlineStyleRanges: [
+						{ offset: 0, length: 265, style: "color-rgb(68,68,68)" },
+						{ offset: 0, length: 265, style: "fontsize-16" },
+						{
+							offset: 0,
+							length: 265,
+							style:
+								'fontfamily--apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif',
+						},
+					],
+					entityRanges: [],
+					data: {},
+				},
+				{
+					key: "1e8u6",
+					text: "Exercise Keeps the Brain Young: Study ",
+					type: "header-three",
+					depth: 0,
+					inlineStyleRanges: [
+						{
+							offset: 0,
+							length: 37,
+							style: "color-rgb(333333/var(--tw-text-opacity))",
+						},
+						{ offset: 0, length: 37, style: "fontsize-1.5rem" },
+						{ offset: 0, length: 37, style: "fontfamily-Lora, serif" },
+					],
+					entityRanges: [],
+					data: { "text-align": "left" },
+				},
+				{
+					key: "4mmko",
+					text: " ",
+					type: "atomic",
+					depth: 0,
+					inlineStyleRanges: [],
+					entityRanges: [{ offset: 0, length: 1, key: 0 }],
+					data: {},
+				},
+				{
+					key: "ech5k",
+					text: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptas cupiditate itaque obcaecati numquam minima, atque iusto quia ullam nam magni neque, id hic corrupti harum sapiente, sunt blanditiis laborum aspernatur?",
+					type: "unstyled",
+					depth: 0,
+					inlineStyleRanges: [
+						{ offset: 0, length: 218, style: "color-rgb(0,0,0)" },
+						{ offset: 0, length: 218, style: "fontsize-16" },
+						{
+							offset: 0,
+							length: 218,
+							style:
+								'fontfamily--apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif',
+						},
+					],
+					entityRanges: [],
+					data: { "text-align": "left" },
+				},
+				{
+					key: "d6ane",
+					text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis magni nostrum tempore similique nulla molestiae ducimus obcaecati ipsam reiciendis, itaque minima hic dolor omnis accusantium corrupti doloremque laudantium? Voluptatem, accusamus. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Distinctio facilis veniam rerum eaque magni illum tempore, laudantium aut ea cum odio. Eaque quo, itaque sit soluta illo quisquam odio quia! Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa quasi dolores, harum atque ipsam placeat magni totam quos! Accusantium quo quibusdam assumenda consequuntur recusandae id maxime? Architecto blanditiis delectus soluta. ",
+					type: "unstyled",
+					depth: 0,
+					inlineStyleRanges: [
+						{ offset: 0, length: 680, style: "color-rgb(0,0,0)" },
+						{ offset: 0, length: 680, style: "fontsize-16" },
+						{
+							offset: 0,
+							length: 680,
+							style:
+								'fontfamily--apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif',
+						},
+					],
+					entityRanges: [],
+					data: { "text-align": "left" },
+				},
+				{
+					key: "e61ln",
+					text: "The most advanced Blog & News WordPress Theme ",
+					type: "header-three",
+					depth: 0,
+					inlineStyleRanges: [
+						{
+							offset: 0,
+							length: 45,
+							style: "color-rgb(333333/var(--tw-text-opacity))",
+						},
+						{ offset: 0, length: 45, style: "fontsize-1.5rem" },
+						{ offset: 0, length: 45, style: "fontfamily-Lora, serif" },
+					],
+					entityRanges: [],
+					data: { "text-align": "left" },
+				},
+				{
+					key: "6q9jk",
+					text: " ",
+					type: "atomic",
+					depth: 0,
+					inlineStyleRanges: [],
+					entityRanges: [{ offset: 0, length: 1, key: 1 }],
+					data: {},
+				},
+				{
+					key: "trih",
+					text: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptas cupiditate itaque obcaecati numquam minima, atque iusto quia ullam nam magni neque, id hic corrupti harum sapiente, sunt blanditiis laborum aspernatur?",
+					type: "unstyled",
+					depth: 0,
+					inlineStyleRanges: [
+						{ offset: 0, length: 218, style: "color-rgb(0,0,0)" },
+						{ offset: 0, length: 218, style: "fontsize-16" },
+						{
+							offset: 0,
+							length: 218,
+							style:
+								'fontfamily--apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif',
+						},
+					],
+					entityRanges: [],
+					data: { "text-align": "left" },
+				},
+				{
+					key: "b61e1",
+					text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis magni nostrum tempore similique nulla molestiae ducimus obcaecati ipsam reiciendis, itaque minima hic dolor omnis accusantium corrupti doloremque laudantium? Voluptatem, accusamus. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Distinctio facilis veniam rerum eaque magni illum tempore, laudantium aut ea cum odio. Eaque quo, itaque sit soluta illo quisquam odio quia!",
+					type: "unstyled",
+					depth: 0,
+					inlineStyleRanges: [
+						{ offset: 0, length: 448, style: "color-rgb(0,0,0)" },
+						{ offset: 0, length: 448, style: "fontsize-16" },
+						{
+							offset: 0,
+							length: 448,
+							style:
+								'fontfamily--apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif',
+						},
+					],
+					entityRanges: [],
+					data: { "text-align": "left" },
+				},
+				{
+					key: "1pbp7",
+					text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa quasi dolores, harum atque ipsam placeat magni totam quos! Accusantium quo quibusdam assumenda consequuntur recusandae id maxime? Architecto blanditiis delectus soluta.",
+					type: "unstyled",
+					depth: 0,
+					inlineStyleRanges: [
+						{ offset: 0, length: 231, style: "color-rgb(0,0,0)" },
+						{ offset: 0, length: 231, style: "fontsize-16" },
+						{
+							offset: 0,
+							length: 231,
+							style:
+								'fontfamily--apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif',
+						},
+					],
+					entityRanges: [],
+					data: { "text-align": "left" },
+				},
+				{
+					key: "1lo9l",
+					text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa quasi dolores, harum atque ipsam placeat magni totam quos! Accusantium quo quibusdam assumenda consequuntur recusandae id maxime? Architecto blanditiis delectus soluta.Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa quasi dolores, harum atque ipsam placeat magni totam quos! Accusantium quo quibusdam assumenda consequuntur recusandae id maxime? Architecto blanditiis delectus soluta. ",
+					type: "unstyled",
+					depth: 0,
+					inlineStyleRanges: [
+						{ offset: 0, length: 462, style: "color-rgb(0,0,0)" },
+						{ offset: 0, length: 462, style: "fontsize-16" },
+						{
+							offset: 0,
+							length: 462,
+							style:
+								'fontfamily--apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif',
+						},
+					],
+					entityRanges: [],
+					data: { "text-align": "left" },
+				},
+			],
+			entityMap: {
+				0: {
+					type: "IMAGE",
+					mutability: "MUTABLE",
+					data: {
+						src: "https://i.pinimg.com/564x/1f/b7/27/1fb727daf7c512b836ee2e02a29570f7.jpg",
+						height: "100%",
+						width: "100%",
+					},
+				},
+				1: {
+					type: "IMAGE",
+					mutability: "MUTABLE",
+					data: {
+						src: "https://cdn.dribbble.com/users/427857/screenshots/14370385/media/9272153b67264251a139bb6885533969.jpg?compress=1&resize=768x576&vertical=top",
+						height: "100%",
+						width: "100%",
+					},
+				},
+			},
+		},
 		date: "June 20, 2022",
-		tag: ["Fitness Tips", "Women's Health"],
+		postTags: ["playstation 4 pro", "esport"],
+		optional: {
+			shared: 44,
+			viewed: 33,
+			Trending: true,
+		},
 	},
 	{
-		id: 2,
-		image: pix2,
-		title: "Omnis autem, magnam consequuntur accusamus 2",
-		cat: "App",
-		content:
-			"Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea, omnis autem, magnam consequuntur accusamus ab tenetur exercitationem quos ipsum eum ducimus quas earum. Sint eveniet pariatur nisi, dicta porro animi!",
+		id: "2",
+		postAuthor: "Sammy",
+		postImage: pix2,
+		postTitle: "Omnis autem, magnam consequuntur accusamus 2",
+		postCategory: ["App"],
+		postContent: {
+			blocks: [
+				{
+					key: "f7gmk",
+					text: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Fugit ducimus eligendi quo alias, sit, labore minus expedita possimus temporibus quaerat, esse rem iusto voluptates tenetur debitis? Quisquam culpa libero fuga. Ipsum dolor sit amet consectetur adipisicing elit. Fugit ducimus eligendi quo alias, sit, labore eligendi quo alias, sit, labore.",
+					type: "unstyled",
+					depth: 0,
+					inlineStyleRanges: [
+						{ offset: 0, length: 348, style: "color-rgb(68,68,68)" },
+						{ offset: 0, length: 348, style: "fontsize-16" },
+						{
+							offset: 0,
+							length: 348,
+							style:
+								'fontfamily--apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif',
+						},
+					],
+					entityRanges: [],
+					data: { "text-align": "left" },
+				},
+				{
+					key: "fcnru",
+					text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque saepe architecto, nulla eum odit autem tempora officiis commodi aliquid, recusandae expedita atque deleniti magni aperiam nobis at non adipisci eligendi. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur tempora nesciunt illo, quibusdam beatae veritatis vero nam ex, possimus harum recusandae numquam eius quod sed, laborum nulla vitae aut minima!",
+					type: "unstyled",
+					depth: 0,
+					inlineStyleRanges: [
+						{ offset: 0, length: 431, style: "color-rgb(68,68,68)" },
+						{ offset: 0, length: 431, style: "fontsize-16" },
+						{
+							offset: 0,
+							length: 431,
+							style:
+								'fontfamily--apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif',
+						},
+					],
+					entityRanges: [],
+					data: { "text-align": "left" },
+				},
+				{
+					key: "5rsc",
+					text: "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptatem ipsa quibusdam sed reprehenderit! Quae quam, eum ea minus laborum impedit? Voluptatem, tempora. Dolorum ratione, tempora quod ipsam fugiat deleniti doloremque? Lorem, ipsum dolor sit amet consectetur adipisicing elit. Blanditiis dignissimos explicabo maxime debitis? Blanditiis, debitis vel esse, tenetur cum magni temporibus consectetur laboriosam beatae quasi architecto consequatur culpa? Deserunt, modi! Lorem ipsum dolor sit amet consectetur, adipisicing elit. Debitis est ea ipsam tempora illo iure nemo temporibus adipisci quibusdam aperiam nam doloremque ab a, dolorem laborum? Unde minima ipsam aspernatur. ",
+					type: "unstyled",
+					depth: 0,
+					inlineStyleRanges: [
+						{ offset: 0, length: 684, style: "color-rgb(68,68,68)" },
+						{ offset: 0, length: 684, style: "fontsize-16" },
+						{
+							offset: 0,
+							length: 684,
+							style:
+								'fontfamily--apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif',
+						},
+					],
+					entityRanges: [],
+					data: { "text-align": "left" },
+				},
+				{
+					key: "7d4jd",
+					text: "The truth is you don't know what is going to happen tomorrow. Life is a crazy ride, and nothing is guaranteed. ",
+					type: "blockquote",
+					depth: 0,
+					inlineStyleRanges: [
+						{ offset: 0, length: 110, style: "color-rgb(122,122,122)" },
+						{ offset: 0, length: 110, style: "fontsize-22" },
+						{ offset: 0, length: 110, style: "fontfamily-Lora, serif" },
+					],
+					entityRanges: [],
+					data: {},
+				},
+				{
+					key: "a6uk5",
+					text: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eius odit quis saepe ab iure asperiores, eos et vero iusto quibusdam est atque ad, eum sit similique veritatis itaque voluptatem aperiam. vero iusto quibusdam est atque ad, eum sit similique veritatis itaque ",
+					type: "unstyled",
+					depth: 0,
+					inlineStyleRanges: [
+						{ offset: 0, length: 265, style: "color-rgb(68,68,68)" },
+						{ offset: 0, length: 265, style: "fontsize-16" },
+						{
+							offset: 0,
+							length: 265,
+							style:
+								'fontfamily--apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif',
+						},
+					],
+					entityRanges: [],
+					data: {},
+				},
+				{
+					key: "1e8u6",
+					text: "Exercise Keeps the Brain Young: Study ",
+					type: "header-three",
+					depth: 0,
+					inlineStyleRanges: [
+						{
+							offset: 0,
+							length: 37,
+							style: "color-rgb(333333/var(--tw-text-opacity))",
+						},
+						{ offset: 0, length: 37, style: "fontsize-1.5rem" },
+						{ offset: 0, length: 37, style: "fontfamily-Lora, serif" },
+					],
+					entityRanges: [],
+					data: { "text-align": "left" },
+				},
+				{
+					key: "4mmko",
+					text: " ",
+					type: "atomic",
+					depth: 0,
+					inlineStyleRanges: [],
+					entityRanges: [{ offset: 0, length: 1, key: 0 }],
+					data: {},
+				},
+				{
+					key: "ech5k",
+					text: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptas cupiditate itaque obcaecati numquam minima, atque iusto quia ullam nam magni neque, id hic corrupti harum sapiente, sunt blanditiis laborum aspernatur?",
+					type: "unstyled",
+					depth: 0,
+					inlineStyleRanges: [
+						{ offset: 0, length: 218, style: "color-rgb(0,0,0)" },
+						{ offset: 0, length: 218, style: "fontsize-16" },
+						{
+							offset: 0,
+							length: 218,
+							style:
+								'fontfamily--apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif',
+						},
+					],
+					entityRanges: [],
+					data: { "text-align": "left" },
+				},
+				{
+					key: "d6ane",
+					text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis magni nostrum tempore similique nulla molestiae ducimus obcaecati ipsam reiciendis, itaque minima hic dolor omnis accusantium corrupti doloremque laudantium? Voluptatem, accusamus. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Distinctio facilis veniam rerum eaque magni illum tempore, laudantium aut ea cum odio. Eaque quo, itaque sit soluta illo quisquam odio quia! Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa quasi dolores, harum atque ipsam placeat magni totam quos! Accusantium quo quibusdam assumenda consequuntur recusandae id maxime? Architecto blanditiis delectus soluta. ",
+					type: "unstyled",
+					depth: 0,
+					inlineStyleRanges: [
+						{ offset: 0, length: 680, style: "color-rgb(0,0,0)" },
+						{ offset: 0, length: 680, style: "fontsize-16" },
+						{
+							offset: 0,
+							length: 680,
+							style:
+								'fontfamily--apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif',
+						},
+					],
+					entityRanges: [],
+					data: { "text-align": "left" },
+				},
+				{
+					key: "e61ln",
+					text: "The most advanced Blog & News WordPress Theme ",
+					type: "header-three",
+					depth: 0,
+					inlineStyleRanges: [
+						{
+							offset: 0,
+							length: 45,
+							style: "color-rgb(333333/var(--tw-text-opacity))",
+						},
+						{ offset: 0, length: 45, style: "fontsize-1.5rem" },
+						{ offset: 0, length: 45, style: "fontfamily-Lora, serif" },
+					],
+					entityRanges: [],
+					data: { "text-align": "left" },
+				},
+				{
+					key: "6q9jk",
+					text: " ",
+					type: "atomic",
+					depth: 0,
+					inlineStyleRanges: [],
+					entityRanges: [{ offset: 0, length: 1, key: 1 }],
+					data: {},
+				},
+				{
+					key: "trih",
+					text: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptas cupiditate itaque obcaecati numquam minima, atque iusto quia ullam nam magni neque, id hic corrupti harum sapiente, sunt blanditiis laborum aspernatur?",
+					type: "unstyled",
+					depth: 0,
+					inlineStyleRanges: [
+						{ offset: 0, length: 218, style: "color-rgb(0,0,0)" },
+						{ offset: 0, length: 218, style: "fontsize-16" },
+						{
+							offset: 0,
+							length: 218,
+							style:
+								'fontfamily--apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif',
+						},
+					],
+					entityRanges: [],
+					data: { "text-align": "left" },
+				},
+				{
+					key: "b61e1",
+					text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis magni nostrum tempore similique nulla molestiae ducimus obcaecati ipsam reiciendis, itaque minima hic dolor omnis accusantium corrupti doloremque laudantium? Voluptatem, accusamus. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Distinctio facilis veniam rerum eaque magni illum tempore, laudantium aut ea cum odio. Eaque quo, itaque sit soluta illo quisquam odio quia!",
+					type: "unstyled",
+					depth: 0,
+					inlineStyleRanges: [
+						{ offset: 0, length: 448, style: "color-rgb(0,0,0)" },
+						{ offset: 0, length: 448, style: "fontsize-16" },
+						{
+							offset: 0,
+							length: 448,
+							style:
+								'fontfamily--apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif',
+						},
+					],
+					entityRanges: [],
+					data: { "text-align": "left" },
+				},
+				{
+					key: "1pbp7",
+					text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa quasi dolores, harum atque ipsam placeat magni totam quos! Accusantium quo quibusdam assumenda consequuntur recusandae id maxime? Architecto blanditiis delectus soluta.",
+					type: "unstyled",
+					depth: 0,
+					inlineStyleRanges: [
+						{ offset: 0, length: 231, style: "color-rgb(0,0,0)" },
+						{ offset: 0, length: 231, style: "fontsize-16" },
+						{
+							offset: 0,
+							length: 231,
+							style:
+								'fontfamily--apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif',
+						},
+					],
+					entityRanges: [],
+					data: { "text-align": "left" },
+				},
+				{
+					key: "1lo9l",
+					text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa quasi dolores, harum atque ipsam placeat magni totam quos! Accusantium quo quibusdam assumenda consequuntur recusandae id maxime? Architecto blanditiis delectus soluta.Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa quasi dolores, harum atque ipsam placeat magni totam quos! Accusantium quo quibusdam assumenda consequuntur recusandae id maxime? Architecto blanditiis delectus soluta. ",
+					type: "unstyled",
+					depth: 0,
+					inlineStyleRanges: [
+						{ offset: 0, length: 462, style: "color-rgb(0,0,0)" },
+						{ offset: 0, length: 462, style: "fontsize-16" },
+						{
+							offset: 0,
+							length: 462,
+							style:
+								'fontfamily--apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif',
+						},
+					],
+					entityRanges: [],
+					data: { "text-align": "left" },
+				},
+			],
+			entityMap: {
+				0: {
+					type: "IMAGE",
+					mutability: "MUTABLE",
+					data: {
+						src: "https://i.pinimg.com/564x/1f/b7/27/1fb727daf7c512b836ee2e02a29570f7.jpg",
+						height: "100%",
+						width: "100%",
+					},
+				},
+				1: {
+					type: "IMAGE",
+					mutability: "MUTABLE",
+					data: {
+						src: "https://cdn.dribbble.com/users/427857/screenshots/14370385/media/9272153b67264251a139bb6885533969.jpg?compress=1&resize=768x576&vertical=top",
+						height: "100%",
+						width: "100%",
+					},
+				},
+			},
+		},
 		date: "June 21, 2022",
-		tag: ["Fitness Tips", "Women's Health"],
+		postTags: ["ces 2017", "game of thrones"],
+		optional: {
+			shared: 44,
+			viewed: 33,
+			Trending: true,
+		},
 	},
 	{
-		id: 3,
-		image: pix3,
-		title: "Ab tenetur exercitationem quos ipsum eum ducimus quas earum  3",
-		cat: "Business",
-		content:
-			"Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea, omnis autem, magnam consequuntur accusamus ab tenetur exercitationem quos ipsum eum ducimus quas earum. Sint eveniet pariatur nisi, dicta porro animi!",
+		id: "3",
+		postAuthor: "Amaka",
+		postImage: pix3,
+		postTitle: "Ab tenetur exercitationem quos ipsum eum ducimus quas earum  3",
+		postCategory: ["Business"],
+		postContent: {
+			blocks: [
+				{
+					key: "f7gmk",
+					text: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Fugit ducimus eligendi quo alias, sit, labore minus expedita possimus temporibus quaerat, esse rem iusto voluptates tenetur debitis? Quisquam culpa libero fuga. Ipsum dolor sit amet consectetur adipisicing elit. Fugit ducimus eligendi quo alias, sit, labore eligendi quo alias, sit, labore.",
+					type: "unstyled",
+					depth: 0,
+					inlineStyleRanges: [
+						{ offset: 0, length: 348, style: "color-rgb(68,68,68)" },
+						{ offset: 0, length: 348, style: "fontsize-16" },
+						{
+							offset: 0,
+							length: 348,
+							style:
+								'fontfamily--apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif',
+						},
+					],
+					entityRanges: [],
+					data: { "text-align": "left" },
+				},
+				{
+					key: "fcnru",
+					text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque saepe architecto, nulla eum odit autem tempora officiis commodi aliquid, recusandae expedita atque deleniti magni aperiam nobis at non adipisci eligendi. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur tempora nesciunt illo, quibusdam beatae veritatis vero nam ex, possimus harum recusandae numquam eius quod sed, laborum nulla vitae aut minima!",
+					type: "unstyled",
+					depth: 0,
+					inlineStyleRanges: [
+						{ offset: 0, length: 431, style: "color-rgb(68,68,68)" },
+						{ offset: 0, length: 431, style: "fontsize-16" },
+						{
+							offset: 0,
+							length: 431,
+							style:
+								'fontfamily--apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif',
+						},
+					],
+					entityRanges: [],
+					data: { "text-align": "left" },
+				},
+				{
+					key: "5rsc",
+					text: "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptatem ipsa quibusdam sed reprehenderit! Quae quam, eum ea minus laborum impedit? Voluptatem, tempora. Dolorum ratione, tempora quod ipsam fugiat deleniti doloremque? Lorem, ipsum dolor sit amet consectetur adipisicing elit. Blanditiis dignissimos explicabo maxime debitis? Blanditiis, debitis vel esse, tenetur cum magni temporibus consectetur laboriosam beatae quasi architecto consequatur culpa? Deserunt, modi! Lorem ipsum dolor sit amet consectetur, adipisicing elit. Debitis est ea ipsam tempora illo iure nemo temporibus adipisci quibusdam aperiam nam doloremque ab a, dolorem laborum? Unde minima ipsam aspernatur. ",
+					type: "unstyled",
+					depth: 0,
+					inlineStyleRanges: [
+						{ offset: 0, length: 684, style: "color-rgb(68,68,68)" },
+						{ offset: 0, length: 684, style: "fontsize-16" },
+						{
+							offset: 0,
+							length: 684,
+							style:
+								'fontfamily--apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif',
+						},
+					],
+					entityRanges: [],
+					data: { "text-align": "left" },
+				},
+				{
+					key: "7d4jd",
+					text: "The truth is you don't know what is going to happen tomorrow. Life is a crazy ride, and nothing is guaranteed. ",
+					type: "blockquote",
+					depth: 0,
+					inlineStyleRanges: [
+						{ offset: 0, length: 110, style: "color-rgb(122,122,122)" },
+						{ offset: 0, length: 110, style: "fontsize-22" },
+						{ offset: 0, length: 110, style: "fontfamily-Lora, serif" },
+					],
+					entityRanges: [],
+					data: {},
+				},
+				{
+					key: "a6uk5",
+					text: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eius odit quis saepe ab iure asperiores, eos et vero iusto quibusdam est atque ad, eum sit similique veritatis itaque voluptatem aperiam. vero iusto quibusdam est atque ad, eum sit similique veritatis itaque ",
+					type: "unstyled",
+					depth: 0,
+					inlineStyleRanges: [
+						{ offset: 0, length: 265, style: "color-rgb(68,68,68)" },
+						{ offset: 0, length: 265, style: "fontsize-16" },
+						{
+							offset: 0,
+							length: 265,
+							style:
+								'fontfamily--apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif',
+						},
+					],
+					entityRanges: [],
+					data: {},
+				},
+				{
+					key: "1e8u6",
+					text: "Exercise Keeps the Brain Young: Study ",
+					type: "header-three",
+					depth: 0,
+					inlineStyleRanges: [
+						{
+							offset: 0,
+							length: 37,
+							style: "color-rgb(333333/var(--tw-text-opacity))",
+						},
+						{ offset: 0, length: 37, style: "fontsize-1.5rem" },
+						{ offset: 0, length: 37, style: "fontfamily-Lora, serif" },
+					],
+					entityRanges: [],
+					data: { "text-align": "left" },
+				},
+				{
+					key: "4mmko",
+					text: " ",
+					type: "atomic",
+					depth: 0,
+					inlineStyleRanges: [],
+					entityRanges: [{ offset: 0, length: 1, key: 0 }],
+					data: {},
+				},
+				{
+					key: "ech5k",
+					text: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptas cupiditate itaque obcaecati numquam minima, atque iusto quia ullam nam magni neque, id hic corrupti harum sapiente, sunt blanditiis laborum aspernatur?",
+					type: "unstyled",
+					depth: 0,
+					inlineStyleRanges: [
+						{ offset: 0, length: 218, style: "color-rgb(0,0,0)" },
+						{ offset: 0, length: 218, style: "fontsize-16" },
+						{
+							offset: 0,
+							length: 218,
+							style:
+								'fontfamily--apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif',
+						},
+					],
+					entityRanges: [],
+					data: { "text-align": "left" },
+				},
+				{
+					key: "d6ane",
+					text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis magni nostrum tempore similique nulla molestiae ducimus obcaecati ipsam reiciendis, itaque minima hic dolor omnis accusantium corrupti doloremque laudantium? Voluptatem, accusamus. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Distinctio facilis veniam rerum eaque magni illum tempore, laudantium aut ea cum odio. Eaque quo, itaque sit soluta illo quisquam odio quia! Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa quasi dolores, harum atque ipsam placeat magni totam quos! Accusantium quo quibusdam assumenda consequuntur recusandae id maxime? Architecto blanditiis delectus soluta. ",
+					type: "unstyled",
+					depth: 0,
+					inlineStyleRanges: [
+						{ offset: 0, length: 680, style: "color-rgb(0,0,0)" },
+						{ offset: 0, length: 680, style: "fontsize-16" },
+						{
+							offset: 0,
+							length: 680,
+							style:
+								'fontfamily--apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif',
+						},
+					],
+					entityRanges: [],
+					data: { "text-align": "left" },
+				},
+				{
+					key: "e61ln",
+					text: "The most advanced Blog & News WordPress Theme ",
+					type: "header-three",
+					depth: 0,
+					inlineStyleRanges: [
+						{
+							offset: 0,
+							length: 45,
+							style: "color-rgb(333333/var(--tw-text-opacity))",
+						},
+						{ offset: 0, length: 45, style: "fontsize-1.5rem" },
+						{ offset: 0, length: 45, style: "fontfamily-Lora, serif" },
+					],
+					entityRanges: [],
+					data: { "text-align": "left" },
+				},
+				{
+					key: "6q9jk",
+					text: " ",
+					type: "atomic",
+					depth: 0,
+					inlineStyleRanges: [],
+					entityRanges: [{ offset: 0, length: 1, key: 1 }],
+					data: {},
+				},
+				{
+					key: "trih",
+					text: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptas cupiditate itaque obcaecati numquam minima, atque iusto quia ullam nam magni neque, id hic corrupti harum sapiente, sunt blanditiis laborum aspernatur?",
+					type: "unstyled",
+					depth: 0,
+					inlineStyleRanges: [
+						{ offset: 0, length: 218, style: "color-rgb(0,0,0)" },
+						{ offset: 0, length: 218, style: "fontsize-16" },
+						{
+							offset: 0,
+							length: 218,
+							style:
+								'fontfamily--apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif',
+						},
+					],
+					entityRanges: [],
+					data: { "text-align": "left" },
+				},
+				{
+					key: "b61e1",
+					text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis magni nostrum tempore similique nulla molestiae ducimus obcaecati ipsam reiciendis, itaque minima hic dolor omnis accusantium corrupti doloremque laudantium? Voluptatem, accusamus. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Distinctio facilis veniam rerum eaque magni illum tempore, laudantium aut ea cum odio. Eaque quo, itaque sit soluta illo quisquam odio quia!",
+					type: "unstyled",
+					depth: 0,
+					inlineStyleRanges: [
+						{ offset: 0, length: 448, style: "color-rgb(0,0,0)" },
+						{ offset: 0, length: 448, style: "fontsize-16" },
+						{
+							offset: 0,
+							length: 448,
+							style:
+								'fontfamily--apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif',
+						},
+					],
+					entityRanges: [],
+					data: { "text-align": "left" },
+				},
+				{
+					key: "1pbp7",
+					text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa quasi dolores, harum atque ipsam placeat magni totam quos! Accusantium quo quibusdam assumenda consequuntur recusandae id maxime? Architecto blanditiis delectus soluta.",
+					type: "unstyled",
+					depth: 0,
+					inlineStyleRanges: [
+						{ offset: 0, length: 231, style: "color-rgb(0,0,0)" },
+						{ offset: 0, length: 231, style: "fontsize-16" },
+						{
+							offset: 0,
+							length: 231,
+							style:
+								'fontfamily--apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif',
+						},
+					],
+					entityRanges: [],
+					data: { "text-align": "left" },
+				},
+				{
+					key: "1lo9l",
+					text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa quasi dolores, harum atque ipsam placeat magni totam quos! Accusantium quo quibusdam assumenda consequuntur recusandae id maxime? Architecto blanditiis delectus soluta.Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa quasi dolores, harum atque ipsam placeat magni totam quos! Accusantium quo quibusdam assumenda consequuntur recusandae id maxime? Architecto blanditiis delectus soluta. ",
+					type: "unstyled",
+					depth: 0,
+					inlineStyleRanges: [
+						{ offset: 0, length: 462, style: "color-rgb(0,0,0)" },
+						{ offset: 0, length: 462, style: "fontsize-16" },
+						{
+							offset: 0,
+							length: 462,
+							style:
+								'fontfamily--apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif',
+						},
+					],
+					entityRanges: [],
+					data: { "text-align": "left" },
+				},
+			],
+			entityMap: {
+				0: {
+					type: "IMAGE",
+					mutability: "MUTABLE",
+					data: {
+						src: "https://i.pinimg.com/564x/1f/b7/27/1fb727daf7c512b836ee2e02a29570f7.jpg",
+						height: "100%",
+						width: "100%",
+					},
+				},
+				1: {
+					type: "IMAGE",
+					mutability: "MUTABLE",
+					data: {
+						src: "https://cdn.dribbble.com/users/427857/screenshots/14370385/media/9272153b67264251a139bb6885533969.jpg?compress=1&resize=768x576&vertical=top",
+						height: "100%",
+						width: "100%",
+					},
+				},
+			},
+		},
 		date: "June 22, 2022",
-		tag: ["Fitness Tips", "Women's Health"],
+		postTags: ["nintendo switch", "golden globes"],
+		optional: {
+			shared: 44,
+			viewed: 33,
+			Trending: true,
+		},
 	},
 	{
-		id: 4,
-		image: pix4,
-		title: "Ipsum dolor sit amet consectetur adipi elit Health 4",
-		cat: "Health",
-		content:
-			"Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea, omnis autem, magnam consequuntur accusamus ab tenetur exercitationem quos ipsum eum ducimus quas earum. Sint eveniet pariatur nisi, dicta porro animi!",
+		id: "4",
+		postAuthor: "Alex",
+		postImage: pix4,
+		postTitle: "Ipsum dolor sit amet consectetur adipi elit Health 4",
+		postCategory: ["Health"],
+		postContent: {
+			blocks: [
+				{
+					key: "f7gmk",
+					text: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Fugit ducimus eligendi quo alias, sit, labore minus expedita possimus temporibus quaerat, esse rem iusto voluptates tenetur debitis? Quisquam culpa libero fuga. Ipsum dolor sit amet consectetur adipisicing elit. Fugit ducimus eligendi quo alias, sit, labore eligendi quo alias, sit, labore.",
+					type: "unstyled",
+					depth: 0,
+					inlineStyleRanges: [
+						{ offset: 0, length: 348, style: "color-rgb(68,68,68)" },
+						{ offset: 0, length: 348, style: "fontsize-16" },
+						{
+							offset: 0,
+							length: 348,
+							style:
+								'fontfamily--apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif',
+						},
+					],
+					entityRanges: [],
+					data: { "text-align": "left" },
+				},
+				{
+					key: "fcnru",
+					text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque saepe architecto, nulla eum odit autem tempora officiis commodi aliquid, recusandae expedita atque deleniti magni aperiam nobis at non adipisci eligendi. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur tempora nesciunt illo, quibusdam beatae veritatis vero nam ex, possimus harum recusandae numquam eius quod sed, laborum nulla vitae aut minima!",
+					type: "unstyled",
+					depth: 0,
+					inlineStyleRanges: [
+						{ offset: 0, length: 431, style: "color-rgb(68,68,68)" },
+						{ offset: 0, length: 431, style: "fontsize-16" },
+						{
+							offset: 0,
+							length: 431,
+							style:
+								'fontfamily--apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif',
+						},
+					],
+					entityRanges: [],
+					data: { "text-align": "left" },
+				},
+				{
+					key: "5rsc",
+					text: "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptatem ipsa quibusdam sed reprehenderit! Quae quam, eum ea minus laborum impedit? Voluptatem, tempora. Dolorum ratione, tempora quod ipsam fugiat deleniti doloremque? Lorem, ipsum dolor sit amet consectetur adipisicing elit. Blanditiis dignissimos explicabo maxime debitis? Blanditiis, debitis vel esse, tenetur cum magni temporibus consectetur laboriosam beatae quasi architecto consequatur culpa? Deserunt, modi! Lorem ipsum dolor sit amet consectetur, adipisicing elit. Debitis est ea ipsam tempora illo iure nemo temporibus adipisci quibusdam aperiam nam doloremque ab a, dolorem laborum? Unde minima ipsam aspernatur. ",
+					type: "unstyled",
+					depth: 0,
+					inlineStyleRanges: [
+						{ offset: 0, length: 684, style: "color-rgb(68,68,68)" },
+						{ offset: 0, length: 684, style: "fontsize-16" },
+						{
+							offset: 0,
+							length: 684,
+							style:
+								'fontfamily--apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif',
+						},
+					],
+					entityRanges: [],
+					data: { "text-align": "left" },
+				},
+				{
+					key: "7d4jd",
+					text: "The truth is you don't know what is going to happen tomorrow. Life is a crazy ride, and nothing is guaranteed. ",
+					type: "blockquote",
+					depth: 0,
+					inlineStyleRanges: [
+						{ offset: 0, length: 110, style: "color-rgb(122,122,122)" },
+						{ offset: 0, length: 110, style: "fontsize-22" },
+						{ offset: 0, length: 110, style: "fontfamily-Lora, serif" },
+					],
+					entityRanges: [],
+					data: {},
+				},
+				{
+					key: "a6uk5",
+					text: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eius odit quis saepe ab iure asperiores, eos et vero iusto quibusdam est atque ad, eum sit similique veritatis itaque voluptatem aperiam. vero iusto quibusdam est atque ad, eum sit similique veritatis itaque ",
+					type: "unstyled",
+					depth: 0,
+					inlineStyleRanges: [
+						{ offset: 0, length: 265, style: "color-rgb(68,68,68)" },
+						{ offset: 0, length: 265, style: "fontsize-16" },
+						{
+							offset: 0,
+							length: 265,
+							style:
+								'fontfamily--apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif',
+						},
+					],
+					entityRanges: [],
+					data: {},
+				},
+				{
+					key: "1e8u6",
+					text: "Exercise Keeps the Brain Young: Study ",
+					type: "header-three",
+					depth: 0,
+					inlineStyleRanges: [
+						{
+							offset: 0,
+							length: 37,
+							style: "color-rgb(333333/var(--tw-text-opacity))",
+						},
+						{ offset: 0, length: 37, style: "fontsize-1.5rem" },
+						{ offset: 0, length: 37, style: "fontfamily-Lora, serif" },
+					],
+					entityRanges: [],
+					data: { "text-align": "left" },
+				},
+				{
+					key: "4mmko",
+					text: " ",
+					type: "atomic",
+					depth: 0,
+					inlineStyleRanges: [],
+					entityRanges: [{ offset: 0, length: 1, key: 0 }],
+					data: {},
+				},
+				{
+					key: "ech5k",
+					text: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptas cupiditate itaque obcaecati numquam minima, atque iusto quia ullam nam magni neque, id hic corrupti harum sapiente, sunt blanditiis laborum aspernatur?",
+					type: "unstyled",
+					depth: 0,
+					inlineStyleRanges: [
+						{ offset: 0, length: 218, style: "color-rgb(0,0,0)" },
+						{ offset: 0, length: 218, style: "fontsize-16" },
+						{
+							offset: 0,
+							length: 218,
+							style:
+								'fontfamily--apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif',
+						},
+					],
+					entityRanges: [],
+					data: { "text-align": "left" },
+				},
+				{
+					key: "d6ane",
+					text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis magni nostrum tempore similique nulla molestiae ducimus obcaecati ipsam reiciendis, itaque minima hic dolor omnis accusantium corrupti doloremque laudantium? Voluptatem, accusamus. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Distinctio facilis veniam rerum eaque magni illum tempore, laudantium aut ea cum odio. Eaque quo, itaque sit soluta illo quisquam odio quia! Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa quasi dolores, harum atque ipsam placeat magni totam quos! Accusantium quo quibusdam assumenda consequuntur recusandae id maxime? Architecto blanditiis delectus soluta. ",
+					type: "unstyled",
+					depth: 0,
+					inlineStyleRanges: [
+						{ offset: 0, length: 680, style: "color-rgb(0,0,0)" },
+						{ offset: 0, length: 680, style: "fontsize-16" },
+						{
+							offset: 0,
+							length: 680,
+							style:
+								'fontfamily--apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif',
+						},
+					],
+					entityRanges: [],
+					data: { "text-align": "left" },
+				},
+				{
+					key: "e61ln",
+					text: "The most advanced Blog & News WordPress Theme ",
+					type: "header-three",
+					depth: 0,
+					inlineStyleRanges: [
+						{
+							offset: 0,
+							length: 45,
+							style: "color-rgb(333333/var(--tw-text-opacity))",
+						},
+						{ offset: 0, length: 45, style: "fontsize-1.5rem" },
+						{ offset: 0, length: 45, style: "fontfamily-Lora, serif" },
+					],
+					entityRanges: [],
+					data: { "text-align": "left" },
+				},
+				{
+					key: "6q9jk",
+					text: " ",
+					type: "atomic",
+					depth: 0,
+					inlineStyleRanges: [],
+					entityRanges: [{ offset: 0, length: 1, key: 1 }],
+					data: {},
+				},
+				{
+					key: "trih",
+					text: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptas cupiditate itaque obcaecati numquam minima, atque iusto quia ullam nam magni neque, id hic corrupti harum sapiente, sunt blanditiis laborum aspernatur?",
+					type: "unstyled",
+					depth: 0,
+					inlineStyleRanges: [
+						{ offset: 0, length: 218, style: "color-rgb(0,0,0)" },
+						{ offset: 0, length: 218, style: "fontsize-16" },
+						{
+							offset: 0,
+							length: 218,
+							style:
+								'fontfamily--apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif',
+						},
+					],
+					entityRanges: [],
+					data: { "text-align": "left" },
+				},
+				{
+					key: "b61e1",
+					text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis magni nostrum tempore similique nulla molestiae ducimus obcaecati ipsam reiciendis, itaque minima hic dolor omnis accusantium corrupti doloremque laudantium? Voluptatem, accusamus. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Distinctio facilis veniam rerum eaque magni illum tempore, laudantium aut ea cum odio. Eaque quo, itaque sit soluta illo quisquam odio quia!",
+					type: "unstyled",
+					depth: 0,
+					inlineStyleRanges: [
+						{ offset: 0, length: 448, style: "color-rgb(0,0,0)" },
+						{ offset: 0, length: 448, style: "fontsize-16" },
+						{
+							offset: 0,
+							length: 448,
+							style:
+								'fontfamily--apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif',
+						},
+					],
+					entityRanges: [],
+					data: { "text-align": "left" },
+				},
+				{
+					key: "1pbp7",
+					text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa quasi dolores, harum atque ipsam placeat magni totam quos! Accusantium quo quibusdam assumenda consequuntur recusandae id maxime? Architecto blanditiis delectus soluta.",
+					type: "unstyled",
+					depth: 0,
+					inlineStyleRanges: [
+						{ offset: 0, length: 231, style: "color-rgb(0,0,0)" },
+						{ offset: 0, length: 231, style: "fontsize-16" },
+						{
+							offset: 0,
+							length: 231,
+							style:
+								'fontfamily--apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif',
+						},
+					],
+					entityRanges: [],
+					data: { "text-align": "left" },
+				},
+				{
+					key: "1lo9l",
+					text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa quasi dolores, harum atque ipsam placeat magni totam quos! Accusantium quo quibusdam assumenda consequuntur recusandae id maxime? Architecto blanditiis delectus soluta.Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa quasi dolores, harum atque ipsam placeat magni totam quos! Accusantium quo quibusdam assumenda consequuntur recusandae id maxime? Architecto blanditiis delectus soluta. ",
+					type: "unstyled",
+					depth: 0,
+					inlineStyleRanges: [
+						{ offset: 0, length: 462, style: "color-rgb(0,0,0)" },
+						{ offset: 0, length: 462, style: "fontsize-16" },
+						{
+							offset: 0,
+							length: 462,
+							style:
+								'fontfamily--apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif',
+						},
+					],
+					entityRanges: [],
+					data: { "text-align": "left" },
+				},
+			],
+			entityMap: {
+				0: {
+					type: "IMAGE",
+					mutability: "MUTABLE",
+					data: {
+						src: "https://i.pinimg.com/564x/1f/b7/27/1fb727daf7c512b836ee2e02a29570f7.jpg",
+						height: "100%",
+						width: "100%",
+					},
+				},
+				1: {
+					type: "IMAGE",
+					mutability: "MUTABLE",
+					data: {
+						src: "https://cdn.dribbble.com/users/427857/screenshots/14370385/media/9272153b67264251a139bb6885533969.jpg?compress=1&resize=768x576&vertical=top",
+						height: "100%",
+						width: "100%",
+					},
+				},
+			},
+		},
 		date: "June 23, 2022",
-		tag: ["Fitness Tips", "Women's Health"],
+		postTags: ["internet", "jorge lorenzo"],
+		optional: {
+			shared: 44,
+			viewed: 33,
+			Trending: true,
+		},
 	},
 	{
-		id: 5,
-		image: pix5,
-		title: "Lorem ipsum dolor sit amet consectetur adipi elit 5",
-		cat: "World",
-		content:
-			"Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea, omnis autem, magnam consequuntur accusamus ab tenetur exercitationem quos ipsum eum ducimus quas earum. Sint eveniet pariatur nisi, dicta porro animi!",
+		id: "5",
+		postAuthor: "Tonny",
+		postImage: pix5,
+		postTitle: "Lorem ipsum dolor sit amet consectetur adipi elit 5",
+		postCategory: ["World"],
+		postContent: {
+			blocks: [
+				{
+					key: "f7gmk",
+					text: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Fugit ducimus eligendi quo alias, sit, labore minus expedita possimus temporibus quaerat, esse rem iusto voluptates tenetur debitis? Quisquam culpa libero fuga. Ipsum dolor sit amet consectetur adipisicing elit. Fugit ducimus eligendi quo alias, sit, labore eligendi quo alias, sit, labore.",
+					type: "unstyled",
+					depth: 0,
+					inlineStyleRanges: [
+						{ offset: 0, length: 348, style: "color-rgb(68,68,68)" },
+						{ offset: 0, length: 348, style: "fontsize-16" },
+						{
+							offset: 0,
+							length: 348,
+							style:
+								'fontfamily--apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif',
+						},
+					],
+					entityRanges: [],
+					data: { "text-align": "left" },
+				},
+				{
+					key: "fcnru",
+					text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque saepe architecto, nulla eum odit autem tempora officiis commodi aliquid, recusandae expedita atque deleniti magni aperiam nobis at non adipisci eligendi. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur tempora nesciunt illo, quibusdam beatae veritatis vero nam ex, possimus harum recusandae numquam eius quod sed, laborum nulla vitae aut minima!",
+					type: "unstyled",
+					depth: 0,
+					inlineStyleRanges: [
+						{ offset: 0, length: 431, style: "color-rgb(68,68,68)" },
+						{ offset: 0, length: 431, style: "fontsize-16" },
+						{
+							offset: 0,
+							length: 431,
+							style:
+								'fontfamily--apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif',
+						},
+					],
+					entityRanges: [],
+					data: { "text-align": "left" },
+				},
+				{
+					key: "5rsc",
+					text: "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptatem ipsa quibusdam sed reprehenderit! Quae quam, eum ea minus laborum impedit? Voluptatem, tempora. Dolorum ratione, tempora quod ipsam fugiat deleniti doloremque? Lorem, ipsum dolor sit amet consectetur adipisicing elit. Blanditiis dignissimos explicabo maxime debitis? Blanditiis, debitis vel esse, tenetur cum magni temporibus consectetur laboriosam beatae quasi architecto consequatur culpa? Deserunt, modi! Lorem ipsum dolor sit amet consectetur, adipisicing elit. Debitis est ea ipsam tempora illo iure nemo temporibus adipisci quibusdam aperiam nam doloremque ab a, dolorem laborum? Unde minima ipsam aspernatur. ",
+					type: "unstyled",
+					depth: 0,
+					inlineStyleRanges: [
+						{ offset: 0, length: 684, style: "color-rgb(68,68,68)" },
+						{ offset: 0, length: 684, style: "fontsize-16" },
+						{
+							offset: 0,
+							length: 684,
+							style:
+								'fontfamily--apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif',
+						},
+					],
+					entityRanges: [],
+					data: { "text-align": "left" },
+				},
+				{
+					key: "7d4jd",
+					text: "The truth is you don't know what is going to happen tomorrow. Life is a crazy ride, and nothing is guaranteed. ",
+					type: "blockquote",
+					depth: 0,
+					inlineStyleRanges: [
+						{ offset: 0, length: 110, style: "color-rgb(122,122,122)" },
+						{ offset: 0, length: 110, style: "fontsize-22" },
+						{ offset: 0, length: 110, style: "fontfamily-Lora, serif" },
+					],
+					entityRanges: [],
+					data: {},
+				},
+				{
+					key: "a6uk5",
+					text: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eius odit quis saepe ab iure asperiores, eos et vero iusto quibusdam est atque ad, eum sit similique veritatis itaque voluptatem aperiam. vero iusto quibusdam est atque ad, eum sit similique veritatis itaque ",
+					type: "unstyled",
+					depth: 0,
+					inlineStyleRanges: [
+						{ offset: 0, length: 265, style: "color-rgb(68,68,68)" },
+						{ offset: 0, length: 265, style: "fontsize-16" },
+						{
+							offset: 0,
+							length: 265,
+							style:
+								'fontfamily--apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif',
+						},
+					],
+					entityRanges: [],
+					data: {},
+				},
+				{
+					key: "1e8u6",
+					text: "Exercise Keeps the Brain Young: Study ",
+					type: "header-three",
+					depth: 0,
+					inlineStyleRanges: [
+						{
+							offset: 0,
+							length: 37,
+							style: "color-rgb(333333/var(--tw-text-opacity))",
+						},
+						{ offset: 0, length: 37, style: "fontsize-1.5rem" },
+						{ offset: 0, length: 37, style: "fontfamily-Lora, serif" },
+					],
+					entityRanges: [],
+					data: { "text-align": "left" },
+				},
+				{
+					key: "4mmko",
+					text: " ",
+					type: "atomic",
+					depth: 0,
+					inlineStyleRanges: [],
+					entityRanges: [{ offset: 0, length: 1, key: 0 }],
+					data: {},
+				},
+				{
+					key: "ech5k",
+					text: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptas cupiditate itaque obcaecati numquam minima, atque iusto quia ullam nam magni neque, id hic corrupti harum sapiente, sunt blanditiis laborum aspernatur?",
+					type: "unstyled",
+					depth: 0,
+					inlineStyleRanges: [
+						{ offset: 0, length: 218, style: "color-rgb(0,0,0)" },
+						{ offset: 0, length: 218, style: "fontsize-16" },
+						{
+							offset: 0,
+							length: 218,
+							style:
+								'fontfamily--apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif',
+						},
+					],
+					entityRanges: [],
+					data: { "text-align": "left" },
+				},
+				{
+					key: "d6ane",
+					text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis magni nostrum tempore similique nulla molestiae ducimus obcaecati ipsam reiciendis, itaque minima hic dolor omnis accusantium corrupti doloremque laudantium? Voluptatem, accusamus. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Distinctio facilis veniam rerum eaque magni illum tempore, laudantium aut ea cum odio. Eaque quo, itaque sit soluta illo quisquam odio quia! Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa quasi dolores, harum atque ipsam placeat magni totam quos! Accusantium quo quibusdam assumenda consequuntur recusandae id maxime? Architecto blanditiis delectus soluta. ",
+					type: "unstyled",
+					depth: 0,
+					inlineStyleRanges: [
+						{ offset: 0, length: 680, style: "color-rgb(0,0,0)" },
+						{ offset: 0, length: 680, style: "fontsize-16" },
+						{
+							offset: 0,
+							length: 680,
+							style:
+								'fontfamily--apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif',
+						},
+					],
+					entityRanges: [],
+					data: { "text-align": "left" },
+				},
+				{
+					key: "e61ln",
+					text: "The most advanced Blog & News WordPress Theme ",
+					type: "header-three",
+					depth: 0,
+					inlineStyleRanges: [
+						{
+							offset: 0,
+							length: 45,
+							style: "color-rgb(333333/var(--tw-text-opacity))",
+						},
+						{ offset: 0, length: 45, style: "fontsize-1.5rem" },
+						{ offset: 0, length: 45, style: "fontfamily-Lora, serif" },
+					],
+					entityRanges: [],
+					data: { "text-align": "left" },
+				},
+				{
+					key: "6q9jk",
+					text: " ",
+					type: "atomic",
+					depth: 0,
+					inlineStyleRanges: [],
+					entityRanges: [{ offset: 0, length: 1, key: 1 }],
+					data: {},
+				},
+				{
+					key: "trih",
+					text: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptas cupiditate itaque obcaecati numquam minima, atque iusto quia ullam nam magni neque, id hic corrupti harum sapiente, sunt blanditiis laborum aspernatur?",
+					type: "unstyled",
+					depth: 0,
+					inlineStyleRanges: [
+						{ offset: 0, length: 218, style: "color-rgb(0,0,0)" },
+						{ offset: 0, length: 218, style: "fontsize-16" },
+						{
+							offset: 0,
+							length: 218,
+							style:
+								'fontfamily--apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif',
+						},
+					],
+					entityRanges: [],
+					data: { "text-align": "left" },
+				},
+				{
+					key: "b61e1",
+					text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis magni nostrum tempore similique nulla molestiae ducimus obcaecati ipsam reiciendis, itaque minima hic dolor omnis accusantium corrupti doloremque laudantium? Voluptatem, accusamus. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Distinctio facilis veniam rerum eaque magni illum tempore, laudantium aut ea cum odio. Eaque quo, itaque sit soluta illo quisquam odio quia!",
+					type: "unstyled",
+					depth: 0,
+					inlineStyleRanges: [
+						{ offset: 0, length: 448, style: "color-rgb(0,0,0)" },
+						{ offset: 0, length: 448, style: "fontsize-16" },
+						{
+							offset: 0,
+							length: 448,
+							style:
+								'fontfamily--apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif',
+						},
+					],
+					entityRanges: [],
+					data: { "text-align": "left" },
+				},
+				{
+					key: "1pbp7",
+					text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa quasi dolores, harum atque ipsam placeat magni totam quos! Accusantium quo quibusdam assumenda consequuntur recusandae id maxime? Architecto blanditiis delectus soluta.",
+					type: "unstyled",
+					depth: 0,
+					inlineStyleRanges: [
+						{ offset: 0, length: 231, style: "color-rgb(0,0,0)" },
+						{ offset: 0, length: 231, style: "fontsize-16" },
+						{
+							offset: 0,
+							length: 231,
+							style:
+								'fontfamily--apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif',
+						},
+					],
+					entityRanges: [],
+					data: { "text-align": "left" },
+				},
+				{
+					key: "1lo9l",
+					text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa quasi dolores, harum atque ipsam placeat magni totam quos! Accusantium quo quibusdam assumenda consequuntur recusandae id maxime? Architecto blanditiis delectus soluta.Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa quasi dolores, harum atque ipsam placeat magni totam quos! Accusantium quo quibusdam assumenda consequuntur recusandae id maxime? Architecto blanditiis delectus soluta. ",
+					type: "unstyled",
+					depth: 0,
+					inlineStyleRanges: [
+						{ offset: 0, length: 462, style: "color-rgb(0,0,0)" },
+						{ offset: 0, length: 462, style: "fontsize-16" },
+						{
+							offset: 0,
+							length: 462,
+							style:
+								'fontfamily--apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif',
+						},
+					],
+					entityRanges: [],
+					data: { "text-align": "left" },
+				},
+			],
+			entityMap: {
+				0: {
+					type: "IMAGE",
+					mutability: "MUTABLE",
+					data: {
+						src: "https://i.pinimg.com/564x/1f/b7/27/1fb727daf7c512b836ee2e02a29570f7.jpg",
+						height: "100%",
+						width: "100%",
+					},
+				},
+				1: {
+					type: "IMAGE",
+					mutability: "MUTABLE",
+					data: {
+						src: "https://cdn.dribbble.com/users/427857/screenshots/14370385/media/9272153b67264251a139bb6885533969.jpg?compress=1&resize=768x576&vertical=top",
+						height: "100%",
+						width: "100%",
+					},
+				},
+			},
+		},
 		date: "June 24, 2022",
-		tag: ["Fitness Tips", "Women's Health"],
+		postTags: ["fashion week", "jorge lorenzo", "golden globes"],
+		optional: {
+			shared: 44,
+			viewed: 33,
+			Trending: true,
+		},
 	},
 	{
-		id: 6,
-		image: pix6,
-		title: "Lorem ipsum dolor sit amet consectetur adipi elit 6",
-		cat: "Food",
-		content:
-			"Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea, omnis autem, magnam consequuntur accusamus ab tenetur exercitationem quos ipsum eum ducimus quas earum. Sint eveniet pariatur nisi, dicta porro animi!",
+		id: "6",
+		postAuthor: "John",
+		postImage: pix6,
+		postTitle: "Lorem ipsum dolor sit amet consectetur adipi elit 6",
+		postCategory: ["gaming", "movie", "music", "sports", "apps"],
+		postContent: {
+			blocks: [
+				{
+					key: "f7gmk",
+					text: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Fugit ducimus eligendi quo alias, sit, labore minus expedita possimus temporibus quaerat, esse rem iusto voluptates tenetur debitis? Quisquam culpa libero fuga. Ipsum dolor sit amet consectetur adipisicing elit. Fugit ducimus eligendi quo alias, sit, labore eligendi quo alias, sit, labore.",
+					type: "unstyled",
+					depth: 0,
+					inlineStyleRanges: [
+						{ offset: 0, length: 348, style: "color-rgb(68,68,68)" },
+						{ offset: 0, length: 348, style: "fontsize-16" },
+						{
+							offset: 0,
+							length: 348,
+							style:
+								'fontfamily--apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif',
+						},
+					],
+					entityRanges: [],
+					data: { "text-align": "left" },
+				},
+				{
+					key: "fcnru",
+					text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque saepe architecto, nulla eum odit autem tempora officiis commodi aliquid, recusandae expedita atque deleniti magni aperiam nobis at non adipisci eligendi. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur tempora nesciunt illo, quibusdam beatae veritatis vero nam ex, possimus harum recusandae numquam eius quod sed, laborum nulla vitae aut minima!",
+					type: "unstyled",
+					depth: 0,
+					inlineStyleRanges: [
+						{ offset: 0, length: 431, style: "color-rgb(68,68,68)" },
+						{ offset: 0, length: 431, style: "fontsize-16" },
+						{
+							offset: 0,
+							length: 431,
+							style:
+								'fontfamily--apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif',
+						},
+					],
+					entityRanges: [],
+					data: { "text-align": "left" },
+				},
+				{
+					key: "5rsc",
+					text: "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptatem ipsa quibusdam sed reprehenderit! Quae quam, eum ea minus laborum impedit? Voluptatem, tempora. Dolorum ratione, tempora quod ipsam fugiat deleniti doloremque? Lorem, ipsum dolor sit amet consectetur adipisicing elit. Blanditiis dignissimos explicabo maxime debitis? Blanditiis, debitis vel esse, tenetur cum magni temporibus consectetur laboriosam beatae quasi architecto consequatur culpa? Deserunt, modi! Lorem ipsum dolor sit amet consectetur, adipisicing elit. Debitis est ea ipsam tempora illo iure nemo temporibus adipisci quibusdam aperiam nam doloremque ab a, dolorem laborum? Unde minima ipsam aspernatur. ",
+					type: "unstyled",
+					depth: 0,
+					inlineStyleRanges: [
+						{ offset: 0, length: 684, style: "color-rgb(68,68,68)" },
+						{ offset: 0, length: 684, style: "fontsize-16" },
+						{
+							offset: 0,
+							length: 684,
+							style:
+								'fontfamily--apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif',
+						},
+					],
+					entityRanges: [],
+					data: { "text-align": "left" },
+				},
+				{
+					key: "7d4jd",
+					text: "The truth is you don't know what is going to happen tomorrow. Life is a crazy ride, and nothing is guaranteed. ",
+					type: "blockquote",
+					depth: 0,
+					inlineStyleRanges: [
+						{ offset: 0, length: 110, style: "color-rgb(122,122,122)" },
+						{ offset: 0, length: 110, style: "fontsize-22" },
+						{ offset: 0, length: 110, style: "fontfamily-Lora, serif" },
+					],
+					entityRanges: [],
+					data: {},
+				},
+				{
+					key: "a6uk5",
+					text: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eius odit quis saepe ab iure asperiores, eos et vero iusto quibusdam est atque ad, eum sit similique veritatis itaque voluptatem aperiam. vero iusto quibusdam est atque ad, eum sit similique veritatis itaque ",
+					type: "unstyled",
+					depth: 0,
+					inlineStyleRanges: [
+						{ offset: 0, length: 265, style: "color-rgb(68,68,68)" },
+						{ offset: 0, length: 265, style: "fontsize-16" },
+						{
+							offset: 0,
+							length: 265,
+							style:
+								'fontfamily--apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif',
+						},
+					],
+					entityRanges: [],
+					data: {},
+				},
+				{
+					key: "1e8u6",
+					text: "Exercise Keeps the Brain Young: Study ",
+					type: "header-three",
+					depth: 0,
+					inlineStyleRanges: [
+						{
+							offset: 0,
+							length: 37,
+							style: "color-rgb(333333/var(--tw-text-opacity))",
+						},
+						{ offset: 0, length: 37, style: "fontsize-1.5rem" },
+						{ offset: 0, length: 37, style: "fontfamily-Lora, serif" },
+					],
+					entityRanges: [],
+					data: { "text-align": "left" },
+				},
+				{
+					key: "4mmko",
+					text: " ",
+					type: "atomic",
+					depth: 0,
+					inlineStyleRanges: [],
+					entityRanges: [{ offset: 0, length: 1, key: 0 }],
+					data: {},
+				},
+				{
+					key: "ech5k",
+					text: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptas cupiditate itaque obcaecati numquam minima, atque iusto quia ullam nam magni neque, id hic corrupti harum sapiente, sunt blanditiis laborum aspernatur?",
+					type: "unstyled",
+					depth: 0,
+					inlineStyleRanges: [
+						{ offset: 0, length: 218, style: "color-rgb(0,0,0)" },
+						{ offset: 0, length: 218, style: "fontsize-16" },
+						{
+							offset: 0,
+							length: 218,
+							style:
+								'fontfamily--apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif',
+						},
+					],
+					entityRanges: [],
+					data: { "text-align": "left" },
+				},
+				{
+					key: "d6ane",
+					text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis magni nostrum tempore similique nulla molestiae ducimus obcaecati ipsam reiciendis, itaque minima hic dolor omnis accusantium corrupti doloremque laudantium? Voluptatem, accusamus. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Distinctio facilis veniam rerum eaque magni illum tempore, laudantium aut ea cum odio. Eaque quo, itaque sit soluta illo quisquam odio quia! Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa quasi dolores, harum atque ipsam placeat magni totam quos! Accusantium quo quibusdam assumenda consequuntur recusandae id maxime? Architecto blanditiis delectus soluta. ",
+					type: "unstyled",
+					depth: 0,
+					inlineStyleRanges: [
+						{ offset: 0, length: 680, style: "color-rgb(0,0,0)" },
+						{ offset: 0, length: 680, style: "fontsize-16" },
+						{
+							offset: 0,
+							length: 680,
+							style:
+								'fontfamily--apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif',
+						},
+					],
+					entityRanges: [],
+					data: { "text-align": "left" },
+				},
+				{
+					key: "e61ln",
+					text: "The most advanced Blog & News WordPress Theme ",
+					type: "header-three",
+					depth: 0,
+					inlineStyleRanges: [
+						{
+							offset: 0,
+							length: 45,
+							style: "color-rgb(333333/var(--tw-text-opacity))",
+						},
+						{ offset: 0, length: 45, style: "fontsize-1.5rem" },
+						{ offset: 0, length: 45, style: "fontfamily-Lora, serif" },
+					],
+					entityRanges: [],
+					data: { "text-align": "left" },
+				},
+				{
+					key: "6q9jk",
+					text: " ",
+					type: "atomic",
+					depth: 0,
+					inlineStyleRanges: [],
+					entityRanges: [{ offset: 0, length: 1, key: 1 }],
+					data: {},
+				},
+				{
+					key: "trih",
+					text: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptas cupiditate itaque obcaecati numquam minima, atque iusto quia ullam nam magni neque, id hic corrupti harum sapiente, sunt blanditiis laborum aspernatur?",
+					type: "unstyled",
+					depth: 0,
+					inlineStyleRanges: [
+						{ offset: 0, length: 218, style: "color-rgb(0,0,0)" },
+						{ offset: 0, length: 218, style: "fontsize-16" },
+						{
+							offset: 0,
+							length: 218,
+							style:
+								'fontfamily--apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif',
+						},
+					],
+					entityRanges: [],
+					data: { "text-align": "left" },
+				},
+				{
+					key: "b61e1",
+					text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis magni nostrum tempore similique nulla molestiae ducimus obcaecati ipsam reiciendis, itaque minima hic dolor omnis accusantium corrupti doloremque laudantium? Voluptatem, accusamus. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Distinctio facilis veniam rerum eaque magni illum tempore, laudantium aut ea cum odio. Eaque quo, itaque sit soluta illo quisquam odio quia!",
+					type: "unstyled",
+					depth: 0,
+					inlineStyleRanges: [
+						{ offset: 0, length: 448, style: "color-rgb(0,0,0)" },
+						{ offset: 0, length: 448, style: "fontsize-16" },
+						{
+							offset: 0,
+							length: 448,
+							style:
+								'fontfamily--apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif',
+						},
+					],
+					entityRanges: [],
+					data: { "text-align": "left" },
+				},
+				{
+					key: "1pbp7",
+					text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa quasi dolores, harum atque ipsam placeat magni totam quos! Accusantium quo quibusdam assumenda consequuntur recusandae id maxime? Architecto blanditiis delectus soluta.",
+					type: "unstyled",
+					depth: 0,
+					inlineStyleRanges: [
+						{ offset: 0, length: 231, style: "color-rgb(0,0,0)" },
+						{ offset: 0, length: 231, style: "fontsize-16" },
+						{
+							offset: 0,
+							length: 231,
+							style:
+								'fontfamily--apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif',
+						},
+					],
+					entityRanges: [],
+					data: { "text-align": "left" },
+				},
+				{
+					key: "1lo9l",
+					text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa quasi dolores, harum atque ipsam placeat magni totam quos! Accusantium quo quibusdam assumenda consequuntur recusandae id maxime? Architecto blanditiis delectus soluta.Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa quasi dolores, harum atque ipsam placeat magni totam quos! Accusantium quo quibusdam assumenda consequuntur recusandae id maxime? Architecto blanditiis delectus soluta. ",
+					type: "unstyled",
+					depth: 0,
+					inlineStyleRanges: [
+						{ offset: 0, length: 462, style: "color-rgb(0,0,0)" },
+						{ offset: 0, length: 462, style: "fontsize-16" },
+						{
+							offset: 0,
+							length: 462,
+							style:
+								'fontfamily--apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif',
+						},
+					],
+					entityRanges: [],
+					data: { "text-align": "left" },
+				},
+			],
+			entityMap: {
+				0: {
+					type: "IMAGE",
+					mutability: "MUTABLE",
+					data: {
+						src: "https://i.pinimg.com/564x/1f/b7/27/1fb727daf7c512b836ee2e02a29570f7.jpg",
+						height: "100%",
+						width: "100%",
+					},
+				},
+				1: {
+					type: "IMAGE",
+					mutability: "MUTABLE",
+					data: {
+						src: "https://cdn.dribbble.com/users/427857/screenshots/14370385/media/9272153b67264251a139bb6885533969.jpg?compress=1&resize=768x576&vertical=top",
+						height: "100%",
+						width: "100%",
+					},
+				},
+			},
+		},
 		date: "June 25, 2022",
-		tag: ["Fitness Tips", "Women's Health"],
+		postTags: ["game of thrones", "motogp 2017", "esport"],
+		optional: {
+			shared: 44,
+			viewed: 33,
+			Trending: true,
+		},
 	},
 	{
-		id: 7,
-		image: pix7,
-		title: "Lorem ipsum dolor sit amet consectetur adipi elit",
-		cat: "Tech",
-		content:
-			"Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea, omnis autem, magnam consequuntur accusamus ab tenetur exercitationem quos ipsum eum ducimus quas earum. Sint eveniet pariatur nisi, dicta porro animi!",
+		id: "7",
+		postAuthor: "James",
+		postImage: pix7,
+		postTitle: "Lorem ipsum dolor sit amet consectetur adipi elit",
+		postCategory: ["Tech"],
+		postContent: {
+			blocks: [
+				{
+					key: "f7gmk",
+					text: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Fugit ducimus eligendi quo alias, sit, labore minus expedita possimus temporibus quaerat, esse rem iusto voluptates tenetur debitis? Quisquam culpa libero fuga. Ipsum dolor sit amet consectetur adipisicing elit. Fugit ducimus eligendi quo alias, sit, labore eligendi quo alias, sit, labore.",
+					type: "unstyled",
+					depth: 0,
+					inlineStyleRanges: [
+						{ offset: 0, length: 348, style: "color-rgb(68,68,68)" },
+						{ offset: 0, length: 348, style: "fontsize-16" },
+						{
+							offset: 0,
+							length: 348,
+							style:
+								'fontfamily--apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif',
+						},
+					],
+					entityRanges: [],
+					data: { "text-align": "left" },
+				},
+				{
+					key: "fcnru",
+					text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque saepe architecto, nulla eum odit autem tempora officiis commodi aliquid, recusandae expedita atque deleniti magni aperiam nobis at non adipisci eligendi. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur tempora nesciunt illo, quibusdam beatae veritatis vero nam ex, possimus harum recusandae numquam eius quod sed, laborum nulla vitae aut minima!",
+					type: "unstyled",
+					depth: 0,
+					inlineStyleRanges: [
+						{ offset: 0, length: 431, style: "color-rgb(68,68,68)" },
+						{ offset: 0, length: 431, style: "fontsize-16" },
+						{
+							offset: 0,
+							length: 431,
+							style:
+								'fontfamily--apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif',
+						},
+					],
+					entityRanges: [],
+					data: { "text-align": "left" },
+				},
+				{
+					key: "5rsc",
+					text: "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptatem ipsa quibusdam sed reprehenderit! Quae quam, eum ea minus laborum impedit? Voluptatem, tempora. Dolorum ratione, tempora quod ipsam fugiat deleniti doloremque? Lorem, ipsum dolor sit amet consectetur adipisicing elit. Blanditiis dignissimos explicabo maxime debitis? Blanditiis, debitis vel esse, tenetur cum magni temporibus consectetur laboriosam beatae quasi architecto consequatur culpa? Deserunt, modi! Lorem ipsum dolor sit amet consectetur, adipisicing elit. Debitis est ea ipsam tempora illo iure nemo temporibus adipisci quibusdam aperiam nam doloremque ab a, dolorem laborum? Unde minima ipsam aspernatur. ",
+					type: "unstyled",
+					depth: 0,
+					inlineStyleRanges: [
+						{ offset: 0, length: 684, style: "color-rgb(68,68,68)" },
+						{ offset: 0, length: 684, style: "fontsize-16" },
+						{
+							offset: 0,
+							length: 684,
+							style:
+								'fontfamily--apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif',
+						},
+					],
+					entityRanges: [],
+					data: { "text-align": "left" },
+				},
+				{
+					key: "7d4jd",
+					text: "The truth is you don't know what is going to happen tomorrow. Life is a crazy ride, and nothing is guaranteed. ",
+					type: "blockquote",
+					depth: 0,
+					inlineStyleRanges: [
+						{ offset: 0, length: 110, style: "color-rgb(122,122,122)" },
+						{ offset: 0, length: 110, style: "fontsize-22" },
+						{ offset: 0, length: 110, style: "fontfamily-Lora, serif" },
+					],
+					entityRanges: [],
+					data: {},
+				},
+				{
+					key: "a6uk5",
+					text: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eius odit quis saepe ab iure asperiores, eos et vero iusto quibusdam est atque ad, eum sit similique veritatis itaque voluptatem aperiam. vero iusto quibusdam est atque ad, eum sit similique veritatis itaque ",
+					type: "unstyled",
+					depth: 0,
+					inlineStyleRanges: [
+						{ offset: 0, length: 265, style: "color-rgb(68,68,68)" },
+						{ offset: 0, length: 265, style: "fontsize-16" },
+						{
+							offset: 0,
+							length: 265,
+							style:
+								'fontfamily--apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif',
+						},
+					],
+					entityRanges: [],
+					data: {},
+				},
+				{
+					key: "1e8u6",
+					text: "Exercise Keeps the Brain Young: Study ",
+					type: "header-three",
+					depth: 0,
+					inlineStyleRanges: [
+						{
+							offset: 0,
+							length: 37,
+							style: "color-rgb(333333/var(--tw-text-opacity))",
+						},
+						{ offset: 0, length: 37, style: "fontsize-1.5rem" },
+						{ offset: 0, length: 37, style: "fontfamily-Lora, serif" },
+					],
+					entityRanges: [],
+					data: { "text-align": "left" },
+				},
+				{
+					key: "4mmko",
+					text: " ",
+					type: "atomic",
+					depth: 0,
+					inlineStyleRanges: [],
+					entityRanges: [{ offset: 0, length: 1, key: 0 }],
+					data: {},
+				},
+				{
+					key: "ech5k",
+					text: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptas cupiditate itaque obcaecati numquam minima, atque iusto quia ullam nam magni neque, id hic corrupti harum sapiente, sunt blanditiis laborum aspernatur?",
+					type: "unstyled",
+					depth: 0,
+					inlineStyleRanges: [
+						{ offset: 0, length: 218, style: "color-rgb(0,0,0)" },
+						{ offset: 0, length: 218, style: "fontsize-16" },
+						{
+							offset: 0,
+							length: 218,
+							style:
+								'fontfamily--apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif',
+						},
+					],
+					entityRanges: [],
+					data: { "text-align": "left" },
+				},
+				{
+					key: "d6ane",
+					text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis magni nostrum tempore similique nulla molestiae ducimus obcaecati ipsam reiciendis, itaque minima hic dolor omnis accusantium corrupti doloremque laudantium? Voluptatem, accusamus. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Distinctio facilis veniam rerum eaque magni illum tempore, laudantium aut ea cum odio. Eaque quo, itaque sit soluta illo quisquam odio quia! Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa quasi dolores, harum atque ipsam placeat magni totam quos! Accusantium quo quibusdam assumenda consequuntur recusandae id maxime? Architecto blanditiis delectus soluta. ",
+					type: "unstyled",
+					depth: 0,
+					inlineStyleRanges: [
+						{ offset: 0, length: 680, style: "color-rgb(0,0,0)" },
+						{ offset: 0, length: 680, style: "fontsize-16" },
+						{
+							offset: 0,
+							length: 680,
+							style:
+								'fontfamily--apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif',
+						},
+					],
+					entityRanges: [],
+					data: { "text-align": "left" },
+				},
+				{
+					key: "e61ln",
+					text: "The most advanced Blog & News WordPress Theme ",
+					type: "header-three",
+					depth: 0,
+					inlineStyleRanges: [
+						{
+							offset: 0,
+							length: 45,
+							style: "color-rgb(333333/var(--tw-text-opacity))",
+						},
+						{ offset: 0, length: 45, style: "fontsize-1.5rem" },
+						{ offset: 0, length: 45, style: "fontfamily-Lora, serif" },
+					],
+					entityRanges: [],
+					data: { "text-align": "left" },
+				},
+				{
+					key: "6q9jk",
+					text: " ",
+					type: "atomic",
+					depth: 0,
+					inlineStyleRanges: [],
+					entityRanges: [{ offset: 0, length: 1, key: 1 }],
+					data: {},
+				},
+				{
+					key: "trih",
+					text: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptas cupiditate itaque obcaecati numquam minima, atque iusto quia ullam nam magni neque, id hic corrupti harum sapiente, sunt blanditiis laborum aspernatur?",
+					type: "unstyled",
+					depth: 0,
+					inlineStyleRanges: [
+						{ offset: 0, length: 218, style: "color-rgb(0,0,0)" },
+						{ offset: 0, length: 218, style: "fontsize-16" },
+						{
+							offset: 0,
+							length: 218,
+							style:
+								'fontfamily--apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif',
+						},
+					],
+					entityRanges: [],
+					data: { "text-align": "left" },
+				},
+				{
+					key: "b61e1",
+					text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis magni nostrum tempore similique nulla molestiae ducimus obcaecati ipsam reiciendis, itaque minima hic dolor omnis accusantium corrupti doloremque laudantium? Voluptatem, accusamus. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Distinctio facilis veniam rerum eaque magni illum tempore, laudantium aut ea cum odio. Eaque quo, itaque sit soluta illo quisquam odio quia!",
+					type: "unstyled",
+					depth: 0,
+					inlineStyleRanges: [
+						{ offset: 0, length: 448, style: "color-rgb(0,0,0)" },
+						{ offset: 0, length: 448, style: "fontsize-16" },
+						{
+							offset: 0,
+							length: 448,
+							style:
+								'fontfamily--apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif',
+						},
+					],
+					entityRanges: [],
+					data: { "text-align": "left" },
+				},
+				{
+					key: "1pbp7",
+					text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa quasi dolores, harum atque ipsam placeat magni totam quos! Accusantium quo quibusdam assumenda consequuntur recusandae id maxime? Architecto blanditiis delectus soluta.",
+					type: "unstyled",
+					depth: 0,
+					inlineStyleRanges: [
+						{ offset: 0, length: 231, style: "color-rgb(0,0,0)" },
+						{ offset: 0, length: 231, style: "fontsize-16" },
+						{
+							offset: 0,
+							length: 231,
+							style:
+								'fontfamily--apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif',
+						},
+					],
+					entityRanges: [],
+					data: { "text-align": "left" },
+				},
+				{
+					key: "1lo9l",
+					text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa quasi dolores, harum atque ipsam placeat magni totam quos! Accusantium quo quibusdam assumenda consequuntur recusandae id maxime? Architecto blanditiis delectus soluta.Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa quasi dolores, harum atque ipsam placeat magni totam quos! Accusantium quo quibusdam assumenda consequuntur recusandae id maxime? Architecto blanditiis delectus soluta. ",
+					type: "unstyled",
+					depth: 0,
+					inlineStyleRanges: [
+						{ offset: 0, length: 462, style: "color-rgb(0,0,0)" },
+						{ offset: 0, length: 462, style: "fontsize-16" },
+						{
+							offset: 0,
+							length: 462,
+							style:
+								'fontfamily--apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif',
+						},
+					],
+					entityRanges: [],
+					data: { "text-align": "left" },
+				},
+			],
+			entityMap: {
+				0: {
+					type: "IMAGE",
+					mutability: "MUTABLE",
+					data: {
+						src: "https://i.pinimg.com/564x/1f/b7/27/1fb727daf7c512b836ee2e02a29570f7.jpg",
+						height: "100%",
+						width: "100%",
+					},
+				},
+				1: {
+					type: "IMAGE",
+					mutability: "MUTABLE",
+					data: {
+						src: "https://cdn.dribbble.com/users/427857/screenshots/14370385/media/9272153b67264251a139bb6885533969.jpg?compress=1&resize=768x576&vertical=top",
+						height: "100%",
+						width: "100%",
+					},
+				},
+			},
+		},
 		date: "June 26, 2022",
-		tag: ["Fitness Tips", "Women's Health"],
+		postTags: ["mark zuckerberg", "motogp 2017"],
+		optional: {
+			shared: 44,
+			viewed: 33,
+			Trending: true,
+		},
 	},
 	{
-		id: 8,
-		image: pix8,
-		title: "Lorem ipsum dolor sit amet consectetur adipi elit",
-		cat: "Life",
-		content:
-			"Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea, omnis autem, magnam consequuntur accusamus ab tenetur exercitationem quos ipsum eum ducimus quas earum. Sint eveniet pariatur nisi, dicta porro animi!",
+		id: "8",
+		postAuthor: "Stone",
+		postImage: pix8,
+		postTitle: "Lorem ipsum dolor sit amet consectetur adipi elit",
+		postCategory: ["Life"],
+		postContent: {
+			blocks: [
+				{
+					key: "f7gmk",
+					text: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Fugit ducimus eligendi quo alias, sit, labore minus expedita possimus temporibus quaerat, esse rem iusto voluptates tenetur debitis? Quisquam culpa libero fuga. Ipsum dolor sit amet consectetur adipisicing elit. Fugit ducimus eligendi quo alias, sit, labore eligendi quo alias, sit, labore.",
+					type: "unstyled",
+					depth: 0,
+					inlineStyleRanges: [
+						{ offset: 0, length: 348, style: "color-rgb(68,68,68)" },
+						{ offset: 0, length: 348, style: "fontsize-16" },
+						{
+							offset: 0,
+							length: 348,
+							style:
+								'fontfamily--apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif',
+						},
+					],
+					entityRanges: [],
+					data: { "text-align": "left" },
+				},
+				{
+					key: "fcnru",
+					text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque saepe architecto, nulla eum odit autem tempora officiis commodi aliquid, recusandae expedita atque deleniti magni aperiam nobis at non adipisci eligendi. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur tempora nesciunt illo, quibusdam beatae veritatis vero nam ex, possimus harum recusandae numquam eius quod sed, laborum nulla vitae aut minima!",
+					type: "unstyled",
+					depth: 0,
+					inlineStyleRanges: [
+						{ offset: 0, length: 431, style: "color-rgb(68,68,68)" },
+						{ offset: 0, length: 431, style: "fontsize-16" },
+						{
+							offset: 0,
+							length: 431,
+							style:
+								'fontfamily--apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif',
+						},
+					],
+					entityRanges: [],
+					data: { "text-align": "left" },
+				},
+				{
+					key: "5rsc",
+					text: "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptatem ipsa quibusdam sed reprehenderit! Quae quam, eum ea minus laborum impedit? Voluptatem, tempora. Dolorum ratione, tempora quod ipsam fugiat deleniti doloremque? Lorem, ipsum dolor sit amet consectetur adipisicing elit. Blanditiis dignissimos explicabo maxime debitis? Blanditiis, debitis vel esse, tenetur cum magni temporibus consectetur laboriosam beatae quasi architecto consequatur culpa? Deserunt, modi! Lorem ipsum dolor sit amet consectetur, adipisicing elit. Debitis est ea ipsam tempora illo iure nemo temporibus adipisci quibusdam aperiam nam doloremque ab a, dolorem laborum? Unde minima ipsam aspernatur. ",
+					type: "unstyled",
+					depth: 0,
+					inlineStyleRanges: [
+						{ offset: 0, length: 684, style: "color-rgb(68,68,68)" },
+						{ offset: 0, length: 684, style: "fontsize-16" },
+						{
+							offset: 0,
+							length: 684,
+							style:
+								'fontfamily--apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif',
+						},
+					],
+					entityRanges: [],
+					data: { "text-align": "left" },
+				},
+				{
+					key: "7d4jd",
+					text: "The truth is you don't know what is going to happen tomorrow. Life is a crazy ride, and nothing is guaranteed. ",
+					type: "blockquote",
+					depth: 0,
+					inlineStyleRanges: [
+						{ offset: 0, length: 110, style: "color-rgb(122,122,122)" },
+						{ offset: 0, length: 110, style: "fontsize-22" },
+						{ offset: 0, length: 110, style: "fontfamily-Lora, serif" },
+					],
+					entityRanges: [],
+					data: {},
+				},
+				{
+					key: "a6uk5",
+					text: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eius odit quis saepe ab iure asperiores, eos et vero iusto quibusdam est atque ad, eum sit similique veritatis itaque voluptatem aperiam. vero iusto quibusdam est atque ad, eum sit similique veritatis itaque ",
+					type: "unstyled",
+					depth: 0,
+					inlineStyleRanges: [
+						{ offset: 0, length: 265, style: "color-rgb(68,68,68)" },
+						{ offset: 0, length: 265, style: "fontsize-16" },
+						{
+							offset: 0,
+							length: 265,
+							style:
+								'fontfamily--apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif',
+						},
+					],
+					entityRanges: [],
+					data: {},
+				},
+				{
+					key: "1e8u6",
+					text: "Exercise Keeps the Brain Young: Study ",
+					type: "header-three",
+					depth: 0,
+					inlineStyleRanges: [
+						{
+							offset: 0,
+							length: 37,
+							style: "color-rgb(333333/var(--tw-text-opacity))",
+						},
+						{ offset: 0, length: 37, style: "fontsize-1.5rem" },
+						{ offset: 0, length: 37, style: "fontfamily-Lora, serif" },
+					],
+					entityRanges: [],
+					data: { "text-align": "left" },
+				},
+				{
+					key: "4mmko",
+					text: " ",
+					type: "atomic",
+					depth: 0,
+					inlineStyleRanges: [],
+					entityRanges: [{ offset: 0, length: 1, key: 0 }],
+					data: {},
+				},
+				{
+					key: "ech5k",
+					text: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptas cupiditate itaque obcaecati numquam minima, atque iusto quia ullam nam magni neque, id hic corrupti harum sapiente, sunt blanditiis laborum aspernatur?",
+					type: "unstyled",
+					depth: 0,
+					inlineStyleRanges: [
+						{ offset: 0, length: 218, style: "color-rgb(0,0,0)" },
+						{ offset: 0, length: 218, style: "fontsize-16" },
+						{
+							offset: 0,
+							length: 218,
+							style:
+								'fontfamily--apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif',
+						},
+					],
+					entityRanges: [],
+					data: { "text-align": "left" },
+				},
+				{
+					key: "d6ane",
+					text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis magni nostrum tempore similique nulla molestiae ducimus obcaecati ipsam reiciendis, itaque minima hic dolor omnis accusantium corrupti doloremque laudantium? Voluptatem, accusamus. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Distinctio facilis veniam rerum eaque magni illum tempore, laudantium aut ea cum odio. Eaque quo, itaque sit soluta illo quisquam odio quia! Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa quasi dolores, harum atque ipsam placeat magni totam quos! Accusantium quo quibusdam assumenda consequuntur recusandae id maxime? Architecto blanditiis delectus soluta. ",
+					type: "unstyled",
+					depth: 0,
+					inlineStyleRanges: [
+						{ offset: 0, length: 680, style: "color-rgb(0,0,0)" },
+						{ offset: 0, length: 680, style: "fontsize-16" },
+						{
+							offset: 0,
+							length: 680,
+							style:
+								'fontfamily--apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif',
+						},
+					],
+					entityRanges: [],
+					data: { "text-align": "left" },
+				},
+				{
+					key: "e61ln",
+					text: "The most advanced Blog & News WordPress Theme ",
+					type: "header-three",
+					depth: 0,
+					inlineStyleRanges: [
+						{
+							offset: 0,
+							length: 45,
+							style: "color-rgb(333333/var(--tw-text-opacity))",
+						},
+						{ offset: 0, length: 45, style: "fontsize-1.5rem" },
+						{ offset: 0, length: 45, style: "fontfamily-Lora, serif" },
+					],
+					entityRanges: [],
+					data: { "text-align": "left" },
+				},
+				{
+					key: "6q9jk",
+					text: " ",
+					type: "atomic",
+					depth: 0,
+					inlineStyleRanges: [],
+					entityRanges: [{ offset: 0, length: 1, key: 1 }],
+					data: {},
+				},
+				{
+					key: "trih",
+					text: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptas cupiditate itaque obcaecati numquam minima, atque iusto quia ullam nam magni neque, id hic corrupti harum sapiente, sunt blanditiis laborum aspernatur?",
+					type: "unstyled",
+					depth: 0,
+					inlineStyleRanges: [
+						{ offset: 0, length: 218, style: "color-rgb(0,0,0)" },
+						{ offset: 0, length: 218, style: "fontsize-16" },
+						{
+							offset: 0,
+							length: 218,
+							style:
+								'fontfamily--apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif',
+						},
+					],
+					entityRanges: [],
+					data: { "text-align": "left" },
+				},
+				{
+					key: "b61e1",
+					text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis magni nostrum tempore similique nulla molestiae ducimus obcaecati ipsam reiciendis, itaque minima hic dolor omnis accusantium corrupti doloremque laudantium? Voluptatem, accusamus. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Distinctio facilis veniam rerum eaque magni illum tempore, laudantium aut ea cum odio. Eaque quo, itaque sit soluta illo quisquam odio quia!",
+					type: "unstyled",
+					depth: 0,
+					inlineStyleRanges: [
+						{ offset: 0, length: 448, style: "color-rgb(0,0,0)" },
+						{ offset: 0, length: 448, style: "fontsize-16" },
+						{
+							offset: 0,
+							length: 448,
+							style:
+								'fontfamily--apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif',
+						},
+					],
+					entityRanges: [],
+					data: { "text-align": "left" },
+				},
+				{
+					key: "1pbp7",
+					text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa quasi dolores, harum atque ipsam placeat magni totam quos! Accusantium quo quibusdam assumenda consequuntur recusandae id maxime? Architecto blanditiis delectus soluta.",
+					type: "unstyled",
+					depth: 0,
+					inlineStyleRanges: [
+						{ offset: 0, length: 231, style: "color-rgb(0,0,0)" },
+						{ offset: 0, length: 231, style: "fontsize-16" },
+						{
+							offset: 0,
+							length: 231,
+							style:
+								'fontfamily--apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif',
+						},
+					],
+					entityRanges: [],
+					data: { "text-align": "left" },
+				},
+				{
+					key: "1lo9l",
+					text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa quasi dolores, harum atque ipsam placeat magni totam quos! Accusantium quo quibusdam assumenda consequuntur recusandae id maxime? Architecto blanditiis delectus soluta.Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa quasi dolores, harum atque ipsam placeat magni totam quos! Accusantium quo quibusdam assumenda consequuntur recusandae id maxime? Architecto blanditiis delectus soluta. ",
+					type: "unstyled",
+					depth: 0,
+					inlineStyleRanges: [
+						{ offset: 0, length: 462, style: "color-rgb(0,0,0)" },
+						{ offset: 0, length: 462, style: "fontsize-16" },
+						{
+							offset: 0,
+							length: 462,
+							style:
+								'fontfamily--apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif',
+						},
+					],
+					entityRanges: [],
+					data: { "text-align": "left" },
+				},
+			],
+			entityMap: {
+				0: {
+					type: "IMAGE",
+					mutability: "MUTABLE",
+					data: {
+						src: "https://i.pinimg.com/564x/1f/b7/27/1fb727daf7c512b836ee2e02a29570f7.jpg",
+						height: "100%",
+						width: "100%",
+					},
+				},
+				1: {
+					type: "IMAGE",
+					mutability: "MUTABLE",
+					data: {
+						src: "https://cdn.dribbble.com/users/427857/screenshots/14370385/media/9272153b67264251a139bb6885533969.jpg?compress=1&resize=768x576&vertical=top",
+						height: "100%",
+						width: "100%",
+					},
+				},
+			},
+		},
 		date: "June 27, 2022",
-		tag: ["Fitness Tips", "Women's Health"],
+		postTags: ["esport", "fashion week"],
+		optional: {
+			shared: 44,
+			viewed: 33,
+			Trending: true,
+		},
 	},
 	{
-		id: 9,
-		image: pix9,
-		title: "Lorem ipsum dolor sit amet consectetur adipi elit",
-		cat: "Books",
-		content:
-			"Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea, omnis autem, magnam consequuntur accusamus ab tenetur exercitationem quos ipsum eum ducimus quas earum. Sint eveniet pariatur nisi, dicta porro animi!",
+		id: "9",
+		postAuthor: "Bush",
+		postImage: pix9,
+		postTitle: "Lorem ipsum dolor sit amet consectetur adipi elit",
+		postCategory: ["Books"],
+		postContent: {
+			blocks: [
+				{
+					key: "f7gmk",
+					text: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Fugit ducimus eligendi quo alias, sit, labore minus expedita possimus temporibus quaerat, esse rem iusto voluptates tenetur debitis? Quisquam culpa libero fuga. Ipsum dolor sit amet consectetur adipisicing elit. Fugit ducimus eligendi quo alias, sit, labore eligendi quo alias, sit, labore.",
+					type: "unstyled",
+					depth: 0,
+					inlineStyleRanges: [
+						{ offset: 0, length: 348, style: "color-rgb(68,68,68)" },
+						{ offset: 0, length: 348, style: "fontsize-16" },
+						{
+							offset: 0,
+							length: 348,
+							style:
+								'fontfamily--apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif',
+						},
+					],
+					entityRanges: [],
+					data: { "text-align": "left" },
+				},
+				{
+					key: "fcnru",
+					text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque saepe architecto, nulla eum odit autem tempora officiis commodi aliquid, recusandae expedita atque deleniti magni aperiam nobis at non adipisci eligendi. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur tempora nesciunt illo, quibusdam beatae veritatis vero nam ex, possimus harum recusandae numquam eius quod sed, laborum nulla vitae aut minima!",
+					type: "unstyled",
+					depth: 0,
+					inlineStyleRanges: [
+						{ offset: 0, length: 431, style: "color-rgb(68,68,68)" },
+						{ offset: 0, length: 431, style: "fontsize-16" },
+						{
+							offset: 0,
+							length: 431,
+							style:
+								'fontfamily--apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif',
+						},
+					],
+					entityRanges: [],
+					data: { "text-align": "left" },
+				},
+				{
+					key: "5rsc",
+					text: "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptatem ipsa quibusdam sed reprehenderit! Quae quam, eum ea minus laborum impedit? Voluptatem, tempora. Dolorum ratione, tempora quod ipsam fugiat deleniti doloremque? Lorem, ipsum dolor sit amet consectetur adipisicing elit. Blanditiis dignissimos explicabo maxime debitis? Blanditiis, debitis vel esse, tenetur cum magni temporibus consectetur laboriosam beatae quasi architecto consequatur culpa? Deserunt, modi! Lorem ipsum dolor sit amet consectetur, adipisicing elit. Debitis est ea ipsam tempora illo iure nemo temporibus adipisci quibusdam aperiam nam doloremque ab a, dolorem laborum? Unde minima ipsam aspernatur. ",
+					type: "unstyled",
+					depth: 0,
+					inlineStyleRanges: [
+						{ offset: 0, length: 684, style: "color-rgb(68,68,68)" },
+						{ offset: 0, length: 684, style: "fontsize-16" },
+						{
+							offset: 0,
+							length: 684,
+							style:
+								'fontfamily--apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif',
+						},
+					],
+					entityRanges: [],
+					data: { "text-align": "left" },
+				},
+				{
+					key: "7d4jd",
+					text: "The truth is you don't know what is going to happen tomorrow. Life is a crazy ride, and nothing is guaranteed. ",
+					type: "blockquote",
+					depth: 0,
+					inlineStyleRanges: [
+						{ offset: 0, length: 110, style: "color-rgb(122,122,122)" },
+						{ offset: 0, length: 110, style: "fontsize-22" },
+						{ offset: 0, length: 110, style: "fontfamily-Lora, serif" },
+					],
+					entityRanges: [],
+					data: {},
+				},
+				{
+					key: "a6uk5",
+					text: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eius odit quis saepe ab iure asperiores, eos et vero iusto quibusdam est atque ad, eum sit similique veritatis itaque voluptatem aperiam. vero iusto quibusdam est atque ad, eum sit similique veritatis itaque ",
+					type: "unstyled",
+					depth: 0,
+					inlineStyleRanges: [
+						{ offset: 0, length: 265, style: "color-rgb(68,68,68)" },
+						{ offset: 0, length: 265, style: "fontsize-16" },
+						{
+							offset: 0,
+							length: 265,
+							style:
+								'fontfamily--apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif',
+						},
+					],
+					entityRanges: [],
+					data: {},
+				},
+				{
+					key: "1e8u6",
+					text: "Exercise Keeps the Brain Young: Study ",
+					type: "header-three",
+					depth: 0,
+					inlineStyleRanges: [
+						{
+							offset: 0,
+							length: 37,
+							style: "color-rgb(333333/var(--tw-text-opacity))",
+						},
+						{ offset: 0, length: 37, style: "fontsize-1.5rem" },
+						{ offset: 0, length: 37, style: "fontfamily-Lora, serif" },
+					],
+					entityRanges: [],
+					data: { "text-align": "left" },
+				},
+				{
+					key: "4mmko",
+					text: " ",
+					type: "atomic",
+					depth: 0,
+					inlineStyleRanges: [],
+					entityRanges: [{ offset: 0, length: 1, key: 0 }],
+					data: {},
+				},
+				{
+					key: "ech5k",
+					text: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptas cupiditate itaque obcaecati numquam minima, atque iusto quia ullam nam magni neque, id hic corrupti harum sapiente, sunt blanditiis laborum aspernatur?",
+					type: "unstyled",
+					depth: 0,
+					inlineStyleRanges: [
+						{ offset: 0, length: 218, style: "color-rgb(0,0,0)" },
+						{ offset: 0, length: 218, style: "fontsize-16" },
+						{
+							offset: 0,
+							length: 218,
+							style:
+								'fontfamily--apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif',
+						},
+					],
+					entityRanges: [],
+					data: { "text-align": "left" },
+				},
+				{
+					key: "d6ane",
+					text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis magni nostrum tempore similique nulla molestiae ducimus obcaecati ipsam reiciendis, itaque minima hic dolor omnis accusantium corrupti doloremque laudantium? Voluptatem, accusamus. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Distinctio facilis veniam rerum eaque magni illum tempore, laudantium aut ea cum odio. Eaque quo, itaque sit soluta illo quisquam odio quia! Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa quasi dolores, harum atque ipsam placeat magni totam quos! Accusantium quo quibusdam assumenda consequuntur recusandae id maxime? Architecto blanditiis delectus soluta. ",
+					type: "unstyled",
+					depth: 0,
+					inlineStyleRanges: [
+						{ offset: 0, length: 680, style: "color-rgb(0,0,0)" },
+						{ offset: 0, length: 680, style: "fontsize-16" },
+						{
+							offset: 0,
+							length: 680,
+							style:
+								'fontfamily--apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif',
+						},
+					],
+					entityRanges: [],
+					data: { "text-align": "left" },
+				},
+				{
+					key: "e61ln",
+					text: "The most advanced Blog & News WordPress Theme ",
+					type: "header-three",
+					depth: 0,
+					inlineStyleRanges: [
+						{
+							offset: 0,
+							length: 45,
+							style: "color-rgb(333333/var(--tw-text-opacity))",
+						},
+						{ offset: 0, length: 45, style: "fontsize-1.5rem" },
+						{ offset: 0, length: 45, style: "fontfamily-Lora, serif" },
+					],
+					entityRanges: [],
+					data: { "text-align": "left" },
+				},
+				{
+					key: "6q9jk",
+					text: " ",
+					type: "atomic",
+					depth: 0,
+					inlineStyleRanges: [],
+					entityRanges: [{ offset: 0, length: 1, key: 1 }],
+					data: {},
+				},
+				{
+					key: "trih",
+					text: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptas cupiditate itaque obcaecati numquam minima, atque iusto quia ullam nam magni neque, id hic corrupti harum sapiente, sunt blanditiis laborum aspernatur?",
+					type: "unstyled",
+					depth: 0,
+					inlineStyleRanges: [
+						{ offset: 0, length: 218, style: "color-rgb(0,0,0)" },
+						{ offset: 0, length: 218, style: "fontsize-16" },
+						{
+							offset: 0,
+							length: 218,
+							style:
+								'fontfamily--apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif',
+						},
+					],
+					entityRanges: [],
+					data: { "text-align": "left" },
+				},
+				{
+					key: "b61e1",
+					text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis magni nostrum tempore similique nulla molestiae ducimus obcaecati ipsam reiciendis, itaque minima hic dolor omnis accusantium corrupti doloremque laudantium? Voluptatem, accusamus. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Distinctio facilis veniam rerum eaque magni illum tempore, laudantium aut ea cum odio. Eaque quo, itaque sit soluta illo quisquam odio quia!",
+					type: "unstyled",
+					depth: 0,
+					inlineStyleRanges: [
+						{ offset: 0, length: 448, style: "color-rgb(0,0,0)" },
+						{ offset: 0, length: 448, style: "fontsize-16" },
+						{
+							offset: 0,
+							length: 448,
+							style:
+								'fontfamily--apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif',
+						},
+					],
+					entityRanges: [],
+					data: { "text-align": "left" },
+				},
+				{
+					key: "1pbp7",
+					text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa quasi dolores, harum atque ipsam placeat magni totam quos! Accusantium quo quibusdam assumenda consequuntur recusandae id maxime? Architecto blanditiis delectus soluta.",
+					type: "unstyled",
+					depth: 0,
+					inlineStyleRanges: [
+						{ offset: 0, length: 231, style: "color-rgb(0,0,0)" },
+						{ offset: 0, length: 231, style: "fontsize-16" },
+						{
+							offset: 0,
+							length: 231,
+							style:
+								'fontfamily--apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif',
+						},
+					],
+					entityRanges: [],
+					data: { "text-align": "left" },
+				},
+				{
+					key: "1lo9l",
+					text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa quasi dolores, harum atque ipsam placeat magni totam quos! Accusantium quo quibusdam assumenda consequuntur recusandae id maxime? Architecto blanditiis delectus soluta.Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa quasi dolores, harum atque ipsam placeat magni totam quos! Accusantium quo quibusdam assumenda consequuntur recusandae id maxime? Architecto blanditiis delectus soluta. ",
+					type: "unstyled",
+					depth: 0,
+					inlineStyleRanges: [
+						{ offset: 0, length: 462, style: "color-rgb(0,0,0)" },
+						{ offset: 0, length: 462, style: "fontsize-16" },
+						{
+							offset: 0,
+							length: 462,
+							style:
+								'fontfamily--apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif',
+						},
+					],
+					entityRanges: [],
+					data: { "text-align": "left" },
+				},
+			],
+			entityMap: {
+				0: {
+					type: "IMAGE",
+					mutability: "MUTABLE",
+					data: {
+						src: "https://i.pinimg.com/564x/1f/b7/27/1fb727daf7c512b836ee2e02a29570f7.jpg",
+						height: "100%",
+						width: "100%",
+					},
+				},
+				1: {
+					type: "IMAGE",
+					mutability: "MUTABLE",
+					data: {
+						src: "https://cdn.dribbble.com/users/427857/screenshots/14370385/media/9272153b67264251a139bb6885533969.jpg?compress=1&resize=768x576&vertical=top",
+						height: "100%",
+						width: "100%",
+					},
+				},
+			},
+		},
 		date: "June 28, 2022",
-		tag: ["Fitness Tips", "Women's Health"],
+		postTags: ["playstation 4 pro", "sillicon valley"],
+		optional: {
+			shared: 44,
+			viewed: 33,
+			Trending: true,
+		},
 	},
 	{
-		id: 10,
-		image: pix10,
-		title: "Lorem ipsum dolor sit amet consectetur adipi elit",
-		cat: "Travel",
-		content:
-			"Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea, omnis autem, magnam consequuntur accusamus ab tenetur exercitationem quos ipsum eum ducimus quas earum. Sint eveniet pariatur nisi, dicta porro animi!",
+		id: "10",
+		postAuthor: "Lisa",
+		postImage: pix10,
+		postTitle: "Lorem ipsum dolor sit amet consectetur adipi elit",
+		postCategory: ["Travel"],
+		postContent: {
+			blocks: [
+				{
+					key: "f7gmk",
+					text: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Fugit ducimus eligendi quo alias, sit, labore minus expedita possimus temporibus quaerat, esse rem iusto voluptates tenetur debitis? Quisquam culpa libero fuga. Ipsum dolor sit amet consectetur adipisicing elit. Fugit ducimus eligendi quo alias, sit, labore eligendi quo alias, sit, labore.",
+					type: "unstyled",
+					depth: 0,
+					inlineStyleRanges: [
+						{ offset: 0, length: 348, style: "color-rgb(68,68,68)" },
+						{ offset: 0, length: 348, style: "fontsize-16" },
+						{
+							offset: 0,
+							length: 348,
+							style:
+								'fontfamily--apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif',
+						},
+					],
+					entityRanges: [],
+					data: { "text-align": "left" },
+				},
+				{
+					key: "fcnru",
+					text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque saepe architecto, nulla eum odit autem tempora officiis commodi aliquid, recusandae expedita atque deleniti magni aperiam nobis at non adipisci eligendi. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur tempora nesciunt illo, quibusdam beatae veritatis vero nam ex, possimus harum recusandae numquam eius quod sed, laborum nulla vitae aut minima!",
+					type: "unstyled",
+					depth: 0,
+					inlineStyleRanges: [
+						{ offset: 0, length: 431, style: "color-rgb(68,68,68)" },
+						{ offset: 0, length: 431, style: "fontsize-16" },
+						{
+							offset: 0,
+							length: 431,
+							style:
+								'fontfamily--apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif',
+						},
+					],
+					entityRanges: [],
+					data: { "text-align": "left" },
+				},
+				{
+					key: "5rsc",
+					text: "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptatem ipsa quibusdam sed reprehenderit! Quae quam, eum ea minus laborum impedit? Voluptatem, tempora. Dolorum ratione, tempora quod ipsam fugiat deleniti doloremque? Lorem, ipsum dolor sit amet consectetur adipisicing elit. Blanditiis dignissimos explicabo maxime debitis? Blanditiis, debitis vel esse, tenetur cum magni temporibus consectetur laboriosam beatae quasi architecto consequatur culpa? Deserunt, modi! Lorem ipsum dolor sit amet consectetur, adipisicing elit. Debitis est ea ipsam tempora illo iure nemo temporibus adipisci quibusdam aperiam nam doloremque ab a, dolorem laborum? Unde minima ipsam aspernatur. ",
+					type: "unstyled",
+					depth: 0,
+					inlineStyleRanges: [
+						{ offset: 0, length: 684, style: "color-rgb(68,68,68)" },
+						{ offset: 0, length: 684, style: "fontsize-16" },
+						{
+							offset: 0,
+							length: 684,
+							style:
+								'fontfamily--apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif',
+						},
+					],
+					entityRanges: [],
+					data: { "text-align": "left" },
+				},
+				{
+					key: "7d4jd",
+					text: "The truth is you don't know what is going to happen tomorrow. Life is a crazy ride, and nothing is guaranteed. ",
+					type: "blockquote",
+					depth: 0,
+					inlineStyleRanges: [
+						{ offset: 0, length: 110, style: "color-rgb(122,122,122)" },
+						{ offset: 0, length: 110, style: "fontsize-22" },
+						{ offset: 0, length: 110, style: "fontfamily-Lora, serif" },
+					],
+					entityRanges: [],
+					data: {},
+				},
+				{
+					key: "a6uk5",
+					text: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eius odit quis saepe ab iure asperiores, eos et vero iusto quibusdam est atque ad, eum sit similique veritatis itaque voluptatem aperiam. vero iusto quibusdam est atque ad, eum sit similique veritatis itaque ",
+					type: "unstyled",
+					depth: 0,
+					inlineStyleRanges: [
+						{ offset: 0, length: 265, style: "color-rgb(68,68,68)" },
+						{ offset: 0, length: 265, style: "fontsize-16" },
+						{
+							offset: 0,
+							length: 265,
+							style:
+								'fontfamily--apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif',
+						},
+					],
+					entityRanges: [],
+					data: {},
+				},
+				{
+					key: "1e8u6",
+					text: "Exercise Keeps the Brain Young: Study ",
+					type: "header-three",
+					depth: 0,
+					inlineStyleRanges: [
+						{
+							offset: 0,
+							length: 37,
+							style: "color-rgb(333333/var(--tw-text-opacity))",
+						},
+						{ offset: 0, length: 37, style: "fontsize-1.5rem" },
+						{ offset: 0, length: 37, style: "fontfamily-Lora, serif" },
+					],
+					entityRanges: [],
+					data: { "text-align": "left" },
+				},
+				{
+					key: "4mmko",
+					text: " ",
+					type: "atomic",
+					depth: 0,
+					inlineStyleRanges: [],
+					entityRanges: [{ offset: 0, length: 1, key: 0 }],
+					data: {},
+				},
+				{
+					key: "ech5k",
+					text: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptas cupiditate itaque obcaecati numquam minima, atque iusto quia ullam nam magni neque, id hic corrupti harum sapiente, sunt blanditiis laborum aspernatur?",
+					type: "unstyled",
+					depth: 0,
+					inlineStyleRanges: [
+						{ offset: 0, length: 218, style: "color-rgb(0,0,0)" },
+						{ offset: 0, length: 218, style: "fontsize-16" },
+						{
+							offset: 0,
+							length: 218,
+							style:
+								'fontfamily--apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif',
+						},
+					],
+					entityRanges: [],
+					data: { "text-align": "left" },
+				},
+				{
+					key: "d6ane",
+					text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis magni nostrum tempore similique nulla molestiae ducimus obcaecati ipsam reiciendis, itaque minima hic dolor omnis accusantium corrupti doloremque laudantium? Voluptatem, accusamus. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Distinctio facilis veniam rerum eaque magni illum tempore, laudantium aut ea cum odio. Eaque quo, itaque sit soluta illo quisquam odio quia! Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa quasi dolores, harum atque ipsam placeat magni totam quos! Accusantium quo quibusdam assumenda consequuntur recusandae id maxime? Architecto blanditiis delectus soluta. ",
+					type: "unstyled",
+					depth: 0,
+					inlineStyleRanges: [
+						{ offset: 0, length: 680, style: "color-rgb(0,0,0)" },
+						{ offset: 0, length: 680, style: "fontsize-16" },
+						{
+							offset: 0,
+							length: 680,
+							style:
+								'fontfamily--apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif',
+						},
+					],
+					entityRanges: [],
+					data: { "text-align": "left" },
+				},
+				{
+					key: "e61ln",
+					text: "The most advanced Blog & News WordPress Theme ",
+					type: "header-three",
+					depth: 0,
+					inlineStyleRanges: [
+						{
+							offset: 0,
+							length: 45,
+							style: "color-rgb(333333/var(--tw-text-opacity))",
+						},
+						{ offset: 0, length: 45, style: "fontsize-1.5rem" },
+						{ offset: 0, length: 45, style: "fontfamily-Lora, serif" },
+					],
+					entityRanges: [],
+					data: { "text-align": "left" },
+				},
+				{
+					key: "6q9jk",
+					text: " ",
+					type: "atomic",
+					depth: 0,
+					inlineStyleRanges: [],
+					entityRanges: [{ offset: 0, length: 1, key: 1 }],
+					data: {},
+				},
+				{
+					key: "trih",
+					text: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptas cupiditate itaque obcaecati numquam minima, atque iusto quia ullam nam magni neque, id hic corrupti harum sapiente, sunt blanditiis laborum aspernatur?",
+					type: "unstyled",
+					depth: 0,
+					inlineStyleRanges: [
+						{ offset: 0, length: 218, style: "color-rgb(0,0,0)" },
+						{ offset: 0, length: 218, style: "fontsize-16" },
+						{
+							offset: 0,
+							length: 218,
+							style:
+								'fontfamily--apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif',
+						},
+					],
+					entityRanges: [],
+					data: { "text-align": "left" },
+				},
+				{
+					key: "b61e1",
+					text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis magni nostrum tempore similique nulla molestiae ducimus obcaecati ipsam reiciendis, itaque minima hic dolor omnis accusantium corrupti doloremque laudantium? Voluptatem, accusamus. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Distinctio facilis veniam rerum eaque magni illum tempore, laudantium aut ea cum odio. Eaque quo, itaque sit soluta illo quisquam odio quia!",
+					type: "unstyled",
+					depth: 0,
+					inlineStyleRanges: [
+						{ offset: 0, length: 448, style: "color-rgb(0,0,0)" },
+						{ offset: 0, length: 448, style: "fontsize-16" },
+						{
+							offset: 0,
+							length: 448,
+							style:
+								'fontfamily--apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif',
+						},
+					],
+					entityRanges: [],
+					data: { "text-align": "left" },
+				},
+				{
+					key: "1pbp7",
+					text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa quasi dolores, harum atque ipsam placeat magni totam quos! Accusantium quo quibusdam assumenda consequuntur recusandae id maxime? Architecto blanditiis delectus soluta.",
+					type: "unstyled",
+					depth: 0,
+					inlineStyleRanges: [
+						{ offset: 0, length: 231, style: "color-rgb(0,0,0)" },
+						{ offset: 0, length: 231, style: "fontsize-16" },
+						{
+							offset: 0,
+							length: 231,
+							style:
+								'fontfamily--apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif',
+						},
+					],
+					entityRanges: [],
+					data: { "text-align": "left" },
+				},
+				{
+					key: "1lo9l",
+					text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa quasi dolores, harum atque ipsam placeat magni totam quos! Accusantium quo quibusdam assumenda consequuntur recusandae id maxime? Architecto blanditiis delectus soluta.Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa quasi dolores, harum atque ipsam placeat magni totam quos! Accusantium quo quibusdam assumenda consequuntur recusandae id maxime? Architecto blanditiis delectus soluta. ",
+					type: "unstyled",
+					depth: 0,
+					inlineStyleRanges: [
+						{ offset: 0, length: 462, style: "color-rgb(0,0,0)" },
+						{ offset: 0, length: 462, style: "fontsize-16" },
+						{
+							offset: 0,
+							length: 462,
+							style:
+								'fontfamily--apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif',
+						},
+					],
+					entityRanges: [],
+					data: { "text-align": "left" },
+				},
+			],
+			entityMap: {
+				0: {
+					type: "IMAGE",
+					mutability: "MUTABLE",
+					data: {
+						src: "https://i.pinimg.com/564x/1f/b7/27/1fb727daf7c512b836ee2e02a29570f7.jpg",
+						height: "100%",
+						width: "100%",
+					},
+				},
+				1: {
+					type: "IMAGE",
+					mutability: "MUTABLE",
+					data: {
+						src: "https://cdn.dribbble.com/users/427857/screenshots/14370385/media/9272153b67264251a139bb6885533969.jpg?compress=1&resize=768x576&vertical=top",
+						height: "100%",
+						width: "100%",
+					},
+				},
+			},
+		},
 		date: "June 29, 2022",
-		tag: ["Fitness Tips", "Women's Health"],
+		postTags: ["golden globes", "game of thrones"],
+		optional: {
+			shared: 44,
+			viewed: 33,
+			Trending: true,
+		},
 	},
 	{
-		id: 11,
-		image: pix11,
-		title: "Lorem ipsum dolor sit amet consectetur adipi elit",
-		cat: "Movies",
-		content:
-			"Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea, omnis autem, magnam consequuntur accusamus ab tenetur exercitationem quos ipsum eum ducimus quas earum. Sint eveniet pariatur nisi, dicta porro animi!",
+		id: "11",
+		postAuthor: "Samsom",
+		postImage: pix11,
+		postTitle: "Lorem ipsum dolor sit amet consectetur adipi elit",
+		postCategory: ["Movies"],
+		postContent: {
+			blocks: [
+				{
+					key: "f7gmk",
+					text: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Fugit ducimus eligendi quo alias, sit, labore minus expedita possimus temporibus quaerat, esse rem iusto voluptates tenetur debitis? Quisquam culpa libero fuga. Ipsum dolor sit amet consectetur adipisicing elit. Fugit ducimus eligendi quo alias, sit, labore eligendi quo alias, sit, labore.",
+					type: "unstyled",
+					depth: 0,
+					inlineStyleRanges: [
+						{ offset: 0, length: 348, style: "color-rgb(68,68,68)" },
+						{ offset: 0, length: 348, style: "fontsize-16" },
+						{
+							offset: 0,
+							length: 348,
+							style:
+								'fontfamily--apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif',
+						},
+					],
+					entityRanges: [],
+					data: { "text-align": "left" },
+				},
+				{
+					key: "fcnru",
+					text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque saepe architecto, nulla eum odit autem tempora officiis commodi aliquid, recusandae expedita atque deleniti magni aperiam nobis at non adipisci eligendi. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur tempora nesciunt illo, quibusdam beatae veritatis vero nam ex, possimus harum recusandae numquam eius quod sed, laborum nulla vitae aut minima!",
+					type: "unstyled",
+					depth: 0,
+					inlineStyleRanges: [
+						{ offset: 0, length: 431, style: "color-rgb(68,68,68)" },
+						{ offset: 0, length: 431, style: "fontsize-16" },
+						{
+							offset: 0,
+							length: 431,
+							style:
+								'fontfamily--apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif',
+						},
+					],
+					entityRanges: [],
+					data: { "text-align": "left" },
+				},
+				{
+					key: "5rsc",
+					text: "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptatem ipsa quibusdam sed reprehenderit! Quae quam, eum ea minus laborum impedit? Voluptatem, tempora. Dolorum ratione, tempora quod ipsam fugiat deleniti doloremque? Lorem, ipsum dolor sit amet consectetur adipisicing elit. Blanditiis dignissimos explicabo maxime debitis? Blanditiis, debitis vel esse, tenetur cum magni temporibus consectetur laboriosam beatae quasi architecto consequatur culpa? Deserunt, modi! Lorem ipsum dolor sit amet consectetur, adipisicing elit. Debitis est ea ipsam tempora illo iure nemo temporibus adipisci quibusdam aperiam nam doloremque ab a, dolorem laborum? Unde minima ipsam aspernatur. ",
+					type: "unstyled",
+					depth: 0,
+					inlineStyleRanges: [
+						{ offset: 0, length: 684, style: "color-rgb(68,68,68)" },
+						{ offset: 0, length: 684, style: "fontsize-16" },
+						{
+							offset: 0,
+							length: 684,
+							style:
+								'fontfamily--apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif',
+						},
+					],
+					entityRanges: [],
+					data: { "text-align": "left" },
+				},
+				{
+					key: "7d4jd",
+					text: "The truth is you don't know what is going to happen tomorrow. Life is a crazy ride, and nothing is guaranteed. ",
+					type: "blockquote",
+					depth: 0,
+					inlineStyleRanges: [
+						{ offset: 0, length: 110, style: "color-rgb(122,122,122)" },
+						{ offset: 0, length: 110, style: "fontsize-22" },
+						{ offset: 0, length: 110, style: "fontfamily-Lora, serif" },
+					],
+					entityRanges: [],
+					data: {},
+				},
+				{
+					key: "a6uk5",
+					text: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eius odit quis saepe ab iure asperiores, eos et vero iusto quibusdam est atque ad, eum sit similique veritatis itaque voluptatem aperiam. vero iusto quibusdam est atque ad, eum sit similique veritatis itaque ",
+					type: "unstyled",
+					depth: 0,
+					inlineStyleRanges: [
+						{ offset: 0, length: 265, style: "color-rgb(68,68,68)" },
+						{ offset: 0, length: 265, style: "fontsize-16" },
+						{
+							offset: 0,
+							length: 265,
+							style:
+								'fontfamily--apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif',
+						},
+					],
+					entityRanges: [],
+					data: {},
+				},
+				{
+					key: "1e8u6",
+					text: "Exercise Keeps the Brain Young: Study ",
+					type: "header-three",
+					depth: 0,
+					inlineStyleRanges: [
+						{
+							offset: 0,
+							length: 37,
+							style: "color-rgb(333333/var(--tw-text-opacity))",
+						},
+						{ offset: 0, length: 37, style: "fontsize-1.5rem" },
+						{ offset: 0, length: 37, style: "fontfamily-Lora, serif" },
+					],
+					entityRanges: [],
+					data: { "text-align": "left" },
+				},
+				{
+					key: "4mmko",
+					text: " ",
+					type: "atomic",
+					depth: 0,
+					inlineStyleRanges: [],
+					entityRanges: [{ offset: 0, length: 1, key: 0 }],
+					data: {},
+				},
+				{
+					key: "ech5k",
+					text: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptas cupiditate itaque obcaecati numquam minima, atque iusto quia ullam nam magni neque, id hic corrupti harum sapiente, sunt blanditiis laborum aspernatur?",
+					type: "unstyled",
+					depth: 0,
+					inlineStyleRanges: [
+						{ offset: 0, length: 218, style: "color-rgb(0,0,0)" },
+						{ offset: 0, length: 218, style: "fontsize-16" },
+						{
+							offset: 0,
+							length: 218,
+							style:
+								'fontfamily--apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif',
+						},
+					],
+					entityRanges: [],
+					data: { "text-align": "left" },
+				},
+				{
+					key: "d6ane",
+					text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis magni nostrum tempore similique nulla molestiae ducimus obcaecati ipsam reiciendis, itaque minima hic dolor omnis accusantium corrupti doloremque laudantium? Voluptatem, accusamus. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Distinctio facilis veniam rerum eaque magni illum tempore, laudantium aut ea cum odio. Eaque quo, itaque sit soluta illo quisquam odio quia! Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa quasi dolores, harum atque ipsam placeat magni totam quos! Accusantium quo quibusdam assumenda consequuntur recusandae id maxime? Architecto blanditiis delectus soluta. ",
+					type: "unstyled",
+					depth: 0,
+					inlineStyleRanges: [
+						{ offset: 0, length: 680, style: "color-rgb(0,0,0)" },
+						{ offset: 0, length: 680, style: "fontsize-16" },
+						{
+							offset: 0,
+							length: 680,
+							style:
+								'fontfamily--apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif',
+						},
+					],
+					entityRanges: [],
+					data: { "text-align": "left" },
+				},
+				{
+					key: "e61ln",
+					text: "The most advanced Blog & News WordPress Theme ",
+					type: "header-three",
+					depth: 0,
+					inlineStyleRanges: [
+						{
+							offset: 0,
+							length: 45,
+							style: "color-rgb(333333/var(--tw-text-opacity))",
+						},
+						{ offset: 0, length: 45, style: "fontsize-1.5rem" },
+						{ offset: 0, length: 45, style: "fontfamily-Lora, serif" },
+					],
+					entityRanges: [],
+					data: { "text-align": "left" },
+				},
+				{
+					key: "6q9jk",
+					text: " ",
+					type: "atomic",
+					depth: 0,
+					inlineStyleRanges: [],
+					entityRanges: [{ offset: 0, length: 1, key: 1 }],
+					data: {},
+				},
+				{
+					key: "trih",
+					text: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptas cupiditate itaque obcaecati numquam minima, atque iusto quia ullam nam magni neque, id hic corrupti harum sapiente, sunt blanditiis laborum aspernatur?",
+					type: "unstyled",
+					depth: 0,
+					inlineStyleRanges: [
+						{ offset: 0, length: 218, style: "color-rgb(0,0,0)" },
+						{ offset: 0, length: 218, style: "fontsize-16" },
+						{
+							offset: 0,
+							length: 218,
+							style:
+								'fontfamily--apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif',
+						},
+					],
+					entityRanges: [],
+					data: { "text-align": "left" },
+				},
+				{
+					key: "b61e1",
+					text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis magni nostrum tempore similique nulla molestiae ducimus obcaecati ipsam reiciendis, itaque minima hic dolor omnis accusantium corrupti doloremque laudantium? Voluptatem, accusamus. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Distinctio facilis veniam rerum eaque magni illum tempore, laudantium aut ea cum odio. Eaque quo, itaque sit soluta illo quisquam odio quia!",
+					type: "unstyled",
+					depth: 0,
+					inlineStyleRanges: [
+						{ offset: 0, length: 448, style: "color-rgb(0,0,0)" },
+						{ offset: 0, length: 448, style: "fontsize-16" },
+						{
+							offset: 0,
+							length: 448,
+							style:
+								'fontfamily--apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif',
+						},
+					],
+					entityRanges: [],
+					data: { "text-align": "left" },
+				},
+				{
+					key: "1pbp7",
+					text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa quasi dolores, harum atque ipsam placeat magni totam quos! Accusantium quo quibusdam assumenda consequuntur recusandae id maxime? Architecto blanditiis delectus soluta.",
+					type: "unstyled",
+					depth: 0,
+					inlineStyleRanges: [
+						{ offset: 0, length: 231, style: "color-rgb(0,0,0)" },
+						{ offset: 0, length: 231, style: "fontsize-16" },
+						{
+							offset: 0,
+							length: 231,
+							style:
+								'fontfamily--apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif',
+						},
+					],
+					entityRanges: [],
+					data: { "text-align": "left" },
+				},
+				{
+					key: "1lo9l",
+					text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa quasi dolores, harum atque ipsam placeat magni totam quos! Accusantium quo quibusdam assumenda consequuntur recusandae id maxime? Architecto blanditiis delectus soluta.Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa quasi dolores, harum atque ipsam placeat magni totam quos! Accusantium quo quibusdam assumenda consequuntur recusandae id maxime? Architecto blanditiis delectus soluta. ",
+					type: "unstyled",
+					depth: 0,
+					inlineStyleRanges: [
+						{ offset: 0, length: 462, style: "color-rgb(0,0,0)" },
+						{ offset: 0, length: 462, style: "fontsize-16" },
+						{
+							offset: 0,
+							length: 462,
+							style:
+								'fontfamily--apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif',
+						},
+					],
+					entityRanges: [],
+					data: { "text-align": "left" },
+				},
+			],
+			entityMap: {
+				0: {
+					type: "IMAGE",
+					mutability: "MUTABLE",
+					data: {
+						src: "https://i.pinimg.com/564x/1f/b7/27/1fb727daf7c512b836ee2e02a29570f7.jpg",
+						height: "100%",
+						width: "100%",
+					},
+				},
+				1: {
+					type: "IMAGE",
+					mutability: "MUTABLE",
+					data: {
+						src: "https://cdn.dribbble.com/users/427857/screenshots/14370385/media/9272153b67264251a139bb6885533969.jpg?compress=1&resize=768x576&vertical=top",
+						height: "100%",
+						width: "100%",
+					},
+				},
+			},
+		},
 		date: "June 30, 2022",
-		tag: ["Fitness Tips", "Women's Health"],
+		postTags: ["nintendo switch", "ces 2017"],
+		optional: {
+			shared: 44,
+			viewed: 33,
+			Trending: true,
+		},
 	},
 	{
-		id: 12,
-		image: pix12,
-		title: "Lorem ipsum dolor sit amet consectetur adipi elit",
-		cat: "Words",
-		content:
-			"Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea, omnis autem, magnam consequuntur accusamus ab tenetur exercitationem quos ipsum eum ducimus quas earum. Sint eveniet pariatur nisi, dicta porro animi!",
+		id: "12",
+		postAuthor: "Sam",
+		postImage: pix12,
+		postTitle: "Lorem ipsum dolor sit amet consectetur adipi elit",
+		postCategory: ["Words"],
+		postContent: {
+			blocks: [
+				{
+					key: "f7gmk",
+					text: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Fugit ducimus eligendi quo alias, sit, labore minus expedita possimus temporibus quaerat, esse rem iusto voluptates tenetur debitis? Quisquam culpa libero fuga. Ipsum dolor sit amet consectetur adipisicing elit. Fugit ducimus eligendi quo alias, sit, labore eligendi quo alias, sit, labore.",
+					type: "unstyled",
+					depth: 0,
+					inlineStyleRanges: [
+						{ offset: 0, length: 348, style: "color-rgb(68,68,68)" },
+						{ offset: 0, length: 348, style: "fontsize-16" },
+						{
+							offset: 0,
+							length: 348,
+							style:
+								'fontfamily--apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif',
+						},
+					],
+					entityRanges: [],
+					data: { "text-align": "left" },
+				},
+				{
+					key: "fcnru",
+					text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque saepe architecto, nulla eum odit autem tempora officiis commodi aliquid, recusandae expedita atque deleniti magni aperiam nobis at non adipisci eligendi. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur tempora nesciunt illo, quibusdam beatae veritatis vero nam ex, possimus harum recusandae numquam eius quod sed, laborum nulla vitae aut minima!",
+					type: "unstyled",
+					depth: 0,
+					inlineStyleRanges: [
+						{ offset: 0, length: 431, style: "color-rgb(68,68,68)" },
+						{ offset: 0, length: 431, style: "fontsize-16" },
+						{
+							offset: 0,
+							length: 431,
+							style:
+								'fontfamily--apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif',
+						},
+					],
+					entityRanges: [],
+					data: { "text-align": "left" },
+				},
+				{
+					key: "5rsc",
+					text: "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptatem ipsa quibusdam sed reprehenderit! Quae quam, eum ea minus laborum impedit? Voluptatem, tempora. Dolorum ratione, tempora quod ipsam fugiat deleniti doloremque? Lorem, ipsum dolor sit amet consectetur adipisicing elit. Blanditiis dignissimos explicabo maxime debitis? Blanditiis, debitis vel esse, tenetur cum magni temporibus consectetur laboriosam beatae quasi architecto consequatur culpa? Deserunt, modi! Lorem ipsum dolor sit amet consectetur, adipisicing elit. Debitis est ea ipsam tempora illo iure nemo temporibus adipisci quibusdam aperiam nam doloremque ab a, dolorem laborum? Unde minima ipsam aspernatur. ",
+					type: "unstyled",
+					depth: 0,
+					inlineStyleRanges: [
+						{ offset: 0, length: 684, style: "color-rgb(68,68,68)" },
+						{ offset: 0, length: 684, style: "fontsize-16" },
+						{
+							offset: 0,
+							length: 684,
+							style:
+								'fontfamily--apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif',
+						},
+					],
+					entityRanges: [],
+					data: { "text-align": "left" },
+				},
+				{
+					key: "7d4jd",
+					text: "The truth is you don't know what is going to happen tomorrow. Life is a crazy ride, and nothing is guaranteed. ",
+					type: "blockquote",
+					depth: 0,
+					inlineStyleRanges: [
+						{ offset: 0, length: 110, style: "color-rgb(122,122,122)" },
+						{ offset: 0, length: 110, style: "fontsize-22" },
+						{ offset: 0, length: 110, style: "fontfamily-Lora, serif" },
+					],
+					entityRanges: [],
+					data: {},
+				},
+				{
+					key: "a6uk5",
+					text: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eius odit quis saepe ab iure asperiores, eos et vero iusto quibusdam est atque ad, eum sit similique veritatis itaque voluptatem aperiam. vero iusto quibusdam est atque ad, eum sit similique veritatis itaque ",
+					type: "unstyled",
+					depth: 0,
+					inlineStyleRanges: [
+						{ offset: 0, length: 265, style: "color-rgb(68,68,68)" },
+						{ offset: 0, length: 265, style: "fontsize-16" },
+						{
+							offset: 0,
+							length: 265,
+							style:
+								'fontfamily--apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif',
+						},
+					],
+					entityRanges: [],
+					data: {},
+				},
+				{
+					key: "1e8u6",
+					text: "Exercise Keeps the Brain Young: Study ",
+					type: "header-three",
+					depth: 0,
+					inlineStyleRanges: [
+						{
+							offset: 0,
+							length: 37,
+							style: "color-rgb(333333/var(--tw-text-opacity))",
+						},
+						{ offset: 0, length: 37, style: "fontsize-1.5rem" },
+						{ offset: 0, length: 37, style: "fontfamily-Lora, serif" },
+					],
+					entityRanges: [],
+					data: { "text-align": "left" },
+				},
+				{
+					key: "4mmko",
+					text: " ",
+					type: "atomic",
+					depth: 0,
+					inlineStyleRanges: [],
+					entityRanges: [{ offset: 0, length: 1, key: 0 }],
+					data: {},
+				},
+				{
+					key: "ech5k",
+					text: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptas cupiditate itaque obcaecati numquam minima, atque iusto quia ullam nam magni neque, id hic corrupti harum sapiente, sunt blanditiis laborum aspernatur?",
+					type: "unstyled",
+					depth: 0,
+					inlineStyleRanges: [
+						{ offset: 0, length: 218, style: "color-rgb(0,0,0)" },
+						{ offset: 0, length: 218, style: "fontsize-16" },
+						{
+							offset: 0,
+							length: 218,
+							style:
+								'fontfamily--apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif',
+						},
+					],
+					entityRanges: [],
+					data: { "text-align": "left" },
+				},
+				{
+					key: "d6ane",
+					text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis magni nostrum tempore similique nulla molestiae ducimus obcaecati ipsam reiciendis, itaque minima hic dolor omnis accusantium corrupti doloremque laudantium? Voluptatem, accusamus. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Distinctio facilis veniam rerum eaque magni illum tempore, laudantium aut ea cum odio. Eaque quo, itaque sit soluta illo quisquam odio quia! Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa quasi dolores, harum atque ipsam placeat magni totam quos! Accusantium quo quibusdam assumenda consequuntur recusandae id maxime? Architecto blanditiis delectus soluta. ",
+					type: "unstyled",
+					depth: 0,
+					inlineStyleRanges: [
+						{ offset: 0, length: 680, style: "color-rgb(0,0,0)" },
+						{ offset: 0, length: 680, style: "fontsize-16" },
+						{
+							offset: 0,
+							length: 680,
+							style:
+								'fontfamily--apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif',
+						},
+					],
+					entityRanges: [],
+					data: { "text-align": "left" },
+				},
+				{
+					key: "e61ln",
+					text: "The most advanced Blog & News WordPress Theme ",
+					type: "header-three",
+					depth: 0,
+					inlineStyleRanges: [
+						{
+							offset: 0,
+							length: 45,
+							style: "color-rgb(333333/var(--tw-text-opacity))",
+						},
+						{ offset: 0, length: 45, style: "fontsize-1.5rem" },
+						{ offset: 0, length: 45, style: "fontfamily-Lora, serif" },
+					],
+					entityRanges: [],
+					data: { "text-align": "left" },
+				},
+				{
+					key: "6q9jk",
+					text: " ",
+					type: "atomic",
+					depth: 0,
+					inlineStyleRanges: [],
+					entityRanges: [{ offset: 0, length: 1, key: 1 }],
+					data: {},
+				},
+				{
+					key: "trih",
+					text: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptas cupiditate itaque obcaecati numquam minima, atque iusto quia ullam nam magni neque, id hic corrupti harum sapiente, sunt blanditiis laborum aspernatur?",
+					type: "unstyled",
+					depth: 0,
+					inlineStyleRanges: [
+						{ offset: 0, length: 218, style: "color-rgb(0,0,0)" },
+						{ offset: 0, length: 218, style: "fontsize-16" },
+						{
+							offset: 0,
+							length: 218,
+							style:
+								'fontfamily--apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif',
+						},
+					],
+					entityRanges: [],
+					data: { "text-align": "left" },
+				},
+				{
+					key: "b61e1",
+					text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis magni nostrum tempore similique nulla molestiae ducimus obcaecati ipsam reiciendis, itaque minima hic dolor omnis accusantium corrupti doloremque laudantium? Voluptatem, accusamus. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Distinctio facilis veniam rerum eaque magni illum tempore, laudantium aut ea cum odio. Eaque quo, itaque sit soluta illo quisquam odio quia!",
+					type: "unstyled",
+					depth: 0,
+					inlineStyleRanges: [
+						{ offset: 0, length: 448, style: "color-rgb(0,0,0)" },
+						{ offset: 0, length: 448, style: "fontsize-16" },
+						{
+							offset: 0,
+							length: 448,
+							style:
+								'fontfamily--apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif',
+						},
+					],
+					entityRanges: [],
+					data: { "text-align": "left" },
+				},
+				{
+					key: "1pbp7",
+					text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa quasi dolores, harum atque ipsam placeat magni totam quos! Accusantium quo quibusdam assumenda consequuntur recusandae id maxime? Architecto blanditiis delectus soluta.",
+					type: "unstyled",
+					depth: 0,
+					inlineStyleRanges: [
+						{ offset: 0, length: 231, style: "color-rgb(0,0,0)" },
+						{ offset: 0, length: 231, style: "fontsize-16" },
+						{
+							offset: 0,
+							length: 231,
+							style:
+								'fontfamily--apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif',
+						},
+					],
+					entityRanges: [],
+					data: { "text-align": "left" },
+				},
+				{
+					key: "1lo9l",
+					text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa quasi dolores, harum atque ipsam placeat magni totam quos! Accusantium quo quibusdam assumenda consequuntur recusandae id maxime? Architecto blanditiis delectus soluta.Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa quasi dolores, harum atque ipsam placeat magni totam quos! Accusantium quo quibusdam assumenda consequuntur recusandae id maxime? Architecto blanditiis delectus soluta. ",
+					type: "unstyled",
+					depth: 0,
+					inlineStyleRanges: [
+						{ offset: 0, length: 462, style: "color-rgb(0,0,0)" },
+						{ offset: 0, length: 462, style: "fontsize-16" },
+						{
+							offset: 0,
+							length: 462,
+							style:
+								'fontfamily--apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif',
+						},
+					],
+					entityRanges: [],
+					data: { "text-align": "left" },
+				},
+			],
+			entityMap: {
+				0: {
+					type: "IMAGE",
+					mutability: "MUTABLE",
+					data: {
+						src: "https://i.pinimg.com/564x/1f/b7/27/1fb727daf7c512b836ee2e02a29570f7.jpg",
+						height: "100%",
+						width: "100%",
+					},
+				},
+				1: {
+					type: "IMAGE",
+					mutability: "MUTABLE",
+					data: {
+						src: "https://cdn.dribbble.com/users/427857/screenshots/14370385/media/9272153b67264251a139bb6885533969.jpg?compress=1&resize=768x576&vertical=top",
+						height: "100%",
+						width: "100%",
+					},
+				},
+			},
+		},
 		date: "June 31, 2022",
-		tag: ["Fitness Tips", "Women's Health"],
+		postTags: ["election results", "white house"],
+		optional: {
+			shared: 44,
+			viewed: 33,
+			Trending: true,
+		},
 	},
 	{
-		id: 13,
-		image: pix13,
-		title: "Lorem ipsum dolor sit amet consectetur adipi elit",
-		cat: "Action",
-		content:
-			"Lorem ipsum dolor sit amet consectetur adipisicing elit. Ea, omnis autem, magnam consequuntur accusamus ab tenetur exercitationem quos ipsum eum ducimus quas earum. Sint eveniet pariatur nisi, dicta porro animi!",
+		id: "13",
+		postAuthor: "Emeka",
+		postImage: pix13,
+		postTitle: "Lorem ipsum dolor sit amet consectetur adipi elit",
+		postCategory: ["Action"],
+		postContent: {
+			blocks: [
+				{
+					key: "f7gmk",
+					text: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Fugit ducimus eligendi quo alias, sit, labore minus expedita possimus temporibus quaerat, esse rem iusto voluptates tenetur debitis? Quisquam culpa libero fuga. Ipsum dolor sit amet consectetur adipisicing elit. Fugit ducimus eligendi quo alias, sit, labore eligendi quo alias, sit, labore.",
+					type: "unstyled",
+					depth: 0,
+					inlineStyleRanges: [
+						{ offset: 0, length: 348, style: "color-rgb(68,68,68)" },
+						{ offset: 0, length: 348, style: "fontsize-16" },
+						{
+							offset: 0,
+							length: 348,
+							style:
+								'fontfamily--apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif',
+						},
+					],
+					entityRanges: [],
+					data: { "text-align": "left" },
+				},
+				{
+					key: "fcnru",
+					text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque saepe architecto, nulla eum odit autem tempora officiis commodi aliquid, recusandae expedita atque deleniti magni aperiam nobis at non adipisci eligendi. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur tempora nesciunt illo, quibusdam beatae veritatis vero nam ex, possimus harum recusandae numquam eius quod sed, laborum nulla vitae aut minima!",
+					type: "unstyled",
+					depth: 0,
+					inlineStyleRanges: [
+						{ offset: 0, length: 431, style: "color-rgb(68,68,68)" },
+						{ offset: 0, length: 431, style: "fontsize-16" },
+						{
+							offset: 0,
+							length: 431,
+							style:
+								'fontfamily--apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif',
+						},
+					],
+					entityRanges: [],
+					data: { "text-align": "left" },
+				},
+				{
+					key: "5rsc",
+					text: "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptatem ipsa quibusdam sed reprehenderit! Quae quam, eum ea minus laborum impedit? Voluptatem, tempora. Dolorum ratione, tempora quod ipsam fugiat deleniti doloremque? Lorem, ipsum dolor sit amet consectetur adipisicing elit. Blanditiis dignissimos explicabo maxime debitis? Blanditiis, debitis vel esse, tenetur cum magni temporibus consectetur laboriosam beatae quasi architecto consequatur culpa? Deserunt, modi! Lorem ipsum dolor sit amet consectetur, adipisicing elit. Debitis est ea ipsam tempora illo iure nemo temporibus adipisci quibusdam aperiam nam doloremque ab a, dolorem laborum? Unde minima ipsam aspernatur. ",
+					type: "unstyled",
+					depth: 0,
+					inlineStyleRanges: [
+						{ offset: 0, length: 684, style: "color-rgb(68,68,68)" },
+						{ offset: 0, length: 684, style: "fontsize-16" },
+						{
+							offset: 0,
+							length: 684,
+							style:
+								'fontfamily--apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif',
+						},
+					],
+					entityRanges: [],
+					data: { "text-align": "left" },
+				},
+				{
+					key: "7d4jd",
+					text: "The truth is you don't know what is going to happen tomorrow. Life is a crazy ride, and nothing is guaranteed. ",
+					type: "blockquote",
+					depth: 0,
+					inlineStyleRanges: [
+						{ offset: 0, length: 110, style: "color-rgb(122,122,122)" },
+						{ offset: 0, length: 110, style: "fontsize-22" },
+						{ offset: 0, length: 110, style: "fontfamily-Lora, serif" },
+					],
+					entityRanges: [],
+					data: {},
+				},
+				{
+					key: "a6uk5",
+					text: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eius odit quis saepe ab iure asperiores, eos et vero iusto quibusdam est atque ad, eum sit similique veritatis itaque voluptatem aperiam. vero iusto quibusdam est atque ad, eum sit similique veritatis itaque ",
+					type: "unstyled",
+					depth: 0,
+					inlineStyleRanges: [
+						{ offset: 0, length: 265, style: "color-rgb(68,68,68)" },
+						{ offset: 0, length: 265, style: "fontsize-16" },
+						{
+							offset: 0,
+							length: 265,
+							style:
+								'fontfamily--apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif',
+						},
+					],
+					entityRanges: [],
+					data: {},
+				},
+				{
+					key: "1e8u6",
+					text: "Exercise Keeps the Brain Young: Study ",
+					type: "header-three",
+					depth: 0,
+					inlineStyleRanges: [
+						{
+							offset: 0,
+							length: 37,
+							style: "color-rgb(333333/var(--tw-text-opacity))",
+						},
+						{ offset: 0, length: 37, style: "fontsize-1.5rem" },
+						{ offset: 0, length: 37, style: "fontfamily-Lora, serif" },
+					],
+					entityRanges: [],
+					data: { "text-align": "left" },
+				},
+				{
+					key: "4mmko",
+					text: " ",
+					type: "atomic",
+					depth: 0,
+					inlineStyleRanges: [],
+					entityRanges: [{ offset: 0, length: 1, key: 0 }],
+					data: {},
+				},
+				{
+					key: "ech5k",
+					text: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptas cupiditate itaque obcaecati numquam minima, atque iusto quia ullam nam magni neque, id hic corrupti harum sapiente, sunt blanditiis laborum aspernatur?",
+					type: "unstyled",
+					depth: 0,
+					inlineStyleRanges: [
+						{ offset: 0, length: 218, style: "color-rgb(0,0,0)" },
+						{ offset: 0, length: 218, style: "fontsize-16" },
+						{
+							offset: 0,
+							length: 218,
+							style:
+								'fontfamily--apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif',
+						},
+					],
+					entityRanges: [],
+					data: { "text-align": "left" },
+				},
+				{
+					key: "d6ane",
+					text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis magni nostrum tempore similique nulla molestiae ducimus obcaecati ipsam reiciendis, itaque minima hic dolor omnis accusantium corrupti doloremque laudantium? Voluptatem, accusamus. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Distinctio facilis veniam rerum eaque magni illum tempore, laudantium aut ea cum odio. Eaque quo, itaque sit soluta illo quisquam odio quia! Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa quasi dolores, harum atque ipsam placeat magni totam quos! Accusantium quo quibusdam assumenda consequuntur recusandae id maxime? Architecto blanditiis delectus soluta. ",
+					type: "unstyled",
+					depth: 0,
+					inlineStyleRanges: [
+						{ offset: 0, length: 680, style: "color-rgb(0,0,0)" },
+						{ offset: 0, length: 680, style: "fontsize-16" },
+						{
+							offset: 0,
+							length: 680,
+							style:
+								'fontfamily--apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif',
+						},
+					],
+					entityRanges: [],
+					data: { "text-align": "left" },
+				},
+				{
+					key: "e61ln",
+					text: "The most advanced Blog & News WordPress Theme ",
+					type: "header-three",
+					depth: 0,
+					inlineStyleRanges: [
+						{
+							offset: 0,
+							length: 45,
+							style: "color-rgb(333333/var(--tw-text-opacity))",
+						},
+						{ offset: 0, length: 45, style: "fontsize-1.5rem" },
+						{ offset: 0, length: 45, style: "fontfamily-Lora, serif" },
+					],
+					entityRanges: [],
+					data: { "text-align": "left" },
+				},
+				{
+					key: "6q9jk",
+					text: " ",
+					type: "atomic",
+					depth: 0,
+					inlineStyleRanges: [],
+					entityRanges: [{ offset: 0, length: 1, key: 1 }],
+					data: {},
+				},
+				{
+					key: "trih",
+					text: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptas cupiditate itaque obcaecati numquam minima, atque iusto quia ullam nam magni neque, id hic corrupti harum sapiente, sunt blanditiis laborum aspernatur?",
+					type: "unstyled",
+					depth: 0,
+					inlineStyleRanges: [
+						{ offset: 0, length: 218, style: "color-rgb(0,0,0)" },
+						{ offset: 0, length: 218, style: "fontsize-16" },
+						{
+							offset: 0,
+							length: 218,
+							style:
+								'fontfamily--apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif',
+						},
+					],
+					entityRanges: [],
+					data: { "text-align": "left" },
+				},
+				{
+					key: "b61e1",
+					text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis magni nostrum tempore similique nulla molestiae ducimus obcaecati ipsam reiciendis, itaque minima hic dolor omnis accusantium corrupti doloremque laudantium? Voluptatem, accusamus. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Distinctio facilis veniam rerum eaque magni illum tempore, laudantium aut ea cum odio. Eaque quo, itaque sit soluta illo quisquam odio quia!",
+					type: "unstyled",
+					depth: 0,
+					inlineStyleRanges: [
+						{ offset: 0, length: 448, style: "color-rgb(0,0,0)" },
+						{ offset: 0, length: 448, style: "fontsize-16" },
+						{
+							offset: 0,
+							length: 448,
+							style:
+								'fontfamily--apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif',
+						},
+					],
+					entityRanges: [],
+					data: { "text-align": "left" },
+				},
+				{
+					key: "1pbp7",
+					text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa quasi dolores, harum atque ipsam placeat magni totam quos! Accusantium quo quibusdam assumenda consequuntur recusandae id maxime? Architecto blanditiis delectus soluta.",
+					type: "unstyled",
+					depth: 0,
+					inlineStyleRanges: [
+						{ offset: 0, length: 231, style: "color-rgb(0,0,0)" },
+						{ offset: 0, length: 231, style: "fontsize-16" },
+						{
+							offset: 0,
+							length: 231,
+							style:
+								'fontfamily--apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif',
+						},
+					],
+					entityRanges: [],
+					data: { "text-align": "left" },
+				},
+				{
+					key: "1lo9l",
+					text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa quasi dolores, harum atque ipsam placeat magni totam quos! Accusantium quo quibusdam assumenda consequuntur recusandae id maxime? Architecto blanditiis delectus soluta.Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa quasi dolores, harum atque ipsam placeat magni totam quos! Accusantium quo quibusdam assumenda consequuntur recusandae id maxime? Architecto blanditiis delectus soluta. ",
+					type: "unstyled",
+					depth: 0,
+					inlineStyleRanges: [
+						{ offset: 0, length: 462, style: "color-rgb(0,0,0)" },
+						{ offset: 0, length: 462, style: "fontsize-16" },
+						{
+							offset: 0,
+							length: 462,
+							style:
+								'fontfamily--apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif',
+						},
+					],
+					entityRanges: [],
+					data: { "text-align": "left" },
+				},
+			],
+			entityMap: {
+				0: {
+					type: "IMAGE",
+					mutability: "MUTABLE",
+					data: {
+						src: "https://i.pinimg.com/564x/1f/b7/27/1fb727daf7c512b836ee2e02a29570f7.jpg",
+						height: "100%",
+						width: "100%",
+					},
+				},
+				1: {
+					type: "IMAGE",
+					mutability: "MUTABLE",
+					data: {
+						src: "https://cdn.dribbble.com/users/427857/screenshots/14370385/media/9272153b67264251a139bb6885533969.jpg?compress=1&resize=768x576&vertical=top",
+						height: "100%",
+						width: "100%",
+					},
+				},
+			},
+		},
 		date: "July 01, 2022",
-		tag: ["Fitness Tips", "Women's Health"],
+		postTags: ["trump inauguration", "united stated"],
+		optional: {
+			shared: 44,
+			viewed: 33,
+			Trending: true,
+		},
 	},
 ];
 
@@ -217,30 +3761,46 @@ export const ParentCategories = {
 	},
 };
 
-export const cats = [
-	"apps",
-	"business",
-	"entertainment",
-	"fashion",
-	"featured",
-	"food",
-	"gadget",
-	"gaming",
-	"health",
-	"lifestyle",
-	"mobile",
-	"movie",
-	"music",
-	"news",
-	"politics",
-	"review",
-	"science",
-	"sports",
-	"startup",
-	"tech",
-	"travel",
-	"world",
-];
+export const createParentCategories = {
+	books: {
+		categories: ["fashion", "food", "health", "travel"],
+	},
+	lifestyle: {
+		categories: ["gaming", "movie", "music", "sports"],
+	},
+	favorite: {
+		categories: ["apps", "gadget", "mobile", "startup"],
+	},
+	business: {
+		categories: ["business", "politics", "science", "world"],
+	},
+	random: {
+		categories: ["news", "review", "entertainment", "featured"],
+	},
+};
+
+export const createParentTags = {
+	books: {
+		tags: [
+			"trump inauguration",
+			"united stated",
+			"election results",
+			"white house",
+		],
+	},
+	lifestyle: {
+		tags: ["nintendo switch", "ces 2017", "mark zuckerberg"],
+	},
+	favorite: {
+		tags: ["golden globes", "game of thrones", "motogp 2017"],
+	},
+	business: {
+		tags: ["playstation 4 pro", "sillicon valley", "internet"],
+	},
+	random: {
+		tags: ["esport", "fashion week", "jorge lorenzo"],
+	},
+};
 
 export const SocialMediaIcons = [
 	{
@@ -250,43 +3810,43 @@ export const SocialMediaIcons = [
 		number: 87.1 + "k",
 		text: "Followers",
 		bg: "bg-[#e4405f]",
-		hv: "hover:bg-[#e4405f]/70",
+		hv: "hover:bg-[rgba(228,64,95,.8)]/70",
 	},
 	{
 		id: 2,
 		icon: <FaFacebook className="inline-block" />,
-		socialLinks: "text-[#f07]",
+		socialLinks: "text-[#4267B2]",
 		number: 649,
 		text: "Followers",
-		bg: "bg-[#f07]",
-		hv: "hover:bg-[#f07]/70",
+		bg: "bg-[#4267B2]",
+		hv: "hover:bg-[rgba(66,103,178,.8)]/70",
 	},
 	{
 		id: 3,
 		icon: <FaTwitter className="inline-block" />,
-		socialLinks: "text-[#ffae00]",
+		socialLinks: "text-[#1DA1F2]",
 		number: 23.7 + "k",
 		text: "Followers",
-		bg: "bg-[#ffae00]",
-		hv: "hover:bg-[#ffae00]/70",
+		bg: "bg-[#1DA1F2]",
+		hv: "hover:bg-[rgba(29,161,242,0.8)]/70",
 	},
 	{
 		id: 4,
 		icon: <FaYoutube className="inline-block" />,
-		socialLinks: "text-[#e4405f]",
+		socialLinks: "text-[#FF0000]",
 		number: 25.7 + "k",
 		text: "Followers",
-		bg: "bg-[#ff6f00]",
-		hv: "hover:bg-[#ff6f00]/70",
+		bg: "bg-[#FF0000]",
+		hv: "hover:bg-[rgba(255,0,0,.8)]/70",
 	},
 	{
 		id: 5,
 		icon: <FaLinkedin className="inline-block" />,
-		socialLinks: "text-blue-400",
+		socialLinks: "text-[#0e76a8]",
 		number: 28.7 + "k",
 		text: "Followers",
-		bg: "bg-blue-400",
-		hv: "hover:bg-blue-700/70",
+		bg: "bg-[#0e76a8]",
+		hv: "hover:bg-[rgba(14,118,168,.8)]",
 	},
 	{
 		id: 6,
@@ -295,7 +3855,7 @@ export const SocialMediaIcons = [
 		number: 99,
 		text: "Subscribers",
 		bg: "bg-[#ff6f00]",
-		hv: "hover:bg-[#ff6f00]/70",
+		hv: "hover:bg-[rgba(255,111,0,.8)]/70",
 	},
 ];
 
@@ -310,68 +3870,31 @@ export const Map = `
 		referrerpolicy="no-referrer-when-downgrade"
 		></iframe>`;
 
-export const tags = [
+export const User = [
 	{
 		id: 1,
-		tag: "bitcoin",
-	},
-	{
-		id: 2,
-		tag: "champions league",
-	},
-	{
-		id: 3,
-		tag: "explore bali",
-	},
-	{
-		id: 4,
-		tag: "golden globes 2018",
-	},
-	{
-		id: 5,
-		tag: "grammy awards",
-	},
-	{
-		id: 6,
-		tag: "harboinas",
-	},
-	{
-		id: 7,
-		tag: "litecoin",
-	},
-	{
-		id: 8,
-		tag: "market stories",
-	},
-	{
-		id: 9,
-		tag: "united stated",
+		name: { firstName: "Nebeolisa", LastName: "Chiemezie" },
+		nickname: 'No Public@"nickname"',
+		email: {
+			primary: "myemailexample@email2.com",
+			secondary: ["example@email.com"],
+		},
+		bio: "text here...",
+		profileImage: "378728372837293821uihu7.jpg",
+		phonenumber: "(+)number",
+		socialLinks: {
+			twitter: "https://www.example.com",
+			facebook: "https://www.example.com",
+			linkedin: "https://www.example.com",
+			instagram: "https://www.example.com",
+			youTube: "https://www.example.com",
+			website: "https://www.example.com",
+		},
+		password: "Da123456",
+		confirmPassword: "Da123456",
+		location: "103,142-7, Dodang-ro, Dobong-gu, Seoul, Republic of Korea",
 	},
 ];
-
-export const User = {
-	name: { firstName: "", LastName: "" },
-	nickName: "",
-	email: {
-		primary: "",
-		secondary: [
-			{ id: 1, email: "myemailexample@email.com" },
-			{ id: 2, email: "myemailexample1@email.com" },
-		],
-	},
-	bio: "",
-	profileImage: "",
-	socialLinks: {
-		twitter: "",
-		facebook: "",
-		linkedin: "",
-		github: "",
-	},
-	password: "",
-	confirmPassword: "",
-	website: "",
-	location: "",
-};
 
 // const [user, setUser] = useState();
 
@@ -466,139 +3989,6 @@ export const otherPages = [
 	},
 ];
 
-// export const secondaryEmails = [
-// 	{id: 1, email: "myemailexample@email.com"},{id: 2,email: "myemailexample1@email.com"},
-// ];
-
-export const users = [
-	{
-		id: 1,
-		name: "user1",
-	},
-	{
-		id: 2,
-		name: "user2",
-	},
-	{
-		id: 3,
-		name: "user3",
-	},
-	{
-		id: 4,
-		name: "user4",
-	},
-];
-
-export const sampleMarkup = `<p>My post Becoming a more effective learner can take time and It always takes practice and determination to establish new habits. Starting a new field of skills, career, work or learning something </p>
-                        <p>new always seems to be the difficult thing Most of us have to pass through. It takes extra energy, time and sometimes strength for most of us to concentrate and dissect what is in front of us. ...! |</p>`;
-
-export const UserContacts = [
-	{
-		id: 1,
-		icon: <FaEnvelopeOpen className="inline-block align-text-top" />,
-		name: "Email",
-		inputtype: "email",
-		inputid: "usercontactemail",
-		placeholder: "example@email.com",
-	},
-	{
-		id: 2,
-		icon: <FaPhoneAlt className="inline-block align-text-top" />,
-		name: "Phone",
-		inputtype: "tel",
-		inputid: "usercontactphone",
-		placeholder: "(+)number",
-	},
-	{
-		id: 3,
-		icon: <FaLinkedinIn className="inline-block align-text-top" />,
-		name: "Linkedin",
-		inputtype: "url",
-		inputid: "usercontactlinkedin",
-		placeholder: "https://www.example.com",
-	},
-	{
-		id: 4,
-		icon: <FaTwitter className="inline-block align-text-top" />,
-		name: "Twitter",
-		inputtype: "url",
-		inputid: "usercontacttwitter",
-		placeholder: "https://www.example.com",
-	},
-	{
-		id: 5,
-		icon: <FaFacebookF className="inline-block align-text-top" />,
-		name: "Facebook",
-		inputtype: "url",
-		inputid: "usercontactfacebook",
-		placeholder: "https://www.example.com",
-	},
-	{
-		id: 6,
-		icon: <FaInstagram className="inline-block align-text-top" />,
-		name: "Instagram",
-		inputtype: "url",
-		inputid: "usercontactinstagram",
-		placeholder: "https://www.example.com",
-	},
-	{
-		id: 7,
-		icon: <FaYoutubeSquare className="inline-block align-text-top" />,
-		name: "YouTube",
-		inputtype: "url",
-		inputid: "usercontactyoutube",
-		placeholder: "https://www.example.com",
-	},
-	{
-		id: 8,
-		icon: <FaGlobe className="inline-block align-text-top" />,
-		name: "Website",
-		inputtype: "url",
-		inputid: "usercontactwebsite",
-		placeholder: "https://www.example.com",
-	},
-];
-
-export const userPersonalInfor = [
-	{
-		id: "1",
-		name: "First Name",
-		type: "text",
-		inputid: "userfirstname",
-		text: "Please provide your first name.",
-	},
-	{
-		id: "2",
-		name: "Last Name",
-		type: "text",
-		inputid: "userlastname",
-		text: "Please provide your last name.",
-	},
-	{
-		id: "3",
-		name: "Location",
-		type: "text",
-		inputid: "userlocation",
-		text: "Please provide your location.",
-	},
-	{
-		id: "4",
-		name: "Email",
-		type: "email",
-		inputid: "useremail",
-		text: "Please provide a valid email address.",
-		form: "userinformation",
-	},
-	{
-		id: "5",
-		name: "Password",
-		type: "password",
-		inputid: "userpassword",
-		text: "Please provide a valid password.",
-		form: "userinformation",
-	},
-];
-
 export const UserPages = [
 	{
 		id: 1,
@@ -614,5 +4004,82 @@ export const UserPages = [
 		id: 3,
 		name: "Sign in & security",
 		toUrl: "/userpage/security",
+	},
+];
+
+export const Comment = [
+	{
+		id: "1",
+		author: "emeka ben",
+		time: "13 hours ago",
+		content:
+			"So many strong and valid messages all in one song. Falz I duff my hat for you. You are a Legend. Keep keeping it real, always. Thank you for always making you voice heard in the strongest ways.		",
+		postId: "",
+		choice: {
+			like: 3,
+			dislike: "",
+		},
+		replies: [
+			{
+				id: "1",
+				name: "Daddy Greenarrow",
+				time: "0 seconds ago",
+				content: "Yes ooo",
+				choice: {
+					like: "",
+					dislike: "",
+				},
+				replyOfreply: "",
+			},
+			{
+				id: "2",
+				name: "Daddy Greenarrow",
+				time: "1 second ago",
+				content: "he is a real hero",
+				choice: {
+					like: "",
+					dislike: "",
+				},
+				replyOfreply: "@Daddy Greenarrow",
+			},
+			{
+				id: "7",
+				name: "By JDFK",
+				time: "16 hours ago",
+				content:
+					"Respect Falz you are a true definition of the voice for the youth. We love you from 🇬🇧",
+				choice: {
+					like: 4,
+					dislike: "",
+				},
+				replyOfreply: "",
+			},
+			{
+				id: "8",
+				name: "Izik Gyang",
+				time: "3 hours ago",
+				content:
+					"God bless you Falz for standing up tall on this. This jam is fire 🔥",
+				choice: {
+					like: 4,
+					dislike: "",
+				},
+				replyOfreply: "",
+			},
+			{
+				id: "9",
+				name: "Chukwu Augustine",
+				time: "13 hours ago",
+				content:
+					"Falz this masterpiece is outstanding thanks for speaking for the people of Nigeria through your music 🎵🎶",
+				choice: {
+					like: 3,
+					dislike: "",
+				},
+				replyOfreply: "@Izik Gyang",
+			},
+		],
+		email: "",
+		website: "",
 	},
 ];

@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { createUser } from "../../Reduxstore/Slices/users/UsersSlice";
 
 const RegistrationForm = () => {
   const [firstName, setFirstName] = useState("");
@@ -6,11 +8,27 @@ const RegistrationForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [requiredText, setRequiredText] = useState(false)
+  const users = useSelector(state => state.users) 
+
+  const dispatch = useDispatch()
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(`First Name: ${firstName}, Last Name: ${lastName}, Email: ${email}, Password: ${password}`);
-    // you can perform any additional action here, such as sending the data to the server
+
+    const checkUser = users.map((user) => user.email.primary );
+
+   if (checkUser.includes(email)){
+    setRequiredText(true)
+   } else{
+    dispatch(createUser(firstName, lastName, email, password, confirmPassword))
+   }
+
+    setFirstName(() => "")
+    setLastName(() => "")
+    setEmail(() => "")
+    setPassword(() => "")
+    setConfirmPassword(() => "")
   };
 
   return (
@@ -54,16 +72,16 @@ const RegistrationForm = () => {
               Email
             </label>
             <input
-              className=""
               id="email"
               name="userregisteredemail"
               type="email"
+              className="mb-0"
               placeholder="Email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-            />            
+            />  {requiredText ? <p className='text-xs text-rose-500 tracking-wider font-lora'>Already have a user with this email!</p> : "" }          
 
-            <label className="block text-gray-700 font-bold mb-2" htmlFor="password">
+            <label className="block text-gray-700 font-bold mb-2 mt-5" htmlFor="password">
               Password
             </label>
             <input

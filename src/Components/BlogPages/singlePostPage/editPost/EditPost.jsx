@@ -1,19 +1,23 @@
-import { ContentState, convertFromHTML } from 'draft-js';
-import React from 'react'
-import { sampleMarkup } from '../../../../data.js';
-import CreatePostComponents from '../createPost/CreatePostComponents.jsx';
+import { ContentState,convertFromHTML} from 'draft-js';
+import {useSelector } from 'react-redux';
+import draftToHtml from 'draftjs-to-html';
+import UpdatePostComponent from './EditPostComponents/UpdatePostComponent';
+import { useParams } from 'react-router-dom';
 
 const EditPost = () => {
+  const { postId } = useParams()
+  const post = useSelector(state => state.posts.find(post => post.id === postId))
+ 
   
-  const blocksFromHTML = convertFromHTML(sampleMarkup);
+  let html = draftToHtml(post.postContent);
+  const blocksFromHTML = convertFromHTML(html);
   const state = ContentState.createFromBlockArray(
     blocksFromHTML.contentBlocks,
     blocksFromHTML.entityMap,
   );
+  
   return (
-    <div>
-      <CreatePostComponents state={state}/>
-    </div>
+   <UpdatePostComponent  state={state} editPost={postId}/>
   )
 }
 

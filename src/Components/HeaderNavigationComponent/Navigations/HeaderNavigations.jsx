@@ -4,7 +4,8 @@ import { useState, useEffect} from "react";
 import {Hanbugar, NavLinksAndArrows} from "../../ButtonAndOthers/Buttons"
 import { HoverLinsks, SmallScreenHoverLinsks } from "../HeadHoverComponent/HoverLinks";
 import { useWindowSize } from "../../SharedAsset/SharedAssets";
-import { navItems, ParentCategories, Posts } from "../../../data";
+import { useSelector } from "react-redux"
+import { navItems, ParentCategories } from "../../../data";
 import { FaChevronDown } from 'react-icons/fa';
 
 const HeaderNavigations = () => {
@@ -14,6 +15,7 @@ const HeaderNavigations = () => {
   const [showhoverlinks , setShowHoverlinks] = useState(false)
   const [getTheNavlinkTextContent, setGetTheNavlinkTextContent] =useState("books")
   const [headerHoverPostNav, setHeaderHoverPostNav] = useState(ParentCategories.books)
+  const Posts = useSelector(state => state.posts)
   const size = useWindowSize()
 
 

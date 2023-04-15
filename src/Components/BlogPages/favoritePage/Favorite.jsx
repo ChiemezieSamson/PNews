@@ -1,13 +1,15 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import StickyBox from "react-sticky-box";
-import { Posts } from "../../../data";
 import { CategoriesComponent, NavDirectionAndPageName, overLay, TimeComponent } from "../../SharedAsset/SharedAssets";
 import { SharedBlogPageStyleTwo } from "../../SharedAsset/SharedBlogPageStyle_1st_Component";
 import Aside from "../asidePage/Aside";
 import { PagesBlogPostComponent } from "../IndexPageComponents/SharedComponents";
+import { Link } from "react-router-dom";
 
 
 const Favorite = () => {
+  const Posts = useSelector(state => state.posts)
   return (
     <section className="text-left">
 
@@ -15,17 +17,17 @@ const Favorite = () => {
         {Posts.slice(8, 13).map((post) => {
           return (
             <li key={post.id} className={`[&:nth-child(2)]:row-span-3 first:mb-2 last:mt-2 relative ${overLay()}`}>
-              <img src={post.image} alt="post" className="h-full w-full object-cover" loading="lazy"/>
+              <img src={post.postImage} alt="post" className="h-full w-full object-cover" loading="lazy"/>
 
               <div className="absolute bottom-[10%] inset-x-0 flex content-center justify-center z-20">
                 <div className="w-[90%] text-left">
                   <span className="text-white">
-                    <CategoriesComponent cat={post.cat} />
+                    <CategoriesComponent cat={post.postCategory[0]} />
                   </span>
                   
                   <h4 className="capitalize tracking-wide font-lora text-base imgxs:text-xl md:text-lg lg:text-xl font-extrabold">
                     <span className="bg-white px-1 hover:text-[#f70d28] cursor-pointer transition-all duration-200 ease-linear">
-                      <span className="" title='title'>{post.title}</span>
+                      <Link to={`/single/${post.id}`} title='title'>{post.postTitle}</Link>
                     </span>
                   </h4>
                     <span className="inline-block bg-white px-2">

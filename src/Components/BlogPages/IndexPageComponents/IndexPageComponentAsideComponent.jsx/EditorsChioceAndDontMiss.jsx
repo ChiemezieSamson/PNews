@@ -1,9 +1,10 @@
 import { JustTimeComponet, JustTimeComponetStar} from '../SharedComponents'
-import { Posts } from '../../../../data'
 import { MainDivider } from '../../../SharedAsset/SharedAssets'
 import TrendingCommentsLatest from './TrendingCommentsLatest'
+import { useSelector } from 'react-redux'
 
 const EditorsChioceAndDontMiss = () => {
+  const Posts = useSelector(state => state.posts)
  
   return (
     <section>    

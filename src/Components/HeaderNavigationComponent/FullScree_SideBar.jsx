@@ -1,9 +1,11 @@
 import React from "react";
 import { Hanbugar3 } from "../ButtonAndOthers/Buttons";
-import {Posts, SocialMediaIcons} from "../../data"
+import { SocialMediaIcons} from "../../data"
+import { useSelector } from "react-redux";
 
 
 const FullSreenSidebar = ({closesidebar}) => {
+  const Posts = useSelector(state => state.posts)
   
   const Words = ["Get in touch", "Adventure journal", "Live events"]
   const texts = Words.map((text,i) => ({id: i, name: text}))
@@ -12,7 +14,7 @@ const FullSreenSidebar = ({closesidebar}) => {
     <section className="overflowScrollSmallScreen hidden md:block h-screen overflow-y-scroll scroll-py-4 overscroll-y-contain snap-mandatory p-8 px-12 relative bg-gray-200">
 
       <figure className="w-40 mx-auto p-4">
-       <img src={Posts[9].image} alt="FirstImage" className="w-full h-auto" loading="lazy"/>
+       <img src={Posts[9].postImage} alt="FirstImage" className="w-full h-auto" loading="lazy"/>
        <figcaption>Chinonye</figcaption>
       </figure>
 
@@ -34,7 +36,7 @@ const FullSreenSidebar = ({closesidebar}) => {
           Posts.slice(0, 9).map((data) => {
             return (
             <li key={data.id} className="p-0 m-0 h-28 relative InstagramImage">
-              <img src={data.image} alt={"social"}  className="w-full h-28 p-0 m-0" loading="lazy"/>
+              <img src={data.postImage} alt={"social"}  className="w-full h-28 p-0 m-0" loading="lazy"/>
               <div className="absolute top-0 right-0 left-0 bottom-0 bg-black opacity-0 Instacover"></div>
             </li>
             )

@@ -5,10 +5,12 @@ import CreatePostComponents from '../createPost/CreatePostComponents.jsx';
 const WritePost = () => {
     const sampleMarkup = '<p>My post ...! |</p>'
     const blocksFromHTML = convertFromHTML(sampleMarkup);
+    
     const state = ContentState.createFromBlockArray(
       blocksFromHTML.contentBlocks,
       blocksFromHTML.entityMap,
     );
+    console.log(state);
   return (
     <div>
       <CreatePostComponents state={state}/>

@@ -7,21 +7,31 @@ import Category from './CreatePostAsideComponents/Category'
 import Optional from './CreatePostAsideComponents/Optional'
 import Tag from './CreatePostAsideComponents/Tag'
 
-const CreatePostAside = () => {
+
+const CreatePostAside = ({handleAllPostContent}) => {
   const [showSideBar, setShowSideBar] = useState(false)
+  
   const size = useWindowSize()
 
+  // handling the display or hidden of the fullsidebar
   const handleShowBar = () => {
     setShowSideBar((change) => !change)
   }
 
+  // handling the display or hidden of the fullsidebar in small screen
   const handleCloseSidebar = () => {
     setShowSideBar(() => false)
   }
+  
+  const handleDispatched = () => {
+    handleAllPostContent()
+  }
 
+  // using useEffect to dictect the changes in screen size
   useEffect(() => {
     size.width >= 1024 ? setShowSideBar(() => true) : setShowSideBar(() => false)
   },[size])
+  
   return (
     <div className="lg:border border-solid border-slate-500 lg:shadow-[#444] lg:shadow lg:ml-[4%] lg:pb-20 bg-white lg:bg-[#eee]">
 
@@ -33,7 +43,7 @@ const CreatePostAside = () => {
 
           <button className='text-white bg-[rgba(0,128,128,0.8)] hover:bg-[rgb(0,128,128)] border-0 p-2.5 rounded-sm cursor-pointer text-base
           shadow-[#444] shadow-sm' 
-          type='submit' form="post_form">Publish</button>
+          type='submit' form="post_form" onClick={handleDispatched}>Publish</button>
         </span>
 
         <button className={`text-[#444] ${showSideBar ? "bg-[#afacac]" : "bg-slate-200"} hover:bg-gray-400 col-span-1 hover:text-[#eee] border-0 p-2.5 rounded-sm cursor-pointer text-base 

@@ -1,8 +1,9 @@
 import React from 'react'
-import { Posts } from '../../../data'
+import { useSelector } from 'react-redux'
 import { GeneralCategorisePages } from '../../SharedAsset/SharedBlogPageStyle_1st_Component'
 
-const Category = () => {
+const Category = ({match}) => {
+  const Posts = useSelector(state => state.posts)
   return (
     <GeneralCategorisePages 
     ThreeFirstPost={Posts.slice(5, 11)} 

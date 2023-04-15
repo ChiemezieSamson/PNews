@@ -1,11 +1,12 @@
 import React from 'react'
-import { Posts } from '../../../data'
+import { useSelector } from 'react-redux'
 import { NewsLetter, PagesDivider, PostTitleMedium2, SocialLinks, TimeComponent } from '../../SharedAsset/SharedAssets'
 import TrendingCommentsLatest from '../IndexPageComponents/IndexPageComponentAsideComponent.jsx/TrendingCommentsLatest'
 import { JustTimeComponet } from '../IndexPageComponents/SharedComponents'
 
 
 const Aside = () => {
+  const Posts = useSelector(state => state.posts)
   return (
     <section>
       <div className='mb-5'>
@@ -23,13 +24,13 @@ const Aside = () => {
         <span className='my-3 inline-block'>
           <div className='text-white relative after:inset-0 after:bg-black/40 after:absolute mt-4 mb-7'>
             <div className='w-full h-44 imgxs:h-[240px] md:h-36 lg:h-48'>
-              <img src={Posts[2].image} alt="recentPost" className="w-full relative h-full object-cover cursor-pointer" loading="lazy"/>  
+              <img src={Posts[2].postImage} alt="recentPost" className="w-full relative h-full object-cover cursor-pointer" loading="lazy"/>  
             </div>
             
 
             <div className="absolute bottom-[10%] inset-x-0 flex content-center  justify-center z-20">
               <div className="w-[90%] text-left">
-                <PostTitleMedium2 post={Posts[2].title}/>
+                <PostTitleMedium2 post={Posts[2].postTitle} postId={Posts[2].id}/>
                 
                 <TimeComponent time={Posts[2].date}/>
               </div>

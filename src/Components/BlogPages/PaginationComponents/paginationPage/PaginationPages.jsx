@@ -1,6 +1,7 @@
 import React from 'react'
 import StickyBox from "react-sticky-box";
-import { HomeAndPigSocialLinks, Posts } from '../../../../data';
+import { useSelector } from "react-redux"
+import { HomeAndPigSocialLinks } from '../../../../data';
 import { PagesDivider, SocialLinks } from '../../../SharedAsset/SharedAssets';
 import { JustTimeComponetCatBlock, JustTimeComponetStar } from '../../IndexPageComponents/SharedComponents';
 import Pagination from '../PaginationControl/Pagination';
@@ -8,6 +9,7 @@ import Pagination from '../PaginationControl/Pagination';
 
 
 const PaginationPages = () => {
+  const Posts = useSelector(state => state.posts)
  
   return (
     <div className='md:grid md:grid-cols-3 mt-7'>

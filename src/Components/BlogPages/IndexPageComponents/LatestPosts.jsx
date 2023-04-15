@@ -1,9 +1,10 @@
 import React from 'react'
 import { JustTimeComponetCatBlock, JustTimeComponetCatBlockStar } from './SharedComponents'
-import { Posts } from '../../../data'
 import { MainDivider } from '../../SharedAsset/SharedAssets'
+import { useSelector } from 'react-redux'
 
 const LatestPosts = () => {
+  const Posts = useSelector(state => state.posts)
   return (
     <section className='mt-2.5'>
       <MainDivider firstletter={"Latest Post"} />

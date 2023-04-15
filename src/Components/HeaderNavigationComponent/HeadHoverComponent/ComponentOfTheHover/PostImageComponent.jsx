@@ -1,5 +1,6 @@
 import React from 'react'
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa'
+import { Link } from 'react-router-dom'
 
 const PostImageComponent = ({blogPost, hostCat}) => {
   const favoriteAndQuotes = blogPost.slice(0, 4)
@@ -13,11 +14,11 @@ const PostImageComponent = ({blogPost, hostCat}) => {
           return(
             <li key={post.id}>
               <span> 
-                  <img src={post.image} alt={post.title} loading="lazy"
+                  <img src={post.postImage} alt={post.postTitle} loading="lazy"
                   className={`w-full cursor-pointer  ${(hostCat === "favorite" || hostCat === "quotes") ? "h-32" : "h-28"}`} />
-                <span className="mt-1 cursor-pointer inline-block">
-                  Note that the development build is not optimized.
-                </span>
+                <Link to={`/single/${post.id}`} className="mt-1 cursor-pointer inline-block">
+                  {post.postTitle}
+                </Link>
               </span>
             </li>
           )

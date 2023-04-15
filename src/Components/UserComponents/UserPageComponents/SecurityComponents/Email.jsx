@@ -1,21 +1,27 @@
 import React, { useRef, useState } from 'react'
-import { User } from '../../../../data'
+import { useDispatch, useSelector } from 'react-redux'
+import { userEmailMakePrimary, userEmailRemoveSecondary, userEmailUpdate } from '../../../../Reduxstore/Slices/users/UsersSlice'
 import { Hanbugar3, WritePostAsideOpenClosebar } from '../../../ButtonAndOthers/Buttons'
 import { SinginAndSecurityIntro } from '../../../SharedAsset/SharedAssets'
 
 
 const Email = () => {
+  const user = useSelector(state => state.users)
   const [openCat, setOpenCat] = useState(false)
   const [openAddnewCat, setOpenAddnewCat] = useState(false)
   const [newEmail, setNewEmail] = useState("")
   const [getUserpassword, setGetUserpassword] = useState("")
-  const [secondaryEmaillist, setsecondaryEmaillist] = useState(User.email.secondary)
-  const [primaryEmail, setPrimaryEmail] = useState("myemailexample@email2.com")
   const [openGetUserPasswordForMakeAndRemove, setOpenGetUserPasswordForMakeAndRemove] = useState(false)
   const [emailOfTheClickedButton, setEmailOfTheClickedButton] = useState("")
   const [textContentOfTheClickedButton, setTextContentOfTheClickedButton] = useState("Make primary")
   const ButtonRef = useRef();
-  
+
+
+  const dispatch = useDispatch()
+
+  const userId = user[1] ? user[1].id : user[0].id
+
+
   const handleOpenCloseChild = () => {
     setOpenCat((change) => !change)
     setOpenAddnewCat(() => false)
@@ -23,14 +29,6 @@ const Email = () => {
 
   const handleOpenAddNewCat = () => {
     setOpenAddnewCat((change) => !change)
-  }
-
-  const handleNewEmail = (e) => {
-    setNewEmail(() => e.target.value)
-  }
-
-  const handleGetUserpassword = (e) => {
-    setGetUserpassword(() => e.target.value)
   }
 
   const handleCloseGetUserPasswordForMakeAndRemove = () => {
@@ -51,48 +49,23 @@ const Email = () => {
     setOpenGetUserPasswordForMakeAndRemove(() => true)   
   }
 
-
+  // DELETE EMAIL OR MAKE IT THE PRIMARY EMAIL
   const handleMakePrimaryORDeleteEmailAfterUserEnterPassword = (e) => {
     e.preventDefault();
 
-    // this block of code checkes if the use click to make a primary email or not 
-    // if true 
-    if (textContentOfTheClickedButton === "Make primary" && textContentOfTheClickedButton === ButtonRef.current.textContent && getUserpassword === "Da123456") {
+    if (textContentOfTheClickedButton === "Make primary" && 
+    textContentOfTheClickedButton === ButtonRef.current.textContent 
+    && getUserpassword === user[0].password) {
 
-      // First get the lenght of the whole secondary email if any and create new id 
-      let id = secondaryEmaillist.length - 1
-      let newId
-      id > 0 ? newId = secondaryEmaillist[id].id : newId = 1
-
-      // using the id create an object for the already existing primary email
-      let addedTag = {id: newId + 1, email: primaryEmail.toLowerCase()}
-      const checkemail = secondaryEmaillist.map(email => email.email)
-
-      // Add the existing primary email to the secorday email
-      checkemail.includes(primaryEmail.toLowerCase()) || primaryEmail === "" ? 
-      setsecondaryEmaillist( list => [...list]) :
-      setsecondaryEmaillist(list => [...list, addedTag])
-      
-       // Set a new primary email
-      setPrimaryEmail(() => emailOfTheClickedButton)
-
-      // using the cliked email. Then filter out the new primary email from the secondary email.
-      checkemail.includes(emailOfTheClickedButton) &&
-      setsecondaryEmaillist((list) => {
-        let newlist = list.filter(item => item.email !==  emailOfTheClickedButton)
-        return newlist})
+      dispatch(userEmailMakePrimary({userId, primaryEmail: user[0].email.primary, emailOfTheClickedButton}))
     }
 
-    // this block of code checkes if the use click to Remove a secondary email or not 
-    // if true 
-    if(textContentOfTheClickedButton === "Remove" && textContentOfTheClickedButton === ButtonRef.current.textContent && getUserpassword === "Da123456") {
+   
+    if(textContentOfTheClickedButton === "Remove" && 
+    textContentOfTheClickedButton === ButtonRef.current.textContent 
+    && getUserpassword === user[0].password) {
 
-      // using the cliked email. Then filter out the email from the secondary email.
-      const checkemail = secondaryEmaillist.map(email => email.email)
-      checkemail.includes(emailOfTheClickedButton) &&
-      setsecondaryEmaillist((list) => {
-      let newlist = list.filter(item => item.email !==  emailOfTheClickedButton)
-      return newlist})  
+      dispatch(userEmailRemoveSecondary({userId, emailOfTheClickedButton}))
     }
 
     // After each action close the input box and empty the input box
@@ -101,28 +74,15 @@ const Email = () => {
   }
 
 
-  // hadles adding new email once submit button is clicked
+  //CREATE NEW EMAIL
   const handleOnSubmit = (e) => {
 
     e.preventDefault();  
+    
+    dispatch(userEmailUpdate({userId, newEmail, getUserpassword}))
 
     // check if the password entered is same as the user password
     if(getUserpassword === "Da123456") {
-      
-      // If true, First get the lenght of the whole secondary email if any and create new id 
-      let id = secondaryEmaillist.length - 1
-      let newId
-      id > 0 ? newId = secondaryEmaillist[id].id : newId = 1
-
-       // using the id create an object for the new  email
-      let addedTag = {id: newId + 1, email: newEmail.toLowerCase()}
-      const checkemail = secondaryEmaillist.map(email => email.email)
-
-      // Add to the existing secondary email if not already in it
-      checkemail.includes(newEmail.toLowerCase()) || newEmail === "" ? 
-      setsecondaryEmaillist( list => [...list]) :
-      setsecondaryEmaillist(list => [...list, addedTag])
-
       // empty the input boxs
       setNewEmail(() => "")
       setGetUserpassword(() => "")
@@ -139,7 +99,6 @@ const Email = () => {
     <div className='font-poppins relative'>
       <WritePostAsideOpenClosebar BarName={"Email addresses"} handle={handleOpenCloseChild}/>
 
-   
         <div className={`${openCat? "block" : "hidden"} mt-2 mb-10 px-3 text-[#444]`}>
           <SinginAndSecurityIntro text={"Emails you've added"} />
 
@@ -148,17 +107,17 @@ const Email = () => {
           <div className='mt-5 py-1 tracking-wide'>
             <div className='py-0.5 mb-10'>
               <h6 className='text-sm font-bold text-[#282a35] mb-4'>Primary email</h6>
-              <p>{primaryEmail}</p>
+              <p>{user[0].email.primary}</p>
             </div>
 
             {/* secondary emails display here */}
             
-            <div className={`${secondaryEmaillist.length <= 0 ? "hidden" : "block"}`}>              
+            <div className={`${user[0].email.secondary.length <= 0 ? "hidden" : "block"}`}>              
              <h6 className='text-sm font-bold text-[#282a35] mb-4'>Secondary email</h6>                
-                {secondaryEmaillist.map(email => {
+                {user[0].email.secondary.map((email, index) => {
                   return (
-                    <div className='sm:grid sm:grid-flow-col sm:justify-between mt-5' key={email.id}>    
-                      <p>{email.email}</p>          
+                    <div className='sm:grid sm:grid-flow-col sm:justify-between mt-5' key={index}>    
+                      <p>{email}</p>          
                       <span className='text-sm text-gray-400 inline-block'>   
 
                         {/* Make this email the primary email button section is here */}
@@ -221,7 +180,7 @@ const Email = () => {
                   value={newEmail}
                   placeholder='myemailexample@email.com' 
                   className='placeholder:text-[#798488] invalid:border-red-400 invalid:shadow-red-400'
-                  onChange={handleNewEmail}
+                  onChange={(e) => setNewEmail(() => e.target.value)}
                   required/>                  
                 </label>
 
@@ -234,7 +193,7 @@ const Email = () => {
                   placeholder='●●●●●●●●●' 
                   value={getUserpassword}
                   className='placeholder:text-[#798488]'
-                  onChange={handleGetUserpassword}
+                  onChange={(e) => setGetUserpassword(() => e.target.value)}
                   required/>
                 </label>
 
@@ -269,7 +228,7 @@ const Email = () => {
               id='userpasswordformakeprimary'
               value={getUserpassword}
               className='placeholder:text-[#798488] invalid:border-red-400 invalid:shadow-red-400'
-              onChange={handleGetUserpassword}
+              onChange={(e) => setGetUserpassword(() => e.target.value)}
               required/>
               <div className='grid grid-flow-col justify-between'>
                 <button type='submit' 
