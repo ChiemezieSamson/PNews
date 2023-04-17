@@ -7,7 +7,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import Preview from '../../createPost/editorPreview/Preview';
 import UpdatePostAsideComponent from './UpdatePostAsideComponent';
 import { postUpdated } from '../../../../../Reduxstore/Slices/posts/PostsSlice';
-import { emptyAuthor } from '../../../../../Reduxstore/Slices/PostsComponentSlices/postAuthor/PostsAuthorSlice';
 import { emptyCategories } from '../../../../../Reduxstore/Slices/PostsComponentSlices/postcategory/PostcategoriesSlice';
 import { emptyTag } from '../../../../../Reduxstore/Slices/PostsComponentSlices/postsTags/PostsTagsSlice';
 import { emptyOptional } from '../../../../../Reduxstore/Slices/PostsComponentSlices/PostsOptional/PostsOptionalSlice';
@@ -22,11 +21,15 @@ const UpdatePostComponent = ({state, editPost}) => {
 
   const [postTitle, setPostTitle] = useState(post.postTitle)
   const [postImage, setPostImage] = useState(post.postImage)
+  const [postAuthor, setPostAuthor] = useState(post.postAuthor)
 
   const postCategory = useSelector(state => state.postCat)
-  const postAuthor = useSelector(state => state.postAuthor)
   const postTags = useSelector(state => state.postTags)
   const postOptional = useSelector(state => state.postOptional)
+
+  const handleSetPostAuthor = (author) => {
+    setPostAuthor(() => author.target.value.toLowerCase())
+  }
 
   const postContent = JSON.stringify(convertToRaw(editorState.getCurrentContent()))
 
@@ -34,6 +37,7 @@ const UpdatePostComponent = ({state, editPost}) => {
   const navigate = useNavigate();
 
   const postId = editPost
+
 
   const canSave = Boolean(postTitle) && Boolean(postImage) && Boolean(postAuthor) && Boolean(postCategory[0]) && Boolean(postTags[0])
 
@@ -49,7 +53,6 @@ const UpdatePostComponent = ({state, editPost}) => {
     if (canSave) {
       dispatch(postUpdated({postId, postAuthor, postTitle, postImage, postContent , postCategory, postTags, postOptional}))
       
-      dispatch(emptyAuthor())
       dispatch(emptyCategories())
       dispatch(emptyTag())
       dispatch(emptyOptional())
@@ -57,6 +60,7 @@ const UpdatePostComponent = ({state, editPost}) => {
       setPostTitle(() => "")
       setEditorState(() => EditorState.createWithContent(state))
       navigate(-1)
+      setPostAuthor(() => undefined)
     }
   }
 
@@ -123,7 +127,11 @@ const UpdatePostComponent = ({state, editPost}) => {
         <Preview editorText={editorState.getCurrentContent()}/>
       </div>
       <div className="lg:order-2 order-1 text-left lg:col-span-1">
-        <UpdatePostAsideComponent handleAllPostContent={handleAllPostContent} editPost={editPost}/> 
+        <UpdatePostAsideComponent 
+        handleAllPostContent={handleAllPostContent} 
+        editPost={editPost} 
+        postAuthor={postAuthor}
+        handleSetPostAuthor={handleSetPostAuthor}/> 
       </div>
     </div>
   )

@@ -8,8 +8,14 @@ import Optional from './CreatePostAsideComponents/Optional'
 import Tag from './CreatePostAsideComponents/Tag'
 
 
-const CreatePostAside = ({handleAllPostContent}) => {
+const CreatePostAside = ({handleAllPostContent, handleSetPostAuthor, postAuthor}) => {
   const [showSideBar, setShowSideBar] = useState(false)
+  const [parentCat, setSelectedParentCat] = useState("")
+  const [parentTag, setSelectedParentTag] = useState("")
+  const [category , setCategory] = useState("")
+  const [addTag, setAddTag] = useState("")
+  const [checkedItemElemets, setCheckedItemElements] = useState([])
+
   
   const size = useWindowSize()
 
@@ -22,9 +28,66 @@ const CreatePostAside = ({handleAllPostContent}) => {
   const handleCloseSidebar = () => {
     setShowSideBar(() => false)
   }
+
+  const handlePostAuthor = (e) => {
+    handleSetPostAuthor(e)
+  }
+
+  const handleSelectedParentCat = (e) => {
+    setSelectedParentCat(() => e !== "" ? e.target.value : e)
+  }
+
+  const handleSelectedParentTag = (e) => {
+    setSelectedParentTag(() => e !== "" ? e.target.value : e)
+  }
+
+  const handleSetCategory = (e) => {
+    setCategory(() => e !== "" ? e.target.value : e)
+  }
+
+  const handleSetAddTag = (e) => {
+    setAddTag(() => e !== "" ? e.target.value : e)    
+  }
+
+  const handlesetCheckedItemElements = (element, action) => {
+    if (element.parentElement && action === "update") { 
+      setCheckedItemElements((list) => [...list, element.previousSibling]);
+    }
+
+    if (element.target && action === "create") {
+      setCheckedItemElements((list) => {
+        //first check if the element containing the checkbox of the value is already in the list
+        if (list.includes(element.target)) {
+          return [...list] // if so just return the list as it is
+        } else {
+          return [...list, element.target] // if not then add the new category parentelement to the list
+        }
+      })      
+    }
+
+    if (element.target && action === "delete") {
+      setCheckedItemElements((list) =>{
+        let newElement = list.filter(item => item !== element.target)
+        return newElement
+      })  
+    }
+
+    if(element === "" && action === "clear") {      
+      setCheckedItemElements(() => [])     
+    }
+  }
   
   const handleDispatched = () => {
+    for(let i = 0; i < checkedItemElemets.length; i++) {
+      checkedItemElemets[i].checked = false // for each of the collected element first uncheck them
+    }
+    
     handleAllPostContent()
+    setSelectedParentCat(() => "")
+    setSelectedParentTag(() => "")
+    setAddTag(() => "")
+    setCategory(() => "")
+    setCheckedItemElements(() => [])
   }
 
   // using useEffect to dictect the changes in screen size
@@ -69,9 +132,21 @@ const CreatePostAside = ({handleAllPostContent}) => {
             <Hanbugar3 closesidebar={handleCloseSidebar}/>
           </span>
         </span>
-        <Author />
-        <Category />  
-        <Tag />    
+        <Author handlePostAuthor={handlePostAuthor} postAuthor={postAuthor}/>
+        <Category 
+          parentCat={parentCat} 
+          category={category}
+          checkedItemElemets={checkedItemElemets}
+          handleSelectedParentCat={handleSelectedParentCat} 
+          handleSetCategory={handleSetCategory}
+          handlesetCheckedItemElements={handlesetCheckedItemElements}
+        />    
+        <Tag 
+          parentTag={parentTag}
+          addTag={addTag}
+          handleSetAddTag={handleSetAddTag}
+          handleSelectedParentTag={handleSelectedParentTag}
+        />    
         <Optional />
       </div>       
     </div>

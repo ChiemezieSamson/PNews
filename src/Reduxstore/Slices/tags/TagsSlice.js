@@ -37,11 +37,13 @@ const tagsSlice = createSlice({
 			reducer(state, action) {
 				const { uncheckedTag } = action.payload;
 
-				for (const tag in state) {
-					if (state[tag].tags) {
-						state[tag].tags = state[tag].tags.filter(
-							(tag) => uncheckedTag.uncheckedTag !== tag
-						);
+				if (uncheckedTag) {
+					for (const tag in state) {
+						if (state[tag].tags.includes(uncheckedTag.uncheckedTag)) {
+							state[tag].tags = state[tag].tags.filter(
+								(tag) => uncheckedTag.uncheckedTag !== tag
+							);
+						}
 					}
 				}
 			},

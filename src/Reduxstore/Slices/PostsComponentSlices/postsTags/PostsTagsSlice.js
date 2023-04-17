@@ -8,9 +8,6 @@ const postTagsSlice = createSlice({
 	reducers: {
 		tagAdded: {
 			reducer(state, action) {
-				if (state.includes(false)) {
-					state.length = 0;
-				}
 				const { checkedTag } = action.payload;
 				const existingTags = state.includes(checkedTag);
 				if (existingTags) {
@@ -24,12 +21,8 @@ const postTagsSlice = createSlice({
 			reducer(state, action) {
 				const { uncheckedTag } = action.payload;
 				if (uncheckedTag) {
-					for (let i = 0; i < state.length; i++) {
-						if (state[i] === uncheckedTag) {
-							let filteredArray = state.filter((item) => item !== uncheckedTag);
-							return filteredArray;
-						}
-					}
+					let filteredArray = state.filter((item) => item !== uncheckedTag);
+					return filteredArray;
 				}
 			},
 		},

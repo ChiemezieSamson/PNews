@@ -16,7 +16,6 @@ import { postDeleted } from '../../../../Reduxstore/Slices/posts/PostsSlice';
 const SinglePost = () => {
   const { postId } = useParams();
   const Post = useSelector(state => state.posts.find(post => post.id === postId))
-
   const comments = useSelector(state => state.comments)
   const [hoverRef, isHovered] = useHover();
   const [sizeLine, setSizeLine] = useState(20)

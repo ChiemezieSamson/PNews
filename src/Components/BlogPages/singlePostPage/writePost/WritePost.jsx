@@ -10,7 +10,6 @@ const WritePost = () => {
       blocksFromHTML.contentBlocks,
       blocksFromHTML.entityMap,
     );
-    console.log(state);
   return (
     <div>
       <CreatePostComponents state={state}/>

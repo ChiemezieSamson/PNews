@@ -6,13 +6,11 @@ import {catAdded, catUnchecked, emptyCategories, updateCategories} from "../../.
 import { useSharedReduxCategories } from '../../../../SharedAsset/SharedReduxData'
 import { createCategories, deleteCategoris } from '../../../../../Reduxstore/Slices/categories/Categories'
 
-const Category = ({updatePostCategories}) => {
+const Category = ({updatePostCategories, parentCat, handleSelectedParentCat, handleSetCategory, 
+  category, handlesetCheckedItemElements, checkedItemElemets}) => {
   const [categories, parentCategories] = useSharedReduxCategories()
-  const [openCat, setOpenCat] = useState(false)
-  const [checkedItemElemets, setCheckedItemElements] = useState([])
-  const [openAddnewCat, setOpenAddnewCat] = useState(false)
-  const [category , setCategory] = useState("")
-  const [parent, setSelectedParentCat] = useState("")
+  const [openCat, setOpenCat] = useState(false)  
+  const [openAddnewCat, setOpenAddnewCat] = useState(false) 
   const [requiredParent, setRequiredParent] = useState(false)
   const [requiredText, setRequiredText] = useState(false)
 
@@ -20,10 +18,19 @@ const Category = ({updatePostCategories}) => {
   const openCategoris = useSelector(state => state.postCat)
 
   const dispatch = useDispatch()
+  let type = "cat"
 
    // handling the display or hidden of of add new category component
   const handleOpenAddNewCat = () => {
     setOpenAddnewCat((change) => !change)
+  }
+
+  const handleParentCategory = (e) => {
+    handleSelectedParentCat(e)
+  }
+
+  const handleNewCategoryName = (e) => {
+    handleSetCategory(e)
   }
 
   const handleSubmit = (e) => {
@@ -36,52 +43,41 @@ const Category = ({updatePostCategories}) => {
     setOpenAddnewCat(() => false)
 
     if (updatePostCategories !== undefined && openCat !== true) {
+      let action = "update"
       const allCategories = document.querySelectorAll(".allCategories")
       allCategories.forEach((element) => {
         if(updatePostCategories.includes(element.textContent)) {
           element.previousSibling.checked = true
-          dispatch(catAdded({checkedCategory: element.textContent}))
-          setCheckedItemElements((list) => [...list, element.previousSibling]);
+          
+          handlesetCheckedItemElements(element, action, type)
         }
       })
     } 
-    if(updatePostCategories !== undefined && openCat !== false){
-      setCheckedItemElements(() => [])
-    }
   }
 
   
   // the function is handle the selection of category when clicked,
   //the deselection of category when the already checked category is unchecked
   const handleRemoveCatOnDoubleClick = (event) => {
-
+    let element = event
+    
     // check to see if the category is not checked
     if (event.target.checked === false) { 
+      let action = "delete"
       dispatch(catUnchecked({uncheckedCategory : event.target.value}))
-
-    // if so get the list element of already in the array and filter out the element containing the unchecked checkbox
-      //then return the rest
-    setCheckedItemElements((list) =>{
-      let newElement = list.filter(item => item !== event.target)
-      return newElement
-     })
+    handlesetCheckedItemElements(element, action, type)
 
   } else {
+
+    let action = "create"
     dispatch(catAdded({checkedCategory: event.target.value}))
-    setCheckedItemElements((list) => {
-       //first check if the element containing the checkbox of the value is already in the list
-      if (list.includes(event.target)) {
-        return [...list] // if so just return the list as it is
-       } else {
-        return [...list, event.target] // if not then add the new category parentelement to the list
-       }
-    })
+    handlesetCheckedItemElements(element, action, type)
   }}
 
 
   // CREATE NEW CATEGORY
   const handleAddNewCat = () => {
-    if(parent === "— Parent Category —" || parent === "" ) {
+    if(parentCat === "— Parent Category —" || parentCat === "" ) {
       setRequiredText(false)
       setRequiredParent(true)      
     } else if (category === "") {
@@ -90,43 +86,29 @@ const Category = ({updatePostCategories}) => {
     } else {
       setRequiredParent(false)
       setRequiredText(false)
-    dispatch(createCategories(parent, category.toLowerCase()))
+    dispatch(createCategories(parentCat, category.toLowerCase()))
     
-    setCategory(() => "")
-    setSelectedParentCat(() => "")
+    handleSetCategory("")
+    handleSelectedParentCat("")
     }
   }
 
   // DELETE CATEGORIES
   const handleDeletCat = () => {
+    let element = ""
+    let action = "clear"
     for(let i = 0; i < checkedItemElemets.length; i++) {
       checkedItemElemets[i].checked = false // for each of the collected element first uncheck them
     }
 
     dispatch(deleteCategoris(openCategoris))
-
-    setCheckedItemElements(() => []) // empty all the collected checked item Elements array also
-
+    handlesetCheckedItemElements(element, action, type)
     dispatch(emptyCategories())
   }
 
-  if (openCategoris.length < 1) {
-    for(let i = 0; i < checkedItemElemets.length; i++) {
-      checkedItemElemets[i].checked = false // for each of the collected element first uncheck them
-    }
-  }
-
-  useEffect(() => {
-    if (openCategoris.length < 1) {
-      setSelectedParentCat(() => "")
-      setCategory(() => "")
-      setCheckedItemElements(() => [])
-    }
-  },[openCategoris])
-
   useEffect(() => {
     if (updatePostCategories !== undefined) {
-      dispatch(updateCategories(updatePostCategories))
+      dispatch(updateCategories(updatePostCategories))    
     }
   },[updatePostCategories, dispatch])
 
@@ -173,12 +155,12 @@ const Category = ({updatePostCategories}) => {
             
             {/* input to create new category */}
             <label htmlFor="new_cat" className='inline-block text-sm text-[#444]'>NEW CATEGORY NAME</label>
-            <input type="text" id='new_cat' name='add_new_category' className='mb-0' value={category} onChange={(e) => setCategory(() => e.target.value)}/>
+            <input type="text" id='new_cat' name='add_new_category' className='mb-0' value={category} onChange={handleNewCategoryName}/>
             {requiredText ? <p className='text-xs text-rose-500 tracking-wider font-lora'>Tag name is required!</p> : "" }
                       
             {/* select option to chose the parent the new created category will belong to */}
             <label htmlFor="parent_cat" className='inline-block text-sm text-[#444] mt-5'>PARENT CATEGORY</label>
-            <select name="parent_categories" id="parent_cat" value={parent} className="mb-0" onChange={(e) => setSelectedParentCat(() => e.target.value)}>
+            <select name="parent_categories" id="parent_cat" value={parentCat} className="mb-0" onChange={handleParentCategory}>
             <option className="text-sm">— Parent Category —</option>
             {parentCategories.map((cat,index) => {
               return (

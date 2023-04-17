@@ -31,7 +31,7 @@ export const Posts = [
 		postAuthor: "Danny",
 		postImage: pix1,
 		postTitle: "Lorem ipsum dolor sit amet consectetur adipi elit 1",
-		postCategory: ["Fashion"],
+		postCategory: ["apps", "entertainment"],
 		postContent: {
 			blocks: [
 				{
@@ -314,7 +314,7 @@ export const Posts = [
 		postAuthor: "Sammy",
 		postImage: pix2,
 		postTitle: "Omnis autem, magnam consequuntur accusamus 2",
-		postCategory: ["App"],
+		postCategory: ["gaming", "world"],
 		postContent: {
 			blocks: [
 				{
@@ -597,7 +597,7 @@ export const Posts = [
 		postAuthor: "Amaka",
 		postImage: pix3,
 		postTitle: "Ab tenetur exercitationem quos ipsum eum ducimus quas earum  3",
-		postCategory: ["Business"],
+		postCategory: ["fashion", "featured"],
 		postContent: {
 			blocks: [
 				{
@@ -880,7 +880,7 @@ export const Posts = [
 		postAuthor: "Alex",
 		postImage: pix4,
 		postTitle: "Ipsum dolor sit amet consectetur adipi elit Health 4",
-		postCategory: ["Health"],
+		postCategory: ["entertainment", "featured"],
 		postContent: {
 			blocks: [
 				{
@@ -1163,7 +1163,7 @@ export const Posts = [
 		postAuthor: "Tonny",
 		postImage: pix5,
 		postTitle: "Lorem ipsum dolor sit amet consectetur adipi elit 5",
-		postCategory: ["World"],
+		postCategory: ["news", "review"],
 		postContent: {
 			blocks: [
 				{
@@ -1446,7 +1446,7 @@ export const Posts = [
 		postAuthor: "John",
 		postImage: pix6,
 		postTitle: "Lorem ipsum dolor sit amet consectetur adipi elit 6",
-		postCategory: ["gaming", "movie", "music", "sports", "apps"],
+		postCategory: ["science", "world"],
 		postContent: {
 			blocks: [
 				{
@@ -1729,7 +1729,7 @@ export const Posts = [
 		postAuthor: "James",
 		postImage: pix7,
 		postTitle: "Lorem ipsum dolor sit amet consectetur adipi elit",
-		postCategory: ["Tech"],
+		postCategory: ["business", "politics"],
 		postContent: {
 			blocks: [
 				{
@@ -2012,7 +2012,7 @@ export const Posts = [
 		postAuthor: "Stone",
 		postImage: pix8,
 		postTitle: "Lorem ipsum dolor sit amet consectetur adipi elit",
-		postCategory: ["Life"],
+		postCategory: ["mobile", "startup"],
 		postContent: {
 			blocks: [
 				{
@@ -2295,7 +2295,7 @@ export const Posts = [
 		postAuthor: "Bush",
 		postImage: pix9,
 		postTitle: "Lorem ipsum dolor sit amet consectetur adipi elit",
-		postCategory: ["Books"],
+		postCategory: ["apps", "gadget"],
 		postContent: {
 			blocks: [
 				{
@@ -2578,7 +2578,7 @@ export const Posts = [
 		postAuthor: "Lisa",
 		postImage: pix10,
 		postTitle: "Lorem ipsum dolor sit amet consectetur adipi elit",
-		postCategory: ["Travel"],
+		postCategory: ["music", "sports"],
 		postContent: {
 			blocks: [
 				{
@@ -2861,7 +2861,7 @@ export const Posts = [
 		postAuthor: "Samsom",
 		postImage: pix11,
 		postTitle: "Lorem ipsum dolor sit amet consectetur adipi elit",
-		postCategory: ["Movies"],
+		postCategory: ["gaming", "movie"],
 		postContent: {
 			blocks: [
 				{
@@ -3144,7 +3144,7 @@ export const Posts = [
 		postAuthor: "Sam",
 		postImage: pix12,
 		postTitle: "Lorem ipsum dolor sit amet consectetur adipi elit",
-		postCategory: ["Words"],
+		postCategory: ["health", "travel"],
 		postContent: {
 			blocks: [
 				{
@@ -3427,7 +3427,7 @@ export const Posts = [
 		postAuthor: "Emeka",
 		postImage: pix13,
 		postTitle: "Lorem ipsum dolor sit amet consectetur adipi elit",
-		postCategory: ["Action"],
+		postCategory: ["fashion", "food"],
 		postContent: {
 			blocks: [
 				{

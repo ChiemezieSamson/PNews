@@ -4,80 +4,71 @@ import { tagAdded, tagUnchecked, updateTag } from '../../../../../Reduxstore/Sli
 import { createTags, deleteTag } from '../../../../../Reduxstore/Slices/tags/TagsSlice'
 import { WritePostAsideOpenClosebar } from '../../../../ButtonAndOthers/Buttons'
 
-const parentCategories = ["books", "lifestyle", "favorite", "business" , "random"]
 
 
-const Tag = ({updatePostTags}) => {
-  const tagsFromRedux = useSelector(state => state.tags)
-  const dispatchedTagArrays = useSelector(state => state.postTags)
-  const [tags, setTags] = useState([])
-  const [tagChoosed, setTagChoosed] = useState([])
+const Tag = ({updatePostTags, parentTag, handleSelectedParentTag, handleSetAddTag, addTag}) => {
+  const MyTags = useSelector(state => {
+    let TagArray= []
+    let parentTag = []
+    for (const tag in state.tags) {
+      parentTag.push(tag)
+      if (state.tags[tag].tags) { 
+        for(const eachtag of state.tags[tag].tags) {
+          TagArray.push(eachtag)
+        }
+      }
+    }
+    return {TagArray, parentTag}
+  })
+  const postTagArrays = useSelector(state => state.postTags)
   const [openCat, setOpenCat] = useState(false)
-  const [addTag, setAddTag] = useState("")
-  const [parent, setSelectedParentCat] = useState("")
   const [requiredParent, setRequiredParent] = useState(false)
   const [requiredText, setRequiredText] = useState(false)
-  
 
   const dispatch = useDispatch()
-
-  const handleOpenCloseChild = () => {
-    setOpenCat((change) => !change)
-
-    if (updatePostTags !== undefined && openCat !== true) {
-      const alltags = document.querySelectorAll(".alltags")
-      alltags.forEach((element) => {
-        if(updatePostTags.includes(element.textContent)){
-          element.parentElement.style.borderColor = "#60a5fa"
-          element.nextSibling.checked = true
-          element.parentElement.lastChild.style.display = "inline-block"
-          setTagChoosed(list => [...list, element.parentElement])
-          dispatch(tagAdded({checkedTag: element.textContent.toLowerCase()}))
-        }
-      })     
-    } 
-    if(updatePostTags !== undefined && openCat !== false){
-      setTagChoosed(() => [])
-    }
-  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
   }
 
+  const handleParentTag = (e) => {
+    handleSelectedParentTag(e)
+  }
+
+  const handleAddNewTag = (e) => {
+    handleSetAddTag(e)
+  }
+
+  const handleOpenCloseChild = () => {
+    setOpenCat((change) => !change)
+  }
+
+
   const handleCheckboxChange = (e) => {
+    let element = e     
   
     if (e.target.checked !== true) {
-
       e.target.parentElement.style.borderColor = "#e2e2e2"
 
       e.target.parentElement.lastChild.style.display = "none"
 
-      setTagChoosed(list => {
-        let newlist = list.filter(item => item !==  e.target.parentElement)
-        return newlist 
-      })
-
-    } else {
+      dispatch(tagUnchecked({uncheckedTag: element.target.parentElement.firstChild.textContent.toLowerCase()}))    
+    } 
+    
+    if(e.target.checked !== false){
       e.target.parentElement.style.borderColor = "#60a5fa"
 
       e.target.parentElement.lastChild.style.display = "inline-block"
 
-      setTagChoosed(list => [...list, e.target.parentElement])
+      dispatch(tagAdded({checkedTag: element.target.parentElement.firstChild.textContent.toLowerCase()}))      
     }
   };
-
- 
-  const handleChoosedTag = (e) =>{
-    dispatchedTagArrays.includes(e.target.textContent.toLowerCase()) ?
-    dispatch(tagUnchecked({uncheckedTag: e.target.textContent})) :
-    dispatch(tagAdded({checkedTag: e.target.textContent.toLowerCase()}))
-  }
+  
  
 
   // CREATE TAG
   const handleAddTag = () => {
-    if(parent === "— Parent Category —" || parent === "" ) {
+    if(parentTag === "— Parent Category —" || parentTag === "" ) {
       setRequiredText(false)
       setRequiredParent(true)      
     } else if (addTag === "") {
@@ -87,55 +78,56 @@ const Tag = ({updatePostTags}) => {
       setRequiredParent(false)
       setRequiredText(false)
 
-      dispatch(createTags(parent, addTag.toLowerCase()))
+      dispatch(createTags(parentTag, addTag.toLowerCase()))
     
-      setAddTag(() => "")
-      setSelectedParentCat(() => "")
+      handleSetAddTag("")
+      handleSelectedParentTag("")
     }
   }
 
 
   // DELETE TAG
   const handleDeletTag = (e) => {
+    let remove = e.target.parentElement.firstChild.textContent.toLowerCase()
 
-    e.target.previousSibling.checked = false
-    e.target.parentElement.style.borderColor = "#e2e2e2"
-    e.target.style.display = "none"
+    dispatch(tagUnchecked({uncheckedTag: remove}))
 
-    dispatch(deleteTag({uncheckedTag: e.target.parentElement.firstChild.textContent.toLowerCase()}))
-
-    dispatch(tagUnchecked({uncheckedTag: e.target.parentElement.firstChild.textContent.toLowerCase()}))
+    dispatch(deleteTag({uncheckedTag: remove}))
   }
 
-
-  useEffect(() => {
-    setTags(() => [])
-    for (const tag in tagsFromRedux) {
-      if (tagsFromRedux[tag].tags) { 
-        setTags((list) => [...list, ...tagsFromRedux[tag].tags])
-      }
-    }
-  },[tagsFromRedux])
-
-  useEffect(() => {
-    if(dispatchedTagArrays.length < 1) {
-      
-    for(const selectedTags of tagChoosed) {
-      selectedTags.style.borderColor = "#e2e2e2"
-      selectedTags.lastChild.style.display = "none"
-    }
-
-      setSelectedParentCat(() => "")
-      setAddTag(() => "")
-    }
-  },[dispatchedTagArrays, tagChoosed]) 
-
-  useEffect(() => {
+  useEffect(() => {    
     if (updatePostTags !== undefined) {
-      dispatch(updateTag(updatePostTags))     
+      dispatch(updateTag(updatePostTags)) 
     } 
   },[updatePostTags, dispatch])
-  
+
+  useEffect(() => {
+    if (postTagArrays.length > 0) {
+      const alltags = document.querySelectorAll(".alltags")
+      alltags.forEach((element) => {
+        element.parentElement.style.borderColor = "#e2e2e2"
+        element.nextSibling.checked = false
+        element.parentElement.lastChild.style.display = "none"
+        
+        if(postTagArrays.includes(element.textContent.toLowerCase())){
+          element.parentElement.style.borderColor = "#60a5fa"
+          element.nextSibling.checked = true
+          element.parentElement.lastChild.style.display = "inline-block"
+        }
+      })     
+    } 
+
+    if(postTagArrays.length === 0) {
+      const alltags = document.querySelectorAll(".alltags")
+      alltags.forEach((element) => {
+        element.parentElement.style.borderColor = "#e2e2e2"
+        element.nextSibling.checked = false
+        element.parentElement.lastChild.style.display = "none"
+      })
+    }
+  },[postTagArrays])
+
+
   return (
     <div className='text-sm'>
       <WritePostAsideOpenClosebar BarName={"Tags"} handle={handleOpenCloseChild}/>
@@ -144,14 +136,14 @@ const Tag = ({updatePostTags}) => {
       <div className={`${openCat? "block" : "hidden"} px-3 mt-2 mb-10`}>
         <form onSubmit={handleSubmit}>
           <label htmlFor="post_tag" className='inline-block text-sm text-[#444]'>ADD NEW TAG</label>
-          <input type="text" id='post_tag' name='posttag' className='mb-0' value={addTag} onChange={(e) =>  setAddTag(() => e.target.value)}/>
+          <input type="text" id='post_tag' name='posttag' className='mb-0' value={addTag} onChange={handleAddNewTag}/>
           {requiredText ? <p className='text-xs text-rose-500 tracking-wider font-lora'>Tag name is required!</p> : "" }
 
           {/* select option to chose the parent the new created category will belong to */}
-          <label htmlFor="parent_cat" className='inline-block text-sm text-[#444] mt-5'>PARENT CATEGORY</label>
-            <select name="parent_categories" id="parent_cat" className='mb-0' value={parent} onChange={(e) => setSelectedParentCat(() => e.target.value)}>
-            <option className="text-sm">— Parent Category —</option>
-            {parentCategories.map((cat,index) => {
+          <label htmlFor="parent_cat" className='inline-block text-sm text-[#444] mt-5'>PARENT TAG</label>
+            <select name="parent_categories" id="parent_cat" className='mb-0' value={parentTag} onChange={handleParentTag}>
+            <option className="text-sm">— Parent Tag —</option>
+            {MyTags.parentTag.map((cat,index) => {
               return (
                 <option value={cat} key={index} className="text-sm">{cat}</option>
               )
@@ -161,21 +153,21 @@ const Tag = ({updatePostTags}) => {
 
           <button type='submit' name='post_tag_button' id='post_tag' 
           className='border mt-5 border-solid border-blue-400 hover:border-blue-500 text-blue-400 hover:text-blue-500 text-xs px-3 py-1'
-          onClick={handleAddTag}>Add</button>
+          onClick={handleAddTag} >Add</button>          
         </form>
 
         {/* list of tags start here */}
         <form className='mt-5' onSubmit={handleSubmit}>
           <ul>
-          {tags.map((tag, index) => {
+          {MyTags.TagArray.map((tag, index) => {
             return (
               <li key={index} className={`bg-[#e2e2e2] inline-block mr-2 mt-2 cursor-pointer text-sm border border-solid`}>
-                <label htmlFor={`"Tag" + ${index}`} className='peer p-0.5 mr-1.5 inline-block capitalize text-center alltags' onClick={handleChoosedTag}>
+                <label htmlFor={`"Tag" + ${index}`} className='peer p-0.5 mr-1.5 inline-block capitalize text-center alltags' > 
                   {tag}
                 </label>
                 <input type='checkbox' name="posttags" id={`"Tag" + ${index}`} className='hidden' onChange={handleCheckboxChange}/>
                 <button type='submit' title='delete' name='deletetag' className='px-[2.5px] py-0.5 hover:bg-red-400 hover:text-white peer-hover:bg-[#b7b6b6] 
-                  peer-hover:text-[#444] hidden text-center' onClick={handleDeletTag}> &#10006;</button>
+                  peer-hover:text-[#444] hidden text-center' onClick={handleDeletTag}> &#10006;</button>                  
               </li>
             )
           })}

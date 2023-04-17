@@ -6,7 +6,6 @@ import tagsReducer from "../Slices/tags/TagsSlice";
 import usersReducer from "../Slices/users/UsersSlice";
 
 import postCategoriesReducer from "../Slices/PostsComponentSlices/postcategory/PostcategoriesSlice";
-import postAuthorsReducer from "../Slices/PostsComponentSlices/postAuthor/PostsAuthorSlice";
 import postTagsReducer from "../Slices/PostsComponentSlices/postsTags/PostsTagsSlice";
 import postOptionalReducer from "../Slices/PostsComponentSlices/PostsOptional/PostsOptionalSlice";
 
@@ -15,7 +14,6 @@ const store = configureStore({
 		posts: postsReducer, // main post state, set up at CreatePostComponents.jsx component
 
 		// PostChildren gotten from different component and sent to CreatePostComponents.jsx component for composing a post.
-		postAuthor: postAuthorsReducer,
 		postCat: postCategoriesReducer,
 		postTags: postTagsReducer,
 		postOptional: postOptionalReducer,

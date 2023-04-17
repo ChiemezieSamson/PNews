@@ -7,7 +7,6 @@ import { convertToRaw, EditorState} from 'draft-js';
 import { Editor } from 'react-draft-wysiwyg';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import { postAdded } from '../../../../Reduxstore/Slices/posts/PostsSlice'
-import { emptyAuthor } from '../../../../Reduxstore/Slices/PostsComponentSlices/postAuthor/PostsAuthorSlice'
 import { emptyCategories } from '../../../../Reduxstore/Slices/PostsComponentSlices/postcategory/PostcategoriesSlice'
 import { emptyTag } from '../../../../Reduxstore/Slices/PostsComponentSlices/postsTags/PostsTagsSlice'
 import { emptyOptional } from '../../../../Reduxstore/Slices/PostsComponentSlices/PostsOptional/PostsOptionalSlice'
@@ -22,11 +21,15 @@ const CreatePostComponents = ({state}) => {
 
   const [postTitle, setPostTitle] = useState("")
   const [postImage, setPostImage] = useState("")
+  const [postAuthor, setPostAuthor] = useState("")
 
   const postCategory = useSelector(state => state.postCat)
-  const postAuthor = useSelector(state => state.postAuthor)
   const postTags = useSelector(state => state.postTags)
   const postOptional = useSelector(state => state.postOptional)
+
+  const handleSetPostAuthor = (author) => {
+    setPostAuthor(() => author.target.value.toLowerCase())
+  }
 
   const postContent = JSON.stringify(convertToRaw(editorState.getCurrentContent()))
 
@@ -38,12 +41,12 @@ const CreatePostComponents = ({state}) => {
     if (canSave) {
       dispatch(postAdded(postAuthor, postTitle, postImage, postContent , postCategory, postTags, postOptional))
       
-      dispatch(emptyAuthor())
       dispatch(emptyCategories())
       dispatch(emptyTag())
       dispatch(emptyOptional())
       setPostImage(() => "")
       setPostTitle(() => "")
+      setPostAuthor(() => "")
       setEditorState(() => EditorState.createWithContent(state))
     }
   }
@@ -111,7 +114,7 @@ const CreatePostComponents = ({state}) => {
         <Preview editorText={editorState.getCurrentContent()} />
       </div>
       <div className="lg:order-2 order-1 text-left lg:col-span-1">
-        <CreatePostAside handleAllPostContent={handleAllPostContent} /> 
+        <CreatePostAside handleAllPostContent={handleAllPostContent} handleSetPostAuthor={handleSetPostAuthor} postAuthor={postAuthor}/> 
       </div>
     </div>
   )

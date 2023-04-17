@@ -15,31 +15,27 @@ const PreviousNextPost = ({postId}) => {
   return (
     <>
       <div className='border-y border-solid border-[#eee] mb-[30px] py-5 mt-3 text-center sm:text-left grid grid-cols-2'>
-            <span className='group'>
+            <Link to={`/single/${Id - 1 < 1 ? Posts.length : Id - 1}`} className='group'>
               <span className='text-[#a0a0a0] font-bold'>
                 Previous Post
               </span>
               <h3 className='border-l-[10px] border-solid border-[#eee] mt-2.5 mb-2.5 pl-3 text-[#212121]
               font-bold transition-all duration-200 ease-linear group-hover:border-[#f70d28] cursor-pointer
-              hidden sm:block'>
-                <Link to={`/single/${Id - 1 < 1 ? Posts.length : Id - 1}`}>
-                  {Posts[Id - 1 < 0 ? Posts.length : Id - 1].postTitle }
-                </Link>
+              hidden sm:block'>               
+               {Posts[Id - 1 < 0 ? Posts.length : Id - 1].postTitle }             
               </h3>
-            </span>
+            </Link>
 
-            <span className='group'>
+            <Link to={`/single/${Id + 1 > Posts.length ? 1 : Id + 1}`} className='group'>
               <span className='text-[#a0a0a0] font-bold'>
                 Next Post
               </span>
               <h3 className='border-l-[10px] border-solid border-[#eee] mt-2.5 mb-2.5 pl-3 text-[#212121]
               font-bold transition-all duration-200 ease-linear group-hover:border-[#f70d28] cursor-pointer
-              hidden sm:block'>
-                <Link to={`/single/${Id + 1 > Posts.length ? 1 : Id + 1}`}>
-                  {Posts[Id + 1 > Posts.length -1 ? 0 : Id + 1].postTitle}
-                </Link>
+              hidden sm:block'>          
+                {Posts[Id + 1 > Posts.length -1 ? 0 : Id + 1].postTitle}                
               </h3>
-            </span>
+            </Link>
           </div>
 
           <section className='lg:grid-cols-6 lg:grid p-7 mb-7 border border-solid border-[#eee] text-center sm:text-left'>

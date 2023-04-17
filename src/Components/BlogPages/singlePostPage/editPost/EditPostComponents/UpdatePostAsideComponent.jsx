@@ -8,10 +8,19 @@ import Tag from '../../createPost/CreatePostAsideComponents/Tag'
 import Optional from '../../createPost/CreatePostAsideComponents/Optional'
 import { useSelector } from 'react-redux'
 
-const UpdatePostAsideComponent = ({handleAllPostContent, editPost}) => {
+const UpdatePostAsideComponent = ({handleAllPostContent, editPost, handleSetPostAuthor, postAuthor}) => {
   const [showSideBar, setShowSideBar] = useState(false)
   const post = useSelector(state => state.posts.find(post => post.id === editPost))
   const size = useWindowSize()
+  // const [postAuthor, setPostAuthor] = useState(post.postAuthor || "")
+  const [postCategory, setPostCategory] = useState(post.postCategory)
+  const [postTag, setPostTag] = useState(post.postTags)
+  const [postOptional, setPostOptional] = useState(post.optional)
+  const [parentCat, setSelectedParentCat] = useState("")
+  const [parentTag, setSelectedParentTag] = useState("")
+  const [category , setCategory] = useState("")
+  const [addTag, setAddTag] = useState("")
+  const [checkedItemElemets, setCheckedItemElements] = useState([])
 
   // handling the display or hidden of the fullsidebar
   const handleShowBar = () => {
@@ -22,9 +31,70 @@ const UpdatePostAsideComponent = ({handleAllPostContent, editPost}) => {
   const handleCloseSidebar = () => {
     setShowSideBar(() => false)
   }
+
+  const handlePostAuthor = (e) => {
+    handleSetPostAuthor(e)
+  }
+
+  const handleSelectedParentCat = (e) => {
+    setSelectedParentCat(() => e !== "" ? e.target.value : e)
+  }
+
+  const handleSelectedParentTag = (e) => {
+    setSelectedParentTag(() => e !== "" ? e.target.value : e)
+  }
+
+  const handleSetCategory = (e) => {
+    setCategory(() => e !== "" ? e.target.value : e)
+  }
+
+  const handleSetAddTag = (e) => {
+    setAddTag(() => e !== "" ? e.target.value : e)
+  }
+
+  const handlesetCheckedItemElements = (element, action) => {
+    if (element.parentElement && action === "update") { 
+      setCheckedItemElements((list) => [...list, element.previousSibling]);
+    }
+
+    if (element.target && action === "create") {
+      setCheckedItemElements((list) => {
+        //first check if the element containing the checkbox of the value is already in the list
+        if (list.includes(element.target)) {
+          return [...list] // if so just return the list as it is
+        } else {
+          return [...list, element.target] // if not then add the new category parentelement to the list
+        }
+      })      
+    }
+
+    if (element.target && action === "delete") {
+      setCheckedItemElements((list) =>{
+        let newElement = list.filter(item => item !== element.target)
+        return newElement
+      })  
+    }
+
+    if(element === "" && action === "clear") {      
+      setCheckedItemElements(() => [])     
+    }
+  }
   
   const handleDispatched = () => {
+    for(let i = 0; i < checkedItemElemets.length; i++) {
+      checkedItemElemets[i].checked = false // for each of the collected element first uncheck them
+    }
+
+
     handleAllPostContent()
+    setPostCategory(() => undefined)
+    setPostTag(() => undefined)
+    setPostOptional(() => undefined)
+    setSelectedParentCat(() => "")
+    setSelectedParentTag(() => "")
+    setAddTag(() => "")
+    setCategory(() => "")
+    setCheckedItemElements(() => [])
   }
 
   // using useEffect to dictect the changes in screen size
@@ -70,10 +140,24 @@ const UpdatePostAsideComponent = ({handleAllPostContent, editPost}) => {
             <Hanbugar3 closesidebar={handleCloseSidebar}/>
           </span>
         </span>
-        <Author updatePostAuthor={post.postAuthor}/>
-        <Category updatePostCategories={post.postCategory}/>  
-        <Tag updatePostTags={post.postTags}/>    
-        <Optional updatePostOptions={post.optional}/>
+        <Author  handlePostAuthor={handlePostAuthor} postAuthor={postAuthor}/>
+        <Category 
+          updatePostCategories={postCategory} 
+          parentCat={parentCat} 
+          category={category}
+          checkedItemElemets={checkedItemElemets}
+          handleSelectedParentCat={handleSelectedParentCat} 
+          handleSetCategory={handleSetCategory}
+          handlesetCheckedItemElements={handlesetCheckedItemElements}
+        />  
+        <Tag 
+          parentTag={parentTag} 
+          addTag={addTag}
+          updatePostTags={postTag}
+          handleSetAddTag={handleSetAddTag} 
+          handleSelectedParentTag={handleSelectedParentTag}
+        />    
+        <Optional updatePostOptions={postOptional}/>
       </div>       
     </div>
   )
