@@ -4,9 +4,10 @@ import { AdminComponentColor, CategoriesComponentBotton, CatSidebarHanbugar, Com
 import { JustTimeComponet, JustTimeComponetStar} from './SharedComponents'
 import { StarComponent } from '../../ButtonAndOthers/Buttons'
 import { useSelector } from 'react-redux'
+import { selectAllPosts } from '../../../Reduxstore/Slices/posts/PostsSlice'
 
 const EntertainmentPosts = () => {
-  const Posts = useSelector(state => state.posts)
+  const Posts = useSelector(selectAllPosts)
   const size = useWindowSize()
 
   return (

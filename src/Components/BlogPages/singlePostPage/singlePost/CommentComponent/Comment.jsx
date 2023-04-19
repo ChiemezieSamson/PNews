@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import LikeDislikeReply, { EditAndDeleteComment, ReplyForm } from './CommentComponents/CommentComponets';
-import { createReply, deleteComment, deleteReply, updateComment, updateReply } from '../../../../../Reduxstore/Slices/comments/CommentsSlice';
+import { createReply, deleteComment, deleteReply, selectAllComments, updateComment, updateReply } from '../../../../../Reduxstore/Slices/comments/CommentsSlice';
+import { CommentReactionButtons, ReplyReactionButtons } from '../../../../ButtonAndOthers/ReactionButtons';
 
 
 
 const Comment = () => {
-  const comments = useSelector(state => state.comments)
+  const comments = useSelector(selectAllComments)
   const [replyTo, setReplyTo] = useState("")  
   const [commentId, setCommentId] = useState("")
   const [replyId, setReplyId] = useState("")
@@ -182,7 +183,10 @@ const Comment = () => {
             <div>{comment.content}</div>
             <div className="text-sm text-gray-500 mt-1">{comment.time}</div>
 
-            <LikeDislikeReply like={comment.choice.like} dislike={comment.choice.dislike} handler={handleCreateReplyOnComment} />
+            <div className='mr-6 max-w-xs py-1 mt-1'>
+              <CommentReactionButtons comment={comment}/>              
+              <LikeDislikeReply handler={handleCreateReplyOnComment} />
+            </div> 
 
             <ReplyForm  handleSetReplyContent={handleSetFormContent} handleSetReplyAuthor={handleSetFormAuthor} 
             handleReplySubmit={handleFormSubmit} replyAuthor={replyAuthor} replyContent={replyContent}
@@ -207,9 +211,14 @@ const Comment = () => {
                         <div>{reply.content}</div>
                         <div className="text-sm text-gray-500 mt-1">{reply.time}</div>
 
-                        <EditAndDeleteComment handleEdit={handleUpdateReply} handleDelete={handleDeleteReply}/>                      
+                        <EditAndDeleteComment handleEdit={handleUpdateReply} handleDelete={handleDeleteReply}/> 
 
-                        <LikeDislikeReply like={reply.choice.like} dislike={reply.choice.dislike} handler={handleCreateReplyOnReply} />
+                        <div className='mr-6 max-w-xs justify-between py-1 mt-1'>
+                          <ReplyReactionButtons reply={reply} commentId={comment.id}/>
+                          <LikeDislikeReply handler={handleCreateReplyOnReply}/>
+                        </div>                     
+
+                        
 
                         <ReplyForm  handleSetReplyContent={handleSetFormContent} handleSetReplyAuthor={handleSetFormAuthor} 
                             handleReplySubmit={handleFormSubmit} replyAuthor={replyAuthor} replyContent={replyContent}

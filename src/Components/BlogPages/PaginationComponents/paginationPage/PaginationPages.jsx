@@ -5,11 +5,12 @@ import { HomeAndPigSocialLinks } from '../../../../data';
 import { PagesDivider, SocialLinks } from '../../../SharedAsset/SharedAssets';
 import { JustTimeComponetCatBlock, JustTimeComponetStar } from '../../IndexPageComponents/SharedComponents';
 import Pagination from '../PaginationControl/Pagination';
+import { selectAllPosts } from '../../../../Reduxstore/Slices/posts/PostsSlice';
 
 
 
 const PaginationPages = () => {
-  const Posts = useSelector(state => state.posts)
+  const Posts = useSelector(selectAllPosts)
  
   return (
     <div className='md:grid md:grid-cols-3 mt-7'>

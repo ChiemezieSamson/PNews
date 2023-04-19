@@ -5,9 +5,10 @@ import { NavDirectionAndPageName } from "../../SharedAsset/SharedAssets";
 import { SharedBlogPageStyleOne } from "../../SharedAsset/SharedBlogPageStyle_1st_Component";
 import Aside from "../asidePage/Aside";
 import { PagesBlogPostComponent } from "../IndexPageComponents/SharedComponents";
+import { selectAllPosts } from "../../../Reduxstore/Slices/posts/PostsSlice";
 
 const Books = () => {
-  const Posts = useSelector(state => state.posts)
+  const Posts = useSelector(selectAllPosts)
   return (
     <section className="text-left">
 

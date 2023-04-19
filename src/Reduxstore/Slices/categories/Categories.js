@@ -59,6 +59,23 @@ const categoriesSlice = createSlice({
 	},
 });
 
+export const selectAllCategories = (state) => {
+	let categories = [];
+	let parentCategories = [];
+	for (const cats in state.categories) {
+		parentCategories.push(cats);
+		if (state.categories[cats].categories) {
+			for (const eachCat of state.categories[cats].categories) {
+				categories.push(eachCat);
+			}
+		}
+	}
+	return { categories, parentCategories };
+};
+
+export const selectCategoriesById = (state, categoriesId) =>
+	state.posts.find((categories) => categories.id === categoriesId);
+
 export const { createCategories, deleteCategoris } = categoriesSlice.actions;
 
 export default categoriesSlice.reducer;

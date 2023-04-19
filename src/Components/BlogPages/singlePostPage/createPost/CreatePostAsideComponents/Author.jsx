@@ -1,7 +1,8 @@
 import {  useSelector } from 'react-redux'
+import { selectAllUsers } from '../../../../../Reduxstore/Slices/users/UsersSlice'
 
 const Author = ({handlePostAuthor, postAuthor}) => {
-  const users = useSelector(state => state.users)
+  const users = useSelector(selectAllUsers)
   const onSelectAuthor = (e) => {
     handlePostAuthor(e)
   }

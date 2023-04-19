@@ -44,6 +44,8 @@ const postTagsSlice = createSlice({
 	},
 });
 
+export const selectAllPostTags = (state) => state.postTags;
+
 export const { tagAdded, tagUnchecked, updateTag, emptyTag } =
 	postTagsSlice.actions;
 

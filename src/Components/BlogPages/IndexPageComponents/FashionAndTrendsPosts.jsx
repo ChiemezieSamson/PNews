@@ -1,10 +1,11 @@
 import React from 'react'
 import { CategoriesComponentBotton, CatSidebarHanbugar, PostTitleMedium, PostTitleSmall, TimeComponentColor, useWindowSize } from '../../SharedAsset/SharedAssets'
 import { useSelector } from 'react-redux';
+import { selectAllPosts } from '../../../Reduxstore/Slices/posts/PostsSlice';
 
 
 const FashionAndTrendsPosts = () => {
-  const Posts = useSelector(state => state.posts)
+  const Posts = useSelector(selectAllPosts)
   const size = useWindowSize()
 
   return (

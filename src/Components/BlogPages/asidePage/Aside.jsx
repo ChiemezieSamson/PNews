@@ -3,10 +3,11 @@ import { useSelector } from 'react-redux'
 import { NewsLetter, PagesDivider, PostTitleMedium2, SocialLinks, TimeComponent } from '../../SharedAsset/SharedAssets'
 import TrendingCommentsLatest from '../IndexPageComponents/IndexPageComponentAsideComponent.jsx/TrendingCommentsLatest'
 import { JustTimeComponet } from '../IndexPageComponents/SharedComponents'
+import { selectAllPosts } from '../../../Reduxstore/Slices/posts/PostsSlice'
 
 
 const Aside = () => {
-  const Posts = useSelector(state => state.posts)
+  const Posts = useSelector(selectAllPosts)
   return (
     <section>
       <div className='mb-5'>

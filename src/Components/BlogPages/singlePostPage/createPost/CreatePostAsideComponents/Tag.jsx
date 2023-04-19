@@ -1,26 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { tagAdded, tagUnchecked, updateTag } from '../../../../../Reduxstore/Slices/PostsComponentSlices/postsTags/PostsTagsSlice'
-import { createTags, deleteTag } from '../../../../../Reduxstore/Slices/tags/TagsSlice'
+import { selectAllPostTags, tagAdded, tagUnchecked, updateTag } from '../../../../../Reduxstore/Slices/PostsComponentSlices/postsTags/PostsTagsSlice'
+import { createTags, deleteTag, selectAllTag } from '../../../../../Reduxstore/Slices/tags/TagsSlice'
 import { WritePostAsideOpenClosebar } from '../../../../ButtonAndOthers/Buttons'
 
 
 
 const Tag = ({updatePostTags, parentTag, handleSelectedParentTag, handleSetAddTag, addTag}) => {
-  const MyTags = useSelector(state => {
-    let TagArray= []
-    let parentTag = []
-    for (const tag in state.tags) {
-      parentTag.push(tag)
-      if (state.tags[tag].tags) { 
-        for(const eachtag of state.tags[tag].tags) {
-          TagArray.push(eachtag)
-        }
-      }
-    }
-    return {TagArray, parentTag}
-  })
-  const postTagArrays = useSelector(state => state.postTags)
+  const MyTags = useSelector(selectAllTag)
+  const postTagArrays = useSelector(selectAllPostTags)
   const [openCat, setOpenCat] = useState(false)
   const [requiredParent, setRequiredParent] = useState(false)
   const [requiredText, setRequiredText] = useState(false)

@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
 import { FaEnvelopeOpen, FaFacebookF, FaGlobe, FaInstagram, FaLinkedinIn, FaPhoneAlt, FaTwitter, FaYoutubeSquare } from 'react-icons/fa';
 import { useDispatch, useSelector } from 'react-redux';
-import { userPublicProfile } from '../../../Reduxstore/Slices/users/UsersSlice';
+import { selectAllUsers, userPublicProfile } from '../../../Reduxstore/Slices/users/UsersSlice';
 import { UserInfoHeading } from '../../SharedAsset/SharedAssets'
 
 const MyPublicProfile = () => {
-  const user = useSelector(state => state.users)
+  const user = useSelector(selectAllUsers)
   const [nickname, setNickname] = useState("")
   const [biography, setBiography] = useState("")
   const [secondaryEmail, setSecondaryEmail] = useState("")

@@ -6,10 +6,11 @@ import { SharedBlogPageStyleTwo } from "../../SharedAsset/SharedBlogPageStyle_1s
 import Aside from "../asidePage/Aside";
 import { PagesBlogPostComponent } from "../IndexPageComponents/SharedComponents";
 import { Link } from "react-router-dom";
+import { selectAllPosts } from "../../../Reduxstore/Slices/posts/PostsSlice";
 
 
 const Favorite = () => {
-  const Posts = useSelector(state => state.posts)
+  const Posts = useSelector(selectAllPosts)
   return (
     <section className="text-left">
 

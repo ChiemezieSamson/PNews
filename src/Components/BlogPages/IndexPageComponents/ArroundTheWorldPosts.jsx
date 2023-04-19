@@ -2,9 +2,10 @@ import React from 'react'
 import { AdminComponentColor, CategoriesComponentBotton, CatSidebarHanbugar, CommentComponetColor, PostsShortInfoComponent, PostTitleMedium, PostTitleMedium2, TimeComponentColor, useWindowSize } from '../../SharedAsset/SharedAssets'
 import { useSelector } from "react-redux"
 import { ReadmoreButton } from '../../ButtonAndOthers/Buttons';
+import { selectAllPosts } from '../../../Reduxstore/Slices/posts/PostsSlice';
 
 const ArroundTheWorldPosts = () => {
-  const Posts = useSelector(state => state.posts)
+  const Posts = useSelector(selectAllPosts)
   const size = useWindowSize()
  
   return (

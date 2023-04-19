@@ -3,10 +3,11 @@ import { CategoriesComponentBotton, PagesDivider, PostTitleMedium, PostTitleSmal
 import { SocialMediaIcons } from '../../../../data'
 import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
+import { selectAllPosts } from '../../../../Reduxstore/Slices/posts/PostsSlice'
 
 
 const PreviousNextPost = ({postId}) => {
-  const Posts = useSelector(state => state.posts)
+  const Posts = useSelector(selectAllPosts)
   const size = useWindowSize()
 
   const Id = parseInt(postId)

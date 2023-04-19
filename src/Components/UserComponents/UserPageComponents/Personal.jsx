@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
 import { FaCheckDouble } from "react-icons/fa";
 import { useDispatch, useSelector } from 'react-redux';
-import { userPersonalInfoUpdated } from '../../../Reduxstore/Slices/users/UsersSlice';
+import { selectAllUsers, userPersonalInfoUpdated } from '../../../Reduxstore/Slices/users/UsersSlice';
 import { UserInfoHeading } from '../../SharedAsset/SharedAssets';
 
 const Personal = () => {
-  const user = useSelector(state => state.users)
+  const user = useSelector(selectAllUsers)
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [location, setLocation] = useState("");

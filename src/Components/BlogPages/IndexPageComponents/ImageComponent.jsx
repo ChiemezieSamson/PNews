@@ -3,9 +3,10 @@ import { useSelector } from 'react-redux'
 import { StarComponent } from '../../ButtonAndOthers/Buttons'
 import { CategoriesComponent, overLay, TimeComponent} from '../../SharedAsset/SharedAssets'
 import { Link } from 'react-router-dom'
+import { selectAllPosts } from '../../../Reduxstore/Slices/posts/PostsSlice'
 
 const ImageComponent = () => {
-  const Posts = useSelector(state => state.posts)
+  const Posts = useSelector(selectAllPosts)
 
   return (
     <section className='cursor-pointer mb-7 mt-12'>

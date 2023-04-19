@@ -2,20 +2,18 @@ import React, { useEffect } from 'react'
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { WritePostAsideOpenClosebar } from '../../../../ButtonAndOthers/Buttons'
-import {catAdded, catUnchecked, emptyCategories, updateCategories} from "../../../../../Reduxstore/Slices/PostsComponentSlices/postcategory/PostcategoriesSlice"
-import { useSharedReduxCategories } from '../../../../SharedAsset/SharedReduxData'
-import { createCategories, deleteCategoris } from '../../../../../Reduxstore/Slices/categories/Categories'
+import {catAdded, catUnchecked, emptyCategories, selectAllPostCat, updateCategories} from "../../../../../Reduxstore/Slices/PostsComponentSlices/postcategory/PostcategoriesSlice"
+import { createCategories, deleteCategoris, selectAllCategories } from '../../../../../Reduxstore/Slices/categories/Categories'
 
 const Category = ({updatePostCategories, parentCat, handleSelectedParentCat, handleSetCategory, 
   category, handlesetCheckedItemElements, checkedItemElemets}) => {
-  const [categories, parentCategories] = useSharedReduxCategories()
+  const categories = useSelector(selectAllCategories)
+  const openCategoris = useSelector(selectAllPostCat)
   const [openCat, setOpenCat] = useState(false)  
   const [openAddnewCat, setOpenAddnewCat] = useState(false) 
   const [requiredParent, setRequiredParent] = useState(false)
   const [requiredText, setRequiredText] = useState(false)
 
- 
-  const openCategoris = useSelector(state => state.postCat)
 
   const dispatch = useDispatch()
   let type = "cat"
@@ -121,7 +119,7 @@ const Category = ({updatePostCategories, parentCat, handleSelectedParentCat, han
       
       <div className={`${openCat? "block" : "hidden"} px-3 mt-2 mb-10`}>      
         <ul className='grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-2 gap-x-2'>
-          {categories.map((cat,index) => {
+          {categories.categories.map((cat,index) => {
             return (
             <li key={index} className="hover:bg-[#fff] capitalize">
 
@@ -162,7 +160,7 @@ const Category = ({updatePostCategories, parentCat, handleSelectedParentCat, han
             <label htmlFor="parent_cat" className='inline-block text-sm text-[#444] mt-5'>PARENT CATEGORY</label>
             <select name="parent_categories" id="parent_cat" value={parentCat} className="mb-0" onChange={handleParentCategory}>
             <option className="text-sm">— Parent Category —</option>
-            {parentCategories.map((cat,index) => {
+            {categories.parentCategories.map((cat,index) => {
               return (
                 <option value={cat} key={index} className="text-sm">{cat}</option>
               )

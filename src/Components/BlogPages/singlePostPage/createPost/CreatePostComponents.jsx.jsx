@@ -6,14 +6,14 @@ import Preview from "./editorPreview/Preview";
 import { convertToRaw, EditorState} from 'draft-js';
 import { Editor } from 'react-draft-wysiwyg';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
-import { postAdded } from '../../../../Reduxstore/Slices/posts/PostsSlice'
-import { emptyCategories } from '../../../../Reduxstore/Slices/PostsComponentSlices/postcategory/PostcategoriesSlice'
-import { emptyTag } from '../../../../Reduxstore/Slices/PostsComponentSlices/postsTags/PostsTagsSlice'
-import { emptyOptional } from '../../../../Reduxstore/Slices/PostsComponentSlices/PostsOptional/PostsOptionalSlice'
+import { postAdded, selectAllPosts } from '../../../../Reduxstore/Slices/posts/PostsSlice'
+import { emptyCategories, selectAllPostCat } from '../../../../Reduxstore/Slices/PostsComponentSlices/postcategory/PostcategoriesSlice'
+import { emptyTag, selectAllPostTags } from '../../../../Reduxstore/Slices/PostsComponentSlices/postsTags/PostsTagsSlice'
+import { emptyOptional, selectAllPostOptionals } from '../../../../Reduxstore/Slices/PostsComponentSlices/PostsOptional/PostsOptionalSlice'
 
 
 const CreatePostComponents = ({state}) => {
-  const Posts = useSelector(state => state.posts)
+  const Posts = useSelector(selectAllPosts)
 
   const [editorState, setEditorState] = useState(
     () => EditorState.createWithContent(state),
@@ -23,9 +23,9 @@ const CreatePostComponents = ({state}) => {
   const [postImage, setPostImage] = useState("")
   const [postAuthor, setPostAuthor] = useState("")
 
-  const postCategory = useSelector(state => state.postCat)
-  const postTags = useSelector(state => state.postTags)
-  const postOptional = useSelector(state => state.postOptional)
+  const postCategory = useSelector(selectAllPostCat)
+  const postTags = useSelector(selectAllPostTags)
+  const postOptional = useSelector(selectAllPostOptionals)
 
   const handleSetPostAuthor = (author) => {
     setPostAuthor(() => author.target.value.toLowerCase())

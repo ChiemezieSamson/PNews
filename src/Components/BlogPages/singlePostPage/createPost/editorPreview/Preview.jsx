@@ -8,8 +8,7 @@ import { convertToRaw } from 'draft-js';
 const Preview = ({editorText, postContent}) => {
   const [convertedContent, setConvertedContent] = useState("")
   const [convertedPosts, setConvertedPosts] = useState("")
-
- 
+   
 
   useEffect(() => {
     if (postContent) {

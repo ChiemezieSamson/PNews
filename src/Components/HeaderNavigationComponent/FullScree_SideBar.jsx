@@ -2,10 +2,11 @@ import React from "react";
 import { Hanbugar3 } from "../ButtonAndOthers/Buttons";
 import { SocialMediaIcons} from "../../data"
 import { useSelector } from "react-redux";
+import { selectAllPosts } from "../../Reduxstore/Slices/posts/PostsSlice";
 
 
 const FullSreenSidebar = ({closesidebar}) => {
-  const Posts = useSelector(state => state.posts)
+  const Posts = useSelector(selectAllPosts)
   
   const Words = ["Get in touch", "Adventure journal", "Live events"]
   const texts = Words.map((text,i) => ({id: i, name: text}))

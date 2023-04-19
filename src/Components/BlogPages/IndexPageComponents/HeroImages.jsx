@@ -4,12 +4,13 @@ import { useSelector } from "react-redux"
 import { StarComponent } from '../../ButtonAndOthers/Buttons';
 import { CategoriesComponent, overLay, PostTitleLarge, TimeComponent, useWindowSize } from '../../SharedAsset/SharedAssets';
 import { Link } from 'react-router-dom';
+import { selectAllPosts } from '../../../Reduxstore/Slices/posts/PostsSlice';
 
 
 
 const HeroImages = () => {
   const [nextTrendingPost, setNextTrendingPost] = useState(1)
-  const Posts = useSelector(state => state.posts)
+  const Posts = useSelector(selectAllPosts)
   const size = useWindowSize()
 
   const trendingPostArry = Posts.slice(0, 6)

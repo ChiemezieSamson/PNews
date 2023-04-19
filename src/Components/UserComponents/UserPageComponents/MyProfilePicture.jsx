@@ -1,11 +1,10 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { userProfilePicture } from '../../../Reduxstore/Slices/users/UsersSlice'
+import { selectAllUsers, userProfilePicture } from '../../../Reduxstore/Slices/users/UsersSlice'
 
 
 const MyProfilePicture = () => {
-  const Posts = useSelector(state => state.posts)
-  const user = useSelector(state => state.users)
+  const user = useSelector(selectAllUsers)
   const [profileImage, setProfileImage] = useState("")
 
 
@@ -32,7 +31,7 @@ const MyProfilePicture = () => {
         <div className="max-w-[200px] mx-auto h-[200px] bg-[#aaacb0] border border-solid border-[#e7e9eb] rounded-full
         text-white group cursor-default shadow-md shadow-[rgba(0,0,0,.25)] relative overflow-clip mb-7">
           <div className='relative after:absolute after:inset-0 after:bg-white/10 after:z-10 w-ful h-full'>
-            <img src={Posts[11].postImage} alt="userprofileimage" className='w-full h-full object-cover'/>
+            <img src={user[0].profileImage} alt="userprofileimage" className='w-full h-full object-cover'/>
           </div>      
           <form 
           id='profileImage'

@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { changeUserPassword } from '../../../../Reduxstore/Slices/users/UsersSlice'
+import { changeUserPassword, selectAllUsers } from '../../../../Reduxstore/Slices/users/UsersSlice'
 import { WritePostAsideOpenClosebar } from '../../../ButtonAndOthers/Buttons'
 import { SinginAndSecurityIntro } from '../../../SharedAsset/SharedAssets'
 
 const ChangePassword = () => {
-  const user = useSelector(state => state.users)
+  const user = useSelector(selectAllUsers)
   const [openCat, setOpenCat] = useState(false)
   const [currentPassword, setCurrentPassword] = useState("⁕⁕⁕⁕⁕⁕⁕");
   const [password, setPassword] = useState("⁕⁕⁕⁕⁕⁕⁕");

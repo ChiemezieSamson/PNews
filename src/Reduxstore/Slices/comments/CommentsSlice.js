@@ -20,9 +20,11 @@ const commentsSlice = createSlice({
 						email,
 						website,
 						postId,
-						choice: {
-							like: "",
-							dislike: "",
+						reactions: {
+							like: 0,
+							support: 0,
+							love: 0,
+							funny: 0,
 						},
 						replies: [],
 						time: "14 hours ago",
@@ -49,9 +51,11 @@ const commentsSlice = createSlice({
 					name: replyAuthor,
 					time: "11am",
 					content: replyContent,
-					choice: {
-						like: "",
-						dislike: "",
+					reactions: {
+						like: 0,
+						support: 0,
+						love: 0,
+						funny: 0,
 					},
 					replyOfreply: replyTo !== null ? "@" + replyTo : "",
 				});
@@ -68,6 +72,23 @@ const commentsSlice = createSlice({
 			if (existingReply) {
 				existingReply.name = replyAuthor;
 				existingReply.content = replyContent;
+			}
+		},
+		reactionAddedComment(state, action) {
+			const { commentId, reaction } = action.payload;
+			const existingComment = state.find((post) => post.id === commentId);
+			if (existingComment) {
+				existingComment.reactions[reaction]++;
+			}
+		},
+		reactionAddedReply(state, action) {
+			const { commentId, replyId, reaction } = action.payload;
+			const existingComment = state.find((post) => post.id === commentId);
+			const existingReply = existingComment.replies.find(
+				(comment) => comment.id === replyId
+			);
+			if (existingComment) {
+				existingReply.reactions[reaction]++;
 			}
 		},
 		deleteComment(state, action) {
@@ -88,11 +109,18 @@ const commentsSlice = createSlice({
 	},
 });
 
+export const selectAllComments = (state) => state.comments;
+
+export const selectCommentById = (state, commentId) =>
+	state.posts.find((comment) => comment.id === commentId);
+
 export const {
 	createComment,
 	createReply,
 	updateComment,
 	updateReply,
+	reactionAddedComment,
+	reactionAddedReply,
 	deleteComment,
 	deleteReply,
 } = commentsSlice.actions;

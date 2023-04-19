@@ -6,10 +6,10 @@ import { BiImageAdd } from 'react-icons/bi'
 import { useDispatch, useSelector } from 'react-redux'
 import Preview from '../../createPost/editorPreview/Preview';
 import UpdatePostAsideComponent from './UpdatePostAsideComponent';
-import { postUpdated } from '../../../../../Reduxstore/Slices/posts/PostsSlice';
-import { emptyCategories } from '../../../../../Reduxstore/Slices/PostsComponentSlices/postcategory/PostcategoriesSlice';
-import { emptyTag } from '../../../../../Reduxstore/Slices/PostsComponentSlices/postsTags/PostsTagsSlice';
-import { emptyOptional } from '../../../../../Reduxstore/Slices/PostsComponentSlices/PostsOptional/PostsOptionalSlice';
+import { postUpdated, selectPostById } from '../../../../../Reduxstore/Slices/posts/PostsSlice';
+import { emptyCategories, selectAllPostCat } from '../../../../../Reduxstore/Slices/PostsComponentSlices/postcategory/PostcategoriesSlice';
+import { emptyTag, selectAllPostTags } from '../../../../../Reduxstore/Slices/PostsComponentSlices/postsTags/PostsTagsSlice';
+import { emptyOptional, selectAllPostOptionals } from '../../../../../Reduxstore/Slices/PostsComponentSlices/PostsOptional/PostsOptionalSlice';
 import draftToHtml from 'draftjs-to-html';
 import { useNavigate } from 'react-router-dom';
 
@@ -17,15 +17,18 @@ const UpdatePostComponent = ({state, editPost}) => {
   const [editorState, setEditorState] = useState(
     () => EditorState.createWithContent(state),
   )
-  const post = useSelector(state => state.posts.find(post => post.id === editPost))
+
+  const postId = editPost
+
+  const post = useSelector(state => selectPostById(state, postId))
 
   const [postTitle, setPostTitle] = useState(post.postTitle)
   const [postImage, setPostImage] = useState(post.postImage)
   const [postAuthor, setPostAuthor] = useState(post.postAuthor)
 
-  const postCategory = useSelector(state => state.postCat)
-  const postTags = useSelector(state => state.postTags)
-  const postOptional = useSelector(state => state.postOptional)
+  const postCategory = useSelector(selectAllPostCat)
+  const postTags = useSelector(selectAllPostTags)
+  const postOptional = useSelector(selectAllPostOptionals)
 
   const handleSetPostAuthor = (author) => {
     setPostAuthor(() => author.target.value.toLowerCase())
@@ -35,8 +38,6 @@ const UpdatePostComponent = ({state, editPost}) => {
 
   const dispatch = useDispatch()
   const navigate = useNavigate();
-
-  const postId = editPost
 
 
   const canSave = Boolean(postTitle) && Boolean(postImage) && Boolean(postAuthor) && Boolean(postCategory[0]) && Boolean(postTags[0])

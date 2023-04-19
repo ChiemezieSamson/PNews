@@ -7,6 +7,7 @@ import { useWindowSize } from "../../SharedAsset/SharedAssets";
 import { useSelector } from "react-redux"
 import { navItems, ParentCategories } from "../../../data";
 import { FaChevronDown } from 'react-icons/fa';
+import { selectAllPosts } from '../../../Reduxstore/Slices/posts/PostsSlice';
 
 const HeaderNavigations = () => {
   const [hideShowNavLinks, setHideShowNavLinks] = useState(false)
@@ -15,7 +16,7 @@ const HeaderNavigations = () => {
   const [showhoverlinks , setShowHoverlinks] = useState(false)
   const [getTheNavlinkTextContent, setGetTheNavlinkTextContent] =useState("books")
   const [headerHoverPostNav, setHeaderHoverPostNav] = useState(ParentCategories.books)
-  const Posts = useSelector(state => state.posts)
+  const Posts = useSelector(selectAllPosts)
   const size = useWindowSize()
 
 

@@ -3,9 +3,10 @@ import { useSelector } from 'react-redux'
 import { SocialMediaIcons } from '../../../../data'
 import { MainDivider, SocialLinks } from '../../../SharedAsset/SharedAssets'
 import { JustTimeComponet, JustTimeComponetStar } from '../SharedComponents'
+import { selectAllPosts } from '../../../../Reduxstore/Slices/posts/PostsSlice'
 
 const Recommended = () => {
-  const Posts = useSelector(state => state.posts)
+  const Posts = useSelector(selectAllPosts)
   return (
     <section className='mt-2.5'>
 

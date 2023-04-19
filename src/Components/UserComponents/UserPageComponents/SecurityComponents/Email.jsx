@@ -1,12 +1,12 @@
 import React, { useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { userEmailMakePrimary, userEmailRemoveSecondary, userEmailUpdate } from '../../../../Reduxstore/Slices/users/UsersSlice'
+import { selectAllUsers, userEmailMakePrimary, userEmailRemoveSecondary, userEmailUpdate } from '../../../../Reduxstore/Slices/users/UsersSlice'
 import { Hanbugar3, WritePostAsideOpenClosebar } from '../../../ButtonAndOthers/Buttons'
 import { SinginAndSecurityIntro } from '../../../SharedAsset/SharedAssets'
 
 
 const Email = () => {
-  const user = useSelector(state => state.users)
+  const user = useSelector(selectAllUsers)
   const [openCat, setOpenCat] = useState(false)
   const [openAddnewCat, setOpenAddnewCat] = useState(false)
   const [newEmail, setNewEmail] = useState("")

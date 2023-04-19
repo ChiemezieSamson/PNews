@@ -2,11 +2,11 @@ import React, { useEffect, useState } from 'react'
 import { FaToggleOff, FaToggleOn } from 'react-icons/fa'
 import { WritePostAsideOpenClosebar } from '../../../../ButtonAndOthers/Buttons'
 import { useDispatch, useSelector } from 'react-redux'
-import { optionalAdded } from '../../../../../Reduxstore/Slices/PostsComponentSlices/PostsOptional/PostsOptionalSlice'
+import { optionalAdded, selectAllPostOptionals } from '../../../../../Reduxstore/Slices/PostsComponentSlices/PostsOptional/PostsOptionalSlice'
 
 
 const Optional = ({updatePostOptions}) => {
-  const dispatchedOpitional = useSelector(state => state.postOptional)
+  const dispatchedOpitional = useSelector(selectAllPostOptionals)
   const [openCat, setOpenCat] = useState(false)
   const [Trending, setTrending] = useState(updatePostOptions !== undefined ? updatePostOptions.Trending : "")
   const [shared, setShared] = useState(updatePostOptions !== undefined ? updatePostOptions.shared : "")

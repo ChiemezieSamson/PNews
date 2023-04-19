@@ -10,13 +10,14 @@ import Comment from './CommentComponent/Comment';
 import Preview from '../createPost/editorPreview/Preview';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import PreviousNextPost from './PreviousNextPost';
-import { postDeleted } from '../../../../Reduxstore/Slices/posts/PostsSlice';
+import { postDeleted, selectPostById } from '../../../../Reduxstore/Slices/posts/PostsSlice';
+import { selectAllComments } from '../../../../Reduxstore/Slices/comments/CommentsSlice';
 
 
 const SinglePost = () => {
   const { postId } = useParams();
-  const Post = useSelector(state => state.posts.find(post => post.id === postId))
-  const comments = useSelector(state => state.comments)
+  const Post = useSelector(state => selectPostById(state, postId))
+  const comments = useSelector(selectAllComments)
   const [hoverRef, isHovered] = useHover();
   const [sizeLine, setSizeLine] = useState(20)
   const [textSize, setTextSize] = useState("prose-base")
@@ -189,14 +190,14 @@ const SinglePost = () => {
 
           <div className='grid md:grid-cols-5 grid-cols-12 lg:mb-8 mb-4'>
             <div className='lg:grid lg:grid-cols-2 whitespace-nowrap max-w-[130px] col-span-1 pt-1 mx-auto lg:mx-0'>
-              <span className='font-extrabold text-[#f70d28] font-round text-2xl leading-none'>
-                {"551"}
+              <span className='font-extrabold text-[#f70d28] font-round text-2xl leading-none text-center'>
+                {Post.optional.shared >= 1000 ? Post.optional.shared + "k" : Post.optional.shared}
                 <div className='text-[#7a7a7a] uppercase text-xs  font-lora font-normal -mt-0.5'>shares</div>
               </span>         
           
               <span className='font-extrabold relative hidden lg:inline-block text-slate-400 font-round text-2xl leading-none after:w-px after:h-full
-              after:bg-[#e0e0e0] after:block after:absolute after:right-0 after:-top-0.5 after:rotate-[15deg] after:z-0'>
-                {"3.9k"}
+              after:bg-[#e0e0e0] after:block after:absolute after:right-0 after:-top-0.5 after:rotate-[15deg] after:z-0 text-center'>
+                {Post.optional.viewed >= 1000 ? Post.optional.viewed + "k" : Post.optional.viewed}
                 <div className='text-[#7a7a7a] uppercase text-xs pl-1.5 font-lora font-normal -mt-0.5'>views</div>
               </span>
             </div>

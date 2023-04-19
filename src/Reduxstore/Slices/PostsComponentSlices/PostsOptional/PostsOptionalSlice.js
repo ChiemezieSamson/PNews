@@ -37,6 +37,8 @@ const postOptionalSlice = createSlice({
 	},
 });
 
+export const selectAllPostOptionals = (state) => state.postOptional;
+
 export const { optionalAdded, emptyOptional } = postOptionalSlice.actions;
 
 export default postOptionalSlice.reducer;

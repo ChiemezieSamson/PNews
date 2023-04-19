@@ -3,10 +3,11 @@ import { JustTimeComponet } from './SharedComponents';
 import { useSelector } from "react-redux"
 import { AdminComponentColor, CategoriesComponentBotton, MainDivider, PostsShortInfoComponent, PostTitleMedium2, TimeComponentColor } from '../../SharedAsset/SharedAssets';
 import { ReadmoreButton, StarComponent } from '../../ButtonAndOthers/Buttons';
+import { selectAllPosts } from '../../../Reduxstore/Slices/posts/PostsSlice';
 
 
 const FeaturedPosts = () => {
-  const Posts = useSelector(state => state.posts)
+  const Posts = useSelector(selectAllPosts)
   
   return (
     <section className="mt-3.5">

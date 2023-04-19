@@ -11,6 +11,7 @@ import pix10 from "../src/asset/images/pix10.jpg";
 import pix11 from "../src/asset/images/pix11.jpg";
 import pix12 from "../src/asset/images/pix12.jpg";
 import pix13 from "../src/asset/images/pix13.jpg";
+import chinonye from "../src/asset/images/chinonye.jpg";
 import {
 	FaClock,
 	FaEnvelope,
@@ -3880,7 +3881,7 @@ export const User = [
 			secondary: ["example@email.com"],
 		},
 		bio: "text here...",
-		profileImage: "378728372837293821uihu7.jpg",
+		profileImage: chinonye,
 		phonenumber: "(+)number",
 		socialLinks: {
 			twitter: "https://www.example.com",
@@ -4015,9 +4016,11 @@ export const Comment = [
 		content:
 			"So many strong and valid messages all in one song. Falz I duff my hat for you. You are a Legend. Keep keeping it real, always. Thank you for always making you voice heard in the strongest ways.		",
 		postId: "",
-		choice: {
+		reactions: {
 			like: 3,
-			dislike: "",
+			support: 0,
+			love: 0,
+			funny: 0,
 		},
 		replies: [
 			{
@@ -4025,9 +4028,11 @@ export const Comment = [
 				name: "Daddy Greenarrow",
 				time: "0 seconds ago",
 				content: "Yes ooo",
-				choice: {
-					like: "",
-					dislike: "",
+				reactions: {
+					like: 0,
+					support: 0,
+					love: 0,
+					funny: 0,
 				},
 				replyOfreply: "",
 			},
@@ -4036,9 +4041,11 @@ export const Comment = [
 				name: "Daddy Greenarrow",
 				time: "1 second ago",
 				content: "he is a real hero",
-				choice: {
-					like: "",
-					dislike: "",
+				reactions: {
+					like: 0,
+					support: 0,
+					love: 0,
+					funny: 0,
 				},
 				replyOfreply: "@Daddy Greenarrow",
 			},
@@ -4048,9 +4055,11 @@ export const Comment = [
 				time: "16 hours ago",
 				content:
 					"Respect Falz you are a true definition of the voice for the youth. We love you from 🇬🇧",
-				choice: {
+				reactions: {
 					like: 4,
-					dislike: "",
+					support: 0,
+					love: 0,
+					funny: 0,
 				},
 				replyOfreply: "",
 			},
@@ -4060,9 +4069,11 @@ export const Comment = [
 				time: "3 hours ago",
 				content:
 					"God bless you Falz for standing up tall on this. This jam is fire 🔥",
-				choice: {
+				reactions: {
 					like: 4,
-					dislike: "",
+					support: 0,
+					love: 0,
+					funny: 0,
 				},
 				replyOfreply: "",
 			},
@@ -4072,9 +4083,11 @@ export const Comment = [
 				time: "13 hours ago",
 				content:
 					"Falz this masterpiece is outstanding thanks for speaking for the people of Nigeria through your music 🎵🎶",
-				choice: {
+				reactions: {
 					like: 3,
-					dislike: "",
+					support: 0,
+					love: 0,
+					funny: 0,
 				},
 				replyOfreply: "@Izik Gyang",
 			},

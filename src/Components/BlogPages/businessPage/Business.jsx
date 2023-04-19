@@ -5,9 +5,10 @@ import { AdminComponent, CategoriesComponent, NavDirectionAndPageName, overLay, 
 import Aside from "../asidePage/Aside";
 import { PagesBlogPostComponent } from "../IndexPageComponents/SharedComponents";
 import { Link } from "react-router-dom";
+import { selectAllPosts } from "../../../Reduxstore/Slices/posts/PostsSlice";
 
 const Business = () => {
-  const Posts = useSelector(state => state.posts)
+  const Posts = useSelector(selectAllPosts)
   const size = useWindowSize()
   return (
     <section className="text-left">

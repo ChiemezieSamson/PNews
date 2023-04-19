@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { createUser } from "../../Reduxstore/Slices/users/UsersSlice";
+import { createUser, selectAllUsers } from "../../Reduxstore/Slices/users/UsersSlice";
 
 const RegistrationForm = () => {
   const [firstName, setFirstName] = useState("");
@@ -9,7 +9,7 @@ const RegistrationForm = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [requiredText, setRequiredText] = useState(false)
-  const users = useSelector(state => state.users) 
+  const users = useSelector(selectAllUsers) 
 
   const dispatch = useDispatch()
 

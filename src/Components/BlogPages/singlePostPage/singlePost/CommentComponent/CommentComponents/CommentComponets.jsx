@@ -1,25 +1,13 @@
 import React, { useState } from 'react'
-import { FaEllipsisH, FaEllipsisV, FaRegThumbsDown, FaRegThumbsUp } from 'react-icons/fa'
+import { FaEllipsisH, FaEllipsisV } from 'react-icons/fa'
 import { useWindowSize } from '../../../../../SharedAsset/SharedAssets'
 
 
-const LikeDislikeReply = ({like, dislike, handler}) => {
-
-  // useEffect
-  return (
-    <div className='mr-6 max-w-[12rem] grid grid-cols-3 py-1 mt-1'>
-      <span className='grid grid-cols-2 px-1'>
-        <FaRegThumbsUp className='inline-block mt-1'/>
-        <span>{like}</span>
-      </span>
-      <span className='grid grid-cols-2 px-1'>
-        <FaRegThumbsDown className='inline-block mt-1.5'/>
-        <span>{dislike}</span>
-      </span>
-      <button className="text-sm text-gray-500" onClick={handler}>
-        Reply
-      </button>
-  </div>    
+const LikeDislikeReply = ({handler}) => {
+  return (  
+    <button className="text-sm text-gray-500" onClick={handler}>
+      Reply
+    </button>   
   )
 }
 

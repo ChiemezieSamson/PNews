@@ -7,12 +7,13 @@ import Category from '../../createPost/CreatePostAsideComponents/Category'
 import Tag from '../../createPost/CreatePostAsideComponents/Tag'
 import Optional from '../../createPost/CreatePostAsideComponents/Optional'
 import { useSelector } from 'react-redux'
+import { selectPostById } from '../../../../../Reduxstore/Slices/posts/PostsSlice'
 
 const UpdatePostAsideComponent = ({handleAllPostContent, editPost, handleSetPostAuthor, postAuthor}) => {
+  const postId = editPost
   const [showSideBar, setShowSideBar] = useState(false)
-  const post = useSelector(state => state.posts.find(post => post.id === editPost))
+  const post = useSelector(state => selectPostById(state, postId))
   const size = useWindowSize()
-  // const [postAuthor, setPostAuthor] = useState(post.postAuthor || "")
   const [postCategory, setPostCategory] = useState(post.postCategory)
   const [postTag, setPostTag] = useState(post.postTags)
   const [postOptional, setPostOptional] = useState(post.optional)

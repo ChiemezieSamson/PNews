@@ -50,6 +50,8 @@ const postCategoriesSlice = createSlice({
 	},
 });
 
+export const selectAllPostCat = (state) => state.postCat;
+
 export const { catAdded, catUnchecked, updateCategories, emptyCategories } =
 	postCategoriesSlice.actions;
 

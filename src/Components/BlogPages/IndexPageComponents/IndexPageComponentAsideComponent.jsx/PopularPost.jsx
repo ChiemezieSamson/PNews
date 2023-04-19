@@ -2,9 +2,10 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import { MainDivider, SharedCount } from '../../../SharedAsset/SharedAssets'
 import { Link } from 'react-router-dom'
+import { selectAllPosts } from '../../../../Reduxstore/Slices/posts/PostsSlice'
 
 const PopularPost = () => {
-const Posts = useSelector(state => state.posts)
+const Posts = useSelector(selectAllPosts)
   return (
     <section className='md:my-3 mt-12'>
       <MainDivider firstletter={"Popular Post"} />
