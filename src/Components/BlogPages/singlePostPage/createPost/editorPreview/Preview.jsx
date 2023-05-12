@@ -4,7 +4,6 @@ import DOMPurify from 'dompurify';
 import { convertToRaw } from 'draft-js';
 
 
-
 const Preview = ({editorText, postContent}) => {
   const [convertedContent, setConvertedContent] = useState("")
   const [convertedPosts, setConvertedPosts] = useState("")
@@ -16,9 +15,11 @@ const Preview = ({editorText, postContent}) => {
     }
   },[postContent])
 
+
+
   useEffect(() => {
     const defaultText = {blocks:[{key:"9f98v",text:"My post ...! |",type:"unstyled",depth:0,inlineStyleRanges:[],entityRanges:[],data:{}}],entityMap:{}}
-    let html = draftToHtml(convertedPosts !== "" ? convertedPosts : editorText  ? convertToRaw(editorText) : defaultText)
+    let html = draftToHtml(convertedPosts !== "" ? JSON.parse(convertedPosts) : editorText  ? convertToRaw(editorText) : defaultText)
     setConvertedContent(html)  
   }, [convertedContent, editorText, convertedPosts])
 

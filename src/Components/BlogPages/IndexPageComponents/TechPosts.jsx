@@ -1,11 +1,10 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
 import { CatSidebarHanbugar } from '../../SharedAsset/SharedAssets'
 import { JustTimeComponet, JustTimeComponetStar} from './SharedComponents'
-import { selectAllPosts } from '../../../Reduxstore/Slices/posts/PostsSlice'
 
-const TechPosts = () => {
-  const Posts = useSelector(selectAllPosts)
+const TechPosts = ({Posts}) => {
+
+  
   return (
     <section>
       <hr />

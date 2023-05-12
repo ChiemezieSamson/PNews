@@ -5,11 +5,13 @@ import FullSreenSidebar from "./HeaderNavigationComponent/FullScree_SideBar";
 import { FaChevronUp } from "react-icons/fa";
 import Footer from "./BlogPages/footerPage/Footer";
 import HeaderNavigations from "./HeaderNavigationComponent/Navigations/HeaderNavigations";
+import { useFetchedPosts } from "./SharedAsset/Spinners/postsSpinner";
 
 
 const HomeLinks = () => {
   const [showFullSideBAr, setShowFullSideBAr] = useState(false)
   const [backToTop, setBackToTop] = useState("")
+  const {isFetching} = useFetchedPosts()
  
   
   const handle_showFullSideBAr = () => {
@@ -57,26 +59,31 @@ const HomeLinks = () => {
         {/* ==== social and newsletter start here === */} 
         <SocialNewsletter opensidebar={handle_showFullSideBAr}/>
 
-        {/* ==== FullScreen Side Bar start here ==== */}
+
+          <>
+          {/* ==== FullScreen Side Bar start here ==== */}
         <div className="Instagramsidebar transition-[display] duration-700 ease-linear hidden fixed right-0 top-0 bottom-0 max-w-md z-[300]" data-visible={showFullSideBAr}>
-          <FullSreenSidebar closesidebar={handleCloseInstaSidebar}/>
+          <FullSreenSidebar closesidebar={handleCloseInstaSidebar} disabled={isFetching}/>
         </div>
 
         {/* ===== Home hero and navigations start here ===== */}
-        <div className="relative z-50">
+        <div className="relative z-50" disabled={isFetching}>
           <HeaderNavigations/>
         </div>
+        </>
       </header>
 
-      {/* Block for all the out let is here */}
-      <div className="w-full">
-        <div className="pt-8 pb-6 lg:max-w-[88%] max-w-[95%] mx-auto">
-          <Outlet/>
-        </div>
-      </div>
+   
+     {/* Block for all the out let is here */}
+        <div className="w-full" disabled={isFetching}>
+          <div className="pt-8 pb-6 lg:max-w-[88%] max-w-[95%] mx-auto">
+            <Outlet/>
+          </div>
+        </div> 
+
 
       <div className="text-left bg-[#212121] text-[#a8a8aa] lg:mt-10 pt-4">
-        <div className="lg:max-w-[88%] max-w-[95%] mx-auto py-4 lg:pt-8">
+        <div className="lg:max-w-[88%] max-w-[95%] mx-auto py-4 lg:pt-8" disabled={isFetching}>
           <Footer />
         </div>
       </div>
@@ -91,17 +98,17 @@ const HomeLinks = () => {
       </span>
 
 
-    {/*  */}
-     <ScrollRestoration 
-      getKey={(location, matches) => {
-        const paths = ["/home", "/notifications"];
-        return paths.includes(location.pathname)
-          ? // home and notifications restore by pathname
-            location.pathname
-          : // everything else by location like the browser
-            location.key;
-      }}
-     />
+      {/*  */}
+      <ScrollRestoration 
+        getKey={(location, matches) => {
+          const paths = ["/home", "/notifications"];
+          return paths.includes(location.pathname)
+            ? // home and notifications restore by pathname
+              location.pathname
+            : // everything else by location like the browser
+              location.key;
+        }}
+      />
     </div>
   )
 }

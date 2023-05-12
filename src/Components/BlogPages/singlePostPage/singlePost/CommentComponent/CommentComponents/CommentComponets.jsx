@@ -11,23 +11,10 @@ const LikeDislikeReply = ({handler}) => {
   )
 }
 
-export const ReplyForm = ({handleReplySubmit, handleSetReplyAuthor, handleSetReplyContent, replyAuthor, replyContent }) => {
+export const ReplyForm = ({handleReplySubmit, handleSetReplyContent, replyContent }) => {
      
   return (
     <form onSubmit={handleReplySubmit} className= "hidden">
-      <div className="mt-2">
-        <label htmlFor="replyname" className="block text-sm font-medium text-gray-700 after:content-['*'] after:ml-1 after:text-lg after:text-red-500">
-          Your Name
-        </label>
-        <input
-          type="text"
-          id="replyname"
-          value={replyAuthor}
-          onChange={handleSetReplyAuthor}
-          required
-          className="mt-1 p-1 border border-gray-400 rounded-md w-full"
-        />
-      </div>
       <div className="mt-2">
         <label htmlFor="replycontent" className="block text-sm font-medium text-gray-700 after:content-['*'] after:ml-1 after:text-lg after:text-red-500">
           Your Reply

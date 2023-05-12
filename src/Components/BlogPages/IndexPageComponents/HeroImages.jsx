@@ -1,16 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { FaMapPin, FaChevronLeft, FaChevronRight} from "react-icons/fa";
-import { useSelector } from "react-redux"
 import { StarComponent } from '../../ButtonAndOthers/Buttons';
 import { CategoriesComponent, overLay, PostTitleLarge, TimeComponent, useWindowSize } from '../../SharedAsset/SharedAssets';
 import { Link } from 'react-router-dom';
-import { selectAllPosts } from '../../../Reduxstore/Slices/posts/PostsSlice';
 
 
-
-const HeroImages = () => {
+const HeroImages = ({Posts}) => {
   const [nextTrendingPost, setNextTrendingPost] = useState(1)
-  const Posts = useSelector(selectAllPosts)
   const size = useWindowSize()
 
   const trendingPostArry = Posts.slice(0, 6)
@@ -60,13 +56,13 @@ const HeroImages = () => {
             <div className="mt-[6px] xs:col-span-4 relative bg-white col-span-9 md:text-sm text-base lg:text-base prose ">
               {Posts.slice(0, 6).map((post) => {
                 return (
-                  <span key={post.id} className="capitalize pl-[2%] font-lora tracking-wide truncate font-bold text-sm -mt-1.5 pb-1 w-[97%] sm:w-full
+                  <span key={post._id} className="capitalize pl-[2%] font-lora tracking-wide truncate font-bold text-sm -mt-1.5 pb-1 w-[97%] sm:w-full
                        absolute -top-[20%] overflow-y-hidden -z-1 trending text-white opacity-0 transition-all duration-500 delay-500 ease-linear 
                        whitespace-nowrap" title='title' data-visible={nextTrendingPost}>                   
-                       <Link to={`/single/${post.id}`} className='hover:text-[#f70d28] cursor-pointer'>
+                       <Link to={`/single/${post._id}`} className='hover:text-[#f70d28] cursor-pointer'>
                           {post.postTitle}
                         </Link> 
-                        <time dateTime='2022-11-3 4:45' className="whitespace-nowrap ml-3 text-gray-400/60 cursor-pointer  text-ellipsis">{post.date}</time>
+                        <time dateTime='2022-11-3 4:45' className="whitespace-nowrap ml-3 text-gray-400/60 cursor-pointer  text-ellipsis">{new Date(post.createdAt).toDateString()}</time>
                   </span>
                 )
               })}
@@ -101,13 +97,13 @@ const HeroImages = () => {
             </span>
             <div className="absolute bottom-[8%] inset-x-0 text-white flex content-center justify-center z-20">
               <div className="w-[90%] text-left">
-                  <PostTitleLarge post={Posts[4].postTitle} postId={Posts[4].id}/>
+                  <PostTitleLarge post={Posts[4].postTitle} postId={Posts[4]._id}/>
                 {size.width > 480 &&
                   <span className="mt-2 inline-block">
                     <span className='mr-4'>
                       <StarComponent color={"text-[#fff]"}/>
                     </span>                 
-                      <TimeComponent time={Posts[4].date} />
+                      <TimeComponent time={Posts[4].createdAt} />
                 </span>}
               </div>
             </div>
@@ -119,7 +115,7 @@ const HeroImages = () => {
             <ul className="w-[800px] md:w-full grid md:grid-flow-row grid-flow-col gap-[5px]">
             {Posts.slice(1,4).map((post) => {
               return (
-            <li key={post.id} className={`relative max-h-44 snap-start ${overLay()} m-0 p-0 group overflow-clip`}>
+            <li key={post._id} className={`relative max-h-44 snap-start ${overLay()} m-0 p-0 group overflow-clip`}>
               <img src={post.postImage} alt="IndexImage"  className="h-32 imgxs:h-[180px] md:h-32 lg:h-40 w-full object-cover group-hover:scale-110
                   transition-all duration-500 delay-200 ease-linear scale-100" loading="lazy"/>
                   <span className='absolute lg:-top-1.5 -top-2 left-4 z-20'>
@@ -128,11 +124,11 @@ const HeroImages = () => {
               <div className="absolute bottom-[10%] text-white inset-x-0 flex content-center justify-center z-20">
                 <div className="w-[90%] text-left">
                   <h3 className="capitalize tracking-wide w-full font-lora md:text-base text-base imgxs:text-xl lg:text-lg font-bold cursor-pointer">
-                    <Link to={`/single/${post.id}`} className='inline-block'>
+                    <Link to={`/single/${post._id}`} className='inline-block'>
                       {post.postTitle}
                     </Link>
                   </h3>
-                  {size.width > 1024 && <TimeComponent time={post.date} />}
+                  {size.width > 1024 && <TimeComponent time={post.createdAt} />}
                 </div>
               </div>
             </li>
@@ -140,9 +136,7 @@ const HeroImages = () => {
             })}
             </ul>
           </div>
-
         </div>
-
       </section>
     </>
   )

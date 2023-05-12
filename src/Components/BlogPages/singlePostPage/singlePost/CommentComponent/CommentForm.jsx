@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { createComment } from "../../../../../Reduxstore/Slices/comments/CommentsSlice";
+import { useCreateNewCommentMutation} from "../../../../../Reduxstore/Slices/comments/CommentsSlice";
+import useFetchedComments from "../../../../SharedAsset/Spinners/commentSpinner";
 
 const CommentForm = ({postId}) => {
   const [author, setAuthor] = useState('');
@@ -8,22 +8,31 @@ const CommentForm = ({postId}) => {
   const [email, setEmail] = useState('');
   const [website, setWebsite] = useState('');
   const [saveInfo, setSaveInfo] = useState(false);
-  const dispatch = useDispatch()
+  const {refetch ,isFetching} = useFetchedComments() 
+  const [addNewComments, {isLoading}] = useCreateNewCommentMutation()
 
-  const handleSubmit = (event) => {
+  const canSave =
+  [postId, author, content, email, website, saveInfo].every(Boolean) && !isLoading
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
-
-    dispatch(createComment(postId, author, content, email, website, saveInfo))
-    
-    setAuthor(() => "");
-    setContent(() => "");
-    setEmail(() => "");
-    setWebsite(() => "");
-    setSaveInfo(() => "")
+    refetch()
+    if (canSave) {
+      try {
+        await addNewComments({postId, author, content, email, website, saveInfo}).unwrap()
+        setAuthor(() => "");
+        setContent(() => "");
+        setEmail(() => "");
+        setWebsite(() => "");
+        setSaveInfo(() => "")
+      } catch (err) {
+        console.error('Failed to save the post: ', err)
+      }
+    }
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} disabled={isFetching} className="disabled:opacity-40">
       <div className="mt-2">
         <label htmlFor="author" className="after:content-['*'] after:ml-1 after:text-lg after:text-red-500  block text-sm font-medium text-gray-700">
           Your Name
@@ -87,11 +96,13 @@ const CommentForm = ({postId}) => {
         checked={saveInfo}
         onChange={() => setSaveInfo((change) => !change)}
         />
-        <label htmlFor="save-data" className="inline-block mx-2 align-top leading-4 text-sm font-medium text-gray-700 col-span-11">Save my name, email and website in this browser for the next time i comment.</label>
+        <label htmlFor="save-data" className="inline-block mx-2 align-top leading-4 text-sm font-medium text-gray-700 col-span-11">
+          Save my name, email and website in this browser for the next time i comment.</label>
       </div>
       
       <div className="mt-7">
-        <button type="submit" className="py-2 px-2 uppercase rounded-md text-xs tracking-wider text-white bg-gray-700 hover:bg-[#f70d28]">
+        <button type="submit" className="py-2 px-2 disabled:opacity-40 uppercase rounded-md text-xs tracking-wider text-white bg-gray-700 hover:bg-[#f70d28]"
+         disabled={!canSave}>
           Add Comment
         </button>
       </div>

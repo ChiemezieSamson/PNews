@@ -1,11 +1,8 @@
 import React from 'react'
 import { AdminComponentColor, CategoriesComponentBotton, CatSidebarHanbugar, CommentComponetColor, PostsShortInfoComponent, PostTitleMedium, PostTitleMedium2, TimeComponentColor, useWindowSize } from '../../SharedAsset/SharedAssets'
-import { useSelector } from "react-redux"
 import { ReadmoreButton } from '../../ButtonAndOthers/Buttons';
-import { selectAllPosts } from '../../../Reduxstore/Slices/posts/PostsSlice';
 
-const ArroundTheWorldPosts = () => {
-  const Posts = useSelector(selectAllPosts)
+const ArroundTheWorldPosts = ({Posts}) => {
   const size = useWindowSize()
  
   return (
@@ -23,14 +20,14 @@ const ArroundTheWorldPosts = () => {
             <CategoriesComponentBotton cat={Posts[11].postCategory[0]} />
           </div>
 
-          <PostTitleMedium2 post={Posts[11].postTitle} postId={Posts[11].id}/>
+          <PostTitleMedium2 post={Posts[11].postTitle} postId={Posts[11]._id}/>
 
           <span className="mt-2 mb-4 inline-block">
             <span className='mr-4 inline-block'>
               <AdminComponentColor />
             </span>
             
-            <TimeComponentColor time={Posts[11].date}/>
+            <TimeComponentColor time={Posts[11].createdAt}/>
           </span>
 
           {size.width > 519 && 
@@ -43,27 +40,27 @@ const ArroundTheWorldPosts = () => {
         <ul className='mt-0.5 p-0 md:ml-[3%]'>
           {Posts.slice(0, 2).map((post) => {
             return (
-              <li key={post.id} className="mb-3.5">
+              <li key={post._id} className="mb-3.5">
                 <div className="relative mb-4">
                   <img src={post.postImage} alt={"game"} className="w-full h-44 imgxs:h-[240px] md:h-36 lg:h-48 xl:h-[250px] object-cover cursor-pointer" loading="lazy"/>
-                  <CategoriesComponentBotton cat={post.postCategory[0]} />
+                  <CategoriesComponentBotton cat={post.postCategory[0]}/>
                 </div>
 
-                <PostTitleMedium post={post.postTitle} postId={post.id}/>
+                <PostTitleMedium post={post.postTitle} postId={post._id}/>
 
                 <span className="mt-2 mb-2 inline-block">
                   <span className='mr-4'>
                     <AdminComponentColor />
                   </span>
                   <span className='mr-4'>
-                    <TimeComponentColor time={post.date}/>
+                    <TimeComponentColor time={post.createdAt}/>
                   </span>
                     <CommentComponetColor />
                 </span>
 
                 {size.width > 519 && 
                 <>
-                  <PostsShortInfoComponent post={post.postContent} />
+                  <PostsShortInfoComponent post={post.postContent}/>
                   <ReadmoreButton />
                 </>}
               </li>

@@ -8,7 +8,7 @@ import Optional from './CreatePostAsideComponents/Optional'
 import Tag from './CreatePostAsideComponents/Tag'
 
 
-const CreatePostAside = ({handleAllPostContent, handleSetPostAuthor, postAuthor}) => {
+const CreatePostAside = ({handleAllPostContent, handleSetPostAuthor, postAuthor, canSave}) => {
   const [showSideBar, setShowSideBar] = useState(false)
   const [parentCat, setSelectedParentCat] = useState("")
   const [parentTag, setSelectedParentTag] = useState("")
@@ -78,16 +78,18 @@ const CreatePostAside = ({handleAllPostContent, handleSetPostAuthor, postAuthor}
   }
   
   const handleDispatched = () => {
-    for(let i = 0; i < checkedItemElemets.length; i++) {
-      checkedItemElemets[i].checked = false // for each of the collected element first uncheck them
-    }
-    
     handleAllPostContent()
-    setSelectedParentCat(() => "")
-    setSelectedParentTag(() => "")
-    setAddTag(() => "")
-    setCategory(() => "")
-    setCheckedItemElements(() => [])
+    if (canSave) {
+      for(let i = 0; i < checkedItemElemets.length; i++) {
+        checkedItemElemets[i].checked = false // for each of the collected element first uncheck them
+      }
+    
+      setSelectedParentCat(() => "")
+      setSelectedParentTag(() => "")
+      setAddTag(() => "")
+      setCategory(() => "")
+      setCheckedItemElements(() => [])
+    }
   }
 
   // using useEffect to dictect the changes in screen size

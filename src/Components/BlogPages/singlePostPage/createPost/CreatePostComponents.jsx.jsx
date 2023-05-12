@@ -6,14 +6,15 @@ import Preview from "./editorPreview/Preview";
 import { convertToRaw, EditorState} from 'draft-js';
 import { Editor } from 'react-draft-wysiwyg';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
-import { postAdded, selectAllPosts } from '../../../../Reduxstore/Slices/posts/PostsSlice'
 import { emptyCategories, selectAllPostCat } from '../../../../Reduxstore/Slices/PostsComponentSlices/postcategory/PostcategoriesSlice'
 import { emptyTag, selectAllPostTags } from '../../../../Reduxstore/Slices/PostsComponentSlices/postsTags/PostsTagsSlice'
 import { emptyOptional, selectAllPostOptionals } from '../../../../Reduxstore/Slices/PostsComponentSlices/PostsOptional/PostsOptionalSlice'
-
+import { useFetchedPosts } from "../../../SharedAsset/Spinners/postsSpinner";
+import { useCreateNewPostMutation } from "../../../../Reduxstore/Slices/posts/PostsSlice";
 
 const CreatePostComponents = ({state}) => {
-  const Posts = useSelector(selectAllPosts)
+  const {content , action, refetch} = useFetchedPosts()
+  const Posts = content
 
   const [editorState, setEditorState] = useState(
     () => EditorState.createWithContent(state),
@@ -22,10 +23,11 @@ const CreatePostComponents = ({state}) => {
   const [postTitle, setPostTitle] = useState("")
   const [postImage, setPostImage] = useState("")
   const [postAuthor, setPostAuthor] = useState("")
+  const [addNewPost, { isLoading }] = useCreateNewPostMutation()
 
   const postCategory = useSelector(selectAllPostCat)
   const postTags = useSelector(selectAllPostTags)
-  const postOptional = useSelector(selectAllPostOptionals)
+  const optional = useSelector(selectAllPostOptionals)
 
   const handleSetPostAuthor = (author) => {
     setPostAuthor(() => author.target.value.toLowerCase())
@@ -35,19 +37,25 @@ const CreatePostComponents = ({state}) => {
 
   const dispatch = useDispatch()
 
-  const canSave = Boolean(postTitle) && Boolean(postImage) && Boolean(postAuthor) && Boolean(postCategory[0]) && Boolean(postTags[0])
 
-  const handleAllPostContent = () => {
+
+  const canSave = [postTitle, postImage, postAuthor,postCategory[0],postTags[0]].every(Boolean) && !isLoading
+
+  const handleAllPostContent = async () => {
+    refetch()
     if (canSave) {
-      dispatch(postAdded(postAuthor, postTitle, postImage, postContent , postCategory, postTags, postOptional))
-      
-      dispatch(emptyCategories())
-      dispatch(emptyTag())
-      dispatch(emptyOptional())
-      setPostImage(() => "")
-      setPostTitle(() => "")
-      setPostAuthor(() => "")
-      setEditorState(() => EditorState.createWithContent(state))
+      try {
+        await addNewPost({ postAuthor, postTitle, postImage, postContent , postCategory, postTags, optional }).unwrap()
+        dispatch(emptyCategories())
+        dispatch(emptyTag())
+        dispatch(emptyOptional())
+        setPostImage(() => "")
+        setPostTitle(() => "")
+        setPostAuthor(() => "")
+        setEditorState(() => EditorState.createWithContent(state))
+      } catch (err) {
+        console.error('Failed to save the post: ', err)
+      }
     }
   }
 
@@ -72,7 +80,7 @@ const CreatePostComponents = ({state}) => {
           autoFocus={true} form="post_form" value={postTitle}  onChange={(e) => setPostTitle(() => e.target.value)}/>
         </div>
 
-        <img key={Posts[4].postImage} src={Posts[4].postImage || null} alt="postImage" className='w-full h-80 rounded-xl object-cover' loading="lazy"/>
+        {action ? <img  src={Posts[4].postImage || null} alt="postImage" className='w-full h-80 rounded-xl object-cover' loading="lazy"/> : content}
 
         {/* write post form */}
         <form className="mt-2.5" id="post_form" onSubmit={handleSubmit}>
@@ -114,7 +122,11 @@ const CreatePostComponents = ({state}) => {
         <Preview editorText={editorState.getCurrentContent()} />
       </div>
       <div className="lg:order-2 order-1 text-left lg:col-span-1">
-        <CreatePostAside handleAllPostContent={handleAllPostContent} handleSetPostAuthor={handleSetPostAuthor} postAuthor={postAuthor}/> 
+        <CreatePostAside 
+        canSave={canSave}
+        handleAllPostContent={handleAllPostContent} 
+        handleSetPostAuthor={handleSetPostAuthor} 
+        postAuthor={postAuthor}/> 
       </div>
     </div>
   )

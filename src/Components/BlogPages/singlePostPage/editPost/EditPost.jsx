@@ -1,24 +1,27 @@
 import { ContentState,convertFromHTML} from 'draft-js';
-import {useSelector } from 'react-redux';
 import draftToHtml from 'draftjs-to-html';
 import UpdatePostComponent from './EditPostComponents/UpdatePostComponent';
-import { useParams } from 'react-router-dom';
-import { selectPostById } from '../../../../Reduxstore/Slices/posts/PostsSlice';
+import { useFetchedPostById } from '../../../SharedAsset/Spinners/postsSpinner';
 
 const EditPost = () => {
-  const { postId } = useParams()
-  const post = useSelector(state => selectPostById(state, postId))
+  const {singlePost , postAction, postId} = useFetchedPostById()
+  const post = singlePost
+  let state
  
-  
-  let html = draftToHtml(post.postContent);
+  if (postAction) {
+  let html = draftToHtml(JSON.parse(post.postContent));
   const blocksFromHTML = convertFromHTML(html);
-  const state = ContentState.createFromBlockArray(
+    state = ContentState.createFromBlockArray(
     blocksFromHTML.contentBlocks,
     blocksFromHTML.entityMap,
-  );
+  );}
   
   return (
-   <UpdatePostComponent  state={state} editPost={postId}/>
+    <>
+    {
+      postAction ? <UpdatePostComponent post={post} state={state} postId={postId}/> : singlePost
+    }
+    </>   
   )
 }
 

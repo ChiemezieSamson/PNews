@@ -1,28 +1,40 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { FaCheckDouble } from "react-icons/fa";
-import { useDispatch, useSelector } from 'react-redux';
-import { selectAllUsers, userPersonalInfoUpdated } from '../../../Reduxstore/Slices/users/UsersSlice';
+import { useUpdateExistingUserMutation } from '../../../Reduxstore/Slices/users/UsersSlice';
 import { UserInfoHeading } from '../../SharedAsset/SharedAssets';
+import { useFetchedUserById } from '../../SharedAsset/Spinners/userSpinner';
 
 const Personal = () => {
-  const user = useSelector(selectAllUsers)
+  const {singleUser, userAction, isFetching} = useFetchedUserById()
+  const [userPersonalInfoUpdated, {isLoading}] = useUpdateExistingUserMutation()
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [location, setLocation] = useState("");
-  
-  const dispatch = useDispatch()
+  const user = singleUser
 
-  const handleSubmit = (event) => {
+  const canSave = [firstName, lastName, location].every(Boolean) && !isLoading
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
-
-    const userId = user[1] ? user[1].id : user[0].id
-
-    dispatch(userPersonalInfoUpdated({userId, firstName, lastName, location}))
+    if (canSave) {
+      await userPersonalInfoUpdated({userId: user._id, name: {firstname: firstName, lastname: lastName}, location})
+    }
   };
+
+  useEffect(() =>{
+    if(userAction) {
+      setFirstName(() => user.name.firstname)
+      setLastName(() => user.name.lastname)
+      setLocation(() => user.location)
+    }
+  },[userAction,user])
 
 
   return (
-    <div className='text-left px-5 mt-8 font-source pt-7 pb-5'>
+    <>
+    {
+      userAction ? 
+      <div className='text-left px-5 mt-8 font-source pt-7 pb-5 disabled:opacity-40' disabled={isFetching}>
 
       {/* User first name and last name are inside the form tag  */}
       <UserInfoHeading head={"User Name"} text={"For Account and Public Profile"}/>
@@ -36,7 +48,7 @@ const Personal = () => {
           </span>
           <div className='relative'>
             <input type="text" name="userfirstname" id="userfirstname"  className='peer mb-0' onChange={(e) => setFirstName(() => e.target.value)}
-            required value={firstName}  placeholder={user[0].name.firstName}/>
+            required value={firstName}  placeholder={user.name.firstname}/>
             <p className="mt-0.5 hidden peer-invalid:block text-red-400 text-sm">
                 Please provide your first name.
             </p>
@@ -53,7 +65,7 @@ const Personal = () => {
           </span>
           <div className='relative'>
             <input type="text" name="userlastname" id="userlastname" className='peer mb-0' onChange={(e) => setLastName(() => e.target.value)}
-            required placeholder={user[0].name.LastName} value={lastName}/>
+            required placeholder={user.name.lastname} value={lastName}/>
             <p className="mt-0.5 hidden peer-invalid:block text-red-400 text-sm">
               Please provide your last name.
             </p>
@@ -70,7 +82,7 @@ const Personal = () => {
           </span>
           <div className='relative'>
             <input type="text" name="userlocation" id="userlocation"  className='peer mb-0'
-            required placeholder={user[0].name.location} value={location} onChange={(e) => setLocation(() => e.target.value)}/>
+            required placeholder={user.location} value={location} onChange={(e) => setLocation(() => e.target.value)}/>
             <p className="mt-0.5 hidden peer-invalid:block text-red-400 text-sm">
               Please provide your location.
             </p>
@@ -96,7 +108,7 @@ const Personal = () => {
             </span>
             <div className='relative'>
               <input type="email" name="useremail" id="useremail"  className='peer mb-0'
-               placeholder="{thisUser.email.primary}" readOnly/>
+               placeholder={user.email.primary} readOnly/>
               <p className="mt-0.5 hidden peer-invalid:block text-red-400 text-sm">
                 Please provide a valid email address.
               </p>
@@ -127,10 +139,14 @@ const Personal = () => {
 
         <div className='mt-5 p-2 grid place-items-end'>
           <button className='text-[#798488] bg-gray-300 capitalize border-0 py-2.5 px-8 rounded-full cursor-pointer text-base shadow-[#444] 
-            shadow-sm' type='submit' form='userinformation'>Save</button>
+            shadow-sm disabled:opacity-40' type='submit' form='userinformation' disabled={!canSave}>Save</button>
         </div>               
       </form>        
-    </div>
+    </div> :
+      singleUser
+    }
+    </>
+    
   )
 }
 

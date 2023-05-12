@@ -1,12 +1,12 @@
 import React from "react";
 import { Hanbugar3 } from "../ButtonAndOthers/Buttons";
 import { SocialMediaIcons} from "../../data"
-import { useSelector } from "react-redux";
-import { selectAllPosts } from "../../Reduxstore/Slices/posts/PostsSlice";
+import { useFetchedPosts } from "../SharedAsset/Spinners/postsSpinner";
 
 
 const FullSreenSidebar = ({closesidebar}) => {
-  const Posts = useSelector(selectAllPosts)
+  const {content , action} = useFetchedPosts()
+  const Posts = content
   
   const Words = ["Get in touch", "Adventure journal", "Live events"]
   const texts = Words.map((text,i) => ({id: i, name: text}))
@@ -15,7 +15,7 @@ const FullSreenSidebar = ({closesidebar}) => {
     <section className="overflowScrollSmallScreen hidden md:block h-screen overflow-y-scroll scroll-py-4 overscroll-y-contain snap-mandatory p-8 px-12 relative bg-gray-200">
 
       <figure className="w-40 mx-auto p-4">
-       <img src={Posts[9].postImage} alt="FirstImage" className="w-full h-auto" loading="lazy"/>
+       {action ? <img src={Posts[9].postImage} alt="FirstImage" className="w-full h-auto" loading="lazy"/> : content}
        <figcaption>Chinonye</figcaption>
       </figure>
 
@@ -33,11 +33,11 @@ const FullSreenSidebar = ({closesidebar}) => {
       {/* ==== the Instagram Image start here ==== */}
   
       <ul className="grid grid-cols-3 gap-0 mb-4 shadow-sm shadow-black ">
-        {
-          Posts.slice(0, 9).map((data) => {
+        {action &&
+          Posts.slice(0, 9).map((post) => {
             return (
-            <li key={data.id} className="p-0 m-0 h-28 relative InstagramImage">
-              <img src={data.postImage} alt={"social"}  className="w-full h-28 p-0 m-0" loading="lazy"/>
+            <li key={post._id} className="p-0 m-0 h-28 relative InstagramImage">
+              <img src={post.postImage} alt={"social"}  className="w-full h-28 p-0 m-0" loading="lazy"/>
               <div className="absolute top-0 right-0 left-0 bottom-0 bg-black opacity-0 Instacover"></div>
             </li>
             )

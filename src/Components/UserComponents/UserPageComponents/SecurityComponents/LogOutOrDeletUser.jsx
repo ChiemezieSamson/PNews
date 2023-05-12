@@ -1,11 +1,19 @@
 import React, { useState } from 'react'
 import { Hanbugar3, WritePostAsideOpenClosebar } from '../../../ButtonAndOthers/Buttons'
 import { SinginAndSecurityIntro } from '../../../SharedAsset/SharedAssets'
+import { useDeleteExistingUserMutation } from '../../../../Reduxstore/Slices/users/UsersSlice'
+import { handelPassWordValidation } from '../../../SharedAsset/Vaidations/bcrypt'
+import { useNavigate } from 'react-router-dom'
 
-const LogOutOrDeletUser = () => {
+const LogOutOrDeletUser = ({user}) => {
+  const [deleteUser, { isLoading }] = useDeleteExistingUserMutation()
   const [openCat, setOpenCat] = useState(false)
+  const [wrongPassword, setWrongPassword] = useState(false)
   const [textContentOfTheClickedButton, setTextContentOfTheClickedButton] = useState("LogOut")
   const [openGetUserPasswordForMakeAndRemove, setOpenGetUserPasswordForMakeAndRemove] = useState(false)
+  const [password, setPassword] = useState("");
+  const navigate = useNavigate();
+
 
   const handleOpenCloseChild = () => {
     setOpenCat((change) => !change)
@@ -22,6 +30,23 @@ const LogOutOrDeletUser = () => {
   const handleDeletbuttonClicked = (e) => {
     setTextContentOfTheClickedButton(() => e.target.textContent)
     setOpenGetUserPasswordForMakeAndRemove(() => true) 
+  }
+
+
+  const handleDelete = async (e) => {
+    e.preventDefault();
+    const canDelete = Boolean(password) && !isLoading && handelPassWordValidation(password, user)
+
+    if (!handelPassWordValidation(password, user)){
+      setWrongPassword(() => true)
+      setPassword(() => "")
+    }
+
+    if(canDelete){
+      await deleteUser({userId: user._id, password})
+      setPassword(() => "")
+      navigate("/")
+    }
   }
 
   return (
@@ -62,14 +87,17 @@ const LogOutOrDeletUser = () => {
 
             {/* The form to get the user inputed password */}
 
-            <form className='mt-4' >
-              <label htmlFor="userpasswordformakeprimary" className='text-xs font-light '>Password</label>
+            <form className='mt-4' onSubmit={handleDelete}>
+            {wrongPassword ? <p className='text-xs text-rose-500 tracking-wider font-lora'>wrong credentials!</p> : "" }
+              <label htmlFor="userpasswordformakeprimary" className='text-xs font-light'>Password</label>
               <input 
               type="password" 
               name='userpasswordforAuth' 
               id='userpasswordforAuth'
               className='placeholder:text-[#798488] invalid:border-red-400 invalid:shadow-red-400'
-              required/>
+              required
+              onChange={(e) => setPassword(() => e.target.value)}
+              />
               <div className='grid grid-flow-col justify-between'>
                 <button type='submit' 
                 id='logoutordeletuserButton' 

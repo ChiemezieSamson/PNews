@@ -1,28 +1,29 @@
-import React, { useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { selectAllUsers, userProfilePicture } from '../../../Reduxstore/Slices/users/UsersSlice'
+import React, {useState } from 'react'
+import { useUpdateExistingUserMutation,  } from '../../../Reduxstore/Slices/users/UsersSlice'
+import { useFetchedUserById } from '../../SharedAsset/Spinners/userSpinner'
 
 
 const MyProfilePicture = () => {
-  const user = useSelector(selectAllUsers)
+  const {singleUser, userAction, isFetching} = useFetchedUserById()
+  const [userProfilePicture, {isLoading}] = useUpdateExistingUserMutation()
   const [profileImage, setProfileImage] = useState("")
+  const user = singleUser  
 
+  const canSave = [profileImage].every(Boolean) && !isLoading
 
-  const dispatch = useDispatch()
-
-  const userId = user[1] ? user[1].id : user[0].id
-
-
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-
-
-    dispatch(userProfilePicture({userId, profileImage}))
-
-    setProfileImage(() => "")
+    if(canSave) {
+      await userProfilePicture({userId: user._id, profileImage})
+      setProfileImage(() => "")
+    }
   }
+
   return (
-    <div className='px-3 mb-12 bg-gray-200/40 pb-5 pt-5 rounded-md'>
+    <>
+    {
+      userAction ?
+      <div className='px-3 mb-12 bg-gray-200/40 pb-5 pt-5 rounded-md disabled:opacity-40' disabled={isFetching}>
       <div className='font-semibold px-3 mb-9'>
         <p className='text-[#282a35] text-2xl capitalize'>My Profile picture</p>
         <small className='text-xs text-[#798488]'>Add a photo of you to be easily recognized</small>
@@ -31,7 +32,7 @@ const MyProfilePicture = () => {
         <div className="max-w-[200px] mx-auto h-[200px] bg-[#aaacb0] border border-solid border-[#e7e9eb] rounded-full
         text-white group cursor-default shadow-md shadow-[rgba(0,0,0,.25)] relative overflow-clip mb-7">
           <div className='relative after:absolute after:inset-0 after:bg-white/10 after:z-10 w-ful h-full'>
-            <img src={user[0].profileImage} alt="userprofileimage" className='w-full h-full object-cover'/>
+            <img src={user.profileImage} alt="userprofileimage" className='w-full h-full object-cover'/>
           </div>      
           <form 
           id='profileImage'
@@ -43,24 +44,25 @@ const MyProfilePicture = () => {
         </div>        
       </div>
 
-        <div className='px-3 pb-5'>
-          <h3 className='text-xl font-semibold text-[#282a35] capitalize'>{user[0].name.firstName + " " + user[0].name.LastName}</h3>
-          <label htmlFor="usernickname" className="text-sm capitalize italic hover:text-red-400 text-red-700 
-          tracking-widest underline underline-offset-2">{user[0].nickname}</label>
-          <button 
-            type='submit' 
-            form='profileImage'
-            id='submitProfileImage' 
-            name='submitProfileImage' 
-            className={`mx-1 mt-8 cursor-pointer bg-[#e4e4e4] tracking-wider px-2 py-1 rounded-md shadow shadow-gray-400 
-            text-sm hover:bg-rose-500 hover:text-white transition-all duration-200 ease-linear text-neutral-600 
-            ${profileImage !== "" ? "inline-block" : "hidden"}`}
-            >Save password</button>
-        </div>
-
-
-      
-    </div>
+      <div className='px-3 pb-5'>
+        <h3 className='text-xl font-semibold text-[#282a35] capitalize'>{user.fullName}</h3>
+        <label htmlFor="usernickname" className="text-sm capitalize italic hover:text-red-400 text-red-700 
+        tracking-widest underline underline-offset-2 block">{user.username}</label>
+        <button 
+          type='submit' 
+          form='profileImage'
+          id='submitProfileImage' 
+          name='submitProfileImage' 
+          className={`mx-1 mt-8 cursor-pointer bg-[#e4e4e4] tracking-wider px-2 py-1 rounded-md shadow shadow-gray-400 
+          text-sm hover:bg-rose-500 hover:text-white transition-all duration-200 ease-linear text-neutral-600 disabled:opacity-40
+          ${!canSave ? "hidden" : "inline-block"}`} disabled={!canSave}
+          >Save</button>
+      </div>      
+    </div> :
+      singleUser
+    }
+    </>
+    
   )
 }
 

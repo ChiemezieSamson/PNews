@@ -11,48 +11,55 @@ import StayConnectedAndRecommended from "./IndexPageComponents/IndexPageComponen
 import EditorsChioceAndDontMiss from "./IndexPageComponents/IndexPageComponentAsideComponent.jsx/EditorsChioceAndDontMiss";
 import ArroundTheWorldPosts from "./IndexPageComponents/ArroundTheWorldPosts";
 import PaginationFunctions from "./PaginationComponents/PaginationControl/PaginationFunctions/PaginationFunctions";
+import { useFetchedPosts } from "../SharedAsset/Spinners/postsSpinner";
 
 
 const IndexPage = () => {
+  const {content , action} = useFetchedPosts()
+  const Posts = content
   return (
-    <div className="text-left">
+    <>
+    {action &&
+      <div className="text-left">
 
-      <HeroImages />
+      <HeroImages Posts={Posts}/>
 
       <div className="md:grid md:grid-cols-3">
         <div className="col-span-2 md:mr-[4%]">
-          <FeaturedPosts />
-          <ArroundTheWorldPosts />
-          <FashionAndTrendsPosts />
-          <EntertainmentPosts />
-          <TechPosts />
+          <FeaturedPosts Posts={Posts}/>
+          <ArroundTheWorldPosts Posts={Posts}/>
+          <FashionAndTrendsPosts Posts={Posts}/>
+          <EntertainmentPosts Posts={Posts}/>
+          <TechPosts Posts={Posts}/>
         </div>
 
         <aside className="col-span-1 hidden md:block md:ml-[4%]">
         <StickyBox offsetTop={0} offsetBottom={0}>
-          <PopularPost />
-          <EditorsChioceAndDontMiss />
+          <PopularPost Posts={Posts}/>
+          <EditorsChioceAndDontMiss Posts={Posts}/>
         </StickyBox>
         </aside>
       </div>
 
-      <ImageComponent />
+      <ImageComponent Posts={Posts}/>
 
       <div className="md:grid md:grid-cols-3">
         <span className="col-span-2 md:mr-[4%]">
-          <LatestPosts />
+          <LatestPosts Posts={Posts}/>
           <div className="grid grid-flow-col justify-center w-full">
             <PaginationFunctions />
           </div>
         </span>
         <span className="col-span-1 md:ml-[4%]">
           <StickyBox offsetTop={0} offsetBottom={0}>
-            <StayConnectedAndRecommended />
+            <StayConnectedAndRecommended Posts={Posts}/>
           </StickyBox>
         </span>
       </div>
       
     </div>
+    }
+    </>    
   )
 }
 

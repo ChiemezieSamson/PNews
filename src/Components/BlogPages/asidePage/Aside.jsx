@@ -1,13 +1,14 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
 import { NewsLetter, PagesDivider, PostTitleMedium2, SocialLinks, TimeComponent } from '../../SharedAsset/SharedAssets'
 import TrendingCommentsLatest from '../IndexPageComponents/IndexPageComponentAsideComponent.jsx/TrendingCommentsLatest'
 import { JustTimeComponet } from '../IndexPageComponents/SharedComponents'
-import { selectAllPosts } from '../../../Reduxstore/Slices/posts/PostsSlice'
+import { useFetchedPosts } from '../../SharedAsset/Spinners/postsSpinner'
 
 
 const Aside = () => {
-  const Posts = useSelector(selectAllPosts)
+  const {content , action} = useFetchedPosts()
+  const Posts = content
+
   return (
     <section>
       <div className='mb-5'>
@@ -18,26 +19,28 @@ const Aside = () => {
 
       <NewsLetter />
 
-      <TrendingCommentsLatest posts={Posts}/>
+      {action &&  <TrendingCommentsLatest posts={Posts}/>}
 
       <div className='my-10'>
         <PagesDivider text={"Recent Posts"} />
         <span className='my-3 inline-block'>
           <div className='text-white relative after:inset-0 after:bg-black/40 after:absolute mt-4 mb-7'>
             <div className='w-full h-44 imgxs:h-[240px] md:h-36 lg:h-48'>
-              <img src={Posts[2].postImage} alt="recentPost" className="w-full relative h-full object-cover cursor-pointer" loading="lazy"/>  
+              {action ? 
+              <img src={Posts[2].postImage} alt="recentPost" className="w-full relative h-full object-cover cursor-pointer" loading="lazy"/> :
+              content}  
             </div>
             
 
             <div className="absolute bottom-[10%] inset-x-0 flex content-center  justify-center z-20">
               <div className="w-[90%] text-left">
-                <PostTitleMedium2 post={Posts[2].postTitle} postId={Posts[2].id}/>
+                {action && <PostTitleMedium2 post={Posts[2].postTitle} postId={Posts[2]._id}/>}
                 
-                <TimeComponent time={Posts[2].date}/>
+                {action && <TimeComponent time={Posts[2].createdAt}/>}
               </div>
             </div>
           </div>
-          <JustTimeComponet Posts={Posts.slice(4,8)} />
+          {action && <JustTimeComponet Posts={Posts.slice(4,8)} />}
         </span> 
       </div>
     </section>

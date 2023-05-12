@@ -4,21 +4,22 @@ import { AdminComponentColor, CategoriesComponentBotton, CommentComponetColor, P
 
 
 export const JustTimeComponet = ({Posts}) => {
+  
   return (    
     <ul className="min-w-[200px]">
         {/* featured posts other post start here */}
       {Posts.map((post) => {
         return (
-          <li key={post.id} className="grid imgxs:grid-cols-5 grid-cols-4 mb-6">
+          <li key={post._id} className="grid imgxs:grid-cols-5 grid-cols-4 mb-6">
 
             <div className="col-span-1 md:col-span-2 mb-1 imgxs:min-w-[90px] mr-[3%] md:mr-[7%] lg:mr-[3%]">
               <img src={post.postImage} alt={"posts"} className="w-full h-auto md:h-[70px] lg:h-[85px] object-cover cursor-pointer" loading="lazy"/>
             </div>
 
             <div className="col-span-3 imgxs:col-span-4 md:col-span-3 ml-[3%] md:ml-[7%] lg:ml-[3%]">
-              <PostTitleSmall post={post.postTitle} postId={post.id}/>
+              <PostTitleSmall post={post.postTitle} postId={post._id}/>
 
-              <TimeComponentColor time={post.date}/>
+              <TimeComponentColor time={post.createdAt}/>
             </div>
           </li>
         )
@@ -34,20 +35,20 @@ export const JustTimeComponetStar = ({Posts}) => {
       {/* featured posts other post start here */}
       {Posts.map((post) => {
         return (
-          <li key={post.id} className="grid imgxs:grid-cols-5 grid-cols-4 mb-6">
+          <li key={post._id} className="grid imgxs:grid-cols-5 grid-cols-4 mb-6">
 
             <div className="col-span-1 md:col-span-2 mb-1 imgxs:min-w-[90px] mr-[3%] md:mr-[7%] lg:mr-[3%]">
               <img src={post.postImage} alt={"posts"} className="w-full md:h-[70px] lg:h-[85px] h-auto object-cover cursor-pointer" loading="lazy"/>
             </div>
 
             <div className="col-span-3 imgxs:col-span-4 md:col-span-3 ml-[3%] md:ml-[7%] lg:ml-[3%]">
-              <PostTitleSmall post={post.postTitle} postId={post.id}/>
+              <PostTitleSmall post={post.postTitle} postId={post._id}/>
 
               <span className='inline-block'>
                 <span className='mr-4'>
                   <StarComponent color={"text-[#f7c90d]"}/>
                 </span>
-                  <TimeComponentColor time={post.date}/>
+                  <TimeComponentColor time={post.createdAt}/>
               </span>
             </div>
           </li>
@@ -65,7 +66,7 @@ export const JustTimeComponetCatBlock = ({Posts}) => {
         {/* featured posts other post start here */}
       {Posts.map((post) => {
         return (
-          <li key={post.id} className="mb-8">
+          <li key={post._id} className="mb-8">
 
             <div className="mb-1 min-w-[90px] relative">
               <img src={post.postImage} alt={"posts"} className="w-full h-40 imgxs:h-32 object-cover md:min-h-[144px]  cursor-pointer lg:min-h-[192px] " loading="lazy"/>
@@ -73,12 +74,11 @@ export const JustTimeComponetCatBlock = ({Posts}) => {
             </div>
 
             <div className="pt-2">
-            {size.width < 768 && size.width > 480 ? <PostTitleSmall post={post.postTitle} postId={post.id}/> : <PostTitleMedium post={post.postTitle} postId={post.id}/> }
+            {size.width < 768 && size.width > 480 ? <PostTitleSmall post={post.postTitle} postId={post._id}/> : <PostTitleMedium post={post.postTitle} postId={post._id}/> }
 
               <span className='inline-block mt-0.5'>
-                <TimeComponentColor time={post.date} />
-              </span>
-              
+                <TimeComponentColor time={post.createdAt} />
+              </span>              
             </div>
           </li>
         )
@@ -95,7 +95,7 @@ export const JustTimeComponetCatBlockStar = ({Posts}) => {
         {/* featured posts other post start here */}
       {Posts.map((post) => {
         return (
-          <li key={post.id} className="mb-8">
+          <li key={post._id} className="mb-8">
 
             <div className="mb-1 min-w-[90px] relative">
               <img src={post.postImage} alt={"posts"} className="w-full h-40 imgxs:h-32 object-cover md:min-h-[144px]  cursor-pointer lg:min-h-[192px]" loading="lazy"/>
@@ -103,13 +103,13 @@ export const JustTimeComponetCatBlockStar = ({Posts}) => {
             </div>
 
             <div className="pt-2">
-            {size.width < 768 && size.width > 480 ? <PostTitleSmall post={post.postTitle} postId={post.id}/> : <PostTitleMedium post={post.postTitle} postId={post.id}/> }
+            {size.width < 768 && size.width > 480 ? <PostTitleSmall post={post.postTitle} postId={post._id}/> : <PostTitleMedium post={post.postTitle} postId={post._id}/> }
 
               <span className='mt-1'>
                 <span className='mr-4'>
                   <StarComponent color={"text-[#f7c90d]"}/>
                 </span>
-                  <TimeComponentColor time={post.date} />
+                  <TimeComponentColor time={post.createdAt} />
               </span>
               
             </div>
@@ -126,20 +126,20 @@ export const PagesBlogPostComponent = ({Posts}) => {
     <ul className='mt-7 text-left'>
         {Posts.map((post) => {
           return (
-          <li key={post.id} className="grid grid-cols-5 md:grid-cols-2 mt-3 pb-3">
+          <li key={post._id} className="grid grid-cols-5 md:grid-cols-2 mt-3 pb-3">
             <div className="my-2 mr-[3%] col-span-2 md:col-span-1 h-24 imgxs:h-36 md:h-[160px] lg:h-[176px] xl:h-full">
               <img src={post.postImage} alt={"game"} className="w-full h-full object-cover cursor-pointer" loading="lazy"/>
             </div>
 
             <div className='pt-1 ml-[3%] col-span-3 md:col-span-1'>
-              <PostTitleMedium2 post={post.postTitle} postId={post.id}/>
+              <PostTitleMedium2 post={post.postTitle} postId={post._id}/>
 
               <span className="mb-4 inline-block">
               <span className='mr-4'>
                     <AdminComponentColor />
                   </span>
                   <span className='mr-4'>
-                    <TimeComponentColor time={post.date}/>
+                    <TimeComponentColor time={post.createdAt}/>
                   </span>
                     <CommentComponetColor />
               </span>
@@ -150,8 +150,7 @@ export const PagesBlogPostComponent = ({Posts}) => {
 
                 <ReadmoreButton />
               </>}
-            </div>
-          
+            </div>          
           </li>
           )
         })}

@@ -6,62 +6,59 @@ import { BiImageAdd } from 'react-icons/bi'
 import { useDispatch, useSelector } from 'react-redux'
 import Preview from '../../createPost/editorPreview/Preview';
 import UpdatePostAsideComponent from './UpdatePostAsideComponent';
-import { postUpdated, selectPostById } from '../../../../../Reduxstore/Slices/posts/PostsSlice';
 import { emptyCategories, selectAllPostCat } from '../../../../../Reduxstore/Slices/PostsComponentSlices/postcategory/PostcategoriesSlice';
 import { emptyTag, selectAllPostTags } from '../../../../../Reduxstore/Slices/PostsComponentSlices/postsTags/PostsTagsSlice';
 import { emptyOptional, selectAllPostOptionals } from '../../../../../Reduxstore/Slices/PostsComponentSlices/PostsOptional/PostsOptionalSlice';
 import draftToHtml from 'draftjs-to-html';
 import { useNavigate } from 'react-router-dom';
+import { useUpdateExistingPostMutation } from '../../../../../Reduxstore/Slices/posts/PostsSlice';
 
-const UpdatePostComponent = ({state, editPost}) => {
+const UpdatePostComponent = ({state, post, postId}) => {
   const [editorState, setEditorState] = useState(
     () => EditorState.createWithContent(state),
   )
 
-  const postId = editPost
-
-  const post = useSelector(state => selectPostById(state, postId))
-
   const [postTitle, setPostTitle] = useState(post.postTitle)
   const [postImage, setPostImage] = useState(post.postImage)
   const [postAuthor, setPostAuthor] = useState(post.postAuthor)
+  const [postUpdated, { isLoading }] = useUpdateExistingPostMutation()
+
 
   const postCategory = useSelector(selectAllPostCat)
   const postTags = useSelector(selectAllPostTags)
-  const postOptional = useSelector(selectAllPostOptionals)
+  const optional = useSelector(selectAllPostOptionals)
 
   const handleSetPostAuthor = (author) => {
     setPostAuthor(() => author.target.value.toLowerCase())
   }
 
   const postContent = JSON.stringify(convertToRaw(editorState.getCurrentContent()))
-
+  
   const dispatch = useDispatch()
   const navigate = useNavigate();
 
-
-  const canSave = Boolean(postTitle) && Boolean(postImage) && Boolean(postAuthor) && Boolean(postCategory[0]) && Boolean(postTags[0])
+  const canSave = [postTitle, postImage, postAuthor,postCategory[0],postTags[0]].every(Boolean) && !isLoading
 
   const handleAllPostContent = () => {
+
     const sampleMarkup = '<p>My post ...! |</p>'
     let html = draftToHtml(sampleMarkup);
-  const blocksFromHTML = convertFromHTML(html);
-  const state = ContentState.createFromBlockArray(
-    blocksFromHTML.contentBlocks,
-    blocksFromHTML.entityMap,
-  );
+    const blocksFromHTML = convertFromHTML(html);
+    const state = ContentState.createFromBlockArray(
+      blocksFromHTML.contentBlocks,
+      blocksFromHTML.entityMap,
+    );
 
     if (canSave) {
-      dispatch(postUpdated({postId, postAuthor, postTitle, postImage, postContent , postCategory, postTags, postOptional}))
-      
+      postUpdated({postId, postAuthor, postTitle, postImage, postContent , postCategory, postTags, optional})
+      setPostAuthor(() => undefined)
+      navigate(`/single/${postId}`)
       dispatch(emptyCategories())
       dispatch(emptyTag())
       dispatch(emptyOptional())
       setPostImage(() => "")
       setPostTitle(() => "")
       setEditorState(() => EditorState.createWithContent(state))
-      navigate(-1)
-      setPostAuthor(() => undefined)
     }
   }
 
@@ -86,7 +83,7 @@ const UpdatePostComponent = ({state, editPost}) => {
           autoFocus={true} form="post_form" value={postTitle}  onChange={(e) => setPostTitle(() => e.target.value)}/>
         </div>
 
-        <img key={post.id} src={post.postImage || null} alt="postImage" className='w-full h-80 rounded-xl object-cover' loading="lazy"/>
+        <img src={post.postImage || null} alt="postImage" className='w-full h-80 rounded-xl object-cover' loading="lazy"/>
 
         {/* write post form */}
         <form className="mt-2.5" id="post_form" onSubmit={handleSubmit}>
@@ -130,7 +127,7 @@ const UpdatePostComponent = ({state, editPost}) => {
       <div className="lg:order-2 order-1 text-left lg:col-span-1">
         <UpdatePostAsideComponent 
         handleAllPostContent={handleAllPostContent} 
-        editPost={editPost} 
+        post={post} 
         postAuthor={postAuthor}
         handleSetPostAuthor={handleSetPostAuthor}/> 
       </div>

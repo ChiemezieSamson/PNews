@@ -27,7 +27,7 @@ export const PostTitleLarge = ({post, postId}) => (
 
 
 export const PostTitleMedium = ({post, postId}) => (
-  <h3 className="capitalize tracking-wide text-black font-lora md:text-base text-base imgxs:text-xl lg:text-lg font-extrabold">
+  <h3 className="capital```````ize tracking-wide text-black font-lora md:text-base text-base imgxs:text-xl lg:text-lg font-extrabold">
     <Link to={`/single/${postId}`} className='hover:text-[#f70d28] cursor-pointer transition-all duration-200 ease-linear' title="title">
       {post}
     </Link>
@@ -317,7 +317,9 @@ export const TimeComponentColor = ({time}) => {
     <span className="mt-1 font-lora tracking-wide whitespace-nowrap text-xs lg:text-xs md:text-[10px] font-extrabold"
     title='date'>
       <FaRegClock className="-mt-0.5 text-[#2e9fff] cursor-pointer inline-block p-px"/>
-      <time dateTime='2022-11-3 4:45' className="ml-0.5 text-[#7a7a7a]/60 whitespace-nowrap cursor-pointer inline-block">{time}</time>
+      <time dateTime='2022-11-3 4:45' className="ml-0.5 text-[#7a7a7a]/60 whitespace-nowrap cursor-pointer inline-block">
+      {new Date(time).toDateString()}
+        </time>
     </span>
   )
 }
@@ -328,7 +330,9 @@ export const TimeComponent = ({time}) => {
     <span className="mt-1 font-lora tracking-wide whitespace-nowrap text-xs lg:text-xs md:text-[10px] font-extrabold"
     title='date'>
       <FaRegClock className="-mt-0.5 cursor-pointer inline-block p-px"/>
-      <time dateTime='2022-11-3 4:45' className="whitespace-nowrap cursor-pointer mt-0.5 ml-0.5 inline-block">{time}</time>
+      <time dateTime='2022-11-3 4:45' className="whitespace-nowrap cursor-pointer mt-0.5 ml-0.5 inline-block">
+        {new Date(time).toDateString()}
+      </time>
     </span>
   )
 }
@@ -366,7 +370,7 @@ export const AdminComponentColor = () => {
 
 export const PostsShortInfoComponent = ({post}) => {
   const postContent =  (<Preview postContent={post}/>)
-  const textExtract = postContent.props.postContent.blocks[0].text
+  const textExtract = JSON.parse(postContent.props.postContent).blocks[0].text
 
   return (
     <div className="text-ellipsis prose text-[#54595f] md:text-[13px] leading-[20px] text-sm imgxs:text-[15px] lg:text-base">

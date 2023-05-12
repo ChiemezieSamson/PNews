@@ -4,21 +4,25 @@ import { useState, useEffect} from "react";
 import {Hanbugar, NavLinksAndArrows} from "../../ButtonAndOthers/Buttons"
 import { HoverLinsks, SmallScreenHoverLinsks } from "../HeadHoverComponent/HoverLinks";
 import { useWindowSize } from "../../SharedAsset/SharedAssets";
-import { useSelector } from "react-redux"
-import { navItems, ParentCategories } from "../../../data";
+import { navItems } from "../../../data";
 import { FaChevronDown } from 'react-icons/fa';
-import { selectAllPosts } from '../../../Reduxstore/Slices/posts/PostsSlice';
+import { useFetchedPosts } from '../../SharedAsset/Spinners/postsSpinner';
+import useFetchedTags from '../../SharedAsset/Spinners/tagsSpiner';
+import useFetchedCategories from '../../SharedAsset/Spinners/categoriesSpinner';
 
 const HeaderNavigations = () => {
+  const {tagsParents, isFetching: isFetchingTags} = useFetchedTags()
+  const {categoriesParents, isFetching} = useFetchedCategories()
   const [hideShowNavLinks, setHideShowNavLinks] = useState(false)
   const [sticky, setSticky] = useState("")
   const [arrowDown, setArrowDown] = useState(false);
   const [showhoverlinks , setShowHoverlinks] = useState(false)
-  const [getTheNavlinkTextContent, setGetTheNavlinkTextContent] =useState("books")
-  const [headerHoverPostNav, setHeaderHoverPostNav] = useState(ParentCategories.books)
-  const Posts = useSelector(selectAllPosts)
+  const [getTheNavlinkTextContent, setGetTheNavlinkTextContent] = useState("books")
+  const [headerHoverCategoriesNav, setHeaderHoverCategoriesNav] = useState([])
+  const [headerHoverTagsNav, setHeaderHoverTagsNav] = useState([])
+  const {content , action} = useFetchedPosts()
+  const Posts = content
   const size = useWindowSize()
-
 
   const handle_hideShowNavLinks = () => {
     setHideShowNavLinks((hideShowNavLinks) => !hideShowNavLinks)
@@ -36,9 +40,12 @@ const HeaderNavigations = () => {
   const onHover = (e) => {
     let elementtextContent =  e.target.parentElement.firstChild.textContent.toLowerCase()
     onshowHoverlinks()
-    setGetTheNavlinkTextContent(() => e.target.parentElement.firstChild.textContent.toLowerCase())
-    setHeaderHoverPostNav(() => e.target.parentElement.firstChild.textContent.toLowerCase() !== "quotes" ?
-     ParentCategories[elementtextContent] : ParentCategories.random)
+    setGetTheNavlinkTextContent(() => elementtextContent)
+    if((categoriesParents[elementtextContent] && tagsParents[elementtextContent])
+     || (elementtextContent === "quotes" && categoriesParents["random"] && tagsParents["random"])) {
+    setHeaderHoverCategoriesNav(() => elementtextContent !== "quotes" ? categoriesParents[elementtextContent].category : categoriesParents.random.category)
+    setHeaderHoverTagsNav(() => elementtextContent !== "quotes" ? tagsParents[elementtextContent].tags : tagsParents.random.tags)
+    }
   }
 
   useEffect (() => {
@@ -126,7 +133,7 @@ const HeaderNavigations = () => {
               {/* ===== block of hoverable links small screen are here ====== */}
               <span className="hidden absolute inset-x-0 top-full z-50 md:rounded-md peer-hover:block hover:block bg-slate-50 lg:hover:hidden lg:peer-hover:hidden
               overflow-hidden">            
-                <SmallScreenHoverLinsks sublink={headerHoverPostNav} hostCat={getTheNavlinkTextContent}/>          
+                <SmallScreenHoverLinsks CategoriesLink={headerHoverCategoriesNav} Parentlink={getTheNavlinkTextContent}/>          
               </span>
             </li>
           )
@@ -138,8 +145,14 @@ const HeaderNavigations = () => {
      {/* ===== block of hoverable links large screen are here ====== */}
      {(window.scrollY > 201 && size.width > 768 ? false : showhoverlinks) && 
       <div className="relative" onMouseOver={onshowHoverlinks} onMouseOut={onshowHoverlinks}>
-        <div className={`absolute top-0 inset-x-[5%]`} >
-          <HoverLinsks sublink={headerHoverPostNav} hostCat={getTheNavlinkTextContent} blogPost={Posts.slice(0, 6)}/>
+        <div className={`absolute top-0 inset-x-[5%] disabled:opacity-40`} disabled={isFetchingTags || isFetching}>
+          {((categoriesParents[getTheNavlinkTextContent] && tagsParents[getTheNavlinkTextContent]) 
+          || (getTheNavlinkTextContent === "quotes" && categoriesParents["random"] && tagsParents["random"]) ) && 
+          <HoverLinsks 
+          CategoriesLink={headerHoverCategoriesNav} 
+          TagsLink={headerHoverTagsNav}
+          Parentlink={getTheNavlinkTextContent} 
+          blogPost={action && Posts.slice(0, 6)} />}
         </div>        
       </div>}    
     </div>

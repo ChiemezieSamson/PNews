@@ -4,25 +4,29 @@ import { BiFontFamily } from "react-icons/bi";
 import StickyBox from "react-sticky-box";
 import { useHover} from '../../../SharedAsset/SharedAssets';
 import Aside from '../../asidePage/Aside';
-import { useDispatch, useSelector } from 'react-redux';
 import CommentForm from './CommentComponent/CommentForm';
 import Comment from './CommentComponent/Comment';
 import Preview from '../createPost/editorPreview/Preview';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import PreviousNextPost from './PreviousNextPost';
-import { postDeleted, selectPostById } from '../../../../Reduxstore/Slices/posts/PostsSlice';
-import { selectAllComments } from '../../../../Reduxstore/Slices/comments/CommentsSlice';
+import { useFetchedPostById } from '../../../SharedAsset/Spinners/postsSpinner';
+import {  useFetchedUserByPostId } from '../../../SharedAsset/Spinners/userSpinner';
+import { useDeleteExistingPostMutation } from '../../../../Reduxstore/Slices/posts/PostsSlice';
 
 
 const SinglePost = () => {
-  const { postId } = useParams();
-  const Post = useSelector(state => selectPostById(state, postId))
-  const comments = useSelector(selectAllComments)
+  const {singlePost , postAction, postId, isFetching} = useFetchedPostById() 
+  const {singleUser, userAction} = useFetchedUserByPostId()
+  const [postDeleted, {isLoading}] = useDeleteExistingPostMutation()
   const [hoverRef, isHovered] = useHover();
   const [sizeLine, setSizeLine] = useState(20)
   const [textSize, setTextSize] = useState("prose-base")
+  
+  
 
-  const dispatch = useDispatch()
+  const Post = singlePost
+  const User = singleUser
+
   const navigate = useNavigate();
 
   const handleMinus = () => {
@@ -37,12 +41,10 @@ const SinglePost = () => {
     setSizeLine(() =>  20)
   }
 
-  const handleDeletePost = () => {
-    navigate(-1)
-    if(postId){
-      setTimeout(() => {
-        dispatch(postDeleted({postId}))
-      },[1000])
+  const handleDeletePost = async () => {
+    if(postId && !isLoading && Post.postAuthor === User._id){
+     await postDeleted({postId, postAuthor: User._id})
+      navigate("/")
     }
   }
 
@@ -83,18 +85,17 @@ const SinglePost = () => {
       img.style = ""
       img.setAttribute("alt", "postimage")
       img.setAttribute("loading", "lazy")
-    })
+    })    
   },[])
-  
 
   return (
-    <article className='text-left md:grid grid-cols-3'>
+    <article className='text-left md:grid grid-cols-3 disabled:opacity-40' disabled={isFetching}>
       <div className='col-span-2 md:mr-[4%] overflow-x-hidden'>
         <article>
           {/* navigation display */}
 
           <div className="lg:mb-8 lg:mt-8 mb-4 grid grid-flow-col justify-between">
-            <small>Home &gt; books &gt; <span className='text-[#7a7a7a]'>{Post.postCategory[0]}</span></small>
+            {postAction && <small>Home &gt; books &gt; <span className='text-[#7a7a7a]'>{Post.postCategory[0]}</span></small>}
             <div className='px-2 mx-0.5'>
               <Link to={`/editpost/${postId}`} type='button' className='mx-1 uppercase rounded-md text-xs font-bold tracking-widest text-gray-400 hover:text-gray-700 
               transition-all duration-200 ease-linear'>edit</Link>
@@ -106,9 +107,9 @@ const SinglePost = () => {
           {/* Post Title start here */}      
 
           <h1 className=" text-black tracking-wide lg:text-4xl text-3xl font-bold font-lora" title='title'>
-            <strong>
+            {postAction && <strong>
               {Post.postTitle}
-            </strong> 
+            </strong>} 
           </h1>
 
           {/*Admin image , name, post date and category , text size adjuster and comment number start here  */}
@@ -117,33 +118,39 @@ const SinglePost = () => {
 
             {/* Admin Image */}
 
-            <div className='text-[#7a7a7a]'>
-              <span className='w-10 h-10 inline-block rounded-full align-bottom mr-2'>
-                <img loading='lazy' src={Post.postImage} alt="AdminImage" className='h-full w-full object-cover rounded-full cursor-pointer'/>
-              </span>
+            {
+              userAction ?
+                <div className='text-[#7a7a7a]'>
+                  <span className='w-10 h-10 inline-block rounded-full align-bottom mr-2'>
+                    {(postAction && userAction) ? <img loading='lazy' src={User.profileImage} alt="AdminImage" className='h-full w-full object-cover rounded-full cursor-pointer'/>
+                    : singlePost}                  
+                  </span>
 
-              {/* Admin name, Post date and category */}
+                  {/* Admin name, Post date and category */}
 
-              <address className='align-top mt-1.5 inline-block'>
-                <small className="text-[#7a7a7a] mt-[3px] font-lora whitespace-nowrap tracking-wider font-extrabold text-xs lg:text-sm md:text-[11px] leading-4 inline-block"
-                  title='post admin'>
-                    By
-                    <span className="text-[#f70d28] cursor-pointer"> {Post.postAuthor}</span>
-                </small>
-                <span className='mx-2 align-text-top inline-block'>&#9473;</span>
-                <span className="mt-1 font-lora tracking-wide whitespace-nowrap text-xs lg:text-sm md:text-xs"
-                title='date'>
-                <time dateTime='2022-11-3 4:45' className="whitespace-nowrap cursor-pointer mt-0.5 ml-0.5 inline-block">{Post.date}</time>
-                </span>
-                <span className='mx-2 font-lora text-xs lg:text-sm md:text-xs cursor-pointer'>
-                  in 
-                  <span className='font-extrabold'>
-                  {" Health"}
-                  </span>              
-                </span>
-              </address>           
-            </div>
+                  <address className='align-top mt-1.5 inline-block'>
+                    <small className="text-[#7a7a7a] mt-[3px] font-lora whitespace-nowrap tracking-wider font-extrabold text-xs lg:text-sm md:text-[11px] leading-4 inline-block"
+                      title='post admin'>
+                        By
+                        {(postAction && userAction) && <span className="text-[#f70d28] cursor-pointer">{User.username}</span>}
+                    </small>
+                    <span className='mx-2 align-text-top inline-block'>&#9473;</span>
+                    <span className="mt-1 font-lora tracking-wide whitespace-nowrap text-xs lg:text-sm md:text-xs"
+                    title='date'>
+                   {postAction && <time dateTime='2022-11-3 4:45' className="whitespace-nowrap cursor-pointer mt-0.5 ml-0.5 inline-block">{new Date(Post.createdAt).toDateString()}</time>}
+                    </span>
+                    <span className='mx-2 font-lora text-xs lg:text-sm md:text-xs cursor-pointer'>
+                      in 
+                      <span className='font-extrabold'>
+                      {" Health"}
+                      </span>              
+                    </span>
+                  </address>           
+                </div> :
+              singleUser
+            }
 
+            
             {/* Text size adjuster and comment number */}
 
             <span className='align-top text-lg sm:mt-0.5 inline-block'>
@@ -183,23 +190,26 @@ const SinglePost = () => {
           {/* post image */}
 
           <div className='lg:mt-7 mt-3 lg:mb-7 mb-4'>
-            <img loading='lazy' src={Post.postImage} alt="PostImage" className='w-full max-h-[370px] object-cover cursor-pointer'/>
-          </div>
+          {postAction ? <img loading='lazy' src={Post.postImage} alt="PostImage" className='w-full max-h-[370px] object-cover cursor-pointer'/>
+                :
+          singlePost
+          }         
+         </div>
 
           {/* share number and views number */}
 
           <div className='grid md:grid-cols-5 grid-cols-12 lg:mb-8 mb-4'>
             <div className='lg:grid lg:grid-cols-2 whitespace-nowrap max-w-[130px] col-span-1 pt-1 mx-auto lg:mx-0'>
-              <span className='font-extrabold text-[#f70d28] font-round text-2xl leading-none text-center'>
+              {postAction && <span className='font-extrabold text-[#f70d28] font-round text-2xl leading-none text-center'>
                 {Post.optional.shared >= 1000 ? Post.optional.shared + "k" : Post.optional.shared}
                 <div className='text-[#7a7a7a] uppercase text-xs  font-lora font-normal -mt-0.5'>shares</div>
-              </span>         
+              </span>}         
           
-              <span className='font-extrabold relative hidden lg:inline-block text-slate-400 font-round text-2xl leading-none after:w-px after:h-full
+             {postAction && <span className='font-extrabold relative hidden lg:inline-block text-slate-400 font-round text-2xl leading-none after:w-px after:h-full
               after:bg-[#e0e0e0] after:block after:absolute after:right-0 after:-top-0.5 after:rotate-[15deg] after:z-0 text-center'>
                 {Post.optional.viewed >= 1000 ? Post.optional.viewed + "k" : Post.optional.viewed}
                 <div className='text-[#7a7a7a] uppercase text-xs pl-1.5 font-lora font-normal -mt-0.5'>views</div>
-              </span>
+              </span>}
             </div>
 
             {/* facebook ,twitter share , email, share button*/}
@@ -228,12 +238,12 @@ const SinglePost = () => {
 
           {/* post text start here */}
           <div className={`${textSize} tracking-wide text-[#444444]`}>
-            <Preview postContent={Post.postContent}/>
+            {postAction && <Preview postContent={Post.postContent}/>}
           </div>
 
           <span className='inline-block lg:py-5 mb-3 lg:text-sm text-xs'>
             <b className='mr-1.5 text-[#444444]'>Tags:</b>
-            {Post.postTags.map((tag,index) => {
+            {postAction && Post.postTags.map((tag,index) => {
               return (
                 <span key={index} className="text-[#616161] bg-[#f5f5f5] inline-block py-0.5 px-2.5 hover:bg-[#f70d28]
                 hover:text-white mb-1.5 mr-[3px] tracking-wider transition-all duration-300 ease-linear cursor-pointer">{tag}</span>
@@ -242,24 +252,16 @@ const SinglePost = () => {
           </span>
         </article>
 
-        <PreviousNextPost  postId={postId}/>
+        {(postAction && userAction)  && <PreviousNextPost  post={Post} User={User} userContent={singleUser} useraction={userAction}/>}
 
-          {/* comments section start here */}
+          {/* Comments section start here */}
           
         <section className='pt-8 pb-4'>
-        { comments.length > 0 &&
-          <>
-            <span>
-              <h4 className='capitalize font-bold text-[27px] leading-8 inline-block align-bottom font-lora'>Comments</h4>
-              <span className='inline-block px-3 bg-[#999] mx-4 text-white rounded-md'>{comments.length}</span>
-            </span>          
-            
-            <div className='mb-6'>              
-              <Comment />            
-            </div> 
-          </>
-        }
-          
+        
+          <div className='mb-6'>              
+            <Comment />            
+          </div> 
+
           {/* Form section start here */}
 
           <strong className='text-2xl inline-block mb-2 font-lora'>Leave a Reply</strong>

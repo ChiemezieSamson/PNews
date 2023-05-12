@@ -3,10 +3,7 @@ import HomeLinks from "./Components/HomeLinks";
 import IndexPage from "./Components/BlogPages/IndexPage";
 import NotFound from "./Components/BlogPages/notFoundPage/NotFound";
 import Books from "./Components/BlogPages/booksPage/Books";
-import LifeStyle from "./Components/BlogPages/lifeStylePage/LifeStyle";
 import Favorite from "./Components/BlogPages/favoritePage/Favorite";
-import Business from "./Components/BlogPages/businessPage/Business";
-import Quotes from "./Components/BlogPages/quotesPage/Quotes";
 import About from "./Components/BlogPages/aboutPage/About";
 import PrivacyAndPolicy from "./Components/BlogPages/policyPage/PrivacyAndPolicy";
 import ContactUs from "./Components/BlogPages/contactUs/ContactUs";
@@ -25,6 +22,14 @@ import {
 	// lodingData as rootLoader,
 	action as rootAction,
 } from "./Components/DataLoader/LodingData";
+import BooksIndexPage from "./Components/BlogPages/booksPage/BooksIndexPage";
+import BusinessIndexPage from "./Components/BlogPages/businessPage/BusinessIndexPage";
+import Business from "./Components/BlogPages/businessPage/Business";
+import FavoriteIndexPage from "./Components/BlogPages/favoritePage/favoriteIndexPage";
+import LifeStyleIndexPage from "./Components/BlogPages/lifeStylePage/LifeStyleIndexPage";
+import LifeStyle from "./Components/BlogPages/lifeStylePage/LifeStyle";
+import QuotesIndexPage from "./Components/BlogPages/quotesPage/QuotesIndexPage";
+import Quotes from "./Components/BlogPages/quotesPage/Quotes";
 
 const App = createBrowserRouter([
 	{
@@ -43,7 +48,11 @@ const App = createBrowserRouter([
 				element: <Books />,
 				children: [
 					{
-						path: "/books/:postId",
+						index: true,
+						element: <BooksIndexPage />,
+					},
+					{
+						path: "/books/:clicked",
 						element: <Category />,
 					},
 				],
@@ -53,7 +62,11 @@ const App = createBrowserRouter([
 				element: <LifeStyle />,
 				children: [
 					{
-						path: "/lifestyle/:postId",
+						index: true,
+						element: <LifeStyleIndexPage />,
+					},
+					{
+						path: "/lifestyle/:clicked",
 						element: <Category />,
 					},
 				],
@@ -63,7 +76,11 @@ const App = createBrowserRouter([
 				element: <Favorite />,
 				children: [
 					{
-						path: "/favorite/:postId",
+						index: true,
+						element: <FavoriteIndexPage />,
+					},
+					{
+						path: "/favorite/:clicked",
 						element: <Category />,
 					},
 				],
@@ -73,7 +90,11 @@ const App = createBrowserRouter([
 				element: <Business />,
 				children: [
 					{
-						path: "/business/:postId",
+						index: true,
+						element: <BusinessIndexPage />,
+					},
+					{
+						path: "/business/:clicked",
 						element: <Category />,
 					},
 				],
@@ -83,7 +104,11 @@ const App = createBrowserRouter([
 				element: <Quotes />,
 				children: [
 					{
-						path: "/quotes/:postId",
+						index: true,
+						element: <QuotesIndexPage />,
+					},
+					{
+						path: "/quotes/:clicked",
 						element: <Category />,
 					},
 				],
@@ -129,11 +154,11 @@ const App = createBrowserRouter([
 						element: <Personal />,
 					},
 					{
-						path: "/userpage/:securityId",
+						path: "/userpage/security",
 						element: <SingAndSecurity />,
 					},
 					{
-						path: "/userpage/:publicprofileId",
+						path: "/userpage/publicprofile",
 						element: <MyPublicProfile />,
 					},
 				],

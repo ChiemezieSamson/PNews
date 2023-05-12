@@ -1,13 +1,10 @@
 import React from 'react'
 import { JustTimeComponet } from './SharedComponents';
-import { useSelector } from "react-redux"
 import { AdminComponentColor, CategoriesComponentBotton, MainDivider, PostsShortInfoComponent, PostTitleMedium2, TimeComponentColor } from '../../SharedAsset/SharedAssets';
 import { ReadmoreButton, StarComponent } from '../../ButtonAndOthers/Buttons';
-import { selectAllPosts } from '../../../Reduxstore/Slices/posts/PostsSlice';
 
 
-const FeaturedPosts = () => {
-  const Posts = useSelector(selectAllPosts)
+const FeaturedPosts = ({Posts}) => {
   
   return (
     <section className="mt-3.5">
@@ -26,7 +23,7 @@ const FeaturedPosts = () => {
             <CategoriesComponentBotton cat={Posts[11].postCategory[0]} />
           </div>
 
-          <PostTitleMedium2 post={Posts[11].postTitle} postId={Posts[11].id}/>
+          <PostTitleMedium2 post={Posts[11].postTitle} postId={Posts[11]._id}/>
 
           <span className="mt-2 mb-4 inline-block">
             <span className='mr-4 inline-block'>
@@ -35,7 +32,7 @@ const FeaturedPosts = () => {
             <span className='mr-4 inline-block'>
               <AdminComponentColor />
             </span>
-            <TimeComponentColor time={Posts[11].date}/>
+            <TimeComponentColor time={Posts[11].createdAt}/>
           </span>
           <PostsShortInfoComponent post={Posts[11].postContent} />
           <ReadmoreButton />   

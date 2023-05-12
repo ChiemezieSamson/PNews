@@ -1,11 +1,12 @@
-import React, { useState } from 'react'
+import React, { useLayoutEffect, useState } from 'react'
 import { FaEnvelopeOpen, FaFacebookF, FaGlobe, FaInstagram, FaLinkedinIn, FaPhoneAlt, FaTwitter, FaYoutubeSquare } from 'react-icons/fa';
-import { useDispatch, useSelector } from 'react-redux';
-import { selectAllUsers, userPublicProfile } from '../../../Reduxstore/Slices/users/UsersSlice';
+import { useUpdateExistingUserPublicProFileMutation } from '../../../Reduxstore/Slices/users/UsersSlice';
 import { UserInfoHeading } from '../../SharedAsset/SharedAssets'
+import { useFetchedUserById } from '../../SharedAsset/Spinners/userSpinner';
 
 const MyPublicProfile = () => {
-  const user = useSelector(selectAllUsers)
+  const {singleUser, userAction, isFetching} = useFetchedUserById()
+  const [userPublicProfile, {isLoading}] = useUpdateExistingUserPublicProFileMutation()
   const [nickname, setNickname] = useState("")
   const [biography, setBiography] = useState("")
   const [secondaryEmail, setSecondaryEmail] = useState("")
@@ -16,18 +17,30 @@ const MyPublicProfile = () => {
   const [instagram, setInstagram] = useState("")
   const [youTube, setYouTube] = useState("")
   const [website, setWebsite] = useState("")
-
-  const userId = user[1] ? user[1].id : user[0].id
-
-  const dispatch = useDispatch()
+  const [emailExist, setEmailExist] = useState(false)
 
 
-  const handleSubmit = (e) => {
+  const user = singleUser
+
+  const canSave = [nickname, biography, secondaryEmail, phone, linkedIn, twitter, facebook, instagram, youTube, website].every(Boolean) && !isLoading
+
+
+  const handleSetSecondaryEmail = (e) => {
+    if(user.email.secondary.includes(e.target.value)) {
+      setEmailExist(() => true)
+      setSecondaryEmail(() => e.target.value)
+    } else {
+      setSecondaryEmail(() => e.target.value)
+      setEmailExist(() => false)
+    }    
+  }
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    dispatch(userPublicProfile({userId, nickname, biography, secondaryEmail, phone, linkedIn, twitter, facebook, instagram, youTube, website}))
+    if(canSave) {
+      await userPublicProfile({userId: user._id, nickname, biography, secondaryEmail, phone, linkedIn, twitter, facebook, instagram, youTube, website})
 
-    
     setNickname(() => "")
     setBiography(() => "")
     setSecondaryEmail(() => "")
@@ -38,13 +51,30 @@ const MyPublicProfile = () => {
     setInstagram(() => "")
     setYouTube(() => "")
     setWebsite(() => "")
+    }
   }
 
-
+  useLayoutEffect(() => {
+    if (userAction) {
+      setNickname(() => user.username)
+      setBiography(() => user.bio)
+      setSecondaryEmail(() => user.email.secondary[user.email.secondary.length - 1])
+      setPhone(() => user.phonenumber)
+      setLinkedIn(() => user.socialLinks.linkedin)
+      setTwitter(() => user.socialLinks.twitter)
+      setFacebook(() => user.socialLinks.facebook)
+      setInstagram(() => user.socialLinks.instagram)
+      setYouTube(() => user.socialLinks.youtube)
+      setWebsite(() => user.socialLinks.website)
+    }
+  },[userAction, user])
  
 
   return (
-    <div className='text-left px-5 mt-8 font-source pt-7 pb-5'>
+    <>
+    {
+      userAction ? 
+      <div className='text-left px-5 mt-8 font-source pt-7 pb-5 disabled:opacity-40' disabled={isFetching}>
       <div>
         <UserInfoHeading head={"Public URL"} text={"Share your accomplishments with the world"}/>
         <small className='text-sm font-normal my-1 italic text-[#f93d53]'>
@@ -67,8 +97,8 @@ const MyPublicProfile = () => {
                   type="text" 
                   id='usernickname' 
                   name='usernickname' 
-                  className='rounded-full invalid:border-red-400 invalid:shadow-red-400 placeholder:text-[#798488] px-1.5 mb-1.5' 
-                  placeholder={user[0].nickname}
+                  className='rounded-full invalid:border-red-400 invalid:shadow-red-400 placeholder:text-[#798488] px-1.5 mb-1.5 capitalize' 
+                  placeholder={user.username}
                   value={nickname}
                   onChange={(e) => setNickname(() => e.target.value)}
                   />
@@ -88,7 +118,7 @@ const MyPublicProfile = () => {
             id="userbio" 
             cols="30" 
             rows="3" 
-            placeholder={user[0].bio} 
+            placeholder={user.bio} 
             value={biography}
             className=''
             onChange={(e) => setBiography(() => e.target.value)}
@@ -110,16 +140,17 @@ const MyPublicProfile = () => {
               type="email" 
               id="usercontactemail" 
               name="usercontactemail"  
-              placeholder={user[0].email.secondary[user[0].email.secondary.length - 1]}
+              placeholder={user.email.secondary[user.email.secondary.length - 1]}
               value={secondaryEmail}
-              className="invalid:border-red-400 invalid:shadow-red-400 placeholder:text-[#798488]"
-              onChange={(e) => setSecondaryEmail(() => e.target.value)}
+              className="invalid:border-red-400 invalid:shadow-red-400 placeholder:text-[#798488] mb-0"
+              onChange={handleSetSecondaryEmail}
               />
+              {emailExist ? <p className='text-xs text-rose-500 tracking-wider font-lora'>This email already exist</p> : ""}
             </div>
           </label>
 
               {/* User Phone Number  */}
-          <label htmlFor="usercontactphone" className="sm:grid sm:grid-cols-4 sm:gap-x-4">
+          <label htmlFor="usercontactphone" className="sm:grid sm:grid-cols-4 sm:gap-x-4 mt-5">
             <span className='text-[#282a35] sm:text-lg py-1 mt-1 whitespace-nowrap sm:col-span-1'>
                 <FaPhoneAlt className="inline-block align-text-top" />
               <span className='text-[#282a35] min-w-fit p-1 ml-4 font-semibold inline-block'>
@@ -132,7 +163,7 @@ const MyPublicProfile = () => {
               type="tel" 
               id="usercontactphone" 
               name="usercontactphone"  
-              placeholder={user[0].phonenumber}
+              placeholder={user.phonenumber}
               value={phone}
               className="invalid:border-red-400 invalid:shadow-red-400 placeholder:text-[#798488]"
               onChange={(e) => setPhone(() => e.target.value)}
@@ -154,7 +185,7 @@ const MyPublicProfile = () => {
               type="url" 
               id="usercontactlinkedin" 
               name="usercontactlinkedin"  
-              placeholder={user[0].socialLinks.linkedin}
+              placeholder={user.socialLinks.linkedin}
               value={linkedIn}
               className="invalid:border-red-400 invalid:shadow-red-400 placeholder:text-[#798488]"
               onChange={(e) => setLinkedIn(() => e.target.value)}
@@ -176,7 +207,7 @@ const MyPublicProfile = () => {
               type="url"
               id="usercontacttwitter" 
               name="usercontacttwitter"  
-              placeholder={user[0].socialLinks.twitter}
+              placeholder={user.socialLinks.twitter}
               value={twitter}
               className="invalid:border-red-400 invalid:shadow-red-400 placeholder:text-[#798488]"
               onChange={(e) => setTwitter(() => e.target.value)}
@@ -198,7 +229,7 @@ const MyPublicProfile = () => {
               type="url" 
               id="usercontactfacebook" 
               name="usercontactfacebook"  
-              placeholder={user[0].socialLinks.facebook}
+              placeholder={user.socialLinks.facebook}
               value={facebook}
               className="invalid:border-red-400 invalid:shadow-red-400 placeholder:text-[#798488]"
               onChange={(e) => setFacebook(() => e.target.value)}
@@ -220,7 +251,7 @@ const MyPublicProfile = () => {
               type="url" 
               id="usercontactinstagram" 
               name="usercontactinstagram"  
-              placeholder={user[0].socialLinks.instagram}
+              placeholder={user.socialLinks.instagram}
               value={instagram}
               className="invalid:border-red-400 invalid:shadow-red-400 placeholder:text-[#798488]"
               onChange={(e) => setInstagram(() => e.target.value)}
@@ -242,7 +273,7 @@ const MyPublicProfile = () => {
               type="url" 
               id="usercontactyoutube" 
               name="usercontactyoutube"  
-              placeholder={user[0].socialLinks.youTube}
+              placeholder={user.socialLinks.youtube}
               value={youTube}
               className="invalid:border-red-400 invalid:shadow-red-400 placeholder:text-[#798488]"
               onChange={(e) => setYouTube(() => e.target.value)}
@@ -264,7 +295,7 @@ const MyPublicProfile = () => {
               type="url" 
               id="usercontactwebsite" 
               name="usercontactwebsite"  
-              placeholder={user[0].socialLinks.website}
+              placeholder={user.socialLinks.website}
               value={website}
               className="invalid:border-red-400 invalid:shadow-red-400 placeholder:text-[#798488]"
               onChange={(e) => setWebsite(() => e.target.value)}
@@ -275,14 +306,15 @@ const MyPublicProfile = () => {
 
           <div className='mt-5 p-2 grid place-items-end'>
             <button className='text-[#798488] bg-gray-300 capitalize border-0 py-2.5 px-8 rounded-full cursor-pointer text-base shadow-[#444] 
-              shadow-sm' type='submit' name="submit">Save</button>
+              shadow-sm disabled:opacity-40' type='submit' name="submit" disabled={!canSave}>Save</button>
           </div>
         </form>
-
       </div>
-
-
-    </div>
+    </div> :
+      singleUser
+    }
+    </>
+    
   )
 }
 

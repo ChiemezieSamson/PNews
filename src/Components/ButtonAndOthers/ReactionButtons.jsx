@@ -1,7 +1,7 @@
 import React from 'react'
 import { FaHandHoldingHeart, FaHeart, FaLaughBeam} from 'react-icons/fa'
-import { useDispatch } from 'react-redux'
-import { reactionAddedComment, reactionAddedReply } from '../../Reduxstore/Slices/comments/CommentsSlice'
+import { useUpdateCommentReactionMutation } from '../../Reduxstore/Slices/comments/CommentsSlice'
+import { useUpdateReplyReactionMutation } from '../../Reduxstore/Slices/replySlice/replySlice'
 
 
 const reactionEmoji = {
@@ -11,17 +11,25 @@ const reactionEmoji = {
   funny: <FaLaughBeam className='inline-block text-yellow-500' title='Funny'/>,
 }
 
-export const CommentReactionButtons = ({comment}) => {
-  const dispatch = useDispatch()
+export const CommentReactionButtons = ({comment, authorId, postId}) => {
+  const [reactionAddedComment, { isLoading }] = useUpdateCommentReactionMutation()
+
+  const handleUpdateReaction = async (e) => {
+    let name = e.target.id
+    const canSave = !isLoading && [comment._id, name, authorId].every(Boolean)
+    if(canSave) {
+    await  reactionAddedComment({commentId: comment._id, reaction: name, authorId, postId})
+    }
+  } 
+
   const reactionButtons = Object.entries(reactionEmoji).map(([name, emoji]) => {
     return (
       <button 
       key={name} 
       type="button" 
-      className="mx-1 mb-0.5"
-      onClick={() =>
-        dispatch(reactionAddedComment({commentId: comment.id, reaction: name}))
-      }
+      id={name}
+      className="mx-1 mb-0.5 relative after:absolute after:inset-0 after:z-10"
+      onClick={handleUpdateReaction}
       >
         {emoji} {comment.reactions[name]}
       </button>
@@ -32,17 +40,25 @@ export const CommentReactionButtons = ({comment}) => {
 }
 
 
-export const ReplyReactionButtons = ({reply, commentId}) => {
-  const dispatch = useDispatch()
+export const ReplyReactionButtons = ({reply, commentId, authorId, postId}) => {
+  const [reactionAddedReply, { isLoading }] = useUpdateReplyReactionMutation()
+  
+  const handleUpdateReaction = async (e) => {
+    let name = e.target.id
+    const canSave = !isLoading && [commentId, name, authorId, reply._id].every(Boolean)
+    if(canSave) {
+    await  reactionAddedReply({commentId, replyId: reply._id, reaction: name, authorId, postId})
+    }
+  } 
+
   const reactionButtons = Object.entries(reactionEmoji).map(([name, emoji]) => {
     return (
       <button 
       key={name} 
+      id={name}
       type="button" 
-      className="mx-1 mb-0.5"
-      onClick={() =>
-        dispatch(reactionAddedReply({commentId, replyId: reply.id, reaction: name}))
-      }
+      className="mx-1 mb-0.5 relative after:absolute after:inset-0 after:z-10"
+      onClick={handleUpdateReaction}
       >
         {emoji}  {reply.reactions[name]}        
       </button>

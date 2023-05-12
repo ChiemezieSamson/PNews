@@ -1,16 +1,15 @@
 import React from 'react'
 import StickyBox from "react-sticky-box";
-import { useSelector } from "react-redux"
 import { HomeAndPigSocialLinks } from '../../../../data';
 import { PagesDivider, SocialLinks } from '../../../SharedAsset/SharedAssets';
 import { JustTimeComponetCatBlock, JustTimeComponetStar } from '../../IndexPageComponents/SharedComponents';
 import Pagination from '../PaginationControl/Pagination';
-import { selectAllPosts } from '../../../../Reduxstore/Slices/posts/PostsSlice';
-
+import { useFetchedPosts } from '../../../SharedAsset/Spinners/postsSpinner';
 
 
 const PaginationPages = () => {
-  const Posts = useSelector(selectAllPosts)
+  const {content , action} = useFetchedPosts()
+  const Posts = content
  
   return (
     <div className='md:grid md:grid-cols-3 mt-7'>
@@ -19,11 +18,11 @@ const PaginationPages = () => {
 
         <div className='imgxs:grid imgxs:grid-cols-2 mt-6'>
           <span className='imgxs:mr-[3%]'>
-            <JustTimeComponetCatBlock Posts={Posts.slice(7, 13)} />
+            {action && <JustTimeComponetCatBlock Posts={Posts.slice(7, 13)} />}
           </span>
          
           <span className='imgxs:ml-[3%]'>
-            <JustTimeComponetCatBlock Posts={Posts.slice(1, 7)} />
+            {action && <JustTimeComponetCatBlock Posts={Posts.slice(1, 7)} />}
           </span>
         </div>
         
@@ -39,7 +38,7 @@ const PaginationPages = () => {
           <div className='my-10'>
             <PagesDivider text={"Recommended"} />
             <span className='mt-5 inline-block'>
-              <JustTimeComponetStar Posts={Posts.slice(6,10)} />
+              {action && <JustTimeComponetStar Posts={Posts.slice(6,10)} />}
             </span> 
           </div>
         </StickyBox>

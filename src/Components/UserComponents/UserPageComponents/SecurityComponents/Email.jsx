@@ -1,13 +1,17 @@
 import React, { useRef, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { selectAllUsers, userEmailMakePrimary, userEmailRemoveSecondary, userEmailUpdate } from '../../../../Reduxstore/Slices/users/UsersSlice'
+import { useUpdateExistingUserMakePrimaryMutation, useUpdateExistingUserRemoveSecondaryMutation, useUpdateExistingUserSecondaryEmailMutation} from '../../../../Reduxstore/Slices/users/UsersSlice'
 import { Hanbugar3, WritePostAsideOpenClosebar } from '../../../ButtonAndOthers/Buttons'
 import { SinginAndSecurityIntro } from '../../../SharedAsset/SharedAssets'
+import { handelPassWordValidation } from '../../../SharedAsset/Vaidations/bcrypt'
 
 
-const Email = () => {
-  const user = useSelector(selectAllUsers)
+const Email = ({user}) => {
+  const [userEmailUpdate, {isLoading}] = useUpdateExistingUserSecondaryEmailMutation()
+  const [userEmailMakePrimary, {isLoading: makePrimary}] = useUpdateExistingUserMakePrimaryMutation()
+  const [userEmailRemoveSecondary, {isLoading: removeSecondary}] = useUpdateExistingUserRemoveSecondaryMutation()
   const [openCat, setOpenCat] = useState(false)
+  const [wrongPassword, setWrongPassword] = useState(false)
+  const [wrongPassword2, setWrongPassword2] = useState(false)
   const [openAddnewCat, setOpenAddnewCat] = useState(false)
   const [newEmail, setNewEmail] = useState("")
   const [getUserpassword, setGetUserpassword] = useState("")
@@ -15,12 +19,6 @@ const Email = () => {
   const [emailOfTheClickedButton, setEmailOfTheClickedButton] = useState("")
   const [textContentOfTheClickedButton, setTextContentOfTheClickedButton] = useState("Make primary")
   const ButtonRef = useRef();
-
-
-  const dispatch = useDispatch()
-
-  const userId = user[1] ? user[1].id : user[0].id
-
 
   const handleOpenCloseChild = () => {
     setOpenCat((change) => !change)
@@ -48,53 +46,62 @@ const Email = () => {
     setTextContentOfTheClickedButton(() => e.target.textContent)
     setOpenGetUserPasswordForMakeAndRemove(() => true)   
   }
-
-  // DELETE EMAIL OR MAKE IT THE PRIMARY EMAIL
-  const handleMakePrimaryORDeleteEmailAfterUserEnterPassword = (e) => {
-    e.preventDefault();
-
-    if (textContentOfTheClickedButton === "Make primary" && 
-    textContentOfTheClickedButton === ButtonRef.current.textContent 
-    && getUserpassword === user[0].password) {
-
-      dispatch(userEmailMakePrimary({userId, primaryEmail: user[0].email.primary, emailOfTheClickedButton}))
-    }
-
-   
-    if(textContentOfTheClickedButton === "Remove" && 
-    textContentOfTheClickedButton === ButtonRef.current.textContent 
-    && getUserpassword === user[0].password) {
-
-      dispatch(userEmailRemoveSecondary({userId, emailOfTheClickedButton}))
-    }
-
-    // After each action close the input box and empty the input box
-    setOpenGetUserPasswordForMakeAndRemove(() => false)
-    setGetUserpassword(() => "")
-  }
-
+  
+  const canSave = [getUserpassword, newEmail].every(Boolean) && !isLoading
 
   //CREATE NEW EMAIL
-  const handleOnSubmit = (e) => {
 
-    e.preventDefault();  
-    
-    dispatch(userEmailUpdate({userId, newEmail, getUserpassword}))
-
-    // check if the password entered is same as the user password
-    if(getUserpassword === "Da123456") {
+  const handleOnSubmit = async  (e) => {
+    e.preventDefault(); 
+    // check if the password entered is same as the user password 
+    if (!handelPassWordValidation(getUserpassword, user)){
+      setWrongPassword(() => true)
       // empty the input boxs
       setNewEmail(() => "")
       setGetUserpassword(() => "")
-      setOpenAddnewCat(() =>false)
-    }    
+    }
+     
+    if(canSave && handelPassWordValidation(getUserpassword, user)) {
+      await userEmailUpdate({userId: user._id, newEmail, getUserpassword})
+      // empty the input boxs and close the tab
+      setNewEmail(() => "")
+      setGetUserpassword(() => "")
+      setOpenAddnewCat(() => false)
+      setWrongPassword(() => false)
+    } 
+  }
 
-     // either way empty the input boxs
-    setNewEmail(() => "")
-    setGetUserpassword(() => "")
+   // DELETE EMAIL OR MAKE IT THE PRIMARY EMAIL
+   const handleMakePrimaryORDeleteEmailAfterUserEnterPassword = async (e) => {
+    e.preventDefault();
+
+    if (!handelPassWordValidation(getUserpassword, user)){
+      setWrongPassword2(() => true)
+      setGetUserpassword(() => "")
+    }
+
+    const canMakePrimary = textContentOfTheClickedButton === "Make primary" && 
+    textContentOfTheClickedButton === ButtonRef.current.textContent 
+    && Boolean(emailOfTheClickedButton) && !makePrimary
+
+    if (canMakePrimary && handelPassWordValidation(getUserpassword, user)) {
+      await userEmailMakePrimary({userId: user._id, primaryEmail: user.email.primary, emailOfTheClickedButton})
+      setOpenGetUserPasswordForMakeAndRemove(() => false)
+      setWrongPassword2(() => false)
+      setGetUserpassword(() => "")
+    } 
+
+    const canRemove = textContentOfTheClickedButton === "Remove" && 
+    textContentOfTheClickedButton === ButtonRef.current.textContent && !removeSecondary
+   
+    if(canRemove && handelPassWordValidation(getUserpassword, user)) {
+      await userEmailRemoveSecondary({userId: user._id, emailOfTheClickedButton})
+      setOpenGetUserPasswordForMakeAndRemove(() => false)
+      setWrongPassword2(() => false)
+      setGetUserpassword(() => "")
+    }
   }
   
-
   return (
     <div className='font-poppins relative'>
       <WritePostAsideOpenClosebar BarName={"Email addresses"} handle={handleOpenCloseChild}/>
@@ -107,14 +114,14 @@ const Email = () => {
           <div className='mt-5 py-1 tracking-wide'>
             <div className='py-0.5 mb-10'>
               <h6 className='text-sm font-bold text-[#282a35] mb-4'>Primary email</h6>
-              <p>{user[0].email.primary}</p>
+              <p>{user.email.primary}</p>
             </div>
 
             {/* secondary emails display here */}
             
-            <div className={`${user[0].email.secondary.length <= 0 ? "hidden" : "block"}`}>              
+            <div className={`${user.email.secondary.length <= 0 ? "hidden" : "block"}`}>              
              <h6 className='text-sm font-bold text-[#282a35] mb-4'>Secondary email</h6>                
-                {user[0].email.secondary.map((email, index) => {
+                {user.email.secondary.map((email, index) => {
                   return (
                     <div className='sm:grid sm:grid-flow-col sm:justify-between mt-5' key={index}>    
                       <p>{email}</p>          
@@ -127,7 +134,7 @@ const Email = () => {
                         id='makeprimaryemailbutton'
                         name='makeprimaryemailbutton'
                         className='sm:mx-2 mr-2 cursor-pointer hover:bg-[#e4e4e4] tracking-wider sm:px-1 pr-1 inline-block rounded-md
-                          hover:shadow hover:shadow-gray-400 transition-all duration-200 ease-linear'
+                          hover:shadow hover:shadow-gray-400 transition-all duration-200 ease-linear disabled:opacity-40'
                           onClick={handleMakePrimaryButton}>
                           Make primary
                         </button>
@@ -170,7 +177,7 @@ const Email = () => {
               </div>
                
               <form onSubmit={handleOnSubmit}>
-
+                {wrongPassword ? <p className='text-xs text-rose-500 tracking-wider font-lora'>wrong credentials!</p> : "" }
                 <label htmlFor="newemailaddress">
                   <span className='text-xs tracking-wider'>Enter new email address</span>
                   <input 
@@ -203,8 +210,7 @@ const Email = () => {
                 name='addnewemailbutton'
                 className='w-full rounded-full text-center text-white bg-blue-500 text-sm py-1.5 tracking-wide
                 font-semibold mt-4 mb-0.5 shadow shadow-gray-400 hover:bg-blue-600 transition-all 
-                duration-200 ease-linear'>Submit</button>
-
+                duration-200 ease-linear disabled:opacity-40' disabled={!canSave}>Submit</button>
               </form>
             </div>
           </div>
@@ -221,6 +227,7 @@ const Email = () => {
             {/* The form to get the user inputed password */}
 
             <form className='mt-4' onSubmit={handleMakePrimaryORDeleteEmailAfterUserEnterPassword}>
+            {wrongPassword2 ? <p className='text-xs text-rose-500 tracking-wider font-lora'>wrong credentials!</p> : "" }
               <label htmlFor="userpasswordformakeprimary" className='text-xs font-light '>Password</label>
               <input 
               type="password" 

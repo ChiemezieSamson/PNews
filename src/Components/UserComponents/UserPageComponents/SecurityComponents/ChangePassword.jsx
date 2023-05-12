@@ -1,45 +1,47 @@
 import React, { useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { changeUserPassword, selectAllUsers } from '../../../../Reduxstore/Slices/users/UsersSlice'
+import { useUpdateExistingUserPasswordMutation } from '../../../../Reduxstore/Slices/users/UsersSlice'
 import { WritePostAsideOpenClosebar } from '../../../ButtonAndOthers/Buttons'
 import { SinginAndSecurityIntro } from '../../../SharedAsset/SharedAssets'
+import { handelPassWordValidation } from '../../../SharedAsset/Vaidations/bcrypt'
 
-const ChangePassword = () => {
-  const user = useSelector(selectAllUsers)
+const ChangePassword = ({user}) => {
+  const [changeUserPassword, { isLoading }] = useUpdateExistingUserPasswordMutation()
   const [openCat, setOpenCat] = useState(false)
-  const [currentPassword, setCurrentPassword] = useState("⁕⁕⁕⁕⁕⁕⁕");
-  const [password, setPassword] = useState("⁕⁕⁕⁕⁕⁕⁕");
-  const [confirmPassword, setConfirmPassword] = useState("⁕⁕⁕⁕⁕⁕⁕");
+  const [currentPassword, setCurrentPassword] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [requiredText, setRequiredText] = useState(false)
   const [notSamePassword, setNotSamePassword] = useState(false)
 
-
-  const dispatch = useDispatch()
-
-  const userId = user[1] ? user[1].id : user[0].id
 
   const handleOpenCloseChild = () => {
     setOpenCat((change) => !change)
   }
 
-  const handleSubmit = (event) => {
+  const canSave = [currentPassword, password, confirmPassword].every(Boolean) && !isLoading
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
-    if(currentPassword !== user[0].password) {
+    if(!handelPassWordValidation(currentPassword, user)) {
       setRequiredText(() => true)
       setNotSamePassword(() => false)
-    } else if (confirmPassword !== password) { 
+    } 
+
+    if (confirmPassword !== password) { 
       setNotSamePassword(() => true)
       setRequiredText(() => false)
-    }else {
+    }
+    
+    if(canSave && handelPassWordValidation(currentPassword, user)){
+      await changeUserPassword({userId: user._id, currentPassword, password, confirmPassword})
       setRequiredText(() => false)
-      setNotSamePassword(() => false)
-      dispatch(changeUserPassword({userId, currentPassword, password, confirmPassword}))
+      setNotSamePassword(() => false)      
     }
 
     setConfirmPassword(() => "")
     setPassword(() => "")
-    setCurrentPassword(() => "")
+    setCurrentPassword(() => "")    
   }
 
   return (
@@ -58,9 +60,10 @@ const ChangePassword = () => {
                 <input 
                 type="password" 
                 id='changeusercurrentpassword' 
-                name='changeusercurrentpassword' 
+                name='changeusercurrentpassword'
+                placeholder={"⁕⁕⁕⁕⁕⁕⁕"} 
                 value={currentPassword} 
-                className='placeholder:text-[#aeaeae] placeholder:text-sm mb-0'
+                className='placeholder:text-[#aeaeae] placeholder:text-sm mb-0 text-black'
                 onChange={(e) => setCurrentPassword(() => e.target.value)}
                 />
               </label>
@@ -73,8 +76,9 @@ const ChangePassword = () => {
                 type="password" 
                 id='usernewpassword' 
                 name='usernewpassword' 
+                placeholder={"⁕⁕⁕⁕⁕⁕⁕"}
                 value={password} 
-                className='placeholder:text-[#aeaeae] placeholder:text-sm'
+                className='placeholder:text-[#aeaeae] placeholder:text-sm text-black'
                 onChange={(e) => setPassword(() => e.target.value)}
                 />
               </label>
@@ -85,9 +89,10 @@ const ChangePassword = () => {
                 <input 
                 type="password" 
                 id='retypeusernewpassword' 
-                name='retypeusernewpassword'  
+                name='retypeusernewpassword'
+                placeholder={"⁕⁕⁕⁕⁕⁕⁕"}  
                 value={confirmPassword}
-                className='placeholder:text-[#aeaeae] placeholder:text-sm mb-0'
+                className='placeholder:text-[#aeaeae] placeholder:text-sm mb-0 text-black'
                 onChange={(e) => setConfirmPassword(() => e.target.value)}
                 />
               </label>
@@ -99,7 +104,8 @@ const ChangePassword = () => {
                 id='saveusernewpassword' 
                 name='saveusernewpassword' 
                 className='mx-1 cursor-pointer bg-[#e4e4e4] tracking-wider px-2 py-1 rounded-md shadow shadow-gray-400 
-                text-sm hover:bg-rose-500 hover:text-white transition-all duration-200 ease-linear text-neutral-600'
+                text-sm hover:bg-rose-500 hover:text-white transition-all duration-200 ease-linear text-neutral-600 disabled:opacity-40'
+                disabled={!canSave}
                 >Save password</button>
                 <button 
                 type='button' 
