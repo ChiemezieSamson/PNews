@@ -1,6 +1,7 @@
 import React from 'react'
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
+import { publicFolder } from '../../../../data'
 
 const PostImageComponent = ({blogPost, Parentlink}) => {
   const favoriteAndQuotes = blogPost.slice(0, 4)
@@ -14,7 +15,7 @@ const PostImageComponent = ({blogPost, Parentlink}) => {
           return(
             <li key={post._id}>
               <span> 
-                  <img src={post.postImage} alt={post.postTitle} loading="lazy"
+                  <img src={publicFolder + post.postImage} alt={post.postTitle} loading="lazy"
                   className={`w-full cursor-pointer  ${(Parentlink === "favorite" || Parentlink === "quotes") ? "h-32" : "h-28"}`} />
                 <Link to={`/single/${post._id}`} className="mt-1 cursor-pointer inline-block">
                   {post.postTitle}

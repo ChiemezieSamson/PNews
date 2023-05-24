@@ -6,6 +6,7 @@ import Aside from '../asidePage/Aside'
 import StickyBox from "react-sticky-box";
 import { PagesBlogPostComponent } from '../IndexPageComponents/SharedComponents'
 import { useFetchedPosts } from '../../SharedAsset/Spinners/postsSpinner'
+import { publicFolder } from '../../../data'
 
 const FavoriteIndexPage = () => {
   const {content , action} = useFetchedPosts()
@@ -17,7 +18,7 @@ const FavoriteIndexPage = () => {
         {action && Posts.slice(8, 13).map((post) => {
           return (
             <li key={post._id} className={`[&:nth-child(2)]:row-span-3 first:mb-2 last:mt-2 relative ${overLay()}`}>
-              <img src={post.postImage} alt="post" className="h-full w-full object-cover" loading="lazy"/>
+              <img src={publicFolder + post.postImage} alt="post" className="h-full w-full object-cover" loading="lazy"/>
 
               <div className="absolute bottom-[10%] inset-x-0 flex content-center justify-center z-20">
                 <div className="w-[90%] text-left">

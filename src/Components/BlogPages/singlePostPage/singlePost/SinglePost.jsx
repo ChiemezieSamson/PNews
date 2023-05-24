@@ -12,6 +12,7 @@ import PreviousNextPost from './PreviousNextPost';
 import { useFetchedPostById } from '../../../SharedAsset/Spinners/postsSpinner';
 import {  useFetchedUserByPostId } from '../../../SharedAsset/Spinners/userSpinner';
 import { useDeleteExistingPostMutation } from '../../../../Reduxstore/Slices/posts/PostsSlice';
+import { publicFolder } from '../../../../data';
 
 
 const SinglePost = () => {
@@ -122,7 +123,7 @@ const SinglePost = () => {
               userAction ?
                 <div className='text-[#7a7a7a]'>
                   <span className='w-10 h-10 inline-block rounded-full align-bottom mr-2'>
-                    {(postAction && userAction) ? <img loading='lazy' src={User.profileImage} alt="AdminImage" className='h-full w-full object-cover rounded-full cursor-pointer'/>
+                    {(postAction && userAction) ? <img loading='lazy' src={publicFolder + User.profileImage} alt="AdminImage" className='h-full w-full object-cover rounded-full cursor-pointer'/>
                     : singlePost}                  
                   </span>
 
@@ -190,7 +191,7 @@ const SinglePost = () => {
           {/* post image */}
 
           <div className='lg:mt-7 mt-3 lg:mb-7 mb-4'>
-          {postAction ? <img loading='lazy' src={Post.postImage} alt="PostImage" className='w-full max-h-[370px] object-cover cursor-pointer'/>
+          {postAction ? <img loading='lazy' src={publicFolder + Post.postImage} alt="PostImage" className='w-full max-h-[370px] object-cover cursor-pointer'/>
                 :
           singlePost
           }         

@@ -1,11 +1,14 @@
 import React, {useState } from 'react'
-import { useUpdateExistingUserMutation,  } from '../../../Reduxstore/Slices/users/UsersSlice'
+import { useUpdateExistingUserImageMutation } from '../../../Reduxstore/Slices/users/UsersSlice'
 import { useFetchedUserById } from '../../SharedAsset/Spinners/userSpinner'
+import axios from "axios"
+import { publicFolder } from '../../../data'
 
 
 const MyProfilePicture = () => {
+  const [file, setFile] = useState("")
   const {singleUser, userAction, isFetching} = useFetchedUserById()
-  const [userProfilePicture, {isLoading}] = useUpdateExistingUserMutation()
+  const [userProfilePicture, {isLoading}] = useUpdateExistingUserImageMutation()
   const [profileImage, setProfileImage] = useState("")
   const user = singleUser  
 
@@ -19,6 +22,24 @@ const MyProfilePicture = () => {
     }
   }
 
+  const handleImage = async (e) => {
+    if(e.target.value) {
+      const data = new FormData()
+      const filename = Date.now() + e.target.files[0].name;
+      
+      data.append("name", filename)
+      data.append("file", e.target.files[0])
+       
+      setProfileImage(() => filename)
+      setFile(() => e.target.files[0])
+     try {
+      await axios.post("/upload", data)
+     } catch (err) {
+
+     }
+    }
+  }
+
   return (
     <>
     {
@@ -29,17 +50,18 @@ const MyProfilePicture = () => {
         <small className='text-xs text-[#798488]'>Add a photo of you to be easily recognized</small>
       </div>
       <div>
-        <div className="max-w-[200px] mx-auto h-[200px] bg-[#aaacb0] border border-solid border-[#e7e9eb] rounded-full
+        <div className="max-w-[200px] mx-auto h-full+ border border-solid border-[#e7e9eb] rounded-full
         text-white group cursor-default shadow-md shadow-[rgba(0,0,0,.25)] relative overflow-clip mb-7">
           <div className='relative after:absolute after:inset-0 after:bg-white/10 after:z-10 w-ful h-full'>
-            <img src={user.profileImage} alt="userprofileimage" className='w-full h-full object-cover'/>
+          {file ? <img  src={URL.createObjectURL(file)} alt="postImage" className='w-auto h-auto object-cover' loading="lazy"/> :
+            <img src={publicFolder + user.profileImage} alt="userprofileimage" className='w-full h-auto object-cover' loading="lazy"/>}
           </div>      
           <form 
           id='profileImage'
           onSubmit={handleSubmit} 
           className='absolute inset-x-0 z-20 group-hover:top-2/3 bg-gray-900/30 bottom-0 pt-3 transition-all duration-500 ease-linear opacity-0 group-hover:opacity-100'>
             <label htmlFor="userimage" className='text-xs uppercase tracking-widest'>Upload Image</label>
-            <input type="file" id="userimage" name='userimage' hidden onChange={(e) => setProfileImage(() => e.target.value)}/>
+            <input type="file" id="userimage" name='userimage' hidden onChange={handleImage}/>
           </form>
         </div>        
       </div>

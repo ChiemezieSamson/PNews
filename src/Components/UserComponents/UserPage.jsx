@@ -1,17 +1,48 @@
-import React, { useState } from 'react';
-import { NavLink, Outlet } from 'react-router-dom';
-import { UserPages } from '../../data';
+import React, { useEffect, useState } from 'react';
+import { NavLink, Outlet, useNavigate, useParams } from 'react-router-dom';
 import { useWindowSize } from '../SharedAsset/SharedAssets';
 import MyProfilePicture from './UserPageComponents/MyProfilePicture';
+import { useSendLogoutMutation } from '../../Reduxstore/Slices/authSlice/authApiSlic';
+import Spinner from '../SharedAsset/Spinners/Spinner';
 
 const UserPage = () => {
   const size = useWindowSize()
   const [navlinkTextContene, setNavlinkTextContene] = useState("")
+  const [sendLogout, {isLoading, isSuccess, isError, error}] = useSendLogoutMutation()
+  
+  const navigate = useNavigate()
+  const {userId} = useParams()
 
 
   const handleNavlinkTextContene = (e) => {
     setNavlinkTextContene(() => e.target.textContent)
   }
+
+  const handleLogOut = async () => {
+   await sendLogout()
+  }
+
+  const UserPages = [
+    {
+      id: 1,
+      name: "My Profile",
+      toUrl: `/userpage/${userId}`,
+    },
+    {
+      id: 2,
+      name: "My Public Profile",
+      toUrl: `/userpage/${userId}/publicprofile`,
+    },
+    {
+      id: 3,
+      name: "Sign in & security",
+      toUrl: `/userpage/${userId}/security`,
+    },
+  ];  
+   
+  useEffect(() => {
+    if (isSuccess) navigate('/')
+  }, [isSuccess, navigate])
 
   let hideshowProfilePicture 
   if (size.width < 1316 && navlinkTextContene === "My Profile") { hideshowProfilePicture = true }
@@ -41,6 +72,13 @@ const UserPage = () => {
 
       <div className={`${size.width >= 1316 ? "col-span-2" : "order-last"} bg-gray-200/40 overflow-x-hidden rounded-md`}>
         <Outlet/>
+
+       <div>
+        <button className='text-[#798488] bg-gray-300 capitalize border-0 py-2.5 px-8 rounded-full cursor-pointer text-base shadow-[#444] 
+          shadow-sm disabled:opacity-40' type='button' title='Logout' onClick={handleLogOut}>
+            LogOut</button>
+          {isLoading ? <Spinner text="Loading..."/> : isError ? <div>Error: {error.toString()}</div> : isSuccess ? <div>Loging Out now</div> : ""}
+        </div>
       </div>
 
       <div className={`${hideshowProfilePicture ? "block" : "hidden"}`}>

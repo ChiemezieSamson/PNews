@@ -3,6 +3,7 @@ import { FaMapPin, FaChevronLeft, FaChevronRight} from "react-icons/fa";
 import { StarComponent } from '../../ButtonAndOthers/Buttons';
 import { CategoriesComponent, overLay, PostTitleLarge, TimeComponent, useWindowSize } from '../../SharedAsset/SharedAssets';
 import { Link } from 'react-router-dom';
+import { publicFolder } from '../../../data';
 
 
 const HeroImages = ({Posts}) => {
@@ -90,7 +91,7 @@ const HeroImages = ({Posts}) => {
           {/* First Big Image */}
 
           <div className={`col-span-2 relative my-2 md:my-0 snap-start ${overLay()} m-0 p-0 group overflow-clip`}>
-            <img src={Posts[4].postImage} alt="Mostrecent" className="md:min-h-[394px] lg:min-h-[490px] xl:min-h-full max-h-44 imgxs:max-h-[260px] w-full object-cover group-hover:scale-110
+            <img src={publicFolder + Posts[4].postImage} alt="Mostrecent" className="md:min-h-[394px] lg:min-h-[490px] xl:min-h-full max-h-44 imgxs:max-h-[260px] w-full object-cover group-hover:scale-110
             transition-all duration-500 delay-200 ease-linear scale-100" loading="lazy"/>
             <span className="absolute lg:-top-1.5 -top-2 left-6 z-20">
               <CategoriesComponent cat={Posts[4].postCategory[0]}/>
@@ -116,7 +117,7 @@ const HeroImages = ({Posts}) => {
             {Posts.slice(1,4).map((post) => {
               return (
             <li key={post._id} className={`relative max-h-44 snap-start ${overLay()} m-0 p-0 group overflow-clip`}>
-              <img src={post.postImage} alt="IndexImage"  className="h-32 imgxs:h-[180px] md:h-32 lg:h-40 w-full object-cover group-hover:scale-110
+              <img src={publicFolder + post.postImage} alt="IndexImage"  className="h-32 imgxs:h-[180px] md:h-32 lg:h-40 w-full object-cover group-hover:scale-110
                   transition-all duration-500 delay-200 ease-linear scale-100" loading="lazy"/>
                   <span className='absolute lg:-top-1.5 -top-2 left-4 z-20'>
                     <CategoriesComponent cat={post.postCategory[0]}/>

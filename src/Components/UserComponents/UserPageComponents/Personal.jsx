@@ -29,7 +29,6 @@ const Personal = () => {
     }
   },[userAction,user])
 
-
   return (
     <>
     {

@@ -9,13 +9,10 @@ import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import { emptyCategories, selectAllPostCat } from '../../../../Reduxstore/Slices/PostsComponentSlices/postcategory/PostcategoriesSlice'
 import { emptyTag, selectAllPostTags } from '../../../../Reduxstore/Slices/PostsComponentSlices/postsTags/PostsTagsSlice'
 import { emptyOptional, selectAllPostOptionals } from '../../../../Reduxstore/Slices/PostsComponentSlices/PostsOptional/PostsOptionalSlice'
-import { useFetchedPosts } from "../../../SharedAsset/Spinners/postsSpinner";
 import { useCreateNewPostMutation } from "../../../../Reduxstore/Slices/posts/PostsSlice";
+import axios from "axios"
 
 const CreatePostComponents = ({state}) => {
-  const {content , action, refetch} = useFetchedPosts()
-  const Posts = content
-
   const [editorState, setEditorState] = useState(
     () => EditorState.createWithContent(state),
   )
@@ -24,6 +21,7 @@ const CreatePostComponents = ({state}) => {
   const [postImage, setPostImage] = useState("")
   const [postAuthor, setPostAuthor] = useState("")
   const [addNewPost, { isLoading }] = useCreateNewPostMutation()
+  const [file, setFile] = useState("")
 
   const postCategory = useSelector(selectAllPostCat)
   const postTags = useSelector(selectAllPostTags)
@@ -37,12 +35,27 @@ const CreatePostComponents = ({state}) => {
 
   const dispatch = useDispatch()
 
+  const handleImage = async (e) => {
+    if(e.target.value) {
+      const data = new FormData()
+      const filename = Date.now() + e.target.files[0].name;
+      
+      data.append("name", filename)
+      data.append("file", e.target.files[0])
+       
+     setPostImage(() => filename)
+     setFile(() => e.target.files[0])
+     try {
+      await axios.post("/upload", data)
+     } catch (err) {
 
+     }
+    }
+  }
 
   const canSave = [postTitle, postImage, postAuthor,postCategory[0],postTags[0]].every(Boolean) && !isLoading
 
   const handleAllPostContent = async () => {
-    refetch()
     if (canSave) {
       try {
         await addNewPost({ postAuthor, postTitle, postImage, postContent , postCategory, postTags, optional }).unwrap()
@@ -80,7 +93,7 @@ const CreatePostComponents = ({state}) => {
           autoFocus={true} form="post_form" value={postTitle}  onChange={(e) => setPostTitle(() => e.target.value)}/>
         </div>
 
-        {action ? <img  src={Posts[4].postImage || null} alt="postImage" className='w-full h-80 rounded-xl object-cover' loading="lazy"/> : content}
+        {(postImage && file) && (<img  src={URL.createObjectURL(file)} alt="postImage" className='w-full h-80 rounded-xl object-cover' loading="lazy"/>)}
 
         {/* write post form */}
         <form className="mt-2.5" id="post_form" onSubmit={handleSubmit}>
@@ -91,7 +104,7 @@ const CreatePostComponents = ({state}) => {
           <input type="file" id="fileInput" className='w-auto text-sm text-slate-500 file:mr-4 file:py-2 file:px-4
               file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-violet-50 file:text-[#f70d28]
             hover:file:bg-violet-100 focus:outline-none focus:border-0 transition-all duration-200 ease-linear' name="image" 
-            onChange={(e) => setPostImage(() => e.target.value)} value={postImage}/>
+            onChange={handleImage}/>
         </form>
 
         <div>

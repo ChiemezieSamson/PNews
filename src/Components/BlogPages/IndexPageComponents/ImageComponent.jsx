@@ -2,6 +2,7 @@ import React from 'react'
 import { StarComponent } from '../../ButtonAndOthers/Buttons'
 import { CategoriesComponent, overLay, TimeComponent} from '../../SharedAsset/SharedAssets'
 import { Link } from 'react-router-dom'
+import { publicFolder } from '../../../data'
 
 const ImageComponent = ({Posts}) => {
 
@@ -12,7 +13,7 @@ const ImageComponent = ({Posts}) => {
         {Posts.slice(0, 7).map((post) => {
           return (
         <li key={post._id} className={`relative snap-start min-w-[350px] ${overLay()} m-0 p-0 group overflow-clip`}>
-          <img src={post.postImage} alt="IndexImage"  className="h-full w-full object-cover group-hover:scale-110
+          <img src={publicFolder + post.postImage} alt="IndexImage"  className="h-full w-full object-cover group-hover:scale-110
                   transition-all duration-500 delay-200 ease-linear scale-100" loading="lazy"/>         
           <div className="absolute bottom-[12%] text-white inset-x-0 grid px-2 place-items-center z-20 transition-all duration-500 delay-200 ease-linear translate-y-10 
                group-hover:translate-y-0">

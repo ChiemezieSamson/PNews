@@ -2,6 +2,7 @@ import React from 'react'
 import { JustTimeComponet } from './SharedComponents';
 import { AdminComponentColor, CategoriesComponentBotton, MainDivider, PostsShortInfoComponent, PostTitleMedium2, TimeComponentColor } from '../../SharedAsset/SharedAssets';
 import { ReadmoreButton, StarComponent } from '../../ButtonAndOthers/Buttons';
+import { publicFolder } from '../../../data';
 
 
 const FeaturedPosts = ({Posts}) => {
@@ -19,7 +20,7 @@ const FeaturedPosts = ({Posts}) => {
 
         <div className="text-black md:mr-[3%]">
           <div className="relative mt-1.5 mb-4">
-            <img src={Posts[11].postImage} alt={"game"} className="w-full h-44 imgxs:h-[240px] object-cover cursor-pointer md:h-36 lg:h-48" loading="lazy"/>
+            <img src={publicFolder + Posts[11].postImage} alt={"game"} className="w-full h-44 imgxs:h-[240px] object-cover cursor-pointer md:h-36 lg:h-48" loading="lazy"/>
             <CategoriesComponentBotton cat={Posts[11].postCategory[0]} />
           </div>
 

@@ -3,6 +3,7 @@ import { NewsLetter, PagesDivider, PostTitleMedium2, SocialLinks, TimeComponent 
 import TrendingCommentsLatest from '../IndexPageComponents/IndexPageComponentAsideComponent.jsx/TrendingCommentsLatest'
 import { JustTimeComponet } from '../IndexPageComponents/SharedComponents'
 import { useFetchedPosts } from '../../SharedAsset/Spinners/postsSpinner'
+import { publicFolder } from '../../../data'
 
 
 const Aside = () => {
@@ -27,7 +28,7 @@ const Aside = () => {
           <div className='text-white relative after:inset-0 after:bg-black/40 after:absolute mt-4 mb-7'>
             <div className='w-full h-44 imgxs:h-[240px] md:h-36 lg:h-48'>
               {action ? 
-              <img src={Posts[2].postImage} alt="recentPost" className="w-full relative h-full object-cover cursor-pointer" loading="lazy"/> :
+              <img src={publicFolder + Posts[2].postImage} alt="recentPost" className="w-full relative h-full object-cover cursor-pointer" loading="lazy"/> :
               content}  
             </div>
             

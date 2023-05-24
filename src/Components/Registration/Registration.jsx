@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { useCreateNewUserMutation } from "../../Reduxstore/Slices/users/UsersSlice";
 import useFetchedUsers from "../SharedAsset/Spinners/userSpinner";
+import { useNavigate } from "react-router-dom";
 
 const RegistrationForm = () => {
-  const {userContent, useraction,  refetch, isFetching} = useFetchedUsers()
+  const {userContent, useraction, isFetching} = useFetchedUsers()
   const users = userContent
   const [firstname, setFirstName] = useState("");
   const [lastname, setLastName] = useState("");
@@ -13,13 +14,14 @@ const RegistrationForm = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [requiredText, setRequiredText] = useState(false)
   const [addNewUser, { isLoading } ] = useCreateNewUserMutation()
+
+  const navigate = useNavigate();
   
 
   const canSave = [firstname, lastname, username, primary, password, confirmPassword].every(Boolean) && !isLoading
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    refetch()
 
     const checkUser = users.map((user) => user.email.primary );
 
@@ -28,8 +30,9 @@ const RegistrationForm = () => {
    } else{
     if (canSave) {
       try {
-
         await addNewUser({firstname, lastname, username, primary, password, confirmPassword}).unwrap()
+
+        navigate("/login")
       } catch (err) {
         console.error('Failed to save the post: ', err)
       } finally {

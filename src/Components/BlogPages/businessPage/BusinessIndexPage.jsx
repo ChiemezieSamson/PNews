@@ -5,6 +5,7 @@ import Aside from "../asidePage/Aside";
 import { PagesBlogPostComponent } from "../IndexPageComponents/SharedComponents";
 import { Link } from "react-router-dom";
 import { useFetchedPosts } from "../../SharedAsset/Spinners/postsSpinner";
+import { publicFolder } from "../../../data";
 
 const BusinessIndexPage = () => {
   const {content , action} = useFetchedPosts()
@@ -18,7 +19,7 @@ const BusinessIndexPage = () => {
       <div className="md:grid grid-cols-2 gap-x-2">
         <div className={`relative my-2 md:my-0 snap-start ${overLay()} m-0 p-0 overflow-clip`}>
             {action ? 
-            <img src={Posts[1].postImage} alt="Post" className="max-h-44 imgxs:max-h-[260px] sm:min-h-full w-full object-cover" loading="lazy"/> :
+            <img src={publicFolder + Posts[1].postImage} alt="Post" className="max-h-44 imgxs:max-h-[260px] sm:min-h-full w-full object-cover" loading="lazy"/> :
             content}
               
           <span className='absolute z-20 -top-2 left-5 text-white'>
@@ -50,7 +51,7 @@ const BusinessIndexPage = () => {
           return (
             <li key={post._id} className={`relative snap-start ${overLay()} m-0 p-0 overflow-clip 
             md:first:row-span-3 md:[&:nth-child(2)]:mb-1 md:last:mt-1`}>
-              <img src={post.postImage} alt="IndexImage"  className="w-full h-32 imgxs:h-[180px] md:h-full object-cover" loading="lazy"/>
+              <img src={publicFolder + post.postImage} alt="IndexImage"  className="w-full h-32 imgxs:h-[180px] md:h-full object-cover" loading="lazy"/>
 
               <span className='absolute z-20 -top-2 left-3 text-white'>
                 <CategoriesComponent  cat={post.postCategory[0]}/>
@@ -93,5 +94,3 @@ const BusinessIndexPage = () => {
 }
 
 export default BusinessIndexPage
-
-

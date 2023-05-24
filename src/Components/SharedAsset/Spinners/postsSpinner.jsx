@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react'
-import { useParams } from 'react-router-dom'
+import { useLocation, useParams } from 'react-router-dom'
 import Spinner from './Spinner'
-import { useGetPostByIdQuery, useGetPostsQuery } from '../../../Reduxstore/Slices/posts/PostsSlice'
+import { useGetPostByIdQuery, useGetPostsByQueryQuery, useGetPostsQuery } from '../../../Reduxstore/Slices/posts/PostsSlice'
 
 export const useFetchedPosts = () => {
   const {
@@ -37,6 +37,41 @@ export const useFetchedPosts = () => {
   return {content , action, refetch, isFetching}
 }
 
+
+export const useFetchedPostByQery = () => {
+  const {search, pathname} = useLocation();
+
+  const {
+    data: posts = [],
+    isFetching,
+    isSuccess,
+    isError,
+    error
+  } = useGetPostsByQueryQuery(search)
+
+
+  const sortedPosts = useMemo(() => {
+    const sortedPosts = posts.slice()
+    // Sort posts in descending chronological order
+    sortedPosts.sort((a, b) => b.createdAt.localeCompare(a.createdAt))
+    return sortedPosts
+  }, [posts])
+
+  
+  let content
+  let action = false
+
+  if (isFetching) {
+    content = <Spinner text="Loading..."/>
+  } else if (isSuccess) {
+    action = true
+    content = sortedPosts
+  } else if (isError) {
+    content = <div>{error.toString()}</div>
+  }
+
+  return {content , action, pathname, isFetching}
+}
 
 
 export const useFetchedPostById = () => {

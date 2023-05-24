@@ -52,7 +52,7 @@ const App = createBrowserRouter([
 						element: <BooksIndexPage />,
 					},
 					{
-						path: "/books/:clicked",
+						path: "/books/:search",
 						element: <Category />,
 					},
 				],
@@ -66,7 +66,7 @@ const App = createBrowserRouter([
 						element: <LifeStyleIndexPage />,
 					},
 					{
-						path: "/lifestyle/:clicked",
+						path: "/lifestyle/:search",
 						element: <Category />,
 					},
 				],
@@ -80,7 +80,7 @@ const App = createBrowserRouter([
 						element: <FavoriteIndexPage />,
 					},
 					{
-						path: "/favorite/:clicked",
+						path: "/favorite/:search",
 						element: <Category />,
 					},
 				],
@@ -94,7 +94,7 @@ const App = createBrowserRouter([
 						element: <BusinessIndexPage />,
 					},
 					{
-						path: "/business/:clicked",
+						path: "/business/:search",
 						element: <Category />,
 					},
 				],
@@ -108,7 +108,7 @@ const App = createBrowserRouter([
 						element: <QuotesIndexPage />,
 					},
 					{
-						path: "/quotes/:clicked",
+						path: "/quotes/:search",
 						element: <Category />,
 					},
 				],
@@ -146,7 +146,7 @@ const App = createBrowserRouter([
 				element: <RegistrationForm />,
 			},
 			{
-				path: "userpage",
+				path: "userpage/:userId",
 				element: <UserPage />,
 				children: [
 					{
@@ -154,11 +154,11 @@ const App = createBrowserRouter([
 						element: <Personal />,
 					},
 					{
-						path: "/userpage/security",
+						path: "/userpage/:userId/security",
 						element: <SingAndSecurity />,
 					},
 					{
-						path: "/userpage/publicprofile",
+						path: "/userpage/:userId/publicprofile",
 						element: <MyPublicProfile />,
 					},
 				],

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { NavLink } from "react-router-dom";
 import MainTagComponent from "./ComponentOfTheHover/MainTagComponent";
 import PostImageComponent from "./ComponentOfTheHover/PostImageComponent";
@@ -35,11 +35,6 @@ export const HoverLinsks = ({CategoriesLink, TagsLink, blogPost, Parentlink}) =>
 
 
 export const SmallScreenHoverLinsks = ({CategoriesLink, Parentlink}) => {
-  const [clickedCategory, setclickedCategory] = useState("")
-
-  const handleclickedCategory = (e) => {
-    setclickedCategory(() => e.target.textContent)
-  }
   const CategoriesLinks = CategoriesLink.map((title, id) => ({id: id, title: title}) )
   return (
     <nav className="overflowScrollSmallScreen bg-gradient-to-b max-h-40 md:h-auto pb-2 from-gray-300/50 to-transparent text-center md:text-left overflow-y-scroll md:overflow-visible">
@@ -54,10 +49,9 @@ export const SmallScreenHoverLinsks = ({CategoriesLink, Parentlink}) => {
           return(
             <li key={category.id}>
               <NavLink
-                to={`/${Parentlink}/${clickedCategory}`}
+                to={`/${Parentlink}/categories?category=${category.title}`}
                 className="py-1.5 px-1 text-[#757575] uppercase font-normal text-xs hover:bg-white 
-               hover:text-[#444] transition duration-200 ease-linear block"
-                onMouseOver={handleclickedCategory}>
+               hover:text-[#444] transition duration-200 ease-linear block">
                   {category.title}
                 </NavLink>
             </li>

@@ -1,18 +1,16 @@
 import React from 'react'
 import { GeneralCategorisePages } from '../../SharedAsset/SharedBlogPageStyle_1st_Component'
-import { useFetchedPosts } from '../../SharedAsset/Spinners/postsSpinner'
-import { useParams } from 'react-router-dom'
+import { useFetchedPostByQery } from '../../SharedAsset/Spinners/postsSpinner'
 
 const Category = () => {
-  const { clicked } = useParams()
-  const {content , action} = useFetchedPosts()
+  const {content , action, pathname, isFetching} = useFetchedPostByQery()
   const Posts = content
-
-  console.log(clicked);
+  const path = pathname.split("/")
+  
   return (
-    <>
-      {action && <GeneralCategorisePages ThreeFirstPost={Posts.slice(5, 11)} DriectionName={"LifeStyle"} PagePost={Posts.slice(3, 13)}/>}
-    </>
+    <div className="m-0 p-0 disabled:opacity-40" disabled={isFetching}>
+      {action && <GeneralCategorisePages ThreeFirstPost={Posts} DriectionName={path} PagePost={Posts}/>}
+    </div>
   )
 }
 

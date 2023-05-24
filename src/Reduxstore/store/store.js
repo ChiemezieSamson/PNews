@@ -1,4 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
+import authreducer from "../Slices/authSlice/AuthSlice";
 import { apiSlice } from "../Slices/ApiSlice/ApiSlice";
 import postCategoriesReducer from "../Slices/PostsComponentSlices/postcategory/PostcategoriesSlice";
 import postTagsReducer from "../Slices/PostsComponentSlices/postsTags/PostsTagsSlice";
@@ -10,13 +11,12 @@ const store = configureStore({
 		postCat: postCategoriesReducer,
 		postTags: postTagsReducer,
 		postOptional: postOptionalReducer,
+		auth: authreducer,
 
 		[apiSlice.reducerPath]: apiSlice.reducer,
 	},
 	middleware: (getDefaultMiddleware) =>
 		getDefaultMiddleware().concat(apiSlice.middleware),
 });
-
-console.log(store.getState());
 
 export default store;

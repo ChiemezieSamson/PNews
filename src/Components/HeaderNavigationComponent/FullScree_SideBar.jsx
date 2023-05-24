@@ -1,6 +1,6 @@
 import React from "react";
 import { Hanbugar3 } from "../ButtonAndOthers/Buttons";
-import { SocialMediaIcons} from "../../data"
+import { SocialMediaIcons, publicFolder} from "../../data"
 import { useFetchedPosts } from "../SharedAsset/Spinners/postsSpinner";
 
 
@@ -15,7 +15,7 @@ const FullSreenSidebar = ({closesidebar}) => {
     <section className="overflowScrollSmallScreen hidden md:block h-screen overflow-y-scroll scroll-py-4 overscroll-y-contain snap-mandatory p-8 px-12 relative bg-gray-200">
 
       <figure className="w-40 mx-auto p-4">
-       {action ? <img src={Posts[9].postImage} alt="FirstImage" className="w-full h-auto" loading="lazy"/> : content}
+       {action ? <img src={publicFolder + Posts[9].postImage} alt="FirstImage" className="w-full h-auto" loading="lazy"/> : content}
        <figcaption>Chinonye</figcaption>
       </figure>
 
@@ -37,7 +37,7 @@ const FullSreenSidebar = ({closesidebar}) => {
           Posts.slice(0, 9).map((post) => {
             return (
             <li key={post._id} className="p-0 m-0 h-28 relative InstagramImage">
-              <img src={post.postImage} alt={"social"}  className="w-full h-28 p-0 m-0" loading="lazy"/>
+              <img src={publicFolder + post.postImage} alt={"social"}  className="w-full h-28 p-0 m-0" loading="lazy"/>
               <div className="absolute top-0 right-0 left-0 bottom-0 bg-black opacity-0 Instacover"></div>
             </li>
             )

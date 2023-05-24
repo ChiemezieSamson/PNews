@@ -19,6 +19,14 @@ export const extendedPostsApiSlice = apiSlice.injectEndpoints({
 			],
 		}),
 
+		getPostsByQuery: builder.query({
+			query: (search) => "posts" + search,
+			providesTags: (result = [], error, arg) => [
+				"Post",
+				...result.map(({ id }) => ({ type: "Post", id })),
+			],
+		}),
+
 		getPostById: builder.query({
 			query: (postId) => `posts/${postId}`,
 			providesTags: (result, error, arg) => [{ type: "Post", id: arg }],
@@ -56,6 +64,7 @@ export const extendedPostsApiSlice = apiSlice.injectEndpoints({
 
 export const {
 	useGetPostsQuery,
+	useGetPostsByQueryQuery,
 	useGetPostByIdQuery,
 	useCreateNewPostMutation,
 	useUpdateExistingPostMutation,

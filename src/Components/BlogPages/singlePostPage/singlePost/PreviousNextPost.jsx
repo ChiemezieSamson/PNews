@@ -1,5 +1,5 @@
 import { CategoriesComponentBotton, PagesDivider, PostTitleMedium, PostTitleSmall, TimeComponentColor, useWindowSize } from '../../../SharedAsset/SharedAssets'
-import { SocialMediaIcons } from '../../../../data'
+import { SocialMediaIcons, publicFolder } from '../../../../data'
 import { Link } from 'react-router-dom'
 import { useFetchedPosts } from '../../../SharedAsset/Spinners/postsSpinner'
 
@@ -49,7 +49,7 @@ const PreviousNextPost = ({post, User, useraction, userContent}) => {
             useraction ?
               <section className='lg:grid-cols-6 lg:grid p-7 mb-7 border border-solid border-[#eee] text-center sm:text-left'>
                 <span className='w-[80px] h-20 inline-block rounded-full align-bottom mr-2 col-span-1'>
-                  <img loading='lazy' src={User.profileImage} alt="AdminImage" className='h-full w-full object-cover rounded-full cursor-pointer'/>
+                  <img loading='lazy' src={publicFolder + User.profileImage} alt="AdminImage" className='h-full w-full object-cover rounded-full cursor-pointer'/>
                 </span>
                 <div className='col-span-5'>
                   <h3 className='mb-2.5 text-lg font-bold'>
@@ -86,7 +86,7 @@ const PreviousNextPost = ({post, User, useraction, userContent}) => {
             <li key={post._id} className="md:mr-[6%] mb-7 last:mb-0 md:mb-0">
 
               <div className="basis-1/6 md:basis-1/3 mb-1 min-w-[90px] relative">
-                <img src={post.postImage} alt={"posts"} className="w-full h-44 imgxs:h-[240px] md:h-36 lg:h-44 object-cover cursor-pointer" loading="lazy"/>
+                <img src={publicFolder + post.postImage} alt={"posts"} className="w-full h-44 imgxs:h-[240px] md:h-36 lg:h-44 object-cover cursor-pointer" loading="lazy"/>
                 <CategoriesComponentBotton cat={post.postCategory[0]} />
               </div>
 

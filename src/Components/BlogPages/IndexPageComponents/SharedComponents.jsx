@@ -1,6 +1,7 @@
 import React from 'react'
 import { ReadmoreButton, StarComponent } from '../../ButtonAndOthers/Buttons'
 import { AdminComponentColor, CategoriesComponentBotton, CommentComponetColor, PostsShortInfoComponent, PostTitleMedium, PostTitleMedium2, PostTitleSmall, TimeComponentColor, useWindowSize } from '../../SharedAsset/SharedAssets'
+import { publicFolder } from '../../../data'
 
 
 export const JustTimeComponet = ({Posts}) => {
@@ -13,7 +14,7 @@ export const JustTimeComponet = ({Posts}) => {
           <li key={post._id} className="grid imgxs:grid-cols-5 grid-cols-4 mb-6">
 
             <div className="col-span-1 md:col-span-2 mb-1 imgxs:min-w-[90px] mr-[3%] md:mr-[7%] lg:mr-[3%]">
-              <img src={post.postImage} alt={"posts"} className="w-full h-auto md:h-[70px] lg:h-[85px] object-cover cursor-pointer" loading="lazy"/>
+              <img src={publicFolder + post.postImage} alt={"posts"} className="w-full h-auto md:h-[70px] lg:h-[85px] object-cover cursor-pointer" loading="lazy"/>
             </div>
 
             <div className="col-span-3 imgxs:col-span-4 md:col-span-3 ml-[3%] md:ml-[7%] lg:ml-[3%]">
@@ -38,7 +39,7 @@ export const JustTimeComponetStar = ({Posts}) => {
           <li key={post._id} className="grid imgxs:grid-cols-5 grid-cols-4 mb-6">
 
             <div className="col-span-1 md:col-span-2 mb-1 imgxs:min-w-[90px] mr-[3%] md:mr-[7%] lg:mr-[3%]">
-              <img src={post.postImage} alt={"posts"} className="w-full md:h-[70px] lg:h-[85px] h-auto object-cover cursor-pointer" loading="lazy"/>
+              <img src={publicFolder + post.postImage} alt={"posts"} className="w-full md:h-[70px] lg:h-[85px] h-auto object-cover cursor-pointer" loading="lazy"/>
             </div>
 
             <div className="col-span-3 imgxs:col-span-4 md:col-span-3 ml-[3%] md:ml-[7%] lg:ml-[3%]">
@@ -69,7 +70,7 @@ export const JustTimeComponetCatBlock = ({Posts}) => {
           <li key={post._id} className="mb-8">
 
             <div className="mb-1 min-w-[90px] relative">
-              <img src={post.postImage} alt={"posts"} className="w-full h-40 imgxs:h-32 object-cover md:min-h-[144px]  cursor-pointer lg:min-h-[192px] " loading="lazy"/>
+              <img src={publicFolder + post.postImage} alt={"posts"} className="w-full h-40 imgxs:h-32 object-cover md:min-h-[144px]  cursor-pointer lg:min-h-[192px] " loading="lazy"/>
               <CategoriesComponentBotton cat={post.postCategory[0]} />
             </div>
 
@@ -98,7 +99,7 @@ export const JustTimeComponetCatBlockStar = ({Posts}) => {
           <li key={post._id} className="mb-8">
 
             <div className="mb-1 min-w-[90px] relative">
-              <img src={post.postImage} alt={"posts"} className="w-full h-40 imgxs:h-32 object-cover md:min-h-[144px]  cursor-pointer lg:min-h-[192px]" loading="lazy"/>
+              <img src={publicFolder + post.postImage} alt={"posts"} className="w-full h-40 imgxs:h-32 object-cover md:min-h-[144px]  cursor-pointer lg:min-h-[192px]" loading="lazy"/>
               <CategoriesComponentBotton cat={post.postCategory[0]} />
             </div>
 
@@ -128,7 +129,7 @@ export const PagesBlogPostComponent = ({Posts}) => {
           return (
           <li key={post._id} className="grid grid-cols-5 md:grid-cols-2 mt-3 pb-3">
             <div className="my-2 mr-[3%] col-span-2 md:col-span-1 h-24 imgxs:h-36 md:h-[160px] lg:h-[176px] xl:h-full">
-              <img src={post.postImage} alt={"game"} className="w-full h-full object-cover cursor-pointer" loading="lazy"/>
+              <img src={publicFolder + post.postImage} alt={"game"} className="w-full h-full object-cover cursor-pointer" loading="lazy"/>
             </div>
 
             <div className='pt-1 ml-[3%] col-span-3 md:col-span-1'>

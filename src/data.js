@@ -12,6 +12,8 @@ import {
 	FaYoutube,
 } from "react-icons/fa";
 
+export const publicFolder = "http://localhost:5000/images/";
+
 export const parentCategoriesAndTags = [
 	"books",
 	"lifestyle",
@@ -159,23 +161,5 @@ export const otherPages = [
 		id: 3,
 		page: "Privacy & Policy",
 		to: "privacy&policy",
-	},
-];
-
-export const UserPages = [
-	{
-		id: 1,
-		name: "My Profile",
-		toUrl: "/userpage",
-	},
-	{
-		id: 2,
-		name: "My Public Profile",
-		toUrl: "/userpage/publicprofile",
-	},
-	{
-		id: 3,
-		name: "Sign in & security",
-		toUrl: "/userpage/security",
 	},
 ];

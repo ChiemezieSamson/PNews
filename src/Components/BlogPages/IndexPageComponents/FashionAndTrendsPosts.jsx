@@ -1,5 +1,6 @@
 import React from 'react'
 import { CategoriesComponentBotton, CatSidebarHanbugar, PostTitleMedium, PostTitleSmall, TimeComponentColor, useWindowSize } from '../../SharedAsset/SharedAssets'
+import { publicFolder } from '../../../data'
 
 
 const FashionAndTrendsPosts = ({Posts}) => {
@@ -23,7 +24,7 @@ const FashionAndTrendsPosts = ({Posts}) => {
             <li key={post._id} className="md:mr-[6%] mb-7 last:mb-0 md:mb-0">
 
               <div className="basis-1/6 md:basis-1/3 mb-1 min-w-[90px] relative">
-                <img src={post.postImage} alt={"posts"} className="w-full h-44 imgxs:h-[240px] md:h-36 lg:h-48 object-cover cursor-pointer" loading="lazy"/>
+                <img src={publicFolder + post.postImage} alt={"posts"} className="w-full h-44 imgxs:h-[240px] md:h-36 lg:h-48 object-cover cursor-pointer" loading="lazy"/>
                 <CategoriesComponentBotton cat={post.postCategory[0]} />
               </div>
 

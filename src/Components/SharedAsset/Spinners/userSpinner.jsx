@@ -22,8 +22,6 @@ const useFetchedUsers = () => {
   } else if (isSuccess) {
     userContent = users
     useraction = true
-    // dispatch(fetchCategories());
-    // dispatch(fetchTags());
   } else if (isError) {
     userContent = <div>{error.toString()}</div>
   }
@@ -33,14 +31,14 @@ const useFetchedUsers = () => {
 
 
 export const useFetchedUserById = () => {
-  // const { userId } = useParams();
+  const {userId} = useParams()
   const {
     data: user = [],
     isFetching,
     isSuccess,
     isError,
     error
-  } = useGetUserByIdQuery("645102f14cff7edf5a295bb9")
+  } = useGetUserByIdQuery(userId)
 
   let singleUser
   let userAction = false

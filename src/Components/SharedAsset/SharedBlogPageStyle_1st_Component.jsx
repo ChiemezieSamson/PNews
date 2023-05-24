@@ -4,6 +4,7 @@ import StickyBox from "react-sticky-box";
 import { PagesBlogPostComponent } from '../BlogPages/IndexPageComponents/SharedComponents'
 import { AdminComponent, CategoriesComponent, NavDirectionAndPageName, overLay, PostTitleLarge, TimeComponent, useWindowSize } from './SharedAssets'
 import { Link } from 'react-router-dom';
+import { publicFolder } from '../../data';
 
 export const SharedBlogPageStyleOne = ({Posts}) => {
   const size = useWindowSize()
@@ -11,7 +12,7 @@ export const SharedBlogPageStyleOne = ({Posts}) => {
     <section>
        <div className="md:grid grid-cols-2 gap-2">
         <div className={`relative my-2 md:my-0 snap-start ${overLay()} m-0 p-0 group overflow-clip`}>
-          <img src={Posts[0].postImage} alt="Post" className="max-h-44 imgxs:max-h-[260px] sm:min-h-full w-full object-cover group-hover:scale-110
+          <img src={publicFolder + Posts[0].postImage} alt="Post" className="max-h-44 imgxs:max-h-[260px] sm:min-h-full w-full object-cover group-hover:scale-110
             transition-all duration-500 delay-200 ease-linear scale-100" loading="lazy"/>
             
           <div className="absolute bottom-[12%] inset-x-0 text-white flex content-center justify-center z-20 transition-all duration-500 delay-200 ease-linear translate-y-10
@@ -36,7 +37,7 @@ export const SharedBlogPageStyleOne = ({Posts}) => {
           return (
             <li key={post._id} className={`relative snap-start ${overLay()} m-0 p-0 group overflow-clip h-32 imgxs:h-[180px] md:first:h-[180px] md:h-36 lg:first:h-52 lg:h-44
             md:first:col-span-2 first:max-h-64 xl:first:h-64 xl:h-52`}>
-              <img src={post.postImage} alt="IndexImage"  className="w-full h-full object-cover group-hover:scale-110
+              <img src={publicFolder + post.postImage} alt="IndexImage"  className="w-full h-full object-cover group-hover:scale-110
                   transition-all duration-500 delay-200 ease-linear scale-100" loading="lazy"/>
               
               <div className="absolute bottom-[35%] imgxs:bottom-[20%] md:bottom-[25%] text-white inset-x-0 flex content-center justify-center z-20 transition-all duration-500 delay-200 ease-linear translate-y-10 
@@ -72,7 +73,7 @@ export const SharedBlogPageStyleTwo = ({Posts}) => {
     <section>
       <div className="md:grid grid-cols-2 gap-x-2">
         <div className={`relative my-2 md:my-0 snap-start ${overLay()} m-0 p-0 overflow-clip`}>
-            <img src={Posts[1].postImage} alt="Post" className="max-h-44 imgxs:max-h-[260px] sm:min-h-full w-full object-cover" loading="lazy"/>
+            <img src={publicFolder + Posts[1].postImage} alt="Post" className="max-h-44 imgxs:max-h-[260px] sm:min-h-full w-full object-cover" loading="lazy"/>
 
           <span className='absolute z-20 -top-2 left-3 text-white'>
           <CategoriesComponent  cat={Posts[1].postCategory[0]}/>
@@ -102,7 +103,7 @@ export const SharedBlogPageStyleTwo = ({Posts}) => {
           return (
             <li key={post._id} className={`relative snap-start ${overLay()} m-0 p-0 overflow-clip 
             md:first:row-span-3 md:[&:nth-child(2)]:mb-2  md:last:mt-2`}>
-              <img src={post.postImage} alt="IndexImage"  className="w-full h-32 imgxs:h-[180px] md:h-full object-cover" loading="lazy"/>
+              <img src={publicFolder + post.postImage} alt="IndexImage"  className="w-full h-32 imgxs:h-[180px] md:h-full object-cover" loading="lazy"/>
 
               <span className='absolute z-20 -top-2 left-3 text-white'>
                 <CategoriesComponent  cat={post.postCategory[0]}/>
@@ -139,7 +140,7 @@ export const GeneralCategorisePages = ({ThreeFirstPost, DriectionName, PagePost}
       
       <div className='md:grid md:grid-cols-3'>
         <div className="col-span-2 md:mr-[3%]">
-          <NavDirectionAndPageName page={DriectionName} />
+          <NavDirectionAndPageName page={`${DriectionName[1]} > ${DriectionName[2]}`} />
         
           <PagesBlogPostComponent Posts={PagePost} />
         </div>

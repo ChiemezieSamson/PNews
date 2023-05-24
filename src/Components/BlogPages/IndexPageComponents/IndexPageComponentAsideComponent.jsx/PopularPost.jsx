@@ -1,6 +1,7 @@
 import React from 'react'
 import { MainDivider, SharedCount } from '../../../SharedAsset/SharedAssets'
 import { Link } from 'react-router-dom'
+import { publicFolder } from '../../../../data'
 
 const PopularPost = ({Posts}) => {
 
@@ -13,7 +14,7 @@ let number = 2
 
       <div className='pt-0.5'>
         <div className="basis-1/6 md:basis-1/3 pt-2.5 my-1 min-w-[90px]">
-          <img src={Posts[0].postImage} alt={"posts"} className="w-full h-auto object-cover cursor-pointer md:h-40 lg:h-52 xl:h-[250px]" loading="lazy"/>
+          <img src={publicFolder + Posts[0].postImage} alt={"posts"} className="w-full h-auto object-cover cursor-pointer md:h-40 lg:h-52 xl:h-[250px]" loading="lazy"/>
         </div>
 
         <div className="basis-5/6 md:basis-2/3 pt-2">
