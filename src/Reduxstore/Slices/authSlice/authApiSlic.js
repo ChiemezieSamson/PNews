@@ -16,7 +16,7 @@ export const extendedAuthApiSlice = apiSlice.injectEndpoints({
 				url: "logout",
 				method: "DELETE",
 			}),
-			invalidatesTags: ["User", "Post", "Categories", "Tag", "AllComment"],
+			invalidatesTags: ["Post", "Categories", "Tag", "AllComment"],
 			async onQueryStarted(arg, { dispatch, queryFulfilled }) {
 				try {
 					await queryFulfilled;
@@ -34,7 +34,6 @@ export const extendedAuthApiSlice = apiSlice.injectEndpoints({
 					const { data } = await queryFulfilled;
 					const { accessToken } = data;
 					dispatch(setCredentials({ accessToken }));
-					localStorage.setItem("userToken", data.accessToken);
 				} catch (err) {
 					console.log(err);
 				}

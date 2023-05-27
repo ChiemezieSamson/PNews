@@ -12,8 +12,8 @@ export const extendedUserApiSlice = apiSlice.injectEndpoints({
 		}),
 
 		getUserById: builder.query({
-			query: (initial) => ({
-				url: `users/user/${initial.userId}`,
+			query: (userId) => ({
+				url: `users/user/${userId}`,
 				method: "GET",
 				extraOptions: { maxRetries: 1 },
 			}),

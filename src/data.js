@@ -25,7 +25,13 @@ export const parentCategoriesAndTags = [
 export const SocialMediaIcons = [
 	{
 		id: 1,
-		icon: <FaInstagram className="inline-block" />,
+		name: "instagram",
+		icon: (
+			<FaInstagram
+				className="inline-block rounded-md px-0.5  transition-all duration-200 ease-linear
+			 group-hover:bg-[#e4405f]"
+			/>
+		),
 		socialLinks: "text-[#e4405f]",
 		number: 87.1 + "k",
 		text: "Followers",
@@ -34,7 +40,13 @@ export const SocialMediaIcons = [
 	},
 	{
 		id: 2,
-		icon: <FaFacebook className="inline-block" />,
+		name: "facebook",
+		icon: (
+			<FaFacebook
+				className="inline-block rounded-md px-0.5  transition-all duration-200 ease-linear
+			 group-hover:bg-[#4267B2]"
+			/>
+		),
 		socialLinks: "text-[#4267B2]",
 		number: 649,
 		text: "Followers",
@@ -43,7 +55,13 @@ export const SocialMediaIcons = [
 	},
 	{
 		id: 3,
-		icon: <FaTwitter className="inline-block" />,
+		name: "twitter",
+		icon: (
+			<FaTwitter
+				className="inline-block rounded-md px-0.5  transition-all duration-200 ease-linear
+			 group-hover:bg-[#1DA1F2]"
+			/>
+		),
 		socialLinks: "text-[#1DA1F2]",
 		number: 23.7 + "k",
 		text: "Followers",
@@ -52,7 +70,13 @@ export const SocialMediaIcons = [
 	},
 	{
 		id: 4,
-		icon: <FaYoutube className="inline-block" />,
+		name: "youtube",
+		icon: (
+			<FaYoutube
+				className="inline-block rounded-md px-0.5  transition-all duration-200 ease-linear
+			 group-hover:bg-[#FF0000]"
+			/>
+		),
 		socialLinks: "text-[#FF0000]",
 		number: 25.7 + "k",
 		text: "Followers",
@@ -61,7 +85,13 @@ export const SocialMediaIcons = [
 	},
 	{
 		id: 5,
-		icon: <FaLinkedin className="inline-block" />,
+		name: "linkedin",
+		icon: (
+			<FaLinkedin
+				className="inline-block rounded-md px-0.5  transition-all duration-200 ease-linear
+			 group-hover:bg-[#0e76a8]"
+			/>
+		),
 		socialLinks: "text-[#0e76a8]",
 		number: 28.7 + "k",
 		text: "Followers",
@@ -70,7 +100,13 @@ export const SocialMediaIcons = [
 	},
 	{
 		id: 6,
-		icon: <FaRss className="inline-block" />,
+		name: "subscribers",
+		icon: (
+			<FaRss
+				className="inline-block rounded-md px-0.5  transition-all duration-200 ease-linear
+			 group-hover:bg-[#ff6f00]"
+			/>
+		),
 		socialLinks: "text-[#ff6f00]",
 		number: 99,
 		text: "Subscribers",

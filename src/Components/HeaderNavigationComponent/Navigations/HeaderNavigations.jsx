@@ -1,7 +1,7 @@
 import React from 'react'
 import { NavLink } from "react-router-dom";
 import { useState, useEffect} from "react";
-import {Hanbugar, NavLinksAndArrows} from "../../ButtonAndOthers/Buttons"
+import { NavLinksAndArrows} from "../../ButtonAndOthers/Buttons"
 import { HoverLinsks, SmallScreenHoverLinsks } from "../HeadHoverComponent/HoverLinks";
 import { useWindowSize } from "../../SharedAsset/SharedAssets";
 import { navItems } from "../../../data";
@@ -10,10 +10,9 @@ import { useFetchedPosts } from '../../SharedAsset/Spinners/postsSpinner';
 import useFetchedTags from '../../SharedAsset/Spinners/tagsSpiner';
 import useFetchedCategories from '../../SharedAsset/Spinners/categoriesSpinner';
 
-const HeaderNavigations = () => {
+const HeaderNavigations = ({hideShowNavLinks}) => {
   const {tagsParents, isFetching: isFetchingTags} = useFetchedTags()
   const {categoriesParents, isFetching} = useFetchedCategories()
-  const [hideShowNavLinks, setHideShowNavLinks] = useState(false)
   const [sticky, setSticky] = useState("")
   const [arrowDown, setArrowDown] = useState(false);
   const [showhoverlinks , setShowHoverlinks] = useState(false)
@@ -24,17 +23,10 @@ const HeaderNavigations = () => {
   const Posts = content
   const size = useWindowSize()
 
-  const handle_hideShowNavLinks = () => {
-    setHideShowNavLinks((hideShowNavLinks) => !hideShowNavLinks)
-  }
-
   const onshowHoverlinks = () => {
     setShowHoverlinks((showhoverlinks) => !showhoverlinks)
   }
 
-  const handle_clickHanbugar = () => {
-    setArrowDown(() => false)
-  }
   
   // if hovered get the textcontent of the hovered navigation so that it can be used to display the categories under it
   const onHover = (e) => {
@@ -58,26 +50,15 @@ const HeaderNavigations = () => {
   
     const is_sticky  = `fixed top-0 left-0 right-0 md:pt-4 md:bg-white md:shadow-md md:shadow-black/30 z-[200]`
 
-    const thewindow = () => {
-      if (size.width > 768 ) {      
-        setHideShowNavLinks(()=> false)
-      } 
-    }
-
-    window.addEventListener('resize', () => {
-      thewindow()
-    });
-
     window.addEventListener("scroll",isSticky)
         
-    return ()=> {
-      window.removeEventListener("scroll",isSticky)
-      window.removeEventListener("resize",() => {
-        thewindow()
-      })
-    }
+    return ()=>  window.removeEventListener("scroll",isSticky)
 
   },[size])
+
+  useEffect(() => {
+    setArrowDown(() => false)
+  }, [hideShowNavLinks])
 
 
   const myLinkStyle =
@@ -96,17 +77,11 @@ const HeaderNavigations = () => {
 
     {/* ==== Home nevigation section start here ===== */}
     <nav className={`transition-all duration-300 delay-200 ease-linear ${sticky}`}>
-      
-      {/* === small scree hanbugar start here === */}
-      <div className="mobile-nav-toggle fixed z-30 w-8 border-0 top-4 right-4 shadow-md shadow-black pt-1" 
-      onClick={handle_clickHanbugar}>
-        <Hanbugar open_close_smallscreen_sidebar={handle_hideShowNavLinks}/>
-      </div>
 
       {/* ==== navigfation liks ====== */}
-      <ul className="primary-navigation flex flex-col justify-evenly m-0 max-w-3xl list-none list-inside p-0 fixed top-0 right-1/2 bottom-1/3 left-0 -translate-x-full transition-transform 
-      duration-[350ms] ease-in-out md:flex-row md:static md:translate-x-0 md:mx-auto z-30"
-      data-visible={hideShowNavLinks}
+      <ul className={`primary-navigation flex flex-col justify-evenly m-0 max-w-3xl list-none list-inside p-0 fixed top-0 right-1/2 bottom-1/3 left-0 -translate-x-full transition-transform 
+      duration-[350ms] ease-in-out md:flex-row md:static md:translate-x-0 md:mx-auto z-30 
+      ${hideShowNavLinks ? "translate-x-0" : ""}`}
       >
         <li className="md:inline-block relative hover:bg-lime-400 md:hover:bg-transparent w-[78%] md:w-auto">
 						<NavLink to="/" end className={({ isActive }) => isActive ? myLinkStyleActive : myLinkStyle}>Home</NavLink>

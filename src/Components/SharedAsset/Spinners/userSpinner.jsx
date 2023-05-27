@@ -31,11 +31,12 @@ const useFetchedUsers = () => {
 
 
 export const useFetchedUserById = () => {
-  const {userId} = useParams()
+  let userId = localStorage.getItem("userId")
   const {
     data: user = [],
     isFetching,
     isSuccess,
+    refetch,
     isError,
     error
   } = useGetUserByIdQuery(userId)
@@ -52,7 +53,7 @@ export const useFetchedUserById = () => {
     singleUser = <div>{error.toString()}</div>
   }
 
-  return {singleUser, userAction, isFetching}
+  return {singleUser, userAction, refetch, isError, isSuccess, isFetching}
 }
 
 export const useFetchedUserByPostId = () => {

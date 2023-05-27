@@ -49,13 +49,16 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
 					api.dispatch(
 						setCredentials({ accessToken: refreshResult.data.accessToken })
 					);
+					localStorage.setItem("userToken", refreshResult.data.accessToken);
+					localStorage.setItem("userId", refreshResult.data._id);
 
 					// retry the original query with new access token
 					result = await baseQuery(args, api, extraOptions);
 				} else {
-					if (refreshResult?.error?.status === 403) {
-						refreshResult.error.data.message = "Your login has expired. ";
+					if (refreshResult?.error?.status === 401) {
+						refreshResult.error.data.message = "Your login has expired.";
 
+						localStorage.setItem("userToken", "");
 						await baseQuery("logout", api, extraOptions);
 						api.dispatch(logOut());
 					}

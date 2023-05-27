@@ -15,7 +15,7 @@ const LogIn = () => {
   const navigate = useNavigate()
 
 
-  const [login, { isLoading }] = useLoginMutation()
+  const [login, { isLoading, isSuccess }] = useLoginMutation()
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -37,11 +37,11 @@ const LogIn = () => {
             const userData = await login({ username, confirmPassword, email: {primary}}).unwrap()
             dispatch(setCredentials(userData))
             localStorage.setItem('userToken', userData.accessToken)
+            localStorage.setItem('userId', userData._id)
 
             setUsername(() => "")
             setConfirmPassword(() => "")
             setPrimary(() => "")
-            navigate(`/userpage/${userData._id}`)
         } catch (err) {
             if (!err?.originalStatus) {
               
@@ -61,6 +61,10 @@ const LogIn = () => {
         }
       }
   }
+
+  useEffect(() => {
+    if (isSuccess) return navigate("/userpage", {replace: true}, [navigate])
+  }, [isSuccess, navigate])
 
   return (
     <div className='py-10 text-left grid place-content-center h-auto lg:h-[70vh] justify-center bg-gradient-to-b from-gray-300/40 to-white/50'>

@@ -6,16 +6,24 @@ import { FaChevronUp } from "react-icons/fa";
 import Footer from "./BlogPages/footerPage/Footer";
 import HeaderNavigations from "./HeaderNavigationComponent/Navigations/HeaderNavigations";
 import { useFetchedPosts } from "./SharedAsset/Spinners/postsSpinner";
+import { Hanbugar, Hanbugar3 } from "./ButtonAndOthers/Buttons";
+import { useWindowSize } from "./SharedAsset/SharedAssets";
 
 
 const HomeLinks = () => {
   const [showFullSideBAr, setShowFullSideBAr] = useState(false)
+  const [hideShowNavLinks, setHideShowNavLinks] = useState(false)
   const [backToTop, setBackToTop] = useState("")
   const {isFetching} = useFetchedPosts()
+  const size = useWindowSize()
  
   
   const handle_showFullSideBAr = () => {
     setShowFullSideBAr((change) => !change)
+  }
+
+  const handle_hideShowNavLinks = () => {
+    setHideShowNavLinks((hideShowNavLinks) => !hideShowNavLinks)
   }
   
   const handleCloseInstaSidebar = () => {
@@ -44,6 +52,25 @@ const HomeLinks = () => {
    } 
   },[])
 
+  useEffect(() => {
+    const thewindow = () => {
+      if (size.width > 768 ) {      
+        setHideShowNavLinks(()=> false)
+      } 
+      if(showFullSideBAr) {
+        setShowFullSideBAr(() => false)
+      }
+    }
+    
+    window.addEventListener('resize', () => {
+      thewindow()
+    });
+
+    window.removeEventListener("resize",() => {
+      thewindow()
+    })
+  }, [size, showFullSideBAr])
+
   const handleBackToTopClick = () => {
     document.body.scrollTop = 0; // For Safari
 	  document.documentElement.scrollTop = 0; //
@@ -57,18 +84,30 @@ const HomeLinks = () => {
       <header className="relative">
 
         {/* ==== social and newsletter start here === */} 
-        <SocialNewsletter opensidebar={handle_showFullSideBAr}/>
+        <div className="relative">
+          <SocialNewsletter opensidebar={handle_showFullSideBAr}/>
+
+          {/* === small scree hanbugar start here === */}
+          <div className="mobile-nav-toggle absolute w-8 border-0 top-full z-[9999] right-4 shadow-md shadow-black pt-1">
+            <Hanbugar open_close_smallscreen_sidebar={handle_hideShowNavLinks}/>
+          </div>
+        </div>
 
 
           <>
           {/* ==== FullScreen Side Bar start here ==== */}
         <div className="Instagramsidebar transition-[display] duration-700 ease-linear hidden fixed right-0 top-0 bottom-0 max-w-md z-[300]" data-visible={showFullSideBAr}>
-          <FullSreenSidebar closesidebar={handleCloseInstaSidebar} disabled={isFetching}/>
+          <FullSreenSidebar  disabled={isFetching}/>
+
+          <div className="fixed top-3 px-3 text-stone-100 text-lg hover:text-red-500 
+            transition-all duration-200 ease-linear" title="close">
+              <Hanbugar3 closesidebar={handleCloseInstaSidebar}/>
+            </div>
         </div>
 
         {/* ===== Home hero and navigations start here ===== */}
         <div className="relative z-50" disabled={isFetching}>
-          <HeaderNavigations/>
+          <HeaderNavigations hideShowNavLinks={hideShowNavLinks}/>
         </div>
         </>
       </header>

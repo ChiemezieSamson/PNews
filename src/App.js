@@ -18,10 +18,6 @@ import SingAndSecurity from "./Components/UserComponents/UserPageComponents/Sing
 import LogIn from "./Components/LogIn/LogIn";
 import RegistrationForm from "./Components/Registration/Registration";
 import Category from "./Components/BlogPages/CategoriesPage/Category";
-import {
-	// lodingData as rootLoader,
-	action as rootAction,
-} from "./Components/DataLoader/LodingData";
 import BooksIndexPage from "./Components/BlogPages/booksPage/BooksIndexPage";
 import BusinessIndexPage from "./Components/BlogPages/businessPage/BusinessIndexPage";
 import Business from "./Components/BlogPages/businessPage/Business";
@@ -36,136 +32,163 @@ const App = createBrowserRouter([
 		path: "/",
 		element: <HomeLinks />,
 		errorElement: <NotFound />,
-		// loader: rootLoader,
-		action: rootAction,
 		children: [
 			{
 				index: true,
 				element: <IndexPage />,
+				errorElement: <NotFound />,
 			},
 			{
 				path: "books",
 				element: <Books />,
+				errorElement: <NotFound />,
 				children: [
 					{
 						index: true,
 						element: <BooksIndexPage />,
+						errorElement: <NotFound />,
 					},
 					{
 						path: "/books/:search",
 						element: <Category />,
+						errorElement: <NotFound />,
 					},
 				],
 			},
 			{
 				path: "lifestyle",
 				element: <LifeStyle />,
+				errorElement: <NotFound />,
 				children: [
 					{
 						index: true,
 						element: <LifeStyleIndexPage />,
+						errorElement: <NotFound />,
 					},
 					{
 						path: "/lifestyle/:search",
 						element: <Category />,
+						errorElement: <NotFound />,
 					},
 				],
 			},
 			{
 				path: "favorite",
 				element: <Favorite />,
+				errorElement: <NotFound />,
 				children: [
 					{
 						index: true,
 						element: <FavoriteIndexPage />,
+						errorElement: <NotFound />,
 					},
 					{
 						path: "/favorite/:search",
 						element: <Category />,
+						errorElement: <NotFound />,
 					},
 				],
 			},
 			{
 				path: "business",
 				element: <Business />,
+				errorElement: <NotFound />,
 				children: [
 					{
 						index: true,
 						element: <BusinessIndexPage />,
+						errorElement: <NotFound />,
 					},
 					{
 						path: "/business/:search",
 						element: <Category />,
+						errorElement: <NotFound />,
 					},
 				],
 			},
 			{
 				path: "quotes",
 				element: <Quotes />,
+				errorElement: <NotFound />,
 				children: [
 					{
 						index: true,
 						element: <QuotesIndexPage />,
+						errorElement: <NotFound />,
 					},
 					{
 						path: "/quotes/:search",
 						element: <Category />,
+						errorElement: <NotFound />,
 					},
 				],
 			},
 			{
 				path: "about",
 				element: <About />,
+				errorElement: <NotFound />,
 			},
 			{
 				path: "privacy&policy",
 				element: <PrivacyAndPolicy />,
+				errorElement: <NotFound />,
 			},
 			{
 				path: "contactus",
 				element: <ContactUs />,
+				errorElement: <NotFound />,
 			},
 			{
 				path: "single/:postId",
 				element: <SinglePost />,
+				errorElement: <NotFound />,
 			},
 			{
 				path: "writepost",
 				element: <WritePost />,
+				errorElement: <NotFound />,
 			},
 			{
 				path: "editpost/:postId",
 				element: <EditPost />,
+				errorElement: <NotFound />,
 			},
 			{
 				path: "login",
 				element: <LogIn />,
+				errorElement: <NotFound />,
 			},
 			{
 				path: "registrationForm",
 				element: <RegistrationForm />,
+				errorElement: <NotFound />,
 			},
 			{
-				path: "userpage/:userId",
+				path: "userpage",
 				element: <UserPage />,
+				errorElement: <NotFound />,
 				children: [
 					{
 						index: true,
 						element: <Personal />,
+						errorElement: <NotFound />,
 					},
 					{
-						path: "/userpage/:userId/security",
+						path: "/userpage/security",
 						element: <SingAndSecurity />,
+						errorElement: <NotFound />,
 					},
 					{
-						path: "/userpage/:userId/publicprofile",
+						path: "/userpage/publicprofile",
 						element: <MyPublicProfile />,
+						errorElement: <NotFound />,
 					},
 				],
 			},
 			{
 				path: "logo",
 				element: <Logo />,
+				errorElement: <NotFound />,
 			},
 		],
 	},
