@@ -1,14 +1,14 @@
-import { JustTimeComponet, JustTimeComponetStar} from '../SharedComponents'
+import { JustTimeComponetStar } from '../SharedComponents'
 import { MainDivider } from '../../../SharedAsset/SharedAssets'
 import TrendingCommentsLatest from './TrendingCommentsLatest'
 
 
-const EditorsChioceAndDontMiss = ({Posts}) => {
+const EditorsChioceAndDontMiss = ({Posts, Comments}) => {
 
   return (
     <section>    
 
-      <TrendingCommentsLatest posts={Posts}/>
+      <TrendingCommentsLatest posts={Posts} Comments={Comments}/>
 
       <div className='mt-7 mb-12'>
         <MainDivider firstletter={"Editor's"} secondletter={"choice"} />
@@ -23,7 +23,7 @@ const EditorsChioceAndDontMiss = ({Posts}) => {
         <MainDivider firstletter={"Don't"} secondletter={"Miss"} />
 
         <div className='mt-4'>
-          <JustTimeComponet Posts={Posts.slice(9, 13)} />
+          <JustTimeComponetStar Posts={Posts.slice(9, 13)} />
         </div>
       </div>
     </section>

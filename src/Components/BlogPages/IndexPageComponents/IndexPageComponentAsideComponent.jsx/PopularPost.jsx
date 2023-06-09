@@ -12,16 +12,19 @@ let number = 2
 
       {/* First Hero Image and link start here */}
 
-      <div className='pt-0.5'>
-        <div className="basis-1/6 md:basis-1/3 pt-2.5 my-1 min-w-[90px]">
-          <img src={publicFolder + Posts[0].postImage} alt={"posts"} className="w-full h-auto object-cover cursor-pointer md:h-40 lg:h-52 xl:h-[250px]" loading="lazy"/>
+      <div className='mt-3.5'>
+
+        <div className="pt-3.5 my-1 md:max-h-44 lg:max-h-52 xl:max-h-60">
+          <Link to={`/single/${Posts[0]._id}`}>
+            <img src={publicFolder + Posts[0].postImage} alt={"posts"} className="md:max-h-44 lg:max-h-52 xl:max-h-60" loading="lazy"/>
+          </Link>
         </div>
 
-        <div className="basis-5/6 md:basis-2/3 pt-2">
-          <h4 className="font-lora tracking-wide flex text-black lg:text-lg font-extrabold text-base md:text-sm">
-            <Link to={`/single/${Posts[0]._id}`} className='hover:text-[#f70d28] basis-11/12 cursor-pointer'>{Posts[0].postTitle}</Link>
-            <span className='inline-block  text-center basis-1/12
-            w-12 text-4xl border-l px-2 border-solid border-[#eee] text-[#d7d7d7]
+        <div className="pt-4">
+          <h4 className="font-lora tracking-wide grid grid-cols-12 text-neutral-800 lg:text-lg font-extrabold text-base md:text-sm">
+
+            <Link to={`/single/${Posts[0]._id}`} className='hover:text-[#f70d28] col-span-11 TextHeadertransition'>{Posts[0].postTitle}</Link>
+            <span className='inline-block text-center text-4xl border-l px-2 border-solid border-[#eee] text-[#d7d7d7] col-span-1
             top-0 italic cursor-pointer'>{`${"0" + (number - 1)}`}</span>
           </h4>
 
@@ -37,13 +40,16 @@ let number = 2
         <ul className='my-4'>
           {Posts.slice(1, 5).map((post) => {
             return ( 
-              <li key={post._id} className='relative flex gap-4 py-1.5 titlePost'>
-                <span className='titleNum text-lg leading-6 text-center italic bg-[#eee]
-                  px-2 rounded-full transition-all duration-500 delay-200 grid items-center
-                  ease-linear hover:bg-[#f70d28] hover:text-white h-10 cursor-pointer'>
-                  {`${"0" + number++}`}
+              <li key={post._id} className='relative grid grid-cols-8 gap-x-3 py-1.5 group'>
+
+                <span className='group-hover:text-stone-50 group-hover:bg-[#f70d28] col-span-1 text-lg leading-6 text-center italic bg-[#eee]
+                  px-2 rounded-full TextHeadertransition h-10 cursor-pointer relative'>
+                    <span className='absolute inset-x-0 top-[20%]'>
+                      {`${"0" + number++}`}
+                    </span>
                 </span>
-                <h4 className="capitalize font-lora tracking-wide font-extrabold text-black lg:text-base text-sm imgxs:text-base md:text-[13px] ">
+
+                <h4 className="capitalize col-span-7 font-lora tracking-wide font-extrabold text-stone-800 lg:text-base text-sm imgxs:text-base md:text-[13px]">
                   <Link to={`/single/${post._id}`} className='hover:text-[#f70d28] cursor-pointer'>{post.postTitle}</Link>
                   <span className='block'>
                     <SharedCount />

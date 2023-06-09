@@ -1,12 +1,14 @@
 import React from 'react'
 import { NewsLetter, PagesDivider, PostTitleMedium2, SocialLinks, TimeComponent } from '../../SharedAsset/SharedAssets'
 import TrendingCommentsLatest from '../IndexPageComponents/IndexPageComponentAsideComponent.jsx/TrendingCommentsLatest'
-import { JustTimeComponet } from '../IndexPageComponents/SharedComponents'
+import { JustTimeComponetStar } from '../IndexPageComponents/SharedComponents'
 import { useFetchedPosts } from '../../SharedAsset/Spinners/postsSpinner'
 import { publicFolder } from '../../../data'
+import { Link } from 'react-router-dom'
+import { StarComponent } from '../../ButtonAndOthers/Buttons'
 
 
-const Aside = () => {
+const Aside = ({Comments}) => {
   const {content , action} = useFetchedPosts()
   const Posts = content
 
@@ -20,29 +22,39 @@ const Aside = () => {
 
       <NewsLetter />
 
-      {action &&  <TrendingCommentsLatest posts={Posts}/>}
+      {action &&  <TrendingCommentsLatest posts={Posts} Comments={Comments}/>}
 
       <div className='my-10'>
         <PagesDivider text={"Recent Posts"} />
-        <span className='my-3 inline-block'>
-          <div className='text-white relative after:inset-0 after:bg-black/40 after:absolute mt-4 mb-7'>
-            <div className='w-full h-44 imgxs:h-[240px] md:h-36 lg:h-48'>
-              {action ? 
-              <img src={publicFolder + Posts[2].postImage} alt="recentPost" className="w-full relative h-full object-cover cursor-pointer" loading="lazy"/> :
-              content}  
-            </div>
-            
 
-            <div className="absolute bottom-[10%] inset-x-0 flex content-center  justify-center z-20">
-              <div className="w-[90%] text-left">
-                {action && <PostTitleMedium2 post={Posts[2].postTitle} postId={Posts[2]._id}/>}
+        {action ? 
+        <div className='my-3 inline-block'>
+
+          <div className='text-white relative mt-4 mb-7'>
+          
+            <Link to={`/single/${Posts[2]._id}`} className='topRetangleImage block after:absolute after:inset-0 after:bg-neutral-700/20'>                
+              <img src={publicFolder + Posts[2].postImage} alt="recentPost" 
+                className="topRetangleImage object-cover object-center cursor-pointer" loading="lazy"/>
+            </Link>        
+            
+            <span className="absolute bottom-[8%] inset-x-0 z-20 max-w-fit mx-1">
+              
+              <PostTitleMedium2 post={Posts[2].postTitle} postId={Posts[2]._id}/>
+              
+              <span className='inline-block'>
+                {Posts[2].optional.Trending === false ? "" : 
+                  <span className='mr-4'>
+                    <StarComponent color={"text-white"} favourite={Posts[2].optional.Trending}/>
+                  </span>}
+                <TimeComponent time={Posts[2].createdAt}/>
+              </span>
                 
-                {action && <TimeComponent time={Posts[2].createdAt}/>}
-              </div>
-            </div>
+            </span>
           </div>
-          {action && <JustTimeComponet Posts={Posts.slice(4,8)} />}
-        </span> 
+          
+          <JustTimeComponetStar Posts={Posts.slice(4,8)}/>
+
+        </div> : content}  
       </div>
     </section>
   )

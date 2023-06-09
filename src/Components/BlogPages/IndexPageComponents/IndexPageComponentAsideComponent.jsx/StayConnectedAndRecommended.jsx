@@ -1,7 +1,7 @@
 import React from 'react'
 import { SocialMediaIcons } from '../../../../data'
 import { MainDivider, SocialLinks } from '../../../SharedAsset/SharedAssets'
-import { JustTimeComponet, JustTimeComponetStar } from '../SharedComponents'
+import { JustTimeComponetStar } from '../SharedComponents'
 
 const Recommended = ({Posts}) => {
   return (
@@ -20,10 +20,7 @@ const Recommended = ({Posts}) => {
         <MainDivider firstletter={"Recommended"}/>
 
         <div className='pt-4'>
-          <JustTimeComponetStar Posts={Posts.slice(0, 2)}/>
-          <JustTimeComponet Posts={Posts.slice(2, 3)}/>
-          <JustTimeComponetStar Posts={Posts.slice(3, 4)}/>
-          <JustTimeComponet Posts={Posts.slice(4, 5)}/>
+          <JustTimeComponetStar Posts={Posts.slice(0, 5)}/>
         </div>
       </div>
       

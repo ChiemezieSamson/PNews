@@ -1,16 +1,29 @@
 import React from 'react'
 import { GeneralCategorisePages } from '../../SharedAsset/SharedBlogPageStyle_1st_Component'
 import { useFetchedPostByQery } from '../../SharedAsset/Spinners/postsSpinner'
+import useFetchedUsers from '../../SharedAsset/Spinners/userSpinner'
+import useFetchedComments from '../../SharedAsset/Spinners/commentSpinner'
 
 const Category = () => {
-  const {content , action, pathname, isFetching} = useFetchedPostByQery()
+  const {content , action, isFetching} = useFetchedPostByQery()
+  const {userContent, useraction} = useFetchedUsers()
+  const {commentsContent, commentaction} = useFetchedComments()
   const Posts = content
-  const path = pathname.split("/")
-  
+  const users = userContent
+  const Comments = commentsContent
+
+  const canOpen = [action, useraction, commentaction].every(Boolean)
+
   return (
-    <div className="m-0 p-0 disabled:opacity-40" disabled={isFetching}>
-      {action && <GeneralCategorisePages ThreeFirstPost={Posts} DriectionName={path} PagePost={Posts}/>}
-    </div>
+    <>{canOpen && 
+      <div className="m-0 p-0 disabled:opacity-40" disabled={isFetching}>        
+        <GeneralCategorisePages 
+          users={users}
+          Comments={Comments}
+          ThreeFirstPost={Posts.slice(0, 4)}  
+          PagePost={Posts.slice(4, 13)}/>
+      </div>}
+    </>
   )
 }
 

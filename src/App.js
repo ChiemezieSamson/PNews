@@ -124,6 +124,11 @@ const App = createBrowserRouter([
 				],
 			},
 			{
+				path: "categories",
+				element: <Category />,
+				errorElement: <NotFound />,
+			},
+			{
 				path: "about",
 				element: <About />,
 				errorElement: <NotFound />,

@@ -1,6 +1,5 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
-import { NavDirectionAndPageName } from '../../SharedAsset/SharedAssets'
+import { HomeLink, NavDirectionAndPageName } from '../../SharedAsset/SharedAssets'
 
 
 const PrivacyAndPolicy = () => {
@@ -209,10 +208,7 @@ const PrivacyAndPolicy = () => {
         </p>        
       </article>
 
-      <Link to={"/"} className='text-center font-lora text-4xl text-[#f70d28] block italic font-bold  py-10'>
-        <span className='hover:underline
-       hover:decoration-4 cursor-pointer'>Home</span>
-      </Link>
+      <HomeLink />
 
       <span className='py-4 inline-block prose-lg'>
         <span className='py-4 inline-block'>

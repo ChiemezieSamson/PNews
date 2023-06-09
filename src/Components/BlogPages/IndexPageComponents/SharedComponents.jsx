@@ -2,52 +2,32 @@ import React from 'react'
 import { ReadmoreButton, StarComponent } from '../../ButtonAndOthers/Buttons'
 import { AdminComponentColor, CategoriesComponentBotton, CommentComponetColor, PostsShortInfoComponent, PostTitleMedium, PostTitleMedium2, PostTitleSmall, TimeComponentColor, useWindowSize } from '../../SharedAsset/SharedAssets'
 import { publicFolder } from '../../../data'
+import { Link } from 'react-router-dom'
 
 
-export const JustTimeComponet = ({Posts}) => {
+export const JustTimeComponet = ({Posts, Comments}) => {
   
   return (    
     <ul className="min-w-[200px]">
         {/* featured posts other post start here */}
       {Posts.map((post) => {
         return (
-          <li key={post._id} className="grid imgxs:grid-cols-5 grid-cols-4 mb-6">
+          <li key={post._id} className="grid grid-cols-4 sm:grid-cols-5 mb-2">
 
-            <div className="col-span-1 md:col-span-2 mb-1 imgxs:min-w-[90px] mr-[3%] md:mr-[7%] lg:mr-[3%]">
-              <img src={publicFolder + post.postImage} alt={"posts"} className="w-full h-auto md:h-[70px] lg:h-[85px] object-cover cursor-pointer" loading="lazy"/>
+            <div className="col-span-1 max-h-16 sm:max-h-24 sm:col-span-2 mb-1 mr-1">
+              <Link to={`/single/${post._id}`}>
+                <img src={publicFolder + post.postImage} alt={"posts"} 
+                  className="max-h-16 sm:max-h-24" 
+                  loading="lazy"/>
+              </Link>
             </div>
 
-            <div className="col-span-3 imgxs:col-span-4 md:col-span-3 ml-[3%] md:ml-[7%] lg:ml-[3%]">
-              <PostTitleSmall post={post.postTitle} postId={post._id}/>
-
-              <TimeComponentColor time={post.createdAt}/>
-            </div>
-          </li>
-        )
-      })}
-    </ul>
-  )
-}
-
-
-export const JustTimeComponetStar = ({Posts}) => {
-  return (    
-    <ul className="min-w-[200px]">
-      {/* featured posts other post start here */}
-      {Posts.map((post) => {
-        return (
-          <li key={post._id} className="grid imgxs:grid-cols-5 grid-cols-4 mb-6">
-
-            <div className="col-span-1 md:col-span-2 mb-1 imgxs:min-w-[90px] mr-[3%] md:mr-[7%] lg:mr-[3%]">
-              <img src={publicFolder + post.postImage} alt={"posts"} className="w-full md:h-[70px] lg:h-[85px] h-auto object-cover cursor-pointer" loading="lazy"/>
-            </div>
-
-            <div className="col-span-3 imgxs:col-span-4 md:col-span-3 ml-[3%] md:ml-[7%] lg:ml-[3%]">
+            <div className="col-span-3 ml-1 pt-px">
               <PostTitleSmall post={post.postTitle} postId={post._id}/>
 
               <span className='inline-block'>
                 <span className='mr-4'>
-                  <StarComponent color={"text-[#f7c90d]"}/>
+                <CommentComponetColor postId={post._id} Comments={Comments}/>
                 </span>
                   <TimeComponentColor time={post.createdAt}/>
               </span>
@@ -60,56 +40,66 @@ export const JustTimeComponetStar = ({Posts}) => {
 }
 
 
-export const JustTimeComponetCatBlock = ({Posts}) => {
-  const size = useWindowSize()
-  return (
-    <ul className="my-2 min-w-[200px]">
-        {/* featured posts other post start here */}
+export const JustTimeComponetStar = ({Posts, grid}) => {
+
+  
+  return (    
+    <ul className={`min-w-[200px] ${grid ? grid: ""}`}>
+      {/* featured posts other post start here */}
       {Posts.map((post) => {
         return (
-          <li key={post._id} className="mb-8">
+          <li key={post._id} className="grid grid-cols-4 sm:grid-cols-5 mb-2">
 
-            <div className="mb-1 min-w-[90px] relative">
-              <img src={publicFolder + post.postImage} alt={"posts"} className="w-full h-40 imgxs:h-32 object-cover md:min-h-[144px]  cursor-pointer lg:min-h-[192px] " loading="lazy"/>
-              <CategoriesComponentBotton cat={post.postCategory[0]} />
+            <div className="col-span-1 max-h-16 sm:max-h-24 sm:col-span-2 mb-1 mr-1">
+              <Link to={`/single/${post._id}`}>
+                <img src={publicFolder + post.postImage} alt={"posts"} 
+                  className="max-h-16 sm:max-h-24" 
+                  loading="lazy"/>
+              </Link>
             </div>
 
-            <div className="pt-2">
-            {size.width < 768 && size.width > 480 ? <PostTitleSmall post={post.postTitle} postId={post._id}/> : <PostTitleMedium post={post.postTitle} postId={post._id}/> }
+            <div className="col-span-3 ml-1 pt-px">
+              <PostTitleSmall post={post.postTitle} postId={post._id}/>
 
-              <span className='inline-block mt-0.5'>
-                <TimeComponentColor time={post.createdAt} />
-              </span>              
+              <span className='inline-block'>
+               {post.optional.Trending === false ? "" : <span className='mr-4'>
+                  <StarComponent color={"text-[#f7c90d]"} favourite={post.optional.Trending}/>
+                </span>}
+                  <TimeComponentColor time={post.createdAt}/>
+              </span>
             </div>
           </li>
         )
-     })}
-   </ul>
+      })}
+    </ul>
   )
 }
 
-
-export const JustTimeComponetCatBlockStar = ({Posts}) => {
+export const JustTimeComponetCatBlockStar = ({Posts, grid}) => {
   const size = useWindowSize()
   return (
-    <ul className="my-2 min-w-[200px]">
+    <ul className={`min-w-[200px] ${grid ? grid: ""}`}>
         {/* featured posts other post start here */}
       {Posts.map((post) => {
         return (
-          <li key={post._id} className="mb-8">
+          <li key={post._id} className="mb-5">
 
-            <div className="mb-1 min-w-[90px] relative">
-              <img src={publicFolder + post.postImage} alt={"posts"} className="w-full h-40 imgxs:h-32 object-cover md:min-h-[144px]  cursor-pointer lg:min-h-[192px]" loading="lazy"/>
+            <div className="mb-1 relative topRetangleImage">
+
+              <Link to={`/single/${post._id}`}>
+                <img src={publicFolder + post.postImage} alt={"posts"} 
+                className="topRetangleImage" loading="lazy"/>
+              </Link>
               <CategoriesComponentBotton cat={post.postCategory[0]} />
             </div>
 
             <div className="pt-2">
-            {size.width < 768 && size.width > 480 ? <PostTitleSmall post={post.postTitle} postId={post._id}/> : <PostTitleMedium post={post.postTitle} postId={post._id}/> }
+              {size.width < 768 && size.width > 480 ? <PostTitleSmall post={post.postTitle} postId={post._id}/> : <PostTitleMedium post={post.postTitle} postId={post._id}/> }
 
               <span className='mt-1'>
-                <span className='mr-4'>
-                  <StarComponent color={"text-[#f7c90d]"}/>
-                </span>
+                {post.optional.Trending === false ? "" : <span className='mr-4 inline-block'>
+                  <StarComponent color={"text-[#f7c90d]"} favourite={post.optional.Trending}/>
+                </span>}
                   <TimeComponentColor time={post.createdAt} />
               </span>
               
@@ -121,41 +111,49 @@ export const JustTimeComponetCatBlockStar = ({Posts}) => {
   )
 }
 
-export const PagesBlogPostComponent = ({Posts}) => {
+export const PagesBlogPostComponent = ({Posts, users, Comments}) => {
   const size = useWindowSize()
+
   return (
-    <ul className='mt-7 text-left'>
-        {Posts.map((post) => {
-          return (
-          <li key={post._id} className="grid grid-cols-5 md:grid-cols-2 mt-3 pb-3">
-            <div className="my-2 mr-[3%] col-span-2 md:col-span-1 h-24 imgxs:h-36 md:h-[160px] lg:h-[176px] xl:h-full">
-              <img src={publicFolder + post.postImage} alt={"game"} className="w-full h-full object-cover cursor-pointer" loading="lazy"/>
+    <ul className='mt-5 text-left'>
+      {Posts.map((post) => {
+        return (
+          <li key={post._id} className="grid grid-cols-5 md:grid-cols-2 mt-3 first:mt-0 last:pb-0 pb-3">
+
+            <div className="mr-[2%] col-span-2 md:col-span-1 max-h-36 sm:max-h-48 lg:max-h-60">
+              <Link to={`/single/${post._id}`}>
+                <img src={publicFolder + post.postImage} alt={"game"} 
+                className="max-h-36 sm:max-h-48 lg:max-h-60" loading="lazy"/>
+              </Link>
             </div>
 
-            <div className='pt-1 ml-[3%] col-span-3 md:col-span-1'>
+            <div className='ml-[2%] col-span-3 md:col-span-1'>
               <PostTitleMedium2 post={post.postTitle} postId={post._id}/>
 
-              <span className="mb-4 inline-block">
-              <span className='mr-4'>
-                    <AdminComponentColor />
-                  </span>
-                  <span className='mr-4'>
-                    <TimeComponentColor time={post.createdAt}/>
-                  </span>
-                    <CommentComponetColor />
+              <span className="mb-2 inline-block">
+                {post.optional.Trending === false ? "" : <span className='mr-4 inline-block'>
+                <StarComponent color={"text-[#f7c90d]"} favourite={post.optional.Trending}/>  
+                </span>}
+                <span className='mr-4'>
+                  <AdminComponentColor user={post.postAuthor} users={users}/>
+                </span>
+                <span className='mr-4'>
+                  <TimeComponentColor time={post.createdAt}/>
+                </span>
+                  <CommentComponetColor Comments={Comments} postId={post._id}/>
               </span>
 
               {size.width > 519 && 
               <>
                 <PostsShortInfoComponent post={post.postContent} />
 
-                <ReadmoreButton />
+                <ReadmoreButton postId={post._id}/>
               </>}
             </div>          
           </li>
-          )
-        })}
-      </ul>
+        )
+      })}
+    </ul>
   )
 }
 

@@ -15,6 +15,7 @@ const SocialNewsletter = ({opensidebar}) => {
   const {singleUser, isSuccess: userisSuccess, refetch, isFetching, isError} = useFetchedUserById()
   const [showLogoutModal, setShowLogoutModal] = useState(false);
   const [buttonText, setButtonText] = useState("")
+
   const user = singleUser
 
   const dispatch = useDispatch()
@@ -68,8 +69,39 @@ const SocialNewsletter = ({opensidebar}) => {
     )
 
   return (
-    <div className="shadow-md py-2 mb-2 font-josefin">
+    <div className="shadow-md py-2 font-josefin">
       <div className="grid grid-flow-col justify-between max-w-[98%] mx-auto">
+
+        {/* Login, logout and user Button*/} 
+        <div className="relative disabled:opacity-40" disabled={isFetching}>  
+
+          {/* Login and logout Button*/} 
+          <div>
+              {((buttonText === "LogIn" && isError) || (buttonText === "LogOut" && userisSuccess)) && 
+              (<button className='text-neutral-500 capitalize border-0 py-0.5 px-4 rounded-full cursor-pointer text-base shadow-[#444] 
+                 shadow-sm' type='button' title='Logout' onClick={handleLogOutConfirmation}>
+                {isLoading ? <Spinner text=""/> :  buttonText}
+              </button>) 
+              }
+          </div>
+
+  
+
+            {/* user profile image serving as a linke to he user page */}
+          {(userisSuccess &&  buttonText !== "LogOut") &&
+            (<Link to={"/userpage"} className="rounded-full m-0 inline-block fixed left-px top-2 lg:inset-auto z-[9999] bg-stone-100"
+              title="user profile">
+              <img src={publicFolder + user.profileImage} alt="userImage" className="rounded-full border border-solid
+               border-rose-400 p-px m-0 object-cover object-center cursor-pointer max-w-[3rem] w-auto max-h-[3rem] mx-auto"/>
+           </Link>)
+          }
+
+            {/* Logout confirmation modal */}
+          <div className={`absolute top-full z-[9999] min-w-[16rem] md:-left-20 py-2 px-2 bg-stone-100 rounded shadow-[#444] shadow-sm mt-2.5 prose font-medium
+           ${showLogoutModal ? "translate-y-0 opacity-100 visible transition-all duration-200 ease-linear" : "-translate-y-full opacity-0 invisible"}`}>
+            {LogOutConfirmation}
+          </div>
+        </div>
 
         {/* ====== newsletter start here ===== */}
         <form 
@@ -96,36 +128,6 @@ const SocialNewsletter = ({opensidebar}) => {
             </span>
           </button>
         </form>
-
-
-        {/* Login, logout and user Button*/} 
-        <div className="relative disabled:opacity-40" disabled={isFetching}>  
-
-          {/* Login and logout Button*/} 
-          <div>
-              {((buttonText === "LogIn" && isError) || (buttonText === "LogOut" && userisSuccess)) && 
-              (<button className='text-neutral-500 capitalize border-0 py-0.5 px-4 rounded-full cursor-pointer text-base shadow-[#444] 
-                 shadow-sm' type='button' title='Logout' onClick={handleLogOutConfirmation}>
-                {isLoading ? <Spinner text=""/> :  buttonText}
-              </button>) 
-              }
-          </div>
-
-            {/* user profile image serving as a linke to he user page */}
-          {(userisSuccess &&  buttonText !== "LogOut") &&
-            (<Link to={"/userpage"} className="rounded-full m-0 inline-block absolute top-0 z-[9999] bg-stone-100"
-              title="user profile">
-              <img src={publicFolder + user.profileImage} alt="userImage" className="rounded-full border border-solid
-               border-rose-400 p-px m-0 object-cover object-center cursor-pointer max-w-[3rem] w-auto max-h-[3rem] mx-auto"/>
-           </Link>)
-          }
-
-            {/* Logout confirmation modal */}
-          <div className={`absolute top-full z-[9999] min-w-[16rem] md:-left-20 py-2 px-2 bg-stone-100 rounded shadow-[#444] shadow-sm mt-2.5 prose font-medium
-           ${showLogoutModal ? "translate-y-0 opacity-100 visible transition-all duration-200 ease-linear" : "-translate-y-full opacity-0 invisible"}`}>
-            {LogOutConfirmation}
-          </div>
-        </div>
 
         {/* ===== social start here ==== */}
         <div>

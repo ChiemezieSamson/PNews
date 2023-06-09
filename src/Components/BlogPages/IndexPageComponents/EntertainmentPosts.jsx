@@ -1,62 +1,46 @@
 import React from 'react'
-import { FaChevronLeft, FaChevronRight } from 'react-icons/fa'
 import { AdminComponentColor, CategoriesComponentBotton, CatSidebarHanbugar, CommentComponetColor, PostsShortInfoComponent, PostTitleMedium, PostTitleMedium2, PostTitleSmall, TimeComponentColor, useWindowSize } from '../../SharedAsset/SharedAssets'
-import { JustTimeComponet, JustTimeComponetStar} from './SharedComponents'
+import { JustTimeComponetStar } from './SharedComponents'
 import { StarComponent } from '../../ButtonAndOthers/Buttons'
 import { publicFolder } from '../../../data'
+import { Link } from 'react-router-dom'
 
-const EntertainmentPosts = ({Posts}) => {
+const EntertainmentPosts = ({Posts, categories, users, Comments}) => {
   const size = useWindowSize()
 
   return (
     <section className='pb-10'>
+      {/* Section title and nav categories start here */}                     
 
-      {/* arrow navigate start here */}
-
-      <div className='relative'>
-        <hr />
-        <span className='absolute left-[40%] imgxs:left-[42%] -top-[22px] flex gap-1 text-[#54595f] text-xs bg-white p-2'>
-
-          <span className='py-2 px-2.5 border border-solid border-gray-300/50'>
-            <FaChevronLeft />
-          </span>
-
-          <span className='py-2 px-2.5 border border-solid border-gray-300/50'>
-           <FaChevronRight />
-          </span>
-
-        </span>
-      </div>
-
-      {/* Section title and nav categories start here */}
-
-      <div className='pt-12'>
-        <CatSidebarHanbugar 
-        blackletters={"Entertainment"} 
-        redletters={"News"} 
-        initial={["All", "Gaming", "Movie", "Music", "Sports"]}
-        />
-      </div>
+      {/* === Header title and possible categories === */}
+      <CatSidebarHanbugar initial={categories.business.category}
+        blackletters={"Entertainment"} redletters={"News"}/>
+   
+     {/* === Posts image and title start here === */}
 
       {/* first component start here */}
-
       <ul className="md:grid md:grid-cols-2 pt-2">
-        {Posts.slice(11, 13).map((post) => {
+        {Posts.slice(9, 11).map((post) => {
           return (
-            <li key={post._id} className="md:first:mr-[3%] md:last:ml-[3%] first:mb-7 md:first:mb-0">
-              <div className="relative mt-1.5 mb-4">
-                <img src={publicFolder + post.postImage} alt={"game"} className="w-full h-44 imgxs:h-[240px] object-cover cursor-pointer md:h-36 lg:h-48 xl:h-[250px]" loading="lazy"/>
+            <li key={post._id} className="first:md:mr-[2%] last:md:ml-[2%] first:mb-7 md:first:mb-0">
+
+              <div className="relative mb-2 topRetangleImage">
+
+                <Link to={`/single/${post._id}`}>
+                  <img src={publicFolder + post.postImage} alt={"game"} 
+                  className="topRetangleImage" loading="lazy"/>
+                </Link>
                 <CategoriesComponentBotton cat={post.postCategory[0]} />
               </div>
 
               <PostTitleMedium post={post.postTitle} postId={post._id}/>
 
-              <span className="inline-block mt-2 mb-4">
+              <span className="inline-block mt-2 mb-2">
+                {post.optional.Trending === false ? "" : <span className='mr-4 inline-block'>
+                  <StarComponent color={"text-[#f7c90d]"} favourite={post.optional.Trending}/>  
+                </span>}
                 <span className='mr-4 inline-block'>
-                  <StarComponent color={"text-[#f7c90d]"} />  
-                </span>
-                <span className='mr-4 inline-block'>
-                  <AdminComponentColor />
+                  <AdminComponentColor user={post.postAuthor} users={users}/>
                 </span>
                   <TimeComponentColor time={post.createdAt} />          
               </span>
@@ -68,46 +52,43 @@ const EntertainmentPosts = ({Posts}) => {
 
       {/* Second component start here */}
 
-      <ul className="min-w-[200px] md:grid md:grid-cols-2 mt-10 ">
-        <li className='md:mr-[3%]'>
-          <JustTimeComponetStar Posts={Posts.slice(10, 11)} />
-
-          <JustTimeComponet Posts={Posts.slice(9, 10)} />
-        </li>
-       
-        <li className='md:ml-[3%]'>
-          <JustTimeComponet Posts={Posts.slice(8, 9)} />
-          
-          <JustTimeComponet Posts={Posts.slice(7, 8)} />
-        </li>
-      </ul>
+      <div className="my-7">
+   
+        <JustTimeComponetStar 
+          Posts={Posts.slice(7, 11)}
+          grid={"md:grid md:grid-cols-2 gap-x-[2%]"} />
+ 
+      </div>
 
         {/* Third component start here */}
 
-      <ul className='mt-7'>
+      <ul className='mt-4'>
         {Posts.slice(4, 8).map((post) => {
           return (
           <li key={post._id} className="grid imgxs:grid-cols-5 grid-cols-3 mb-3.5">
-            <div className="my-2 imgxs:col-span-2 col-span-1 mr-[3%]">
-              <img src={publicFolder + post.postImage} alt={"game"} className="w-full imgxs:h-36 md:min-h-[140px] lg:min-h-[176px] xl:min-h-full object-cover cursor-pointer" loading="lazy"/>
+            <div className="imgxs:col-span-2 col-span-1 mr-[2%] max-h-24 imgxs:max-h-32 sm:max-h-40 lg:max-h-44">
+
+              <Link to={`/single/${post._id}`}>
+                <img src={publicFolder + post.postImage} alt={"game"} 
+                className="max-h-24 imgxs:max-h-32 sm:max-h-40 lg:max-h-44" loading="lazy"/>
+              </Link>
             </div>
 
-            <div className='pt-1 imgxs:col-span-3 col-span-2 md:max-w-md text-black ml-[3%]'>
-             {size.width > 768 ? <PostTitleMedium2 post={post.postTitle}  postId={post._id}/> : <span className='pt-2 inline-block'> <PostTitleSmall post={post.postTitle}  postId={post._id}/> </span>}
+            <div className='imgxs:col-span-3 col-span-2 md:max-w-md text-stone-800 ml-[2%]'>
+             {size.width > 768 ? <PostTitleMedium2 post={post.postTitle}  postId={post._id}/> : <span className='inline-block'> <PostTitleSmall post={post.postTitle}  postId={post._id}/> </span>}
 
               <span className="mt-2 mb-4 inline-block">
-              <span className='mr-4'>
-                    <AdminComponentColor />
-                  </span>
-                  <span className='mr-4'>
-                    <TimeComponentColor time={post.createdAt}/>
-                  </span>
-                <CommentComponetColor />
+                <span className='mr-4'>
+                  <AdminComponentColor user={post.postAuthor} users={users}/>
+                </span>
+                <span className='mr-4'>
+                  <TimeComponentColor time={post.createdAt}/>
+                </span>
+                  <CommentComponetColor Comments={Comments} postId={post._id}/>
               </span>
 
               {size.width > 519 && <PostsShortInfoComponent post={post.postContent} />}
-            </div>
-          
+            </div>          
           </li>
           )
         })}

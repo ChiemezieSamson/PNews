@@ -1,34 +1,24 @@
 import React from 'react'
 import { CatSidebarHanbugar } from '../../SharedAsset/SharedAssets'
-import { JustTimeComponet, JustTimeComponetStar} from './SharedComponents'
+import { JustTimeComponetStar } from './SharedComponents'
 
-const TechPosts = ({Posts}) => {
+const TechPosts = ({Posts, categories}) => {
 
-  
   return (
     <section>
       <hr />
     
-    <div>
-    <CatSidebarHanbugar 
-        blackletters={"Tech"} 
-        redletters={"News"} 
-        initial={["All", "Apps", "Gadget", "Mobile", "Startup"]}
-        />
-    </div>
+      {/* Section title and nav categories start here */}                     
 
-    <div className='md:grid md:grid-cols-2 mt-7'>
-      <div className='md:mr-[3%]'>
-        <JustTimeComponetStar Posts={Posts.slice(0, 3)}/>
-      </div>
-      
+      {/* === Header title and possible categories === */}
+      <CatSidebarHanbugar initial={categories.books.category}
+          blackletters={"Tech"}  redletters={"News"}/>
 
-      <div className='md:ml-[3%]'>
-       <JustTimeComponetStar Posts={Posts.slice(4,6)}/>
-       <JustTimeComponet Posts={Posts.slice(6,7)} />
-      </div>
-    </div>
-      
+      <div className='mt-5'>
+        <JustTimeComponetStar 
+          Posts={Posts.slice(0, 6)}
+          grid={"md:grid md:grid-cols-2 gap-x-[2%]"}/>
+      </div>      
     </section>
   )
 }

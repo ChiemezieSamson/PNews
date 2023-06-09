@@ -134,13 +134,13 @@ export const navItems = [
 	},
 	{
 		id: 2,
-		url: "/lifestyle",
-		name: "Lifestyle",
+		url: "/favorite",
+		name: "Favorite",
 	},
 	{
 		id: 3,
-		url: "/favorite",
-		name: "Favorite",
+		url: "/lifestyle",
+		name: "Lifestyle",
 	},
 	{
 		id: 4,

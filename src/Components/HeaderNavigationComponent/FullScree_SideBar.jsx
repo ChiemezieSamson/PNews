@@ -4,7 +4,7 @@ import { useFetchedPosts } from "../SharedAsset/Spinners/postsSpinner";
 import { FaRegCircle } from "react-icons/fa";
 
 
-const FullSreenSidebar = () => {
+const FullSreenSidebar = ({closesidebar, disabled}) => {
   const {content , action} = useFetchedPosts()
   const Posts = content
   
@@ -13,7 +13,8 @@ const FullSreenSidebar = () => {
 
   return (
     <section className="overflowScrollSmallScreen hidden md:block h-screen overflow-y-scroll 
-    scroll-py-4 overscroll-y-contain snap-mandatory p-8 px-12 bg-zinc-400 font-lora text-white">
+    scroll-py-4 overscroll-y-contain snap-mandatory p-8 px-12 bg-neutral-100 font-lora text-stone-800"
+    disabled={disabled}>
 
       {/* === Site owner image and name === */}
       {action ?
@@ -54,7 +55,7 @@ const FullSreenSidebar = () => {
         {texts.map((text) => {
           return (
             <li key={text.id} className="px-2 last:col-span-2">
-              <FaRegCircle className="text-sm inline-block p-0.5 mx-1 text-stone-100"/>
+              <FaRegCircle className="text-sm inline-block p-0.5 mx-1 text-stone-800"/>
                 <span className="">
                   {text.name}
                 </span>                
@@ -68,9 +69,10 @@ const FullSreenSidebar = () => {
       <ul className="mx-auto w-3xl">
         {SocialMediaIcons.map((icon) => {
           return (
-            <li key={icon.id} className={`group cursor-pointer inline-block mx-2`} title={icon.name}>
+            <li key={icon.id} className={`group cursor-pointer inline-block mx-2`} title={icon.name}
+            onClick={closesidebar}>
               <span className={`no-underline text-lg ${icon.socialLinks} group-hover:text-stone-100 inline-block
-              transition-all duration-200 ease-linear border border-solid border-stone-100
+              transition-all duration-200 ease-linear border border-solid border-stone-800
               rounded-full px-1 pb-px`}>{icon.icon}</span>
             </li>
           )

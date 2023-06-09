@@ -39,7 +39,7 @@ export const useFetchedPosts = () => {
 
 
 export const useFetchedPostByQery = () => {
-  const {search, pathname} = useLocation();
+  const { search } = useLocation();
 
   const {
     data: posts = [],
@@ -70,7 +70,7 @@ export const useFetchedPostByQery = () => {
     content = <div>{error.toString()}</div>
   }
 
-  return {content , action, pathname, isFetching}
+  return {content , action, isFetching}
 }
 
 

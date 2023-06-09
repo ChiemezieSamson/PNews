@@ -1,26 +1,42 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
 import { publicFolder } from '../../../../data'
+import { useWindowSize } from '../../../SharedAsset/SharedAssets'
 
-const PostImageComponent = ({blogPost, Parentlink}) => {
-  const favoriteAndQuotes = blogPost.slice(0, 4)
-  let Data 
-  (Parentlink === "favorite" || Parentlink === "quotes") ? Data = favoriteAndQuotes : Data = blogPost
+const PostImageComponent = ({blogPost, Parentlink, handleCloseHoverlinks}) => {
+  const [posts, setPosts] = useState([])
+  const size = useWindowSize()
+  
+  useEffect(() => {
+  if(Parentlink === "favorite" || Parentlink === "quotes") {
+    setPosts(() => blogPost.slice(0, 4))
+  } else if (size.width < 1024) {
+    setPosts(() => blogPost.slice(0, 3))
+  } else {
+    setPosts(() => blogPost)
+  }
+  }, [size, Parentlink, blogPost])
+
   return (
     <div>
       <ul className={`${(Parentlink === "favorite" || Parentlink === "quotes") ? "grid-flow-col" : "grid-cols-3"} 
-        grid gap-4 list-none m-0 py-2`}>
-        {Data.map((post) => {
+        grid list-none m-0 py-2`}>
+        {posts.map((post) => {
           return(
-            <li key={post._id}>
-              <span> 
-                  <img src={publicFolder + post.postImage} alt={post.postTitle} loading="lazy"
-                  className={`w-full cursor-pointer  ${(Parentlink === "favorite" || Parentlink === "quotes") ? "h-32" : "h-28"}`} />
-                <Link to={`/single/${post._id}`} className="mt-1 cursor-pointer inline-block">
-                  {post.postTitle}
+            <li key={post._id} className='px-1 py-1'>
+              <Link to={`/single/${post._id}`} className='lg:max-h-32 max-h-24' onClick={handleCloseHoverlinks}> 
+                <img src={publicFolder + post.postImage} alt={post.postTitle} loading="lazy"
+                className={`cursor-pointer object-cover object-center rounded  ${(Parentlink === "favorite" || Parentlink === "quotes") ? "lg:h-32 max-h-24" : "lg:h-28 max-h-24"}`}/>
+              </Link>
+              <h5 className='capitalize font-lora tracking-wide font-extrabold text-stone-800 text-sm  mt-1 pb-1'>
+                <Link 
+                to={`/single/${post._id}`} 
+                className="inline-block hover:text-[#f70d28] cursor-pointer transition-all duration-200 ease-linear" 
+                title='title' onClick={handleCloseHoverlinks}>
+                  {size.width < 1024 ? post.postTitle.substring(0, 30) : post.postTitle.substring(0, 50)}...
                 </Link>
-              </span>
+              </h5>
             </li>
           )
         })}        

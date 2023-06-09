@@ -3,7 +3,7 @@ import { FaFacebookSquare,   FaRegClock, FaRegComment, FaShareAlt, FaTwitter} fr
 import { SocialMediaIcons } from '../../data';
 import { CatSideBarHanbugar } from '../ButtonAndOthers/Buttons';
 import Preview from '../BlogPages/singlePostPage/createPost/editorPreview/Preview';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 const HeadTitle = ({blackletters, redletters}) => {
   return (
@@ -18,7 +18,7 @@ const HeadTitle = ({blackletters, redletters}) => {
 
 
 export const PostTitleLarge = ({post, postId}) => (
-  <h2 className="tracking-wide capitalize font-lora text-lg imgxs:text-xl md:text-lg lg:text-3xl font-bold">
+  <h2 className="tracking-wide capitalize font-lora text-lg imgxs:text-xl md:text-lg lg:text-2xl font-bold">
     <Link to={`/single/${postId}`} className='cursor-pointer'  title='title'>
       {post}
     </Link>
@@ -27,8 +27,8 @@ export const PostTitleLarge = ({post, postId}) => (
 
 
 export const PostTitleMedium = ({post, postId}) => (
-  <h3 className="capital```````ize tracking-wide text-black font-lora md:text-base text-base imgxs:text-xl lg:text-lg font-extrabold">
-    <Link to={`/single/${postId}`} className='hover:text-[#f70d28] cursor-pointer transition-all duration-200 ease-linear' title="title">
+  <h3 className="capitalize tracking-wide text-black font-lora md:text-base text-base imgxs:text-xl lg:text-lg font-extrabold">
+    <Link to={`/single/${postId}`} className='hover:text-[#f70d28] cursor-pointer TextHeadertransition' title="title">
       {post}
     </Link>
   </h3>
@@ -36,7 +36,7 @@ export const PostTitleMedium = ({post, postId}) => (
 
 export const PostTitleMedium2 = ({post, postId}) => (
   <h3 className="capitalize tracking-wide font-lora text-base imgxs:text-xl md:text-lg lg:text-xl font-extrabold">
-    <Link to={`/single/${postId}`} className='hover:text-[#f70d28] cursor-pointer transition-all duration-200 ease-linear'  title='title'>
+    <Link to={`/single/${postId}`} className='hover:text-[#f70d28] cursor-pointer TextHeadertransition'  title='title'>
       {post}
     </Link>
   </h3>
@@ -45,10 +45,16 @@ export const PostTitleMedium2 = ({post, postId}) => (
 
 export const PostTitleSmall = ({post, postId}) => (
   <h4 className="capitalize font-lora tracking-wide font-extrabold text-black lg:text-base text-sm imgxs:text-base -mt-1.5 pb-1 md:text-[13px]">
-    <Link to={`/single/${postId}`} className='hover:text-[#f70d28] cursor-pointer transition-all duration-200 ease-linear' title='title'>
+    <Link to={`/single/${postId}`} className='hover:text-[#f70d28] cursor-pointer TextHeadertransition' title='title'>
       {post}
     </Link>
   </h4>
+)
+
+export const HomeLink = () => (
+  <Link to={"/"} className='text-center font-lora text-4xl hover:text-[#f70d28] inline-block italic font-bold py-10 TextHeadertransition'>
+    <span className='hover:underline hover:decoration-4 cursor-pointer'>Home</span>
+  </Link>
 )
 
 
@@ -78,15 +84,18 @@ export const PagesDivider = ({text}) => {
 
 export const CategoriesComponent = ({cat}) => {
   return (
-    <span className="bg-[#f70d28] tracking-wider font-lora lg:text-xs text-[11px] md:leading-3 uppercase px-2 z-20 cursor-pointer" title='category'>{cat}</span>
+    <Link to={`/categories?category=${cat}`} 
+    className="bg-[#f70d28] tracking-wider font-lora lg:text-xs text-[11px] md:leading-3 uppercase px-2 z-20 cursor-pointer" 
+    title='category'>{cat}</Link>
   )
 }
 
 
 export const CategoriesComponentBotton = ({cat}) => {
   return (
-    <span className="absolute bottom-2 bg-[#f70d28] font-lora left-3 lg:text-xs text-[11px] md:leading-3 tracking-wider cursor-pointer font-semibold text-white px-2 uppercase"
-    title='category'>{cat}</span>
+    <Link to={`/categories?category=${cat}`} 
+    className="absolute bottom-2 bg-[#f70d28] font-lora left-3 lg:text-xs text-[11px] md:leading-3 tracking-wider cursor-pointer font-semibold text-white px-2 uppercase"
+    title='category'>{cat}</Link>
   )
 }
 
@@ -95,45 +104,58 @@ export const CatSidebarHanbugar = ({initial, blackletters, redletters}) => {
   const [catSidebar, setCatSidebar] = useState(false)
   const size = useWindowSize()
 
+  const CategoriesLinks = initial.map((title, id) => ({id: id, title: title}) )
+
   const handleShowCatSideBar = () => {
     setCatSidebar((open) => !open)
   }
 
   useEffect(() => {
-    if (size.width >= 768) {
+    if (size.width >= 1000) {
       setCatSidebar(() => false)
     }
   }, [catSidebar, size])
 
-  const CatSideBarStyle = `absolute right-0 top-full z-20 shadow-sm shadow-black/5 bg-[#fff] py-1 px-2 uppercase cursor-pointer hover:text-[#f70d28] ${catSidebar ? "translate-y-0 opacity-100 visible transition-all duration-500 delay-200 ease-linear" : "translate-y-32 opacity-0 invisible"}`
+  const CatSideBarStyle = `absolute right-0 top-full z-20 shadow-sm shadow-black/5 bg-[#fff] py-1 px-2 uppercase cursor-pointer hover:text-[#f70d28] ${catSidebar ? "translate-y-0 opacity-100 visible TextHeadertransition" : "translate-y-32 opacity-0 invisible"}`
 
   return (
-    <div className="flex justify-between relative my-3">
+    <div className="grid grid-flow-col justify-between relative my-3">
       
       <HeadTitle blackletters={blackletters} redletters={redletters} />
 
-      <div className=' text-[#54595f]/70 font-semibold text-xs lg:text-xs md:text-[10px] md:leading-4 md:mt-0.5 tracking-wide'>
-        <div className='flex'>
-          <ul className="flex">
-            {initial.map((list, index) => {
-              return (
-                <li key={index} className={`first:text-black first:hover:text-black inline-block cursor-pointer uppercase last:hidden py-1 px-2 last:md:inline-block  
-                 ${size.width < 420 && "[&:nth-child(2)]:hidden"} [&:nth-child(2)]:sxs:inline-block ${size.width < 520 && "[&:nth-child(3)]:hidden"} 
-                 [&:nth-child(3)]:xs:inline-block [&:nth-child(4)]:hidden [&:nth-child(4)]:md:inline-block [&:nth-child(5)]:hidden [&:nth-child(5)]:md:inline-block`}>
-                  <span className='hover:text-[#f70d28]'>{list}</span>
+      <div className='text-neutral-400 font-josefin font-semibold text-xs lg:text-xs md:text-[10px] md:leading-4 md:mt-0.5 tracking-wide'>
+        <div className='grid grid-flow-col'>
+          <ul className="grid grid-flow-col">
+            <li className="text-stone-800 inline-block cursor-pointer uppercase">
+              <Link to={`/categories?categories=${initial}`} className='py-1 px-2 inline-block'>All</Link>
+            </li>
+
+              {CategoriesLinks.map((cat) => {
+                return (
+                  <li key={cat.id} className={`inline-block cursor-pointer uppercase last:hidden  last:md:inline-block  
+                    ${size.width < 420 ? "[&:nth-child(2)]:hidden": "[&:nth-child(2)]:sxs:inline-block"}  
+                    ${size.width < 520 ? "[&:nth-child(3)]:hidden" : "[&:nth-child(3)]:xs:inline-block "} 
+                     ${size.width < 768 ? "[&:nth-child(4)]:hidden" : "[&:nth-child(4)]:md:inline-block"}
+                     ${size.width < 1000 ? "[&:nth-child(5)]:hidden" : "[&:nth-child(5)]:md:inline-block"}`}
+                     >
+                    <Link to={`/categories?category=${cat.title}`} className='hover:text-[#f70d28] py-1 px-2 inline-block'>{cat.title}</Link>
                   </li>
-              )
+                )
             })}
           </ul>
 
-          <div className="block md:hidden px-2 pt-1.5">
-            <CatSideBarHanbugar sidebar_state={catSidebar} handleShowCatSideBar={handleShowCatSideBar} />
-          </div>
+          {(size.width > 1000 && CategoriesLinks.length <= 5) ? "" :
+            <div className="block px-2 pt-1.5 lg:hidden">
+              <CatSideBarHanbugar sidebar_state={catSidebar} handleShowCatSideBar={handleShowCatSideBar} />
+            </div>}
         </div>
+        
         <ul className={CatSideBarStyle}>
-          {initial.map((list, index) => {
+          {CategoriesLinks.map((cat) => {
             return (
-              <li key={index} className="first:hidden [&:nth-child(2)]:sxs:hidden [&:nth-child(3)]:xs:hidden py-1 px-2">{list}</li>
+              <li key={cat.id} className="first:sxs:hidden [&:nth-child(2)]:xs:hidden [&:nth-child(3)]:md:hidden">
+                <Link to={`/categories?category=${cat.title}`} className='hover:text-[#f70d28] py-1 px-2 inline-block'>{cat.title}</Link>
+              </li>
             )
           })}
         </ul>
@@ -216,11 +238,9 @@ export const useHover = () => {
 
 
 export const overLay = () => {
-  const overLay = `after:absolute after:inset-0 cursor-grab
-  after:bg-gradient-to-bl from-[#b3ffab] via-cyan-300 to-[#12fff7] transition-all duration-500 delay-200 ease-linear
-  hover:after:opacity-50 after:opacity-0 after:transition-opacity after:ease-in-out
-  after:duration-300 after:delay-150 before:absolute before:z-10 before:inset-0 before:bg-black/30`
-
+  const overLay = `after:absolute after:inset-0 cursor-pointer after:bg-blue-500/30 group-hover:after:opacity-50 
+  after:opacity-0 after:transition-opacity after:ease-linear after:duration-300 before:absolute 
+  before:z-10 before:inset-0 before:bg-black/10 group-hover:before:bg-black/30`
   return overLay
 }
 
@@ -295,11 +315,27 @@ export const SharedCount = () => {
 }
 
 
-export const NavDirectionAndPageName = ({page}) => {
+export const NavDirectionAndPageName = () => {
+  const location = useLocation()
+  let page
+  let pages
+  let search
+
+  if (location?.pathname) {
+    page = location.pathname.split("/")[1]
+    pages = location.pathname.replace(/[/]/g, " > ")
+  }
+
+  if(location?.search) {
+    let path = location.search.replace(/[?=]/g, ",")
+    search = path.split(",")[path.split(",").length - 1]
+  }
+
   return (
     <>
       <span className="inline-block mb-5 mt-8">
-        <small>Home &gt; {page}</small>
+        <small>Home {pages} {search && 
+        <span> &gt; {search}</span>}</small>
       </span>
       
       <h2 className="font-black font-round tracking-wide text-3xl">
@@ -338,32 +374,53 @@ export const TimeComponent = ({time}) => {
 }
 
 
-export const CommentComponetColor = () => {
+export const CommentComponetColor = ({postId, Comments}) => {
+  let numberOfComment
+
+  if(Comments){
+    numberOfComment = Comments.filter(comment => comment.postId === postId)
+  }
   return (
     <span className='cursor-pointer font-lora tracking-wide whitespace-nowrap  text-xs lg:text-xs md:text-[10px] font-extrabold'
     title='comments'>
-      <FaRegComment className="text-[#2e9fff] inline-block mr-px -mt-px"/> <span className='mt-px text-[#7a7a7a]/60 text-[11px] leading-4 inline-block'>{0}</span>
+      <FaRegComment className="text-[#2e9fff] inline-block mr-px -mt-px"/> <span className='mt-px text-[#7a7a7a]/60 text-[11px] leading-4 inline-block'>
+        {numberOfComment?.length ? numberOfComment.length : 0}
+      </span>
     </span>
   )
 }
 
-export const AdminComponent = () => {
+export const AdminComponent = ({user, users}) => {
+  let adminName
+
+  if(users) {
+    adminName = users.find(item => item._id === user)
+  }
+  
   return (
-    <small className="font-lora whitespace-nowrap tracking-wider font-extrabold text-xs lg:text-xs md:text-[11px]  leading-4 inline-block"
-    title='post admin'>
+    <Link to={`/categories?user=${user}`} 
+     className="font-lora whitespace-nowrap tracking-wider font-extrabold text-xs lg:text-xs md:text-[11px] leading-4 inline-block"
+      title='post admin'>
       By
-      <span className="cursor-pointer"> Admin</span>
-    </small>
+      <span className="cursor-pointer"> {adminName?.username ? adminName.username : " Admin"}</span>
+    </Link>
   )
 }
 
-export const AdminComponentColor = () => {
+export const AdminComponentColor = ({user, users}) => {
+  let adminName
+
+  if(users) {
+    adminName = users.find(item => item._id === user)
+  }
+ 
   return (
-    <small className="text-[#7a7a7a] mt-[3px] font-lora whitespace-nowrap tracking-wider font-extrabold text-xs lg:text-xs md:text-[11px] leading-4 inline-block"
-    title='post admin'>
-      By
-      <span className="text-[#f70d28] cursor-pointer"> Admin</span>
-    </small>
+    <Link to={`/categories?user=${user}`} 
+      className="text-[#7a7a7a] mt-[3px] font-lora whitespace-nowrap tracking-wider font-extrabold text-xs lg:text-xs md:text-[11px] leading-4 inline-block"
+      title='post admin'>
+        By
+        <span className="text-[#f70d28] cursor-pointer"> {adminName?.username ? adminName.username : "Admin"}</span>
+    </Link>
   )
 }
 
