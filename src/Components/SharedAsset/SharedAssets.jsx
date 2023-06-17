@@ -328,7 +328,9 @@ export const NavDirectionAndPageName = () => {
 
   if(location?.search) {
     let path = location.search.replace(/[?=]/g, ",")
-    search = path.split(",")[path.split(",").length - 1]
+    let searchReturned = path.split(",")[path.split(",").length - 1]
+
+    search = searchReturned.replace(/[%]\d+/g, " ")
   }
 
   return (
@@ -340,7 +342,7 @@ export const NavDirectionAndPageName = () => {
       
       <h2 className="font-black font-round tracking-wide text-3xl">
         <strong>
-          {page}
+          {page !== "pages" ? page : ""}
         </strong> 
       </h2>
     </>

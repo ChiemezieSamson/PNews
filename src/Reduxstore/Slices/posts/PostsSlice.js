@@ -19,17 +19,33 @@ export const extendedPostsApiSlice = apiSlice.injectEndpoints({
 			],
 		}),
 
-		getPostsByQuery: builder.query({
-			query: (search) => "posts" + search,
-			providesTags: (result = [], error, arg) => [
-				"Post",
-				...result.map(({ id }) => ({ type: "Post", id })),
-			],
-		}),
-
 		getPostById: builder.query({
 			query: (postId) => `posts/${postId}`,
 			providesTags: (result, error, arg) => [{ type: "Post", id: arg }],
+		}),
+
+		getPostsByQuery: builder.query({
+			query: (search) => "posts/query/search" + search,
+			providesTags: (result = [], error, arg) => [
+				"Post",
+				...result.posts.map(({ id }) => ({ type: "Post", id })),
+			],
+		}),
+
+		getPostsByPagination: builder.query({
+			query: (page) => "posts/pagination/page" + page,
+			providesTags: (result = [], error, arg) => [
+				"Post",
+				...result.Posts.map(({ id }) => ({ type: "Post", id })),
+			],
+		}),
+
+		getPostsByPaginationTwo: builder.query({
+			query: (page) => "posts/paginationroute/page" + page,
+			providesTags: (result = [], error, arg) => [
+				"Post",
+				...result.Posts.map(({ id }) => ({ type: "Post", id })),
+			],
 		}),
 
 		createNewPost: builder.mutation({
@@ -64,8 +80,10 @@ export const extendedPostsApiSlice = apiSlice.injectEndpoints({
 
 export const {
 	useGetPostsQuery,
-	useGetPostsByQueryQuery,
 	useGetPostByIdQuery,
+	useGetPostsByQueryQuery,
+	useGetPostsByPaginationQuery,
+	useGetPostsByPaginationTwoQuery,
 	useCreateNewPostMutation,
 	useUpdateExistingPostMutation,
 	useDeleteExistingPostMutation,

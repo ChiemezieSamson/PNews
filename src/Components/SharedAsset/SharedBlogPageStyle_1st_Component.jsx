@@ -82,7 +82,7 @@ export const SharedBlogPageStyleOne = ({Posts, users}) => {
 }
 
 
-export const GeneralCategorisePages = ({ThreeFirstPost, Comments, PagePost, users}) => {
+export const GeneralCategorisePages = ({ThreeFirstPost, Comments, PagePost, users, currentPage, totalPages}) => {
   return (
     <section className="text-left">
 
@@ -97,7 +97,10 @@ export const GeneralCategorisePages = ({ThreeFirstPost, Comments, PagePost, user
           <PagesBlogPostComponent 
             users={users}
             Comments={Comments}
-            Posts={PagePost} />
+            Posts={PagePost}
+            currentPage={currentPage}
+            totalPages={totalPages}
+            />
         </div>
         <aside className="md:col-span-1 mt-8 md:ml-[3%]">
           <StickyBox

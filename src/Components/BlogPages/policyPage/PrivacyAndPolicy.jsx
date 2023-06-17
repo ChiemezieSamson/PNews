@@ -101,10 +101,11 @@ const PrivacyAndPolicy = () => {
           <strong>Google</strong>
           <br />
           Google's advertising requirements can be summed up by Googles Advertising Principles.
-          They are put in place to provide a positive experience for users.
-          https://support.google.com
-          /adwordspolicy/answer
-          /1316548?hl=en 
+          They are put in place to provide a positive experience for users. 
+          <a href="https://support.google.com/adwordspolicy/answer/1316548?hl=en"
+          className='p-0 whitespace-normal text'>
+          &nbsp; https://support.google.com/adwordspolicy/answer/1316548?hl=en. &nbsp;
+          </a>         
           We have not enabled Google AdSense on our site but we may do so in the future
           California Online Privacy Protection Act CalOPPA is the first state law in the 
           country to require business sites and online administrations to post a protection approach.
@@ -116,7 +117,9 @@ const PrivacyAndPolicy = () => {
           identifiable data from California buyers to post a prominent security arrangement
           on its site expressing precisely the data being gathered and those people with whom 
           it is being shared, and to consent to this arrangement. See more at: 
-          http://consumercal.org/california-online-privacy-protection-act-caloppa/#st.
+          <a href="http://consumercal.org/california-online-privacy-protection-act-caloppa/#st">
+          &nbsp; http://consumercal.org/california-online-privacy-protection-act-caloppa/#st
+          </a>. &nbsp;
           <br />
           As indicated by CalOPPA we consent to the following: Clients can visit our site 
           Anonymously/secretly Once this security approach is made, we will include a 
@@ -208,7 +211,9 @@ const PrivacyAndPolicy = () => {
         </p>        
       </article>
 
-      <HomeLink />
+      <div>
+        <HomeLink />
+      </div>
 
       <span className='py-4 inline-block prose-lg'>
         <span className='py-4 inline-block'>

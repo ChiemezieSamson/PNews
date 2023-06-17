@@ -4,14 +4,14 @@ import { AdminComponent, CategoriesComponent, NavDirectionAndPageName, overLay, 
 import Aside from "../asidePage/Aside";
 import { PagesBlogPostComponent } from "../IndexPageComponents/SharedComponents";
 import { Link } from "react-router-dom";
-import { useFetchedPosts } from "../../SharedAsset/Spinners/postsSpinner";
+import { useFetchedPostByPaginationTwo } from "../../SharedAsset/Spinners/postsSpinner";
 import { publicFolder } from "../../../data";
 import useFetchedComments from "../../SharedAsset/Spinners/commentSpinner";
 import useFetchedUsers from "../../SharedAsset/Spinners/userSpinner";
 import { SharedBlogPageStyleOne } from "../../SharedAsset/SharedBlogPageStyle_1st_Component";
 
 const BusinessIndexPage = () => {
-  const {content , action} = useFetchedPosts()
+  const {content , action, totalPages, currentPage, isFetching} = useFetchedPostByPaginationTwo()
   const {userContent, useraction} = useFetchedUsers()
   const {commentsContent, commentaction} = useFetchedComments()
   const Posts = content
@@ -23,9 +23,9 @@ const BusinessIndexPage = () => {
   return (
     <>
       {canOpen && 
-        <div>
+        <div className='disabled:opacity-40' disabled={isFetching}>
            <ul className="hidden md:grid md:gap-1 md:grid-rows-6 md:grid-cols-7 mb-4 md:max-h-[450px] lg:max-h-[500px]">
-              {Posts.slice(1, 5).map((post) => {
+              {Posts.slice(0, 4).map((post) => {
                 return (
                   <li key={post._id} className="md:first:col-start-1 md:first:col-end-4 md:first:row-start-1 md:first:row-end-7 
                       md:[&:nth-child(2)]:col-start-4 md:[&:nth-child(2)]:col-end-6 md:[&:nth-child(2)]:row-start-1 md:[&:nth-child(2)]:row-end-7  
@@ -61,7 +61,7 @@ const BusinessIndexPage = () => {
 
             <div className="md:hidden">
               <SharedBlogPageStyleOne 
-                Posts={Posts.slice(1, 5)} 
+                Posts={Posts.slice(1, 4)} 
                 users={users}/>
             </div>
 
@@ -80,7 +80,10 @@ const BusinessIndexPage = () => {
               <PagesBlogPostComponent 
                 users={users}
                 Comments={Comments}
-                Posts={Posts.slice(3, 13)}/>
+                Posts={Posts.slice(4, 10)}
+                currentPage={currentPage}
+                totalPages={totalPages}
+                />
             </div>
           </div>
         </div>

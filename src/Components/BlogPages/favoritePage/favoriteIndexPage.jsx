@@ -5,13 +5,13 @@ import { SharedBlogPageStyleOne } from '../../SharedAsset/SharedBlogPageStyle_1s
 import Aside from '../asidePage/Aside'
 import StickyBox from "react-sticky-box";
 import { PagesBlogPostComponent } from '../IndexPageComponents/SharedComponents'
-import { useFetchedPosts } from '../../SharedAsset/Spinners/postsSpinner'
+import { useFetchedPostByPaginationTwo } from '../../SharedAsset/Spinners/postsSpinner'
 import { publicFolder } from '../../../data'
 import useFetchedUsers from '../../SharedAsset/Spinners/userSpinner'
 import useFetchedComments from '../../SharedAsset/Spinners/commentSpinner'
 
 const FavoriteIndexPage = () => {
-  const {content , action} = useFetchedPosts()
+  const {content , action, totalPages, currentPage, isFetching} = useFetchedPostByPaginationTwo()
   const {userContent, useraction} = useFetchedUsers()
   const {commentsContent, commentaction} = useFetchedComments()
   const Posts = content
@@ -24,10 +24,10 @@ const FavoriteIndexPage = () => {
   return (
     <>
       {canOpen && 
-        <div>
+        <div className='disabled:opacity-40' disabled={isFetching}>
           <ul className="hidden md:grid md:gap-1 md:grid-rows-6 md:grid-cols-7 mb-4 md:max-h-[450px] lg:max-h-[500px]">
 
-            {Posts.slice(8, 13).map((post) => {
+            {Posts.slice(0, 5).map((post) => {
               return (
                 <li key={post._id} className="md:first:col-start-3 md:first:col-end-6 md:first:row-start-1 md:first:row-end-7 
                     md:[&:nth-child(2)]:col-start-1 md:[&:nth-child(2)]:col-end-3 md:[&:nth-child(2)]:row-start-1 md:[&:nth-child(2)]:row-end-4  
@@ -62,7 +62,7 @@ const FavoriteIndexPage = () => {
 
           <div className="md:hidden">
             <SharedBlogPageStyleOne 
-              Posts={Posts.slice(8, 12)} 
+              Posts={Posts.slice(0, 5)} 
               users={users}/>
           </div>
 
@@ -80,7 +80,10 @@ const FavoriteIndexPage = () => {
               <PagesBlogPostComponent 
                 users={users}
                 Comments={Comments}
-                Posts={Posts.slice(0, 10)}/>
+                Posts={Posts.slice(5, 10)}
+                currentPage={currentPage}
+                totalPages={totalPages}
+                />
             </div>
           </div>
         </div>

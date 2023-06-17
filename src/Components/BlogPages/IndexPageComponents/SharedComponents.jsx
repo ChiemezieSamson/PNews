@@ -3,6 +3,7 @@ import { ReadmoreButton, StarComponent } from '../../ButtonAndOthers/Buttons'
 import { AdminComponentColor, CategoriesComponentBotton, CommentComponetColor, PostsShortInfoComponent, PostTitleMedium, PostTitleMedium2, PostTitleSmall, TimeComponentColor, useWindowSize } from '../../SharedAsset/SharedAssets'
 import { publicFolder } from '../../../data'
 import { Link } from 'react-router-dom'
+import PaginationFunctions from '../PaginationComponents/PaginationControl/PaginationFunctions/PaginationFunctions'
 
 
 export const JustTimeComponet = ({Posts, Comments}) => {
@@ -111,49 +112,58 @@ export const JustTimeComponetCatBlockStar = ({Posts, grid}) => {
   )
 }
 
-export const PagesBlogPostComponent = ({Posts, users, Comments}) => {
+export const PagesBlogPostComponent = ({Posts, users, Comments, currentPage, totalPages}) => {
   const size = useWindowSize()
 
   return (
-    <ul className='mt-5 text-left'>
-      {Posts.map((post) => {
-        return (
-          <li key={post._id} className="grid grid-cols-5 md:grid-cols-2 mt-3 first:mt-0 last:pb-0 pb-3">
+    <div>
+      <ul className='mt-5 text-left'>
+        {Posts.map((post) => {
+          return (
+            <li key={post._id} className="grid grid-cols-5 md:grid-cols-2 mt-3 first:mt-0 last:pb-0 pb-3">
 
-            <div className="mr-[2%] col-span-2 md:col-span-1 max-h-36 sm:max-h-48 lg:max-h-60">
-              <Link to={`/single/${post._id}`}>
-                <img src={publicFolder + post.postImage} alt={"game"} 
-                className="max-h-36 sm:max-h-48 lg:max-h-60" loading="lazy"/>
-              </Link>
-            </div>
+              <div className="mr-[2%] col-span-2 md:col-span-1 max-h-36 sm:max-h-48 lg:max-h-60">
+                <Link to={`/single/${post._id}`}>
+                  <img src={publicFolder + post.postImage} alt={"game"} 
+                  className="max-h-36 sm:max-h-48 lg:max-h-60" loading="lazy"/>
+                </Link>
+              </div>
 
-            <div className='ml-[2%] col-span-3 md:col-span-1'>
-              <PostTitleMedium2 post={post.postTitle} postId={post._id}/>
+              <div className='ml-[2%] col-span-3 md:col-span-1'>
+                <PostTitleMedium2 post={post.postTitle} postId={post._id}/>
 
-              <span className="mb-2 inline-block">
-                {post.optional.Trending === false ? "" : <span className='mr-4 inline-block'>
-                <StarComponent color={"text-[#f7c90d]"} favourite={post.optional.Trending}/>  
-                </span>}
-                <span className='mr-4'>
-                  <AdminComponentColor user={post.postAuthor} users={users}/>
+                <span className="mb-2 inline-block">
+                  {post.optional.Trending === false ? "" : <span className='mr-4 inline-block'>
+                  <StarComponent color={"text-[#f7c90d]"} favourite={post.optional.Trending}/>  
+                  </span>}
+                  <span className='mr-4'>
+                    <AdminComponentColor user={post.postAuthor} users={users}/>
+                  </span>
+                  <span className='mr-4'>
+                    <TimeComponentColor time={post.createdAt}/>
+                  </span>
+                    <CommentComponetColor Comments={Comments} postId={post._id}/>
                 </span>
-                <span className='mr-4'>
-                  <TimeComponentColor time={post.createdAt}/>
-                </span>
-                  <CommentComponetColor Comments={Comments} postId={post._id}/>
-              </span>
 
-              {size.width > 519 && 
-              <>
-                <PostsShortInfoComponent post={post.postContent} />
+                {size.width > 519 && 
+                <>
+                  <PostsShortInfoComponent post={post.postContent} />
 
-                <ReadmoreButton postId={post._id}/>
-              </>}
-            </div>          
-          </li>
-        )
-      })}
-    </ul>
+                  <ReadmoreButton postId={post._id}/>
+                </>}
+              </div>          
+            </li>
+          )
+        })}
+      </ul>
+
+      <div className='grid grid-flow-col justify-center w-full mt-8'>      
+        <PaginationFunctions 
+          currentPage={currentPage}
+          totalPages={totalPages}
+        />
+      </div>
+    </div>
   )
 }
 

@@ -26,6 +26,8 @@ import LifeStyleIndexPage from "./Components/BlogPages/lifeStylePage/LifeStyleIn
 import LifeStyle from "./Components/BlogPages/lifeStylePage/LifeStyle";
 import QuotesIndexPage from "./Components/BlogPages/quotesPage/QuotesIndexPage";
 import Quotes from "./Components/BlogPages/quotesPage/Quotes";
+import PaginationPages from "./Components/BlogPages/PaginationComponents/paginationPage/PaginationPages";
+import OtherPaginationPages from "./Components/BlogPages/PaginationComponents/paginationPage/OtherPaginationPages";
 
 const App = createBrowserRouter([
 	{
@@ -53,6 +55,11 @@ const App = createBrowserRouter([
 						element: <Category />,
 						errorElement: <NotFound />,
 					},
+					{
+						path: "/books/pages",
+						element: <OtherPaginationPages />,
+						errorElement: <NotFound />,
+					},
 				],
 			},
 			{
@@ -68,6 +75,11 @@ const App = createBrowserRouter([
 					{
 						path: "/lifestyle/:search",
 						element: <Category />,
+						errorElement: <NotFound />,
+					},
+					{
+						path: "/lifestyle/pages",
+						element: <OtherPaginationPages />,
 						errorElement: <NotFound />,
 					},
 				],
@@ -87,6 +99,11 @@ const App = createBrowserRouter([
 						element: <Category />,
 						errorElement: <NotFound />,
 					},
+					{
+						path: "/favorite/pages",
+						element: <OtherPaginationPages />,
+						errorElement: <NotFound />,
+					},
 				],
 			},
 			{
@@ -102,6 +119,11 @@ const App = createBrowserRouter([
 					{
 						path: "/business/:search",
 						element: <Category />,
+						errorElement: <NotFound />,
+					},
+					{
+						path: "/business/pages",
+						element: <OtherPaginationPages />,
 						errorElement: <NotFound />,
 					},
 				],
@@ -121,11 +143,21 @@ const App = createBrowserRouter([
 						element: <Category />,
 						errorElement: <NotFound />,
 					},
+					{
+						path: "/quotes/pages",
+						element: <OtherPaginationPages />,
+						errorElement: <NotFound />,
+					},
 				],
 			},
 			{
 				path: "categories",
 				element: <Category />,
+				errorElement: <NotFound />,
+			},
+			{
+				path: "pages",
+				element: <PaginationPages />,
 				errorElement: <NotFound />,
 			},
 			{

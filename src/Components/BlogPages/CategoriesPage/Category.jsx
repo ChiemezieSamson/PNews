@@ -3,9 +3,10 @@ import { GeneralCategorisePages } from '../../SharedAsset/SharedBlogPageStyle_1s
 import { useFetchedPostByQery } from '../../SharedAsset/Spinners/postsSpinner'
 import useFetchedUsers from '../../SharedAsset/Spinners/userSpinner'
 import useFetchedComments from '../../SharedAsset/Spinners/commentSpinner'
+import CategorySearchpagination from '../PaginationComponents/paginationPage/CategorySearchpagination'
 
 const Category = () => {
-  const {content , action, isFetching} = useFetchedPostByQery()
+  const {content , action, totalPages, currentPage, isFetching} = useFetchedPostByQery()
   const {userContent, useraction} = useFetchedUsers()
   const {commentsContent, commentaction} = useFetchedComments()
   const Posts = content
@@ -16,12 +17,20 @@ const Category = () => {
 
   return (
     <>{canOpen && 
-      <div className="m-0 p-0 disabled:opacity-40" disabled={isFetching}>        
-        <GeneralCategorisePages 
-          users={users}
-          Comments={Comments}
-          ThreeFirstPost={Posts.slice(0, 4)}  
-          PagePost={Posts.slice(4, 13)}/>
+      <div className="m-0 p-0 disabled:opacity-40" disabled={isFetching}>
+        {currentPage > 1 ?
+          <CategorySearchpagination /> 
+            :
+          <GeneralCategorisePages 
+            users={users}
+            Comments={Comments}
+            ThreeFirstPost={Posts.slice(0, 4)}  
+            PagePost={Posts.slice(4, 13)}
+            currentPage={currentPage}
+            totalPages={totalPages}
+            />
+        }        
+          
       </div>}
     </>
   )

@@ -11,13 +11,14 @@ import StayConnectedAndRecommended from "./IndexPageComponents/IndexPageComponen
 import EditorsChioceAndDontMiss from "./IndexPageComponents/IndexPageComponentAsideComponent.jsx/EditorsChioceAndDontMiss";
 import ArroundTheWorldPosts from "./IndexPageComponents/ArroundTheWorldPosts";
 import PaginationFunctions from "./PaginationComponents/PaginationControl/PaginationFunctions/PaginationFunctions";
-import { useFetchedPosts } from "../SharedAsset/Spinners/postsSpinner";
+import { useFetchedPostByPagination, useFetchedPosts } from "../SharedAsset/Spinners/postsSpinner";
 import useFetchedUsers from "../SharedAsset/Spinners/userSpinner";
 import useFetchedCategories from "../SharedAsset/Spinners/categoriesSpinner";
 import useFetchedComments from "../SharedAsset/Spinners/commentSpinner";
 
 
 const IndexPage = () => {
+  const {action: paginationAction, totalPages, currentPage, isFetching} = useFetchedPostByPagination()
   const {content , action} = useFetchedPosts()
   const {userContent, useraction} = useFetchedUsers()
   const {commentsContent, commentaction,} = useFetchedComments()
@@ -27,11 +28,11 @@ const IndexPage = () => {
   const Comments = commentsContent
 
 
-  const canOpen = [action, useraction, categoriesaction, commentaction].every(Boolean)
+  const canOpen = [action, useraction, categoriesaction, commentaction, paginationAction].every(Boolean)
   return (
     <>
     {canOpen &&
-      <div className="text-left">
+      <div className="text-left disabled:opacity-40" disabled={isFetching}>
 
         <HeroImages Posts={Posts}/>
 
@@ -67,7 +68,10 @@ const IndexPage = () => {
           <span className="col-span-2 md:mr-[4%]">
             <LatestPosts Posts={Posts}/>
             <div className="grid grid-flow-col justify-center w-full">
-              <PaginationFunctions />
+              <PaginationFunctions 
+                currentPage={currentPage}
+                totalPages={totalPages}
+              />
             </div>
           </span>
 
