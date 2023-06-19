@@ -1,8 +1,8 @@
 import { useState, React, useEffect } from "react";
-import { Outlet, ScrollRestoration } from "react-router-dom"
+import { Link, Outlet, ScrollRestoration } from "react-router-dom"
 import SocialNewsletter from "./HeaderNavigationComponent/Social_newsLetter";
 import FullSreenSidebar from "./HeaderNavigationComponent/FullScree_SideBar";
-import { FaBars, FaChevronUp, FaTimes } from "react-icons/fa";
+import { FaBars, FaChevronUp, FaSistrix, FaTimes } from "react-icons/fa";
 import Footer from "./BlogPages/footerPage/Footer";
 import HeaderNavigations from "./HeaderNavigationComponent/Navigations/HeaderNavigations";
 import { useFetchedPosts } from "./SharedAsset/Spinners/postsSpinner";
@@ -96,7 +96,12 @@ const HomeLinks = () => {
           <div className="fixed top-3 px-3 text-stone-800 text-lg hover:text-rose-500 
             transition-all duration-200 ease-linear" title="close">
               <Hanbugar3 closesidebar={handleCloseInstaSidebar}/>
-            </div>
+          </div>
+
+          <Link to={"/search"} className="fixed right-8 top-3 cursor-pointer text-stone-800 text-lg font-bold hover:mainColor TextHeadertransition" title="posts search"
+          onClick={handleCloseInstaSidebar}>
+              <FaSistrix className="inline-block"/>
+          </Link>
         </div>
 
         {/* ===== Home hero and navigations start here ===== */}

@@ -1,11 +1,11 @@
 import React from 'react'
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { useState, useEffect} from "react";
 import { NavLinksAndArrows} from "../../ButtonAndOthers/Buttons"
 import { HoverLinsks, SmallScreenHoverLinsks } from "../HeadHoverComponent/HoverLinks";
 import { useWindowSize } from "../../SharedAsset/SharedAssets";
 import { navItems } from "../../../data";
-import { FaChevronDown } from 'react-icons/fa';
+import { FaChevronDown, FaSistrix } from 'react-icons/fa';
 import { useFetchedPosts } from '../../SharedAsset/Spinners/postsSpinner';
 import useFetchedTags from '../../SharedAsset/Spinners/tagsSpiner';
 import useFetchedCategories from '../../SharedAsset/Spinners/categoriesSpinner';
@@ -77,11 +77,15 @@ const HeaderNavigations = ({hideShowNavLinks, closeNavLinksOnBodyClick, handleCl
     <div className={sticky}>
 
       {/* ==== Home Hero section start here ==== */}
-      <div className={`leading-8 font-poppins font-medium pt-8 md:py-8 max-w-xl mx-auto my-0 mt-2 bg-white
+      <div className={`leading-8 font-poppins font-medium pt-8 md:py-8 max-w-xl mx-auto my-0 mt-2 bg-white relative
       ${(size.width >= 768 && scroll >= 300) ? "hidden" : "block"}`}>
         <h1 className="text-stone-800 text-4xl sm:text-6xl md:text-8xl font-extralight 
         italic tracking-wider uppercase">Chinonye</h1>
         <small className="text-base font-thin tracking-widest text-stone-800 font-lora capitalize">Discover The Best</small>
+
+        <Link to={"/search"} className="absolute right-2 bottom-1 cursor-pointer md:hidden text-stone-800 text-lg font-bold hover:mainColor TextHeadertransition" title="posts search">
+          <FaSistrix className="inline-block"/>
+        </Link>
       </div>
 
       {/* ==== Home nevigation section start here ===== */}

@@ -13,11 +13,10 @@ const Pagination = ({ currentPage , totalPages }) => {
 
   if(pathname.split("/")[2] === "categories" 
   || pathname.split("/")[2] === "tags" 
-  || routePathName === "/categories") {
-    categoryRoute = `${pathname}${search}`
+  || routePathName === "/categories" 
+  || routePathName === "/search") {
+    categoryRoute = `${pathname}${search.split("&")[0]}`
   }
-
-  console.log(pathname.split("/")[2], categoryRoute);
 
   let numberLink
 
@@ -57,12 +56,12 @@ const Pagination = ({ currentPage , totalPages }) => {
     if (routePathName !== "/pages") {
       newRoute = routePathName
     } else {
-      if(categoryRoute) {
-        newRoute = categoryRoute
-      } else {
         newRoute = "/"
-      }
     }
+
+    if(categoryRoute) {
+      newRoute = categoryRoute
+    } 
     urlLink = newRoute
   }
 

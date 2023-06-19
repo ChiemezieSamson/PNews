@@ -65,7 +65,7 @@ export const useFetchedPostById = () => {
 
 export const useFetchedPostByQery = () => {
   const { search } = useLocation();
-  let newSearch = `${search}&limit=${10}`
+  let newSearch = `${search ? search : "?s='"}&limit=${10}`
 
   const {
     data: posts = [],
@@ -97,7 +97,6 @@ export const useFetchedPostByQery = () => {
     content = sortedPosts
     totalPages = posts.totalPages
     currentPage = posts.currentPage
-    console.log(sortedPosts, totalPages, currentPage);
   } else if (isError) {
     content = <div>{error.toString()}</div>
   }

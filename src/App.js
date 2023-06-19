@@ -7,7 +7,6 @@ import Favorite from "./Components/BlogPages/favoritePage/Favorite";
 import About from "./Components/BlogPages/aboutPage/About";
 import PrivacyAndPolicy from "./Components/BlogPages/policyPage/PrivacyAndPolicy";
 import ContactUs from "./Components/BlogPages/contactUs/ContactUs";
-import Logo from "./Components/BlogPages/searchPage/Logo_Search";
 import SinglePost from "./Components/BlogPages/singlePostPage/singlePost/SinglePost";
 import WritePost from "./Components/BlogPages/singlePostPage/writePost/WritePost";
 import EditPost from "./Components/BlogPages/singlePostPage/editPost/EditPost";
@@ -28,6 +27,7 @@ import QuotesIndexPage from "./Components/BlogPages/quotesPage/QuotesIndexPage";
 import Quotes from "./Components/BlogPages/quotesPage/Quotes";
 import PaginationPages from "./Components/BlogPages/PaginationComponents/paginationPage/PaginationPages";
 import OtherPaginationPages from "./Components/BlogPages/PaginationComponents/paginationPage/OtherPaginationPages";
+import SearchPage from "./Components/BlogPages/searchPage/SearchPage";
 
 const App = createBrowserRouter([
 	{
@@ -223,8 +223,8 @@ const App = createBrowserRouter([
 				],
 			},
 			{
-				path: "logo",
-				element: <Logo />,
+				path: "search",
+				element: <SearchPage />,
 				errorElement: <NotFound />,
 			},
 		],
