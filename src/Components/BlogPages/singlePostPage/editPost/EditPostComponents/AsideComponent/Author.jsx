@@ -1,4 +1,4 @@
-import useFetchedUsers from '../../../../SharedAsset/Spinners/userSpinner';
+import useFetchedUsers from '../../../../../SharedAsset/Spinners/userSpinner';
 
 
 const Author = ({handlePostAuthor, postAuthor}) => {
@@ -18,9 +18,9 @@ const Author = ({handlePostAuthor, postAuthor}) => {
         value={postAuthor} 
         aria-label="select"
         className='capitalize aria-required:bg-rose-500 font-poppins'
-        onChange={handlePostAuthor} form="post_form" required>
+        onChange={handlePostAuthor} form="post_form" disabled={true} autoFocus required>
 
-        <option className="text-sm" value={""}></option>
+      <option className="text-sm" value={""}></option>
 
         {useraction && users.map((user) => {
           return (

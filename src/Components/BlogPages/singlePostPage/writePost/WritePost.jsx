@@ -1,4 +1,4 @@
-import { ContentState, convertFromHTML } from 'draft-js';
+import { ContentState, EditorState, convertFromHTML } from 'draft-js';
 import React from 'react'
 import CreatePostComponents from '../createPost/CreatePostComponents.jsx';
 
@@ -10,9 +10,12 @@ const WritePost = () => {
       blocksFromHTML.contentBlocks,
       blocksFromHTML.entityMap,
     );
+
+    const defaultState = EditorState.createWithContent(state)
+
   return (
     <div>
-      <CreatePostComponents state={state}/>
+      <CreatePostComponents state={defaultState}/>
     </div>
   )
 }

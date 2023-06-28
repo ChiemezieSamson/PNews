@@ -1,17 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { selectAllPostTags, tagAdded, tagUnchecked } from '../../../../../Reduxstore/Slices/PostsComponentSlices/postsTags/PostsTagsSlice'
-import { useCreateNewTagsMutation, useDeleteExistingTagMutation, useUpdateExistingTagMutation } from '../../../../../Reduxstore/Slices/tags/TagsSlice'
-import { WritePostAsideOpenClosebar } from '../../../../ButtonAndOthers/Buttons'
-import useFetchedTags from '../../../../SharedAsset/Spinners/tagsSpiner'
-import { parentCategoriesAndTags } from '../../../../../data'
+import useFetchedTags from '../../../../../SharedAsset/Spinners/tagsSpiner'
+import { useDeleteExistingTagMutation, useUpdateExistingTagMutation } from '../../../../../../Reduxstore/Slices/tags/TagsSlice'
+import { selectAllPostTags, tagAdded, tagUnchecked, updateTag } from '../../../../../../Reduxstore/Slices/PostsComponentSlices/postsTags/PostsTagsSlice'
+import { WritePostAsideOpenClosebar } from '../../../../../ButtonAndOthers/Buttons'
+import { parentCategoriesAndTags } from '../../../../../../data'
 
 
-const Tag = ({handleSetAddTag, addTag, handleSelectedParentTag, parentTag}) => {
+const Tag = ({updatePostTags, parentTag, handleSelectedParentTag, handleSetAddTag, addTag}) => {
   // fetch all the tags and their parent for tags listing
   const {tagsContent, tagsParents, tagsaction, isFetching} = useFetchedTags()
-  // Create new tag onec if none have been created before
-  const [addNewTags, { isLoading }] = useCreateNewTagsMutation()
   // Update tag using the id of the first created tags
   const [updatingTag, { isLoading: isUpdating }] = useUpdateExistingTagMutation()
   // Delete tag makings sure that a tag,user and authorities are correct
@@ -41,6 +39,21 @@ const Tag = ({handleSetAddTag, addTag, handleSelectedParentTag, parentTag}) => {
   // handling the display or hidden of the whole tag component
   const handleOpenCloseChild = () => {
     setOpenCat((change) => !change)
+
+    if (postTagArrays.length > 0) {
+      const alltags = document.querySelectorAll(".alltags")
+      alltags.forEach((element) => {
+        element.parentElement.style.borderColor = "#e2e2e2"
+        element.nextSibling.checked = false
+        element.parentElement.lastChild.style.display = "none"
+        
+        if(updatePostTags.includes(element.textContent.toLowerCase())){
+          element.parentElement.style.borderColor = "#60a5fa"
+          element.nextSibling.checked = true
+          element.parentElement.lastChild.style.display = "inline-block"
+        }
+      })     
+    } 
   }
 
   // regular expression that allows only letters and numbers (no symbols)
@@ -102,7 +115,7 @@ const Tag = ({handleSetAddTag, addTag, handleSelectedParentTag, parentTag}) => {
 
    /***************** CREATE */
   
-  const canSave = [parent, tag, isValid].every(Boolean) && !isLoading && !parentFullText && !tagsContent?.includes(tag.toLowerCase())
+  const canSave = [parent, tag, isValid].every(Boolean) && !parentFullText && !tagsContent?.includes(tag.toLowerCase())
 
   useEffect(() => {  // making sure the user dont add an already existing tag
     if(tagsaction) {
@@ -121,22 +134,13 @@ const Tag = ({handleSetAddTag, addTag, handleSelectedParentTag, parentTag}) => {
         setErrorText(false)
         
         try {
-          if(!tagsParents?._id) {
-            // run if the user haven't create any tag before. (saving to database)
-            await addNewTags({parent, tag}).unwrap()
+          // run if the user have create any tag before and the id for that is available (saving to database)
+          if(!isUpdating) {
+            await updatingTag({tagId: tagsParents._id, parent, tag})
 
-            // function to empty this parent and tag for next user action
+            // function to empty this parent and category for next user action
             handleSetAddTag("")
             handleSelectedParentTag("")
-          } else {
-            // run if the user have create any tag before and the id for that is available (saving to database)
-            if(!isUpdating) {
-              await updatingTag({tagId: tagsParents._id, parent, tag})
-
-              // function to empty this parent and category for next user action
-              handleSetAddTag("")
-              handleSelectedParentTag("")
-            }
           }    
         } catch (err) {
           setErrorText(true)
@@ -164,6 +168,13 @@ const Tag = ({handleSetAddTag, addTag, handleSelectedParentTag, parentTag}) => {
     }
   }
 
+  useEffect(() => {    
+    if (updatePostTags?.length > 0) {
+      dispatch(updateTag(updatePostTags)) 
+    } 
+  },[updatePostTags, dispatch])
+
+ 
   return (
     <div className='text-sm disabled:opacity-40' disabled={isFetching}>
 
@@ -230,7 +241,7 @@ const Tag = ({handleSetAddTag, addTag, handleSelectedParentTag, parentTag}) => {
             {tagsaction ? MyTags.map((tag) => {
               return (
                 <li key={tag.id} className={`bg-[#e2e2e2] inline-block mr-2 mt-2 cursor-pointer text-sm border border-solid`}>
-                  <label htmlFor={`"Tag" + ${tag.id}`} className='peer p-0.5 mr-1.5 inline-block capitalize text-center cursor-pointer' > 
+                  <label htmlFor={`"Tag" + ${tag.id}`} className='peer p-0.5 mr-1.5 inline-block capitalize text-center alltags cursor-pointer' > 
                     {tag.title}
                   </label>
                   <input type='checkbox' name="posttags" id={`"Tag" + ${tag.id}`} className='hidden' onChange={handleCheckboxChange}/>

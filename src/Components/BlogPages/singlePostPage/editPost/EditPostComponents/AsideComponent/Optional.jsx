@@ -1,15 +1,15 @@
 import React, { useState } from 'react'
 import { FaToggleOff, FaToggleOn } from 'react-icons/fa'
-import { WritePostAsideOpenClosebar } from '../../../../ButtonAndOthers/Buttons'
+import { WritePostAsideOpenClosebar } from '../../../../../ButtonAndOthers/Buttons'
 
 
 const Optional = ({handlesetViewed, handlessetShared, handleCheckedTrendig, Trending, shared, viewed}) => {
-  const [openCat, setOpenCat] = useState(false) // use to open and close the category section  
+  const [openCat, setOpenCat] = useState(false) // use to open and close the category section
 
  // handling the display or hidden of the whole optional component
   const handleOpenCloseChild = () => {
     setOpenCat((change) => !change)
-  }
+  }  
 
   return (
     <div className='text-sm bg-white lg:bg-[#eee]'>
@@ -20,7 +20,7 @@ const Optional = ({handlesetViewed, handlessetShared, handleCheckedTrendig, Tren
 
       {/* form to add the share, view and trending post start here*/}
       <div className={`${openCat? "block" : "hidden"} px-3 mt-2 pb-16`}>
-         
+        
           <label htmlFor="sharedPost" className="inline-block text-sm text-stone-700">SHARES</label>
           <input 
             type="number" 

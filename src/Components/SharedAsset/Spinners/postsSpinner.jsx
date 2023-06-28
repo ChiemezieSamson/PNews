@@ -151,7 +151,6 @@ export const useFetchedPostByPaginationTwo = () => {
   const parent = pathname.split("/")[1]
   let parentRoute
   parent === "quotes" ? parentRoute = "random" : parentRoute = parent
-  console.log(search, parent);
   let page = `${search ? search : "?page=" + 1}&limit=${10}&parentCat=${parentRoute}` 
 
   const {
@@ -183,7 +182,6 @@ export const useFetchedPostByPaginationTwo = () => {
     content = sortedPosts
     totalPages = posts.totalPages
     currentPage = posts.currentPage
-    console.log(sortedPosts, totalPages, currentPage);
   } else if (isError) {
     content = <div>{error.toString()}</div>
   }

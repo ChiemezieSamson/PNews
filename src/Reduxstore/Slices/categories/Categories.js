@@ -28,6 +28,7 @@ export const extendedCategoriesApiSlice = apiSlice.injectEndpoints({
 				method: "PUT",
 				body: categories,
 			}),
+			invalidatesTags: ["Post", "Categories"],
 			async onQueryStarted(categories, { dispatch, queryFulfilled }) {
 				const patchResult = dispatch(
 					extendedCategoriesApiSlice.util.updateQueryData(
