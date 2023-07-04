@@ -149,10 +149,12 @@ const UpdatePostAsideComponent = ({postTitle, handleAllPostContent, handleSetPos
 
           <button 
           className='text-neutral-50 bg-teal-600 hover:bg-teal-700 border-0 p-2.5 rounded-sm cursor-pointer text-base
-          shadow-stone-700 shadow-sm TextHeadertransition' 
+          shadow-stone-700 shadow-sm TextHeadertransition disabled:opacity-40' 
           type='submit' 
           form="post_form" 
-          onClick={handleDispatched}>Publish</button>
+          onClick={handleDispatched}
+          disabled={!canSave}
+          >Publish</button>
         </span>
 
         <button 

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { SocialMediaIcons, publicFolder } from "../../data";
+import {  publicFolder } from "../../data";
 import { HanbugarTwo } from "../ButtonAndOthers/Buttons";
 import { FaRegEnvelope } from "react-icons/fa";
 import { useFetchedUserById } from "../SharedAsset/Spinners/userSpinner";
@@ -8,6 +8,7 @@ import { useSendLogoutMutation } from "../../Reduxstore/Slices/authSlice/authApi
 import Spinner from "../SharedAsset/Spinners/Spinner";
 import { useDispatch } from "react-redux";
 import { logOut } from "../../Reduxstore/Slices/authSlice/AuthSlice";
+import { SocialMediaLinks } from "../SharedAsset/SharedAssets";
 
 
 const SocialNewsletter = ({opensidebar}) => {
@@ -131,18 +132,9 @@ const SocialNewsletter = ({opensidebar}) => {
 
         {/* ===== social start here ==== */}
         <div>
-          <ul className="pt-1 list-none m-0 p-0 inline-block">
-            {SocialMediaIcons.map((icon) => {
-              return (
-                <li key={icon.id} className="inline-block px-1.5 group cursor-pointer" title={icon.name}>
-                  <span className={`no-underline text-xl ${icon.socialLinks} leading-3 
-                    group-hover:text-white transition-all duration-200 ease-linear`}>
-                    {icon.icon}
-                    </span>
-                </li>
-              )
-            })}
-          </ul>
+          <SocialMediaLinks 
+           socialLinks={""}
+          />
 
             {/*Hanbuger button use to open the side bar for instagram feed on large screen*/}
           <div className="text-stone-800 text-lg pl-7 md:inline-block leading-3 hidden align-bottom">

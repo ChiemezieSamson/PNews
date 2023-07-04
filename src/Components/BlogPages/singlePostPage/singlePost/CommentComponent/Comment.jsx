@@ -2,14 +2,13 @@ import React, { useState } from 'react';
 import LikeDislikeReply, { EditAndDeleteComment, ReplyForm } from './CommentComponents/CommentComponets';
 import { useDeleteExistingCommentMutation, useUpdateExistingCommentMutation } from '../../../../../Reduxstore/Slices/comments/CommentsSlice';
 import { CommentReactionButtons, ReplyReactionButtons } from '../../../../ButtonAndOthers/ReactionButtons';
-import { useFetchedCommentById, useFindThisUser } from '../../../../SharedAsset/Spinners/commentSpinner';
+import { useFindThisUser } from '../../../../SharedAsset/Spinners/commentSpinner';
 import { useCreateNewReplyMutation, useDeleteExistingReplyMutation, useUpdateExistingReplyMutation } from '../../../../../Reduxstore/Slices/replySlice/replySlice';
 
 
 
-const Comment = () => {
+const Comment = ({comments, postId}) => {
   const [replyTo, setReplyTo] = useState("")  
-  const {singleContent, contentAction, isFetching, postId} = useFetchedCommentById() 
   const [updateComment, {isLoading}] = useUpdateExistingCommentMutation()
   const [deleteComment, {isLoading: deleting}] = useDeleteExistingCommentMutation()
   const [createReply, {isLoading: replyCreating}] = useCreateNewReplyMutation()
@@ -17,8 +16,7 @@ const Comment = () => {
   const [deleteReply, {isLoading: replyDeleting}] = useDeleteExistingReplyMutation()
   const [commentId, setCommentId] = useState("")
   const [replyId, setReplyId] = useState("")
-  const [replyContent, setReplyContent] = useState('');
-  const comments = singleContent 
+  const [replyContent, setReplyContent] = useState(''); 
   const User = useFindThisUser("daddygreenarrow4401@gmail.com", "nebbeolis")
 
 
@@ -193,73 +191,68 @@ const Comment = () => {
   }
 
   return ( 
-    <>
-    {contentAction ? comments.length > 0 &&
-      <div className="my-2 px-4 py-2 bg-gray-100 rounded-lg disabled:opacity-40" disabled={isFetching}>
-          <span className='inline-block mb-4'>
-            <h4 className='capitalize font-bold text-[27px] leading-8 inline-block align-bottom font-lora'>Comments</h4>
-            <span className='inline-block px-3 bg-[#999] mx-4 text-white rounded-md'>{comments.length}</span>
-          </span> 
-        {comments.map((comment) => {
-          return (
-            <div id={comment._id} key={comment._id} className="mb-3 relative"> 
-              <div className="font-medium capitalize font-josefin" name={comment.author}>{comment.author}</div>
-              <div>{comment.content}</div>
-              <div className="text-sm text-gray-500 mt-1">{comment.time}</div>
+    <div className="my-2 px-4 py-2 bg-gray-100 rounded-lg">
+        <span className='inline-block mb-4'>
+          <h4 className='capitalize font-bold text-[27px] leading-8 inline-block align-bottom font-lora'>Comments</h4>
+          <span className='inline-block px-3 bg-[#999] mx-4 text-white rounded-md'>{comments.length}</span>
+        </span> 
+      {comments.map((comment) => {
+        return (
+          <div id={comment._id} key={comment._id} className="mb-3 relative"> 
+            <div className="font-medium capitalize font-josefin" name={comment.author}>{comment.author}</div>
+            <div>{comment.content}</div>
+            <div className="text-sm text-gray-500 mt-1">{comment.time}</div>
 
-              <div className='mr-6 max-w-xs py-1 mt-1'>
-                <CommentReactionButtons comment={comment} authorId={User ? User._id : ""} postId={postId}/>              
-                <LikeDislikeReply handler={handleCreateReplyOnComment} />
-              </div> 
+            <div className='mr-6 max-w-xs py-1 mt-1'>
+              <CommentReactionButtons comment={comment} authorId={User ? User._id : ""} postId={postId}/>              
+              <LikeDislikeReply handler={handleCreateReplyOnComment} />
+            </div> 
 
-              <ReplyForm  handleSetReplyContent={handleSetFormContent} 
-              handleReplySubmit={handleFormSubmit} replyContent={replyContent}
-              />
-              
-              <EditAndDeleteComment handleEdit={handleUpdateComment} handleDelete={handleDeleteComment}/>
+            <ReplyForm  handleSetReplyContent={handleSetFormContent} 
+            handleReplySubmit={handleFormSubmit} replyContent={replyContent}
+            />
+            
+            <EditAndDeleteComment handleEdit={handleUpdateComment} handleDelete={handleDeleteComment}/>
 
 
-              {comment.replies.length > 0 &&
-                <details>
-                  <summary className='text-sm italic text-blue-500 cursor-pointer'> {comment.replies.length} replies</summary>
-                  {comment.replies.map((reply) => {
-                    return (
-                      <div id={comment._id} key={reply._id} className={`${reply.name && "bg-gray-200 rounded-lg my-2 px-4 py-2"}`}>
-                        {reply.name &&
-                        <div className="relative" id={reply._id}>
-                          <div className="font-medium capitalize font-josefin" name={reply.name}>
-                            {reply.name}
-                            {reply.replyOfreply !== "" &&
-                            <span className='text-blue-500 mx-3'>{reply.replyOfreply}</span>}
-                          </div>
-                          <div>{reply.content}</div>
-                          <div className="text-sm text-gray-500 mt-1">{reply.time}</div>
+            {comment.replies.length > 0 &&
+              <details>
+                <summary className='text-sm italic text-blue-500 cursor-pointer'> {comment.replies.length} replies</summary>
+                {comment.replies.map((reply) => {
+                  return (
+                    <div id={comment._id} key={reply._id} className={`${reply.name && "bg-gray-200 rounded-lg my-2 px-4 py-2"}`}>
+                      {reply.name &&
+                      <div className="relative" id={reply._id}>
+                        <div className="font-medium capitalize font-josefin" name={reply.name}>
+                          {reply.name}
+                          {reply.replyOfreply !== "" &&
+                          <span className='text-blue-500 mx-3'>{reply.replyOfreply}</span>}
+                        </div>
+                        <div>{reply.content}</div>
+                        <div className="text-sm text-gray-500 mt-1">{reply.time}</div>
 
-                          <EditAndDeleteComment handleEdit={handleUpdateReply} handleDelete={handleDeleteReply}/> 
+                        <EditAndDeleteComment handleEdit={handleUpdateReply} handleDelete={handleDeleteReply}/> 
 
-                          <div className='mr-6 max-w-xs justify-between py-1 mt-1'>
-                            <ReplyReactionButtons reply={reply} commentId={comment._id} authorId={User ? User._id : ""} postId={postId}/>
-                            <LikeDislikeReply handler={handleCreateReplyOnReply}/>
-                          </div>                   
+                        <div className='mr-6 max-w-xs justify-between py-1 mt-1'>
+                          <ReplyReactionButtons reply={reply} commentId={comment._id} authorId={User ? User._id : ""} postId={postId}/>
+                          <LikeDislikeReply handler={handleCreateReplyOnReply}/>
+                        </div>                   
 
-                          <ReplyForm  handleSetReplyContent={handleSetFormContent}  replyContent={replyContent}
-                              handleReplySubmit={handleFormSubmit}  
-                              />
-                        </div>  
-                      } 
-                      </div>                           
-                    )
-                  })}
-                </details>
-              }
-              
-            </div>
-          )
-        } )}
-      </div>
-      : singleContent
-    }
-    </> 
+                        <ReplyForm  handleSetReplyContent={handleSetFormContent}  replyContent={replyContent}
+                            handleReplySubmit={handleFormSubmit}  
+                            />
+                      </div>  
+                    } 
+                    </div>                           
+                  )
+                })}
+              </details>
+            }
+            
+          </div>
+        )
+      } )}
+    </div>     
   );
 };
 

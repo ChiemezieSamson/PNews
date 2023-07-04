@@ -156,6 +156,11 @@ const App = createBrowserRouter([
 				errorElement: <NotFound />,
 			},
 			{
+				path: "tags",
+				element: <Category />,
+				errorElement: <NotFound />,
+			},
+			{
 				path: "pages",
 				element: <PaginationPages />,
 				errorElement: <NotFound />,

@@ -101,8 +101,9 @@ const UpdatePostComponent = ({state, post, postId}) => {
     }
   }
 
-  const canSave = [postTitle, postImage, postAuthor,postCategory[0],postTags[0], isValid].every(Boolean) && !isLoading
+  const canSave = [postTitle, postImage, postAuthor, postCategory[0], postTags[0], isValid].every(Boolean) && !isLoading
 
+  console.log(canSave);
   const handleAllPostContent = () => {
 
     const sampleMarkup = '<p>My post ...! |</p>'

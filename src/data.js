@@ -100,7 +100,7 @@ export const SocialMediaIcons = [
 	},
 	{
 		id: 6,
-		name: "subscribers",
+		name: "website",
 		icon: (
 			<FaRss
 				className="inline-block rounded-md px-0.5  transition-all duration-200 ease-linear

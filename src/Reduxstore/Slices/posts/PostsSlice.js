@@ -64,7 +64,49 @@ export const extendedPostsApiSlice = apiSlice.injectEndpoints({
 				method: "PUT",
 				body: initialPost,
 			}),
-			invalidatesTags: (result, error, arg) => [{ type: "Post", id: arg._id }],
+			invalidatesTags: (result, error, arg) => [{ id: arg._id }],
+			// async onQueryStarted(initialPost, { dispatch, queryFulfilled }) {
+			// 	console.log(initialPost);
+			// 	const patchResult = dispatch(
+			// 		extendedPostsApiSlice.util.updateQueryData(
+			// 			"getPostById",
+			// 			initialPost.postId,
+			// 			(draft) => {
+			// 				console.log([draft]);
+			// 			}
+			// 		)
+			// 	);
+			// 	try {
+			// 		await queryFulfilled;
+			// 	} catch {
+			// 		patchResult.undo();
+			// 	}
+			// },
+		}),
+
+		MarkPostFavouriteStatus: builder.mutation({
+			query: (initialPost) => ({
+				url: `posts/favourite/${initialPost.postId}`,
+				method: "PUT",
+				body: initialPost,
+			}),
+			invalidatesTags: (result, error, arg) => [{ id: arg._id }],
+			async onQueryStarted(initialPost, { dispatch, queryFulfilled }) {
+				const patchResult = dispatch(
+					extendedPostsApiSlice.util.updateQueryData(
+						"getPostById",
+						initialPost.postId,
+						(draft) => {
+							draft.optional.favourite = initialPost.favourite;
+						}
+					)
+				);
+				try {
+					await queryFulfilled;
+				} catch {
+					patchResult.undo();
+				}
+			},
 		}),
 
 		deleteExistingPost: builder.mutation({
@@ -86,6 +128,7 @@ export const {
 	useGetPostsByPaginationTwoQuery,
 	useCreateNewPostMutation,
 	useUpdateExistingPostMutation,
+	useMarkPostFavouriteStatusMutation,
 	useDeleteExistingPostMutation,
 } = extendedPostsApiSlice;
 

@@ -211,6 +211,11 @@
    font-lora text-lg lg:text-[22px] leading-8 text-[#7a7a7a] cursor-pointer 
   }
 
+  .editor blockquote {
+   @apply relative max-w-[38rem] block  pt-4 pb-5 text-center mx-auto before:absolute before:top-0 before:inset-x-0 before:w-16 before:mx-auto before:inline-block before:h-0.5 before:bg-[#e0e0e0] after:absolute after:bottom-0 after:inset-x-0 after:w-16 after:mx-auto after:inline-block after:h-0.5 after:bg-[#e0e0e0] 
+   font-lora text-lg lg:text-[22px] leading-8 text-[#7a7a7a] cursor-pointer 
+  }
+
   .editor img,
   div[data-contents="true"] figure span {
     @apply max-h-[480px] w-full object-cover cursor-pointer mb-4

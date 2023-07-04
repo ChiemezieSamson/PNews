@@ -104,7 +104,7 @@ export const CatSidebarHanbugar = ({initial, blackletters, redletters}) => {
   const [catSidebar, setCatSidebar] = useState(false)
   const size = useWindowSize()
 
-  const CategoriesLinks = initial.map((title, id) => ({id: id, title: title}) )
+  const CategoriesLinks = initial.map((title, id) => ({id: id, title: title}))
 
   const handleShowCatSideBar = () => {
     setCatSidebar((open) => !open)
@@ -244,6 +244,23 @@ export const overLay = () => {
   return overLay
 }
 
+
+export const SocialMediaLinks = ({socialLinks}) => {
+  return (
+    <ul className="pt-1 list-none m-0 p-0 inline-block">
+      {SocialMediaIcons.map((icon) => {
+        return (
+          <li key={icon.id} className="inline-block px-1.5 first:pl-0 last:pr-0 group cursor-pointer" title={icon.name}>
+            <a href={socialLinks[icon.name] !== "" ? socialLinks[icon.name] : "#"} target="_blank" rel={"noreferrer"} className={`no-underline text-xl ${icon.socialLinks} leading-3 
+              group-hover:text-white transition-all duration-200 ease-linear`} onClick={(e) => e.preventDefault()}>
+              {icon.icon}
+              </a>
+          </li>
+        )
+      })}
+    </ul>
+  )
+}
 
 const SocialMediaCount = ({text, bg}) => {
 
