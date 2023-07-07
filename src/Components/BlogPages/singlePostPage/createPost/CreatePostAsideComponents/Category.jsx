@@ -127,7 +127,7 @@ const Category = ({handleSelectedParentCat, parentCat, handleSetCategory, catego
   const handleAddNewCat = async () => {
       if (canSave) {
 
-        setErrorText(false)
+        setErrorText(() => false)
 
         try {
           if(!categoriesParents?._id) { 
@@ -148,7 +148,8 @@ const Category = ({handleSelectedParentCat, parentCat, handleSetCategory, catego
             }
           }          
         } catch (err) {
-          setErrorText(true)
+          setErrorText(() =>  true)
+          console.error('Failed to save the category: ', err)
         } 
          // function to empty this parent and category for next user action
       handleSetCategory("")
@@ -190,7 +191,7 @@ const Category = ({handleSelectedParentCat, parentCat, handleSetCategory, catego
       <WritePostAsideOpenClosebar BarName={"Categories"} handle={handleOpenCloseChild}/>
       
       <div className={`${openCat ? "block" : "hidden"} px-3 mt-2 mb-10`}>  
-        {errorText ? <p className='text-xs text-rose-500 tracking-wider font-lora'>Failed to save the Category</p> : "" }    
+        {errorText ? <p className='text-xs text-rose-500 tracking-wider font-lora'>Failed to save the category</p> : "" }    
         
         {categoriesaction ? 
           <ul className='grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-2 gap-x-[2%] text-stone-700'>

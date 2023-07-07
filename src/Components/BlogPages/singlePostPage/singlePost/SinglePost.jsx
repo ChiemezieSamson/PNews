@@ -359,7 +359,7 @@ const SinglePost = () => {
             {/* comment form section start here */}
             <strong className='text-2xl inline-block mb-2 font-lora'>Leave a Reply</strong>
             <p className='after:content-["*"] after:ml-1 after:text-lg after:text-red-500 text-sm'>Your email address will not be published. Required fields are marked</p>
-            <CommentForm postId={postId}/>
+            <CommentForm postId={postId} commentIsFetching={commentIsFetching}/>
             
           </section>
         </div>

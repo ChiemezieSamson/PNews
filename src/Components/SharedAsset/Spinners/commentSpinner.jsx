@@ -11,7 +11,6 @@ const useFetchedComments = () => {
     isSuccess,
     isError,
     error,
-    refetch
   } = useGetCommentsQuery()
 
 
@@ -36,7 +35,7 @@ const useFetchedComments = () => {
     commentsContent = <div>{error.toString()}</div>
   }
 
-  return {commentsContent, commentaction, refetch, isFetching}
+  return {commentsContent, commentaction, isFetching}
 }
 
 export const useFindThisUser = (email, author) => {

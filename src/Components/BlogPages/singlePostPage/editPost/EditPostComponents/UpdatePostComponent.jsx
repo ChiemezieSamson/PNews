@@ -26,7 +26,7 @@ const UpdatePostComponent = ({state, post, postId}) => {
   const [showSideBar, setShowSideBar] = useState(false) // handling the display action of the aside components
   const [errorText, setErrorText] = useState(false) /// text used to indicate that your category didn't save or there is an erro
   const [errorText2, setErrorText2] = useState(false) /// text used to indicate that your category didn't save or there is an erro
-  const [isValid, setIsValid] = useState(false); // regular expressions
+  const [isValid, setIsValid] = useState(true); // regular expressions
 
   const [postTitle, setPostTitle] = useState(post.postTitle)
   const [postImage, setPostImage] = useState(post.postImage)
