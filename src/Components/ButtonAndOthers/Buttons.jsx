@@ -4,6 +4,7 @@ import {FaBars,FaChevronUp,FaEllipsisH,FaEllipsisV,FaRegStar,FaStar,FaTimes} fro
 import { FaChevronDown, FaChevronRight } from "react-icons/fa";
 import { Link, useFetcher } from "react-router-dom";
 import { useWindowSize } from "../SharedAsset/SharedAssets";
+import { CommentReactionButtons, ReplyReactionButtons } from "./ReactionButtons";
 
 
 // export const Hanbugar = ({open_close_smallscreen_sidebar}) => {
@@ -158,6 +159,51 @@ export const Favorite = ({ contact }) => {
   );
 }
 
+
+export const EditAndDeleteButton = ({handler}) => {
+  const size = useWindowSize()   
+   
+  return (  
+    <button className='absolute top-1 right-1 cursor-pointer text-neutral-500 after:absolute after:top-1 
+      after:right-1 after:inset-0 after:w-full z-20 hover:text-stone-700 TextHeadertransition' onClick={handler}>
+      {size.width > 1028 ? <FaEllipsisH /> : <FaEllipsisV />}
+    </button>
+  )
+}
+
+
+export const ReactionAndReplyButton = ({handler, comment, User, postId, buttonText}) => {
+  
+  return (  
+    <div className='max-w-xs py-1.5 mb-1.5' name={comment.author} id={comment._id}>
+      <span className="inline-block mt-1">
+        <CommentReactionButtons comment={comment} authorId={User?._id} postId={postId}/>
+      </span>      
+
+      <button 
+        className="text-neutral-700 hover:text-neutral-500 font-josefin tracking-wide mt-[5px] 
+        align-top mx-2 TextHeadertransition" onClick={handler}>
+        {buttonText}
+      </button> 
+    </div> 
+  )
+}
+
+export const ReactionAndReplyButtonForReply = ({handler, reply, comment, User, postId, buttonText}) => {
+  
+  return ( 
+    <div className='max-w-xs py-1.5 mb-1.5' name={reply.name} id={comment._id}>
+      <span  className="inline-block mt-1">
+        <ReplyReactionButtons reply={reply} commentId={comment._id} authorId={User?._id} postId={postId}/>
+      </span>
+
+      <button className="text-neutral-700 hover:text-neutral-500 font-josefin tracking-wide mt-[5px] 
+        align-top mx-2 TextHeadertransition" onClick={handler}>
+        {buttonText}
+      </button> 
+    </div>  
+  )
+}
 
 export const ReadmoreButton = ({postId}) => (
   <Link to={`/single/${postId}`}>  

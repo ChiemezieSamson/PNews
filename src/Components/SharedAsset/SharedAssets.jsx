@@ -379,6 +379,57 @@ export const TimeComponentColor = ({time}) => {
   )
 }
 
+export  const formatDate = (createdAt) => {
+  const currentDate = new Date();
+  const createdDate = new Date(createdAt);
+
+  const timeDiffInSeconds = Math.floor((currentDate - createdDate) / 1000);
+
+  if (timeDiffInSeconds < 60) {
+    return `${timeDiffInSeconds}sec`;
+  } else if (timeDiffInSeconds < 3600) {
+    const minutes = Math.floor(timeDiffInSeconds / 60);
+    return `${minutes}min${minutes > 1 ? 's' : ''}`;
+  } else if (timeDiffInSeconds < 86400) {
+    const hours = Math.floor(timeDiffInSeconds / 3600);
+    return `${hours}hr${hours > 1 ? 's' : ''}`;
+  } else if (timeDiffInSeconds < 604800) {
+    const days = Math.floor(timeDiffInSeconds / 86400);
+    return `${days}day${days > 1 ? 's' : ''}`;
+  } else if (timeDiffInSeconds < 2592000) {
+    const weeks = Math.floor(timeDiffInSeconds / 604800);
+    return `${weeks}week${weeks > 1 ? 's' : ''}`;
+  } else if (timeDiffInSeconds < 31536000) {
+    const months = Math.floor(timeDiffInSeconds / 2592000);
+    return `${months}month${months > 1 ? 's' : ''}`;
+  } else {
+    const years = Math.floor(timeDiffInSeconds / 31536000);
+    return `${years}year${years > 1 ? 's' : ''}`;
+  }
+};
+
+
+export const commentText = (comment) => {
+  const commentContent = comment
+  const linkPattern = /(https?:\/\/[^\s]+)/g;  // regular expressions
+  let Content
+
+  // if the textarea content has a link add it inside a link tag
+  if (commentContent.match(linkPattern)) {
+    const modifiedText = commentContent.replace(linkPattern, 
+      `<a href="$&" target={"_blank"}
+          class="text-blue-500 active:text-blue-400 cursor-pointer visited:text-purple-400">$&</a>`);
+
+    Content = modifiedText   
+  } else {
+
+    Content = commentContent
+  }    
+  
+  return {text: Content}
+}
+
+
 
 export const TimeComponent = ({time}) => {
   return (

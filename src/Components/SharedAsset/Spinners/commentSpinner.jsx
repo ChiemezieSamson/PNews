@@ -38,12 +38,14 @@ const useFetchedComments = () => {
   return {commentsContent, commentaction, isFetching}
 }
 
-export const useFindThisUser = (email, author) => {
+export const useFindThisUser = () => {
   const {commentsContent, commentaction} = useFetchedComments()
+  const randomCommentId = localStorage.getItem("commentId").toLocaleLowerCase()
+  const commentUserName = localStorage.getItem("commentUserName").toLocaleLowerCase()
   let replyAuthor 
 
   if(commentaction) {
-    replyAuthor =  commentsContent.find(item => item.email === email && item.author === author)
+    replyAuthor =  commentsContent.find(item => item?.onSaveId === randomCommentId && item?.author === commentUserName)
   }
   
   return replyAuthor

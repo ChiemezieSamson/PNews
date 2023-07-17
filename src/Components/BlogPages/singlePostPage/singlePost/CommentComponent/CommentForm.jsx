@@ -11,7 +11,6 @@ const CommentForm = ({postId}) => {
 
   const [author, setAuthor] = useState('');
   const [content, setContent] = useState('');
-  const [textAreaContent, settextAreaContent] = useState('');
   const [email, setEmail] = useState('');
   const [website, setWebsite] = useState('');
   const [randomCommentId, setRandomCommentId] = useState('');
@@ -34,7 +33,6 @@ const CommentForm = ({postId}) => {
   const noEmailOrURLRegex = /^((?!(www\.|http:\/\/|https:\/\/))[^\s@]+[^\s@]*[^@]+)$/i;
   const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
   const multipleLinksPattern = /(^|\s)(https?:\/\/[^\s]+)$/g;
-  const linkPattern = /(https?:\/\/[^\s]+)/g;
 
 
   // handling save author name
@@ -65,14 +63,8 @@ const CommentForm = ({postId}) => {
   const handleTextarea = (event) => {
     const { value } = event.target;
 
-    // if the textarea contence a link add it inside a link tag
-    if (value.match(linkPattern)) {
-      const modifiedText = value.replace(linkPattern, '<a href="$&">$&</a>');
-      setContent(() => modifiedText)    
-    } else {
-      setContent(() => value)
-    }
-    settextAreaContent(() => value)
+    
+    setContent(() => value)
   }
 
 
@@ -136,7 +128,6 @@ const CommentForm = ({postId}) => {
             setEmail(() => "");
             setWebsite(() => "");
             setSaveInfo(() => "")
-            settextAreaContent(() => "")
           } catch (err) {
             setErrorText(() => true)
             console.error('Failed to save the post: ', err)
@@ -154,7 +145,6 @@ const CommentForm = ({postId}) => {
             setEmail(() => "");
             setWebsite(() => "");
             setSaveInfo(() => "")
-            settextAreaContent(() => "")
           } catch (err) {
             setErrorText(() => true)
             console.error('Failed to save the post: ', err)
@@ -170,7 +160,6 @@ const CommentForm = ({postId}) => {
           setEmail(() => "");
           setWebsite(() => "");
           setSaveInfo(() => "")
-          settextAreaContent(() => "")
         } catch (err) {
           setErrorText(() => true)
           console.error('Failed to save the post: ', err)
@@ -237,12 +226,12 @@ const CommentForm = ({postId}) => {
         <textarea
           name="content"
           id="content"
-          value={textAreaContent}
+          value={content}
           onChange={handleTextarea}
           required
           maxLength={1000}
           rows={4}
-          className="mt-1 p-1 border border-gray-400 rounded-md w-full mb-0"
+          className="mt-1 p-1 border border-gray-400 rounded-md w-full mb-0 resize-none overflow-hidden"
         ></textarea>
       </div>
 

@@ -26,7 +26,7 @@ const SinglePost = () => {
   const {singleUser: byUserId, userAction: byUserIdAction} = useFetchedUserById()
   const [postDeleted, {isLoading}] = useDeleteExistingPostMutation()
   const [markfavourite, {isLoading: favouriteIsLoading}] = useMarkPostFavouriteStatusMutation()
-  const {singleContent, contentAction, isFetching: commentIsFetching, postId: commentPostId} = useFetchedCommentById()   
+  const {singleContent, contentAction, isFetching: commentIsFetching, postId: commentPostId} = useFetchedCommentById() 
   const [favourite, setFavourite] = useState(false)
   const [openValidation, setOpenValidation] = useState(false)
   const [wrongPassword, setWrongPassword] = useState(false)
