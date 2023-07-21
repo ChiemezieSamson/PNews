@@ -3,7 +3,7 @@ import { useDeleteExistingCommentMutation, useUpdateExistingCommentMutation } fr
 import { CommentReplyForm, EditAndDeleteComment } from './CommentComponets'
 import { ReactionAndReplyButton } from '../../../../../ButtonAndOthers/Buttons'
 
-const MainCommentUpdate = ({comments, comment, postId, User, editEllipsis}) => {
+const MainCommentUpdate = ({comments, comment, postId, User, editEllipsis, postAuthor, byUserId}) => {
   //updating the comment created from the main comment form from the server   
   const [updateComment, {isLoading}] = useUpdateExistingCommentMutation()
   //deleting the comment created from the main comment form from the server
@@ -145,15 +145,17 @@ const MainCommentUpdate = ({comments, comment, postId, User, editEllipsis}) => {
         </div>
       }
         
-      <EditAndDeleteComment 
-        commentId={comment._id}
-        handleEdit={handleUpdateComment} 
-        handleDelete={handleDeleteComment}
-        editEllipsis={editEllipsis}
-        closeEditComment={closeEditComment}
-        handleSetEditComment={handleSetEditComment}
-        handleSetCloseEditComment={handleSetCloseEditComment}
-      />  
+      {(comment?.onSaveId === User?.onSaveId || byUserId?._id === postAuthor) &&
+        <EditAndDeleteComment 
+          commentId={comment._id}
+          handleEdit={handleUpdateComment} 
+          handleDelete={handleDeleteComment}
+          editEllipsis={editEllipsis}
+          closeEditComment={closeEditComment}
+          handleSetEditComment={handleSetEditComment}
+          handleSetCloseEditComment={handleSetCloseEditComment}
+        />  
+      }
     </>
   )
 }

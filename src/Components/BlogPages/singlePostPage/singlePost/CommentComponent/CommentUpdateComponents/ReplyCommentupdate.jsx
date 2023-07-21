@@ -3,7 +3,7 @@ import { useDeleteExistingReplyMutation, useUpdateExistingReplyMutation } from '
 import { CommentReplyForm, EditAndDeleteComment } from '../CommentComponents/CommentComponets'
 import { ReactionAndReplyButtonForReply } from '../../../../../ButtonAndOthers/Buttons'
 
-const ReplyCommentupdate = ({comments, User, postId, reply, comment}) => {
+const ReplyCommentupdate = ({comments, User, postId, reply, comment, byUserId, postAuthor}) => {
   // If the replies or any reply have been created use this to update it on the server
   const [updateReply, {isLoading: replyUpdating}] = useUpdateExistingReplyMutation()
   // use this to delete just comment reply on server
@@ -156,15 +156,17 @@ const ReplyCommentupdate = ({comments, User, postId, reply, comment}) => {
         </div>
       }
 
-      <EditAndDeleteComment 
-        replyId={reply._id}
-        commentId={comment._id}
-        handleEdit={handleUpdateReply} 
-        handleDelete={handleDeleteReply}
-        closeEditComment={closeEditComment}
-        handleSetEditReply={handleSetEditReply}
-        handleSetCloseEditComment={handleSetCloseEditComment}
-      />      
+      {(reply?.name === User?.author || byUserId?._id === postAuthor) &&
+        <EditAndDeleteComment 
+          replyId={reply._id}
+          commentId={comment._id}
+          handleEdit={handleUpdateReply} 
+          handleDelete={handleDeleteReply}
+          closeEditComment={closeEditComment}
+          handleSetEditReply={handleSetEditReply}
+          handleSetCloseEditComment={handleSetCloseEditComment}
+        />      
+      }
     </>
   )
 }

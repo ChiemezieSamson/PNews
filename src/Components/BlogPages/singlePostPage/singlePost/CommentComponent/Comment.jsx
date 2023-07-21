@@ -6,7 +6,7 @@ import Reply from './CommentUpdateComponents/Reply';
 import { commentText, formatDate } from '../../../../SharedAsset/SharedAssets';
 
 
-const Comment = ({comments, postId}) => {
+const Comment = ({comments, postId, byUserId, postAuthor, offsetOfForm}) => {
   const User = useFindThisUser() // Get the user from the local storage
 
   return ( 
@@ -46,7 +46,9 @@ const Comment = ({comments, postId}) => {
               comment={comment}
               comments={comments} 
               postId={postId}
-              User={User}        
+              User={User}
+              byUserId={byUserId}  
+              postAuthor={postAuthor}      
             />
              
             <CommentReplyCommponent 
@@ -54,6 +56,9 @@ const Comment = ({comments, postId}) => {
               User={User}
               comment={comment}
               comments={comments}
+              byUserId={byUserId}  
+              postAuthor={postAuthor}
+              offsetOfForm={offsetOfForm}
             />
 
             <Reply 
@@ -61,6 +66,9 @@ const Comment = ({comments, postId}) => {
               comments={comments}
               User={User}
               postId={postId}
+              byUserId={byUserId}  
+              postAuthor={postAuthor}
+              offsetOfForm={offsetOfForm}
             />            
           </article>
         )

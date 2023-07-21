@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import {  FaMinus, FaPlus, FaRedo, FaRegComment, FaRegStar, FaStar} from 'react-icons/fa'
 import { BiFontFamily } from "react-icons/bi";
 import StickyBox from "react-sticky-box";
@@ -35,6 +35,8 @@ const SinglePost = () => {
   const [hoverRef, isHovered] = useHover();
   const [sizeLine, setSizeLine] = useState(20)
   const [textSize, setTextSize] = useState("prose-base")
+
+  const offsetOfForm = useRef(null);
 
   const Post = singlePost
   const User = singleUser
@@ -346,18 +348,21 @@ const SinglePost = () => {
 
           {/* Comments section start here */}            
           <section className='pt-8 pb-4'>
-            {contentAction ? comments.length > 0 &&
+            {(contentAction) ? comments.length > 0 &&
               <div className='mb-6 disabled:opacity-40' disabled={commentIsFetching}>              
                 <Comment 
                   comments={comments}
                   postId={commentPostId} 
+                  byUserId={byUserId}
+                  postAuthor={Post?.postAuthor}
+                  offsetOfForm={offsetOfForm}
                 />            
               </div> :
               singleContent
             }
 
             {/* comment form section start here */}
-            <strong className='text-2xl inline-block mb-2 font-lora'>Leave a Reply</strong>
+            <strong className='text-2xl inline-block mb-2 font-lora'  ref={offsetOfForm}>Leave a Reply</strong>
             <p className='after:content-["*"] after:ml-1 after:text-lg after:text-red-500 text-sm'>Your email address will not be published. Required fields are marked</p>
             <CommentForm postId={postId} commentIsFetching={commentIsFetching}/>
             

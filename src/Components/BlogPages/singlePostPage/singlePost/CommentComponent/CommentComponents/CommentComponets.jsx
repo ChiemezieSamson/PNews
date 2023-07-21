@@ -19,9 +19,9 @@ export const CommentReplyForm = ({canSave, handleSetFormContent, replyContent, h
           onChange={handleSetFormContent}
           required
           maxLength={1000}
-          rows={2}
+          rows={3}
           autoFocus={true}
-          className="mt-1 p-1 border mb-0 border-neutral-400 rounded w-full resize-none overflow-hidden"
+          className="mt-1 p-1 border mb-0 border-neutral-400 rounded w-full overflow-hidden"
         ></textarea>
       </div>
 

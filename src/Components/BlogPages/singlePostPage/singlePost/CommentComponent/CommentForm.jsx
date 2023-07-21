@@ -61,9 +61,7 @@ const CommentForm = ({postId}) => {
 
   // handling save the textarea content
   const handleTextarea = (event) => {
-    const { value } = event.target;
-
-    
+    const { value } = event.target;    
     setContent(() => value)
   }
 
@@ -115,26 +113,26 @@ const CommentForm = ({postId}) => {
 
     if (canSave) {
       const randomId = nanoid() // generating a random id
+     
+      //if there is an existing user and just use the local storage id and not a new generated id 
+      // else do the opposite
+      if (checkRandomIdComments?.onSaveId !== "" && randomCommentId) {
+        
+        try {
+          await addNewComments({postId, author, content, email, website, saveInfo: true, randomId: randomCommentId}).unwrap()
+          setAuthor(() => "");
+          setContent(() => "");
+          setEmail(() => "");
+          setWebsite(() => "");
+          setSaveInfo(() => "")
+        } catch (err) {
+          setErrorText(() => true)
+          console.error('Failed to save the post: ', err)
+        }       
 
-      if(saveInfo) {       
-        //if there is an existing user and just use the local storage id and not a new generated id 
-        // else do the opposite
-        if (checkRandomIdComments?.onSaveId !== "" && randomCommentId) {
+      } else {
 
-          try {
-            await addNewComments({postId, author, content, email, website, saveInfo, randomId: randomCommentId}).unwrap()
-            setAuthor(() => "");
-            setContent(() => "");
-            setEmail(() => "");
-            setWebsite(() => "");
-            setSaveInfo(() => "")
-          } catch (err) {
-            setErrorText(() => true)
-            console.error('Failed to save the post: ', err)
-          }
-
-        } else {
-
+        if(saveInfo) {
           localStorage.setItem("commentId", randomId);
           localStorage.setItem("commentUserName", author);
 
@@ -149,29 +147,29 @@ const CommentForm = ({postId}) => {
             setErrorText(() => true)
             console.error('Failed to save the post: ', err)
           }
-        }
-    
-      }  else {
 
-        try {
-          await addNewComments({postId, author, content, email}).unwrap()
-          setAuthor(() => "");
-          setContent(() => "");
-          setEmail(() => "");
-          setWebsite(() => "");
-          setSaveInfo(() => "")
-        } catch (err) {
-          setErrorText(() => true)
-          console.error('Failed to save the post: ', err)
-        }
-      } 
+        } else {
+
+          try {
+            await addNewComments({postId, author, content, email}).unwrap()
+            setAuthor(() => "");
+            setContent(() => "");
+            setEmail(() => "");
+            setWebsite(() => "");
+            setSaveInfo(() => "")
+          } catch (err) {
+            setErrorText(() => true)
+            console.error('Failed to save the post: ', err)
+          }
+        }          
+      }    
     }
   };
 
 
   useEffect(() => {
-    const randomCommentId = localStorage.getItem("commentId").toLocaleLowerCase()
-    const commentUserName = localStorage.getItem("commentUserName").toLocaleLowerCase()
+    const randomCommentId = localStorage?.getItem("commentId")?.toLocaleLowerCase()
+    const commentUserName = localStorage?.getItem("commentUserName")?.toLocaleLowerCase()
     let checkId
 
      // if there is an existing user 
@@ -179,15 +177,21 @@ const CommentForm = ({postId}) => {
       checkId  = commentsContent?.find(item => item?.onSaveId === randomCommentId)
     }
 
-    if(checkId?.onSaveId === randomCommentId) {
+    if(checkId?.onSaveId === randomCommentId ) {
       setRandomCommentId(() => randomCommentId)
       setCommentAuthorName(() => commentUserName)
       setCheckRandomIdComments(() => checkId)
-      setAuthor(() => checkId?.author)
-      setEmail(() => checkId?.email)
-      setWebsite(() => checkId?.website)
     }
   }, [commentsContent, commentaction])
+
+
+  useEffect(() => {
+    if(checkRandomIdComments?.author) {
+      setAuthor(() => checkRandomIdComments?.author)
+      setEmail(() => checkRandomIdComments?.email)
+      setWebsite(() => checkRandomIdComments?.website)
+    }
+  },[checkRandomIdComments])
 
 
   return (

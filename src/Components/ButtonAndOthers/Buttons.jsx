@@ -6,7 +6,6 @@ import { Link, useFetcher } from "react-router-dom";
 import { useWindowSize } from "../SharedAsset/SharedAssets";
 import { CommentReactionButtons, ReplyReactionButtons } from "./ReactionButtons";
 
-
 // export const Hanbugar = ({open_close_smallscreen_sidebar}) => {
 //   const [state, setState] = useState(false)
 //   const size = useWindowSize()
@@ -172,35 +171,58 @@ export const EditAndDeleteButton = ({handler}) => {
 }
 
 
-export const ReactionAndReplyButton = ({handler, comment, User, postId, buttonText}) => {
-  
+export const ReactionAndReplyButton = ({handler, comment, User, postId, buttonText, createUserFirstButton, offsetOfForm}) => {
+  const handleBackToTopClick = () => {
+    document.body.scrollTop = offsetOfForm.current.offsetTop; // For Safari
+    window.scrollTo({left: 0, top: offsetOfForm.current.offsetTop, behavior: "smooth"})
+    return
+  }
+
   return (  
     <div className='max-w-xs py-1.5 mb-1.5' name={comment.author} id={comment._id}>
       <span className="inline-block mt-1">
         <CommentReactionButtons comment={comment} authorId={User?._id} postId={postId}/>
       </span>      
 
-      <button 
-        className="text-neutral-700 hover:text-neutral-500 font-josefin tracking-wide mt-[5px] 
-        align-top mx-2 TextHeadertransition" onClick={handler}>
-        {buttonText}
-      </button> 
+     {createUserFirstButton ?         
+        <button className="text-neutral-700 hover:text-neutral-500 font-josefin tracking-wide mt-[5px] 
+          align-top mx-2 inline-block TextHeadertransition" onClick={handleBackToTopClick}>
+          {buttonText}
+        </button>      
+      :
+        <button className="text-neutral-700 hover:text-neutral-500 font-josefin tracking-wide mt-[5px] 
+          align-top mx-2 TextHeadertransition" onClick={handler}>
+          {buttonText}
+        </button> 
+    }
     </div> 
   )
 }
 
-export const ReactionAndReplyButtonForReply = ({handler, reply, comment, User, postId, buttonText}) => {
-  
+export const ReactionAndReplyButtonForReply = ({handler, reply, comment, User, postId, buttonText, createUserFirstButton, offsetOfForm}) => {
+  const handleBackToTopClick = () => {
+    document.body.scrollTop = offsetOfForm.current.offsetTop; // For Safari
+    window.scrollTo({left: 0, top: offsetOfForm.current.offsetTop, behavior: "smooth"})
+    return
+  }
+
   return ( 
     <div className='max-w-xs py-1.5 mb-1.5' name={reply.name} id={comment._id}>
       <span  className="inline-block mt-1">
         <ReplyReactionButtons reply={reply} commentId={comment._id} authorId={User?._id} postId={postId}/>
       </span>
 
-      <button className="text-neutral-700 hover:text-neutral-500 font-josefin tracking-wide mt-[5px] 
-        align-top mx-2 TextHeadertransition" onClick={handler}>
-        {buttonText}
-      </button> 
+      {createUserFirstButton ?
+          <button className="text-neutral-700 hover:text-neutral-500 font-josefin tracking-wide mt-[5px] 
+              align-top mx-2 inline-block TextHeadertransition" onClick={handleBackToTopClick}>
+            {buttonText}
+          </button>          
+        :
+        <button className="text-neutral-700 hover:text-neutral-500 font-josefin tracking-wide mt-[5px] 
+          align-top mx-2 TextHeadertransition" onClick={handler}>
+          {buttonText}
+        </button> 
+      }
     </div>  
   )
 }

@@ -40,8 +40,8 @@ const useFetchedComments = () => {
 
 export const useFindThisUser = () => {
   const {commentsContent, commentaction} = useFetchedComments()
-  const randomCommentId = localStorage.getItem("commentId").toLocaleLowerCase()
-  const commentUserName = localStorage.getItem("commentUserName").toLocaleLowerCase()
+  const randomCommentId = localStorage?.getItem("commentId")?.toLocaleLowerCase()
+  const commentUserName = localStorage?.getItem("commentUserName")?.toLocaleLowerCase()
   let replyAuthor 
 
   if(commentaction) {

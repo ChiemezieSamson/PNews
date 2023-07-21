@@ -3,7 +3,7 @@ import ReplyCommentupdate from './ReplyCommentupdate'
 import CommentReplyCommponent from '../CommentComponents/CommentReplyCommponent'
 import { commentText, formatDate } from '../../../../../SharedAsset/SharedAssets'
 
-const Reply = ({comment, comments, User, postId}) => {
+const Reply = ({comment, comments, User, postId, offsetOfForm, byUserId, postAuthor}) => {
 
   return (
     <div className='mt-3'>
@@ -50,6 +50,8 @@ const Reply = ({comment, comments, User, postId}) => {
                         User={User}
                         postId={postId}
                         reply={reply}
+                        byUserId={byUserId}  
+                        postAuthor={postAuthor}
                         comment={comment}
                       />
 
@@ -58,6 +60,9 @@ const Reply = ({comment, comments, User, postId}) => {
                         comment={comment}
                         User={User}
                         postId={postId}
+                        byUserId={byUserId}  
+                        postAuthor={postAuthor}
+                        offsetOfForm={offsetOfForm}
                       />
 
                     </article>

@@ -1,9 +1,10 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useCreateNewReplyMutation } from '../../../../../../Reduxstore/Slices/replySlice/replySlice'
 import { CommentReplyForm } from './CommentComponets'
 import { ReactionAndReplyButton, ReactionAndReplyButtonForReply } from '../../../../../ButtonAndOthers/Buttons'
 
-const CommentReplyCommponent = ({reply, postId, User, comment}) => {
+const CommentReplyCommponent = ({reply, postId, User, comment, byUserId,  offsetOfForm,
+  postAuthor}) => {
   // create a new replay to a user comment on the server
   const [createReply, {isLoading: replyCreating}] = useCreateNewReplyMutation()
 
@@ -12,39 +13,46 @@ const CommentReplyCommponent = ({reply, postId, User, comment}) => {
   const [replyContent, setReplyContent] = useState(''); // set the update content
   const [openTextArea, setOpenTextArea] = useState(false); // open and close text area 
 
+  // use open the button that will direct the new user to the form component
+  const [createUserFirstButton, setCreateUserFirstButton] = useState(false)
+  
+
 
   // CREATE NEW REPLY BY CLICK TO THE REPLY BUTTON ON THE MAIN COMMENT AND REPLY
   const handleCreateReplyOnComment = (e) => { 
-    const CommentId = e.target.parentElement.id // get the comment id from the element
-    const ReplyTo = e.target.parentElement.getAttribute("name") // get the author
+    if (byUserId === postAuthor || User) {
+      const CommentId = e.target.parentElement.id // get the comment id from the element
+      const ReplyTo = e.target.parentElement.getAttribute("name") // get the author
+      console.log(ReplyTo);
 
-    setOpenTextArea((change) => !change)
+      setOpenTextArea((change) => !change)
 
-    // check to see the textcontent of the button and toggle to reply or cancle accordingly
-    if(e.target.textContent === "Reply") {
-      e.target.textContent = "Cancle" // change the to cancle
+      // check to see the textcontent of the button and toggle to reply or cancle accordingly
+      if(e.target.textContent === "Reply") {
+        e.target.textContent = "Cancle" // change the to cancle
 
-      // disable the 3 dotted hambuger button
-      const editDelete = e.target.parentElement.parentElement.previousSibling.previousSibling
-      editDelete.style.pointerEvents = "none"
+        // disable the 3 dotted hambuger button
+        const editDelete = e.target.parentElement.parentElement.previousSibling.previousSibling
+        editDelete.style.pointerEvents = "none"
 
-      // just set the comment author and id
-      setReplyTo(() => ReplyTo) 
-      setCommentId(() => CommentId);
-      
-    } else {
+        // just set the comment author and id
+        setReplyTo(() => ReplyTo) 
+        setCommentId(() => CommentId);
+        
+      } else {
 
-      e.target.textContent = "Reply"
+        e.target.textContent = "Reply"
 
-      // Enable the 3 dotted hambuger button
-      const editDelete = e.target.parentElement.parentElement.previousSibling.previousSibling
-      editDelete.style.pointerEvents = ""
+        // Enable the 3 dotted hambuger button
+        const editDelete = e.target.parentElement.parentElement.previousSibling.previousSibling
+        editDelete.style.pointerEvents = ""
 
-      // Clear the data's
-      setReplyTo(() => "")
-      setCommentId(() => "")
-      setReplyContent(() => "")
-    }
+        // Clear the data's
+        setReplyTo(() => "")
+        setCommentId(() => "")
+        setReplyContent(() => "")
+      }
+    } 
   }
 
 
@@ -79,6 +87,18 @@ const CommentReplyCommponent = ({reply, postId, User, comment}) => {
     setCommentId(() => "")
     setReplyContent(() => "");
   };
+
+
+  useEffect(() => {
+    if(byUserId === postAuthor || User) {
+
+      // open the button that will direct the new user to the form component
+      setCreateUserFirstButton(() => false) 
+    } else {
+      
+      setCreateUserFirstButton(() => true)
+    }
+  }, [byUserId, User, postAuthor])
   
 
   return (
@@ -92,6 +112,8 @@ const CommentReplyCommponent = ({reply, postId, User, comment}) => {
           postId={postId}
           reply={reply}
           buttonText={"Reply"}
+          createUserFirstButton={createUserFirstButton}
+          offsetOfForm={offsetOfForm}
         /> 
 
         :
@@ -102,6 +124,8 @@ const CommentReplyCommponent = ({reply, postId, User, comment}) => {
           User={User}
           postId={postId}
           buttonText={"Reply"}
+          createUserFirstButton={createUserFirstButton}
+          offsetOfForm={offsetOfForm}
         />
       }         
 
@@ -116,6 +140,6 @@ const CommentReplyCommponent = ({reply, postId, User, comment}) => {
       }
     </div>
   )
-}
+  }
 
 export default CommentReplyCommponent
