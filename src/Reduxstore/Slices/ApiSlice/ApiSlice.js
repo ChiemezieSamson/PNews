@@ -87,7 +87,15 @@ export const apiSlice = createApi({
 	baseQuery: baseQueryWithReauth,
 
 	// automatic refreshing with cache invalidation
-	tagTypes: ["Post", "User", "Comment", "Categories", "Tag", "AllComment"],
+	tagTypes: [
+		"Post",
+		"ALLPOSTS",
+		"User",
+		"Comment",
+		"Categories",
+		"Tag",
+		"AllComment",
+	],
 
 	// The "endpoints" represent operations and requests for this server
 	endpoints: (builder) => ({}),

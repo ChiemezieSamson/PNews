@@ -4,9 +4,10 @@ import MainCommentUpdate from './CommentComponents/MainCommentUpdate';
 import CommentReplyCommponent from './CommentComponents/CommentReplyCommponent';
 import Reply from './CommentUpdateComponents/Reply';
 import { commentText, formatDate } from '../../../../SharedAsset/SharedAssets';
+import { SkeletonTextFour } from '../../../../SharedAsset/Spinners/Spinner';
 
 
-const Comment = ({comments, postId, byUserId, postAuthor, offsetOfForm}) => {
+const Comment = ({comments, postId, byUserId, postAuthor, offsetOfForm, contentAction}) => {
   const User = useFindThisUser() // Get the user from the local storage
 
   return ( 
@@ -17,7 +18,8 @@ const Comment = ({comments, postId, byUserId, postAuthor, offsetOfForm}) => {
         <span className='inline-block px-3 py-px bg-neutral-400 mx-4 text-neutral-50 rounded-md'>{comments.length}</span>
       </span> 
 
-      {comments.map((comment) => { 
+      {(contentAction) ? (comments.length > 0 ) && 
+      comments.map((comment) => { 
         // if the textarea content has a link add it inside a link tag funtion
         const {text} = commentText(comment.content)
 
@@ -72,7 +74,13 @@ const Comment = ({comments, postId, byUserId, postAuthor, offsetOfForm}) => {
             />            
           </article>
         )
-      } )}
+      } ) :
+        <>
+          <SkeletonTextFour />
+          <br />
+          <SkeletonTextFour />
+        </>
+      }
     </div>     
   );
 };

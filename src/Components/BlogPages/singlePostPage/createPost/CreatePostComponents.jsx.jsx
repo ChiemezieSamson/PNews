@@ -12,9 +12,15 @@ import { useCreateNewPostMutation } from "../../../../Reduxstore/Slices/posts/Po
 import axios from "axios"
 import { useWindowSize } from "../../../SharedAsset/SharedAssets";
 import PostWritePreview from "./editorPreview/postWritePreview";
+import { useFetchedUserById } from "../../../SharedAsset/Spinners/userSpinner";
+import { useNavigate } from "react-router-dom";
 
 const CreatePostComponents = ({state}) => {
   const [addNewPost, { isLoading }] = useCreateNewPostMutation() // Redux function to create a new post
+
+  // getting the user for authenticatin, authorisation and security
+  const {singleUser, userAction, isSuccess, isError} = useFetchedUserById()
+
   const [editorState, setEditorState] = useState(() => state)
 
   const [preview, setPreview] = useState(false) // handling the preview of the post preview component page design
@@ -29,6 +35,8 @@ const CreatePostComponents = ({state}) => {
   const [file, setFile] = useState("")
 
   const size = useWindowSize()
+  const navigate = useNavigate();
+  const User = singleUser
 
   // Array of all the selected categories, tags, and options coming from redux store
   const postCategory = useSelector(selectAllPostCat)
@@ -120,6 +128,15 @@ const CreatePostComponents = ({state}) => {
     size.width >= 1024 ? setShowSideBar(() => true) : setShowSideBar(() => false)
   },[size])
 
+
+   // making user that only authorized user can update
+   useEffect(() => {
+    if(!isSuccess && isError) {
+      navigate(-1, {replace: true}, [navigate])
+    }
+  },[isSuccess, isError, navigate])
+
+
   return (
     <div className="grid lg:grid-cols-4 relative">
       {errorText2 ? <p className='text-xs text-rose-500 tracking-wider font-lora'>Failed to save the post</p> : "" }
@@ -205,10 +222,14 @@ const CreatePostComponents = ({state}) => {
           <PostWritePreview 
             editorText={editorState.getCurrentContent()} 
             postTitle={postTitle}
-            postImage={file}
             postAuthor={postAuthor}
             postTags={postTags}
-            optional={optional}
+            optional={optional}           
+            postImage={postImage}        
+            postCategory={postCategory?.length ? postCategory :  ["category"]}
+            file={file}
+            User={User}
+            userAction={userAction}
           />
         }
       </div>

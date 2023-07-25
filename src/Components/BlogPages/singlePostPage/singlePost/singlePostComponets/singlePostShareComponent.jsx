@@ -17,18 +17,20 @@ const SinglePostShareComponent = ({postAction, Post, size}) => {
       <div className='col-span-2 hidden xs:block'>
         <div className="whitespace-nowrap relative pt-1 lg:mx-0 grid grid-flow-col justify-around px-0.5 after:w-0.5 after:h-full
           after:bg-neutral-300 after:block after:absolute after:right-0 after:-top-0.5 after:rotate-[15deg] after:z-0">
-
-          {postAction && 
             <span className='font-extrabold text-[#f70d28] font-round text-2xl leading-none text-center'>
-              {Post.optional.shared >= 1000 ? Post.optional.shared + "k" : Post.optional.shared}
+              <span className={`${postAction ? "" : "skeleton h-3 w-3 inline-block"}`}>
+                {postAction && (Post?.optional?.shared >= 1000 ? Post?.optional?.shared + "k" : Post?.optional?.shared)}
+              </span>
+
               <div className='text-neutral-500 uppercase text-xs font-lora font-normal -mt-0.5'>shares</div>
-            </span>}         
+            </span>        
       
-          {postAction && 
           <span className='hidden font-extrabold lg:inline-block text-slate-500 font-round text-2xl leading-none text-center'>
-            {Post.optional.viewed >= 1000 ? Post.optional.viewed + "k" : Post.optional.viewed}           
+            <span className={`${postAction ? "" : "skeleton h-3 w-3 inline-block"}`}>
+              {postAction && (Post.optional.viewed >= 1000 ? Post.optional.viewed + "k" : Post.optional.viewed)}           
+            </span>
             <div className='text-neutral-500 uppercase text-xs font-lora font-normal -mt-0.5'>views</div>
-          </span>}
+          </span>
         </div>
       </div>
 

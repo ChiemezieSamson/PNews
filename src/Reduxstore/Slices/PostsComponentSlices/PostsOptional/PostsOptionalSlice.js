@@ -10,12 +10,13 @@ const postOptionalSlice = createSlice({
 			reducer(state, action) {
 				return action.payload;
 			},
-			prepare(shared, viewed, Trending) {
+			prepare(shared, viewed, trending, favourite) {
 				return {
 					payload: {
 						shared,
 						viewed,
-						Trending,
+						trending,
+						favourite,
 					},
 				};
 			},
@@ -27,9 +28,9 @@ const postOptionalSlice = createSlice({
 			prepare() {
 				return {
 					payload: {
-						shared: null,
-						viewed: null,
-						Trending: null,
+						shared: 0,
+						viewed: 0,
+						Trending: false,
 					},
 				};
 			},

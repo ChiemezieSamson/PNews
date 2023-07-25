@@ -66,7 +66,6 @@ export const useFetchedPostById = () => {
 export const useFetchedPostByQery = () => {
   const { search } = useLocation();
   let newSearch = `${search ? search : "?s='"}&limit=${10}`
-  console.log(search);
 
   const {
     data: posts = [],

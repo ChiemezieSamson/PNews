@@ -451,7 +451,7 @@ export const CommentComponetColor = ({postId, Comments}) => {
     numberOfComment = Comments.filter(comment => comment.postId === postId)
   }
   return (
-    <span className='cursor-pointer font-lora tracking-wide whitespace-nowrap  text-xs lg:text-xs md:text-[10px] font-extrabold'
+    <span className='cursor-pointer font-lora tracking-wide whitespace-nowrap text-xs lg:text-xs md:text-[10px] font-extrabold'
     title='comments'>
       <FaRegComment className="text-[#2e9fff] inline-block mr-px -mt-px"/> <span className='mt-px text-[#7a7a7a]/60 text-[11px] leading-4 inline-block'>
         {numberOfComment?.length ? numberOfComment.length : 0}

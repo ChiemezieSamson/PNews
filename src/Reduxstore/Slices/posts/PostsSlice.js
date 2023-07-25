@@ -16,6 +16,7 @@ export const extendedPostsApiSlice = apiSlice.injectEndpoints({
 			providesTags: (result = [], error, arg) => [
 				"Post",
 				...result.map(({ id }) => ({ type: "Post", id })),
+				"ALLPOSTS",
 			],
 		}),
 
@@ -64,24 +65,35 @@ export const extendedPostsApiSlice = apiSlice.injectEndpoints({
 				method: "PUT",
 				body: initialPost,
 			}),
-			invalidatesTags: (result, error, arg) => [{ id: arg._id }],
-			// async onQueryStarted(initialPost, { dispatch, queryFulfilled }) {
-			// 	console.log(initialPost);
-			// 	const patchResult = dispatch(
-			// 		extendedPostsApiSlice.util.updateQueryData(
-			// 			"getPostById",
-			// 			initialPost.postId,
-			// 			(draft) => {
-			// 				console.log([draft]);
-			// 			}
-			// 		)
-			// 	);
-			// 	try {
-			// 		await queryFulfilled;
-			// 	} catch {
-			// 		patchResult.undo();
-			// 	}
-			// },
+			invalidatesTags: ["ALLPOSTS"],
+			async onQueryStarted(initialPost, { dispatch, queryFulfilled }) {
+				const patchResult = dispatch(
+					extendedPostsApiSlice.util.updateQueryData(
+						"getPostById",
+						initialPost.postId,
+						(draft) => {
+							if (draft) {
+								draft.postTitle = initialPost.postTitle;
+								draft.postContent = initialPost.postContent;
+								draft.postAuthor = initialPost.postAuthor;
+								draft.postImage = initialPost.postImage;
+								draft.postCategory = initialPost.postCategory;
+								draft.postTags = initialPost.postTags;
+								draft._id = initialPost.postId;
+								draft.optional.viewed = initialPost?.optional?.viewed;
+								draft.optional.shared = initialPost?.optional?.shared;
+								draft.optional.trending = initialPost?.optional?.trending;
+								draft.optional.favourite = initialPost?.optional?.favourite;
+							}
+						}
+					)
+				);
+				try {
+					await queryFulfilled;
+				} catch {
+					patchResult.undo();
+				}
+			},
 		}),
 
 		MarkPostFavouriteStatus: builder.mutation({
@@ -97,7 +109,9 @@ export const extendedPostsApiSlice = apiSlice.injectEndpoints({
 						"getPostById",
 						initialPost.postId,
 						(draft) => {
-							draft.optional.favourite = initialPost.favourite;
+							if (draft) {
+								draft.optional.favourite = initialPost?.favourite;
+							}
 						}
 					)
 				);

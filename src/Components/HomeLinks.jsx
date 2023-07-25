@@ -128,7 +128,7 @@ const HomeLinks = () => {
         </div>
       </div>
 
-        {/* === Move ack to the top button === */}
+        {/* === Move back to the top button === */}
       <span className="fixed bottom-8 right-6 z-30 hidden" style={{ display: backToTop, }} >
         <button title="Back to top" className="text-neutral-400 text-xl pt-1.5 pb-2.5 rounded-md px-3 bg-neutral-100/30 text-center
            border border-solid border-stone-300 shadow-sm shadow-stone-300 opacity-70 transition-opacity hover:opacity-100 

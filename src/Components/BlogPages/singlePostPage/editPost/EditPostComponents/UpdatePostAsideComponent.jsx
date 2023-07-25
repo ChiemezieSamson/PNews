@@ -5,17 +5,18 @@ import Author from './AsideComponent/Author'
 import Category from './AsideComponent/Category'
 import Tag from './AsideComponent/Tag'
 import Optional from './AsideComponent/Optional'
-import { useDispatch } from 'react-redux'
 import { optionalAdded } from '../../../../../Reduxstore/Slices/PostsComponentSlices/PostsOptional/PostsOptionalSlice'
+import { useDispatch } from 'react-redux'
 
 
 const UpdatePostAsideComponent = ({postTitle, handleAllPostContent, handleSetPostAuthor, postAuthor, canSave, handlePreview, preview,
   handleShowBar, handleCloseSidebar, showSideBar, post}) => {
-  const [postCategory, setPostCategory] = useState(post.postCategory)
-  const [postTag, setPostTag] = useState(post.postTags)
-  const [Trending, setTrending] = useState( post.optional.Trending)
-  const [shared, setShared] = useState(post.optional.shared)
-  const [viewed, setViewed] = useState(post.optional.viewed)
+  const [postCategory, setPostCategory] = useState(post?.postCategory)
+  const [postTag, setPostTag] = useState(post?.postTags)
+  const [trending, setTrending] = useState(false)
+  const [favourite, setFavourite] = useState(false)
+  const [shared, setShared] = useState(0)
+  const [viewed, setViewed] = useState(0)
   const [parentCat, setSelectedParentCat] = useState("")
   const [parentTag, setSelectedParentTag] = useState("")
   const [category , setCategory] = useState("")
@@ -62,16 +63,22 @@ const UpdatePostAsideComponent = ({postTitle, handleAllPostContent, handleSetPos
   // Handle setting the number value for the views
   const handlesetViewed = (e) => {
     setViewed(()=> e.target.value)
+
+    dispatch(optionalAdded(shared, viewed, trending))
   }
 
    // Handle setting the number value for the shares
   const handlessetShared = (e) => {
     setShared(()=> e.target.value)
+
+    dispatch(optionalAdded(shared, viewed, trending))
   }
 
    // Handle setting the value for the trending posts
   const handleCheckedTrendig = (e) => {
     e.target.checked ? setTrending(() => true) : setTrending(() => false)
+
+    dispatch(optionalAdded(shared, viewed, trending))
   }
 
   // handleing setting CheckedItemElements for categories checkbox
@@ -108,8 +115,8 @@ const UpdatePostAsideComponent = ({postTitle, handleAllPostContent, handleSetPos
     }
   }
   
-  const handleDispatched = () => {
-    handleAllPostContent() // handling calling of the function that save each post to the data base
+  const handleDispatched = async () => {
+   await handleAllPostContent() // handling calling of the function that save each post to the data base
 
     if (canSave) {
       for(let i = 0; i < checkedItemElemets.length; i++) {
@@ -129,9 +136,35 @@ const UpdatePostAsideComponent = ({postTitle, handleAllPostContent, handleSetPos
     }    
   }
 
-  useEffect(() => { // updating changes made
-    dispatch(optionalAdded(shared, viewed, Trending))
-  },[Trending, shared, viewed, dispatch])
+  useEffect(() => {
+    if(post?.optional?.shared === null || post?.optional?.shared === "") {
+      setShared(() => 0)
+    } else {
+      setShared(() => post?.optional?.shared)
+    }
+
+    if(post?.optional?.viewed === null || post?.optional?.viewed === "") {
+      setViewed(() => 0)
+    }else {
+      setViewed(() => post?.optional?.viewed)
+    }
+
+    if(post?.optional?.trending === undefined || post?.optional?.trending === "") {
+      setTrending(() => false)
+    } else {
+      setTrending(() => post?.optional?.trending)
+    }
+
+    if(post?.optional?.favourite === undefined || post?.optional?.trending === "") {
+      setFavourite(() => false)
+    }else {
+      setFavourite(() => post?.optional?.favourite)
+    }
+  }, [post])
+
+  useEffect(() => {
+    dispatch(optionalAdded(shared, viewed, trending, favourite))
+  },[shared, viewed, trending, favourite, dispatch])
 
   return (
     <div className="lg:border lg:border-solid lg:border-slate-500 lg:shadow-stone-700 lg:shadow lg:ml-[4%] bg-white lg:bg-neutral-100">
@@ -208,7 +241,7 @@ const UpdatePostAsideComponent = ({postTitle, handleAllPostContent, handleSetPos
           handlessetShared={handlessetShared}
           handlesetViewed={handlesetViewed}
           handleCheckedTrendig={handleCheckedTrendig}
-          Trending={Trending}
+          trending={trending}
           shared={shared}
           viewed={viewed}
         />

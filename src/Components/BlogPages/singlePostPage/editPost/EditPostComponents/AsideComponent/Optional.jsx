@@ -3,7 +3,7 @@ import { FaToggleOff, FaToggleOn } from 'react-icons/fa'
 import { WritePostAsideOpenClosebar } from '../../../../../ButtonAndOthers/Buttons'
 
 
-const Optional = ({handlesetViewed, handlessetShared, handleCheckedTrendig, Trending, shared, viewed}) => {
+const Optional = ({handlesetViewed, handlessetShared, handleCheckedTrendig, trending, shared, viewed}) => {
   const [openCat, setOpenCat] = useState(false) // use to open and close the category section
 
  // handling the display or hidden of the whole optional component
@@ -25,7 +25,7 @@ const Optional = ({handlesetViewed, handlessetShared, handleCheckedTrendig, Tren
           <input 
             type="number" 
             name='shares'
-            defaultValue={shared}
+            value={shared}
             min={0}
             max={50000}
             id='sharedPost' 
@@ -37,7 +37,7 @@ const Optional = ({handlesetViewed, handlessetShared, handleCheckedTrendig, Tren
             type="number" 
             name='views' 
             id='viewedPost'
-            defaultValue={viewed}
+            value={viewed}
             min={0}
             max={50000} 
             form="post_form" 
@@ -47,7 +47,7 @@ const Optional = ({handlesetViewed, handlessetShared, handleCheckedTrendig, Tren
             <input type="checkbox" name='trendinpost' id='trending' form="post_form" className='hidden' onChange={handleCheckedTrendig}/>
             <label htmlFor="trending" className="inline-block text-sm text-stone-700">
               <div className='pr-0.5 mr-4'>Add to trending posts:</div>
-                {Trending ? 
+                {trending ? 
                   <span className='px-2 inline-block text-2xl text-blue-400' >
                     <FaToggleOn  className='inline-block'/>
                   </span> :

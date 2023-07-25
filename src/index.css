@@ -243,6 +243,12 @@
     @apply text-[#f70d28] active:text-blue-600 visited:text-purple-600
   } 
 
+
+  .editor p:first-child {
+    @apply first-letter:uppercase first-letter:text-3xl first-letter:text-slate-500
+   first-letter:align-bottom
+  }
+
   
   /* textEditor Styling stop here */
 
@@ -342,6 +348,23 @@
 
 .overflowScroll::-webkit-scrollbar-thumb:hover {
   background-color: white;
+}
+
+
+.skeleton {
+  opacity: .7;
+  animation: skeleton-loading 1s linear infinite alternate;
+  -webkit-animation: skeleton-loading 1s linear infinite alternate;
+}
+
+@keyframes skeleton-loading {
+  0% {
+    background-color: hsl(200, 20%, 70%)
+  }
+
+  100% {
+    background-color: hsl(200, 20%, 95%)
+  }
 }
 
  /* scroll bar for some components settings and style start here */

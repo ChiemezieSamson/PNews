@@ -15,12 +15,19 @@ import axios from "axios"
 import { publicFolder } from '../../../../../data';
 import { useWindowSize } from '../../../../SharedAsset/SharedAssets';
 import PostWritePreview from '../../createPost/editorPreview/postWritePreview';
+import { useFetchedUserById } from '../../../../SharedAsset/Spinners/userSpinner';
 
 const UpdatePostComponent = ({state, post, postId}) => {
   const [postUpdated, { isLoading }] = useUpdateExistingPostMutation()// Redux function to update a new post
+
+  // getting the user for authenticatin, authorisation and security
+  const {singleUser, userAction, isSuccess, isError} = useFetchedUserById()
+
   const [editorState, setEditorState] = useState(
     () => EditorState.createWithContent(state),
   )
+
+  const User = singleUser
 
   const [preview, setPreview] = useState(false) // handling the preview of the post preview component page design
   const [showSideBar, setShowSideBar] = useState(false) // handling the display action of the aside components
@@ -103,8 +110,7 @@ const UpdatePostComponent = ({state, post, postId}) => {
 
   const canSave = [postTitle, postImage, postAuthor, postCategory[0], postTags[0], isValid].every(Boolean) && !isLoading
 
-  console.log(canSave);
-  const handleAllPostContent = () => {
+  const handleAllPostContent = async () => {
 
     const sampleMarkup = '<p>My post ...! |</p>'
     let html = draftToHtml(sampleMarkup);
@@ -118,10 +124,11 @@ const UpdatePostComponent = ({state, post, postId}) => {
       setErrorText2(() => false)
 
       try {
-        postUpdated({postId, postAuthor, postTitle, postImage, postContent , postCategory, postTags, optional})
+       await postUpdated({postId, postAuthor, postTitle, postImage, postContent, postCategory, postTags, optional})
 
         navigate(`/single/${postId}`)
         setEditorState(() => EditorState.createWithContent(WritePoststate))
+
         dispatch(emptyCategories())
         dispatch(emptyTag())
         dispatch(emptyOptional())
@@ -140,6 +147,14 @@ const UpdatePostComponent = ({state, post, postId}) => {
   useEffect(() => {
     size.width >= 1024 ? setShowSideBar(() => true) : setShowSideBar(() => false)
   },[size])
+
+
+  // making user that only authorized user can update
+  useEffect(() => {
+    if(!isSuccess && isError) {
+      navigate(-1, {replace: true}, [navigate])
+    }
+  },[isSuccess, isError, navigate])
  
   return (
     <div className="grid lg:grid-cols-4 relative">
@@ -228,14 +243,19 @@ const UpdatePostComponent = ({state, post, postId}) => {
               }}
             />       
           </div> 
-          </> :
+          </> 
+          :
           <PostWritePreview 
             editorText={editorState.getCurrentContent()} 
             postTitle={postTitle}
-            postImage={file}
+            postImage={postImage}
             postAuthor={postAuthor}
             postTags={postTags}
             optional={optional}
+            postCategory={postCategory?.length ? postCategory :  post?.postCategory}
+            file={file}
+            User={User}
+            userAction={userAction}
           />
         }
       </div>

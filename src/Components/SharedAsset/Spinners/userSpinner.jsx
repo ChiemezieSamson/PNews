@@ -78,7 +78,7 @@ export const useFetchedUserByPostId = () => {
     singleUser = <div>{error.toString()}</div>
   }
 
-  return {singleUser, userAction, postId, isFetching}
+  return {singleUser, userAction, postId, isFetching, isSuccess, isError}
 }
 
 

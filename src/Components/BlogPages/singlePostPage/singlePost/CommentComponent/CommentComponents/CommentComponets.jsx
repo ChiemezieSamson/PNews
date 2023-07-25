@@ -92,7 +92,7 @@ export const EditAndDeleteComment = ({handleEdit, handleDelete, commentId, handl
     {/* Edit, Delete and Delete Message container */}
     <div  id={replyId} 
       className={`absolute bg-white w-full py-2 m-0 shadow-inner shadow-gray-400 rounded-md max-w-[8rem] top-6 right-0 
-      ${editEllipsis ? "translate-y-0 opacity-100 visible transition-all duration-300 delay-200 ease-linear"
+      ${editEllipsis ? "translate-y-0 opacity-100 visible TextHeadertransition"
       : "translate-y-32 opacity-0 invisible"}`}>
 
       {/* Edit Button */}
