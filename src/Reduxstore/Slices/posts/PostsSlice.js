@@ -45,7 +45,7 @@ export const extendedPostsApiSlice = apiSlice.injectEndpoints({
 			query: (page) => "posts/paginationroute/page" + page,
 			providesTags: (result = [], error, arg) => [
 				"Post",
-				...result.Posts.map(({ id }) => ({ type: "Post", id })),
+				...result?.Posts?.map(({ id }) => ({ type: "Post", id })),
 			],
 		}),
 

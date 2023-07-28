@@ -3,79 +3,108 @@ import { Link } from "react-router-dom";
 import MainTagComponent from "./ComponentOfTheHover/MainTagComponent";
 import PostImageComponent from "./ComponentOfTheHover/PostImageComponent";
 import TrendingTagscomponent from "./ComponentOfTheHover/TrendingTagscomponent";
+import { SkeletonTextFour } from "../../SharedAsset/Spinners/Spinner";
 
-export const HoverLinsks = ({CategoriesLink, TagsLink, blogPost, Parentlink, handleCloseHoverlinks}) => { 
-  const CategoriesLinks = CategoriesLink.map((title, id) => ({id: id, title: title}) )
-  const TagsLinks = TagsLink.map((title,id) => ({id:id,title:title}))
+export const HoverLinsks = ({CategoriesLink, TagsLink, blogPost, Parentlink, handleCloseHoverlinks, tagsaction,
+  isSuccess, isFetchingHoverPosts, isFetchingTags, isFetching, categoriesaction}) => { 
+ 
+  
 
   return (
-    <div className="text-left w-full lg:max-w-6xl lg:rounded-b mx-auto shadow-md shadow-black bg-stone-50 font-poppins tracking-wide">
+    <div 
+      className="text-left w-full lg:max-w-6xl lg:rounded-b mx-auto shadow-md shadow-black bg-stone-50
+       font-poppins tracking-wide">
       <div className="grid grid-cols-6">
 
         {/* === List of categories in the hover component handler ===*/}
         <div className={`${(Parentlink === "quotes") ? "hidden" : "block"} col-span-1
           bg-neutral-200 `}>
           <MainTagComponent 
-            CategoriesLinks={CategoriesLinks} 
+            CategoriesLink={CategoriesLink} 
             Parentlink={Parentlink} 
-            handleCloseHoverlinks={handleCloseHoverlinks}/>
+            handleCloseHoverlinks={handleCloseHoverlinks}
+            isFetching={isFetching}
+            categoriesaction={categoriesaction}/>
         </div>
 
-          {/* === Posts Images and title component handler === */}
+        {/* === Posts Images and title component handler === */}
         <div className={`${(Parentlink === "favorite") ? "col-span-5" : "col-span-4"} 
           ${(Parentlink === "quotes") ? "col-span-6" : "col-span-4"} p-4`}>
+
           <PostImageComponent 
             blogPost={blogPost} 
             Parentlink={Parentlink}
-            handleCloseHoverlinks={handleCloseHoverlinks}/>
+            isFetchingHoverPosts={isFetchingHoverPosts}
+            isSuccess={isSuccess}
+            handleCloseHoverlinks={handleCloseHoverlinks}
+            />
         </div>
         
         {/* === List of tags in the hover component handler ===*/}
         <div className={`${(Parentlink === "favorite" || Parentlink === "quotes") ? "hidden" : "block"} 
         text-center pt-4 border-l border-solid border-neutral-200 col-span-1`}>
           <TrendingTagscomponent 
-            TagsLinks={TagsLinks} 
+            TagsLink={TagsLink} 
             Parentlink={Parentlink}
-            handleCloseHoverlinks={handleCloseHoverlinks}/>
-        </div>
-        
+            handleCloseHoverlinks={handleCloseHoverlinks}
+            isFetchingTags={isFetchingTags}
+            tagsaction={tagsaction}
+            />
+        </div>        
       </div>
     </div>
   )
 }
 
 
-export const SmallScreenHoverLinsks = ({CategoriesLink, Parentlink, handleCloseNavLinks}) => {
+export const SmallScreenHoverLinsks = ({CategoriesLink, Parentlink, handleCloseNavLinks, isFetching, categoriesaction}) => {
   const [backgroundVisible, setBackgroundVisible] = useState(true);
-  const CategoriesLinks = CategoriesLink.map((title, id) => ({id: id, title: title}) )
 
   const handleBackgroundMove = () => {
     setBackgroundVisible(false);
   }
+
+  const handleOnHover = () => {
+    setBackgroundVisible(() => false);
+  }
+
+  const handleOnHoverOut = () => {
+    setBackgroundVisible(() => true);
+  }
+
+  let CategoriesLinks = []
+
+  if (CategoriesLink?.length > 0) {
+    CategoriesLinks = CategoriesLink?.map((title, id) => ({id: id, title: title}))
+  }
   
   return (
-    <nav className="md:hidden">
+    <nav className="md:hidden disabled:opacity-40" disabled={isFetching}>
       <ul className="list-none m-0 font-semibold overflowScrollSmallScreen bg-gradient-to-b from-gray-300/50 
         to-transparent text-center md:text-left overflow-y-scroll md:overflow-visible max-h-40 md:max-h-full pb-2">
 
         <li className={`${backgroundVisible ? 'bg-white' : ''} py-1.5 px-1 text-stone-700 uppercase font-normal text-xs
-          hover:mainColor transition duration-200 ease-linear focus-within:bg-white`}>
+          hover:mainColor TextHeadertransition focus-within:bg-white`}>
           <Link to={`/${Parentlink}`} className="block"   onClick={handleCloseNavLinks}>All</Link>
         </li>
         
-        {CategoriesLinks.map((category) => {
-          return(
-            <li key={category.id} className="py-1.5 px-1 text-stone-700 uppercase font-normal text-xs
-            hover:mainColor transition duration-200 ease-linear focus-within:bg-white" 
-            onClick={handleBackgroundMove}
-            >
-              <Link to={`/${Parentlink}/categories?category=${category.title}`} 
-              className="block"   onClick={handleCloseNavLinks}>
-                  {category.title}
-              </Link>
-            </li>
-          )
-        })}
+        {(categoriesaction && !isFetching) ?          
+          CategoriesLinks?.map((category) => {
+            return(
+              <li key={category?.id} className="py-1.5 px-1 text-stone-700 uppercase font-normal text-xs
+              hover:mainColor TextHeadertransition focus-within:bg-white hover:bg-white" 
+              onClick={handleBackgroundMove} onMouseOver={handleOnHover} onMouseOut={handleOnHoverOut}>
+
+                <Link to={`/${Parentlink}/categories?category=${category?.title}`} 
+                className="block"   onClick={handleCloseNavLinks}>
+                    {category?.title}
+                </Link>
+              </li>
+            )
+          })
+          :
+          <SkeletonTextFour />
+        }
       </ul>
     </nav> 
   )

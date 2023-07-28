@@ -23,7 +23,6 @@ const CommentReplyCommponent = ({reply, postId, User, comment, byUserId,  offset
     if (byUserId === postAuthor || User) {
       const CommentId = e.target.parentElement.id // get the comment id from the element
       const ReplyTo = e.target.parentElement.getAttribute("name") // get the author
-      console.log(ReplyTo);
 
       setOpenTextArea((change) => !change)
 

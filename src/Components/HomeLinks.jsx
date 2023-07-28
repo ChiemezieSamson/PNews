@@ -25,7 +25,7 @@ const HomeLinks = () => {
   }
 
   const handle_hideShowNavLinks = () => {
-    setHideShowNavLinks((hideShowNavLinks) => !hideShowNavLinks)
+    setHideShowNavLinks((change) => !change)
   }
   
   const handleCloseNavLinks = () => {
@@ -58,11 +58,9 @@ const HomeLinks = () => {
     if (size.width >= 768 ) {      
       setHideShowNavLinks(()=> false)
     } 
-
-    if(size.width < 768) {
-     handleCloseInstaSidebar()
-    }
-  }, [size])
+   
+     handleCloseInstaSidebar() // close onec their is change in window width    
+  }, [size, hideShowNavLinks])
 
   const handleBackToTopClick = () => {
     document.body.scrollTop = 0; // For Safari
@@ -81,10 +79,10 @@ const HomeLinks = () => {
           <SocialNewsletter opensidebar={handle_showFullSideBAr}/>
 
           {/* === small scree hanbugar start here === */}
-          <div className="md:hidden fixed w-8 border-0 inset-auto bg-neutral-100  z-[9999] right-4 shadow-md shadow-stone-900 pt-1">
+          <div className="md:hidden fixed w-8 border-0 inset-auto bg-neutral-100 z-[9999] right-4 shadow-md shadow-stone-900 pt-1">
             <button type="button" aria-controls="primary-navigation" onClick={handle_hideShowNavLinks}>
               {hideShowNavLinks ? <FaTimes /> : <FaBars /> }
-            <span className="hidden">Menu</span>
+              <span className="hidden">Menu</span>
             </button>
           </div>
         </div>
@@ -105,11 +103,11 @@ const HomeLinks = () => {
         </div>
 
         {/* ===== Home hero and navigations start here ===== */}
-        <div className="relative z-50" disabled={isFetching}>
+        <div className="relative z-50 mt-10" disabled={isFetching}>
           <HeaderNavigations 
-          handleCloseNavLinks={handleCloseNavLinks}
-          hideShowNavLinks={hideShowNavLinks} 
-          closeNavLinksOnBodyClick={closeNavLinksOnBodyClick}/>
+            handleCloseNavLinks={handleCloseNavLinks}
+            hideShowNavLinks={hideShowNavLinks} 
+            closeNavLinksOnBodyClick={closeNavLinksOnBodyClick}/>
         </div>
       </header>
 

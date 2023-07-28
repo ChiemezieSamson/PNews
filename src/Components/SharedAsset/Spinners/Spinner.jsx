@@ -13,8 +13,8 @@ const Spinner = ({ text = '', size = '2em' }) => {
 export const SkeletonTextTwo = () => {
   return (
     <>
-      <div className='skeleton  w-full h-4 mb-0.5 rounded-sm'></div>
-      <div className='skeleton  w-[80%] h-4 mb-0 rounded-sm'></div>
+      <div className='skeleton w-full h-4 mb-0.5 rounded-sm'></div>
+      <div className='skeleton w-[80%] h-4 mb-0 rounded-sm'></div>
     </>
   )
 }
