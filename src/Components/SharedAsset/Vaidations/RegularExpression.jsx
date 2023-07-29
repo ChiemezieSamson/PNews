@@ -1,8 +1,17 @@
 
 
+// regular expression that allows only text (no symbols, no numbers, no space)
+export const textOnly = (value) => {
+  const textOnlyRegex = /^[a-zA-Z]{2,}$/;
+
+  const isValid = textOnlyRegex.test(value);
+
+  return {isValid: isValid}
+}
+
 // regular expression that allows only letters and numbers (no symbols)
 export const textAndNumberOnly = (value) => {
-  const alphanumericRegex = /^[a-zA-Z0-9]+$/
+  const alphanumericRegex = /^[a-zA-Z0-9]{2,}$/
 
   const isValid = alphanumericRegex.test(value);
 

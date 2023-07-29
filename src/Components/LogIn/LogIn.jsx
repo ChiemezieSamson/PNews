@@ -22,7 +22,7 @@ const LogIn = () => {
   const [passWordIsValid, setPassWordIsValid] = useState(false); // regular expressions
   const [emailIsValid, setEmailIsValid] = useState(false); // regular expressions
 
-  const navigate = useNavigate()
+  const navigate = useNavigate()  
   const dispatch = useDispatch()
 
   // handling setting the value of Username
@@ -211,7 +211,7 @@ const LogIn = () => {
                   onChange={handleUserpassword}
                   required/>
 
-                 <span className="absolute top-[22%] right-4 p-px cursor-pointer" onClick={() => setShowPassword((change) => !change)}>
+                <span className="absolute top-[22%] right-4 p-px cursor-pointer" onClick={() => setShowPassword((change) => !change)}>
                   {showPassword ?
                     <FaRegEye className="inline-block text-xs text-stone-600 cursor-pointer"/>
                     :
@@ -224,8 +224,6 @@ const LogIn = () => {
             {/* login button */}
             <button
             type='submit'
-            name='userloginsubmitbutton'
-            id='userloginsubmitbutton'
             className='cursor-pointer w-full text-sm py-1 bg-rose-500 border-0 text-white rounded-md tracking-wide
             hover:bg-rose-600 TextHeadertransition shadow-md shadow-gray-400 disabled:opacity-40'
             disabled={!canSave}
@@ -238,16 +236,6 @@ const LogIn = () => {
             <span>Or</span>
             <span className='h-px w-full align-text-top mt-2.5 inline-block max-w-[46%] border border-neutral-300'></span>
           </div>
-        </div>
-        
-
-        {/* login register button */}
-        <div className='border border-solid border-gray-400 rounded-md text-center p-4 text-sm tracking-wide mt-5 
-          shadow shadow-gray-500'>
-          <span>New this place?</span>
-          <button className='cursor-pointer border-0 inline-block text-blue-600 mx-2'>
-            <span>Create an accont</span>
-          </button>
         </div>
       </div>
     </div>

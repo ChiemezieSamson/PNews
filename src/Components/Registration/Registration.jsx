@@ -1,44 +1,178 @@
 import React, { useState } from "react";
 import { useCreateNewUserMutation } from "../../Reduxstore/Slices/users/UsersSlice";
 import useFetchedUsers from "../SharedAsset/Spinners/userSpinner";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { handleEmailPattern, handleUserPassword, textAndNumberOnly, textOnly } from "../SharedAsset/Vaidations/RegularExpression";
+import { FaCheckDouble, FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 
 const RegistrationForm = () => {
+  // Redux toolkit that calls the back end to create a user account
+  const [addNewUser, { isLoading } ] = useCreateNewUserMutation()
+  // Redux toolkit that calls the back end to fetch all the existing..
+  // users in order to make sure we dont have same username or email
   const {userContent, useraction, isFetching} = useFetchedUsers()
+
   const users = userContent
+
   const [firstname, setFirstName] = useState("");
   const [lastname, setLastName] = useState("");
   const [username, setUsername] = useState("");
   const [primary, setPrimary] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [requiredText, setRequiredText] = useState(false)
-  const [addNewUser, { isLoading } ] = useCreateNewUserMutation()
+  const [errMsg, setErrMsg] = useState('')
 
-  const navigate = useNavigate();
-  
+  const [errMsgOn, setErrMsgOn] = useState(false) // Indicate that there is an error
+  const [userNameExist, setUserNameExist] = useState(false) // notify the user that the entered Username already exist
+  const [emailExist, setEmailExist] = useState(false) // notify the user that the entered email already exist
+  const [showPassword, setShowPassword] = useState(false); // show the password when user click the eye
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false); // show the password when user click the eye
+  const [passwordNotSame, setPasswordNotSame] = useState(false); // show the password when user click the eye
 
-  const canSave = [firstname, lastname, username, primary, password, confirmPassword].every(Boolean) && !isLoading
+  const [isValid, setIsValid] = useState(false); // regular expressions
+  const [firstNameIsValid, setFirstNameIsValid] = useState(false); // regular expressions
+  const [lastNameIsValid, setLastNameIsValid] = useState(false); // regular expressions
+  const [emailIsValid, setEmailIsValid] = useState(false); // regular expressions
+  const [passWordIsValid, setPassWordIsValid] = useState(false); // regular expressions
+  const [confirmPasswordIsValid, setConfirmPasswordIsValid] = useState(false); // regular expressions
+
+  const navigate = useNavigate();  
+
+  // handling setting the value of first name
+  const handleFirstName = (e) => {
+    // close the error message(if any) once the use change any input
+    if(errMsgOn) {
+      setErrMsg(() => "")
+      setErrMsgOn(() => false)
+    }
+
+    const { value } = e.target;
+    const { isValid } = textOnly(value); // function for texting the entered text format
+    setFirstNameIsValid(isValid);
+    setFirstName(() => value)
+  }
+
+  // handling setting the value of last name
+  const handleLastName = (e) => {
+    // close the error message(if any) once the use change any input
+    if(errMsgOn) {
+      setErrMsg(() => "")
+      setErrMsgOn(() => false)
+    }
+
+    const { value } = e.target;
+    const { isValid } = textOnly(value); // function for texting the entered text format
+    setLastNameIsValid(isValid);
+    setLastName(() => value)
+  }
+
+  // handling setting the value of Username
+  const handleUserName = (e) => {
+    setUserNameExist(() => false)
+
+    // close the error message(if any) once the use change any input
+    if(errMsgOn) {
+      setErrMsg(() => "")
+      setErrMsgOn(() => false)
+    }
+
+    const checkUserName = users?.map((user) => user.username);// get all the exiting user name
+    const { value } = e.target;
+    const { isValid } = textAndNumberOnly(value); // function for texting the entered text format
+
+    setIsValid(isValid);
+    setUsername(() => value)
+
+    if (checkUserName?.includes(value?.toLowerCase())){ // checke if the entered value is in existence
+      setUserNameExist(() => true)
+    }
+  }
+
+  // handling save the email content
+  const handleEmail = (event) => {
+    setEmailExist(() => false)
+
+    // close the error message(if any) once the use change any input
+    if(errMsgOn) {
+      setErrMsg(() => "")
+      setErrMsgOn(() => false)
+    }
+
+    const checkUserEmail = users?.map((user) => user?.email?.primary); // get all the exiting email
+    const { value } = event.target;    
+    const { isValid } = handleEmailPattern(value);// function for texting the entered text format
+
+    setEmailIsValid(isValid)
+    setPrimary(() => value)
+
+    if (checkUserEmail?.includes(value)){ // checke if the entered value is in existence
+      setEmailExist(() => true)
+    }
+   }
+
+   // handing getting and setting users password 
+  const handleUserpassword = (e) => {
+    setPasswordNotSame(() => false)
+
+    // close the error message(if any) once the use change any input
+    if(errMsgOn) {
+      setErrMsg(() => "")
+      setErrMsgOn(() => false)
+    }
+
+    const { value } = e.target;
+    const { isValid } = handleUserPassword(value);// function for texting the entered text format    
+    setPassWordIsValid(isValid);
+    setPassword(() => value)
+
+    if(confirmPassword && value !== confirmPassword) {
+      setPasswordNotSame(() => true)
+    }
+  }
+
+   // handing getting and setting users password 
+  const handleUserConFirmPassword = (e) => {
+    setPasswordNotSame(() => false)
+
+    // close the error message(if any) once the use change any input
+    if(errMsgOn) {
+      setErrMsg(() => "")
+      setErrMsgOn(() => false)
+    }
+
+    const { value } = e.target;
+    const { isValid } = handleUserPassword(value);// function for texting the entered text format    
+    setConfirmPasswordIsValid(isValid);
+    setConfirmPassword(() => value)
+
+    if(value !== password) {
+      setPasswordNotSame(() => true)
+    }
+  }
+
+
+  // CREATE A NEW USERR
+  const canSave = [firstname, lastname, username, primary, password, confirmPassword,
+       isValid, firstNameIsValid, lastNameIsValid, emailIsValid, passWordIsValid, 
+       confirmPasswordIsValid].every(Boolean) && !isLoading && !passwordNotSame 
+       && !emailExist && !userNameExist
+
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    const checkUser = users.map((user) => user.email.primary );
-
-   if (checkUser.includes(primary)){
-    setRequiredText(true)
-   } else{
     if (canSave) {
       try {
         await addNewUser({firstname, lastname, username, primary, password, confirmPassword}).unwrap()
 
         navigate("/login")
       } catch (err) {
-        console.error('Failed to save the post: ', err)
-      } finally {
-      }
-    }
-   }
+
+        console.error('Failed to register: ', err)
+        setErrMsg('Failed to register');
+          setErrMsgOn(() => true)
+      }     
+   }   
 
     setFirstName(() => "")
     setLastName(() => "")
@@ -48,118 +182,231 @@ const RegistrationForm = () => {
     setConfirmPassword(() => "")
   };
 
-  return (useraction &&
-    <div className="py-10 text-left grid place-content-center justify-center bg-gradient-to-b from-gray-300/40 to-white/50"
-    disabled={isFetching}>
-      <div className="md:w-[28rem] max-w-md font-lora p-6">
 
-        {/* login title */}
+  return (useraction ?
+    <div className="pb-10 pt-3 text-left bg-gradient-to-b from-neutral-100 via-gray-50 to-neutral-100"
+      disabled={isFetching}>
+      <div className="md:w-[28rem] max-w-sm font-lora px-6 pb-3 rounded mx-auto">
+        {errMsgOn && <p className='text-xs text-rose-500 tracking-wider font-lora'>{errMsg}</p>}
+
+        {/* Register title */}
         <h3 className='text-2xl font-light text-center py-3 mb-2'>Register</h3>
 
-        <div className='border border-solid border-gray-300 w-full p-3 rounded-md shadow shadow-gray-500 bg-blue-100/30'>
+        <div className='border border-solid border-neutral-200 w-full p-3 rounded-md shadow shadow-neutral-400 bg-blue-100/30'>
+
+          {/* Register form */}
           <form onSubmit={handleSubmit}>
-            
 
-            <label className="block text-gray-700 font-bold mb-2" htmlFor="firstname">
-              First Name
+            {/* First Name */}
+            <label className="text-gray-700" htmlFor="firstname">
+
+              <span className="after:content-['*'] after:ml-0.5 after:text-red-500 font-bold block text-sm">
+                First Name
+              </span>
+
+              <div className='relative'>
+
+                <input
+                  className={`${(!firstNameIsValid && firstname) ? "border-red-500 text-red-600 focus:border-red-500 focus:ring-red-500" :
+                  ""}`}
+                  id="firstname"
+                  name="userregisteredfirstname"
+                  type="text"
+                  placeholder="First Name"
+                  aria-label='text' 
+                  maxLength={20}
+                  autoFocus={true}              
+                  required
+                  value={firstname}
+                  onChange={handleFirstName}
+                />
+
+                <span className={`absolute top-[22%] right-4 p-px ${firstNameIsValid ? "inline" : "hidden"}`}>
+                  <FaCheckDouble className="inline-block text-xs text-green-500" />
+                </span>
+              </div>
             </label>
-            <input
-              className=""
-              id="firstname"
-              name="userregisteredfirstname"
-              type="text"
-              placeholder="First Name"
-              value={firstname}
-              onChange={(e) => setFirstName(e.target.value)}
-            />
   
-            <label className="block text-gray-700 font-bold mb-2" htmlFor="lastname">
-              Last Name
-            </label>
-            <input
-              className=""
-              id="lastname"
-              name="userregisteredlastname"
-              type="text"
-              placeholder="Last Name"
-              value={lastname}
-              onChange={(e) => setLastName(e.target.value)}
-            />
+            {/* Last Name */}
+            <label className="text-gray-700" htmlFor="lastname">
 
-            <label className="block text-gray-700 font-bold mb-2" htmlFor="username">
-              User Name
-            </label>
-            <input
-              className=""
-              id="username"
-              name="userregisteredusername"
-              type="text"
-              placeholder="User Name"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-            />
+              <span className="after:content-['*'] after:ml-0.5 after:text-red-500 font-bold block text-sm">
+                Last Name
+              </span>
 
-            <label className="block text-gray-700 font-bold mb-2" htmlFor="primary">
-              Email
-            </label>
-            <input
-              id="primary"
-              name="userregisteredprimary"
-              type="email"
-              className="mb-0"
-              placeholder="Email"
-              value={primary}
-              onChange={(e) => setPrimary(e.target.value)}
-            />  {requiredText ? <p className='text-xs text-rose-500 tracking-wider font-lora'>Already have a user with this primary email!</p> : "" }          
+              <div className='relative'>
 
-            <label className="block text-gray-700 font-bold mb-2 mt-5" htmlFor="password">
-              Password
-            </label>
-            <input
-              className=""
-              id="password"
-              name="userregisteredpassword"
-              type="password"
-              placeholder="********"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
+                <input
+                className={`${(!lastNameIsValid && lastname) ? "border-red-500 text-red-600 focus:border-red-500 focus:ring-red-500" :
+                ""}`}
+                  id="lastname"
+                  name="userregisteredlastname"
+                  type="text"
+                  placeholder="Last Name"
+                  aria-label='text' 
+                  maxLength={20}             
+                  required
+                  value={lastname}
+                  onChange={handleLastName}
+                />
 
-            <label className="block text-gray-700 font-bold mb-2" htmlFor="confirmPassword">
-              Confirm Password
+                <span className={`absolute top-[22%] right-4 p-px ${lastNameIsValid ? "inline" : "hidden"}`}>
+                  <FaCheckDouble className="inline-block text-xs text-green-500" />
+                </span>
+              </div>              
             </label>
-            <input
-              className=""
-              id="confirmpassword"
-              name="userregisteredconfirmpassword"
-              type="password"
-              placeholder="********"
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
-            />
+
+            {/* User Name */}
+            <label className="text-gray-700" htmlFor="username">
+
+              <span className="after:content-['*'] after:ml-0.5 after:text-red-500 font-bold block text-sm">
+                User Name
+              </span>
+
+              <div className='relative'>
+
+                <input
+                  className={`${userNameExist && "mb-0"} ${(!isValid && username) ? "border-red-500 text-red-600 focus:border-red-500 focus:ring-red-500" :
+                  ""}`}
+                  id="username"
+                  name="userregisteredusername"
+                  type="text"
+                  placeholder="User Name"
+                  aria-label='text' 
+                  maxLength={19}             
+                  required
+                  value={username}
+                  onChange={handleUserName}
+                />
+
+                {userNameExist && <p className='text-xs text-rose-500 tracking-wider font-lora mb-5'>Already have a user with this email!</p>}
+
+                <span className={`absolute top-[22%] right-4 p-px ${isValid ? "inline" : "hidden"}`}>
+                  <FaCheckDouble className="inline-block text-xs text-green-500" />
+                </span>
+              </div>              
+            </label>
+
+             {/* Email */}
+            <label className="text-gray-700" htmlFor="primary">
+
+              <span className="after:content-['*'] after:ml-0.5 after:text-red-500 font-bold block text-sm">
+                Email
+              </span>
+
+              <div className='relative'>
+
+                <input
+                  id="primary"
+                  name="userregisteredprimary"
+                  type="email"
+                  className={`mb-0 ${(!emailIsValid && primary) ? "border-red-500 text-red-600 focus:border-red-500 focus:ring-red-500" : ""}`}
+                  placeholder="Email"
+                  value={primary}
+                  onChange={handleEmail}
+                  required
+                />  
+
+                {emailExist && <p className='text-xs text-rose-500 tracking-wider font-lora'>Already have a user with this email!</p>}  
+
+                <span className={`absolute top-[22%] right-4 p-px ${emailIsValid ? "inline" : "hidden"}`}>
+                  <FaCheckDouble className="inline-block text-xs text-green-500" />
+                </span> 
+              </div>             
+            </label>
+            
+            {/* Password */}
+            <label className="text-gray-700 block mt-5" htmlFor="password">
+
+              <span className="after:content-['*'] after:ml-0.5 after:text-red-500 font-bold block text-sm">
+                Password
+              </span>
+
+              <div className='relative'>
+
+                <input
+                  className={`${(!passWordIsValid && password) ? "border-red-500 text-red-600 focus:border-red-500 focus:ring-red-500" :
+                  ""}`}
+                  id="password"
+                  name="userregisteredpassword"
+                  type={`${showPassword ? "text" : "password"}`}
+                  placeholder="********"
+                  value={password}
+                  onChange={handleUserpassword}
+                  required
+                />
+
+                <span className="absolute top-[22%] right-4 p-px cursor-pointer" onClick={() => setShowPassword((change) => !change)}>
+                  {showPassword ?
+                    <FaRegEye className="inline-block text-xs text-stone-600 cursor-pointer"/>
+                    :
+                    <FaRegEyeSlash className="inline-block text-xs text-stone-600 cursor-pointer"/>
+                  }
+                </span>
+              </div>             
+            </label>
+
+             {/* Confirm Password */}
+            <label className="text-gray-700" htmlFor="confirmPassword">
+
+              <span className="after:content-['*'] after:ml-0.5 after:text-red-500 font-bold block text-sm">
+                Confirm Password
+              </span>
+
+              <div className='relative'>
+
+                <input
+                  className={`mb-0 ${(!confirmPasswordIsValid && confirmPassword) ? "border-red-500 text-red-600 focus:border-red-500 focus:ring-red-500" :
+                  ""}`}
+                  id="confirmpassword"
+                  name="userregisteredconfirmpassword"
+                  type={`${showConfirmPassword ? "text" : "password"}`}
+                  placeholder="********"
+                  value={confirmPassword}
+                  onChange={handleUserConFirmPassword}
+                  required
+                />
+
+                {passwordNotSame && <p className='text-xs text-rose-500 tracking-wider font-lora'>Passwords not same</p>}
+
+                <span className="absolute top-[22%] right-4 p-px cursor-pointer" onClick={() => setShowConfirmPassword((change) => !change)}>
+                  {showConfirmPassword ?
+                    <FaRegEye className="inline-block text-xs text-stone-600 cursor-pointer"/>
+                    :
+                    <FaRegEyeSlash className="inline-block text-xs text-stone-600 cursor-pointer"/>
+                  }
+                </span>
+              </div>             
+            </label>
 
             {/* registere user button */}
             <button
               type="submit"
-              className="cursor-pointer w-full text-sm py-2 bg-rose-500 border-0 text-white rounded-md tracking-wide
-            hover:bg-rose-600 transition-all duration-200 ease-linear shadow-md shadow-gray-400 disabled:opacity-40" disabled={!canSave}
-            >
+              className="cursor-pointer w-full text-sm py-2 mt-5 bg-rose-500 border-0 text-white rounded-md tracking-wide
+            hover:bg-rose-600 TextHeadertransition shadow-md shadow-gray-400 disabled:opacity-40" 
+              disabled={!canSave}>
               Register
             </button>
-
           </form>
 
-          <div className='border border-solid border-gray-400 rounded-md text-center p-4 text-sm tracking-wide mt-5 
-            shadow shadow-gray-500'>
-          <span>Already registered</span>
-          <button className='cursor-pointer border-0 inline-block text-blue-600 mx-2'>
-            <span>Sign in?</span>
-          </button>
+          {/* divider */}
+          <div className='my-4 text-center'>
+            <span className='h-px w-full align-text-top mt-2.5 inline-block max-w-[46%] border border-neutral-300'></span>
+            <span>Or</span>
+            <span className='h-px w-full align-text-top mt-2.5 inline-block max-w-[46%] border border-neutral-300'></span>
+          </div>
         </div>
+
+        <div className='border border-solid border-gray-400 rounded-md text-center p-4 text-sm tracking-wide mt-5 
+          shadow shadow-gray-500'>
+          <span>Already registered</span>
+          <Link to={"/login"} className='cursor-pointer border-0 inline-block text-blue-500 mx-2'>
+            <span className='hover:text-blue-700 TextHeadertransition'>Sign in?</span>
+          </Link>        
         </div>
       </div>
     </div>
-    );
+    : userContent);
   }
   
   
