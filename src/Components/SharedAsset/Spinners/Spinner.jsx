@@ -23,11 +23,11 @@ export const SkeletonTextTwo = () => {
 export const SkeletonTextFour = () => {
   return (
     <>
-     <div className='skeleton  w-full h-3 mb-0.5 rounded-sm'></div>
-     <div className='skeleton  w-full h-3 mb-0.5 rounded-sm'></div>
-     <div className='skeleton  w-full h-3 mb-0.5 rounded-sm'></div>
-     <div className='skeleton  w-full h-3 mb-0.5 rounded-sm'></div>
-      <div className='skeleton  w-[80%] h-3 mb-0 rounded-sm'></div>
+     <div className='skeleton w-full h-3 mb-0.5 rounded-sm'></div>
+     <div className='skeleton w-full h-3 mb-0.5 rounded-sm'></div>
+     <div className='skeleton w-full h-3 mb-0.5 rounded-sm'></div>
+     <div className='skeleton w-full h-3 mb-0.5 rounded-sm'></div>
+      <div className='skeleton w-[80%] h-3 mb-0 rounded-sm'></div>
     </>
   )
 }

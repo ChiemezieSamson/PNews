@@ -6,6 +6,7 @@ import {catAdded, catUnchecked, emptyCategories, selectAllPostCat} from "../../.
 import { useCreateNewCategoriesMutation, useDeleteExistingCategoriesMutation, useUpdateExistingCategoriesMutation, } from '../../../../../Reduxstore/Slices/categories/Categories'
 import useFetchedCategories from '../../../../SharedAsset/Spinners/categoriesSpinner'
 import { parentCategoriesAndTags } from '../../../../../data'
+import { textAndNumberOnly } from '../../../../SharedAsset/Vaidations/RegularExpression'
 
 const Category = ({handleSelectedParentCat, parentCat, handleSetCategory, category,
   handlesetCheckedItemElements, checkedItemElemets}) => {
@@ -51,14 +52,11 @@ const Category = ({handleSelectedParentCat, parentCat, handleSetCategory, catego
     setOpenAddnewCat((change) => !change)
   }
 
-  // regular expression that allows only letters and numbers (no symbols)
-  const alphanumericRegex = /^[a-zA-Z0-9]+$/
-
   // handling setting the value of the input for category name and 
   //sending it to CreatePostAside component
   const handleNewCategoryName = (e) => {
     const { value } = e.target;
-    const isValid = alphanumericRegex.test(value);
+    const { isValid } = textAndNumberOnly(value);
     setIsValid(isValid);
     handleSetCategory(e)
   }

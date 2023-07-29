@@ -26,11 +26,9 @@ const HeaderNavigations = ({hideShowNavLinks, closeNavLinksOnBodyClick, handleCl
   const [headerHoverCategoriesNav, setHeaderHoverCategoriesNav] = useState([])
   // get the array of all the item in post tag for a hovered parentcategory  
   const [headerHoverTagsNav, setHeaderHoverTagsNav] = useState([])
-
-  // making sure to querry for particuarl post when the parent category is hovered on
-  let cat = `${"?page=" + 1}&limit=${10}&parentCat=${getTheNavlinkTextContent !== "quotes" ? getTheNavlinkTextContent : "random"}`
+  const [headerParentCategory, setHeaderParentCategory] = useState([])
   // fetching post based on a particular parent category
-  const { data = [], isSuccess, isFetching: isFetchingHoverPosts } = useGetPostsByPaginationTwoQuery(cat);
+  const { data = [], isSuccess, isFetching: isFetchingHoverPosts } = useGetPostsByPaginationTwoQuery(headerParentCategory ?  headerParentCategory : `${"?page=" + 1}&limit=${10}&parentCat="books"`);
 
   const hoverPosts = data.Posts
   const size = useWindowSize()
@@ -60,6 +58,8 @@ const HeaderNavigations = ({hideShowNavLinks, closeNavLinksOnBodyClick, handleCl
 
     // Set the categories
     if (categoriesParents?._id) {
+      // making sure to querry for particuarl post when the parent category is hovered on
+      setHeaderParentCategory(() =>  `${"?page=" + 1}&limit=${10}&parentCat=${elementtextContent !== "quotes" ? elementtextContent : "random"}`)
 
       if (elementtextContent !== "quotes") {
 

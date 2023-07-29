@@ -5,6 +5,7 @@ import { useCreateNewTagsMutation, useDeleteExistingTagMutation, useUpdateExisti
 import { WritePostAsideOpenClosebar } from '../../../../ButtonAndOthers/Buttons'
 import useFetchedTags from '../../../../SharedAsset/Spinners/tagsSpiner'
 import { parentCategoriesAndTags } from '../../../../../data'
+import { textAndNumberOnly } from '../../../../SharedAsset/Vaidations/RegularExpression'
 
 
 const Tag = ({handleSetAddTag, addTag, handleSelectedParentTag, parentTag}) => {
@@ -43,14 +44,11 @@ const Tag = ({handleSetAddTag, addTag, handleSelectedParentTag, parentTag}) => {
     setOpenCat((change) => !change)
   }
 
-  // regular expression that allows only letters and numbers (no symbols)
-  const alphanumericRegex = /^[a-zA-Z0-9\s]+$/
-
   // handling setting the value of the input for tag name and 
   //sending it to CreatePostAside component
   const handleAddNewTag = (e) => {
     const { value } = e.target;
-    const isValid = alphanumericRegex.test(value);
+    const { isValid } = textAndNumberOnly(value);
     setIsValid(isValid);
     handleSetAddTag(e)
   }

@@ -18,6 +18,7 @@ import UserValidation from '../../../SharedAsset/Vaidations/UserValidation';
 import { handelPassWordValidation } from '../../../SharedAsset/Vaidations/bcrypt';
 import { useFetchedCommentById } from '../../../SharedAsset/Spinners/commentSpinner';
 import { SkeletonTextFour, SkeletonTextTwo } from '../../../SharedAsset/Spinners/Spinner';
+import { handleUserPassword } from '../../../SharedAsset/Vaidations/RegularExpression';
 
 
 const SinglePost = () => {
@@ -76,13 +77,10 @@ const SinglePost = () => {
     setSizeLine(() =>  20)
   }
 
-  // regular expressions
-  const passwordRegex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-
   // handing getting and setting users password for before a user can delete a post
   const handleSetGetUserpassword = (e) => {
     const { value } = e.target;
-    const isValid = passwordRegex.test(value);
+    const { isValid } = handleUserPassword(value)
     setIsValid(isValid);
     setGetUserpassword(() => value)
   }

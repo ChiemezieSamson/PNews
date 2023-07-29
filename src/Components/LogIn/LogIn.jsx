@@ -1,65 +1,115 @@
 import React from 'react'
-import { useState, useRef,  useEffect} from 'react'
+import { useState, useEffect} from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useLoginMutation } from '../../Reduxstore/Slices/authSlice/authApiSlic'
 import { useDispatch } from 'react-redux'
 import { setCredentials } from '../../Reduxstore/Slices/authSlice/AuthSlice'
+import { handleEmailPattern, handleUserPassword, textAndNumberOnly } from '../SharedAsset/Vaidations/RegularExpression'
+import { FaCheckDouble, FaRegEye, FaRegEyeSlash } from 'react-icons/fa'
 
 const LogIn = () => {
-  const userRef = useRef()
-  const errRef = useRef()
+  // Redux toolkit that calls the back end for a log in
+  const [login, { isLoading, isSuccess }] = useLoginMutation()
+
   const [username, setUsername] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
   const [primary, setPrimary] = useState('')
   const [errMsg, setErrMsg] = useState('')
+
+  const [errMsgOn, setErrMsgOn] = useState(false) // Indicate that there is an error
+  const [showPassword, setShowPassword] = useState(false); // show the password when user click the eye
+  const [isValid, setIsValid] = useState(false); // regular expressions
+  const [passWordIsValid, setPassWordIsValid] = useState(false); // regular expressions
+  const [emailIsValid, setEmailIsValid] = useState(false); // regular expressions
+
   const navigate = useNavigate()
-
-
-  const [login, { isLoading, isSuccess }] = useLoginMutation()
   const dispatch = useDispatch()
 
-  useEffect(() => {
-      userRef.current.focus()
-  }, [])
+  // handling setting the value of Username
+  const handleUserName = (e) => {
+    // close the error message(if any) once the use change any input
+    if(errMsgOn) {
+      setErrMsg(() => "")
+      setErrMsgOn(() => false)
+    }
 
-  useEffect(() => {
-      setErrMsg('')
-  }, [username, confirmPassword, primary])
+    const { value } = e.target;
+    const { isValid } = textAndNumberOnly(value); // function for texting the entered text format
+    setIsValid(isValid);
+    setUsername(() => value)
+  }
+
+   // handling save the email content
+   const handleEmail = (event) => {
+    // close the error message(if any) once the use change any input
+     if(errMsgOn) {
+      setErrMsg(() => "")
+      setErrMsgOn(() => false)
+    }
+
+    const { value } = event.target;
+    const { isValid } = handleEmailPattern(value);// function for texting the entered text format
+    setEmailIsValid(isValid)
+    setPrimary(() => value)
+   }
+
+   // handing getting and setting users password 
+  const handleUserpassword = (e) => {
+    // close the error message(if any) once the use change any input
+    if(errMsgOn) {
+      setErrMsg(() => "")
+      setErrMsgOn(() => false)
+    }
+
+    const { value } = e.target;
+    const { isValid } = handleUserPassword(value);// function for texting the entered text format    
+    setPassWordIsValid(isValid);
+    setConfirmPassword(() => value)
+  }
 
 
-  const canSave = [username, confirmPassword, primary].every(Boolean) && !isLoading
+  // LOGIN FUNCTION
+  const canSave = [username, confirmPassword, primary, isValid, emailIsValid, passWordIsValid].every(Boolean) && !isLoading && !errMsgOn
 
   const handleSubmit = async (e) => {
-      e.preventDefault()
+    e.preventDefault()
 
-      if(canSave) {
-        try {
-            const userData = await login({ username, confirmPassword, email: {primary}}).unwrap()
-            dispatch(setCredentials(userData))
-            localStorage.setItem('userToken', userData.accessToken)
-            localStorage.setItem('userId', userData._id)
+    if(canSave) {
 
-            setUsername(() => "")
-            setConfirmPassword(() => "")
-            setPrimary(() => "")
-        } catch (err) {
-            if (!err?.originalStatus) {
-              
-                // isLoading: true until timeout occurs
-                setErrMsg('No Server Response');
-            } else if (err.originalStatus === 400) {
+      try {
+          const userData = await login({ username, confirmPassword, email: {primary}}).unwrap()
 
-                setErrMsg('fill all the input form');
-            } else if (err.originalStatus === 401) {
+          dispatch(setCredentials(userData)) // send the update to redux store
 
-                setErrMsg('Unauthorized');
-            } else {
+          // get the access token and user id set back from the server and save it to the local storage
+          localStorage.setItem('userToken', userData.accessToken) 
+          localStorage.setItem('userId', userData._id)
 
-                setErrMsg('Login Failed');
-            }
-            errRef.current.focus();
+          setUsername(() => "")
+          setConfirmPassword(() => "")
+          setPrimary(() => "")
+      } catch (err) {
+        
+        if (!err?.originalStatus) {
+          
+          // isLoading: true until timeout occurs
+          setErrMsg('No Server Response');
+          setErrMsgOn(() => true)
+        } else if (err.originalStatus === 400) {
+
+          setErrMsg('fill all the input form');
+          setErrMsgOn(() => true)
+        } else if (err.originalStatus === 401) {
+
+          setErrMsg('Unauthorized');
+          setErrMsgOn(() => true)
+        } else {
+
+          setErrMsg('Login Failed');
+          setErrMsgOn(() => true)
         }
       }
+    }
   }
 
   useEffect(() => {
@@ -67,59 +117,109 @@ const LogIn = () => {
   }, [isSuccess, navigate])
 
   return (
-    <div className='py-10 text-left grid place-content-center h-auto lg:h-[70vh] justify-center bg-gradient-to-b from-gray-300/40 to-white/50'>
-       <div className="md:w-[28rem] max-w-sm font-lora p-6">
-
-       <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
+    <div className='pb-10 pt-3 text-left bg-gradient-to-b from-neutral-100 via-gray-50 to-neutral-100'>
+      <div className="md:w-[28rem] max-w-sm font-lora px-6 pb-3 rounded mx-auto">
+        {errMsgOn && <p className='text-xs text-rose-500 tracking-wider font-lora'>{errMsg}</p>}
 
         {/* login title */}
-        <h3 className='text-2xl font-light text-center py-3 mb-2'>Sign in to admin account</h3>
+        <h3 className='text-2xl font-light text-center py-2 mb-2'>Sign in</h3>
 
-        <div className='border border-solid border-gray-300 w-full p-3 rounded-md shadow shadow-gray-500 bg-blue-100/30'>
+        <div className='border border-solid border-neutral-200 w-full p-3 rounded-md shadow shadow-neutral-400 bg-blue-100/30'>
+
           {/* login form */}
-          <form className='' onSubmit={handleSubmit}>
-            <label htmlFor="userloginusername" className='text-sm tracking-wide font-light'>Username</label>
-            <input 
-            type="text" 
-            name='userloginusername'
-            id='userloginusername'
-            placeholder='Enter your username...' 
-            className='bg-white'
-            ref={userRef}
-            value={username}
-            onChange={(e) => setUsername(() => e.target.value)}
-            autoComplete="off"
-            required
-            />
+          <form onSubmit={handleSubmit}>
 
-            <label htmlFor="userloginemail" className='text-sm tracking-wide font-light'>email address</label>
-            <input 
-            type="email" 
-            name='userloginemail'
-            id='userloginemail'
-            placeholder='Enter your email...' 
-            className='bg-white'
-            value={primary}
-            onChange={(e) => setPrimary(() => e.target.value)}
-            required/>
-            
-            <label htmlFor="userloginemail" className='text-sm tracking-wide font-light grid grid-flow-col justify-between'>
-              <span>
-                Password
+            {/* User Name */}
+            <label htmlFor="userloginusername" className='text-sm tracking-wide font-light'>
+
+              <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700 capitalize">
+                Username
               </span>
-              <span className='text-xs text-blue-600 cursor-pointer '>
-                Forgot password?
-              </span>
+
+              <div className='relative'>  
+
+                <input 
+                  type="text" 
+                  name='userloginusername'
+                  id='userloginusername'
+                  placeholder='Enter your username...' 
+                  className={`bg-white ${(!isValid && username) ? "border-red-500 text-red-600 focus:border-red-500 focus:ring-red-500" :
+                  ""}`}
+                  value={username}
+                  onChange={handleUserName}
+                  aria-label='text' 
+                  maxLength={19}
+                  autoFocus={true}              
+                  required
+                />
+
+                <span className={`absolute top-[22%] right-4 p-px ${isValid ? "inline" : "hidden"}`}>
+                  <FaCheckDouble className="inline-block text-xs text-green-500" />
+                </span>
+              </div>
             </label>
-            <input 
-            type="password" 
-            name='userloginpassword'
-            id='userloginpassword'
-            placeholder='Enter your password...' 
-            className='bg-white'
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(() => e.target.value)}
-            required/>
+
+            {/* User Email */}
+            <label htmlFor="userloginemail" className='text-sm tracking-wide font-light'>
+
+              <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700 capitalize">
+                email address
+              </span>
+
+              <div className='relative'>
+
+                <input 
+                  type="email" 
+                  name='userloginemail'
+                  id='userloginemail'
+                  placeholder='Enter your email...' 
+                  className={`bg-white ${(!emailIsValid && primary) ? "border-red-500 text-red-600 focus:border-red-500 focus:ring-red-500" : ""}`}
+                  value={primary}
+                  onChange={handleEmail}
+                  required/> 
+
+                <span className={`absolute top-[22%] right-4 p-px ${emailIsValid ? "inline" : "hidden"}`}>
+                  <FaCheckDouble className="inline-block text-xs text-green-500" />
+                </span>               
+              </div>
+            </label>
+            
+            {/* User Password */}
+            <label htmlFor="userloginpassword" className='text-sm tracking-wide font-light'>
+
+              <div className='grid grid-flow-col justify-between'>
+
+                <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700 capitalize">
+                  Password
+                </span>
+
+                <span className='text-xs text-blue-600 cursor-pointer'>
+                  Forgot password?
+                </span>
+              </div>
+
+              <div className='relative'>
+
+                <input 
+                  type={`${showPassword ? "text" : "password"}`} 
+                  name='userloginpassword'
+                  id='userloginpassword'
+                  placeholder='Enter your password...' 
+                  className={`bg-white ${(!passWordIsValid && confirmPassword) ? "border-red-500 text-red-600 focus:border-red-500 focus:ring-red-500" :
+                  ""}`}
+                  value={confirmPassword}
+                  onChange={handleUserpassword}
+                  required/>
+
+                 <span className="absolute top-[22%] right-4 p-px cursor-pointer" onClick={() => setShowPassword((change) => !change)}>
+                  {showPassword ?
+                    <FaRegEye className="inline-block text-xs text-stone-600 cursor-pointer"/>
+                    :
+                    <FaRegEyeSlash className="inline-block text-xs text-stone-600 cursor-pointer"/>
+                  }
+                </span>
+              </div>
+            </label>
 
             {/* login button */}
             <button
@@ -127,10 +227,17 @@ const LogIn = () => {
             name='userloginsubmitbutton'
             id='userloginsubmitbutton'
             className='cursor-pointer w-full text-sm py-1 bg-rose-500 border-0 text-white rounded-md tracking-wide
-            hover:bg-rose-600 transition-all duration-200 ease-linear shadow-md shadow-gray-400 disabled:opacity-40'
+            hover:bg-rose-600 TextHeadertransition shadow-md shadow-gray-400 disabled:opacity-40'
             disabled={!canSave}
             >Sign In</button>
           </form>
+           
+           {/* divider */}
+          <div className='my-4 text-center'>
+            <span className='h-px w-full align-text-top mt-2.5 inline-block max-w-[46%] border border-neutral-300'></span>
+            <span>Or</span>
+            <span className='h-px w-full align-text-top mt-2.5 inline-block max-w-[46%] border border-neutral-300'></span>
+          </div>
         </div>
         
 

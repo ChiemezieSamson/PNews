@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useCreateNewCommentMutation} from "../../../../../Reduxstore/Slices/comments/CommentsSlice";
 import useFetchedComments from "../../../../SharedAsset/Spinners/commentSpinner";
 import { nanoid } from "@reduxjs/toolkit";
+import { handleEmailPattern } from "../../../../SharedAsset/Vaidations/RegularExpression";
 
 const CommentForm = ({postId}) => {
   // fetching all comment used to check if the user exist
@@ -31,7 +32,6 @@ const CommentForm = ({postId}) => {
   // regular expressions
   const websitePattern = /^(https?:\/\/)?([a-zA-Z0-9]+(-[a-zA-Z0-9]+)*\.)+[a-zA-Z]{2,}(:\d{1,5})?(\/[^\s]*)?$/;
   const noEmailOrURLRegex = /^((?!(www\.|http:\/\/|https:\/\/))[^\s@]+[^\s@]*[^@]+)$/i;
-  const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
   const multipleLinksPattern = /(^|\s)(https?:\/\/[^\s]+)$/g;
 
 
@@ -71,8 +71,8 @@ const CommentForm = ({postId}) => {
     setRequiredText2(() => false)
 
     const { value } = event.target;
-    const isValidEmail = emailPattern.test(value);
-    setEmailIsValid(isValidEmail)
+    const { isValid } = handleEmailPattern(value);
+    setEmailIsValid(isValid)
 
     let validEmail 
 
@@ -80,7 +80,7 @@ const CommentForm = ({postId}) => {
       validEmail = commentsContent?.find(item => item?.email === value.toLowerCase())
     }
 
-    if (validEmail?.email && isValidEmail ) {
+    if (validEmail?.email && isValid ) {
       if (validEmail?.author !== commentAuthorName) {
         setRequiredText2(() => true)
       }      
@@ -97,8 +97,7 @@ const CommentForm = ({postId}) => {
     const isValidWebsite = !hasMultipleLinks && websitePattern.test(value);
 
     setWebsiteIsValid(() => isValidWebsite)
-    setWebsite(() => value)
-
+    setWebsite(() => value)    
   }
 
   // CREATE COMMENT
