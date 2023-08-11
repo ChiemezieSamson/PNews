@@ -229,13 +229,6 @@ const LogIn = () => {
             disabled={!canSave}
             >Sign In</button>
           </form>
-           
-           {/* divider */}
-          <div className='my-4 text-center'>
-            <span className='h-px w-full align-text-top mt-2.5 inline-block max-w-[46%] border border-neutral-300'></span>
-            <span>Or</span>
-            <span className='h-px w-full align-text-top mt-2.5 inline-block max-w-[46%] border border-neutral-300'></span>
-          </div>
         </div>
       </div>
     </div>

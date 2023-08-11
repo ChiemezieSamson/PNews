@@ -12,7 +12,7 @@ const RegistrationForm = () => {
   // users in order to make sure we dont have same username or email
   const {userContent, useraction, isFetching} = useFetchedUsers()
 
-  const users = userContent
+  const users = useraction ? userContent : []
 
   const [firstname, setFirstName] = useState("");
   const [lastname, setLastName] = useState("");
@@ -183,7 +183,7 @@ const RegistrationForm = () => {
   };
 
 
-  return (useraction ?
+  return (
     <div className="pb-10 pt-3 text-left bg-gradient-to-b from-neutral-100 via-gray-50 to-neutral-100"
       disabled={isFetching}>
       <div className="md:w-[28rem] max-w-sm font-lora px-6 pb-3 rounded mx-auto">
@@ -388,13 +388,6 @@ const RegistrationForm = () => {
               Register
             </button>
           </form>
-
-          {/* divider */}
-          <div className='my-4 text-center'>
-            <span className='h-px w-full align-text-top mt-2.5 inline-block max-w-[46%] border border-neutral-300'></span>
-            <span>Or</span>
-            <span className='h-px w-full align-text-top mt-2.5 inline-block max-w-[46%] border border-neutral-300'></span>
-          </div>
         </div>
 
         <div className='border border-solid border-gray-400 rounded-md text-center p-4 text-sm tracking-wide mt-5 
@@ -406,7 +399,7 @@ const RegistrationForm = () => {
         </div>
       </div>
     </div>
-    : userContent);
+   );
   }
   
   
