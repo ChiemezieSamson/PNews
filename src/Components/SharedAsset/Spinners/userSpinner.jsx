@@ -1,80 +1,102 @@
 import { useParams } from "react-router-dom"
 import { useGetUserByIdQuery, useGetUserByPostIdQuery, useGetUserQuery } from "../../../Reduxstore/Slices/users/UsersSlice"
-import Spinner from "./Spinner"
 
+// Use to fecth the all users when ever a call to the function is made
 const useFetchedUsers = () => {
-  const {
-    data: users,
+
+  const { // redux data flow and or returned information
+    data: users = [],
     isLoading,
     isFetching,
     isSuccess,
     isError,
-    error,
-    refetch
+    error
   } = useGetUserQuery()
 
+  // An array of all the users
   let userContent
+  // Notify true only when the users are ready
   let useraction = false
 
 
   if (isLoading) {
-    userContent = <Spinner text="Loading..."/>
+
+    useraction = false
+
   } else if (isSuccess) {
+
     userContent = users
     useraction = true
   } else if (isError) {
+
     userContent = <div>{error.toString()}</div>
   }
 
-  return {userContent , useraction, refetch, isFetching}
+  return {userContent , useraction, isFetching}
 }
 
-
+// Use to fecth the user by thier Id when ever a call to the function is made
 export const useFetchedUserById = () => {
-  let userId = localStorage.getItem("userId")
-  const {
-    data: user = [],
+  let userId = localStorage.getItem("userId") // getting the user id from the localStorage
+
+  const { // redux data flow and or returned information
+    data: user = {},
     isFetching,
     isSuccess,
-    refetch,
     isError,
     error
   } = useGetUserByIdQuery(userId)
 
+  // An object of the user
   let singleUser
+   // Notify true only when the user are ready
   let userAction = false
 
   if (isFetching) {
-    singleUser = <Spinner text="Loading..."/>
+
+    userAction = false
+
   } else if (isSuccess) {
+
     userAction = true
     singleUser = user
   } else if (isError) {
+
     singleUser = <div>{error.toString()}</div>
   }
 
-  return {singleUser, userAction, refetch, isError, isSuccess, isFetching}
+  return {singleUser, userAction, isError, isSuccess, isFetching}
 }
 
+
+// Use to fecth the user by post Id when ever a call to the function is made
 export const useFetchedUserByPostId = () => {
-  const { postId } = useParams();
-  const {
-    data: user = [],
+  const { postId } = useParams(); // getting the post id from the url params
+
+  const { // redux data flow and or returned information
+    data: user = {},
     isFetching,
     isSuccess,
     isError,
     error
   } = useGetUserByPostIdQuery(postId)
 
+  // An object of the user
   let singleUser
+  // Notify true only when the user are ready
   let userAction = false
 
+
   if (isFetching) {
-    singleUser = <Spinner text="Loading..."/>
+
+    userAction = false
+
   } else if (isSuccess) {
+
     userAction = true
     singleUser = user
   } else if (isError) {
+
     singleUser = <div>{error.toString()}</div>
   }
 

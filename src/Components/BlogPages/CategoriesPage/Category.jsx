@@ -15,24 +15,24 @@ const Category = () => {
 
   const canOpen = [action, useraction, commentaction].every(Boolean)
 
-  return (
-    <>{canOpen && 
-      <div className="m-0 p-0 disabled:opacity-40" disabled={isFetching}>
-        {currentPage > 1 ?
-          <CategorySearchpagination /> 
-            :
-          <GeneralCategorisePages 
-            users={users}
-            Comments={Comments}
-            ThreeFirstPost={Posts.slice(0, 4)}  
-            PagePost={Posts.slice(4, 13)}
-            currentPage={currentPage}
-            totalPages={totalPages}
-            />
-        }        
-          
-      </div>}
-    </>
+  return (  
+    <div className="m-0 p-0 disabled:opacity-40" disabled={isFetching}>
+      {currentPage > 1 ?
+        <CategorySearchpagination
+          canOpen={canOpen}
+        /> 
+          :
+        <GeneralCategorisePages 
+          canOpen={canOpen}
+          users={users}
+          Comments={Comments}
+          ThreeFirstPost={canOpen && Posts?.slice(0, 4)}  
+          PagePost={canOpen && Posts?.slice(4, 13)}
+          currentPage={currentPage}
+          totalPages={totalPages}
+          />
+      }                
+    </div>    
   )
 }
 

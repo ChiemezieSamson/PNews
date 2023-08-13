@@ -17,7 +17,7 @@ import { publicFolder } from '../../../../data';
 import UserValidation from '../../../SharedAsset/Vaidations/UserValidation';
 import { handelPassWordValidation } from '../../../SharedAsset/Vaidations/bcrypt';
 import { useFetchedCommentById } from '../../../SharedAsset/Spinners/commentSpinner';
-import { SkeletonTextFour, SkeletonTextTwo } from '../../../SharedAsset/Spinners/Spinner';
+import { SkeletonTextTwo } from '../../../SharedAsset/Spinners/Spinner';
 import { handleUserPassword } from '../../../SharedAsset/Vaidations/RegularExpression';
 
 
@@ -360,13 +360,7 @@ const SinglePost = () => {
             <div className={`${textSize} tracking-wide text-stone-800`}>
               {postAction ? <Preview postContent={Post?.postContent}/>
                 :
-                <>
-                  <SkeletonTextFour />
-                  <br />
-                  <SkeletonTextFour />
-                  <br />
-                  <SkeletonTextFour />
-                </>
+                singlePost
               }
             </div>
 

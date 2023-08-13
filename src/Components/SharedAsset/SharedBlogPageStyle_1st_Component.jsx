@@ -82,13 +82,13 @@ export const SharedBlogPageStyleOne = ({Posts, users}) => {
 }
 
 
-export const GeneralCategorisePages = ({ThreeFirstPost, Comments, PagePost, users, currentPage, totalPages}) => {
+export const GeneralCategorisePages = ({ThreeFirstPost, Comments, PagePost, users, currentPage, totalPages, canOpen}) => {
   return (
     <section className="text-left">
 
-      <SharedBlogPageStyleOne 
+      {canOpen && <SharedBlogPageStyleOne 
         users={users} 
-        Posts={ThreeFirstPost}/>
+        Posts={ThreeFirstPost}/>}
       
       <div className='md:grid md:grid-cols-3'>
         <div className="md:col-span-2 md:mr-[3%]">
@@ -100,6 +100,7 @@ export const GeneralCategorisePages = ({ThreeFirstPost, Comments, PagePost, user
             Posts={PagePost}
             currentPage={currentPage}
             totalPages={totalPages}
+            canOpen={canOpen}
             />
         </div>
         <aside className="md:col-span-1 mt-8 md:ml-[3%]">

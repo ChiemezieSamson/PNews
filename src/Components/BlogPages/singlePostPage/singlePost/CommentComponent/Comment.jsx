@@ -4,8 +4,6 @@ import MainCommentUpdate from './CommentComponents/MainCommentUpdate';
 import CommentReplyCommponent from './CommentComponents/CommentReplyCommponent';
 import Reply from './CommentUpdateComponents/Reply';
 import { commentText, formatDate } from '../../../../SharedAsset/SharedAssets';
-import { SkeletonTextFour } from '../../../../SharedAsset/Spinners/Spinner';
-
 
 const Comment = ({comments, postId, byUserId, postAuthor, offsetOfForm, contentAction}) => {
   const User = useFindThisUser() // Get the user from the local storage
@@ -15,13 +13,13 @@ const Comment = ({comments, postId, byUserId, postAuthor, offsetOfForm, contentA
 
       <span className='my-4 inline-block'>
         <h4 className='capitalize font-bold text-[27px] leading-8 inline-block font-lora align-bottom'>Comments</h4>
-        <span className='inline-block px-3 py-px bg-neutral-400 mx-4 text-neutral-50 rounded-md'>{comments.length}</span>
+        <span className='inline-block px-3 py-px bg-neutral-400 mx-4 text-neutral-50 rounded-md'>{comments?.length}</span>
       </span> 
 
-      {(contentAction) ? (comments.length > 0 ) && 
-      comments.map((comment) => { 
+      {(contentAction) ? (comments?.length > 0 ) && 
+      comments?.map((comment) => { 
         // if the textarea content has a link add it inside a link tag funtion
-        const {text} = commentText(comment.content)
+        const {text} = commentText(comment?.content)
 
         // changing the string content to html so that the any link will be displayed
         const renderHTML = (htmlString) => {        
@@ -76,9 +74,9 @@ const Comment = ({comments, postId, byUserId, postAuthor, offsetOfForm, contentA
         )
       } ) :
         <>
-          <SkeletonTextFour />
+          {comments}
           <br />
-          <SkeletonTextFour />
+          {comments}
         </>
       }
     </div>     
