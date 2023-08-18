@@ -1,7 +1,8 @@
 import React from 'react'
 import ReplyCommentupdate from './ReplyCommentupdate'
 import CommentReplyCommponent from '../CommentComponents/CommentReplyCommponent'
-import { commentText, formatDate } from '../../../../../SharedAsset/SharedAssets'
+import { formatDate } from '../../../../../SharedAsset/SharedAssets'
+import { commentText } from '../../../../../SharedAsset/Vaidations/RegularExpression'
 
 const Reply = ({comment, comments, User, postId, offsetOfForm, byUserId, postAuthor}) => {
 

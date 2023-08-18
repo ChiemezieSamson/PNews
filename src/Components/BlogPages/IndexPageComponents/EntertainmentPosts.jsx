@@ -13,7 +13,7 @@ const EntertainmentPosts = ({Posts, categories, users, Comments}) => {
       {/* Section title and nav categories start here */}                     
 
       {/* === Header title and possible categories === */}
-      <CatSidebarHanbugar initial={categories.business.category}
+      <CatSidebarHanbugar initial={categories} parent={"business"}
         blackletters={"Entertainment"} redletters={"News"}/>
    
      {/* === Posts image and title start here === */}

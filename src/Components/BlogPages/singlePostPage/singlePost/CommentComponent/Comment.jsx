@@ -3,7 +3,8 @@ import { useFindThisUser } from '../../../../SharedAsset/Spinners/commentSpinner
 import MainCommentUpdate from './CommentComponents/MainCommentUpdate';
 import CommentReplyCommponent from './CommentComponents/CommentReplyCommponent';
 import Reply from './CommentUpdateComponents/Reply';
-import { commentText, formatDate } from '../../../../SharedAsset/SharedAssets';
+import { formatDate } from '../../../../SharedAsset/SharedAssets';
+import { commentText } from '../../../../SharedAsset/Vaidations/RegularExpression';
 
 const Comment = ({comments, postId, byUserId, postAuthor, offsetOfForm, contentAction}) => {
   const User = useFindThisUser() // Get the user from the local storage

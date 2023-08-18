@@ -11,7 +11,7 @@ const TechPosts = ({Posts, categories}) => {
       {/* Section title and nav categories start here */}                     
 
       {/* === Header title and possible categories === */}
-      <CatSidebarHanbugar initial={categories.books.category}
+      <CatSidebarHanbugar initial={categories}  parent={"books"}
           blackletters={"Tech"}  redletters={"News"}/>
 
       <div className='mt-5'>

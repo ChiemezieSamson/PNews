@@ -32,6 +32,7 @@ export const SocialMediaIcons = [
 			 group-hover:bg-[#e4405f]"
 			/>
 		),
+		link: "https://www.instagram.com",
 		socialLinks: "text-[#e4405f]",
 		number: 87.1 + "k",
 		text: "Followers",
@@ -47,6 +48,7 @@ export const SocialMediaIcons = [
 			 group-hover:bg-[#4267B2]"
 			/>
 		),
+		link: "https://www.facebook.com",
 		socialLinks: "text-[#4267B2]",
 		number: 649,
 		text: "Followers",
@@ -62,6 +64,7 @@ export const SocialMediaIcons = [
 			 group-hover:bg-[#1DA1F2]"
 			/>
 		),
+		link: "https://twitter.com",
 		socialLinks: "text-[#1DA1F2]",
 		number: 23.7 + "k",
 		text: "Followers",
@@ -77,6 +80,7 @@ export const SocialMediaIcons = [
 			 group-hover:bg-[#FF0000]"
 			/>
 		),
+		link: "https://www.youtube.com/",
 		socialLinks: "text-[#FF0000]",
 		number: 25.7 + "k",
 		text: "Followers",
@@ -92,6 +96,7 @@ export const SocialMediaIcons = [
 			 group-hover:bg-[#0e76a8]"
 			/>
 		),
+		link: "https://www.linkedin.com/",
 		socialLinks: "text-[#0e76a8]",
 		number: 28.7 + "k",
 		text: "Followers",
@@ -107,6 +112,7 @@ export const SocialMediaIcons = [
 			 group-hover:bg-[#ff6f00]"
 			/>
 		),
+		link: "https://www.mywebsite.com/",
 		socialLinks: "text-[#ff6f00]",
 		number: 99,
 		text: "Subscribers",

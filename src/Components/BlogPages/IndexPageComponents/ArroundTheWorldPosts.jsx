@@ -12,8 +12,8 @@ const ArroundTheWorldPosts = ({Posts, categories, users, Comments}) => {
       <hr />
       
       {/* === Header title and possible categories === */}
-      <CatSidebarHanbugar  initial={categories.lifestyle.category}
-        blackletters={"Arround the"} redletters={"world"}
+      <CatSidebarHanbugar  initial={categories} parent={"lifestyle"}
+        blackletters={"Arround the"} redletters={"world"} 
       />
 
        {/* === Posts image and title start here === */}

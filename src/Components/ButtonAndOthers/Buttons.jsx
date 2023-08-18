@@ -79,7 +79,7 @@ export const NavLinksAndArrows = ({opncategories, hideShowNavLinks}) => {
 };
 
 
-export const CatSideBarHanbugar = ({sidebar_state, handleShowCatSideBar}) => {
+export const CatSideBarHanbugarButton = ({sidebar_state, handleShowCatSideBar}) => {
   const [state, setState] = useState(sidebar_state)
 
   const handle_toggle = () => {

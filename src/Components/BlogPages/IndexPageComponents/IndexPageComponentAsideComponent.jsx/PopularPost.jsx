@@ -28,7 +28,7 @@ let number = 2
             top-0 italic cursor-pointer'>{`${"0" + (number - 1)}`}</span>
           </h4>
 
-          <SharedCount />
+          <SharedCount postId={Posts[0]._id} postTitle={Posts[0].postTitle} SocialSharedCount={Posts[0].optional.socialmediashare}/>
         </div>
       </div>
 
@@ -52,7 +52,7 @@ let number = 2
                 <h4 className="capitalize col-span-7 font-lora tracking-wide font-extrabold text-stone-800 lg:text-base text-sm imgxs:text-base md:text-[13px]">
                   <Link to={`/single/${post._id}`} className='hover:text-[#f70d28] cursor-pointer'>{post.postTitle}</Link>
                   <span className='block'>
-                    <SharedCount />
+                    <SharedCount postId={post._id} postTitle={post.postTitle} SocialSharedCount={post.optional.socialmediashare}/>
                   </span>              
                 </h4>
               </li>          

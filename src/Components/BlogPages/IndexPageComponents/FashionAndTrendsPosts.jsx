@@ -13,7 +13,7 @@ const FashionAndTrendsPosts = ({Posts, categories}) => {
       <hr />
 
         {/* === Header title and possible categories === */}
-      <CatSidebarHanbugar initial={categories.favorite.category}
+      <CatSidebarHanbugar initial={categories} parent={"favorite"}
         blackletters={"Fashion &"} redletters={"Trends"}/>
         
         {/* === Posts image and title start here === */}

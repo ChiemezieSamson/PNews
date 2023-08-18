@@ -36,3 +36,25 @@ export const handleUserPassword = (value) => {
 
   return {isValid: isValid}
 }
+
+
+// searching for a link included into the comment box.
+export const commentText = (comment) => {
+  const commentContent = comment
+  const linkPattern = /(https?:\/\/[^\s]+)/g;  // regular expressions
+  let Content
+
+  // if the textarea content has a link add it inside a link tag
+  if (commentContent.match(linkPattern)) {
+    const modifiedText = commentContent.replace(linkPattern, 
+      `<a href="$&" target={"_blank"}
+          class="text-blue-500 active:text-blue-400 cursor-pointer visited:text-purple-400">$&</a>`);
+
+    Content = modifiedText   
+  } else {
+
+    Content = commentContent
+  }    
+  
+  return {text: Content}
+}
