@@ -20,24 +20,26 @@ const BooksIndexPage = () => {
 
   return (
     <div className='disabled:opacity-40' disabled={isFetching}>
-      {canOpen && 
+
         <SharedBlogPageStyleOne
           users={users} 
-          Posts={Posts.slice(0,4)} 
-          />}
+          Posts={canOpen && Posts?.slice(0,4)} 
+          canOpen={canOpen}
+          />
 
         <div className='md:grid md:grid-cols-3'>
           <div className="md:col-span-2 md:mr-[3%]">
             <NavDirectionAndPageName />
           
-            {canOpen && 
+          
             <PagesBlogPostComponent
               users={users}
               Comments={Comments}
-              Posts={Posts.slice(4,10)}
+              Posts={canOpen && Posts?.slice(4,10)}
               currentPage={currentPage}
               totalPages={totalPages}
-              />}
+              canOpen={canOpen}
+              />
               
           </div>
 

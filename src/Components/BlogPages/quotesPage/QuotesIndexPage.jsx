@@ -14,18 +14,18 @@ const QuotesIndexPage = () => {
   const Comments = commentsContent
 
   const canOpen = [action, useraction, commentaction].every(Boolean)
+
   return (
     <div className='disabled:opacity-40' disabled={isFetching}>
-      {canOpen &&
         <QuotesPage 
           users={users}
           Comments={Comments}
-          ThreeFirstPost={Posts.slice(0, 4)} 
-          PagePost={Posts.slice(4, 12)}
+          ThreeFirstPost={canOpen && Posts?.slice(0, 4)} 
+          PagePost={canOpen && Posts?.slice(4, 12)}
           currentPage={currentPage}
           totalPages={totalPages}
-          />
-          }
+          canOpen={canOpen}
+        />
     </div>    
   )
 }

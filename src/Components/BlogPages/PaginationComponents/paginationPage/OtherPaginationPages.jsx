@@ -16,17 +16,19 @@ const OtherPaginationPages = () => {
   const Comments = commentsContent
 
   const canOpen = [action, useraction, commentaction].every(Boolean)
+
   return (
     <div>
-      <div className='md:grid md:grid-cols-3'>
+      <div className='md:grid md:grid-cols-3 text-left'>
           <div className="md:col-span-2 md:mr-[3%]">
             <NavDirectionAndPageName />
           
-            {canOpen && 
             <PagesBlogPostComponent
               users={users}
               Comments={Comments}
-              Posts={Posts}/>}
+              Posts={Posts}
+              canOpen={canOpen}
+            />
           </div>
 
           <aside className="md:col-span-1 mt-8 md:ml-[3%]">

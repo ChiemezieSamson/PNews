@@ -120,7 +120,7 @@ export const PagesBlogPostComponent = ({Posts, users, Comments, currentPage, tot
     <div>
       {canOpen ?
         <ul className='mt-5 text-left'>
-          {Posts.map((post) => {
+          {Posts?.map((post) => {
             return (
               <li key={post._id} className="grid grid-cols-5 md:grid-cols-2 mt-3 first:mt-0 last:pb-0 pb-3">
 
@@ -161,7 +161,7 @@ export const PagesBlogPostComponent = ({Posts, users, Comments, currentPage, tot
         :
         <SearchPostSpinner
           groupStyle={"grid grid-cols-5 md:grid-cols-2 mt-3 first:mt-0 last:pb-0 pb-3"}
-          imageStyle={"max-h-36 sm:max-h-48 lg:max-h-60"}
+          imageStyle={"mr-[2%] col-span-2 md:col-span-1 max-h-36 sm:max-h-48 lg:max-h-60"}
           textStyle={"ml-[2%] col-span-3 md:col-span-1 pt-4"}
         />
         }

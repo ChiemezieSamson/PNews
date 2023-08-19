@@ -19,8 +19,8 @@ const PaginationPages = () => {
         <div className='mt-8 col-span-2 md:mr-[3%] '>        
           {action && 
           <JustTimeComponetCatBlockStar 
-          Posts={Posts.slice(0, 5)} 
-          grid={"imgxs:grid imgxs:grid-cols-2 gap-x-4"}
+            Posts={Posts.slice(0, 5)} 
+            grid={"imgxs:grid imgxs:grid-cols-2 gap-x-4"}
           />}
 
           <div className='grid grid-flow-col justify-center w-full'>      

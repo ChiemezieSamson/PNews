@@ -18,30 +18,27 @@ const CategorySearchpagination = () => {
   const canOpen = [action, useraction, commentaction].every(Boolean)
 
   return (
-    <>
-      {canOpen &&
-        <div className='grid grid-flow-row md:grid-cols-3 disabled:opacity-40' disabled={isFetching}>
+    <div className='grid grid-flow-row md:grid-cols-3 disabled:opacity-40' disabled={isFetching}>
 
-          <aside className="md:col-span-1 mt-8 md:mr-[3%] order-last md:order-first">
-            <StickyBox offsetTop={0} offsetBottom={0}>
-              <Aside Comments={Comments}/>
-            </StickyBox>
-          </aside>
+      <aside className="md:col-span-1 mt-8 md:mr-[3%] order-last md:order-first">
+        <StickyBox offsetTop={0} offsetBottom={0}>
+          <Aside Comments={Comments}/>
+        </StickyBox>
+      </aside>
 
-          <div className="md:col-span-2 md:ml-[3%]">
-            <NavDirectionAndPageName />
-          
-            <PagesBlogPostComponent 
-              users={users}
-              Comments={Comments}
-              Posts={Posts.slice(0, 10)}
-              currentPage={currentPage}
-              totalPages={totalPages}
-              />
-          </div>
-        </div>
-      }
-    </>
+      <div className="md:col-span-2 md:ml-[3%] text-left">
+        <NavDirectionAndPageName />
+      
+        <PagesBlogPostComponent 
+          users={users}
+          Comments={Comments}
+          Posts={canOpen && Posts?.slice(0, 10)}
+          currentPage={currentPage}
+          totalPages={totalPages}
+          canOpen={canOpen}
+        />
+      </div>
+    </div>     
   )
 }
 
