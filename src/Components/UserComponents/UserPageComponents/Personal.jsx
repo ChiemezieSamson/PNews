@@ -1,151 +1,296 @@
 import React, { useEffect, useState } from 'react'
-import { FaCheckDouble } from "react-icons/fa";
 import { useUpdateExistingUserMutation } from '../../../Reduxstore/Slices/users/UsersSlice';
-import { UserInfoHeading } from '../../SharedAsset/SharedAssets';
+import { CorrectTick, UserInfoHeading } from '../../SharedAsset/SharedAssets';
 import { useFetchedUserById } from '../../SharedAsset/Spinners/userSpinner';
+import { livingaddress, textOnly } from '../../SharedAsset/Vaidations/RegularExpression';
 
 const Personal = () => {
+  // fetching the user from the server
   const {singleUser, userAction, isFetching} = useFetchedUserById()
+  // Redux toolkit function use to update user personal information
   const [userPersonalInfoUpdated, {isLoading}] = useUpdateExistingUserMutation()
+
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [location, setLocation] = useState("");
+  const [errMsg, setErrMsg] = useState('')
+
+  const [errMsgOn, setErrMsgOn] = useState(false) // Indicate that there is an error
+
+
+  const [firstNameIsValid, setFirstNameIsValid] = useState(true); // regular expressions
+  const [lastNameIsValid, setLastNameIsValid] = useState(true); // regular expressions
+  const [locationIsValid, setLocationIsValid] = useState(true); // regular expressions
+
   const user = singleUser
 
-  const canSave = [firstName, lastName, location].every(Boolean) && !isLoading
+  // handling setting the value of first name
+  const handleFirstName = (e) => {
+    // close the error message(if any), once the user change any input
+    if(errMsgOn) {
+      setErrMsg(() => "")
+      setErrMsgOn(() => false)
+    }
+
+    const { value } = e.target;
+    const { isValid } = textOnly(value); // function for texting the entered text format
+    setFirstNameIsValid(isValid);
+    setFirstName(() => value)
+  }
+
+  // handling setting the value of last name
+  const handleLastName = (e) => {
+    // close the error message(if any), once the user change any input
+    if(errMsgOn) {
+      setErrMsg(() => "")
+      setErrMsgOn(() => false)
+    }
+
+    const { value } = e.target;
+    const { isValid } = textOnly(value); // function for texting the entered text format
+    setLastNameIsValid(isValid);
+    setLastName(() => value)
+  }
+
+  // handling setting the value of  living addresses
+  const handlelivingaddresses = (e) => {
+    // close the error message(if any), once the user change any input
+    if(errMsgOn) {
+      setErrMsg(() => "")
+      setErrMsgOn(() => false)
+    }
+
+    const { value } = e.target;
+    const { isValid } = livingaddress(value); // function for texting the entered text format
+    setLocationIsValid(isValid);
+    setLocation(() => value)
+  }
+
+
+  // UPDATE USER INFOR
+  const canSave = [firstName, lastName, location, firstNameIsValid, lastNameIsValid, locationIsValid].every(Boolean) && !isLoading
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+
     if (canSave) {
-      await userPersonalInfoUpdated({userId: user._id, name: {firstname: firstName, lastname: lastName}, location})
+
+      try{
+
+        await userPersonalInfoUpdated({userId: user._id, name: {firstname: firstName, lastname: lastName}, location})
+
+        setFirstName(() => "")
+        setLastName(() => "")
+        setLocation(() => "")
+      } catch (err) {
+
+        console.error('Failed to register: ', err)
+        setErrMsg('Failed to update!');
+        setErrMsgOn(() => true)
+      } 
     }
   };
 
-  useEffect(() =>{
+  useEffect(() =>{ // update the input once fetch is complete
+
     if(userAction) {
+
       setFirstName(() => user.name.firstname)
       setLastName(() => user.name.lastname)
       setLocation(() => user.location)
     }
-  },[userAction,user])
+  },[userAction, user])
+
 
   return (
-    <>
-    {
-      userAction ? 
-      <div className='text-left px-5 mt-8 font-source pt-7 pb-5 disabled:opacity-40' disabled={isFetching}>
+    <div className='text-left px-5 mt-8 font-source pt-7 pb-5 disabled:opacity-40' disabled={isFetching}>
 
       {/* User first name and last name are inside the form tag  */}
       <UserInfoHeading head={"User Name"} text={"For Account and Public Profile"}/>
-      
+      {errMsgOn && <p className='text-xs text-rose-500 tracking-wider font-lora'>{errMsg}</p>}
+    
       <form id='userinformation' name='userinfoform' className='py-3 my-0.5' onSubmit={handleSubmit}>
 
-         {/* UserFirst Name */}
+        {/* UserFirst Name */}
         <label htmlFor="userfirstname" className='tracking-wide font-medium'>
+
           <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block mt-4 text-sm font-medium text-slate-700 capitalize">
             First Name
           </span>
+
           <div className='relative'>
-            <input type="text" name="userfirstname" id="userfirstname"  className='peer mb-0' onChange={(e) => setFirstName(() => e.target.value)}
-            required value={firstName}  placeholder={user.name.firstname}/>
+
+            <input 
+              type="text" 
+              name="userfirstname" 
+              id="userfirstname"  
+              className={`peer mb-0 ${(!firstNameIsValid && firstName) ? "border-red-500 text-red-600 focus:border-red-500 focus:ring-red-500" :
+              ""}`} 
+              onChange={handleFirstName}
+              aria-label='text'
+              maxLength={20}
+              autoFocus={true}
+              required 
+              value={firstName}  
+              placeholder={user?.name?.firstname}
+            />
+
             <p className="mt-0.5 hidden peer-invalid:block text-red-400 text-sm">
                 Please provide your first name.
             </p>
-            <span className='absolute top-1/3 peer-invalid:top-[20%] right-4 p-px peer-invalid:hidden'>
-              <FaCheckDouble className="inline-block text-xs text-green-500" />
-            </span>
+
+            <CorrectTick 
+              IsValid={firstNameIsValid}
+              positionTop={"top-[25%]"}
+            />
           </div>          
         </label>
         
-          {/* UserLastName */}
+        {/* UserLastName */}
         <label htmlFor="userlastname" className='tracking-wide font-medium'>
+
           <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block mt-4 text-sm font-medium text-slate-700 capitalize">
             Last Name
           </span>
+
           <div className='relative'>
-            <input type="text" name="userlastname" id="userlastname" className='peer mb-0' onChange={(e) => setLastName(() => e.target.value)}
-            required placeholder={user.name.lastname} value={lastName}/>
+
+            <input 
+              type="text" 
+              name="userlastname" 
+              id="userlastname" 
+              className={`peer mb-0 ${(!lastNameIsValid && lastName) ? "border-red-500 text-red-600 focus:border-red-500 focus:ring-red-500" :
+              ""}`} 
+              onChange={handleLastName}
+              aria-label='text' 
+              maxLength={20} 
+              required 
+              placeholder={user?.name?.lastname} 
+              value={lastName}
+            />
+
             <p className="mt-0.5 hidden peer-invalid:block text-red-400 text-sm">
               Please provide your last name.
             </p>
-            <span className='absolute top-1/3 peer-invalid:top-[20%] right-4 p-px peer-invalid:hidden'>
-              <FaCheckDouble className="inline-block text-xs text-green-500" />
-            </span>
+
+            <CorrectTick 
+              IsValid={lastNameIsValid}
+              positionTop={"top-[25%]"}
+            /> 
           </div>          
         </label>
 
-          {/* UserLocation */}
+        {/* UserLocation */}
         <label htmlFor="userlocation" className='tracking-wide font-medium'>
+
           <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block mt-4 text-sm font-medium text-slate-700 capitalize">
             Location
           </span>
+
           <div className='relative'>
-            <input type="text" name="userlocation" id="userlocation"  className='peer mb-0'
-            required placeholder={user.location} value={location} onChange={(e) => setLocation(() => e.target.value)}/>
+
+            <input 
+              type="text" 
+              name="userlocation" 
+              id="userlocation"  
+              className={`peer mb-0 ${(!locationIsValid && location) ? "border-red-500 text-red-600 focus:border-red-500 focus:ring-red-500" :
+              ""}`}
+              required 
+              aria-label='text' 
+              maxLength={180}
+              placeholder={user?.location} 
+              value={location} 
+              onChange={handlelivingaddresses}
+            />
+
             <p className="mt-0.5 hidden peer-invalid:block text-red-400 text-sm">
               Please provide your location.
             </p>
-            <span className='absolute top-1/3 peer-invalid:top-[20%] right-4 p-px peer-invalid:hidden'>
-              <FaCheckDouble className="inline-block text-xs text-green-500" />
-            </span>
+
+            <CorrectTick 
+              IsValid={locationIsValid}
+              positionTop={"top-[25%]"}
+            />
           </div>             
         </label>  
 
 
-         {/* The login password and email are outside the tag but connected with the ' form ' attribute */}
-        <div className='mt-5'>
-          <h3 className='text-3xl font-normal my-1 pr-2 text-[#282a35]  capitalize'>Login</h3>
-          <small className='text-sm font-normal text-[#798488] my-1'><p>Your Login Credentials</p></small>
+        {/* The login password and email  */}
+        <div className=' mt-5'>
+          <UserInfoHeading head={"Login"} text={"Your Login Credentials"}/>
         </div>
 
         <div className='py-3 my-0.5'>
         
           {/* UserEmail */}
           <label htmlFor="useremail" className='tracking-wide font-medium'>
+
             <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block mt-4 text-sm font-medium text-slate-700 capitalize">
               Email
             </span>
+
             <div className='relative'>
-              <input type="email" name="useremail" id="useremail"  className='peer mb-0'
-               placeholder={user.email.primary} readOnly/>
+
+              <input 
+                type="email" 
+                name="useremail" 
+                id="useremail"  
+                className='peer mb-0'
+                placeholder={user?.email?.primary} 
+                readOnly
+              />
+
               <p className="mt-0.5 hidden peer-invalid:block text-red-400 text-sm">
                 Please provide a valid email address.
               </p>
-              <span className='absolute top-1/3 peer-invalid:top-[20%] right-4 p-px peer-invalid:hidden'>
-                <FaCheckDouble className="inline-block text-xs text-green-500" />
-              </span>
+
+              <CorrectTick 
+                IsValid={lastNameIsValid}
+                positionTop={"top-[25%]"}
+              /> 
             </div>          
           </label>          
 
 
             {/* UserPassorw */}
           <label htmlFor="userpassword" className='tracking-wide font-medium'>
+
             <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block mt-4 text-sm font-medium text-slate-700 capitalize">
               Password
             </span>
+
             <div className='relative'>
-              <input type="password" name="userpassword" id="userpassword"  className='peer mb-0'
-              placeholder="⁕⁕⁕⁕⁕⁕⁕⁕" readOnly/>
+              <input 
+                type="password" 
+                name="userpassword" 
+                id="userpassword"  
+                className='peer mb-0'
+                placeholder="⁕⁕⁕⁕⁕⁕⁕⁕" 
+                readOnly
+              />
+
               <p className="mt-0.5 hidden peer-invalid:block text-red-400 text-sm">
               Please provide a valid password.
               </p>
-              <span className='absolute top-1/3 peer-invalid:top-[20%] right-4 p-px peer-invalid:hidden'>
-                <FaCheckDouble className="inline-block text-xs text-green-500" />
-              </span>
+
+              <CorrectTick 
+                IsValid={lastNameIsValid}
+                positionTop={"top-[25%]"}
+              /> 
             </div>             
           </label>           
         </div>
 
         <div className='mt-5 p-2 grid place-items-end'>
-          <button className='text-[#798488] bg-gray-300 capitalize border-0 py-2.5 px-8 rounded-full cursor-pointer text-base shadow-[#444] 
-            shadow-sm disabled:opacity-40' type='submit' form='userinformation' disabled={!canSave}>Save</button>
+          <button 
+            className='text-neutral-600 bg-neutral-200 capitalize border-0 py-2.5 px-8 rounded-full TextHeadertransition
+            cursor-pointer text-base shadow-neutral-400 shadow-sm disabled:opacity-40 hover:bg-neutral-300' 
+            type='submit' 
+            form='userinformation' 
+            disabled={!canSave}>Save</button>
         </div>               
       </form>        
-    </div> :
-      singleUser
-    }
-    </>
-    
+    </div> 
   )
 }
 

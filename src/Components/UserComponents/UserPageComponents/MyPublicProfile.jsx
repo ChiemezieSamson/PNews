@@ -5,8 +5,11 @@ import { UserInfoHeading } from '../../SharedAsset/SharedAssets'
 import { useFetchedUserById } from '../../SharedAsset/Spinners/userSpinner';
 
 const MyPublicProfile = () => {
+  // fetching the user from the server
   const {singleUser, userAction, isFetching} = useFetchedUserById()
+  // Redux toolkit function use to update user public information
   const [userPublicProfile, {isLoading}] = useUpdateExistingUserPublicProFileMutation()
+
   const [nickname, setNickname] = useState("")
   const [biography, setBiography] = useState("")
   const [secondaryEmail, setSecondaryEmail] = useState("")
@@ -17,8 +20,9 @@ const MyPublicProfile = () => {
   const [instagram, setInstagram] = useState("")
   const [youTube, setYouTube] = useState("")
   const [website, setWebsite] = useState("")
-  const [emailExist, setEmailExist] = useState(false)
 
+
+  const [emailExist, setEmailExist] = useState(false) // notify the user that the entered email already exist
 
   const user = singleUser
 

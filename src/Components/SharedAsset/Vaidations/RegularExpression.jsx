@@ -38,6 +38,17 @@ export const handleUserPassword = (value) => {
 }
 
 
+//  regular expression living addresses 
+export const livingaddress = (value) => {
+  const addressRegx = /^(?!.*(?:\b(?:https?|ftp):\/\/|www\.|@\w+\.\w+\b)).+$/
+
+  const isValid = addressRegx.test(value);
+
+  return {isValid: isValid}
+}
+
+
+
 // searching for a link included into the comment box.
 export const commentText = (comment) => {
   const commentContent = comment

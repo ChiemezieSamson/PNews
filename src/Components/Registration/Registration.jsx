@@ -3,7 +3,8 @@ import { useCreateNewUserMutation } from "../../Reduxstore/Slices/users/UsersSli
 import useFetchedUsers from "../SharedAsset/Spinners/userSpinner";
 import { Link, useNavigate } from "react-router-dom";
 import { handleEmailPattern, handleUserPassword, textAndNumberOnly, textOnly } from "../SharedAsset/Vaidations/RegularExpression";
-import { FaCheckDouble, FaRegEye, FaRegEyeSlash } from "react-icons/fa";
+import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
+import { CorrectTick } from "../SharedAsset/SharedAssets";
 
 const RegistrationForm = () => {
   // Redux toolkit that calls the back end to create a user account
@@ -40,7 +41,7 @@ const RegistrationForm = () => {
 
   // handling setting the value of first name
   const handleFirstName = (e) => {
-    // close the error message(if any) once the use change any input
+    // close the error message(if any), once the user change any input
     if(errMsgOn) {
       setErrMsg(() => "")
       setErrMsgOn(() => false)
@@ -54,7 +55,7 @@ const RegistrationForm = () => {
 
   // handling setting the value of last name
   const handleLastName = (e) => {
-    // close the error message(if any) once the use change any input
+    // close the error message(if any), once the user change any input
     if(errMsgOn) {
       setErrMsg(() => "")
       setErrMsgOn(() => false)
@@ -162,7 +163,9 @@ const RegistrationForm = () => {
     event.preventDefault();
 
     if (canSave) {
+      
       try {
+
         await addNewUser({firstname, lastname, username, primary, password, confirmPassword}).unwrap()
 
         navigate("/login")
@@ -170,7 +173,7 @@ const RegistrationForm = () => {
 
         console.error('Failed to register: ', err)
         setErrMsg('Failed to register');
-          setErrMsgOn(() => true)
+        setErrMsgOn(() => true)
       }     
    }   
 
@@ -221,9 +224,10 @@ const RegistrationForm = () => {
                   onChange={handleFirstName}
                 />
 
-                <span className={`absolute top-[22%] right-4 p-px ${firstNameIsValid ? "inline" : "hidden"}`}>
-                  <FaCheckDouble className="inline-block text-xs text-green-500" />
-                </span>
+                <CorrectTick 
+                  IsValid={firstNameIsValid}
+                  positionTop={"top-[18%]"}
+                />                
               </div>
             </label>
   
@@ -237,8 +241,8 @@ const RegistrationForm = () => {
               <div className='relative'>
 
                 <input
-                className={`${(!lastNameIsValid && lastname) ? "border-red-500 text-red-600 focus:border-red-500 focus:ring-red-500" :
-                ""}`}
+                  className={`${(!lastNameIsValid && lastname) ? "border-red-500 text-red-600 focus:border-red-500 focus:ring-red-500" :
+                  ""}`}
                   id="lastname"
                   name="userregisteredlastname"
                   type="text"
@@ -250,9 +254,10 @@ const RegistrationForm = () => {
                   onChange={handleLastName}
                 />
 
-                <span className={`absolute top-[22%] right-4 p-px ${lastNameIsValid ? "inline" : "hidden"}`}>
-                  <FaCheckDouble className="inline-block text-xs text-green-500" />
-                </span>
+                <CorrectTick 
+                  IsValid={lastNameIsValid}
+                  positionTop={"top-[18%]"}
+                />   
               </div>              
             </label>
 
@@ -281,9 +286,10 @@ const RegistrationForm = () => {
 
                 {userNameExist && <p className='text-xs text-rose-500 tracking-wider font-lora mb-5'>Already have a user with this email!</p>}
 
-                <span className={`absolute top-[22%] right-4 p-px ${isValid ? "inline" : "hidden"}`}>
-                  <FaCheckDouble className="inline-block text-xs text-green-500" />
-                </span>
+                <CorrectTick 
+                  IsValid={firstNameIsValid}
+                  positionTop={"top-[18%]"}
+                /> 
               </div>              
             </label>
 
@@ -309,9 +315,10 @@ const RegistrationForm = () => {
 
                 {emailExist && <p className='text-xs text-rose-500 tracking-wider font-lora'>Already have a user with this email!</p>}  
 
-                <span className={`absolute top-[22%] right-4 p-px ${emailIsValid ? "inline" : "hidden"}`}>
-                  <FaCheckDouble className="inline-block text-xs text-green-500" />
-                </span> 
+                <CorrectTick 
+                  IsValid={firstNameIsValid}
+                  positionTop={"top-[18%]"}
+                /> 
               </div>             
             </label>
             

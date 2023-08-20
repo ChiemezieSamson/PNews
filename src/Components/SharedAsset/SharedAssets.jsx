@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { FaFacebookSquare,   FaRegClock, FaRegComment, FaShareAlt, FaTwitter} from 'react-icons/fa';
+import { FaCheckDouble, FaFacebookSquare,   FaRegClock, FaRegComment, FaShareAlt, FaTwitter} from 'react-icons/fa';
 import { FacebookShareButton, TwitterShareButton } from "react-share";
 import { SocialMediaIcons } from '../../data';
 import { CatSideBarHanbugarButton } from '../ButtonAndOthers/Buttons';
@@ -653,6 +653,17 @@ export const SinginAndSecurityIntro = ({text}) => {
     <div className='font-medium tracking-wide font-josefin'>
       <p>{text}</p>
     </div>
+  )
+}
+
+
+// Green correct tick component, user, register login input tick 
+export const CorrectTick = ({IsValid, positionTop}) => {
+
+  return (
+    <span className={`${positionTop} absolute right-4 p-px ${IsValid ? "inline" : "hidden"}`}>
+      <FaCheckDouble className="inline-block text-xs text-green-500 drop-shadow-md" />
+    </span>
   )
 }
 
