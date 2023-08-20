@@ -3,73 +3,150 @@ import { useUpdateExistingUserImageMutation } from '../../../Reduxstore/Slices/u
 import { useFetchedUserById } from '../../SharedAsset/Spinners/userSpinner'
 import axios from "axios"
 import { publicFolder } from '../../../data'
+import { UserInfoHeading } from '../../SharedAsset/SharedAssets'
 
 
-const MyProfilePicture = () => {
-  const [file, setFile] = useState("")
+const MyProfilePicture = () => { 
+  // fetching the user from the server
   const {singleUser, userAction, isFetching} = useFetchedUserById()
+  // Redux function to update user profile pictur changes
   const [userProfilePicture, {isLoading}] = useUpdateExistingUserImageMutation()
+
+  
+  const [errorText, setErrorText] = useState(false) /// text used to indicate that your update didn't save or there is an erro
+  const [errorText2, setErrorText2] = useState(false) /// text used to indicate that your update didn't save or there is an erro
+
+  
   const [profileImage, setProfileImage] = useState("")
+  const [errorMessage, setErrorMessage] = useState("");
+  const [file, setFile] = useState("")
+
   const user = singleUser  
 
-  const canSave = [profileImage].every(Boolean) && !isLoading
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    if(canSave) {
-      await userProfilePicture({userId: user._id, profileImage})
-      setProfileImage(() => "")
-    }
-  }
-
+  // handling setting image once selected from the user device
   const handleImage = async (e) => {
     if(e.target.value) {
-      const data = new FormData()
-      const filename = Date.now() + e.target.files[0].name;
-      
-      data.append("name", filename)
-      data.append("file", e.target.files[0])
-       
-      setProfileImage(() => filename)
-      setFile(() => e.target.files[0])
-     try {
-      await axios.post("/upload", data)
-     } catch (err) {
+      setErrorText(() => false)
 
+      const data = new FormData()
+      const file = e.target.files[0]
+      const fileSizeInMB = file.size / (1024 * 1024); // Convert to MB
+
+      if (fileSizeInMB > 1) {
+
+        setErrorMessage('Image size exceeds 1MB limit');
+        setProfileImage(() => "")
+      } else {
+        setErrorMessage('');
+
+        const filename = Date.now() + file.name; // making sure no two file have same name
+        
+        data.append("name", filename)
+        data.append("file", file)
+        
+        setProfileImage(() => filename)
+        setFile(() => file)
+        try {
+
+          await axios.post("/upload", data)
+
+        } catch (err) {
+
+          setErrorText(() => true)
+          console.error(err)
+        }
      }
     }
   }
 
+  const canSave = [profileImage].every(Boolean) && !isLoading
+
+
+  //handle form submmition and api calling
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    if(canSave) {
+      setErrorText2(() => false)
+
+      try{
+
+        await userProfilePicture({userId: user._id, profileImage})
+  
+        setProfileImage(() => "")
+        setFile(() => "")
+      } catch (err) {
+
+        setErrorText2(() => true)
+        console.error(err)
+      }
+    }
+  }
+
   return (
-    <>
-    {
-      userAction ?
-      <div className='px-3 mb-12 bg-gray-200/40 pb-5 pt-5 rounded-md disabled:opacity-40' disabled={isFetching}>
+    <div className='px-3 mb-12 bg-gray-200/40 pb-5 pt-5 rounded-md disabled:opacity-40' disabled={isFetching}>
+
+      {/* Head Introduction */}
       <div className='font-semibold px-3 mb-9'>
-        <p className='text-[#282a35] text-2xl capitalize'>My Profile picture</p>
-        <small className='text-xs text-[#798488]'>Add a photo of you to be easily recognized</small>
-      </div>
-      <div>
-        <div className="max-w-[200px] mx-auto h-full+ border border-solid border-[#e7e9eb] rounded-full
-        text-white group cursor-default shadow-md shadow-[rgba(0,0,0,.25)] relative overflow-clip mb-7">
-          <div className='relative after:absolute after:inset-0 after:bg-white/10 after:z-10 w-ful h-full'>
-          {file ? <img  src={URL.createObjectURL(file)} alt="postImage" className='w-auto h-auto object-cover' loading="lazy"/> :
-            <img src={publicFolder + user.profileImage} alt="userprofileimage" className='w-full h-auto object-cover' loading="lazy"/>}
-          </div>      
-          <form 
-          id='profileImage'
-          onSubmit={handleSubmit} 
-          className='absolute inset-x-0 z-20 group-hover:top-2/3 bg-gray-900/30 bottom-0 pt-3 transition-all duration-500 ease-linear opacity-0 group-hover:opacity-100'>
-            <label htmlFor="userimage" className='text-xs uppercase tracking-widest'>Upload Image</label>
-            <input type="file" id="userimage" name='userimage' hidden onChange={handleImage}/>
-          </form>
-        </div>        
+        <UserInfoHeading 
+          head={"My Profile picture"}
+          text={"Add a photo of you to be easily recognized"}
+        />
+        {errorText2 && <p className='text-xs text-rose-500 mb-1 tracking-wider font-lora'>Failed to save the image</p>}
       </div>
 
+      {/* Image and image form */}
+      <div className="max-w-[200px] mx-auto h-full max-h-52 border-4 border-inherit overflow-hidden rounded-full text-white text group cursor-pointer shadow-md shadow-[rgba(0,0,0,.25)] relative mb-7">
+
+        <div className='relative after:absolute after:inset-0 after:bg-white/10 after:z-10 w-ful h-screen max-h-52'>
+          {userAction ? 
+          <>
+            {file ? 
+              <img  src={URL?.createObjectURL(file)} alt="postImage" className='max-h-52' loading="lazy"/> :
+              <img src={publicFolder + user?.profileImage} alt="userprofileimage" className='max-h-52' loading="lazy"/>
+            }
+          </>
+          :
+          <div className='skeleton rounded-sm h-screen w-screen'></div>
+          }
+        </div>      
+
+        <form 
+          id='profileImage'
+          onSubmit={handleSubmit} 
+          className='absolute inset-x-0 z-20 group-hover:top-2/3 bg-neutral-400/40 drop-shadow bottom-0 pt-3 TextHeadertransition opacity-0 group-hover:opacity-100'>
+          <label htmlFor="userimage" className='text-xs uppercase tracking-widest'>Upload Image</label>
+          <input 
+            type="file" 
+            id="userimage" 
+            name='userimage'
+            accept="image/*" 
+            required
+            hidden 
+            onChange={handleImage}/>
+        </form>
+      </div>
+
+      {/* errorMessage notification  */}
+      {errorMessage && <p className='text-xs text-rose-500 tracking-wider font-lora'>{errorMessage}</p>}
+      {errorText && <p className='text-xs text-rose-500 tracking-wider font-lora'>Failed to upload image the image</p>}        
+      
+      {/* user name and full name*/}
       <div className='px-3 pb-5'>
-        <h3 className='text-xl font-semibold text-[#282a35] capitalize'>{user.fullName}</h3>
-        <label htmlFor="usernickname" className="text-sm capitalize italic hover:text-red-400 text-red-700 
-        tracking-widest underline underline-offset-2 block">{user.username}</label>
+        {userAction ?
+          <>
+            <h3 className='text-xl font-semibold text-[#282a35] capitalize'>{user?.fullName}</h3>
+            <label htmlFor="usernickname" className="text-sm capitalize italic hover:text-red-400 text-red-700 
+            tracking-widest underline underline-offset-2 block">{user?.username}</label>
+          </>
+          :
+          <>
+            <div className='skeleton w-[80%] mx-auto h-6 mb-1.5 rounded-sm'></div>
+            <div className='skeleton w-[60%] mx-auto h-4 mb-0.5 rounded-sm'></div>
+          </>
+        }
+
         <button 
           type='submit' 
           form='profileImage'
@@ -79,12 +156,8 @@ const MyProfilePicture = () => {
           text-sm hover:bg-rose-500 hover:text-white transition-all duration-200 ease-linear text-neutral-600 disabled:opacity-40
           ${!canSave ? "hidden" : "inline-block"}`} disabled={!canSave}
           >Save</button>
-      </div>      
-    </div> :
-      singleUser
-    }
-    </>
-    
+      </div> 
+    </div>  
   )
 }
 

@@ -32,6 +32,7 @@ const CreatePostComponents = ({state}) => {
   const [postTitle, setPostTitle] = useState("")
   const [postImage, setPostImage] = useState("")
   const [postAuthor, setPostAuthor] = useState("")
+  const [errorMessage, setErrorMessage] = useState('');
   const [file, setFile] = useState("")
 
   const size = useWindowSize()
@@ -86,39 +87,61 @@ const CreatePostComponents = ({state}) => {
       setErrorText(() => false)
 
       const data = new FormData()
-      const filename = Date.now() + e.target.files[0].name; // making sure no two file have same name
-      
-      data.append("name", filename)
-      data.append("file", e.target.files[0])
-       
-     setPostImage(() => filename)
-     setFile(() => e.target.files[0])
-     try {
+      const file = e.target.files[0]
+      const fileSizeInMB = file.size / (1024 * 1024); // Convert to MB
 
-      await axios.post("/upload", data)
+       if (fileSizeInMB > 1) {
 
-     } catch (err) {
-      setErrorText(() => true)
-     }
+        setErrorMessage('Image size exceeds 1MB limit');
+        setPostImage(() => "")
+      } else {
+        setErrorMessage('');
+
+        const filename = Date.now() + file.name; // making sure no two file have same name
+        
+        data.append("name", filename)
+        data.append("file", file)
+          
+        setPostImage(() => filename)
+        setFile(() => file)
+        try {
+    
+          await axios.post("/upload", data)
+    
+        } catch (err) {
+
+          setErrorText(() => true)
+          console.error(err)
+        }
+      }
+
     }
   }
 
   const canSave = [postTitle, postImage, postAuthor,postCategory[0],postTags[0], isValid].every(Boolean) && !isLoading
 
   const handleAllPostContent = async () => {
+
     if (canSave) {
       setErrorText2(() => false)
+
       try {
+        
         await addNewPost({ postAuthor, postTitle, postImage, postContent , postCategory, postTags, optional }).unwrap()
+        
         dispatch(emptyCategories())
         dispatch(emptyTag())
         dispatch(emptyOptional())
+
         setPostImage(() => "")
         setPostTitle(() => "")
         setPostAuthor(() => "")
+        setFile(() => "")
         setEditorState(() => state)
       } catch (err) {
+
         setErrorText2(() => true)
+        console.error(err)
       }
     }
   }
@@ -188,6 +211,7 @@ const CreatePostComponents = ({state}) => {
                 name="image" 
                 required
                 onChange={handleImage}/>
+                {errorMessage && <p className='text-xs text-rose-500 tracking-wider font-lora'>{errorMessage}</p>}
                 {errorText ? <p className='text-xs text-rose-500 tracking-wider font-lora'>Failed to save the image</p> : "" }
             </form>
 
