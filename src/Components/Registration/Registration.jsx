@@ -315,7 +315,7 @@ const RegistrationForm = () => {
                 {emailExist && <p className='text-xs text-rose-500 tracking-wider font-lora'>Already have a user with this email!</p>}  
 
                 <CorrectTick 
-                  IsValid={firstNameIsValid}
+                  IsValid={firstNameIsValid && !emailExist}
                   positionTop={"top-[18%]"}
                 /> 
               </div>             

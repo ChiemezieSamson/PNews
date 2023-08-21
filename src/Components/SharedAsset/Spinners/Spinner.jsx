@@ -82,10 +82,10 @@ export const SearchPostSpinner = ({groupStyle, imageStyle, textStyle}) => {
 
   return (
     <ul>
-      {content.map((post, index) => {
+      {content.map((post) => {
 
       return ( 
-        <li className={`${groupStyle}`} key={index}>
+        <li className={`${groupStyle}`} key={post.id}>
           <div className={`skeleton rounded-sm my-4 h-screen ${imageStyle}`}></div>
 
           <div className={`${textStyle}`}>
@@ -137,6 +137,7 @@ export const SinglePostSpinner = () => {
   )
 }
 
+
 export const CommentSpinner = () => {
   return (
     <>
@@ -147,6 +148,33 @@ export const CommentSpinner = () => {
       <div className='skeleton w-[80%] h-4 mb-0 rounded-sm'></div>
       <div className='skeleton w-[45%] h-4 mb-0 mt-2.5 rounded-sm'></div>
     </>
+  )
+}
+
+
+export const UserSecondaryEmailSpinner = () => {
+  const EmptyValues = [...Array(4)]
+  const content  = EmptyValues.map((title, id) => ({id: id, title: title}))
+  
+  return (
+    <ul>
+      <p className='text-sm font-bold text-stone-800 mb-4'>Secondary email</p>
+
+      {content.map((email) => {
+
+        return (
+          <li className="grid grid-cols-10 mb-2.5" key={email.id}>
+            <div className='skeleton w-full h-3 mb-0.5 rounded-sm col-span-4'></div>
+            <div className="col-span-2"></div>
+
+            <div className="grid grid-cols-2 gap-x-2 col-span-4">
+              <div className='skeleton w-full h-3 mb-0.5 rounded-sm'></div>
+              <div className='skeleton w-full h-3 mb-0.5 rounded-sm'></div>
+            </div>
+          </li>
+        )
+      })}
+    </ul>
   )
 }
 

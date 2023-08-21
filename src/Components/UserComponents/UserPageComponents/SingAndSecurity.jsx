@@ -10,14 +10,18 @@ const SingAndSecurity = () => {
 
   return (
     <div className='text-left px-5 mt-8 font-source pt-7 pb-5'>
-      <UserInfoHeading head={"Account access"} text={""}/>
-
-      {userAction ? 
-      <div className='divide-y divide-solid divide-slate-500 mt-8 disabled:opacity-40' disabled={isFetching}>
-        <Email user={user}/>
-        <ChangePassword user={user}/>
-        <LogOutOrDeletUser user={user}/>
-      </div> : singleUser}
+      <UserInfoHeading head={"Security and account access"} text={"Manage your account's security and keep track of your account's usage."}/>
+      
+      <div className='divide-y divide-solid divide-neutral-400 mt-8 disabled:opacity-40' disabled={isFetching}>
+        <Email user={user} userAction={userAction}/>
+        {userAction &&
+        <>
+          <ChangePassword user={userAction && user}/>
+          <LogOutOrDeletUser user={userAction && user}/>
+        </>
+        }
+      </div> 
+     
     </div>
   )
 }

@@ -47,7 +47,7 @@ const Category = ({handleSelectedParentCat, parentCat, handleSetCategory, catego
     setOpenAddnewCat(() => false)
   }
 
-   // handling the display or hidden of of add new category component
+   // handling the display or hidden of add new category component
   const handleOpenAddNewCat = () => {
     setOpenAddnewCat((change) => !change)
   }

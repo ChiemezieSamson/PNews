@@ -199,9 +199,9 @@ export const WritePostAsideOpenClosebar = ({BarName, handle}) => {
 
   return (
     <div className='hover:bg-[#e2e2e2] px-3 py-3 flex justify-between' onClick={handleOpenCat}>
-      <b className='block font-bold text-lg text-[#444] capitalize'>{BarName}</b>
+      <b className='block font-bold text-lg text-stone-800 capitalize'>{BarName}</b>
       <span className='pt-2.5'>
-        {openCat ? <FaChevronDown /> : <FaChevronUp />}
+        {openCat ? <FaChevronDown  className="text-stone-800"/> : <FaChevronUp className="text-stone-800"/>}
       </span>
     </div>
   )

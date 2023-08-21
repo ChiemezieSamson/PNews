@@ -32,7 +32,7 @@ const UserPage = () => {
     },
     {
       id: 3,
-      name: "Sign in & Security",
+      name: "Security and account access",
       toUrl: "/userpage/security",
     },
     {

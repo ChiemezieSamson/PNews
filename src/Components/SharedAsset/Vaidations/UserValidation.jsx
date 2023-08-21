@@ -1,15 +1,17 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Hanbugar3 } from '../../ButtonAndOthers/Buttons'
+import { PasswordDisplay } from '../SharedAssets';
 
 const UserValidation = ({openValidation, onSubmitValidation, onWrongUserPassword, handleClose, canDelete,
   Userpassword, handleSetGetUserpassword, ButtonRef, textContentOfTheClickedButton, message, isValid}) => {
+    const [showPassword, setShowPassword] = useState(false); // show the password when user click the eye
   
   return (
     <div className={`${openValidation ? "fixed z-50 inset-0 p-0.5 -translate-x-[0] translate-y-0 grid place-content-center"
         : "-translate-x-[200%] translate-y-full hidden transition-all duration-500 ease-linear"}`}>
-      <div className='shadow-md font-poppins shadow-gray-400 max-w-[300px] bg-white py-7 px-5 rounded-md relative'>
+      <div className='shadow-md font-poppins shadow-neutral-400 max-w-[300px] bg-white py-7 px-5 rounded-md relative'>
 
-        <h6 className='font-bold text-lg text-stone-700 mb-4'>Enter Password</h6>
+        <h6 className='font-bold text-lg text-stone-800 mb-4'>Enter Password</h6>
         <p className='text-sm text-stone-700'>{message}</p>
 
         {/* The form to get the user inputed password */}
@@ -17,19 +19,33 @@ const UserValidation = ({openValidation, onSubmitValidation, onWrongUserPassword
         <form className='mt-4' onSubmit={onSubmitValidation}>
           {onWrongUserPassword ? <p className='text-xs text-rose-500 tracking-wider font-lora'>wrong credentials!</p> : "" }
 
-          <label htmlFor="userpasswordformakeprimary" className='text-xs font-light'>Password</label>
-          <input 
-            type="password" 
-            name='userpassword' 
-            id='userpassword'
-            maxLength={20}
-            placeholder={"Enter password"}
-            value={Userpassword}
-            className={`placeholder:text-neutral-500 
-            ${(!isValid && Userpassword) ? "border-red-500 text-red-600 focus:border-red-500 focus:ring-red-500 shadow-inner shadow-red-400" :
-            ""}`}
-            onChange={handleSetGetUserpassword}
-            required/>
+          <label htmlFor="userpasswordformakeprimary" className='text-xs font-light'>
+          
+            <span className="text-xs tracking-wider after:content-['*'] after:ml-0.5 after:text-red-500 font-bold block">
+              password
+            </span>
+
+            <div className='relative'>
+
+              <input 
+                type={`${showPassword ? "text" : "password"}`}
+                name='userpassword' 
+                id='userpassword'
+                maxLength={11}
+                placeholder={"Enter password"}
+                value={Userpassword}
+                className={`placeholder:text-neutral-500 ${(!isValid && Userpassword) ? 
+                  "border-red-500 text-red-600 focus:border-red-500 focus:ring-red-500 shadow-inner shadow-red-400" : ""}`}
+                onChange={handleSetGetUserpassword}
+                required
+              />
+
+              <PasswordDisplay 
+                showPassword={showPassword}
+                handle={() => setShowPassword((change) => !change)}
+              />
+            </div>
+          </label>
             
           <div className='grid grid-flow-col justify-between'>
 
@@ -48,13 +64,12 @@ const UserValidation = ({openValidation, onSubmitValidation, onWrongUserPassword
               name='forgetPassword'
               className='px-1 mx-1 cursor-pointer tracking-wider text-blue-400 text-sm 
               TextHeadertransition hover:text-blue-700 disabled:opacity-40'
-              disabled={!canDelete}>Forgot password</button>
+              >Forgot password</button>
           </div>
         </form>
 
           {/* cancle button used on the Enter Password box */}
-        <div title='close'
-        className="absolute top-4 right-1.5 text-base text-stone-500 p-0.5 hover:text-stone-800 TextHeadertransition">
+        <div title='close' className="absolute top-4 right-1.5 text-base text-stone-500 p-0.5 hover:text-stone-800 TextHeadertransition">
           <Hanbugar3 closesidebar={handleClose}/>
         </div>
       </div>                
