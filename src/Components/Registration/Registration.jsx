@@ -3,8 +3,7 @@ import { useCreateNewUserMutation } from "../../Reduxstore/Slices/users/UsersSli
 import useFetchedUsers from "../SharedAsset/Spinners/userSpinner";
 import { Link, useNavigate } from "react-router-dom";
 import { handleEmailPattern, handleUserPassword, textAndNumberOnly, textOnly } from "../SharedAsset/Vaidations/RegularExpression";
-import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
-import { CorrectTick } from "../SharedAsset/SharedAssets";
+import { CorrectTick, PasswordDisplay } from "../SharedAsset/SharedAssets";
 
 const RegistrationForm = () => {
   // Redux toolkit that calls the back end to create a user account
@@ -71,7 +70,7 @@ const RegistrationForm = () => {
   const handleUserName = (e) => {
     setUserNameExist(() => false)
 
-    // close the error message(if any) once the use change any input
+    // close the error message(if any), once the user change any input
     if(errMsgOn) {
       setErrMsg(() => "")
       setErrMsgOn(() => false)
@@ -93,7 +92,7 @@ const RegistrationForm = () => {
   const handleEmail = (event) => {
     setEmailExist(() => false)
 
-    // close the error message(if any) once the use change any input
+    // close the error message(if any), once the user change any input
     if(errMsgOn) {
       setErrMsg(() => "")
       setErrMsgOn(() => false)
@@ -115,7 +114,7 @@ const RegistrationForm = () => {
   const handleUserpassword = (e) => {
     setPasswordNotSame(() => false)
 
-    // close the error message(if any) once the use change any input
+    // close the error message(if any), once the user change any input
     if(errMsgOn) {
       setErrMsg(() => "")
       setErrMsgOn(() => false)
@@ -135,7 +134,7 @@ const RegistrationForm = () => {
   const handleUserConFirmPassword = (e) => {
     setPasswordNotSame(() => false)
 
-    // close the error message(if any) once the use change any input
+    // close the error message(if any), once the user change any input
     if(errMsgOn) {
       setErrMsg(() => "")
       setErrMsgOn(() => false)
@@ -343,13 +342,10 @@ const RegistrationForm = () => {
                   required
                 />
 
-                <span className="absolute top-[22%] right-4 p-px cursor-pointer" onClick={() => setShowPassword((change) => !change)}>
-                  {showPassword ?
-                    <FaRegEye className="inline-block text-xs text-stone-600 cursor-pointer"/>
-                    :
-                    <FaRegEyeSlash className="inline-block text-xs text-stone-600 cursor-pointer"/>
-                  }
-                </span>
+                <PasswordDisplay 
+                  showPassword={showPassword}
+                  handle={() => setShowPassword((change) => !change)}
+                />
               </div>             
             </label>
 
@@ -376,13 +372,11 @@ const RegistrationForm = () => {
 
                 {passwordNotSame && <p className='text-xs text-rose-500 tracking-wider font-lora'>Passwords not same</p>}
 
-                <span className="absolute top-[22%] right-4 p-px cursor-pointer" onClick={() => setShowConfirmPassword((change) => !change)}>
-                  {showConfirmPassword ?
-                    <FaRegEye className="inline-block text-xs text-stone-600 cursor-pointer"/>
-                    :
-                    <FaRegEyeSlash className="inline-block text-xs text-stone-600 cursor-pointer"/>
-                  }
-                </span>
+
+                <PasswordDisplay 
+                  showPassword={showConfirmPassword}
+                  handle={() => setShowConfirmPassword((change) => !change)}
+                />
               </div>             
             </label>
 

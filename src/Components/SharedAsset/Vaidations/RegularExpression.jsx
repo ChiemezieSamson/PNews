@@ -3,17 +3,32 @@
 // regular expression that allows only text (no symbols, no numbers, no space)
 export const textOnly = (value) => {
   const textOnlyRegex = /^[a-zA-Z]{2,}$/;
+  const noEmailOrURLRegex = /^((?!(www\.|http:\/\/|https:\/\/))[^\s@]+[^\s@]*[^@]+)$/i;
 
-  const isValid = textOnlyRegex.test(value);
+  let isValid 
+
+  if(textOnlyRegex.test(value) && noEmailOrURLRegex.test(value)){
+    isValid = true
+  } else {
+    isValid = false
+  }
 
   return {isValid: isValid}
 }
 
+
 // regular expression that allows only letters and numbers (no symbols)
 export const textAndNumberOnly = (value) => {
   const alphanumericRegex = /^[a-zA-Z0-9]{2,}$/
+  const noEmailOrURLRegex = /^((?!(www\.|http:\/\/|https:\/\/))[^\s@]+[^\s@]*[^@]+)$/i;
 
-  const isValid = alphanumericRegex.test(value);
+  let isValid 
+
+  if(alphanumericRegex.test(value) && noEmailOrURLRegex.test(value)){
+    isValid = true
+  } else {
+    isValid = false
+  }
 
   return {isValid: isValid}
 }
@@ -26,6 +41,27 @@ export const handleEmailPattern = (value) => {
   const isValidEmail = emailPattern.test(value);
 
   return {isValid: isValidEmail}
+}
+
+// A regular expression for phone numbers 
+export const handlePhoneNumbers = (value) => {
+  const phoneNumberPattern =  /^\+\d{1,3}\s\d{11}$/;
+
+  const isValidPhoneNumber = phoneNumberPattern.test(value);
+
+  return {isValid: isValidPhoneNumber}
+}
+
+
+// A regular expression for url links 
+export const handleUrlLinks = (value) => {
+  const websitePattern = /^(https?:\/\/)?([a-zA-Z0-9]+(-[a-zA-Z0-9]+)*\.)+[a-zA-Z]{2,}(:\d{1,5})?(\/[^\s]*)?$/;
+  const multipleLinksPattern = /^https?:\/\/[^\s]+/g;
+
+  const hasMultipleLinks = value.match(multipleLinksPattern)?.length > 1;
+  const isValidWebsite = !hasMultipleLinks && websitePattern.test(value);
+
+  return {isValid: isValidWebsite}
 }
 
 // regular expression that allows Password of text,symblo,upperCase,LowerCase,number

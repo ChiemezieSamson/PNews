@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useCreateNewCommentMutation} from "../../../../../Reduxstore/Slices/comments/CommentsSlice";
 import useFetchedComments from "../../../../SharedAsset/Spinners/commentSpinner";
 import { nanoid } from "@reduxjs/toolkit";
-import { handleEmailPattern } from "../../../../SharedAsset/Vaidations/RegularExpression";
+import { handleEmailPattern, handleUrlLinks, textAndNumberOnly } from "../../../../SharedAsset/Vaidations/RegularExpression";
 
 const CommentForm = ({postId}) => {
   // fetching all comment used to check if the user exist
@@ -29,24 +29,18 @@ const CommentForm = ({postId}) => {
   const [websiteIsValid, setWebsiteIsValid] = useState(true); // regular expressions
 
 
-  // regular expressions
-  const websitePattern = /^(https?:\/\/)?([a-zA-Z0-9]+(-[a-zA-Z0-9]+)*\.)+[a-zA-Z]{2,}(:\d{1,5})?(\/[^\s]*)?$/;
-  const noEmailOrURLRegex = /^((?!(www\.|http:\/\/|https:\/\/))[^\s@]+[^\s@]*[^@]+)$/i;
-  const multipleLinksPattern = /(^|\s)(https?:\/\/[^\s]+)$/g;
-
-
   // handling save author name
   const handleAuthorName = (event) => {
     setRequiredText(() => false)
     
     const { value } = event.target;
-    const isValid = noEmailOrURLRegex.test(value);
+    const { isValid } = textAndNumberOnly(value);
     setIsValid(() => isValid);
 
     let validName 
 
     if (commentaction) {// check if a user we this name already exist
-      validName = commentsContent?.find(item => item?.author === value.toLowerCase())
+      validName = commentsContent?.find(item => item?.author === value?.toLowerCase())
     }
 
     if (validName?.author && isValid ) {
@@ -93,10 +87,9 @@ const CommentForm = ({postId}) => {
   // handling save the website content
   const handleWebsite = (event) => {
     const { value } = event.target;
-    const hasMultipleLinks = value.match(multipleLinksPattern)?.length > 1;
-    const isValidWebsite = !hasMultipleLinks && websitePattern.test(value);
+    const { isValid } = handleUrlLinks(value); // function for texting the entered text format
 
-    setWebsiteIsValid(() => isValidWebsite)
+    setWebsiteIsValid(() => isValid)
     setWebsite(() => value)    
   }
 

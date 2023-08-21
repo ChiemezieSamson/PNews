@@ -84,7 +84,7 @@ const Personal = () => {
         setLocation(() => "")
       } catch (err) {
 
-        console.error('Failed to register: ', err)
+        console.error('Failed to update: ', err)
         setErrMsg('Failed to update!');
         setErrMsgOn(() => true)
       } 
@@ -132,7 +132,7 @@ const Personal = () => {
               autoFocus={true}
               required 
               value={firstName}  
-              placeholder={user?.name?.firstname}
+              placeholder={user?.name?.firstname ? user?.name?.firstname : ""}
             />
 
             <p className="mt-0.5 hidden peer-invalid:block text-red-400 text-sm">
@@ -165,7 +165,7 @@ const Personal = () => {
               aria-label='text' 
               maxLength={20} 
               required 
-              placeholder={user?.name?.lastname} 
+              placeholder={user?.name?.lastname ? user?.name?.lastname : ""} 
               value={lastName}
             />
 
@@ -198,7 +198,7 @@ const Personal = () => {
               required 
               aria-label='text' 
               maxLength={180}
-              placeholder={user?.location} 
+              placeholder={user?.location ? user?.location : ""} 
               value={location} 
               onChange={handlelivingaddresses}
             />
@@ -236,7 +236,7 @@ const Personal = () => {
                 name="useremail" 
                 id="useremail"  
                 className='peer mb-0'
-                placeholder={user?.email?.primary} 
+                placeholder={user?.email?.primary ? user?.email?.primary : ""} 
                 readOnly
               />
 

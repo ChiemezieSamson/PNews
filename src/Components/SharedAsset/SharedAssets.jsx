@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { FaCheckDouble, FaFacebookSquare,   FaRegClock, FaRegComment, FaShareAlt, FaTwitter} from 'react-icons/fa';
+import { FaCheckDouble, FaFacebookSquare,   FaRegClock, FaRegComment, FaRegEye, FaRegEyeSlash, FaShareAlt, FaTwitter} from 'react-icons/fa';
 import { FacebookShareButton, TwitterShareButton } from "react-share";
 import { SocialMediaIcons } from '../../data';
 import { CatSideBarHanbugarButton } from '../ButtonAndOthers/Buttons';
@@ -663,6 +663,21 @@ export const CorrectTick = ({IsValid, positionTop}) => {
   return (
     <span className={`${positionTop} absolute right-4 p-px ${IsValid ? "inline" : "hidden"}`}>
       <FaCheckDouble className="inline-block text-xs text-green-500 drop-shadow-md" />
+    </span>
+  )
+}
+
+
+// password open and close component, user, register login input 
+export const PasswordDisplay = ({showPassword, handle}) => {
+
+  return (
+    <span className="absolute top-[22%] right-4 p-px cursor-pointer after:absolute after:inset-0 after:z-10" onClick={handle}>
+      {showPassword ?
+        <FaRegEye className="inline-block text-xs text-stone-600 cursor-pointer"/>
+        :
+        <FaRegEyeSlash className="inline-block text-xs text-stone-600 cursor-pointer"/>
+      }
     </span>
   )
 }

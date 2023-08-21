@@ -1,19 +1,21 @@
-import React, { useState } from 'react';
-import { NavLink, Outlet} from 'react-router-dom';
+import React from 'react';
+import { NavLink, Outlet, useLocation} from 'react-router-dom';
 import { useWindowSize } from '../SharedAsset/SharedAssets';
 import MyProfilePicture from './UserPageComponents/MyProfilePicture';
 
 const UserPage = () => {
-  const [navlinkTextContene, setNavlinkTextContene] = useState("My Profile")
+   // getting the pathname value from the url through useLocation
+   const { pathname } = useLocation();
+   // getting the path from the path url
+   const path = pathname.split("/")[2]
+ 
+
   const size = useWindowSize()
 
-  const handleNavlinkTextContene = (e) => {
-    setNavlinkTextContene(() => e.target.textContent)
-  }
 
   // when on small screen open the profile picture only on my profile nav
   let hideshowProfilePicture 
-  if (size.width < 1316 && navlinkTextContene === "My Profile") { hideshowProfilePicture = true }
+  if (size.width < 1316 && path === undefined) { hideshowProfilePicture = true }
   // on lager screen always keep open
   if (size.width >= 1316) {hideshowProfilePicture = true}
 
@@ -53,7 +55,7 @@ const UserPage = () => {
             return (
               <div key={page.id} className = "mb-7 sm:mt-2 sm:mb-4">
                 <NavLink to={page.toUrl} end className={({ isActive }) => isActive ? `${style} border-[#f70d28] font-semibold` : style}
-                 onClick={handleNavlinkTextContene}>{page.name}</NavLink>
+                >{page.name}</NavLink>
               </div>              
             )
           })

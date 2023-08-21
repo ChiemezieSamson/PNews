@@ -5,7 +5,7 @@ import { useLoginMutation } from '../../Reduxstore/Slices/authSlice/authApiSlic'
 import { useDispatch } from 'react-redux'
 import { setCredentials } from '../../Reduxstore/Slices/authSlice/AuthSlice'
 import { handleEmailPattern, handleUserPassword, textAndNumberOnly } from '../SharedAsset/Vaidations/RegularExpression'
-import { FaCheckDouble, FaRegEye, FaRegEyeSlash } from 'react-icons/fa'
+import { CorrectTick, PasswordDisplay } from '../SharedAsset/SharedAssets'
 
 const LogIn = () => {
   // Redux toolkit that calls the back end for a log in
@@ -27,7 +27,7 @@ const LogIn = () => {
 
   // handling setting the value of Username
   const handleUserName = (e) => {
-    // close the error message(if any) once the use change any input
+    // close the error message(if any), once the user change any input
     if(errMsgOn) {
       setErrMsg(() => "")
       setErrMsgOn(() => false)
@@ -41,7 +41,7 @@ const LogIn = () => {
 
    // handling save the email content
    const handleEmail = (event) => {
-    // close the error message(if any) once the use change any input
+    // close the error message(if any), once the user change any input
      if(errMsgOn) {
       setErrMsg(() => "")
       setErrMsgOn(() => false)
@@ -55,7 +55,7 @@ const LogIn = () => {
 
    // handing getting and setting users password 
   const handleUserpassword = (e) => {
-    // close the error message(if any) once the use change any input
+    // close the error message(if any), once the user change any input
     if(errMsgOn) {
       setErrMsg(() => "")
       setErrMsgOn(() => false)
@@ -153,9 +153,10 @@ const LogIn = () => {
                   required
                 />
 
-                <span className={`absolute top-[22%] right-4 p-px ${isValid ? "inline" : "hidden"}`}>
-                  <FaCheckDouble className="inline-block text-xs text-green-500" />
-                </span>
+                <CorrectTick 
+                  IsValid={isValid}
+                  positionTop={"top-[20%]"}
+                />
               </div>
             </label>
 
@@ -178,9 +179,10 @@ const LogIn = () => {
                   onChange={handleEmail}
                   required/> 
 
-                <span className={`absolute top-[22%] right-4 p-px ${emailIsValid ? "inline" : "hidden"}`}>
-                  <FaCheckDouble className="inline-block text-xs text-green-500" />
-                </span>               
+                <CorrectTick 
+                  IsValid={isValid}
+                  positionTop={"top-[20%]"}
+                />               
               </div>
             </label>
             
@@ -209,15 +211,13 @@ const LogIn = () => {
                   ""}`}
                   value={confirmPassword}
                   onChange={handleUserpassword}
-                  required/>
+                  required
+                />
 
-                <span className="absolute top-[22%] right-4 p-px cursor-pointer" onClick={() => setShowPassword((change) => !change)}>
-                  {showPassword ?
-                    <FaRegEye className="inline-block text-xs text-stone-600 cursor-pointer"/>
-                    :
-                    <FaRegEyeSlash className="inline-block text-xs text-stone-600 cursor-pointer"/>
-                  }
-                </span>
+                <PasswordDisplay 
+                  showPassword={showPassword}
+                  handle={() => setShowPassword((change) => !change)}
+                />
               </div>
             </label>
 
