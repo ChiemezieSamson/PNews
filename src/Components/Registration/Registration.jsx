@@ -27,7 +27,8 @@ const RegistrationForm = () => {
   const [emailExist, setEmailExist] = useState(false) // notify the user that the entered email already exist
   const [showPassword, setShowPassword] = useState(false); // show the password when user click the eye
   const [showConfirmPassword, setShowConfirmPassword] = useState(false); // show the password when user click the eye
-  const [passwordNotSame, setPasswordNotSame] = useState(false); // show the password when user click the eye
+   // notify when if the enterend retyped password is not same with the password
+  const [passwordNotSame, setPasswordNotSame] = useState(false); 
 
   const [isValid, setIsValid] = useState(false); // regular expressions
   const [firstNameIsValid, setFirstNameIsValid] = useState(false); // regular expressions

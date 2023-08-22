@@ -14,12 +14,11 @@ const SingAndSecurity = () => {
       
       <div className='divide-y divide-solid divide-neutral-400 mt-8 disabled:opacity-40' disabled={isFetching}>
         <Email user={user} userAction={userAction}/>
-        {userAction &&
-        <>
-          <ChangePassword user={userAction && user}/>
+
+        <ChangePassword user={user} userAction={userAction}/>
+          {userAction &&
           <LogOutOrDeletUser user={userAction && user}/>
-        </>
-        }
+          }
       </div> 
      
     </div>

@@ -46,11 +46,24 @@ const Email = ({user, userAction}) => {
     
     setOpenEmail((change) => !change)
     setOpenAddnewEmail(() => false)
+
+
+    setNewEmail(() => "")
+    setPassword(() => "")
+    setEmailExist(() => false)
+    setEmailIsValid(() => false)
+    setPassWordIsValid(() => false);
   }
 
   // handling the display or hidden of add new Email component
   const handleOpenAddEmail = () => {
     setOpenAddnewEmail((change) => !change)
+
+    setNewEmail(() => "")
+    setPassword(() => "")
+    setEmailExist(() => false)
+    setEmailIsValid(() => false)
+    setPassWordIsValid(() => false);
   }
 
   // handling the display or hidden of comfirmation box
@@ -58,6 +71,10 @@ const Email = ({user, userAction}) => {
 
     setOpenGetUserPasswordForMakeAndRemove(() => false)
     setGetUserpassword(() => "")
+    setWrongPassword2(() => false)
+    setIsValid(() => false);   
+    setEmailOfTheClickedButton(() => "")
+    setTextContentOfTheClickedButton(() => "Make primary")
   }
 
   // getting the email clicked on, command clicked on and opening the comfirmation box
@@ -162,13 +179,6 @@ const Email = ({user, userAction}) => {
         
         await userEmailUpdate({userId: user?._id, newEmail, password})
 
-        // empty the input boxs and close the tab
-        setNewEmail(() => "")
-        setPassword(() => "")
-        setOpenAddnewEmail(() => false)
-        setWrongPassword(() => false)
-        setEmailIsValid(() => false)
-        setPassWordIsValid(() => false)
       } catch (err) {
 
         console.error("Something went wrong!", err)
@@ -176,6 +186,14 @@ const Email = ({user, userAction}) => {
         setErrMsgOn(() => true)
       }
     } 
+
+    // empty the input boxs and close the tab
+    setNewEmail(() => "")
+    setPassword(() => "")
+    setOpenAddnewEmail(() => false)
+    setWrongPassword(() => false)
+    setEmailIsValid(() => false)
+    setPassWordIsValid(() => false)
   }
 
 
@@ -199,13 +217,6 @@ const Email = ({user, userAction}) => {
 
         await userEmailMakePrimary({userId: user?._id, primaryEmail: user?.email?.primary, emailOfTheClickedButton})
 
-        setOpenGetUserPasswordForMakeAndRemove(() => false)
-        setWrongPassword2(() => false)
-        setIsValid(() => false)
-        setGetUserpassword(() => "")
-        setEmailOfTheClickedButton(() => "")
-        setTextContentOfTheClickedButton(() => "")
-        setMessage(() => "")
       } catch (err) {
 
         console.error("Something went wrong!", err)
@@ -224,13 +235,8 @@ const Email = ({user, userAction}) => {
 
         await userEmailRemoveSecondary({userId: user?._id, emailOfTheClickedButton})
 
-        setOpenGetUserPasswordForMakeAndRemove(() => false)
-        setWrongPassword2(() => false)
-        setIsValid(() => false)
-        setGetUserpassword(() => "")
-        setEmailOfTheClickedButton(() => "")
-        setTextContentOfTheClickedButton(() => "")
-        setMessage(() => "")
+        
+       
       } catch (err) {
 
         console.error("Something went wrong!", err)
@@ -238,6 +244,14 @@ const Email = ({user, userAction}) => {
         setErrMsgOn(() => true)
       }
     }
+
+    setOpenGetUserPasswordForMakeAndRemove(() => false)
+    setWrongPassword2(() => false)
+    setIsValid(() => false)
+    setGetUserpassword(() => "")
+    setEmailOfTheClickedButton(() => "")
+    setTextContentOfTheClickedButton(() => "")
+    setMessage(() => "")
   }
 
 
@@ -378,7 +392,7 @@ const Email = ({user, userAction}) => {
                     maxLength={11}
                     placeholder='●●●●●●●●●' 
                     value={password}
-                    className={`placeholder:text-neutral-600 ${(!passWordIsValid && password) ? 
+                    className={`placeholder:text-neutral-400 ${(!passWordIsValid && password) ? 
                       "border-red-500 text-red-600 focus:border-red-500 focus:ring-red-500 shadow-inner shadow-red-400" : ""}`}
                     onChange={handleUserpassword}
                     required
@@ -391,24 +405,25 @@ const Email = ({user, userAction}) => {
                 </div>
               </label>
 
-              <button 
-                type='submit' 
-                id='addnewemailbutton'
-                name='addnewemailbutton'
-                className='w-full rounded-full text-center text-white bg-blue-500 text-sm py-1.5 tracking-wide
-                font-semibold mt-4 mb-0.5 shadow shadow-gray-400 hover:bg-blue-600 transition-all 
-                duration-200 ease-linear disabled:opacity-40' disabled={!canSave}>Submit</button>
-            </form>
 
-            <div className='text-right mt-6'>
-              <button 
+              <div className='grid grid-flow-col justify-between mt-14'>
+                <button 
                 type='submit' 
-                id='forgetPassword' 
-                name='forgetPassword'
-                className='px-1 mx-1 cursor-pointer tracking-wider text-blue-400 text-sm 
-                TextHeadertransition hover:text-blue-700 disabled:opacity-40'
-                >Forgot password</button>
-            </div>
+                id='addnewemailbutton' 
+                name='addnewemailbutton' 
+                className='mx-1 cursor-pointer bg-[#e4e4e4] tracking-wider px-2 py-1 rounded-md shadow shadow-gray-400 
+                text-sm hover:bg-rose-500 hover:text-white transition-all duration-200 ease-linear text-neutral-600 disabled:opacity-40'
+                disabled={!canSave}
+                >Save password</button>
+
+                <button 
+                type='button' 
+                id='emailforgotpassword' 
+                name='emailforgotpassword' 
+                className='mx-1 cursor-pointer hover:bg-[#e4e4e4] text-neutral-600 tracking-wider px-2 py-1 rounded-md hover:shadow 
+                hover:shadow-gray-400 text-sm transition-all duration-200 ease-linear'>Forgot password</button>
+              </div>
+            </form>
           </div>
         </div>
       </div> 
