@@ -30,7 +30,6 @@ const UserValidation = ({openValidation, onSubmitValidation, onWrongUserPassword
               <input 
                 type={`${showPassword ? "text" : "password"}`}
                 name='userpassword' 
-                id='userpassword'
                 maxLength={11}
                 placeholder={"Enter password"}
                 value={Userpassword}
@@ -50,9 +49,8 @@ const UserValidation = ({openValidation, onSubmitValidation, onWrongUserPassword
           <div className='grid grid-flow-col justify-between'>
 
             <button type='submit' 
-              id='userpasswordBtn' 
               name='userpasswordBtn' 
-              className='mx-1 cursor-pointer bg-neutral-300 tracking-wider px-1 rounded-sm shadow shadow-neutral-400 text-sm
+              className='mx-1 pt-px cursor-pointer bg-neutral-300 tracking-wider px-1 rounded-sm shadow shadow-neutral-400 text-sm
               TextHeadertransition hover:bg-red-500 hover:text-neutral-50 disabled:opacity-40 font-medium'
               ref={ButtonRef}
               disabled={!canDelete}
@@ -60,7 +58,6 @@ const UserValidation = ({openValidation, onSubmitValidation, onWrongUserPassword
 
             <button 
               type='submit' 
-              id='forgetPassword' 
               name='forgetPassword'
               className='px-1 mx-1 cursor-pointer tracking-wider text-blue-400 text-sm 
               TextHeadertransition hover:text-blue-700 disabled:opacity-40'

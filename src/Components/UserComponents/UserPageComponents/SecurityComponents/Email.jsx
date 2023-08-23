@@ -68,9 +68,10 @@ const Email = ({user, userAction}) => {
 
   // handling the display or hidden of comfirmation box
   const handleCloseGetUserPasswordForMakeAndRemove = () => {
-
     setOpenGetUserPasswordForMakeAndRemove(() => false)
+
     setGetUserpassword(() => "")
+    setMessage(() => "")
     setWrongPassword2(() => false)
     setIsValid(() => false);   
     setEmailOfTheClickedButton(() => "")
@@ -197,9 +198,17 @@ const Email = ({user, userAction}) => {
   }
 
 
+  const canMakeChanges = [emailOfTheClickedButton, getUserpassword, isValid].every(Boolean) && !makePrimary && !wrongPassword2 && !removeSecondary
+
    // DELETE EMAIL OR MAKE IT THE PRIMARY EMAIL
    const handleMakePrimaryORDeleteEmailAfterUserEnterPassword = async (e) => {
     e.preventDefault();
+
+    const canMakePrimary = textContentOfTheClickedButton === "Make primary" && 
+    textContentOfTheClickedButton === ButtonRef?.current?.textContent 
+
+    const canRemove = textContentOfTheClickedButton === "Remove" && 
+    textContentOfTheClickedButton === ButtonRef?.current?.textContent 
 
     // validating password with bycrpt
     if (!handelPassWordValidation(getUserpassword, user)){
@@ -207,43 +216,38 @@ const Email = ({user, userAction}) => {
       setGetUserpassword(() => "")
     }
 
-    const canMakePrimary = textContentOfTheClickedButton === "Make primary" && 
-    textContentOfTheClickedButton === ButtonRef?.current?.textContent 
-    && Boolean(emailOfTheClickedButton) && !makePrimary
+    if (canMakeChanges) {
 
-    if (canMakePrimary && handelPassWordValidation(getUserpassword, user)) {
-
-      try {
-
-        await userEmailMakePrimary({userId: user?._id, primaryEmail: user?.email?.primary, emailOfTheClickedButton})
-
-      } catch (err) {
-
-        console.error("Something went wrong!", err)
-        setErrMsg('Failed to update!');
-        setErrMsgOn(() => true)
-      }
-    } 
-
-
-    const canRemove = textContentOfTheClickedButton === "Remove" && 
-    textContentOfTheClickedButton === ButtonRef?.current?.textContent && !removeSecondary
-   
-    if(canRemove && handelPassWordValidation(getUserpassword, user)) {
-
-      try {
-
-        await userEmailRemoveSecondary({userId: user?._id, emailOfTheClickedButton})
-
-        
-       
-      } catch (err) {
-
-        console.error("Something went wrong!", err)
-        setErrMsg('Failed to update!');
-        setErrMsgOn(() => true)
+      if (canMakePrimary && handelPassWordValidation(getUserpassword, user)) {
+  
+        try {
+  
+          await userEmailMakePrimary({userId: user?._id, primaryEmail: user?.email?.primary, emailOfTheClickedButton})
+  
+        } catch (err) {
+  
+          console.error("Something went wrong!", err)
+          setErrMsg('Failed to update!');
+          setErrMsgOn(() => true)
+        }
+      } 
+  
+     
+      if(canRemove && handelPassWordValidation(getUserpassword, user)) {
+  
+        try {
+  
+          await userEmailRemoveSecondary({userId: user?._id, emailOfTheClickedButton})
+         
+        } catch (err) {
+  
+          console.error("Something went wrong!", err)
+          setErrMsg('Failed to update!');
+          setErrMsgOn(() => true)
+        }
       }
     }
+
 
     setOpenGetUserPasswordForMakeAndRemove(() => false)
     setWrongPassword2(() => false)
@@ -363,9 +367,10 @@ const Email = ({user, userAction}) => {
                     id='newemailaddress' 
                     value={newEmail}
                     placeholder='myemailexample@email.com' 
-                    className={`placeholder:text-neutral-600 mb-0 ${(!emailIsValid && newEmail) ? "border-red-500 text-red-600 focus:border-red-500 focus:ring-red-500" : ""}`}
+                    className={`placeholder:text-neutral-400 disabled:opacity-40 mb-0 ${(!emailIsValid && newEmail) ? "border-red-500 text-red-600 focus:border-red-500 focus:ring-red-500" : ""}`}
                     onChange={handleEmail}
                     required
+                    disabled={!userAction}
                   />   
 
                   {emailExist && <p className='text-xs text-rose-500 tracking-wider  font-lora'>Email already exist!</p>} 
@@ -392,10 +397,11 @@ const Email = ({user, userAction}) => {
                     maxLength={11}
                     placeholder='●●●●●●●●●' 
                     value={password}
-                    className={`placeholder:text-neutral-400 ${(!passWordIsValid && password) ? 
+                    className={`placeholder:text-neutral-400 disabled:opacity-40 ${(!passWordIsValid && password) ? 
                       "border-red-500 text-red-600 focus:border-red-500 focus:ring-red-500 shadow-inner shadow-red-400" : ""}`}
                     onChange={handleUserpassword}
                     required
+                    disabled={!userAction}
                   />
 
                   <PasswordDisplay 
@@ -414,7 +420,7 @@ const Email = ({user, userAction}) => {
                 className='mx-1 cursor-pointer bg-[#e4e4e4] tracking-wider px-2 py-1 rounded-md shadow shadow-gray-400 
                 text-sm hover:bg-rose-500 hover:text-white transition-all duration-200 ease-linear text-neutral-600 disabled:opacity-40'
                 disabled={!canSave}
-                >Save password</button>
+                >Add email</button>
 
                 <button 
                 type='button' 
@@ -435,7 +441,7 @@ const Email = ({user, userAction}) => {
         onSubmitValidation={handleMakePrimaryORDeleteEmailAfterUserEnterPassword}
         onWrongUserPassword={wrongPassword2}
         handleClose={handleCloseGetUserPasswordForMakeAndRemove}
-        canDelete={getUserpassword && handelPassWordValidation(getUserpassword, user)}          
+        canDelete={canMakeChanges && handelPassWordValidation(getUserpassword, user)}          
         Userpassword={getUserpassword}
         handleSetGetUserpassword={handleSetGetUserpassword}
         ButtonRef={ButtonRef}

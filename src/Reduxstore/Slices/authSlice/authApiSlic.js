@@ -21,6 +21,7 @@ export const extendedAuthApiSlice = apiSlice.injectEndpoints({
 				try {
 					await queryFulfilled;
 					dispatch(logOut());
+					localStorage.setItem("userToken", "");
 				} catch (err) {
 					console.log(err);
 				}

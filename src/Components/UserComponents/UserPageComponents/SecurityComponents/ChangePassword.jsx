@@ -268,8 +268,8 @@ const ChangePassword = ({user, userAction}) => {
 
             <button 
               type='button' 
-              id='forgotpassword' 
-              name='forgotpassword' 
+              id='forgotchangepassword' 
+              name='forgotchangepassword' 
               className='mx-1 cursor-pointer hover:bg-[#e4e4e4] text-neutral-600 tracking-wider px-2 py-1 rounded-md hover:shadow 
               hover:shadow-gray-400 text-sm transition-all duration-200 ease-linear'>Forgot password</button>
           </div>

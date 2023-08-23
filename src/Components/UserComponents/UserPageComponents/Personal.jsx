@@ -124,13 +124,14 @@ const Personal = () => {
               type="text" 
               name="userfirstname" 
               id="userfirstname"  
-              className={`peer mb-0 ${(!firstNameIsValid && firstName) ? "border-red-500 text-red-600 focus:border-red-500 focus:ring-red-500" :
+              className={`peer mb-0 disabled:opacity-40 ${(!firstNameIsValid && firstName) ? "border-red-500 text-red-600 focus:border-red-500 focus:ring-red-500" :
               ""}`} 
               onChange={handleFirstName}
               aria-label='text'
               maxLength={20}
               autoFocus={true}
               required 
+              disabled={!userAction}
               value={firstName}  
               placeholder={user?.name?.firstname ? user?.name?.firstname : ""}
             />
@@ -140,7 +141,7 @@ const Personal = () => {
             </p>
 
             <CorrectTick 
-              IsValid={firstNameIsValid}
+              IsValid={firstName && firstNameIsValid}
               positionTop={"top-[25%]"}
             />
           </div>          
@@ -159,12 +160,13 @@ const Personal = () => {
               type="text" 
               name="userlastname" 
               id="userlastname" 
-              className={`peer mb-0 ${(!lastNameIsValid && lastName) ? "border-red-500 text-red-600 focus:border-red-500 focus:ring-red-500" :
+              className={`peer mb-0 disabled:opacity-40 ${(!lastNameIsValid && lastName) ? "border-red-500 text-red-600 focus:border-red-500 focus:ring-red-500" :
               ""}`} 
               onChange={handleLastName}
               aria-label='text' 
               maxLength={20} 
               required 
+              disabled={!userAction}
               placeholder={user?.name?.lastname ? user?.name?.lastname : ""} 
               value={lastName}
             />
@@ -174,7 +176,7 @@ const Personal = () => {
             </p>
 
             <CorrectTick 
-              IsValid={lastNameIsValid}
+              IsValid={lastName && lastNameIsValid}
               positionTop={"top-[25%]"}
             /> 
           </div>          
@@ -193,9 +195,10 @@ const Personal = () => {
               type="text" 
               name="userlocation" 
               id="userlocation"  
-              className={`peer mb-0 ${(!locationIsValid && location) ? "border-red-500 text-red-600 focus:border-red-500 focus:ring-red-500" :
+              className={`peer mb-0 disabled:opacity-40 ${(!locationIsValid && location) ? "border-red-500 text-red-600 focus:border-red-500 focus:ring-red-500" :
               ""}`}
               required 
+              disabled={!userAction}
               aria-label='text' 
               maxLength={180}
               placeholder={user?.location ? user?.location : ""} 
@@ -208,7 +211,7 @@ const Personal = () => {
             </p>
 
             <CorrectTick 
-              IsValid={locationIsValid}
+              IsValid={location && locationIsValid}
               positionTop={"top-[25%]"}
             />
           </div>             
@@ -235,9 +238,10 @@ const Personal = () => {
                 type="email" 
                 name="useremail" 
                 id="useremail"  
-                className='peer mb-0'
+                className='peer mb-0 disabled:opacity-40'
                 placeholder={user?.email?.primary ? user?.email?.primary : ""} 
                 readOnly
+                disabled={!userAction}
               />
 
               <p className="mt-0.5 hidden peer-invalid:block text-red-400 text-sm">
@@ -245,7 +249,7 @@ const Personal = () => {
               </p>
 
               <CorrectTick 
-                IsValid={lastNameIsValid}
+                IsValid={user?.email?.primary && lastNameIsValid}
                 positionTop={"top-[25%]"}
               /> 
             </div>          
@@ -262,11 +266,12 @@ const Personal = () => {
             <div className='relative'>
               <input 
                 type="password" 
-                name="userpassword" 
-                id="userpassword"  
-                className='peer mb-0'
+                name="userpersonalpassword" 
+                id="userpersonalpassword"  
+                className='peer mb-0 disabled:opacity-40'
                 placeholder="⁕⁕⁕⁕⁕⁕⁕⁕" 
                 readOnly
+                disabled={!userAction}
               />
 
               <p className="mt-0.5 hidden peer-invalid:block text-red-400 text-sm">
@@ -274,7 +279,7 @@ const Personal = () => {
               </p>
 
               <CorrectTick 
-                IsValid={lastNameIsValid}
+                IsValid={user?.password && lastNameIsValid}
                 positionTop={"top-[25%]"}
               /> 
             </div>             

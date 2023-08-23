@@ -264,13 +264,14 @@ const MyPublicProfile = () => {
                 type="text" 
                 id='usernickname' 
                 name='usernickname' 
-                className={`rounded-full placeholder:text-neutral-600 px-1.5 mb-1.5 capitalize ${(!nickNameIsValid && nickname) ? "border-red-500 text-red-600 focus:border-red-500 focus:ring-red-500" :
+                className={`rounded-full placeholder:text-neutral-400 disabled:opacity-40 px-1.5 mb-1.5 capitalize ${(!nickNameIsValid && nickname) ? "border-red-500 text-red-600 focus:border-red-500 focus:ring-red-500" :
                 ""}`} 
                 placeholder={user?.username ? user?.username : ""}
                 aria-label='text' 
                 maxLength={20}
                 autoFocus={true}              
                 required
+                disabled={!userAction}
                 value={nickname}
                 onChange={handleNickName}
               />
@@ -302,7 +303,8 @@ const MyPublicProfile = () => {
             value={biography}
             maxLength={800}
             rows={4}
-            className="mt-1 p-1 border border-gray-400 rounded-md w-full mb-0 resize-none overflow-hidden"
+            disabled={!userAction}
+            className="mt-1 p-1 border border-gray-400 rounded-md w-full mb-0 resize-none overflow-hidden disabled:opacity-40"
             onChange={handleTextarea}
           ></textarea>
         </div>
@@ -319,14 +321,15 @@ const MyPublicProfile = () => {
 
           <div className='w-full sm:col-span-3'>
             <input 
-            type="email" 
-            id="usercontactemail" 
-            name="usercontactemail"
-            aria-label="email"  
-            placeholder={user?.email?.secondary ? user?.email?.secondary[user?.email?.secondary?.length - 1] : ""}
-            value={secondaryEmail}
-            className={`${(!emailIsValid && secondaryEmail) ? "border-red-500 text-red-600 focus:border-red-500 focus:ring-red-500" : ""} placeholder:text-neutral-600 mb-0`}
-            onChange={handleSetSecondaryEmail}
+              type="email" 
+              id="usercontactemail" 
+              name="usercontactemail"
+              aria-label="email"  
+              disabled={!userAction}
+              placeholder={user?.email?.secondary ? user?.email?.secondary[user?.email?.secondary?.length - 1] : ""}
+              value={secondaryEmail}
+              className={`${(!emailIsValid && secondaryEmail) ? "border-red-500 text-red-600 focus:border-red-500 focus:ring-red-500" : ""} placeholder:text-neutral-400 disabled:opacity-40 mb-0`}
+              onChange={handleSetSecondaryEmail}
             />
           </div>
         </label>
@@ -346,10 +349,11 @@ const MyPublicProfile = () => {
               type="tel" 
               aria-label="phone" 
               id="usercontactphone" 
-              name="usercontactphone"  
+              name="usercontactphone" 
+              disabled={!userAction} 
               placeholder={user?.phonenumber  ? user?.phonenumber : ""}
               value={phone}
-              className={`${(!phoneNumberIsValid && phone) ? "border-red-500 text-red-600 focus:border-red-500 focus:ring-red-500" : ""} placeholder:text-neutral-600`}
+              className={`${(!phoneNumberIsValid && phone) ? "border-red-500 text-red-600 focus:border-red-500 focus:ring-red-500" : ""} placeholder:text-neutral-400 disabled:opacity-40`}
               onChange={handlePhone}
             />
           </div>
@@ -367,13 +371,14 @@ const MyPublicProfile = () => {
 
           <div className='w-full sm:col-span-3'>
             <input 
-              type="url" 
+              type="url"
+              disabled={!userAction} 
               id="usercontactlinkedin" 
               name="usercontactlinkedin" 
               aria-label='linkedIn' 
               placeholder={user?.socialLinks?.linkedin ? user?.socialLinks?.linkedin : ""}
               value={linkedIn}
-              className={`${(!linkedInIsValid && linkedIn) ? "border-red-500 text-red-600 focus:border-red-500 focus:ring-red-500" : ""} placeholder:text-neutral-400`}
+              className={`${(!linkedInIsValid && linkedIn) ? "border-red-500 text-red-600 focus:border-red-500 focus:ring-red-500" : ""} placeholder:text-neutral-400 disabled:opacity-40`}
               onChange={handleLinkedIn}
             />
           </div>
@@ -392,12 +397,13 @@ const MyPublicProfile = () => {
           <div className='w-full sm:col-span-3'>
             <input 
               type="url"
+              disabled={!userAction}
               id="usercontacttwitter" 
               name="usercontacttwitter"
               aria-label='twitter'   
               placeholder={user?.socialLinks?.twitter ? user?.socialLinks?.twitter : ""}
               value={twitter}
-              className={`${(!twitterIsValid && twitter) ? "border-red-500 text-red-600 focus:border-red-500 focus:ring-red-500" : ""} placeholder:text-neutral-600`}
+              className={`${(!twitterIsValid && twitter) ? "border-red-500 text-red-600 focus:border-red-500 focus:ring-red-500" : ""} placeholder:text-neutral-400 disabled:opacity-40`}
               onChange={handleTwitter}
             />
           </div>
@@ -415,13 +421,14 @@ const MyPublicProfile = () => {
 
           <div className='w-full sm:col-span-3'>
             <input 
-              type="url" 
+              type="url"
+              disabled={!userAction} 
               id="usercontactfacebook" 
               name="usercontactfacebook"
               aria-label='facebook'    
               placeholder={user?.socialLinks?.facebook ? user?.socialLinks?.facebook : ""}
               value={facebook}
-              className={`${(!facebookIsValid && facebook) ? "border-red-500 text-red-600 focus:border-red-500 focus:ring-red-500" : ""} placeholder:text-neutral-600`}
+              className={`${(!facebookIsValid && facebook) ? "border-red-500 text-red-600 focus:border-red-500 focus:ring-red-500" : ""} placeholder:text-neutral-400 disabled:opacity-40`}
               onChange={handleFacebook}
             />
           </div>
@@ -439,13 +446,14 @@ const MyPublicProfile = () => {
 
           <div className='w-full sm:col-span-3'>
             <input 
-              type="url" 
+              type="url"
+              disabled={!userAction} 
               id="usercontactinstagram" 
               name="usercontactinstagram"  
               aria-label='instagram'
               placeholder={user?.socialLinks?.instagram ? user?.socialLinks?.instagram : ""}
               value={instagram}
-              className={`${(!instagramIsValid && instagram) ? "border-red-500 text-red-600 focus:border-red-500 focus:ring-red-500" : ""} placeholder:text-neutral-600`}
+              className={`${(!instagramIsValid && instagram) ? "border-red-500 text-red-600 focus:border-red-500 focus:ring-red-500" : ""} placeholder:text-neutral-400 disabled:opacity-40`}
               onChange={handleInstagram}
             />
           </div>
@@ -463,13 +471,14 @@ const MyPublicProfile = () => {
 
           <div className='w-full sm:col-span-3'>
             <input 
-              type="url" 
+              type="url"
+              disabled={!userAction} 
               id="usercontactyoutube" 
               name="usercontactyoutube"  
               aria-label='youTube'
               placeholder={user?.socialLinks?.youtube ? user?.socialLinks?.youtube : ""}
               value={youTube}
-              className={`${(!youTubeIsValid && youTube) ? "border-red-500 text-red-600 focus:border-red-500 focus:ring-red-500" : ""} placeholder:text-neutral-600`}
+              className={`${(!youTubeIsValid && youTube) ? "border-red-500 text-red-600 focus:border-red-500 focus:ring-red-500" : ""} placeholder:text-neutral-400 disabled:opacity-40`}
               onChange={handleYouTube}
             />
           </div>
@@ -487,13 +496,14 @@ const MyPublicProfile = () => {
 
           <div className='w-full sm:col-span-3'>
             <input 
-              type="url" 
+              type="url"
+              disabled={!userAction} 
               id="usercontactwebsite" 
               name="usercontactwebsite"  
               aria-label='website'
               placeholder={user?.socialLinks?.website ? user?.socialLinks?.youtube : ""}
               value={website}
-              className={`${(!websiteValid && website) ? "border-red-500 text-red-600 focus:border-red-500 focus:ring-red-500" : ""} placeholder:text-neutral-600`}
+              className={`${(!websiteValid && website) ? "border-red-500 text-red-600 focus:border-red-500 focus:ring-red-500" : ""} placeholder:text-neutral-400 disabled:opacity-40`}
               onChange={handleWebsite}
             />
           </div>

@@ -49,6 +49,7 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
 					api.dispatch(
 						setCredentials({ accessToken: refreshResult.data.accessToken })
 					);
+
 					localStorage.setItem("userToken", refreshResult.data.accessToken);
 					localStorage.setItem("userId", refreshResult.data._id);
 
@@ -62,6 +63,7 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
 						await baseQuery("logout", api, extraOptions);
 						api.dispatch(logOut());
 					}
+
 					return refreshResult;
 				}
 			} finally {

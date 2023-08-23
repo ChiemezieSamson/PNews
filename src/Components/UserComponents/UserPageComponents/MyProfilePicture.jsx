@@ -112,20 +112,22 @@ const MyProfilePicture = () => {
           }
         </div>      
 
-        <form 
-          id='profileImage'
-          onSubmit={handleSubmit} 
-          className='absolute inset-x-0 z-20 group-hover:top-2/3 bg-neutral-400/40 drop-shadow bottom-0 pt-3 TextHeadertransition opacity-0 group-hover:opacity-100'>
-          <label htmlFor="userimage" className='text-xs uppercase tracking-widest'>Upload Image</label>
-          <input 
-            type="file" 
-            id="userimage" 
-            name='userimage'
-            accept="image/*" 
-            required
-            hidden 
-            onChange={handleImage}/>
-        </form>
+        {userAction && 
+          <form 
+            id='profileImage'
+            onSubmit={handleSubmit} 
+            className='absolute inset-x-0 z-20 group-hover:top-2/3 bg-neutral-400/40 drop-shadow bottom-0 pt-3 TextHeadertransition opacity-0 group-hover:opacity-100'>
+            <label htmlFor="userimage" className='text-xs uppercase tracking-widest'>Upload Image</label>
+            <input 
+              type="file" 
+              id="userimage" 
+              name='userimage'
+              accept="image/*" 
+              required
+              hidden 
+              onChange={handleImage}/>
+          </form>
+        }
       </div>
 
       {/* errorMessage notification  */}

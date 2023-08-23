@@ -92,7 +92,7 @@ const SocialNewsletter = ({opensidebar}) => {
           {(userisSuccess &&  buttonText !== "LogOut") &&
             (<Link to={"/userpage"} className="rounded-full m-0 inline-block fixed left-px top-2 lg:inset-auto z-[9999] bg-stone-100"
               title="user profile">
-              <img src={publicFolder + user.profileImage} alt="userImage" className="rounded-full border border-solid
+              <img src={publicFolder + user?.profileImage} alt="userImage" className="rounded-full border border-solid
                border-rose-400 p-px m-0 object-cover object-center cursor-pointer max-w-[3rem] w-auto max-h-[3rem] mx-auto"/>
            </Link>)
           }

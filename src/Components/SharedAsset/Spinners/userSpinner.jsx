@@ -43,6 +43,7 @@ export const useFetchedUserById = () => {
     data: user = {},
     isFetching,
     isSuccess,
+    refetch,
     isError,
     error
   } = useGetUserByIdQuery(userId)
@@ -65,7 +66,7 @@ export const useFetchedUserById = () => {
     singleUser = <div>{error.toString()}</div>
   }
 
-  return {singleUser, userAction, isError, isSuccess, isFetching}
+  return {singleUser, userAction, refetch, isError, isSuccess, isFetching}
 }
 
 
