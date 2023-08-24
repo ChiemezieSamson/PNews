@@ -25,11 +25,16 @@ export const extendedPostsApiSlice = apiSlice.injectEndpoints({
 			providesTags: (result, error, arg) => [{ type: "Post", id: arg }],
 		}),
 
+		getPostByUserId: builder.query({
+			query: (userId) => `posts/user/${userId}`,
+			providesTags: (result, error, arg) => [{ type: "Post", id: arg }],
+		}),
+
 		getPostsByQuery: builder.query({
 			query: (search) => "posts/query/search" + search,
 			providesTags: (result = [], error, arg) => [
 				"Post",
-				...result.posts.map(({ id }) => ({ type: "Post", id })),
+				...result?.posts?.map(({ id }) => ({ type: "Post", id })),
 			],
 		}),
 
@@ -37,7 +42,7 @@ export const extendedPostsApiSlice = apiSlice.injectEndpoints({
 			query: (page) => "posts/pagination/page" + page,
 			providesTags: (result = [], error, arg) => [
 				"Post",
-				...result.Posts.map(({ id }) => ({ type: "Post", id })),
+				...result?.Posts?.map(({ id }) => ({ type: "Post", id })),
 			],
 		}),
 
@@ -168,6 +173,7 @@ export const extendedPostsApiSlice = apiSlice.injectEndpoints({
 export const {
 	useGetPostsQuery,
 	useGetPostByIdQuery,
+	useGetPostByUserIdQuery,
 	useGetPostsByQueryQuery,
 	useGetPostsByPaginationQuery,
 	useGetPostsByPaginationTwoQuery,

@@ -37,7 +37,7 @@ const UserPage = () => {
     },
     {
       id: 4,
-      name: "General",
+      name: "Accessibility",
       toUrl: "/userpage/General",
     },
   ];  

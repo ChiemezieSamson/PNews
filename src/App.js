@@ -28,6 +28,7 @@ import Quotes from "./Components/BlogPages/quotesPage/Quotes";
 import PaginationPages from "./Components/BlogPages/PaginationComponents/paginationPage/PaginationPages";
 import OtherPaginationPages from "./Components/BlogPages/PaginationComponents/paginationPage/OtherPaginationPages";
 import SearchPage from "./Components/BlogPages/searchPage/SearchPage";
+import General from "./Components/UserComponents/UserPageComponents/General";
 
 const App = createBrowserRouter([
 	{
@@ -223,6 +224,11 @@ const App = createBrowserRouter([
 					{
 						path: "/userpage/publicprofile",
 						element: <MyPublicProfile />,
+						errorElement: <NotFound />,
+					},
+					{
+						path: "/userpage/General",
+						element: <General />,
 						errorElement: <NotFound />,
 					},
 				],

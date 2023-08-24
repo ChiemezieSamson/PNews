@@ -179,5 +179,25 @@ export const UserSecondaryEmailSpinner = () => {
 }
 
 
+export const UserPostsSpinner = () => {
+  const EmptyValues = [...Array(10)]
+  const content  = EmptyValues.map((title, id) => ({id: id, title: title}))
+  
+  return (
+    <ul className='w-full max-w-2xl'>
+      {content.map((email) => {
+
+        return (
+          <li key={email.id} className="md:grid md:grid-cols-5 md:gap-x-10 mt-2">
+            <div className='skeleton w-[85%] md:w-full h-4 mb-0.5 rounded-sm col-span-4'></div>
+            <div className='skeleton w-[30%] md:w-full h-4 mb-0 rounded-sm col-span-1'></div>
+          </li>
+        )
+      })}
+    </ul>
+  )
+}
+
+
 
 export default Spinner

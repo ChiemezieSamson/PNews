@@ -1,7 +1,8 @@
 import React, { useMemo } from 'react'
 import { useLocation, useParams } from 'react-router-dom'
 import { SinglePostSpinner, SkeletonTextTwo } from './Spinner'
-import { useGetPostByIdQuery, useGetPostsByPaginationQuery, useGetPostsByPaginationTwoQuery, useGetPostsByQueryQuery, useGetPostsQuery } from '../../../Reduxstore/Slices/posts/PostsSlice'
+import { useGetPostByIdQuery, useGetPostByUserIdQuery, useGetPostsByPaginationQuery, 
+  useGetPostsByPaginationTwoQuery, useGetPostsByQueryQuery, useGetPostsQuery } from '../../../Reduxstore/Slices/posts/PostsSlice'
 
 // Use to fecth the all posts when ever a call to the function is made
 export const useFetchedPosts = () => {
@@ -84,6 +85,43 @@ export const useFetchedPostById = () => {
   }
 
   return {singlePost, postAction, postId, isFetching}
+}
+
+
+// Use to fecth the post by user Id when ever a call to the function is made
+export const useFetchedPostByUserId = (page = 1) => {
+  const  getPostId  =  localStorage.getItem("userId") // getting the user id from the local storage
+  const postId = `${getPostId}?page=${page}&limit=${10}` // add a limit to the fetched post and managing it by page
+
+  const { // redux data flow and or returned information
+    data: post = [],
+    isFetching,
+    isSuccess,
+    isError,
+    error
+  } = useGetPostByUserIdQuery(postId)
+
+  // An object of the post
+  let singlePost
+  // Notify true only when the post are ready
+  let postAction = false
+
+
+  if (isFetching) {
+   
+    postAction = false
+
+  } else if (isSuccess) {
+
+    postAction = true
+    singlePost = post
+
+  } else if (isError) {
+
+    singlePost = <div>{error.toString()}</div>
+  }
+
+  return {singlePost, postAction, isFetching}
 }
 
 
