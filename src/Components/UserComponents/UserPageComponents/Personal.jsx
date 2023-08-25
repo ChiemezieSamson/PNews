@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { useUpdateExistingUserMutation } from '../../../Reduxstore/Slices/users/UsersSlice';
 import { CorrectTick, UserInfoHeading } from '../../SharedAsset/SharedAssets';
-import { useFetchedUserById } from '../../SharedAsset/Spinners/userSpinner';
 import { livingaddress, textOnly } from '../../SharedAsset/Vaidations/RegularExpression';
+import { useOutletContext } from 'react-router-dom';
 
 const Personal = () => {
-  // fetching the user from the server
-  const {singleUser, userAction, isFetching} = useFetchedUserById()
+  // fetching the user from the parent
+  const [user, userAction, isFetching] = useOutletContext();
   // Redux toolkit function use to update user personal information
   const [userPersonalInfoUpdated, {isLoading}] = useUpdateExistingUserMutation()
 
@@ -17,12 +17,10 @@ const Personal = () => {
 
   const [errMsgOn, setErrMsgOn] = useState(false) // Indicate that there is an error
 
-
   const [firstNameIsValid, setFirstNameIsValid] = useState(true); // regular expressions
   const [lastNameIsValid, setLastNameIsValid] = useState(true); // regular expressions
   const [locationIsValid, setLocationIsValid] = useState(true); // regular expressions
 
-  const user = singleUser
 
   // handling setting the value of first name
   const handleFirstName = (e) => {

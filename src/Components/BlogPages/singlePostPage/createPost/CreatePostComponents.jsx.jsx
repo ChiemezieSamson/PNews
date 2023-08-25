@@ -156,6 +156,7 @@ const CreatePostComponents = ({state}) => {
    useEffect(() => {
     if(!isSuccess && isError) {
       navigate(-1, {replace: true}, [navigate])
+      window.history.replaceState({}, document.title)
     }
   },[isSuccess, isError, navigate])
 

@@ -1,9 +1,13 @@
-import React from 'react';
-import { NavLink, Outlet, useLocation} from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { NavLink, Outlet, useLocation, useNavigate} from 'react-router-dom';
 import { useWindowSize } from '../SharedAsset/SharedAssets';
 import MyProfilePicture from './UserPageComponents/MyProfilePicture';
+import { useFetchedUserById } from '../SharedAsset/Spinners/userSpinner';
 
 const UserPage = () => {
+   // getting the user for authenticatin, authorisation and security
+   const {singleUser, userAction, isSuccess, isError, isFetching} = useFetchedUserById()
+  const user = singleUser
    // getting the pathname value from the url through useLocation
    const { pathname } = useLocation();
    // getting the path from the path url
@@ -11,6 +15,7 @@ const UserPage = () => {
  
 
   const size = useWindowSize()
+  const navigate = useNavigate();
 
 
   // when on small screen open the profile picture only on my profile nav
@@ -44,7 +49,16 @@ const UserPage = () => {
 
   const style = `border-l-[10px] border-solid bg-gray-200/40 hover:bg-neutral-200 mt-2.5 mb-2.5 px-3 text-stone-800 TextHeadertransition cursor-pointer block py-2 h-[50px] sm:h-auto tracking-wider text-sm sm:text-base`
 
-  
+   // making user that only authorized user can update
+   useEffect(() => {
+    if(!isSuccess && isError) {
+      
+      window.history.replaceState({}, document.title)
+      navigate("/login", {replace: true}, [navigate])
+    }
+  },[isSuccess, isError, navigate])
+
+
   return (
     <div className={`${size.width >= 1316 ? "grid grid-cols-4 gap-x-4" : "grid grid-flow-row "} font-poppins`}>
 
@@ -64,13 +78,13 @@ const UserPage = () => {
 
       {/* user information content */}
       <div className={`${size.width >= 1316 ? "col-span-2" : "order-last"} bg-gray-200/40 overflow-x-hidden rounded-md`}>
-        <Outlet/>
+        <Outlet  context={[user, userAction, isFetching]}/>
       </div>
       
       {/* user image */}
       <div className={`${hideshowProfilePicture ? "block" : "hidden"}`}>
         <div className={`${size.width >= 1316 ? "col-span-1" : "order-2"}`}>
-          <MyProfilePicture />
+          <MyProfilePicture user={user} userAction={userAction} isFetching={isFetching}/>
         </div>         
       </div>
     </div>

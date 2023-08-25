@@ -1,14 +1,11 @@
 import React, {useState } from 'react'
 import { useUpdateExistingUserImageMutation } from '../../../Reduxstore/Slices/users/UsersSlice'
-import { useFetchedUserById } from '../../SharedAsset/Spinners/userSpinner'
 import axios from "axios"
 import { publicFolder } from '../../../data'
 import { UserInfoHeading } from '../../SharedAsset/SharedAssets'
 
 
-const MyProfilePicture = () => { 
-  // fetching the user from the server
-  const {singleUser, userAction, isFetching} = useFetchedUserById()
+const MyProfilePicture = ({user, userAction, isFetching}) => { 
   // Redux function to update user profile pictur changes
   const [userProfilePicture, {isLoading}] = useUpdateExistingUserImageMutation()
 
@@ -21,7 +18,6 @@ const MyProfilePicture = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const [file, setFile] = useState("")
 
-  const user = singleUser  
 
 
   // handling setting image once selected from the user device

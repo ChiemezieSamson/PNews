@@ -113,7 +113,11 @@ const LogIn = () => {
   }
 
   useEffect(() => {
-    if (isSuccess) return navigate("/userpage", {replace: true}, [navigate])
+    if (isSuccess) {
+      
+     navigate("/userpage", {replace: true}, [navigate])
+     window.history.replaceState({}, document.title)
+    }
   }, [isSuccess, navigate])
 
   return (

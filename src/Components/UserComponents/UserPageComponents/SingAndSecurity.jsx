@@ -3,10 +3,12 @@ import Email from './SecurityComponents/Email'
 import ChangePassword from './SecurityComponents/ChangePassword'
 import LogOutOrDeletUser from './SecurityComponents/LogOutOrDeletUser'
 import { useFetchedUserById } from '../../SharedAsset/Spinners/userSpinner'
+import { useOutletContext } from 'react-router-dom'
 
 const SingAndSecurity = () => {
-  const {singleUser, userAction, isFetching, refetch} = useFetchedUserById()
-  const user = singleUser
+  // fetching the user from the parent
+  const [user, userAction, isFetching] = useOutletContext();
+  const { refetch } = useFetchedUserById()
 
   return (
     <div className='text-left px-5 mt-8 font-source pt-7 pb-5'>

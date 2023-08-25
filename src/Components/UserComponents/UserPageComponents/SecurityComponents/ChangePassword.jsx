@@ -270,7 +270,8 @@ const ChangePassword = ({user, userAction}) => {
               type='button' 
               id='forgotchangepassword' 
               name='forgotchangepassword' 
-              className='mx-1 cursor-pointer hover:bg-[#e4e4e4] text-neutral-600 tracking-wider px-2 py-1 rounded-md hover:shadow 
+              disabled={!userAction}
+              className='mx-1 cursor-pointer hover:bg-[#e4e4e4] text-neutral-600 tracking-wider px-2 py-1 rounded-md hover:shadow disabled:opacity-40
               hover:shadow-gray-400 text-sm transition-all duration-200 ease-linear'>Forgot password</button>
           </div>
         </form>     

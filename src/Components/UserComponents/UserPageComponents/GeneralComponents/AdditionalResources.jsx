@@ -19,7 +19,7 @@ const AdditionalResources = () => {
       link: "/privacy&policy",
     },
     {
-      id: 1,
+      id: 2,
       name: "Terms of Service",
       link: "",
     }
@@ -32,7 +32,7 @@ const AdditionalResources = () => {
       link: "/about",
     },
     {
-      id: 1,
+      id: 2,
       name: "Contact Us",
       link: "/contactus",
     }

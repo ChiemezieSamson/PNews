@@ -5,7 +5,7 @@ import { SinginAndSecurityIntro, TimeComponentColor } from '../../../SharedAsset
 import { Link } from 'react-router-dom'
 import { UserPostsSpinner } from '../../../SharedAsset/Spinners/Spinner'
 
-const MyPosts = () => {
+const MyPosts = ({userAction}) => {
   const [page, setPage] = useState(1)
   const [openUserPost, setOpenUserPost] = useState(false) // use to open and close the Posts section
   const {singlePost, postAction, isFetching} = useFetchedPostByUserId(page)
@@ -43,7 +43,7 @@ const MyPosts = () => {
         <SinginAndSecurityIntro text={"Manage the information associated with your posts."} />
 
         <div className='mt-7'>
-          {postAction ? 
+          {postAction && userAction ? 
             <ul className='w-full max-w-2xl'>
               {posts.map((post) => {
                 return (
@@ -73,7 +73,7 @@ const MyPosts = () => {
               className={`mx-2 cursor-pointer bg-[#e4e4e4] tracking-wider px-2 py-1 rounded-md shadow shadow-gray-400 
               text-sm hover:bg-rose-500 hover:text-white transition-all duration-200 ease-linear text-neutral-600 disabled:opacity-40 
               ${(currentPage > 1) ? "inline-block" : "hidden"}`}
-              disabled={""}
+              disabled={!userAction && !postAction}
              onClick={handleReduceFecthedPosts}>previous</button>
 
             <button 
@@ -83,7 +83,7 @@ const MyPosts = () => {
               className={`mx-2 cursor-pointer bg-[#e4e4e4] tracking-wider px-2 py-1 rounded-md shadow shadow-gray-400 
               text-sm hover:bg-rose-500 hover:text-white transition-all duration-200 ease-linear text-neutral-600 disabled:opacity-40 
               ${(totalPage > 1 && currentPage < totalPage) ? "inline-block" : "hidden"}`}
-              disabled={""}
+              disabled={!userAction && !postAction}
              onClick={handleFecthMore}>next</button>
           </div>
         </div>

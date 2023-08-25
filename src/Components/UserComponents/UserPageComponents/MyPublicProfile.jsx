@@ -2,12 +2,12 @@ import React, { useLayoutEffect, useState } from 'react'
 import { FaEnvelopeOpen, FaFacebookF, FaGlobe, FaInstagram, FaLinkedinIn, FaPhoneAlt, FaTwitter, FaYoutubeSquare } from 'react-icons/fa';
 import { useUpdateExistingUserPublicProFileMutation } from '../../../Reduxstore/Slices/users/UsersSlice';
 import { UserInfoHeading } from '../../SharedAsset/SharedAssets'
-import { useFetchedUserById } from '../../SharedAsset/Spinners/userSpinner';
 import { handleEmailPattern, handlePhoneNumbers, handleUrlLinks, textAndNumberOnly } from '../../SharedAsset/Vaidations/RegularExpression';
+import { useOutletContext } from 'react-router-dom';
 
 const MyPublicProfile = () => {
-  // fetching the user from the server
-  const {singleUser, userAction, isFetching} = useFetchedUserById()
+  // fetching the user from the parent
+  const [user, userAction, isFetching] = useOutletContext();
   // Redux toolkit function use to update user public information
   const [userPublicProfile, {isLoading}] = useUpdateExistingUserPublicProFileMutation()
 
@@ -34,8 +34,6 @@ const MyPublicProfile = () => {
   const [instagramIsValid, setInstagramIsValid] = useState(true); // regular expressions
   const [youTubeIsValid, setYouTubeValid] = useState(true); // regular expressions
   const [websiteValid, setwebsiteIsValid] = useState(true); // regular expressions
-
-  const user = singleUser
 
 
   // handling setting the value of nick name
