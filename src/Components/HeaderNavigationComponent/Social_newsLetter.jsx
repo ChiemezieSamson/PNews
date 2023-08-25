@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import {  publicFolder } from "../../data";
 import { HanbugarTwo } from "../ButtonAndOthers/Buttons";
 import { FaRegEnvelope } from "react-icons/fa";
-import { useFetchedUserById } from "../SharedAsset/Spinners/userSpinner";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useSendLogoutMutation } from "../../Reduxstore/Slices/authSlice/authApiSlic";
 import Spinner from "../SharedAsset/Spinners/Spinner";
@@ -11,56 +10,62 @@ import { logOut } from "../../Reduxstore/Slices/authSlice/AuthSlice";
 import { SocialMediaLinks } from "../SharedAsset/SharedAssets";
 
 
-const SocialNewsletter = ({opensidebar}) => {
+const SocialNewsletter = ({opensidebar, user, userAction, isFetching, userisSuccess, isError, refetch}) => {
+  // logout call to the server
   const [sendLogout, {isLoading, isSuccess}] = useSendLogoutMutation()
-  const {singleUser, isSuccess: userisSuccess, refetch, isFetching, isError} = useFetchedUserById()
-  const [showLogoutModal, setShowLogoutModal] = useState(false);
-  const [buttonText, setButtonText] = useState("")
-
-  const user = singleUser
+  const [showLogoutModal, setShowLogoutModal] = useState(false); // chose what to dispaly when in userpage and when not in userpage
+  const [buttonText, setButtonText] = useState("Login") 
 
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const location = useLocation()
 
-  const handleLogOut = async () => {
-    localStorage.setItem("userToken", ""); // clear the user token from localStorage
+  console.log(location.pathname.split("/")[1]);
 
-    if(location.pathname.split("/")[1].startsWith("user")){ // makeSure we are in the userPage
-      await sendLogout() // send request to the server to clear cookies used or refresh
-      dispatch(logOut()) // reset userToke to null
-      setShowLogoutModal(() =>  false)
-    }
-   }
 
-   useEffect(() => {
+  useEffect(() => {
     if (isSuccess) {
       navigate('/', {replace: true}, [navigate]) 
       refetch() // refetch the single user
     } 
   }, [isSuccess, navigate, refetch])
-
-   useEffect(() => {
-    if (location.pathname.split("/")[1].startsWith("user")) {// makeSure we are in the userPage
+  
+  
+  useEffect(() => {
+    if (location?.pathname?.split("/")[1]?.startsWith("user")) {// makeSure we are in the userPage
       setButtonText(() => "LogOut")
-    }else if (location.pathname.split("/")[1].startsWith("login")){ // check if we are in the login Page
+    }else if (location?.pathname?.split("/")[1]?.startsWith("login")){ // check if we are in the login Page
       setButtonText(() => "")
     }else {
       setButtonText(() => "LogIn")
     }
   }, [location])
-
+  
+  
   const handleLogOutConfirmation = () => {
     if(buttonText === "LogOut") {
+      
       setShowLogoutModal(() =>  true)
     }else if (buttonText === "LogIn") {
+      
       navigate('/login', {replace: true}, [navigate])
     }
   }
 
-   //Logout button confirmation modal
+
+  const handleLogOut = async () => {
+    localStorage.setItem("userToken", ""); // clear the user token from localStorage
+
+    if(location.pathname.split("/")[1]?.startsWith("user")){ // makeSure we are in the userPage
+      await sendLogout() // send request to the server to clear cookies used or refresh
+      dispatch(logOut()) // reset userToke to null
+      setShowLogoutModal(() =>  false)
+    }
+   }
+  
+  //Logout button confirmation modal
   const LogOutConfirmation = (
-      <div className="modal-content">
+    <div className="modal-content">
         <p className="text-neutral-400">Are you sure you want to logout?</p>
         <button onClick={handleLogOut} className='hover:bg-blue-400 hover:text-neutral-100 border-0  px-2.5 mx-2.5 rounded-full cursor-pointer shadow-[#444] 
             shadow-sm transition-all duration-200 ease-linear'>Logout</button>
@@ -98,7 +103,7 @@ const SocialNewsletter = ({opensidebar}) => {
           }
 
             {/* Logout confirmation modal */}
-          <div className={`absolute top-full z-[9999] min-w-[16rem] md:-left-20 py-2 px-2 bg-stone-100 rounded shadow-[#444] shadow-sm mt-2.5 prose font-medium
+          <div className={`absolute top-full z-[9999] min-w-[16rem] py-2 px-2 bg-stone-100 rounded shadow-[#444] shadow-sm mt-2.5 prose font-medium
            ${showLogoutModal ? "translate-y-0 opacity-100 visible transition-all duration-200 ease-linear" : "-translate-y-full opacity-0 invisible"}`}>
             {LogOutConfirmation}
           </div>

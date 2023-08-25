@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useUpdateExistingUserMutation } from '../../../Reduxstore/Slices/users/UsersSlice';
-import { CorrectTick, UserInfoHeading } from '../../SharedAsset/SharedAssets';
+import { CorrectTick, UserInfoHeading, isFecthingStyle } from '../../SharedAsset/SharedAssets';
 import { livingaddress, textOnly } from '../../SharedAsset/Vaidations/RegularExpression';
 import { useOutletContext } from 'react-router-dom';
 
@@ -101,7 +101,7 @@ const Personal = () => {
 
 
   return (
-    <div className='text-left px-5 mt-8 font-source pt-7 pb-5 disabled:opacity-40' disabled={isFetching}>
+    <div className={`text-left px-5 mt-8 font-source pt-7 pb-5 ${isFecthingStyle(isFetching)}`}>
 
       {/* User first name and last name are inside the form tag  */}
       <UserInfoHeading head={"User Name"} text={"For Account and Public Profile"}/>

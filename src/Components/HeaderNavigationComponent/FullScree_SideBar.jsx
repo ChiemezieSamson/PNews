@@ -13,8 +13,8 @@ const FullSreenSidebar = ({closesidebar, disabled}) => {
 
   return (
     <section className="overflowScrollSmallScreen hidden md:block h-screen overflow-y-scroll 
-    scroll-py-4 overscroll-y-contain snap-mandatory p-8 px-12 bg-neutral-100 font-lora text-stone-800"
-    disabled={disabled}>
+      scroll-py-4 overscroll-y-contain snap-mandatory p-8 px-12 bg-neutral-100 font-lora text-stone-800"
+      disabled={disabled}>
 
       {/* === Site owner image and name === */}
       {action ?

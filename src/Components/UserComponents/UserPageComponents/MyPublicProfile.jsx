@@ -1,7 +1,7 @@
 import React, { useLayoutEffect, useState } from 'react'
 import { FaEnvelopeOpen, FaFacebookF, FaGlobe, FaInstagram, FaLinkedinIn, FaPhoneAlt, FaTwitter, FaYoutubeSquare } from 'react-icons/fa';
 import { useUpdateExistingUserPublicProFileMutation } from '../../../Reduxstore/Slices/users/UsersSlice';
-import { UserInfoHeading } from '../../SharedAsset/SharedAssets'
+import { UserInfoHeading, isFecthingStyle } from '../../SharedAsset/SharedAssets'
 import { handleEmailPattern, handlePhoneNumbers, handleUrlLinks, textAndNumberOnly } from '../../SharedAsset/Vaidations/RegularExpression';
 import { useOutletContext } from 'react-router-dom';
 
@@ -233,7 +233,7 @@ const MyPublicProfile = () => {
  
 
   return (
-    <div className='text-left px-5 mt-8 font-source pt-7 pb-5 disabled:opacity-40' disabled={isFetching}>
+    <div className={`text-left px-5 mt-8 font-source pt-7 pb-5 disabled:opacity-40 ${isFecthingStyle(isFetching)}`}>
       {/* introduction headers */}
       <UserInfoHeading head={"Public URL"} text={"Share your accomplishments with the world"}/>
 

@@ -1,19 +1,18 @@
 import React from 'react'
-import { UserInfoHeading } from '../../SharedAsset/SharedAssets'
-import { useFetchedUserById } from '../../SharedAsset/Spinners/userSpinner'
+import { UserInfoHeading, isFecthingStyle } from '../../SharedAsset/SharedAssets'
 import MyPosts from './GeneralComponents/MyPosts'
-import { Link } from 'react-router-dom'
+import { Link, useOutletContext } from 'react-router-dom'
 import AdditionalResources from './GeneralComponents/AdditionalResources'
 
 const General = () => {
-  const {singleUser, userAction, isFetching} = useFetchedUserById()
-  const user = singleUser
+ // fetching the user from the parent
+ const [user, userAction, isFetching] = useOutletContext();
 
   return (
     <div className='text-left px-5 mt-8 font-source pt-7 pb-5'>
       <UserInfoHeading head={"Your activities"} text={"Manage your post."}/>
 
-      <div className={`${isFetching && "opacity-40 after:absolute after:inset-0 after:z-10"} text-right`}>
+      <div className={`${isFecthingStyle(isFetching)} text-right`}>
         <Link to={`/writepost`}>  
           <button className="uppercase cursor-pointer hover:bg-neutral-300 font-medium prose text-stone-700 hover:text-white
            py-1.5 tracking-wider px-4 text-[11px] leading-[16px]  my-4 shadow rounded disabled:opacity-40
@@ -21,7 +20,7 @@ const General = () => {
         </Link>
       </div>
     
-    <div className={`divide-y divide-solid divide-neutral-400 mt-8 relative ${isFetching && "opacity-40 after:absolute after:inset-0 after:z-10"}`}>
+    <div className={`divide-y divide-solid divide-neutral-400 mt-8 relative ${isFecthingStyle(isFetching)}`}>
       <MyPosts userId={user?._id} userAction={userAction}/>
       
       <AdditionalResources />

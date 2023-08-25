@@ -2,7 +2,7 @@ import React, {useState } from 'react'
 import { useUpdateExistingUserImageMutation } from '../../../Reduxstore/Slices/users/UsersSlice'
 import axios from "axios"
 import { publicFolder } from '../../../data'
-import { UserInfoHeading } from '../../SharedAsset/SharedAssets'
+import { UserInfoHeading, isFecthingStyle } from '../../SharedAsset/SharedAssets'
 
 
 const MyProfilePicture = ({user, userAction, isFetching}) => { 
@@ -81,7 +81,7 @@ const MyProfilePicture = ({user, userAction, isFetching}) => {
   }
 
   return (
-    <div className='px-3 mb-12 bg-gray-200/40 pb-5 pt-5 rounded-md disabled:opacity-40' disabled={isFetching}>
+    <div className={`px-3 mb-12 bg-gray-200/40 pb-5 pt-5 rounded-md ${isFecthingStyle(isFetching)}`}>
 
       {/* Head Introduction */}
       <div className='font-semibold px-3 mb-9'>

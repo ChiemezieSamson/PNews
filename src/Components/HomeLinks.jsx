@@ -5,19 +5,21 @@ import FullSreenSidebar from "./HeaderNavigationComponent/FullScree_SideBar";
 import { FaBars, FaChevronUp, FaSistrix, FaTimes } from "react-icons/fa";
 import Footer from "./BlogPages/footerPage/Footer";
 import HeaderNavigations from "./HeaderNavigationComponent/Navigations/HeaderNavigations";
-import { useFetchedPosts } from "./SharedAsset/Spinners/postsSpinner";
 import { Hanbugar3 } from "./ButtonAndOthers/Buttons";
 import { useWindowSize } from "./SharedAsset/SharedAssets";
 import { useWindowScroll, useClickAway } from "@uidotdev/usehooks"
+import { useFetchedUserById } from "./SharedAsset/Spinners/userSpinner";
 
 
 const HomeLinks = () => {
+  const {singleUser, userAction, isSuccess: userisSuccess, isError, isFetching, refetch} = useFetchedUserById()
   const [showFullSideBAr, setShowFullSideBAr] = useState(false)
   const [hideShowNavLinks, setHideShowNavLinks] = useState(false)
   const [backToTop, setBackToTop] = useState("")
-  const {isFetching} = useFetchedPosts()
   const size = useWindowSize()
   const [{x, y}, scrollTo] = useWindowScroll()
+
+  const user = singleUser
 
 
   const handle_showFullSideBAr = () => {
@@ -69,41 +71,53 @@ const HomeLinks = () => {
   }
 
    return(
-    <div className="text-center relative">
+    <div className={`text-center relative`}>
       
       {/* ==== Main header section start here ==== */}
       <header className="relative">
 
         {/* ==== social and newsletter start here === */} 
         <div className="relative">
-          <SocialNewsletter opensidebar={handle_showFullSideBAr}/>
+          <SocialNewsletter
+            user={user}
+            userAction={userAction}
+            isFetching={isFetching}
+            userisSuccess={userisSuccess}
+            isError={isError} 
+            opensidebar={handle_showFullSideBAr}
+            refetch={refetch}
+          />
 
           {/* === small scree hanbugar start here === */}
-          <div className="md:hidden fixed w-8 border-0 inset-auto bg-neutral-100 z-[9999] right-4 shadow-md shadow-stone-900 pt-1">
+          <div className="md:hidden fixed w-8 border-0 inset-auto bg-neutral-100 !z-[9999] right-4 shadow-md shadow-stone-900 pt-1">
             <button type="button" aria-controls="primary-navigation" onClick={handle_hideShowNavLinks}>
               {hideShowNavLinks ? <FaTimes /> : <FaBars /> }
               <span className="hidden">Menu</span>
             </button>
           </div>
         </div>
+
         
         {/* ==== FullScreen Side Bar start here ==== */}
         <div ref={closeSideBarOnBodyClick} className={`transition-[display] duration-700 ease-linear fixed right-0 inset-y-0 max-w-md z-[300] ${showFullSideBAr ? "block" : "hidden"}`}>
-          <FullSreenSidebar  disabled={isFetching} closesidebar={handleCloseInstaSidebar}/>
+          <FullSreenSidebar closesidebar={handleCloseInstaSidebar}/>
 
+          {/* button to close the sidebar after opening */}
           <div className="fixed top-3 px-3 text-stone-800 text-lg hover:text-rose-500 
             transition-all duration-200 ease-linear" title="close">
               <Hanbugar3 closesidebar={handleCloseInstaSidebar}/>
           </div>
 
+          {/* Link to the search page */}
           <Link to={"/search"} className="fixed right-8 top-3 cursor-pointer text-stone-800 text-lg font-bold hover:mainColor TextHeadertransition" title="posts search"
           onClick={handleCloseInstaSidebar}>
               <FaSistrix className="inline-block"/>
           </Link>
         </div>
 
+
         {/* ===== Home hero and navigations start here ===== */}
-        <div className="relative z-50 mt-10" disabled={isFetching}>
+        <div className={`relative z-50 mt-10`}>
           <HeaderNavigations 
             handleCloseNavLinks={handleCloseNavLinks}
             hideShowNavLinks={hideShowNavLinks} 
@@ -113,18 +127,20 @@ const HomeLinks = () => {
 
    
      {/* === Block for all the out let is here === */}
-      <main className="w-full" disabled={isFetching}>
+      <main className="w-full">
         <div className="pt-8 pb-6 lg:max-w-[88%] max-w-[95%] mx-auto">
-          <Outlet/>
+          <Outlet  context={[user, userAction, isFetching, userisSuccess, isError]}/>
         </div>
       </main> 
 
+
       {/* === footer start here === */}
-      <div className="text-left bg-stone-800 text-neutral-200 lg:mt-10 pt-4">
-        <div className="lg:max-w-[88%] max-w-[95%] mx-auto py-4 lg:pt-8" disabled={isFetching}>
+      <footer className="text-left bg-stone-800 text-neutral-200 lg:mt-10 pt-4">
+        <div className="lg:max-w-[88%] max-w-[95%] mx-auto py-4 lg:pt-8">
           <Footer />
         </div>
-      </div>
+      </footer>
+
 
         {/* === Move back to the top button === */}
       <span className="fixed bottom-8 right-6 z-30 hidden" style={{ display: backToTop, }} >

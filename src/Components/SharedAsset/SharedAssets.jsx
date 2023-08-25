@@ -426,6 +426,14 @@ export const overLay = () => {
 }
 
 
+// when is fetching 
+export const isFecthingStyle = (isFetching) => {
+  const isFetchingStyle = `${isFetching && "opacity-40 after:absolute after:inset-0 after:z-10"}`
+
+  return isFetchingStyle
+}
+
+
 // footer and aside newletter component
 export const NewsLetter = () => {
 

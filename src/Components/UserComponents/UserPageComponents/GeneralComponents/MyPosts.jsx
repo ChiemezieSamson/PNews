@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useFetchedPostByUserId } from '../../../SharedAsset/Spinners/postsSpinner'
 import { WritePostAsideOpenClosebar } from '../../../ButtonAndOthers/Buttons'
-import { SinginAndSecurityIntro, TimeComponentColor } from '../../../SharedAsset/SharedAssets'
+import { SinginAndSecurityIntro, TimeComponentColor, isFecthingStyle } from '../../../SharedAsset/SharedAssets'
 import { Link } from 'react-router-dom'
 import { UserPostsSpinner } from '../../../SharedAsset/Spinners/Spinner'
 
@@ -35,7 +35,7 @@ const MyPosts = ({userAction}) => {
   }
 
   return (
-    <div className={`font-poppins relative  ${isFetching && "opacity-40 after:absolute after:inset-0 after:z-10"}`}>
+    <div className={`font-poppins relative  ${isFecthingStyle(isFetching)}`}>
 
       <WritePostAsideOpenClosebar BarName={"Posts"} handle={handleOpenCloseChild}/>
 
