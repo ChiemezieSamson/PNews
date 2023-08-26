@@ -35,26 +35,37 @@ export const Hanbugar3 = ({closesidebar}) => {
 }
 
 
-export const NavLinksAndArrows = ({opncategories, hideShowNavLinks}) => {
-  const [state, setState] = useState(false)
+export const NavLinksAndArrows = ({opncategories, hideShowNavLinks, name}) => {
   const size = useWindowSize()
 
   const handle_toggle = (e) => {
-    setState((state) => !state)
+    if (e.target.nextSibling.style.display !== "block") {
 
-    if(state){
+      const allThearrow = document.querySelectorAll(".shortNav")
+      allThearrow.forEach((element) => {
+  
+        element.nextSibling.style.display = "none" 
+        element.nextSibling.style = " " 
+      })
+  
       opncategories(e)
-      e.target.nextSibling.style.display =  "none" 
-    } else {
       e.target.nextSibling.style.display = "block"
+    } else {
+      
+      const allThearrow = document.querySelectorAll(".shortNav")
+      allThearrow.forEach((element) => {
+  
+        element.nextSibling.style.display = "none" 
+        element.nextSibling.style = " " 
+      })
     }
+
   }
 
   useEffect(() => {
     const allThearrow = document.querySelectorAll(".shortNav")
 
     if(hideShowNavLinks === false && size.width < 768) {
-      setState(() => false)
 
       allThearrow.forEach((element) => {
 
@@ -63,18 +74,17 @@ export const NavLinksAndArrows = ({opncategories, hideShowNavLinks}) => {
       })
     } 
   },[hideShowNavLinks, size])
+
   
 	return (
-		<span className="shortNav inline-block text-[10px] py-2.5 px-4 relative after:absolute after:inset-0 after:z-10" 
+		<button id={name} className="shortNav inline-block text-[10px] py-2.5 group px-4 relative after:absolute after:inset-0 after:z-10" 
        onClick={handle_toggle}>
 
-      {state ? 
-        <FaChevronDown className="inline-block my-1"/> 
-      : 
-        <FaChevronRight className="inline-block my-1"/>
-      }
-
-		</span>		
+        <FaChevronDown className="my-1 hidden group-focus:inline-block"/> 
+      
+        <FaChevronRight className="inline-block my-1 group-focus:hidden"/>
+  
+		</button>		
 	);
 };
 

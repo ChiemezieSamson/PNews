@@ -74,6 +74,30 @@ export const HeroOneBussinessFavoriteImageSpinner = ({groupStyle, imageStyle, im
 }
 
 
+// posts with title below the image and time below the title Spinner
+export const ImageTopTitleTimeDownSpinner = ({groupStyle, listStyle, imageStyle, titleStyle, timeStyle, num}) => {
+  const EmptyValues = [...Array(num)]
+  const content  = EmptyValues.map((title, id) => ({id: id, title: title}))
+
+  return (
+    <div>
+      <ul className={`${groupStyle}`}>
+        {content.map((post) => {
+          return (
+            <li className={`${listStyle}`}  key={post.id}>
+              <div className={`skeleton rounded-sm h-screen ${imageStyle}`}></div>
+              <div className={`skeleton rounded-sm ${titleStyle}`}></div>
+              <div className={`skeleton rounded-sm w-[70%] ${titleStyle}`}></div>
+              <div className={`skeleton rounded-sm ${timeStyle}`}></div>
+            </li>
+          )
+        })}        
+      </ul>     
+    </div>
+  )
+}
+
+
 
 
 export const SearchPostSpinner = ({groupStyle, imageStyle, textStyle}) => {

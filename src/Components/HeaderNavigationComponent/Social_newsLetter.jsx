@@ -84,6 +84,7 @@ const SocialNewsletter = ({opensidebar, user, userAction, isFetching, userisSucc
         await sendLogout() // send request to the server to clear cookies used or refresh
 
         setShowLogoutModal(() =>  false)
+        setNavigateTo(() => true)
         setButtonText(() => "Login")
 
       } catch (err) {
@@ -97,7 +98,7 @@ const SocialNewsletter = ({opensidebar, user, userAction, isFetching, userisSucc
 
    useEffect(() => {
 
-    if (isSuccess  && navigateTo) {
+    if (isSuccess && navigateTo) {
       setNavigateTo(() => false)
 
       window.history.replaceState({}, document.title)

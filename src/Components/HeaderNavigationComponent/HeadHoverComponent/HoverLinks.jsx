@@ -1,18 +1,17 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import MainTagComponent from "./ComponentOfTheHover/MainTagComponent";
 import PostImageComponent from "./ComponentOfTheHover/PostImageComponent";
 import TrendingTagscomponent from "./ComponentOfTheHover/TrendingTagscomponent";
-import { SkeletonTextFour } from "../../SharedAsset/Spinners/Spinner";
+import { HeroOneBussinessFavoriteImageSpinner } from "../../SharedAsset/Spinners/Spinner";
+import { isFecthingStyle } from "../../SharedAsset/SharedAssets";
 
 export const HoverLinsks = ({CategoriesLink, TagsLink, blogPost, Parentlink, handleCloseHoverlinks, tagsaction,
   isSuccess, isFetchingHoverPosts, isFetchingTags, isFetching, categoriesaction}) => { 
  
-  
-
   return (
     <div 
-      className="text-left w-full lg:max-w-6xl lg:rounded-b mx-auto shadow-md shadow-black bg-stone-50
+      className="text-left w-[98%] lg:max-w-6xl lg:rounded-b mx-auto shadow-md shadow-black bg-stone-50
        font-poppins tracking-wide">
       <div className="grid grid-cols-6">
 
@@ -59,6 +58,7 @@ export const HoverLinsks = ({CategoriesLink, TagsLink, blogPost, Parentlink, han
 
 export const SmallScreenHoverLinsks = ({CategoriesLink, Parentlink, handleCloseNavLinks, isFetching, categoriesaction}) => {
   const [backgroundVisible, setBackgroundVisible] = useState(true);
+  const [categoriesLinks, setCategoriesLinks] = useState([])
 
   const handleBackgroundMove = () => {
     setBackgroundVisible(false);
@@ -72,38 +72,47 @@ export const SmallScreenHoverLinsks = ({CategoriesLink, Parentlink, handleCloseN
     setBackgroundVisible(() => true);
   }
 
-  let CategoriesLinks = []
-
-  if (CategoriesLink?.length > 0) {
-    CategoriesLinks = CategoriesLink?.map((title, id) => ({id: id, title: title}))
-  }
+  
+  useEffect(() => {
+    
+    if (CategoriesLink?.length > 0) {
+  
+     const  CategoriesLinks = CategoriesLink?.map((title, id) => ({id: id, title: title}))
+       setCategoriesLinks(() => CategoriesLinks)
+    }
+  }, [CategoriesLink])
   
   return (
-    <nav className="md:hidden disabled:opacity-40" disabled={isFetching}>
+    <nav className={`md:hidden disabled:opacity-40 ${isFecthingStyle(isFetching)}`}>
+
       <ul className="list-none m-0 font-semibold overflowScrollSmallScreen bg-gradient-to-b from-gray-300/50 
         to-transparent text-center md:text-left overflow-y-scroll md:overflow-visible max-h-40 md:max-h-full pb-2">
 
-        <li className={`${backgroundVisible ? 'bg-white' : ''} py-1.5 px-1 text-stone-700 uppercase font-normal text-xs
+        <li className={`${backgroundVisible && 'bg-white'} py-1.5 px-1 text-stone-700 uppercase font-normal text-xs
           hover:mainColor TextHeadertransition focus-within:bg-white`}>
-          <Link to={`/${Parentlink}`} className="block"   onClick={handleCloseNavLinks}>All</Link>
+          <Link to={`/${Parentlink}`} className="block"  onClick={handleCloseNavLinks}>All</Link>
         </li>
         
         {(categoriesaction && !isFetching) ?          
-          CategoriesLinks?.map((category) => {
+          categoriesLinks?.map((category) => {
             return(
               <li key={category?.id} className="py-1.5 px-1 text-stone-700 uppercase font-normal text-xs
               hover:mainColor TextHeadertransition focus-within:bg-white hover:bg-white" 
               onClick={handleBackgroundMove} onMouseOver={handleOnHover} onMouseOut={handleOnHoverOut}>
 
                 <Link to={`/${Parentlink}/categories?category=${category?.title}`} 
-                className="block"   onClick={handleCloseNavLinks}>
+                  className="block"   onClick={handleCloseNavLinks}>
                     {category?.title}
                 </Link>
               </li>
             )
           })
           :
-          <SkeletonTextFour />
+          <HeroOneBussinessFavoriteImageSpinner 
+            groupStyle={"list-none m-0 py-3 px-4"}
+            imageStyle={"h-5 w-[30%] mx-auto my-2 "}
+            image={5}
+          />    
         }
       </ul>
     </nav> 

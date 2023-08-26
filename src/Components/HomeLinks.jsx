@@ -115,7 +115,7 @@ const HomeLinks = () => {
         </div>
 
         {/* ===== Home hero and navigations start here ===== */}
-        <div className="mt-10"  onClick={handleCloseNavLinks}>
+        <div className="mt-10">
           <HeaderNavigations 
             handleCloseNavLinks={handleCloseNavLinks}
             hideShowNavLinks={hideShowNavLinks} 

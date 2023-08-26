@@ -30,7 +30,7 @@ const HeaderNavigations = ({hideShowNavLinks, handleCloseNavLinks}) => {
   // fetching post based on a particular parent category
   const { data = [], isSuccess, isFetching: isFetchingHoverPosts } = useGetPostsByPaginationTwoQuery(headerParentCategory ?  headerParentCategory : `${"?page=" + 1}&limit=${10}&parentCat="books"`);
 
-  const hoverPosts = data.Posts
+  const hoverPosts = data?.Posts
   const size = useWindowSize()
 
   // function for opening and closing the hover components
@@ -46,7 +46,7 @@ const HeaderNavigations = ({hideShowNavLinks, handleCloseNavLinks}) => {
   // if hovered get the textcontent of the hovered navigation so that it can be used to display 
   // the categories under it
   const onHover = (e) => {
-    let elementtextContent =  e.target.id.toLowerCase() // text content
+    let elementtextContent = e.target.id.toLowerCase() // text content
 
     // make sure to only open the big hover component when the window size is bigger than 768
     if(size.width > 768) { 
@@ -106,6 +106,10 @@ const HeaderNavigations = ({hideShowNavLinks, handleCloseNavLinks}) => {
       }
     };
 
+    if(size.width < 768) {
+      handleCloseHoverlinks()
+    }
+
     const is_sticky  = `fixed top-0 inset-x-0 md:pt-2 bg-white z-[200] shadow-md shadow-neutral-300`
 
     window?.addEventListener("scroll", isSticky)
@@ -130,7 +134,9 @@ const HeaderNavigations = ({hideShowNavLinks, handleCloseNavLinks}) => {
 
         <small className="text-xs xxs:text-base font-thin tracking-widest text-stone-800 font-lora capitalize">Discover The Best</small>
 
-        <Link to={"/search"} className="absolute right-0 bottom-1 cursor-pointer md:hidden text-stone-800 text-xs pb-1 xxs:pb-0 xxs:right-2 xxs:text-lg font-bold hover:mainColor TextHeadertransition" title="posts search">
+        <Link to={"/search"} 
+        className="absolute right-0 bottom-1 cursor-pointer md:hidden text-stone-800 text-xs pb-1 xxs:pb-0 xxs:right-2 xxs:text-lg font-bold hover:mainColor TextHeadertransition" 
+        title="posts search"  onClick={handleCloseNavLinks}>
           <FaSistrix className="inline-block"/>
         </Link>
       </div>
@@ -141,7 +147,7 @@ const HeaderNavigations = ({hideShowNavLinks, handleCloseNavLinks}) => {
         {/* ==== navigfation liks ====== */}
         <ul className={`bg-[#ffffff1a] backdrop-blur-lg md:backdrop-blur-none md:bg-transparent 
           grid grid-flow-row m-0 max-w-3xl list-none list-inside pb-5 pt-8 fixed top-0 right-1/2 
-          left-0 transition-transform duration-[350ms] ease-in-out z-50 md:p-0 
+          left-0 transition-transform duration-[350ms] ease-in-out z-50 md:p-0
           md:justify-evenly md:grid-flow-col md:static md:translate-x-0 md:mx-auto 
           ${hideShowNavLinks ? "translate-x-0" : "-translate-x-full"} font-round`}>
 
@@ -157,14 +163,14 @@ const HeaderNavigations = ({hideShowNavLinks, handleCloseNavLinks}) => {
           </li>
 
             {/* === The rest of the links start here === */}
-          {navItems.map((nav) => {
+          {navItems?.map((nav) => {
             return (
               <li key={nav.id} className="md:inline-block relative group hover:bg-stone-100 md:hover:bg-transparent">
                 <NavLink to={nav.url}	className={({ isActive , isPending }) => 
-                  isActive ?  navStyle + " mainColor actives" : 
+                  isActive ?  navStyle + " mainColor" : 
                   isPending ? navStyle + " text-blue-400" : navStyle}
                   onClick={handleCloseNavLinks}>{nav.name}</NavLink>
-                <span className="nav-link md:inline-block  transition-all duration-200 ease-linear"></span>{/* navlink hover underline design */}
+                <span id={nav.name} className="nav-link md:inline-block  transition-all duration-200 ease-linear"></span>{/* navlink hover underline design */}
 
                 {/* The hover arrow for sublinks display */}
                 {(scroll < 201 && size.width >= 768) ? 
@@ -174,7 +180,12 @@ const HeaderNavigations = ({hideShowNavLinks, handleCloseNavLinks}) => {
                     <FaChevronDown className="inline-block align-text-top mt-[2px] my-1"/> 
                   </span> : "" }                    
                   
-                {size.width < 768 && <NavLinksAndArrows opncategories={onHover} hideShowNavLinks={hideShowNavLinks}/>}
+                {size.width < 768 && 
+                  <NavLinksAndArrows 
+                    opncategories={onHover} 
+                    name={nav.name} 
+                    hideShowNavLinks={hideShowNavLinks}
+                  />}
 
                 {/* ===== block of hoverable links small screen are here ====== */}
                 {size.width < 768 && 
@@ -198,7 +209,7 @@ const HeaderNavigations = ({hideShowNavLinks, handleCloseNavLinks}) => {
      {(scroll > 201 && size.width >= 768 ? false : showhoverlinks) && 
 
       <div className="relative" onMouseOver={onshowHoverlinks} onMouseOut={onshowHoverlinks}>
-        <div className={`absolute top-0 lg:inset-x-[5%]`}>
+        <div className={`absolute top-0 inset-x-0 lg:inset-x-[5%] hidded md:block`}>
             <HoverLinsks 
               handleCloseHoverlinks={handleCloseHoverlinks}
               CategoriesLink={headerHoverCategoriesNav} 

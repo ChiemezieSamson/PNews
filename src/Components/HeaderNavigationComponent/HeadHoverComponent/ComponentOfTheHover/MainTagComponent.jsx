@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom'
-import { SkeletonTextFour } from '../../../SharedAsset/Spinners/Spinner';
+import { HeroOneBussinessFavoriteImageSpinner } from '../../../SharedAsset/Spinners/Spinner';
+import { isFecthingStyle } from '../../../SharedAsset/SharedAssets';
 
 const MainTagComponent = ({CategoriesLink, Parentlink, handleCloseHoverlinks, isFetching, categoriesaction}) => {
   const [backgroundVisible, setBackgroundVisible] = useState(true);
@@ -20,13 +21,14 @@ const MainTagComponent = ({CategoriesLink, Parentlink, handleCloseHoverlinks, is
   let CategoriesLinks = []
 
   if (CategoriesLink?.length > 0 && Parentlink) {
+    
     CategoriesLinks = CategoriesLink?.map((title, id) => ({id: id, title: title}) )
   }
 
   return (
-    <nav className="py-6 disabled:opacity-40" disabled={isFetching}>
+    <nav className={`py-6 disabled:opacity-40 ${isFecthingStyle(isFetching)}`}>
       <ul className="list-none m-0">
-        <li  className={`${backgroundVisible ? 'bg-white' : ''} py-1.5 px-4 text-stone-900 
+        <li  className={`${backgroundVisible && 'bg-white'} py-1.5 px-4 text-stone-900 
           uppercase text-sm font-bold focus-within:bg-white TextHeadertransition`}>
           <Link to={`/${Parentlink}`} className="block" onClick={handleCloseHoverlinks}>All</Link>
         </li>
@@ -46,7 +48,11 @@ const MainTagComponent = ({CategoriesLink, Parentlink, handleCloseHoverlinks, is
             )
           })
           :
-          <SkeletonTextFour />          
+          <HeroOneBussinessFavoriteImageSpinner 
+            groupStyle={"list-none m-0 py-3 px-4"}
+            imageStyle={"h-5 w-[70%] my-2 "}
+            image={5}
+          />          
         }
       </ul>
     </nav> 
