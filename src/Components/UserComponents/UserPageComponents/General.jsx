@@ -1,12 +1,12 @@
 import React from 'react'
 import { UserInfoHeading, isFecthingStyle } from '../../SharedAsset/SharedAssets'
+import { useFetchedUserById } from '../../SharedAsset/Spinners/userSpinner'
 import MyPosts from './GeneralComponents/MyPosts'
-import { Link, useOutletContext } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import AdditionalResources from './GeneralComponents/AdditionalResources'
 
 const General = () => {
- // fetching the user from the parent
- const [user, userAction, isFetching] = useOutletContext();
+  const {userAction, isFetching} = useFetchedUserById()  
 
   return (
     <div className='text-left px-5 mt-8 font-source pt-7 pb-5'>
@@ -21,7 +21,7 @@ const General = () => {
       </div>
     
     <div className={`divide-y divide-solid divide-neutral-400 mt-8 relative ${isFecthingStyle(isFetching)}`}>
-      <MyPosts userId={user?._id} userAction={userAction}/>
+      <MyPosts userAction={userAction}/>
       
       <AdditionalResources />
     </div> 

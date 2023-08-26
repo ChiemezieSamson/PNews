@@ -125,12 +125,12 @@ const HeaderNavigations = ({hideShowNavLinks, handleCloseNavLinks}) => {
       {/* ==== Home Hero section start here ==== */}
       <div className={`leading-8 font-poppins font-medium md:py-8 max-w-xl mx-auto my-0 bg-white relative
       ${(size.width >= 768 && scroll >= 300) ? "hidden" : "block"}`}>
-        <h1 className="text-stone-800 text-4xl sm:text-6xl md:text-8xl font-extralight 
+        <h1 className="text-stone-800 text-2xl xxs:text-4xl sm:text-6xl md:text-8xl font-extralight 
           italic tracking-wider uppercase">Chinonye</h1>
 
-        <small className="text-base font-thin tracking-widest text-stone-800 font-lora capitalize">Discover The Best</small>
+        <small className="text-xs xxs:text-base font-thin tracking-widest text-stone-800 font-lora capitalize">Discover The Best</small>
 
-        <Link to={"/search"} className="absolute right-2 bottom-1 cursor-pointer md:hidden text-stone-800 text-lg font-bold hover:mainColor TextHeadertransition" title="posts search">
+        <Link to={"/search"} className="absolute right-0 bottom-1 cursor-pointer md:hidden text-stone-800 text-xs pb-1 xxs:pb-0 xxs:right-2 xxs:text-lg font-bold hover:mainColor TextHeadertransition" title="posts search">
           <FaSistrix className="inline-block"/>
         </Link>
       </div>

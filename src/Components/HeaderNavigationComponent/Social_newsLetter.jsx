@@ -17,6 +17,7 @@ const SocialNewsletter = ({opensidebar, user, userAction, isFetching, userisSucc
 
   const [errMsgOn, setErrMsgOn] = useState(false) // Indicate that there is an error  
   const [showLogoutModal, setShowLogoutModal] = useState(false); // chose what to dispaly when in userpage and when not in userpage
+  const [navigateTo, setNavigateTo] = useState(false) // safe to navigate
 
   const [emailIsValid, setEmailIsValid] = useState(false); // regular expressions
 
@@ -96,13 +97,17 @@ const SocialNewsletter = ({opensidebar, user, userAction, isFetching, userisSucc
 
    useEffect(() => {
 
-    if (isSuccess) {
+    if (isSuccess  && navigateTo) {
+      setNavigateTo(() => false)
+
       window.history.replaceState({}, document.title)
       navigate('/', {replace: true}, [navigate])
-      refetch() // refetch the single user       
+      refetch() // refetch the single user    
+      return   
     } 
 
-  }, [isSuccess, navigate, refetch])
+
+  }, [isSuccess, navigate, refetch, navigateTo])
 
   
   //Logout button confirmation modal

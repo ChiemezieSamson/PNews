@@ -126,22 +126,22 @@ const HomeLinks = () => {
    
      {/* === Block for all the out let is here === */}
       <main className="w-full" onClick={handleCloseNavLinks}>
-        <div className="pt-8 pb-6 lg:max-w-[88%] max-w-[95%] mx-auto">
-          <Outlet  context={[user, userAction, isFetching, userisSuccess, isError]}/>
+        <div className="pt-8 pb-6 lg:max-w-[88%] xxs:max-w-[95%] mx-auto">
+          <Outlet />
         </div>
       </main> 
 
 
       {/* === footer start here === */}
-      <footer className="text-left bg-stone-800 text-neutral-200 lg:mt-10 pt-4">
-        <div className="lg:max-w-[88%] max-w-[95%] mx-auto py-4 lg:pt-8">
+      <footer className="text-left bg-stone-800 text-neutral-200 lg:mt-10 pt-4" onClick={handleCloseNavLinks}>
+        <div className="w-full lg:max-w-[88%] xxs:max-w-[95%] mx-auto py-4 lg:pt-8">
           <Footer />
         </div>
       </footer>
 
 
       {/* === Move back to the top button === */}
-      <span className="fixed bottom-8 right-6 z-30 hidden" style={{ display: backToTop, }} >
+      <span className="fixed bottom-8 right-6 z-30 hidden" style={{ display: backToTop, }} onClick={handleCloseNavLinks}>
         <button title="Back to top" className="text-neutral-400 text-xl pt-1.5 pb-2.5 rounded-md px-3 bg-neutral-100/30 text-center
            border border-solid border-stone-300 shadow-sm shadow-stone-300 opacity-70 transition-opacity hover:opacity-100 
            duration-200 ease-in" onClick={handleBackToTopClick}>

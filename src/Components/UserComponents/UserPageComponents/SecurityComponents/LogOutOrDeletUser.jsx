@@ -20,6 +20,7 @@ const LogOutOrDeletUser = ({user, refetch, userAction}) => {
   const [openLogOut, setOpenLogOut] = useState(false) // use to open and close the LogOut section
   const [wrongPassword, setWrongPassword] = useState(false)// notify when if the enterend password is wrong
   const [errMsgOn, setErrMsgOn] = useState(false) // Indicate that there is an error
+  const [navigateTo, setNavigateTo] = useState(false) // safe to navigate
 
   const [textContentOfTheClickedButton, setTextContentOfTheClickedButton] = useState("LogOut")
   // use to open and close the comfirmation box
@@ -120,6 +121,8 @@ const LogOutOrDeletUser = ({user, refetch, userAction}) => {
           await deleteUser({userId: user?._id, password})
 
           await loggingOut()
+
+          setNavigateTo(() => true)
         } catch (err) {
   
           console.error("Something went wrong!", err)
@@ -134,6 +137,7 @@ const LogOutOrDeletUser = ({user, refetch, userAction}) => {
 
           await loggingOut()
 
+          setNavigateTo(() => true)
         } catch (err) {
   
           console.error("Something went wrong!", err)
@@ -152,12 +156,16 @@ const LogOutOrDeletUser = ({user, refetch, userAction}) => {
   }
 
   useEffect(() => {
-    if (isSuccess){ 
+    if (isSuccess && navigateTo){ 
+      setNavigateTo(() => false)
       
       window.history.replaceState({}, document.title)
-      return navigate("/", {replace: true}, [navigate])}
+      navigate("/", {replace: true}, [navigate])
       refetch()
-  }, [isSuccess, navigate, refetch])
+      return 
+    }
+      
+  }, [isSuccess, navigate, refetch, navigateTo])
 
 
   return (

@@ -12,7 +12,7 @@ const NewsLetter = () => {
 
           <input type="email" placeholder='Your email address' name='email' 
             className='bg-neutral-600 focus:outline-none caret-[#f70d28] placeholder:text-neutral-100 
-              w-full sm:w-auto focus:ring-0 lg:w-[60%] py-[9px] focus:border-none border-none 
+            w-full sm:w-auto focus:ring-0 lg:w-[60%] py-[9px] focus:border-none border-none
               shadow-inner text-center lg:text-left rounded-none'/>
 
           <input type="button" value={"sing up"} name='email' 

@@ -47,7 +47,7 @@ const UserPage = () => {
     },
   ];  
 
-  const style = `border-l-[10px] border-solid bg-gray-200/40 hover:bg-neutral-200 mt-2.5 mb-2.5 px-3 text-stone-800 TextHeadertransition cursor-pointer block py-2 h-[50px] sm:h-auto tracking-wider text-sm sm:text-base`
+  const style = `border-l-[10px] border-solid bg-gray-200/40 hover:bg-neutral-200 px-3 text-stone-800 TextHeadertransition cursor-pointer block py-2 h-[50px] sm:h-auto tracking-wider text-sm sm:text-base`
 
    // making user that only authorized user can update
    useEffect(() => {
@@ -63,18 +63,18 @@ const UserPage = () => {
     <div className={`${size.width >= 1316 ? "grid grid-cols-4 gap-x-4" : "grid grid-flow-row "} font-poppins`}>
 
       {/* user navigation list */}
-      <div className={`mt-6 text-left ${size.width >= 1316 ? "col-span-1 max-h-56" : "order-first grid grid-flow-col justify-evenly"}`}>
+      <ul className={`text-left ${size.width >= 1316 ? "col-span-1 max-h-56 mt-6" : "order-first xs:grid xs:grid-cols-2 mb-7"}`}>
 
         {UserPages?.map((page) => {
             return (
-              <div key={page.id} className = "mb-7 sm:mt-2 sm:mb-4">
+              <li key={page.id} className = "mt-2">
                 <NavLink to={page.toUrl} end className={({ isActive }) => isActive ? `${style} border-[#f70d28] font-semibold` : style}
                 >{page.name}</NavLink>
-              </div>              
+              </li>              
             )
           })
         }                
-      </div>
+      </ul>
 
       {/* user information content */}
       <div className={`${size.width >= 1316 ? "col-span-2" : "order-last"} bg-gray-200/40 overflow-x-hidden rounded-md`}>

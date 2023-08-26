@@ -669,8 +669,8 @@ export const SinginAndSecurityIntro = ({text}) => {
 export const CorrectTick = ({IsValid, positionTop}) => {
 
   return (
-    <span className={`${positionTop} absolute right-4 p-px ${IsValid ? "inline" : "hidden"}`}>
-      <FaCheckDouble className="inline-block text-xs text-green-500 drop-shadow-md" />
+    <span className={`${positionTop} absolute xxs:right-4 right-1 p-px ${IsValid ? "inline" : "hidden"}`}>
+      <FaCheckDouble className="inline-block text-xs text-green-500 drop-shadow-md bg-slate-50/50" />
     </span>
   )
 }
