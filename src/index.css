@@ -369,12 +369,6 @@
 
  /* scroll bar for some components settings and style start here */
 
-.clearfix {
-  content: "";
-  clear: both;
-  display: table;
-}
-
 .activeTitle {
   border-bottom: 2px solid #f70d28;
 }

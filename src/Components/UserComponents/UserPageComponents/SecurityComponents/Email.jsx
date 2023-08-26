@@ -180,6 +180,7 @@ const Email = ({user, userAction}) => {
         
         await userEmailUpdate({userId: user?._id, newEmail, password})
 
+        setOpenAddnewEmail(() => false)
       } catch (err) {
 
         console.error("Something went wrong!", err)
@@ -191,7 +192,6 @@ const Email = ({user, userAction}) => {
     // empty the input boxs and close the tab
     setNewEmail(() => "")
     setPassword(() => "")
-    setOpenAddnewEmail(() => false)
     setWrongPassword(() => false)
     setEmailIsValid(() => false)
     setPassWordIsValid(() => false)
@@ -223,7 +223,8 @@ const Email = ({user, userAction}) => {
         try {
   
           await userEmailMakePrimary({userId: user?._id, primaryEmail: user?.email?.primary, emailOfTheClickedButton})
-  
+          
+          setOpenGetUserPasswordForMakeAndRemove(() => false)
         } catch (err) {
   
           console.error("Something went wrong!", err)
@@ -238,7 +239,8 @@ const Email = ({user, userAction}) => {
         try {
   
           await userEmailRemoveSecondary({userId: user?._id, emailOfTheClickedButton})
-         
+          
+          setOpenGetUserPasswordForMakeAndRemove(() => false)
         } catch (err) {
   
           console.error("Something went wrong!", err)
@@ -249,7 +251,6 @@ const Email = ({user, userAction}) => {
     }
 
 
-    setOpenGetUserPasswordForMakeAndRemove(() => false)
     setWrongPassword2(() => false)
     setIsValid(() => false)
     setGetUserpassword(() => "")

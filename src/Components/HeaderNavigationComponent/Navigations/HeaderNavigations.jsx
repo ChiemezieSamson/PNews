@@ -10,7 +10,7 @@ import useFetchedTags from '../../SharedAsset/Spinners/tagsSpiner';
 import useFetchedCategories from '../../SharedAsset/Spinners/categoriesSpinner';
 import { useGetPostsByPaginationTwoQuery } from '../../../Reduxstore/Slices/posts/PostsSlice';
 
-const HeaderNavigations = ({hideShowNavLinks, closeNavLinksOnBodyClick, handleCloseNavLinks}) => {
+const HeaderNavigations = ({hideShowNavLinks, handleCloseNavLinks}) => {
   // fetch the tags of each ParentCategory
   const {tagsParents = [], isFetching: isFetchingTags, tagsaction} = useFetchedTags() 
   // fetch the category of each ParentCategory
@@ -143,7 +143,7 @@ const HeaderNavigations = ({hideShowNavLinks, closeNavLinksOnBodyClick, handleCl
           grid grid-flow-row m-0 max-w-3xl list-none list-inside pb-5 pt-8 fixed top-0 right-1/2 
           left-0 transition-transform duration-[350ms] ease-in-out z-50 md:p-0 
           md:justify-evenly md:grid-flow-col md:static md:translate-x-0 md:mx-auto 
-          ${hideShowNavLinks ? "translate-x-0" : "-translate-x-full"} font-round`} ref={closeNavLinksOnBodyClick}>
+          ${hideShowNavLinks ? "translate-x-0" : "-translate-x-full"} font-round`}>
 
           {/* === The Home link and style is here === */}
           <li className="md:inline-block relative hover:bg-stone-100 md:hover:bg-transparent mr-2">

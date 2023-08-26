@@ -42,9 +42,6 @@ const HomeLinks = () => {
     handleCloseInstaSidebar()
   }) 
 
-  const closeNavLinksOnBodyClick = useClickAway(() => {
-    handleCloseNavLinks()
-  }) 
 
   useEffect(() => { 
     if (
@@ -55,6 +52,7 @@ const HomeLinks = () => {
       setBackToTop("none") 
     }
   },[y,x])
+
 
   useEffect(() => {  
     if (size.width >= 768 ) {      
@@ -71,32 +69,33 @@ const HomeLinks = () => {
   }
 
    return(
-    <div className={`text-center relative`}>
+    <div className={`text-center`}>
       
       {/* ==== Main header section start here ==== */}
-      <header className="relative">
+      <header className="relative z-50">
 
         {/* ==== social and newsletter start here === */} 
-        <div className="relative">
-          <SocialNewsletter
-            user={user}
-            userAction={userAction}
-            isFetching={isFetching}
-            userisSuccess={userisSuccess}
-            isError={isError} 
-            opensidebar={handle_showFullSideBAr}
-            refetch={refetch}
-          />
+        <SocialNewsletter
+          user={user}
+          userAction={userAction}
+          isFetching={isFetching}
+          userisSuccess={userisSuccess}
+          isError={isError} 
+          opensidebar={handle_showFullSideBAr}
+          refetch={refetch}
+        />
 
-          {/* === small scree hanbugar start here === */}
-          <div className="md:hidden fixed w-8 border-0 inset-auto bg-neutral-100 !z-[9999] right-4 shadow-md shadow-stone-900 pt-1">
-            <button type="button" aria-controls="primary-navigation" onClick={handle_hideShowNavLinks}>
-              {hideShowNavLinks ? <FaTimes /> : <FaBars /> }
-              <span className="hidden">Menu</span>
-            </button>
-          </div>
-        </div>
-
+        {/* === small screen hanbugar start here === */}
+        <button 
+          type="button" 
+          name='smallScreenhanbugar'
+          aria-controls="primary-navigation" 
+          onClick={handle_hideShowNavLinks} 
+          className="md:hidden fixed w-8 border-0 inset-auto bg-neutral-100 top-[44.3px] !z-[9999] mx-auto right-3 shadow-md shadow-stone-900 pb-1
+          after:absolute after:inset-0 after:z-50">
+            {hideShowNavLinks ? <FaTimes className="inline-block"/> : <FaBars className="inline-block"/> }
+          <span className="hidden">Menu</span>
+        </button>  
         
         {/* ==== FullScreen Side Bar start here ==== */}
         <div ref={closeSideBarOnBodyClick} className={`transition-[display] duration-700 ease-linear fixed right-0 inset-y-0 max-w-md z-[300] ${showFullSideBAr ? "block" : "hidden"}`}>
@@ -110,24 +109,23 @@ const HomeLinks = () => {
 
           {/* Link to the search page */}
           <Link to={"/search"} className="fixed right-8 top-3 cursor-pointer text-stone-800 text-lg font-bold hover:mainColor TextHeadertransition" title="posts search"
-          onClick={handleCloseInstaSidebar}>
-              <FaSistrix className="inline-block"/>
+            onClick={handleCloseInstaSidebar}>
+            <FaSistrix className="inline-block"/>
           </Link>
         </div>
 
-
         {/* ===== Home hero and navigations start here ===== */}
-        <div className={`relative z-50 mt-10`}>
+        <div className="mt-10"  onClick={handleCloseNavLinks}>
           <HeaderNavigations 
             handleCloseNavLinks={handleCloseNavLinks}
             hideShowNavLinks={hideShowNavLinks} 
-            closeNavLinksOnBodyClick={closeNavLinksOnBodyClick}/>
+          />
         </div>
       </header>
 
    
      {/* === Block for all the out let is here === */}
-      <main className="w-full">
+      <main className="w-full" onClick={handleCloseNavLinks}>
         <div className="pt-8 pb-6 lg:max-w-[88%] max-w-[95%] mx-auto">
           <Outlet  context={[user, userAction, isFetching, userisSuccess, isError]}/>
         </div>
@@ -142,7 +140,7 @@ const HomeLinks = () => {
       </footer>
 
 
-        {/* === Move back to the top button === */}
+      {/* === Move back to the top button === */}
       <span className="fixed bottom-8 right-6 z-30 hidden" style={{ display: backToTop, }} >
         <button title="Back to top" className="text-neutral-400 text-xl pt-1.5 pb-2.5 rounded-md px-3 bg-neutral-100/30 text-center
            border border-solid border-stone-300 shadow-sm shadow-stone-300 opacity-70 transition-opacity hover:opacity-100 

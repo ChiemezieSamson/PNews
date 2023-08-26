@@ -153,8 +153,10 @@ const LogOutOrDeletUser = ({user, refetch, userAction}) => {
 
   useEffect(() => {
     if (isSuccess){ 
-      refetch()
+      
+      window.history.replaceState({}, document.title)
       return navigate("/", {replace: true}, [navigate])}
+      refetch()
   }, [isSuccess, navigate, refetch])
 
 
