@@ -456,18 +456,25 @@ export const isFecthingStyle = (isFetching) => {
 export const NewsLetter = () => {
 
   return (
-    <div className='mt-12 mb-12 bg-gray-300/30 p-5 shadow-sm shadow-gray-300/40 rounded-sm text-center sm:text-left'>
+    <div className='mt-12 mb-12 bg-gray-300/30 p-5 shadow-sm shadow-gray-300/40 rounded-sm text-center sm:text-left inline-block'>
       <p className='font-round text-[#54595f] text-xs lg:text-sm tracking-normal my-0.5'>Subscribe to our mailing list to receives daily updates direct to your inbox!</p>
 
-      <form className='my-4'>
-        <input type="email" placeholder='Your email address' name='email' 
-        className='bg-white focus:outline-none text-center w-full md:w-auto focus:ring-0 lg:w-56 py-2 focus:border border-solid focus:border-gray-300/50 sm:text-left border-gray-300/50 shadow-inner'/>
-        <input type="button" value={"sing up"} name='email' className='uppercase block w-full md:w-auto my-2 md:inline-block text-xs font-black pt-[13.2px] pb-[11.1px] px-6 text-white bg-[#f70d28] tracking-wider'/>
+      <form className='my-4 bg-red-400 h-full max-h-11 grid grid-cols-8 border-solid relative focus:border-gray-300/50 sm:text-left border-gray-300/50'>
+        <input 
+          type="email" 
+          placeholder='Your email address' 
+          name='newsletteremail' 
+          id='newsletteremail'
+          className='bg-white focus:outline-none w-full h-16 max-h-11 col-span-6 md:w-auto py-0 focus:ring-0 my-0 focus:border border rounded-none'/>
+
+        <button 
+         type="submit"
+         name="newsletterButton"
+         className='w-full md:w-auto text-xs font-black my-0 text-white bg-[#f70d28] tracking-wider align-baseline col-span-2'>sing up</button>
       </form>
 
-      <small className="text-[#54595f] block text-[11px] tracking-wide">
-        <sup>*</sup>
-        &nbsp; we hate spam as much as you do
+      <small className="text-[#54595f] block text-[11px] tracking-wide before:content-['*'] before:ml-0.5 before:text-red-500 before:px-px">
+        we hate spam as much as you do
       </small>
     </div>
   )

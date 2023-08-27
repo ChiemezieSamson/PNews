@@ -32,19 +32,18 @@ const About = () => {
 
               <p>              
                 Lorem, ipsum dolor sit amet consectetur adipisicing elit. Hic reprehenderit, earum exercitationem quas aliquam enim vitae quaerat, dolores quos iure debitis doloremque voluptatum magnam.
-              </p>
-              
+              </p>              
             </div>                     
           </div>
         </div>
 
-        <div className='mb-7 md:col-span-2 max-h-[750px]'>
-          <img src={Chinonye} alt="ChinonyeUmeh" className=''/>
+        <div className='mb-7 md:col-span-2 max-h-[750px] shadow-md shadow-neutral-500 rounded-sm'>
+          <img src={Chinonye} alt="ChinonyeUmeh" className='max-h-[750px] rounded-sm'/>
         </div>
       </article>
 
       <div className='md:w-1/2 mt-8'>
-        <div className='border-y-2 border-solid  border-gray-400/70 py-4'>
+        <div className='border-y-2 border-solid  border-gray-400/70 py-4 inline-block pr-5'>
           <p className='imgxs:text-lg sxs:text-base text-sm font-lora italic font-bold'>
             For More Stories Like this,
             <span className='text-[#f70d28] underline underline-offset-4 inline-block mx-2'> sing up for our newsletter.</span>

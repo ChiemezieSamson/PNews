@@ -21,10 +21,9 @@ const NewsLetter = () => {
 
         </form>
 
-        <div className='text-neutral-300 block text-[11px] tracking-wide pb-7'>
-          <sup>* </sup>
+        <small className="text-neutral-200 block text-[11px] tracking-wide before:content-['*'] before:ml-0.5 before:text-white before:px-px">
           we hate spam as much as you do
-        </div>
+        </small>
       </div>
       
     </section>
