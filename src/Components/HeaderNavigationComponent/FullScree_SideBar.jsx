@@ -2,19 +2,19 @@ import React from "react";
 import { SocialMediaIcons, publicFolder} from "../../data"
 import { useFetchedPosts } from "../SharedAsset/Spinners/postsSpinner";
 import { FaRegCircle } from "react-icons/fa";
+import { isFecthingStyle } from "../SharedAsset/SharedAssets";
 
 
-const FullSreenSidebar = ({closesidebar, disabled}) => {
-  const {content , action} = useFetchedPosts()
+const FullSreenSidebar = ({closesidebar}) => {
+  const {content , action, isFetching} = useFetchedPosts()
   const Posts = content
   
   const Words = ["Get in touch", "Instagram Feeds", "Live events"]
   const texts = Words?.map((text,i) => ({id: i, name: text}))
 
   return (
-    <section className="overflowScrollSmallScreen hidden md:block h-screen overflow-y-scroll 
-      scroll-py-4 overscroll-y-contain snap-mandatory p-8 px-12 bg-neutral-100 font-lora text-stone-800"
-      disabled={disabled}>
+    <section className={`overflowScrollSmallScreen hidden md:block h-screen overflow-y-scroll ${isFecthingStyle(isFetching)}
+      scroll-py-4 overscroll-y-contain snap-mandatory p-8 px-12 bg-neutral-100 font-lora text-stone-800`}>
 
       {/* === Site owner image and name === */}
       <div className="mb-14 text-center">

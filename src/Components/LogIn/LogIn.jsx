@@ -5,7 +5,7 @@ import { useLoginMutation } from '../../Reduxstore/Slices/authSlice/authApiSlic'
 import { useDispatch } from 'react-redux'
 import { setCredentials } from '../../Reduxstore/Slices/authSlice/AuthSlice'
 import { handleEmailPattern, handleUserPassword, textAndNumberOnly } from '../SharedAsset/Vaidations/RegularExpression'
-import { CorrectTick, PasswordDisplay } from '../SharedAsset/SharedAssets'
+import { CorrectTick, PasswordDisplay, isFecthingStyle } from '../SharedAsset/SharedAssets'
 
 const LogIn = () => {
   // Redux toolkit that calls the back end for a log in
@@ -121,7 +121,8 @@ const LogIn = () => {
   }, [isSuccess, navigate])
 
   return (
-    <div className='pb-10 pt-3 text-left bg-gradient-to-b from-neutral-100 via-gray-50 to-neutral-100'>
+    <div className={`pb-10 pt-3 text-left bg-gradient-to-b from-neutral-100 via-gray-50 to-neutral-100 ${isFecthingStyle(isLoading)}`}>
+      
       <div className="md:w-[28rem] max-w-sm font-lora px-6 pb-3 rounded mx-auto">
         {errMsgOn && <p className='text-xs text-rose-500 tracking-wider font-lora'>{errMsg}</p>}
 
@@ -184,7 +185,7 @@ const LogIn = () => {
                   required/> 
 
                 <CorrectTick 
-                  IsValid={isValid}
+                  IsValid={emailIsValid}
                   positionTop={"top-[20%]"}
                 />               
               </div>

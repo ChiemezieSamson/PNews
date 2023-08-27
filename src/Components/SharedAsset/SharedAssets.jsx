@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { FaCheckDouble, FaFacebookSquare,   FaRegClock, FaRegComment, FaRegEye, FaRegEyeSlash, FaShareAlt, FaTwitter} from 'react-icons/fa';
 import { FacebookShareButton, TwitterShareButton } from "react-share";
-import { SocialMediaIcons } from '../../data';
+import { SocialMediaIcons, passWordTextStructure } from '../../data';
 import { CatSideBarHanbugarButton } from '../ButtonAndOthers/Buttons';
 import Preview from '../BlogPages/singlePostPage/createPost/editorPreview/Preview';
 import { Link, useLocation } from 'react-router-dom';
@@ -169,22 +169,22 @@ export const CatSidebarHanbugar = ({initial, blackletters, redletters, parent}) 
               <Link to={`/${parent}`} className='py-1 px-2 inline-block'>All</Link>
             </li>
 
-            {CategoriesLinks.map((cat) => {
+            {CategoriesLinks?.map((cat) => {
               return (
-                <li key={cat.id} className={`inline-block cursor-pointer uppercase last:hidden  last:md:inline-block  
+                <li key={cat?.id} className={`inline-block cursor-pointer uppercase last:hidden  last:md:inline-block  
                   ${size.width < 420 ? "[&:nth-child(2)]:hidden": "[&:nth-child(2)]:sxs:inline-block"}  
                   ${size.width < 520 ? "[&:nth-child(3)]:hidden" : "[&:nth-child(3)]:xs:inline-block "} 
                     ${size.width < 768 ? "[&:nth-child(4)]:hidden" : "[&:nth-child(4)]:md:inline-block"}
                     ${size.width < 1000 ? "[&:nth-child(5)]:hidden" : "[&:nth-child(5)]:md:inline-block"}`}
                     >
-                  <Link to={`/categories?category=${cat.title}`} className='hover:mainColor py-1 px-2 inline-block'>{cat.title}</Link>
+                  <Link to={`/categories?category=${cat?.title}`} className='hover:mainColor py-1 px-2 inline-block'>{cat?.title}</Link>
                 </li>
               )
             })}
           </ul>
 
           {/* small scree eclips button to display and hide the list */}
-          {(size.width > 1000 && CategoriesLinks.length <= 5) ? "" :
+          {(size.width > 1000 && CategoriesLinks?.length <= 5) ? "" :
             <div className="block px-2 pt-1.5 lg:hidden">
               <CatSideBarHanbugarButton sidebar_state={catSidebar} handleShowCatSideBar={handleShowCatSideBar} />
           </div>}
@@ -192,10 +192,10 @@ export const CatSidebarHanbugar = ({initial, blackletters, redletters, parent}) 
         
         {/* use some of the list here in  small screens*/}
         <ul className={CatSideBarStyle}>
-          {CategoriesLinks.map((cat) => {
+          {CategoriesLinks?.map((cat) => {
             return (
-              <li key={cat.id} className="first:sxs:hidden [&:nth-child(2)]:xs:hidden [&:nth-child(3)]:md:hidden">
-                <Link to={`/categories?category=${cat.title}`} className='hover:mainColor py-1 px-2 inline-block'>{cat.title}</Link>
+              <li key={cat?.id} className="first:sxs:hidden [&:nth-child(2)]:xs:hidden [&:nth-child(3)]:md:hidden">
+                <Link to={`/categories?category=${cat?.title}`} className='hover:mainColor py-1 px-2 inline-block'>{cat?.title}</Link>
               </li>
             )
           })}
@@ -427,6 +427,20 @@ export const overLay = () => {
   before:z-10 before:inset-0 before:bg-black/10 group-hover:before:bg-black/30`
 
   return overLay
+}
+
+
+export const PassWordTextStructure = ({groupStyle}) => {
+
+  return (
+    <ul className={`list-disc list-inside text-sm mb-5 ${groupStyle}`}>
+      {passWordTextStructure.map((text) => {
+        return (
+          <li key={text.id} >{text.text}</li>
+        )
+      })}
+    </ul>
+  )
 }
 
 

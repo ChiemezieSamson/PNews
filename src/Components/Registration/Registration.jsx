@@ -3,7 +3,7 @@ import { useCreateNewUserMutation } from "../../Reduxstore/Slices/users/UsersSli
 import useFetchedUsers from "../SharedAsset/Spinners/userSpinner";
 import { Link, useNavigate } from "react-router-dom";
 import { handleEmailPattern, handleUserPassword, textAndNumberOnly, textOnly } from "../SharedAsset/Vaidations/RegularExpression";
-import { CorrectTick, PasswordDisplay } from "../SharedAsset/SharedAssets";
+import { CorrectTick, PassWordTextStructure, PasswordDisplay, isFecthingStyle } from "../SharedAsset/SharedAssets";
 
 const RegistrationForm = () => {
   // Redux toolkit that calls the back end to create a user account
@@ -187,8 +187,8 @@ const RegistrationForm = () => {
 
 
   return (
-    <div className="pb-10 pt-3 text-left bg-gradient-to-b from-neutral-100 via-gray-50 to-neutral-100"
-      disabled={isFetching}>
+    <div className={`pb-10 pt-3 text-left bg-gradient-to-b from-neutral-100 via-gray-50 to-neutral-100 ${isFecthingStyle(isFetching)}`}>
+      
       <div className="md:w-[28rem] max-w-sm font-lora px-6 pb-3 rounded mx-auto">
         {errMsgOn && <p className='text-xs text-rose-500 tracking-wider font-lora'>{errMsg}</p>}
 
@@ -211,7 +211,7 @@ const RegistrationForm = () => {
 
                 <input
                   className={`${(!firstNameIsValid && firstname) ? "border-red-500 text-red-600 focus:border-red-500 focus:ring-red-500" :
-                  ""}`}
+                  ""} disabled:opacity-40`}
                   id="firstname"
                   name="userregisteredfirstname"
                   type="text"
@@ -220,6 +220,7 @@ const RegistrationForm = () => {
                   maxLength={20}
                   autoFocus={true}              
                   required
+                  disabled={!useraction}                 
                   value={firstname}
                   onChange={handleFirstName}
                 />
@@ -242,7 +243,7 @@ const RegistrationForm = () => {
 
                 <input
                   className={`${(!lastNameIsValid && lastname) ? "border-red-500 text-red-600 focus:border-red-500 focus:ring-red-500" :
-                  ""}`}
+                  ""} disabled:opacity-40`}
                   id="lastname"
                   name="userregisteredlastname"
                   type="text"
@@ -250,6 +251,7 @@ const RegistrationForm = () => {
                   aria-label='text' 
                   maxLength={20}             
                   required
+                  disabled={!useraction}
                   value={lastname}
                   onChange={handleLastName}
                 />
@@ -272,7 +274,7 @@ const RegistrationForm = () => {
 
                 <input
                   className={`${userNameExist && "mb-0"} ${(!isValid && username) ? "border-red-500 text-red-600 focus:border-red-500 focus:ring-red-500" :
-                  ""}`}
+                  ""} disabled:opacity-40`}
                   id="username"
                   name="userregisteredusername"
                   type="text"
@@ -280,6 +282,7 @@ const RegistrationForm = () => {
                   aria-label='text' 
                   maxLength={19}             
                   required
+                  disabled={!useraction}
                   value={username}
                   onChange={handleUserName}
                 />
@@ -306,11 +309,12 @@ const RegistrationForm = () => {
                   id="primary"
                   name="userregisteredprimary"
                   type="email"
-                  className={`mb-0 ${(!emailIsValid && primary) ? "border-red-500 text-red-600 focus:border-red-500 focus:ring-red-500" : ""}`}
+                  className={`mb-0 ${(!emailIsValid && primary) ? "border-red-500 text-red-600 focus:border-red-500 focus:ring-red-500" : ""} disabled:opacity-40`}
                   placeholder="Email"
                   value={primary}
                   onChange={handleEmail}
                   required
+                  disabled={!useraction}
                 />  
 
                 {emailExist && <p className='text-xs text-rose-500 tracking-wider font-lora'>Already have a user with this email!</p>}  
@@ -333,7 +337,7 @@ const RegistrationForm = () => {
 
                 <input
                   className={`${(!passWordIsValid && password) ? "border-red-500 text-red-600 focus:border-red-500 focus:ring-red-500" :
-                  ""}`}
+                  ""} disabled:opacity-40`}
                   id="password"
                   name="userregisteredpassword"
                   type={`${showPassword ? "text" : "password"}`}
@@ -341,6 +345,7 @@ const RegistrationForm = () => {
                   value={password}
                   onChange={handleUserpassword}
                   required
+                  disabled={!useraction}
                 />
 
                 <PasswordDisplay 
@@ -349,6 +354,9 @@ const RegistrationForm = () => {
                 />
               </div>             
             </label>
+
+
+            <PassWordTextStructure />
 
              {/* Confirm Password */}
             <label className="text-gray-700" htmlFor="confirmPassword">
@@ -361,7 +369,7 @@ const RegistrationForm = () => {
 
                 <input
                   className={`mb-0 ${(!confirmPasswordIsValid && confirmPassword) ? "border-red-500 text-red-600 focus:border-red-500 focus:ring-red-500" :
-                  ""}`}
+                  ""} disabled:opacity-40`}
                   id="confirmpassword"
                   name="userregisteredconfirmpassword"
                   type={`${showConfirmPassword ? "text" : "password"}`}
@@ -369,10 +377,10 @@ const RegistrationForm = () => {
                   value={confirmPassword}
                   onChange={handleUserConFirmPassword}
                   required
+                  disabled={!useraction}
                 />
 
                 {passwordNotSame && <p className='text-xs text-rose-500 tracking-wider font-lora'>Passwords not same</p>}
-
 
                 <PasswordDisplay 
                   showPassword={showConfirmPassword}

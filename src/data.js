@@ -205,3 +205,26 @@ export const otherPages = [
 		to: "privacy&policy",
 	},
 ];
+
+export const passWordTextStructure = [
+	{
+		id: 0,
+		text: "8 characters minimum",
+	},
+	{
+		id: 1,
+		text: "One uppercase character",
+	},
+	{
+		id: 2,
+		text: "One lowercase character",
+	},
+	{
+		id: 3,
+		text: "One special character",
+	},
+	{
+		id: 4,
+		text: "Numbers",
+	},
+];

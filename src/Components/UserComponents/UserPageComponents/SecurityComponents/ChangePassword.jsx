@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useUpdateExistingUserPasswordMutation } from '../../../../Reduxstore/Slices/users/UsersSlice'
 import { WritePostAsideOpenClosebar } from '../../../ButtonAndOthers/Buttons'
-import { PasswordDisplay, SinginAndSecurityIntro } from '../../../SharedAsset/SharedAssets'
+import { PassWordTextStructure, PasswordDisplay, SinginAndSecurityIntro } from '../../../SharedAsset/SharedAssets'
 import { handelPassWordValidation } from '../../../SharedAsset/Vaidations/bcrypt'
 import { handleUserPassword } from '../../../SharedAsset/Vaidations/RegularExpression'
 
@@ -224,7 +224,9 @@ const ChangePassword = ({user, userAction}) => {
             </div>
           </label>
 
-            {/* User retype password input box start here */}
+          <PassWordTextStructure groupStyle={"sxs:grid sxs:grid-cols-2"} />
+
+          {/* User retype password input box start here */}
           <label htmlFor="retypeusernewpassword">
 
             <span className="text-xs tracking-wider after:content-['*'] after:ml-0.5 after:text-red-500 font-bold block">
