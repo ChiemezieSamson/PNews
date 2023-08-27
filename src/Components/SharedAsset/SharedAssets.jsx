@@ -211,11 +211,15 @@ export const SocialMediaLinks = () => {
   
   return (
     <ul className="pt-1 list-none m-0 p-0 inline-block">
-      {SocialMediaIcons.map((icon) => {
+      {SocialMediaIcons?.map((icon) => {
         return (
-          <li key={icon.id} className="inline-block px-1.5 first:pl-0 last:pr-0 group cursor-pointer" title={icon.name}>
-            <a href={icon.link} target="_blank" rel={"noreferrer"} className={`no-underline text-xl ${icon.socialLinks} leading-3 
-              group-hover:text-white transition-all duration-200 ease-linear`} onClick={(e) => e.preventDefault()}>
+          <li key={icon.id} className="inline-block first:pl-0 last:pr-0 group cursor-pointer" title={icon.name}>
+            <a  
+              href={icon.link} 
+              target="_blank" 
+              rel={"noreferrer"} 
+              className={`no-underline mx-1.5 text-xl ${icon.socialLinks} leading-3 
+              group-hover:text-white TextHeadertransition inline-block relative after:absolute after:inset-0 after:z-10`}>
               {icon.icon}
             </a>
           </li>
@@ -261,7 +265,7 @@ const SocialMediaCount = ({text, bg, shareUrl, postTitle, postId, SocialSharedCo
             onShareWindowClose={handleShareUpdate}
             onClick={handleSetSocial}
             >
-            <FaFacebookSquare className='inline-block text-base align-text-top pr-1'/> 
+            <FaFacebookSquare className='inline-block text-base align-text-top pr-1 TextHeadertransition'/> 
             { text}
           </FacebookShareButton>
         : 
@@ -345,7 +349,7 @@ export const SocialLinks = ({others}) => {
         return (
           <li key={link.id}>
             <a href={link.link} target="_blank" rel="noopener noreferrer" className={`text-xl block ${others ? link.bg : "bg-[#fff]"} font-bold ${others ? link.hv : "hover:bg-slate-200/75"} cursor-pointer border border-solid border-[#e0e0e0]
-              transition-all duration-200 ease-linear`} onClick={(e) => e.preventDefault()}>
+              TextHeadertransition`} onClick={(e) => e.preventDefault()}>
               <span className={`${others ? "text-white" : "text-[#53585c]"}`}>
                 <span className={`block text-3xl ${others ? "text-white" : link.socialLinks}`}>{link.icon}</span>
                 <span className='block'>{link.number}</span>
