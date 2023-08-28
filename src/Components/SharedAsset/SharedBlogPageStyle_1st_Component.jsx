@@ -45,7 +45,7 @@ export const SharedBlogPageStyleOne = ({Posts, users, canOpen}) => {
                 <ul className="w-[900px] md:w-full grid md:grid-rows-2 grid-cols-3 md:grid-cols-2 md:gap-1 HeroImageMultiple">
                   {Posts?.slice(1,4)?.map((post) => {
                     return (
-                      <li key={post._id} className="HeroImageMultipleListOverFlow group md:first:col-span-2 md:last:col-span-1 HeroImageMultipleList">
+                      <li key={post?._id} className="HeroImageMultipleListOverFlow group md:first:col-span-2 md:last:col-span-1 HeroImageMultipleList">
 
                         <Link to={`/single/${post?._id}`} className={overLay()}>
                           <img src={publicFolder + post?.postImage} alt="IndexImage" className="Imagetransition HeroImageMultipleList" loading="lazy"/>

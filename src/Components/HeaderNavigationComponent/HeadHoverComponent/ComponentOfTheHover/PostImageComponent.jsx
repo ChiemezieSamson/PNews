@@ -35,6 +35,7 @@ const PostImageComponent = ({blogPost = [], Parentlink, handleCloseHoverlinks, i
     if (blogPost?.length > 0 && Parentlink) {
 
       if(Parentlink === "favorite" || Parentlink === "quotes") {
+
         setPosts(() => blogPost?.slice(start, end))
       } else if (size.width < 1024) {
     
@@ -75,11 +76,11 @@ const PostImageComponent = ({blogPost = [], Parentlink, handleCloseHoverlinks, i
         </ul>
       :
         <ImageTopTitleTimeDownSpinner
-          groupStyle={(Parentlink === "favorite" || Parentlink === "quotes") ? "grid-flow-col grid list-none m-0 py-2" : "grid-cols-3 grid list-none m-0 py-2"}
+          groupStyle={(Parentlink === "favorite" || Parentlink === "quotes") ? "grid-flow-col grid list-none m-0 py-2 text-center" : "grid-cols-3 grid list-none m-0 py-2"}
           listStyle={"mx-1 my-1"}
           imageStyle={(Parentlink === "favorite" || Parentlink === "quotes") ? "lg:h-32 max-h-24" : "lg:h-28 max-h-24"}
           titleStyle={"mt-1 h-3"}
-          num={(Parentlink === "favorite" || Parentlink === "quotes") ? 4 : 6}
+          num={((Parentlink === "favorite" || Parentlink === "quotes") ? 4 : 6)}
         /> 
       }
 
