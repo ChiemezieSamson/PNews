@@ -4,6 +4,7 @@ import { useFetchedPostByQery } from '../../SharedAsset/Spinners/postsSpinner'
 import useFetchedUsers from '../../SharedAsset/Spinners/userSpinner'
 import useFetchedComments from '../../SharedAsset/Spinners/commentSpinner'
 import CategorySearchpagination from '../PaginationComponents/paginationPage/CategorySearchpagination'
+import { isFecthingStyle } from '../../SharedAsset/SharedAssets'
 
 const Category = () => {
   const {content , action, totalPages, currentPage, isFetching} = useFetchedPostByQery()
@@ -16,21 +17,20 @@ const Category = () => {
   const canOpen = [action, useraction, commentaction].every(Boolean)
 
   return (  
-    <div className="m-0 p-0 disabled:opacity-40" disabled={isFetching}>
+    <div className={`m-0 p-0 ${isFecthingStyle(isFetching)}`}>
       {currentPage > 1 ?
-        <CategorySearchpagination
-          canOpen={canOpen}
-        /> 
+        <CategorySearchpagination /> 
           :
         <GeneralCategorisePages 
           canOpen={canOpen}
           users={users}
           Comments={Comments}
+          commentaction={commentaction}
           ThreeFirstPost={canOpen && Posts?.slice(0, 4)}  
           PagePost={canOpen && Posts?.slice(4, 13)}
           currentPage={currentPage}
           totalPages={totalPages}
-          />
+        />
       }                
     </div>    
   )

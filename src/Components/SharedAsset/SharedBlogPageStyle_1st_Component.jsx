@@ -121,7 +121,7 @@ export const GeneralCategorisePages = ({ThreeFirstPost, Comments, commentaction,
             currentPage={currentPage}
             totalPages={totalPages}
             canOpen={canOpen}
-            />
+          />
         </div>
 
         <aside className="md:col-span-1 mt-8 md:ml-[3%]">

@@ -1,7 +1,7 @@
 import React from 'react'
 import StickyBox from "react-sticky-box";
 import Aside from '../../asidePage/Aside';
-import { NavDirectionAndPageName } from '../../../SharedAsset/SharedAssets';
+import { NavDirectionAndPageName, isFecthingStyle } from '../../../SharedAsset/SharedAssets';
 import { PagesBlogPostComponent } from '../../IndexPageComponents/SharedComponents';
 import useFetchedUsers from '../../../SharedAsset/Spinners/userSpinner';
 import useFetchedComments from '../../../SharedAsset/Spinners/commentSpinner';
@@ -18,11 +18,11 @@ const CategorySearchpagination = () => {
   const canOpen = [action, useraction, commentaction].every(Boolean)
 
   return (
-    <div className='grid grid-flow-row md:grid-cols-3 disabled:opacity-40' disabled={isFetching}>
+    <div className={`grid grid-flow-row md:grid-cols-3 ${isFecthingStyle(isFetching)}`}>
 
       <aside className="md:col-span-1 mt-8 md:mr-[3%] order-last md:order-first">
         <StickyBox offsetTop={0} offsetBottom={0}>
-          <Aside Comments={Comments}/>
+          <Aside Comments={Comments} commentaction={commentaction}/>
         </StickyBox>
       </aside>
 
