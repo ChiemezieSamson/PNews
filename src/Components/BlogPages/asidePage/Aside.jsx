@@ -8,9 +8,11 @@ import { Link } from 'react-router-dom'
 import { StarComponent } from '../../ButtonAndOthers/Buttons'
 
 
-const Aside = ({Comments}) => {
+const Aside = ({Comments, commentaction}) => {
   const {content , action, isFetching} = useFetchedPosts()
   const Posts = content
+
+  const canOpen = [action, commentaction].every(Boolean)
 
   return (
     <>
@@ -25,7 +27,7 @@ const Aside = ({Comments}) => {
 
       <TrendingCommentsLatest 
         posts={Posts} 
-        action={action} 
+        action={canOpen}
         Comments={Comments} 
         isFetching={isFetching}
       />
@@ -36,7 +38,7 @@ const Aside = ({Comments}) => {
 
         <div className='my-3 block'>
 
-          {action ? 
+          {canOpen ? 
             <div className='text-white relative mt-4 mb-7'>
             
               <Link to={`/single/${Posts[2]?._id}`} className='topRetangleImage block after:absolute after:inset-0 after:bg-neutral-700/20'>                
@@ -61,7 +63,7 @@ const Aside = ({Comments}) => {
             <div className="skeleton rounded-sm h-screen topRetangleImage mt-4 mb-7"></div>
           }  
           
-          <JustTimeComponetStar Posts={action && Posts?.slice(4,8)} action={action}/>
+          <JustTimeComponetStar Posts={canOpen && Posts?.slice(4,8)} action={canOpen}/>
         </div>
       </div>
     </>

@@ -1,7 +1,7 @@
 import React from 'react'
 import { useFetchedPostByPaginationTwo } from '../../SharedAsset/Spinners/postsSpinner'
 import { SharedBlogPageStyleOne } from '../../SharedAsset/SharedBlogPageStyle_1st_Component'
-import { NavDirectionAndPageName } from '../../SharedAsset/SharedAssets'
+import { NavDirectionAndPageName, isFecthingStyle } from '../../SharedAsset/SharedAssets'
 import { PagesBlogPostComponent } from '../IndexPageComponents/SharedComponents'
 import StickyBox from "react-sticky-box";
 import Aside from '../asidePage/Aside'
@@ -19,13 +19,13 @@ const BooksIndexPage = () => {
   const canOpen = [action, useraction, commentaction].every(Boolean)
 
   return (
-    <div className='disabled:opacity-40' disabled={isFetching}>
+    <div className={`${isFecthingStyle(isFetching)}`}>
 
         <SharedBlogPageStyleOne
           users={users} 
           Posts={canOpen && Posts?.slice(0,4)} 
           canOpen={canOpen}
-          />
+        />
 
         <div className='md:grid md:grid-cols-3'>
           <div className="md:col-span-2 md:mr-[3%]">
@@ -39,13 +39,12 @@ const BooksIndexPage = () => {
               currentPage={currentPage}
               totalPages={totalPages}
               canOpen={canOpen}
-              />
-              
+            />              
           </div>
 
           <aside className="md:col-span-1 mt-8 md:ml-[3%]">
             <StickyBox offsetTop={0} offsetBottom={0}>
-              <Aside Comments={Comments}/>
+              <Aside Comments={Comments} commentaction={commentaction}/>
             </StickyBox>
           </aside>
       </div>       

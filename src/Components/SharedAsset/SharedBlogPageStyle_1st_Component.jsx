@@ -15,15 +15,14 @@ export const SharedBlogPageStyleOne = ({Posts, users, canOpen}) => {
     <>
       {canOpen ? 
         <div>
-          {Posts.length > 0 ?
+          {Posts?.length > 0 ?
             <div className="md:grid md:grid-cols-7">
 
               {/* first big image */}
               <div className={`HeroImageOneOverFlow group HeroImageOne md:col-span-4`}>
 
                 <Link to={`/single/${Posts[0]?._id}`} className={overLay()}>
-                  <img src={publicFolder + Posts[0]?.postImage || null} alt="Post" 
-                  className="Imagetransition HeroImageOne" loading="lazy"/>
+                  <img src={publicFolder + Posts[0]?.postImage || null} alt="Post" className="Imagetransition HeroImageOne" loading="lazy"/>
                 </Link>            
                         
                 <span className="bottom-[14%] md:bottom-[14%] lg:bottom-[8%] ImageTextTranslateY">   
@@ -44,28 +43,26 @@ export const SharedBlogPageStyleOne = ({Posts, users, canOpen}) => {
               {/* The remaining three images */}
               <div className="overflowScroll md:col-span-3 HeroImageThreeMultipleOverFlow">
                 <ul className="w-[900px] md:w-full grid md:grid-rows-2 grid-cols-3 md:grid-cols-2 md:gap-1 HeroImageMultiple">
-                  {Posts.slice(1,4).map((post) => {
+                  {Posts?.slice(1,4)?.map((post) => {
                     return (
                       <li key={post._id} className="HeroImageMultipleListOverFlow group md:first:col-span-2 md:last:col-span-1 HeroImageMultipleList">
 
-                        <Link to={`/single/${post._id}`} className={overLay()}>
-                          <img src={publicFolder + post.postImage} alt="IndexImage"  
-                            className="Imagetransition HeroImageMultipleList" 
-                            loading="lazy"/>
+                        <Link to={`/single/${post?._id}`} className={overLay()}>
+                          <img src={publicFolder + post?.postImage} alt="IndexImage" className="Imagetransition HeroImageMultipleList" loading="lazy"/>
                         </Link>                  
                       
                         <span className="ImageTextTranslateY bottom-[35%] md:bottom-[14%] lg:bottom-[10%]">
-                          <CategoriesComponent cat={post.postCategory[0]}/>
+                          <CategoriesComponent cat={post?.postCategory[0]}/>
 
                           <h3 className="HeroImageMultipleListH3 group-first:md:text-lg group-first:lg:text-xl">
-                            <Link to={`/single/${post._id}`} className='inline-block' title='title'>
-                            {post.postTitle}
+                            <Link to={`/single/${post?._id}`} className='inline-block' title='title'>
+                              {post?.postTitle}
                             </Link>
                           </h3>
 
                           {size.width >= 1024 && 
                           <span className="Imagetransition ImageTextTranslateYInvisible">
-                            <TimeComponent time={post.createdAt} />
+                            <TimeComponent time={post?.createdAt} />
                           </span>}
                         </span>
                       </li>
@@ -101,7 +98,7 @@ export const SharedBlogPageStyleOne = ({Posts, users, canOpen}) => {
 
 
 // Category, pagination page component
-export const GeneralCategorisePages = ({ThreeFirstPost, Comments, PagePost, users, currentPage, totalPages, canOpen}) => {
+export const GeneralCategorisePages = ({ThreeFirstPost, Comments, commentaction, PagePost, users, currentPage, totalPages, canOpen}) => {
   return (
     <section className="text-left">
 
@@ -130,7 +127,7 @@ export const GeneralCategorisePages = ({ThreeFirstPost, Comments, PagePost, user
         <aside className="md:col-span-1 mt-8 md:ml-[3%]">
           <StickyBox
             offsetTop={0} offsetBottom={0}>
-            <Aside Comments={Comments}/>
+            <Aside Comments={Comments} commentaction={commentaction}/>
           </StickyBox>
         </aside>
       </div>      
