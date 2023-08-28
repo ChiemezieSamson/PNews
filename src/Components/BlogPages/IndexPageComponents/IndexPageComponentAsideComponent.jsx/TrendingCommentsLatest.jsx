@@ -1,77 +1,145 @@
 import React, { useRef, useState } from 'react'
 import { JustTimeComponet, JustTimeComponetStar } from '../SharedComponents'
+import { isFecthingStyle } from '../../../SharedAsset/SharedAssets'
 
-const TrendingCommentsLatest = ({posts, Comments}) => {
+
+const TrendingCommentsLatest = ({posts, Comments, action, isFetching}) => {
   const [newPosts, setNewPosts] = useState("")
   const [text, setText] = useState("")
+
+  const TrendingPosts = action && posts?.filter(post => post?.optional?.trending === true)
 
   const ref = useRef()
   const ref2 = useRef()
   const ref3 = useRef()
 
+  // handling Tab selection
   const handleClick = (e) => {
-    ref.current.classList.remove("activeTitle")
-    ref2.current.classList.remove("activeTitle")
-    ref3.current.classList.remove("activeTitle")
-    e.target.classList.add("activeTitle")
+    const ClickedHead = e.target
 
-    if(e.target.textContent === "Trending") {
-      setNewPosts(() => posts.slice(0, 4))
+    //  first remove the active style from all
+    ref.current.parentElement.classList.remove("activeTitle")
+    ref2.current.parentElement.classList.remove("activeTitle")
+    ref3.current.parentElement.classList.remove("activeTitle")
+
+    // make the clicked button the active
+    ClickedHead.parentElement.classList.add("activeTitle")
+
+
+    // Find only the Trend posts
+    if(ClickedHead.textContent === "Trending") {
+
+      setNewPosts(() => TrendingPosts?.slice(0, 4))
       setText(() => "Trending")
     }
-    if(e.target.textContent === "Comments") {
+    
 
-      if(Comments?.length) {
-        const uniqueItems = new Map();
+    // find the post with commments on them
+    if(ClickedHead.textContent === "Comments") {
+
+      if (Comments?.length) {
+
+        const uniqueItems = new Map(); // used in making sure that a unqui array is returned
         let allComment = []
         let allNewPost = []
-        for(const Comment of Comments) {
-           allComment.push(posts.filter(post => post._id === Comment.postId))
+
+        // Get all post that contense a comment
+        for (const Comment of Comments) {
+
+          const post_Comments = posts?.filter(post => post?._id === Comment?.postId)
+
+          allComment?.push(post_Comments)
+        }
+
+        // make sure that an empty post is not returned
+        allComment?.forEach(item => {
+          if (item?.length > 0) {
+
+            allNewPost?.push(item[0]);
           }
+        })
 
-          allComment.forEach(item => {
-            allNewPost.push(item[0]);
-          })
-         
-          // Iterate through the array and add items with unique IDs to the map
-          for (let i = 0; i < allNewPost.length; i++) {
-            const item = allNewPost[i];
-            const id = item._id;
-            uniqueItems.set(id, item);
-          }
+        // Iterate through the array and add items with unique IDs to the map
+        for (let i = 0; i < allNewPost?.length; i++) {
 
-          // Convert the map values to an array
-          const uniqueItemsArray = Array.from(uniqueItems.values());
+          const item = allNewPost[i];
+          const id = item?._id;
 
-          setNewPosts(() => uniqueItemsArray?.length ? uniqueItemsArray : "")
+          uniqueItems.set(id, item);
+        }
+
+        // Convert the map values to an array
+        const uniqueItemsArray = Array.from(uniqueItems.values());
+
+        setNewPosts(() => uniqueItemsArray?.length ? uniqueItemsArray : "")
       
-          setText(() => "Comments") 
+        setText(() => "Comments") 
       }
     }
-    if(e.target.textContent === "Latest") {
-      setNewPosts(() => posts.slice(8, 12))
+
+
+    if(ClickedHead.textContent === "Latest") {
+
+      setNewPosts(() => posts?.slice(0, 4))
       setText(() => "Latest")
     }
   }
   
   return (
-    <>
+    <div className={`${isFecthingStyle(isFetching)}`}>
       <ul className='grid grid-cols-3 text-center mt-7 mb-6 p-0 divide-x border border-solid boreder-neutral-100'>
-        <li ref={ref} className="text-sm font-medium leading-9 hover:bg-neutral-50 cursor-pointer text-stone-700 activeTitle" 
-        onClick={handleClick}>Trending</li>
-        <li ref={ref2} className="text-sm font-medium leading-9 hover:bg-neutral-50 cursor-pointer text-stone-700"
-        onClick={handleClick}>Comments</li>
-        <li ref={ref3} className="text-sm font-medium leading-9 hover:bg-neutral-50 cursor-pointer text-stone-700"
-        onClick={handleClick}>Latest</li>
+
+        <li className="text-sm font-medium leading-9 hover:bg-neutral-50 cursor-pointer text-stone-700 activeTitle">
+          <button 
+            type="button"
+            name="TrendingButton"
+            id='TrendingButton'
+            onClick={handleClick}
+            disabled={!action}
+            className="disabled:opacity-40"
+            ref={ref}
+          >
+            Trending
+          </button>
+        </li>
+
+        <li className="text-sm font-medium leading-9 hover:bg-neutral-50 cursor-pointer text-stone-700">
+          <button 
+            type="button"
+            name="CommentsButton"
+            id='CommentsButton'
+            onClick={handleClick}
+            disabled={!action}
+            className="disabled:opacity-40"
+            ref={ref2}
+          >            
+            Comments
+          </button>
+        </li>
+
+        <li className="text-sm font-medium leading-9 hover:bg-neutral-50 cursor-pointer text-stone-700">
+           <button 
+            type="button"
+            name="LatestButton"
+            id='LatestButton'
+            onClick={handleClick}
+            disabled={!action}
+            className="disabled:opacity-40"
+            ref={ref3}
+          >           
+            Latest
+          </button>
+        </li>
       </ul>   
       
+
       <div className='mb-5'>
         {text !== "Comments" ? 
-          <JustTimeComponetStar Posts={newPosts.length ? newPosts : posts.slice(0, 4)}/> :
-          <JustTimeComponet Posts={newPosts} Comments={Comments}/>
+          <JustTimeComponetStar Posts={newPosts?.length ? newPosts : action && TrendingPosts?.slice(0, 4)} action={action}/> :
+          <JustTimeComponet Posts={newPosts} Comments={Comments} action={action}/>
         }
       </div>
-    </>
+    </div>
   )
 }
 

@@ -242,7 +242,6 @@ export const useFetchedPostByPaginationTwo = () => {
 
   // making sure our quotes parent category is same as the database name which is random
   const parentRoute = parent === "quotes" ?  "random" : parent
-  console.log(parentRoute);
 
    // Arrange the query in order for it not to return more than 10 posts for each query.
   // if no search was not found just return the first 10 post in descending order taking page as one

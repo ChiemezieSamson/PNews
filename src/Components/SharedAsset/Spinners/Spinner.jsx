@@ -127,6 +127,30 @@ export const SearchPostSpinner = ({groupStyle, imageStyle, textStyle}) => {
 }
 
 
+export const SmallPostImageLeftTitleDateRightSpinner = ({groupStyle, listStyle, imageStyle, textStyle}) => {
+  const EmptyValues = [...Array(4)]
+  const content  = EmptyValues.map((title, id) => ({id: id, title: title}))
+
+  return (
+    <ul className={`${groupStyle}`}>
+      {content.map((post) => {
+
+        return ( 
+          <li className={`${listStyle}`} key={post.id}>
+            <div className={`skeleton rounded-sm h-screen ${imageStyle}`}></div>
+
+            <div className={`${textStyle}`}>
+              <SkeletonTextTwo />
+              <div className='skeleton w-[35%] lg:mt-3 mt-2 lg:h-3 h-2 rounded-sm'></div>
+            </div>
+          </li>
+        )
+      })}
+    </ul>
+  )
+}
+
+
 export const SinglePostSpinner = () => {
   return (
     <>
