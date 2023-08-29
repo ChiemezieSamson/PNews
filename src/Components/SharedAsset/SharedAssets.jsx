@@ -6,6 +6,7 @@ import { CatSideBarHanbugarButton } from '../ButtonAndOthers/Buttons';
 import Preview from '../BlogPages/singlePostPage/createPost/editorPreview/Preview';
 import { Link, useLocation } from 'react-router-dom';
 import { useUpDateSharedPostsMutation } from '../../Reduxstore/Slices/posts/PostsSlice';
+import { CatSidebarHanbugarSpinner } from './Spinners/Spinner';
 
 
 // HeroImage one image title
@@ -133,12 +134,12 @@ export const CategoriesComponentBotton = ({cat}) => {
 
 
 // hero page section navigation of few possible categories (Arround The world, Fashion & Trends, Entertainment News etc)
-export const CatSidebarHanbugar = ({initial, blackletters, redletters, parent}) => {
+export const CatSidebarHanbugar = ({initial, blackletters, redletters, parent, canOpen}) => {
   const [catSidebar, setCatSidebar] = useState(false) // display control
   const size = useWindowSize()
 
   // Change each array to object with id for keys
-  const CategoriesLinks = initial[parent]?.category?.map((title, id) => ({id: id, title: title}))
+  const CategoriesLinks = canOpen && initial[parent]?.category?.map((title, id) => ({id: id, title: title}))
 
   // open and close display control
   const handleShowCatSideBar = () => {
@@ -154,54 +155,66 @@ export const CatSidebarHanbugar = ({initial, blackletters, redletters, parent}) 
   const CatSideBarStyle = `absolute right-0 top-full z-20 shadow-sm shadow-black/5 bg-white py-1 px-2 uppercase cursor-pointer hover:mainColor ${catSidebar ? "translate-y-0 opacity-100 visible TextHeadertransition" : "translate-y-32 opacity-0 invisible"}`
 
   return (
-    <div className="grid grid-flow-col justify-between relative my-3">
-      
-      {/* Section Introduction text */}
-      <HeadTitle blackletters={blackletters} redletters={redletters} /> 
-
-      {/* Categories listing and styling */}
-      <div className='text-neutral-400 font-josefin font-semibold text-xs lg:text-xs md:text-[10px] md:leading-4 md:mt-0.5 tracking-wide'>
-        <div className='grid grid-flow-col'>
-          <ul className="grid grid-flow-col">
-
-            {/* All ie the main parent categories */}
-            <li className="text-stone-800 inline-block cursor-pointer uppercase">
-              <Link to={`/${parent}`} className='py-1 px-2 inline-block'>All</Link>
-            </li>
-
-            {CategoriesLinks?.map((cat) => {
-              return (
-                <li key={cat?.id} className={`inline-block cursor-pointer uppercase last:hidden  last:md:inline-block  
-                  ${size.width < 420 ? "[&:nth-child(2)]:hidden": "[&:nth-child(2)]:sxs:inline-block"}  
-                  ${size.width < 520 ? "[&:nth-child(3)]:hidden" : "[&:nth-child(3)]:xs:inline-block "} 
-                    ${size.width < 768 ? "[&:nth-child(4)]:hidden" : "[&:nth-child(4)]:md:inline-block"}
-                    ${size.width < 1000 ? "[&:nth-child(5)]:hidden" : "[&:nth-child(5)]:md:inline-block"}`}
-                    >
-                  <Link to={`/categories?category=${cat?.title}`} className='hover:mainColor py-1 px-2 inline-block'>{cat?.title}</Link>
-                </li>
-              )
-            })}
-          </ul>
-
-          {/* small scree eclips button to display and hide the list */}
-          {(size.width > 1000 && CategoriesLinks?.length <= 5) ? "" :
-            <div className="block px-2 pt-1.5 lg:hidden">
-              <CatSideBarHanbugarButton sidebar_state={catSidebar} handleShowCatSideBar={handleShowCatSideBar} />
-          </div>}
-        </div>
+    <>
+      {canOpen ? 
+        <div className="grid grid-flow-col justify-between relative my-3 ">
         
-        {/* use some of the list here in  small screens*/}
-        <ul className={CatSideBarStyle}>
-          {CategoriesLinks?.map((cat) => {
-            return (
-              <li key={cat?.id} className="first:sxs:hidden [&:nth-child(2)]:xs:hidden [&:nth-child(3)]:md:hidden">
-                <Link to={`/categories?category=${cat?.title}`} className='hover:mainColor py-1 px-2 inline-block'>{cat?.title}</Link>
-              </li>
-            )
-          })}
-        </ul>
-      </div>
-    </div>
+          {/* Section Introduction text */}
+          <HeadTitle blackletters={blackletters} redletters={redletters} /> 
+
+          {/* Categories listing and styling */}
+          <div className='text-neutral-400 font-josefin font-semibold text-xs lg:text-xs md:text-[10px] md:leading-4 md:mt-0.5 tracking-wide'>
+
+            <div className='grid grid-flow-col'>
+              <ul className="grid grid-flow-col">
+
+                {/* All ie the main parent categories */}
+                <li className="text-stone-800 inline-block cursor-pointer uppercase">
+                  <Link to={`/${parent}`} className='py-1 px-2 inline-block'>All</Link>
+                </li>
+
+                {CategoriesLinks?.map((cat) => {
+                  return (
+                    <li key={cat?.id} className={`inline-block cursor-pointer uppercase last:hidden  last:md:inline-block  
+                      ${size.width < 420 ? "[&:nth-child(2)]:hidden": "[&:nth-child(2)]:sxs:inline-block"}  
+                      ${size.width < 520 ? "[&:nth-child(3)]:hidden" : "[&:nth-child(3)]:xs:inline-block "} 
+                        ${size.width < 768 ? "[&:nth-child(4)]:hidden" : "[&:nth-child(4)]:md:inline-block"}
+                        ${size.width < 1000 ? "[&:nth-child(5)]:hidden" : "[&:nth-child(5)]:md:inline-block"}`}
+                        >
+                      <Link to={`/categories?category=${cat?.title}`} className='hover:mainColor py-1 px-2 inline-block'>{cat?.title}</Link>
+                    </li>
+                  )
+                })}
+              </ul>
+
+              {/* small scree eclips button to display and hide the list */}
+              {(size.width > 1000 && CategoriesLinks?.length <= 5) ? "" :
+              <div className="block px-2 pt-1.5 lg:hidden">
+                  <CatSideBarHanbugarButton sidebar_state={catSidebar} handleShowCatSideBar={handleShowCatSideBar} />
+              </div>}
+            </div>
+              
+            {/* use some of the list here in  small screens*/}
+            <ul className={CatSideBarStyle}>
+              {CategoriesLinks?.map((cat) => {
+                return (
+                  <li key={cat?.id} className="first:sxs:hidden [&:nth-child(2)]:xs:hidden [&:nth-child(3)]:md:hidden">
+                    <Link to={`/categories?category=${cat?.title}`} className='hover:mainColor py-1 px-2 inline-block'>{cat?.title}</Link>
+                  </li>
+                )
+              })}
+            </ul>              
+          </div>
+        </div>
+        :
+        <CatSidebarHanbugarSpinner 
+          groupStyle={"grid grid-cols-3 text-right"}
+          listgroupStyle={"grid grid-cols-5 gap-x-2 max-w-sm text-right"}
+          listStyle={"h-4 w-full mt-3"}
+          num={5} 
+        />     
+      }
+    </>
   )
 }
 

@@ -15,6 +15,7 @@ import { useFetchedPostByPagination, useFetchedPosts } from "../SharedAsset/Spin
 import useFetchedUsers from "../SharedAsset/Spinners/userSpinner";
 import useFetchedCategories from "../SharedAsset/Spinners/categoriesSpinner";
 import useFetchedComments from "../SharedAsset/Spinners/commentSpinner";
+import { isFecthingStyle } from "../SharedAsset/SharedAssets";
 
 
 const IndexPage = () => {
@@ -30,41 +31,50 @@ const IndexPage = () => {
 
   const canOpen = [action, useraction, categoriesaction, commentaction, paginationAction].every(Boolean)
   return (
-    <>
-    {canOpen &&
-      <div className="text-left disabled:opacity-40" disabled={isFetching}>
+    <>    
+      <div className={`text-left ${isFecthingStyle(isFetching)}`}>
 
-        <HeroImages Posts={Posts}/>
+        {canOpen && <HeroImages Posts={Posts}/>}
 
         <div className="md:grid md:grid-cols-3">
 
           <div className="col-span-2 md:mr-[4%]">
-            <FeaturedPosts Posts={Posts} users={users}/>
+          {canOpen && <FeaturedPosts Posts={Posts} users={users}/>}
+
+          
             <ArroundTheWorldPosts 
               Comments={Comments}
               Posts={Posts} 
               categories={categoriesParents} 
-              users={users}/>
-            <FashionAndTrendsPosts Posts={Posts} categories={categoriesParents}/>
-            <EntertainmentPosts 
-              Comments={Comments}
-              Posts={Posts} 
-              categories={categoriesParents} 
-              users={users}/>
-            <TechPosts Posts={Posts} categories={categoriesParents}/>
+              users={users}
+              canOpen={canOpen}
+            />
+
+          {canOpen &&
+            <>
+              <FashionAndTrendsPosts Posts={Posts} categories={categoriesParents}/>
+              <EntertainmentPosts 
+                Comments={Comments}
+                Posts={Posts} 
+                categories={categoriesParents} 
+                users={users}/>
+              <TechPosts Posts={Posts} categories={categoriesParents}/>
+            </>
+            }
           </div>
 
+          {canOpen &&
           <aside className="col-span-1 hidden md:block md:ml-[4%]">
             <StickyBox offsetTop={0} offsetBottom={0}>
               <PopularPost Posts={Posts}/>
               <EditorsChioceAndDontMiss Posts={Posts} Comments={Comments}/>
             </StickyBox>
-          </aside>
+          </aside>}
         </div>
 
-        <ImageComponent Posts={Posts}/>
+        {canOpen && <ImageComponent Posts={Posts}/>}
 
-        <div className="md:grid md:grid-cols-3">
+        {canOpen && <div className="md:grid md:grid-cols-3">
           <span className="col-span-2 md:mr-[4%]">
             <LatestPosts Posts={Posts}/>
             <div className="grid grid-flow-col justify-center w-full">
@@ -80,10 +90,8 @@ const IndexPage = () => {
               <StayConnectedAndRecommended Posts={Posts}/>
             </StickyBox>
           </span>
-        </div>
-      
+        </div>}      
       </div>
-    }
     </>    
   )
 }

@@ -73,6 +73,26 @@ export const HeroOneBussinessFavoriteImageSpinner = ({groupStyle, imageStyle, im
   )
 }
 
+// Bussiness component hero Spinner
+export const CatSidebarHanbugarSpinner = ({groupStyle, listgroupStyle, listStyle, num}) => {
+  const EmptyValues = [...Array(num)]
+  const content  = EmptyValues.map((title, id) => ({id: id, title: title}))
+
+  return (
+    <div className={`${groupStyle}`}>
+      <div className='skeleton w-[35%] mt-3 h-4 rounded-sm'></div>
+      <div></div>
+      <ul className={`${listgroupStyle}`}>
+        {content.map((post) => {
+          return (
+            <li className={`skeleton rounded-sm ${listStyle}`}  key={post.id}></li>
+          )
+        })}        
+      </ul>     
+    </div>
+  )
+}
+
 
 // posts with title below the image and time below the title Spinner
 export const ImageTopTitleTimeDownSpinner = ({groupStyle, listStyle, imageStyle, titleStyle, timeStyle, num}) => {
@@ -100,6 +120,31 @@ export const ImageTopTitleTimeDownSpinner = ({groupStyle, listStyle, imageStyle,
 
 
 
+export const HomeFeaturedArroundSpinner = ({groupStyle, listgroupStyle, imageStyle, num, buttonStyle}) => {
+  const EmptyValues = [...Array(num)]
+  const content  = EmptyValues.map((title, id) => ({id: id, title: title}))
+
+  return (
+    <ul  className={`${groupStyle}`}>
+      {content.map((post) => {
+
+      return ( 
+        <li className={`${listgroupStyle}`} key={post.id}>
+          <div className={`skeleton rounded-sm my-4 h-screen ${imageStyle}`}></div>
+
+          <div>
+            <SkeletonTextTwo />
+            <div className='skeleton w-[35%] lg:mt-3 mt-2 lg:h-3 h-2 rounded-sm'></div>
+            <div className='skeleton w-full lg:h-4 h-3 lg:mt-4 mt-3 mb-0.5 rounded-sm'></div>
+            <div className='skeleton w-[99%] lg:h-4 h-3 mb-0.5 rounded-sm'></div>
+            <div className='skeleton w-[60%] lg:h-4 h-3 mb-0.5 rounded-sm'></div>
+            <div className={`skeleton w-[20%] mt-4 lg:h-4 h-3 mb-0.5 rounded-sm ${buttonStyle}`}></div>
+          </div>
+        </li>)
+      })}
+    </ul>
+  )
+}
 export const SearchPostSpinner = ({groupStyle, imageStyle, textStyle}) => {
   const EmptyValues = [...Array(8)]
   const content  = EmptyValues.map((title, id) => ({id: id, title: title}))
