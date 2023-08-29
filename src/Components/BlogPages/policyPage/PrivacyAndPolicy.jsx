@@ -11,6 +11,7 @@ const PrivacyAndPolicy = () => {
         <p>
           <strong>Chinonye Privacy Policy</strong>
         </p>
+
         <p>
           This protection policy has been compiled to better serve the individuals who are worried
           with how their personal identifiable information is being utilized on the web. personal 
@@ -103,8 +104,8 @@ const PrivacyAndPolicy = () => {
           Google's advertising requirements can be summed up by Googles Advertising Principles.
           They are put in place to provide a positive experience for users. 
           <a href="https://support.google.com/adwordspolicy/answer/1316548?hl=en"
-          className='p-0 whitespace-normal text'>
-          &nbsp; https://support.google.com/adwordspolicy/answer/1316548?hl=en. &nbsp;
+            className='p-0 whitespace-normal text'>
+            &nbsp; https://support.google.com/adwordspolicy/answer/1316548?hl=en. &nbsp;
           </a>         
           We have not enabled Google AdSense on our site but we may do so in the future
           California Online Privacy Protection Act CalOPPA is the first state law in the 
@@ -118,7 +119,7 @@ const PrivacyAndPolicy = () => {
           on its site expressing precisely the data being gathered and those people with whom 
           it is being shared, and to consent to this arrangement. See more at: 
           <a href="http://consumercal.org/california-online-privacy-protection-act-caloppa/#st">
-          &nbsp; http://consumercal.org/california-online-privacy-protection-act-caloppa/#st
+           &nbsp; http://consumercal.org/california-online-privacy-protection-act-caloppa/#st
           </a>. &nbsp;
           <br />
           As indicated by CalOPPA we consent to the following: Clients can visit our site 
@@ -150,64 +151,64 @@ const PrivacyAndPolicy = () => {
         <p>
           <strong>Does our site permit outsider behavioral following?</strong>
           <br />
-            It's likewise imperative to take note of that we don't permit outsider behavioral
-            following COPPA (Children Online Privacy Protection Act) With regards to the 
-            gathering of individual data from kids under 13, the Kid's Online Privacy Protection
-            Act (COPPA) places folks in control. The Federal Exchange Commission, the country's 
-            purchaser insurance organization, authorizes the COPPA Rule, which spells out what 
-            administrators of sites and online administrations must do to secure youngster's 
-            protection and wellbeing on the web. We don't particularly market to youngsters 
-            under 13.
+          It's likewise imperative to take note of that we don't permit outsider behavioral
+          following COPPA (Children Online Privacy Protection Act) With regards to the 
+          gathering of individual data from kids under 13, the Kid's Online Privacy Protection
+          Act (COPPA) places folks in control. The Federal Exchange Commission, the country's 
+          purchaser insurance organization, authorizes the COPPA Rule, which spells out what 
+          administrators of sites and online administrations must do to secure youngster's 
+          protection and wellbeing on the web. We don't particularly market to youngsters 
+          under 13.
         </p>
 
         <p>
           <strong>Reasonable Information Practices</strong>
           <br />
-            The Fair Information Practices Principles shape the foundation of protection law in
-            the United States and the ideas they incorporate have assumed a critical part in the 
-            advancement of information assurance laws around the world. Understanding the Fair 
-            Information Practice Standards and how they ought to be executed is basic to agree 
-            to the different security laws that ensure individual data. Keeping in mind the end 
-            goal to be in accordance with Fair Information Practices we will take the accompanying
-            responsive activity, ought to an information rupture happen:
+          The Fair Information Practices Principles shape the foundation of protection law in
+          the United States and the ideas they incorporate have assumed a critical part in the 
+          advancement of information assurance laws around the world. Understanding the Fair 
+          Information Practice Standards and how they ought to be executed is basic to agree 
+          to the different security laws that ensure individual data. Keeping in mind the end 
+          goal to be in accordance with Fair Information Practices we will take the accompanying
+          responsive activity, ought to an information rupture happen:
           <br />
-            We will advise the clients by means of email
+          We will advise the clients by means of email
           <br />
           • Within 1 business day we will advise the clients by means of in site warning
           <br />
           • Within 1 business
           <br />
-            We additionally consent to the individual change standard, which requires that people have
-            a right to seek after lawfully enforceable rights against information gatherers and 
-            processors who neglect to stick to the law. This guideline requires not just that people 
-            have enforceable rights against information clients, additionally that people have plan of 
-            action to courts or an administration office to examine and/or arraign resistance by 
-            information processors.
+          We additionally consent to the individual change standard, which requires that people have
+          a right to seek after lawfully enforceable rights against information gatherers and 
+          processors who neglect to stick to the law. This guideline requires not just that people 
+          have enforceable rights against information clients, additionally that people have plan of 
+          action to courts or an administration office to examine and/or arraign resistance by 
+          information processors.
         </p>
 
         <p>
           <strong>CAN SPAM Act</strong>
           <br />
-            The CAN-SPAM Act is a law that sets the principles for business email, sets up 
-            necessities for business messages, gives beneficiaries the privilege to have messages
-            halted from being sent to them, and spells out extreme punishments for infringement.
+          The CAN-SPAM Act is a law that sets the principles for business email, sets up 
+          necessities for business messages, gives beneficiaries the privilege to have messages
+          halted from being sent to them, and spells out extreme punishments for infringement.
         </p>
 
         <p>
           <strong>We gather your email address so as to:</strong>
           <br />
-            To be as per CANSPAM we agree to be following:
+          To be as per CANSPAM we agree to be following:
           <br />
-            On the off chance that whenever you might want to unsubscribe from accepting future 
-            messages, you can email us at what's more, we will immediately remove you from ALL 
-            correspondence.
+          On the off chance that whenever you might want to unsubscribe from accepting future 
+          messages, you can email us at what's more, we will immediately remove you from ALL 
+          correspondence.
         </p>
 
         <p>
           <strong>Contacting Us</strong>
           <br />
-            If there are any questions regarding this privacy policy you may contact us using the 
-            information below.
+          If there are any questions regarding this privacy policy you may contact us using the 
+          information below.
         </p>        
       </article>
 

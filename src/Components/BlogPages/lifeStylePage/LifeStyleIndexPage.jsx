@@ -3,6 +3,7 @@ import { GeneralCategorisePages as Lifestyle } from "../../SharedAsset/SharedBlo
 import { useFetchedPostByPaginationTwo } from "../../SharedAsset/Spinners/postsSpinner";
 import useFetchedUsers from "../../SharedAsset/Spinners/userSpinner";
 import useFetchedComments from "../../SharedAsset/Spinners/commentSpinner";
+import { isFecthingStyle } from "../../SharedAsset/SharedAssets";
 
 
 const LifeStyleIndexPage = () => {
@@ -16,10 +17,11 @@ const LifeStyleIndexPage = () => {
   const canOpen = [action, useraction, commentaction].every(Boolean)
 
   return (
-    <div className='disabled:opacity-40' disabled={isFetching}>
+    <div className={`${isFecthingStyle(isFetching)}`}>
       <Lifestyle 
         users={users}
         Comments={Comments}
+        commentaction={commentaction}
         ThreeFirstPost={canOpen && Posts?.slice(0, 4)}
         PagePost={canOpen && Posts?.slice(4, 12)}
         currentPage={currentPage}

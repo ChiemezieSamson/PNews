@@ -22,9 +22,7 @@ export const JustTimeComponet = ({Posts, Comments, action}) => {
 
                 <div className="col-span-1 max-h-16 sm:max-h-24 sm:col-span-2 mb-1 mr-1">
                   <Link to={`/single/${post?._id}`}>
-                    <img src={publicFolder + post?.postImage} alt={"posts"} 
-                      className="max-h-16 sm:max-h-24" 
-                      loading="lazy"/>
+                    <img src={publicFolder + post?.postImage} alt={"posts"} className="max-h-16 sm:max-h-24" loading="lazy"/>
                   </Link>
                 </div>
 
@@ -33,7 +31,7 @@ export const JustTimeComponet = ({Posts, Comments, action}) => {
 
                   <span className='inline-block'>
                     <span className='mr-4'>
-                    <CommentComponetColor postId={post?._id} Comments={Comments}/>
+                      <CommentComponetColor postId={post?._id} Comments={Comments}/>
                     </span>
                       <TimeComponentColor time={post?.createdAt}/>
                   </span>
