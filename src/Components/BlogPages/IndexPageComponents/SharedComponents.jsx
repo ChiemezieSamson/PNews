@@ -90,7 +90,7 @@ export const JustTimeComponetStar = ({Posts, grid, action}) => {
         </ul>
         :
         <SmallPostImageLeftTitleDateRightSpinner
-          groupStyle={`w-full`}
+          groupStyle={`w-full ${grid}`}
           listStyle={"grid grid-cols-4 sm:grid-cols-5 mb-2"}
           imageStyle={"col-span-1 max-h-16 sm:max-h-24 sm:col-span-2 mb-1 mr-1"}
           textStyle={"col-span-3 ml-1 pt-px"}
@@ -187,9 +187,11 @@ export const PagesBlogPostComponent = ({Posts, users, Comments, currentPage, tot
         </ul>
         :
         <SearchPostSpinner
-          groupStyle={"grid grid-cols-5 md:grid-cols-2 mt-3 first:mt-0 last:pb-0 pb-3"}
+          groupStyle={"mt-5"}
+          listgroupStyle={"grid grid-cols-5 md:grid-cols-2 mt-3 first:mt-0 last:pb-0 pb-3"}
           imageStyle={"mr-[2%] col-span-2 md:col-span-1 max-h-36 sm:max-h-48 lg:max-h-60"}
-          textStyle={"ml-[2%] col-span-3 md:col-span-1 pt-4"}
+          textStyle={"ml-[2%] col-span-3 md:col-span-1"}
+          numb={8}
         />
         }
 

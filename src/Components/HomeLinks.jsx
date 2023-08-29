@@ -126,7 +126,7 @@ const HomeLinks = () => {
    
      {/* === Block for all the out let is here === */}
       <main className="w-full" onClick={handleCloseNavLinks}>
-        <div className="pt-8 pb-6 lg:max-w-[88%] xxs:max-w-[95%] xl:max-w-[82%] mx-auto">
+        <div className="pt-8 pb-6 lg:max-w-[88%] max-w-[95%] xl:max-w-[82%] mx-auto">
           <Outlet />
         </div>
       </main> 

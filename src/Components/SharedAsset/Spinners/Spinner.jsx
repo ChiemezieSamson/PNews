@@ -145,23 +145,24 @@ export const HomeFeaturedArroundSpinner = ({groupStyle, listgroupStyle, imageSty
     </ul>
   )
 }
-export const SearchPostSpinner = ({groupStyle, imageStyle, textStyle}) => {
-  const EmptyValues = [...Array(8)]
+
+
+export const SearchPostSpinner = ({groupStyle, listgroupStyle, imageStyle, textStyle, numb}) => {
+  const EmptyValues = [...Array(numb)]
   const content  = EmptyValues.map((title, id) => ({id: id, title: title}))
 
   return (
-    <ul>
+    <ul className={`${groupStyle}`}>
       {content.map((post) => {
-
       return ( 
-        <li className={`${groupStyle}`} key={post.id}>
-          <div className={`skeleton rounded-sm my-4 h-screen ${imageStyle}`}></div>
+        <li className={`${listgroupStyle}`} key={post.id}>
+          <div className={`skeleton rounded-sm h-screen ${imageStyle}`}></div>
 
           <div className={`${textStyle}`}>
             <SkeletonTextTwo />
             <div className='skeleton w-[35%] lg:mt-3 mt-2 lg:h-3 h-2 rounded-sm'></div>
             <div className='skeleton w-full lg:h-4 h-3 lg:mt-4 mt-3 mb-0.5 rounded-sm'></div>
-            <div className='skeleton w-full lg:h-4 h-3 mb-0.5 rounded-sm'></div>
+            <div className='skeleton w-[99%] lg:h-4 h-3 mb-0.5 rounded-sm'></div>
             <div className='skeleton w-full lg:h-4 h-3 mb-0.5 rounded-sm'></div>
             <div className='skeleton w-[80%] lg:h-4 h-3 mb-0.5 rounded-sm'></div>
           </div>
