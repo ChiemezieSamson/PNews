@@ -1,5 +1,6 @@
 import React from 'react'
 import { SocialMediaIcons } from '../../../../data'
+import { Link } from 'react-router-dom'
 
 const FollowUs = () => {
   
@@ -28,10 +29,10 @@ const FollowUs = () => {
         return (
           
           <li key={icon.id} className="xxs:mx-1 mt-0.5 sxs:mt-0 first:ml-0 xxs:last:mr-0 xxs:last-ml-1 mx-px inline-block">
-            <span className='text-2xl w-8 xxs:w-[38px] leading-9 inline-block text-center
+            <Link to={icon.link} className='text-2xl w-8 xxs:w-[38px] leading-9 inline-block text-center
              text-white bg-stone-500 rounded hover:bg-[#f70d28] TextHeadertransition'>
               <div className='align-text-top pb-1'>{icon.icon}</div>
-            </span>
+            </Link>
           </li>
         )
        })}

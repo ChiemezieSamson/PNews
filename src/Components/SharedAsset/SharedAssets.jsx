@@ -453,11 +453,11 @@ export const isFecthingStyle = (isFetching) => {
 
 
 // footer and aside newletter component
-export const NewsLetter = () => {
+export const NewsLetter = ({textColor}) => {
 
   return (
     <div className='mt-12 mb-12 bg-gray-300/30 p-5 shadow-sm shadow-gray-300/40 rounded-sm text-center sm:text-left inline-block'>
-      <p className='font-round text-[#54595f] text-xs lg:text-sm tracking-normal my-0.5'>Subscribe to our mailing list to receives daily updates direct to your inbox!</p>
+      <p className={`font-round ${textColor ? textColor : "text-stone-700"} text-base lg:text-sm tracking-normal my-0.5`}>Subscribe to our mailing list to receives daily updates direct to your inbox!</p>
 
       <form className='my-4 bg-red-400 h-full max-h-11 grid grid-cols-8 border-solid relative focus:border-gray-300/50 sm:text-left border-gray-300/50'>
         <input 
@@ -470,10 +470,10 @@ export const NewsLetter = () => {
         <button 
          type="submit"
          name="newsletterButton"
-         className='w-full md:w-auto text-xs font-black my-0 text-white bg-[#f70d28] tracking-wider align-baseline col-span-2'>sing up</button>
+         className='w-full md:w-auto text-xs font-black my-0 text-white bg-[#f70d28] uppercase tracking-wider align-baseline col-span-2'>sing up</button>
       </form>
 
-      <small className="text-[#54595f] block text-[11px] tracking-wide before:content-['*'] before:ml-0.5 before:text-red-500 before:px-px">
+      <small className={`${textColor ? textColor : "text-stone-700"} block text-sm tracking-wide before:content-['*'] before:ml-0.5 before:text-lg before:text-red-500 before:pr-2`}>
         we hate spam as much as you do
       </small>
     </div>
