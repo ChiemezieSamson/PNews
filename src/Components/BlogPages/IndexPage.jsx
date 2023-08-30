@@ -39,7 +39,13 @@ const IndexPage = () => {
         <div className="md:grid md:grid-cols-3">
 
           <div className="col-span-2 md:mr-[4%]">
-          {canOpen && <FeaturedPosts Posts={Posts} users={users}/>}
+          {canOpen && 
+            <FeaturedPosts 
+              Posts={Posts} 
+              users={users}
+              categories={categoriesParents}
+              canOpen={canOpen}
+            />}
 
           
             <ArroundTheWorldPosts 

@@ -62,7 +62,7 @@ export const HomeLink = () => (
 
 
 // Hero page categories intoduction Title without line style (Arround The world, Fashion & Trends, Entertainment News etc)
-const HeadTitle = ({blackletters, redletters}) => {
+export const HeadTitle = ({blackletters, redletters}) => {
 
   return (
     <h2 className="inline-block w-full">
@@ -208,6 +208,8 @@ export const CatSidebarHanbugar = ({initial, blackletters, redletters, parent, c
         </div>
         :
         <CatSidebarHanbugarSpinner 
+          blackletters={blackletters} 
+          redletters={redletters}
           groupStyle={"grid grid-cols-3 text-right"}
           listgroupStyle={"grid grid-cols-5 gap-x-2 max-w-sm text-right"}
           listStyle={"h-4 w-full mt-3"}

@@ -1,3 +1,5 @@
+import { HeadTitle } from "../SharedAssets"
+
 const Spinner = ({ text = '', size = '2em' }) => {
   const header = text ? <h4>{text}</h4> : null
   return (
@@ -74,13 +76,15 @@ export const HeroOneBussinessFavoriteImageSpinner = ({groupStyle, imageStyle, im
 }
 
 // Bussiness component hero Spinner
-export const CatSidebarHanbugarSpinner = ({groupStyle, listgroupStyle, listStyle, num}) => {
+export const CatSidebarHanbugarSpinner = ({groupStyle, listgroupStyle, listStyle, num, blackletters, redletters}) => {
   const EmptyValues = [...Array(num)]
   const content  = EmptyValues.map((title, id) => ({id: id, title: title}))
 
   return (
     <div className={`${groupStyle}`}>
-      <div className='skeleton w-[35%] mt-3 h-4 rounded-sm'></div>
+      <div className='w-[35%] mt-2 rounded-sm'>
+        <HeadTitle blackletters={blackletters} redletters={redletters} />
+      </div>
       <div></div>
       <ul className={`${listgroupStyle}`}>
         {content.map((post) => {
