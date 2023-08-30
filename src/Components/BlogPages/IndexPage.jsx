@@ -62,12 +62,13 @@ const IndexPage = () => {
               categories={categoriesParents} 
               users={users}
               canOpen={canOpen}
-            />
-              {canOpen &&
+            />            
        
-              <TechPosts Posts={Posts} categories={categoriesParents}/>
-      
-            }
+            <TechPosts 
+              Posts={Posts} 
+              categories={categoriesParents}
+              canOpen={canOpen}
+            />     
           </div>
 
           {canOpen &&
