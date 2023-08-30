@@ -177,8 +177,8 @@ export const SearchPostSpinner = ({groupStyle, listgroupStyle, imageStyle, textS
 }
 
 
-export const SmallPostImageLeftTitleDateRightSpinner = ({groupStyle, listStyle, imageStyle, textStyle}) => {
-  const EmptyValues = [...Array(4)]
+export const SmallPostImageLeftTitleDateRightSpinner = ({groupStyle, listStyle, imageStyle, textStyle, num}) => {
+  const EmptyValues = [...Array(num)]
   const content  = EmptyValues.map((title, id) => ({id: id, title: title}))
 
   return (

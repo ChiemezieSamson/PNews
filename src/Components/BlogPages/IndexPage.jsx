@@ -10,7 +10,6 @@ import PopularPost from "./IndexPageComponents/IndexPageComponentAsideComponent.
 import StayConnectedAndRecommended from "./IndexPageComponents/IndexPageComponentAsideComponent.jsx/StayConnectedAndRecommended";
 import EditorsChioceAndDontMiss from "./IndexPageComponents/IndexPageComponentAsideComponent.jsx/EditorsChioceAndDontMiss";
 import ArroundTheWorldPosts from "./IndexPageComponents/ArroundTheWorldPosts";
-import PaginationFunctions from "./PaginationComponents/PaginationControl/PaginationFunctions/PaginationFunctions";
 import { useFetchedPostByPagination, useFetchedPosts } from "../SharedAsset/Spinners/postsSpinner";
 import useFetchedUsers from "../SharedAsset/Spinners/userSpinner";
 import useFetchedCategories from "../SharedAsset/Spinners/categoriesSpinner";
@@ -19,8 +18,8 @@ import { isFecthingStyle } from "../SharedAsset/SharedAssets";
 
 
 const IndexPage = () => {
-  const {action: paginationAction, totalPages, currentPage, isFetching} = useFetchedPostByPagination()
-  const {content , action} = useFetchedPosts()
+  const {content: paginationContent, action: paginationAction, totalPages, currentPage, isFetching: paginationIsFetching} = useFetchedPostByPagination()
+  const {content , action, isFetching} = useFetchedPosts()
   const {userContent, useraction} = useFetchedUsers()
   const {commentsContent, commentaction,} = useFetchedComments()
   const {categoriesParents, categoriesaction} = useFetchedCategories()
@@ -94,23 +93,26 @@ const IndexPage = () => {
         canOpen={canOpen}
       />
 
-      {canOpen && <div className="md:grid md:grid-cols-3">
+      
+      <div className="md:grid md:grid-cols-3">
+
         <span className="col-span-2 md:mr-[4%]">
-          <LatestPosts Posts={Posts}/>
-          <div className="grid grid-flow-col justify-center w-full">
-            <PaginationFunctions 
-              currentPage={currentPage}
-              totalPages={totalPages}
-            />
-          </div>
+
+          <LatestPosts 
+            Posts={paginationContent}
+            isFetching={paginationIsFetching}
+            canOpen={canOpen}
+            currentPage={currentPage}
+            totalPages={totalPages}
+          />
         </span>
 
         <span className="col-span-1 md:ml-[4%]">
           <StickyBox offsetTop={0} offsetBottom={0}>
-            <StayConnectedAndRecommended Posts={Posts}/>
+          {canOpen &&  <StayConnectedAndRecommended Posts={Posts}/>}
           </StickyBox>
         </span>
-      </div>}      
+      </div>   
     </div>  
   )
 }

@@ -90,50 +90,63 @@ export const JustTimeComponetStar = ({Posts, grid, action}) => {
         </ul>
         :
         <SmallPostImageLeftTitleDateRightSpinner
-          groupStyle={`w-full ${grid}`}
+          groupStyle={`w-full min-w-[200px] ${grid}`}
           listStyle={"grid grid-cols-4 sm:grid-cols-5 mb-2"}
           imageStyle={"col-span-1 max-h-16 sm:max-h-24 sm:col-span-2 mb-1 mr-1"}
           textStyle={"col-span-3 ml-1 pt-px"}
+          num={4}
         />
       }
     </>
   )
 }
 
-export const JustTimeComponetCatBlockStar = ({Posts, grid}) => {
+export const JustTimeComponetCatBlockStar = ({Posts, grid, canOpen}) => {
   const size = useWindowSize()
 
   return (
-    <ul className={`min-w-[200px] ${grid ? grid: ""}`}>
-        {/* featured posts other post start here */}
-      {Posts?.map((post) => {
+    <>
+      {canOpen ? 
+        <ul className={`min-w-[200px] ${grid ? grid: ""}`}>
+            {/* featured posts other post start here */}
+          {Posts?.map((post) => {
 
-        return (
-          <li key={post?._id} className="mb-5">
+            return (
+              <li key={post?._id} className="mb-5">
 
-            <div className="mb-1 relative topRetangleImage">
+                <div className="mb-1 relative topRetangleImage">
 
-              <Link to={`/single/${post?._id}`}>
-                <img src={publicFolder + post?.postImage} alt={"posts"} className="topRetangleImage" loading="lazy"/>
-              </Link>
+                  <Link to={`/single/${post?._id}`}>
+                    <img src={publicFolder + post?.postImage} alt={"posts"} className="topRetangleImage" loading="lazy"/>
+                  </Link>
 
-              <CategoriesComponentBotton cat={post?.postCategory[0]} />
-            </div>
+                  <CategoriesComponentBotton cat={post?.postCategory[0]} />
+                </div>
 
-            <div className="pt-2">
-              {size.width < 768 && size.width > 480 ? <PostTitleSmall post={post?.postTitle} postId={post?._id}/> : <PostTitleMedium post={post?.postTitle} postId={post?._id}/> }
+                <div className="pt-2">
+                  {size.width < 768 && size.width > 480 ? <PostTitleSmall post={post?.postTitle} postId={post?._id}/> : <PostTitleMedium post={post?.postTitle} postId={post?._id}/> }
 
-              <span className='mt-1'>
-                {post?.optional?.favourite === false ? "" : <span className='mr-4 inline-block'>
-                  <StarComponent color={"text-[#f7c90d]"} favourite={post?.optional?.favourite}/>
-                </span>}
-                  <TimeComponentColor time={post?.createdAt} />
-              </span>              
-            </div>
-          </li>
-        )
-     })}
-   </ul>
+                  <span className='mt-1'>
+                    {post?.optional?.favourite === false ? "" : <span className='mr-4 inline-block'>
+                      <StarComponent color={"text-[#f7c90d]"} favourite={post?.optional?.favourite}/>
+                    </span>}
+                      <TimeComponentColor time={post?.createdAt} />
+                  </span>              
+                </div>
+              </li>
+            )
+        })}
+        </ul>
+      :
+        <SmallPostImageLeftTitleDateRightSpinner
+          groupStyle={`w-full min-w-[200px] ${grid}`}
+          listStyle={"mb-5"}
+          imageStyle={"mb-1 topRetangleImage"}
+          textStyle={"pt-2"}
+          num={8}
+        />
+      }
+    </>
   )
 }
 
