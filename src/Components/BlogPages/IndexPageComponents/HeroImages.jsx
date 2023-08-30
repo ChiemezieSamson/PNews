@@ -1,94 +1,109 @@
-import React from 'react'
 import { StarComponent } from '../../ButtonAndOthers/Buttons';
 import { CategoriesComponent, overLay, PostTitleLarge, TimeComponent, useWindowSize } from '../../SharedAsset/SharedAssets';
 import { Link } from 'react-router-dom';
 import { publicFolder } from '../../../data';
 import TrendingPosts from './TrendingPosts';
+import useParentcategories from './useParentcategories/UseParentcategories';
+import { HeroOneThreeImageSpinner } from '../../SharedAsset/Spinners/Spinner';
 
 
-const HeroImages = ({Posts}) => { 
+const HeroImages = ({Posts, categories, canOpen}) => { 
   const size = useWindowSize()
 
+  const parent = "lifestyle"
+  const parentRandom = "random"
+  const parentBooks = "books"
+  
+  const {allPost} = useParentcategories(parent, categories, Posts, canOpen)
+  const {allPost: parentTwo} = useParentcategories(parentRandom, categories, Posts, canOpen)
+  const {allPost: parentThree} = useParentcategories(parentBooks, categories, Posts, canOpen)
+
+  const displayedPost = canOpen && [parentTwo[5], parentThree[7], allPost[5]]
 
   return (   
     <div className="pt-5">
 
       {/* Trending Post Block change every 4s */}
-
-      <TrendingPosts size={size} Posts={Posts}/>
+      <TrendingPosts size={size} Posts={Posts} canOpen={canOpen}/>
 
       {/* Index Image block start here */}
+      {canOpen ? 
+        <div className="md:grid md:grid-cols-3 my-12 text-white">
 
-      <div className="md:grid md:grid-cols-3 my-12 text-white">
-        {/* First Big Image */}
+          <div className={`col-span-2 HeroImageOneOverFlow group HeroImageOne`}>
 
-        <div className={`col-span-2 HeroImageOneOverFlow group HeroImageOne`}>
+            <Link to={`/single/${allPost[4]?._id}`} className={overLay()}>
+              <img src={publicFolder + allPost[4]?.postImage}  alt="Mostrecent" className="Imagetransition HeroImageOne" loading="lazy"/>
+            </Link>          
 
-          <Link to={`/single/${Posts[4]._id}`} className={overLay()}>
+            <span className="absolute lg:-top-1.5 -top-2 left-0 z-30">
+              <CategoriesComponent cat={allPost[4]?.postCategory[0]}/>
+            </span>
 
-            <img src={publicFolder + Posts[4].postImage} 
-              alt="Mostrecent" 
-              className="Imagetransition HeroImageOne"
-              loading="lazy"/>
-          </Link>          
+            <span className="absolute bottom-[8%] inset-x-auto max-w-fit text-white z-30 mx-1">
 
-          <span className="absolute lg:-top-1.5 -top-2 left-0 z-30">
-            <CategoriesComponent cat={Posts[4].postCategory[0]}/>
-          </span>
+              <PostTitleLarge post={allPost[4]?.postTitle} postId={allPost[4]?._id}/>
 
-          <span className="absolute bottom-[8%] inset-x-auto max-w-fit text-white z-30 mx-1">
-            <PostTitleLarge post={Posts[4].postTitle} postId={Posts[4]._id}/>
+              {size.width > 480 &&
+                <span className="mt-2 inline-block lg:block lg:text-left">
 
-            {size.width > 480 &&
-              <span className="mt-2 inline-block lg:block lg:text-left">
+                  {allPost[4]?.optional?.favourite === false ? "" : 
 
-                {Posts[4].optional.Trending === false ? "" : <span className='mr-4'>
-                  <StarComponent color={"text-white"} favourite={Posts[4].optional.Trending}/>
-                </span>}     
+                  <span className='mr-4'>
+                    <StarComponent color={"text-white"} favourite={allPost[4]?.optional?.favourite}/>
+                  </span>}     
 
-                <TimeComponent time={Posts[4].createdAt} />
-              </span>
-            }
-          </span>
+                  <TimeComponent time={allPost[4]?.createdAt} />
+                </span>
+              }
+            </span>
+          </div>
+
+
+          {/* The three list image start here */}
+          <div className="overflowScroll HeroImageThreeMultipleOverFlow">
+
+            <ul className="w-[900px] md:w-full grid md:grid-rows-3 grid-cols-3 auto-cols-fr md:auto-cols-auto md:grid-cols-none HeroImageMultiple">
+
+              {displayedPost?.map((post) => {
+
+                return (
+                  
+                  <li key={post?._id} className={`HeroImageMultipleListOverFlow first:mt-0 md:mt-1 group HeroImageMultipleList`}>
+
+                    <Link to={`/single/${post?._id}`} className={overLay()}>
+                      <img src={publicFolder + post?.postImage} alt="IndexImage" className="Imagetransition HeroImageMultipleList" loading="lazy"/>
+                    </Link>
+
+                    <span className='absolute lg:-top-1.5 -top-2 left-0 z-30'>
+                      <CategoriesComponent cat={post?.postCategory[0]}/>
+                    </span>
+
+                    <Link to={`/single/${post?._id}`} className="absolute bottom-[10%] max-w-fit inset-x-auto text-white z-30 mx-1">
+
+                      <h3 className="HeroImageMultipleListH3">
+                        <span>
+                          {post?.postTitle}
+                        </span>
+                      </h3>
+
+                      {size.width > 1024 && <TimeComponent time={post?.createdAt} />}
+                    </Link>               
+                  </li>
+                )
+              })}
+            </ul>
+          </div>
         </div>
-
-        {/* The three list image start here */}
-        <div className="overflowScroll HeroImageThreeMultipleOverFlow">
-
-          <ul className="w-[900px] md:w-full grid md:grid-rows-3 grid-flow-col HeroImageMultiple">
-
-            {Posts.slice(1,4).map((post) => {
-              return (
-                
-                <li key={post._id} className={`HeroImageMultipleListOverFlow first:mt-0 md:mt-1 group HeroImageMultipleList`}>
-
-                  <Link to={`/single/${post._id}`} className={overLay()}>
-                    <img src={publicFolder + post.postImage} alt="IndexImage"  
-                      className="Imagetransition HeroImageMultipleList" 
-                      loading="lazy"/>
-                  </Link>
-
-                  <span className='absolute lg:-top-1.5 -top-2 left-0 z-30'>
-                    <CategoriesComponent cat={post.postCategory[0]}/>
-                  </span>
-
-                  <Link to={`/single/${post._id}`} className="absolute bottom-[10%] max-w-fit inset-x-auto text-white z-30 mx-1">
-
-                    <h3 className="HeroImageMultipleListH3">
-                      <span>
-                        {post.postTitle}
-                      </span>
-                    </h3>
-
-                    {size.width > 1024 && <TimeComponent time={post.createdAt} />}
-                  </Link>
-               
-                </li>
-              )
-            })}
-          </ul>
-        </div>
-      </div>
+        :
+        <HeroOneThreeImageSpinner 
+          groupStyle={"md:grid md:grid-cols-3 my-12"}
+          oneimageStyle={"col-span-2 HeroImageOneOverFlow group HeroImageOne"}
+          threecoverStyle={"overflowScroll HeroImageThreeMultipleOverFlow"}
+          threeimageStyle={"HeroImageMultipleListOverFlow group HeroImageMultipleList"}
+          threegroupStyle={"w-[900px] md:w-full md:gap-y-1 grid md:grid-rows-3 grid-flow-col HeroImageMultiple"}
+        />
+      }
     </div>
   )
 }

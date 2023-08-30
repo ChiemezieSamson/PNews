@@ -31,82 +31,84 @@ const IndexPage = () => {
 
   const canOpen = [action, useraction, categoriesaction, commentaction, paginationAction].every(Boolean)
   return (
-    <>    
-      <div className={`text-left ${isFecthingStyle(isFetching)}`}>
+    <div className={`text-left ${isFecthingStyle(isFetching)}`}> 
 
-        {canOpen && <HeroImages Posts={Posts}/>}
+      <HeroImages 
+        Posts={Posts}
+        categories={categoriesParents}
+        canOpen={canOpen}
+      />
 
-        <div className="md:grid md:grid-cols-3">
+      <div className="md:grid md:grid-cols-3">
 
-          <div className="col-span-2 md:mr-[4%]">
-          {canOpen && 
-            <FeaturedPosts 
-              Posts={Posts} 
-              users={users}
-              categories={categoriesParents}
-              canOpen={canOpen}
-            />}
+        <div className="col-span-2 md:mr-[4%]">
 
-          
-            <ArroundTheWorldPosts 
-              Comments={Comments}
-              Posts={Posts} 
-              categories={categoriesParents} 
-              users={users}
-              canOpen={canOpen}
-            />
-              
-            <FashionAndTrendsPosts 
-              Posts={Posts} 
-              canOpen={canOpen}
-              categories={categoriesParents}
-            />
+          <FeaturedPosts 
+            Posts={Posts} 
+            users={users}
+            categories={categoriesParents}
+            canOpen={canOpen}
+          />
 
-            <EntertainmentPosts 
-              Comments={Comments}
-              Posts={Posts} 
-              categories={categoriesParents} 
-              users={users}
-              canOpen={canOpen}
-            />            
-       
-            <TechPosts 
-              Posts={Posts} 
-              categories={categoriesParents}
-              canOpen={canOpen}
-            />     
-          </div>
+        
+          <ArroundTheWorldPosts 
+            Comments={Comments}
+            Posts={Posts} 
+            categories={categoriesParents} 
+            users={users}
+            canOpen={canOpen}
+          />
+            
+          <FashionAndTrendsPosts 
+            Posts={Posts} 
+            canOpen={canOpen}
+            categories={categoriesParents}
+          />
 
-          {canOpen &&
-          <aside className="col-span-1 hidden md:block md:ml-[4%]">
-            <StickyBox offsetTop={0} offsetBottom={0}>
-              <PopularPost Posts={Posts}/>
-              <EditorsChioceAndDontMiss Posts={Posts} Comments={Comments}/>
-            </StickyBox>
-          </aside>}
+          <EntertainmentPosts 
+            Comments={Comments}
+            Posts={Posts} 
+            categories={categoriesParents} 
+            users={users}
+            canOpen={canOpen}
+          />            
+      
+          <TechPosts 
+            Posts={Posts} 
+            categories={categoriesParents}
+            canOpen={canOpen}
+          />     
         </div>
 
-        {canOpen && <ImageComponent Posts={Posts}/>}
-
-        {canOpen && <div className="md:grid md:grid-cols-3">
-          <span className="col-span-2 md:mr-[4%]">
-            <LatestPosts Posts={Posts}/>
-            <div className="grid grid-flow-col justify-center w-full">
-              <PaginationFunctions 
-                currentPage={currentPage}
-                totalPages={totalPages}
-              />
-            </div>
-          </span>
-
-          <span className="col-span-1 md:ml-[4%]">
-            <StickyBox offsetTop={0} offsetBottom={0}>
-              <StayConnectedAndRecommended Posts={Posts}/>
-            </StickyBox>
-          </span>
-        </div>}      
+        {canOpen &&
+        <aside className="col-span-1 hidden md:block md:ml-[4%]">
+          <StickyBox offsetTop={0} offsetBottom={0}>
+            <PopularPost Posts={Posts}/>
+            <EditorsChioceAndDontMiss Posts={Posts} Comments={Comments}/>
+          </StickyBox>
+        </aside>}
       </div>
-    </>    
+
+      {canOpen && <ImageComponent Posts={Posts}/>}
+
+      {canOpen && <div className="md:grid md:grid-cols-3">
+        <span className="col-span-2 md:mr-[4%]">
+          <LatestPosts Posts={Posts}/>
+          <div className="grid grid-flow-col justify-center w-full">
+            <PaginationFunctions 
+              currentPage={currentPage}
+              totalPages={totalPages}
+            />
+          </div>
+        </span>
+
+        <span className="col-span-1 md:ml-[4%]">
+          <StickyBox offsetTop={0} offsetBottom={0}>
+            <StayConnectedAndRecommended Posts={Posts}/>
+          </StickyBox>
+        </span>
+      </div>}      
+    </div>  
   )
 }
 
