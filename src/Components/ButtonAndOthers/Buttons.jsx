@@ -1,6 +1,6 @@
 import React from "react";
 import { useState, useEffect} from "react";
-import { FaBars, FaChevronUp, FaEllipsisH, FaEllipsisV, FaStar, FaTimes} from "react-icons/fa"
+import { FaBars, FaChevronLeft, FaChevronUp, FaEllipsisH, FaEllipsisV, FaStar, FaTimes} from "react-icons/fa"
 import { FaChevronDown, FaChevronRight } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { useWindowSize } from "../SharedAsset/SharedAssets";
@@ -216,3 +216,31 @@ export const WritePostAsideOpenClosebar = ({BarName, handle}) => {
     </div>
   )
 } 
+
+export const HomePageSlideNextAndPreviousButton = ({isSuccess, handleBackward, handleNext}) => {
+  return (
+    <div className='grid grid-cols-2 max-w-[90px] gap-1 text-neutral-500 text-xs p-2 mx-auto'>
+        <button 
+          type='button'
+          id='previouspost'
+          name='previouspost'
+          title='previous'
+          disabled={!isSuccess}
+          className='py-2 px-2.5 border border-solid border-neutral-300 hover:border-neutral-400 disabled:opacity-40 hover:text-neutral-600 cursor-pointer TextHeadertransition' 
+          onClick={handleBackward}>
+          <FaChevronLeft />
+        </button>
+
+        <button 
+          type='button'
+          id='nextpost'
+          name='nextpost'
+          title='next'
+          disabled={!isSuccess}
+          className='py-2 px-2.5 border border-solid border-neutral-300 hover:border-neutral-400 disabled:opacity-40 hover:text-neutral-600 cursor-pointer TextHeadertransition'
+          onClick={handleNext}>
+          <FaChevronRight />
+        </button>
+      </div>
+  )
+}

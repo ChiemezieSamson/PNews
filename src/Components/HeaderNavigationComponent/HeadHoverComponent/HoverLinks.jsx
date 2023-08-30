@@ -13,7 +13,7 @@ export const HoverLinsks = ({CategoriesLink, TagsLink, blogPost, Parentlink, han
     <div 
       className="text-left w-[98%] lg:max-w-6xl lg:rounded-b mx-auto shadow-md shadow-black bg-stone-50
        font-poppins tracking-wide">
-      <div className="grid grid-cols-6">
+      <div className={`grid ${Parentlink === "quotes" ? "grid-cols-4" : "grid-cols-6"}`}>
 
         {/* === List of categories in the hover component handler ===*/}
         <div className={`${(Parentlink === "quotes") ? "hidden" : "block"} col-span-1
@@ -28,7 +28,7 @@ export const HoverLinsks = ({CategoriesLink, TagsLink, blogPost, Parentlink, han
 
         {/* === Posts Images and title component handler === */}
         <div className={`${(Parentlink === "favorite") ? "col-span-5" : "col-span-4"} 
-          ${(Parentlink === "quotes") ? "col-span-6" : "col-span-4"} p-4`}>
+          ${(Parentlink === "quotes") ? "col-span-6" : "col-span-6"} p-4`}>
 
           <PostImageComponent 
             blogPost={blogPost} 

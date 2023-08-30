@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
-import { FaChevronLeft, FaChevronRight } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
 import { publicFolder } from '../../../../data'
 import { isFecthingStyle, useWindowSize } from '../../../SharedAsset/SharedAssets'
 import { ImageTopTitleTimeDownSpinner } from '../../../SharedAsset/Spinners/Spinner'
+import { HomePageSlideNextAndPreviousButton } from '../../../ButtonAndOthers/Buttons'
 
 const PostImageComponent = ({blogPost = [], Parentlink, handleCloseHoverlinks, isFetchingHoverPosts, isSuccess}) => {
   const [posts, setPosts] = useState([])
@@ -85,28 +85,15 @@ const PostImageComponent = ({blogPost = [], Parentlink, handleCloseHoverlinks, i
       }
 
      {(Parentlink === "favorite" || Parentlink === "quotes") && 
-      <div className='lg:grid grid-cols-2 max-w-[90px] gap-1 text-neutral-500 text-xs p-2 mx-auto hidden'>
-        <button 
-          type='button'
-          id='previouspost'
-          name='previouspost'
-          title='previous'
-          disabled={!isSuccess}
-          className='py-2 px-2.5 border border-solid border-neutral-300 hover:border-neutral-400 disabled:opacity-40 hover:text-neutral-600 cursor-pointer TextHeadertransition' 
-          onClick={handleBackward}>
-          <FaChevronLeft />
-        </button>
+      <div className='lg:block hidden'>
 
-        <button 
-          type='button'
-          id='nextpost'
-          name='nextpost'
-          title='next'
-          className='py-2 px-2.5 border border-solid border-neutral-300 hover:border-neutral-400 disabled:opacity-40 hover:text-neutral-600 cursor-pointer TextHeadertransition'
-          onClick={handleNext}>
-          <FaChevronRight />
-        </button>
-      </div>}
+        <HomePageSlideNextAndPreviousButton 
+          isSuccess={isSuccess}
+          handleBackward={handleBackward}
+          handleNext={handleNext}
+        />
+      </div>
+      }
     </div>
    
   )

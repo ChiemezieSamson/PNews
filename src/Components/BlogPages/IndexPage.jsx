@@ -49,9 +49,12 @@ const IndexPage = () => {
               users={users}
               canOpen={canOpen}
             />
-
-          
-               {canOpen && <FashionAndTrendsPosts Posts={Posts} categories={categoriesParents}/>}
+              
+            <FashionAndTrendsPosts 
+              Posts={Posts} 
+              canOpen={canOpen}
+              categories={categoriesParents}
+            />
 
             <EntertainmentPosts 
               Comments={Comments}

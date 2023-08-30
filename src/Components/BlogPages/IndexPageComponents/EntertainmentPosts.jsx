@@ -20,7 +20,7 @@ const EntertainmentPosts = ({Posts, categories, users, Comments, canOpen}) => {
       <CatSidebarHanbugar 
         initial={categories} 
         canOpen={canOpen}
-        parent={"business"}
+        parent={parent}
         blackletters={"Entertainment"} 
         redletters={"News"}
       />

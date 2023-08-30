@@ -20,7 +20,7 @@ const ArroundTheWorldPosts = ({Posts, categories, users, Comments, canOpen}) => 
       <CatSidebarHanbugar  
         initial={categories} 
         canOpen={canOpen}
-        parent={"lifestyle"}
+        parent={parent}
         blackletters={"Arround the"} 
         redletters={"world"} 
       />
