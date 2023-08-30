@@ -89,7 +89,10 @@ const IndexPage = () => {
         </aside>}
       </div>
 
-      {canOpen && <ImageComponent Posts={Posts}/>}
+      <ImageComponent 
+        Posts={Posts}  
+        canOpen={canOpen}
+      />
 
       {canOpen && <div className="md:grid md:grid-cols-3">
         <span className="col-span-2 md:mr-[4%]">
