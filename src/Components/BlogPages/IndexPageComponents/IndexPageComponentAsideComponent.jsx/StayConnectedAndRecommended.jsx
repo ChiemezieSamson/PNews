@@ -1,9 +1,9 @@
 import React from 'react'
 import { SocialMediaIcons } from '../../../../data'
-import { MainDivider, SocialLinks } from '../../../SharedAsset/SharedAssets'
+import { MainDivider, SocialLinks, isFecthingStyle } from '../../../SharedAsset/SharedAssets'
 import { JustTimeComponetStar } from '../SharedComponents'
 
-const Recommended = ({Posts}) => {
+const Recommended = ({Posts, canOpen, isFetching}) => {
   return (
     <section className='mt-2.5'>
 
@@ -19,8 +19,12 @@ const Recommended = ({Posts}) => {
       <div className='mt-10'>
         <MainDivider firstletter={"Recommended"}/>
 
-        <div className='pt-4'>
-          <JustTimeComponetStar Posts={Posts.slice(0, 5)}/>
+        <div className={`pt-4 ${isFecthingStyle(isFetching)}`}>
+
+          <JustTimeComponetStar 
+            Posts={canOpen && Posts.slice(0, 5)}
+            action={canOpen}
+          />
         </div>
       </div>
       

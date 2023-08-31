@@ -129,7 +129,13 @@ const IndexPage = () => {
 
         <span className="col-span-1 md:ml-[4%]">
           <StickyBox offsetTop={0} offsetBottom={0}>
-          {canOpen &&  <StayConnectedAndRecommended Posts={Posts}/>}
+
+            <StayConnectedAndRecommended 
+              Posts={Posts}
+              isFetching={isFetching}
+              canOpen={canOpen}
+            />
+            
           </StickyBox>
         </span>
       </div>   
