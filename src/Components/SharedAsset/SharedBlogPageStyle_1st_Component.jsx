@@ -2,19 +2,19 @@ import React from 'react'
 import Aside from '../BlogPages/asidePage/Aside'
 import StickyBox from "react-sticky-box";
 import { PagesBlogPostComponent } from '../BlogPages/IndexPageComponents/SharedComponents'
-import { AdminComponent, CategoriesComponent, HomeLink, NavDirectionAndPageName, overLay, PostTitleLarge, TimeComponent, useWindowSize } from './SharedAssets'
+import { AdminComponent, CategoriesComponent, HomeLink, isFecthingStyle, NavDirectionAndPageName, overLay, PostTitleLarge, TimeComponent, useWindowSize } from './SharedAssets'
 import { Link } from 'react-router-dom';
 import { publicFolder } from '../../data';
 import { HeroOneThreeImageSpinner } from './Spinners/Spinner';
 
 // Hero Image component for Book, Lifestyle, Qute, Category etc
-export const SharedBlogPageStyleOne = ({Posts, users, canOpen}) => {
+export const SharedBlogPageStyleOne = ({Posts, users, canOpen, isFetching}) => {
   const size = useWindowSize()
 
   return (
     <>
       {canOpen ? 
-        <div>
+        <div className={`${isFecthingStyle(isFetching)}`}>
           {Posts?.length > 0 ?
             <div className="md:grid md:grid-cols-7">
 
@@ -98,7 +98,7 @@ export const SharedBlogPageStyleOne = ({Posts, users, canOpen}) => {
 
 
 // Category, pagination page component
-export const GeneralCategorisePages = ({ThreeFirstPost, Comments, commentaction, PagePost, users, currentPage, totalPages, canOpen}) => {
+export const GeneralCategorisePages = ({ThreeFirstPost, Comments, commentaction, PagePost, users, currentPage, totalPages, canOpen, isFetching}) => {
   return (
     <section className="text-left">
 
@@ -107,7 +107,9 @@ export const GeneralCategorisePages = ({ThreeFirstPost, Comments, commentaction,
         users={users} 
         Posts={ThreeFirstPost}
         canOpen={canOpen}
+        isFetching={isFetching}
       />
+
       
       <div className='md:grid md:grid-cols-3'>
         <div className="md:col-span-2 md:mr-[3%]">
@@ -121,6 +123,7 @@ export const GeneralCategorisePages = ({ThreeFirstPost, Comments, commentaction,
             currentPage={currentPage}
             totalPages={totalPages}
             canOpen={canOpen}
+            isFetching={isFetching}
           />
         </div>
 

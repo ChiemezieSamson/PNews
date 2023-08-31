@@ -3,7 +3,9 @@ import { HomeLink, NavDirectionAndPageName } from '../../SharedAsset/SharedAsset
 
 
 const PrivacyAndPolicy = () => {
+
   return (
+    
     <section className='text-left'>
       <NavDirectionAndPageName page={"Privacy & Policy"} />
 

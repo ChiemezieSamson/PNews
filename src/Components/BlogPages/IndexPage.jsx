@@ -103,7 +103,6 @@ const IndexPage = () => {
               canOpen={canOpen}
             />
           </StickyBox>
-
         </aside>
       </div>
 
@@ -112,7 +111,6 @@ const IndexPage = () => {
         canOpen={canOpen}
         isFetching={isFetching}
       />
-
       
       <div className="md:grid md:grid-cols-3">
 

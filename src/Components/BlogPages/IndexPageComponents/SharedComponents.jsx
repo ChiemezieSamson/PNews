@@ -1,6 +1,6 @@
 import React from 'react'
 import { ReadmoreButton, StarComponent } from '../../ButtonAndOthers/Buttons'
-import { AdminComponentColor, CategoriesComponentBotton, CommentComponetColor, PostsShortInfoComponent, PostTitleMedium, PostTitleMedium2, PostTitleSmall, TimeComponentColor, useWindowSize } from '../../SharedAsset/SharedAssets'
+import { AdminComponentColor, CategoriesComponentBotton, CommentComponetColor, isFecthingStyle, PostsShortInfoComponent, PostTitleMedium, PostTitleMedium2, PostTitleSmall, TimeComponentColor, useWindowSize } from '../../SharedAsset/SharedAssets'
 import { publicFolder } from '../../../data'
 import { Link } from 'react-router-dom'
 import PaginationFunctions from '../PaginationComponents/PaginationControl/PaginationFunctions/PaginationFunctions'
@@ -10,30 +10,34 @@ import { SearchPostSpinner, SmallPostImageLeftTitleDateRightSpinner } from '../.
 export const JustTimeComponet = ({Posts, Comments, action}) => {
   
   return (    
-
     <>
       {action ?
         <ul className="min-w-[200px]">
-            {/* featured posts other post start here */}
+           
           {Posts?.map((post) => {
 
             return (
               <li key={post?._id} className="grid grid-cols-4 sm:grid-cols-5 mb-2">
 
                 <div className="col-span-1 max-h-16 sm:max-h-24 sm:col-span-2 mb-1 mr-1">
+
                   <Link to={`/single/${post?._id}`}>
                     <img src={publicFolder + post?.postImage} alt={"posts"} className="max-h-16 sm:max-h-24" loading="lazy"/>
                   </Link>
+
                 </div>
 
                 <div className="col-span-3 ml-1 pt-px">
+
                   <PostTitleSmall post={post?.postTitle} postId={post?._id}/>
 
                   <span className='inline-block'>
+
                     <span className='mr-4'>
                       <CommentComponetColor postId={post?._id} Comments={Comments}/>
                     </span>
-                      <TimeComponentColor time={post?.createdAt}/>
+
+                    <TimeComponentColor time={post?.createdAt}/>
                   </span>
                 </div>
               </li>
@@ -60,28 +64,32 @@ export const JustTimeComponetStar = ({Posts, grid, action}) => {
       {action ?
         <ul className={`min-w-[200px] ${grid ? grid: ""}`}>
 
-          {/* featured posts other post start here */}
           {Posts?.map((post) => {
 
             return (
               <li key={post?._id} className="grid grid-cols-4 sm:grid-cols-5 mb-2">
 
                 <div className="col-span-1 max-h-16 sm:max-h-24 sm:col-span-2 mb-1 mr-1">
+                  
                   <Link to={`/single/${post?._id}`}>
-                    <img src={publicFolder + post?.postImage} alt={"posts"} 
-                      className="max-h-16 sm:max-h-24" 
-                      loading="lazy"/>
+                    <img src={publicFolder + post?.postImage} alt={"posts"} className="max-h-16 sm:max-h-24" loading="lazy"/>
                   </Link>
+
                 </div>
 
                 <div className="col-span-3 ml-1 pt-px">
+
                   <PostTitleSmall post={post?.postTitle} postId={post?._id}/>
 
                   <span className='inline-block'>
-                  {post?.optional?.favourite === false ? "" : <span className='mr-4'>
-                      <StarComponent color={"text-[#f7c90d]"} favourite={post?.optional?.favourite}/>
-                    </span>}
-                      <TimeComponentColor time={post?.createdAt}/>
+
+                    {post?.optional?.favourite === false ? "" : 
+                      <span className='mr-4'>
+                        <StarComponent color={"text-[#f7c90d]"} favourite={post?.optional?.favourite}/>
+                      </span>
+                    }
+
+                    <TimeComponentColor time={post?.createdAt}/>
                   </span>
                 </div>
               </li>
@@ -107,8 +115,9 @@ export const JustTimeComponetCatBlockStar = ({Posts, grid, canOpen}) => {
   return (
     <>
       {canOpen ? 
+
         <ul className={`min-w-[200px] ${grid ? grid: ""}`}>
-            {/* featured posts other post start here */}
+            
           {Posts?.map((post) => {
 
             return (
@@ -124,13 +133,18 @@ export const JustTimeComponetCatBlockStar = ({Posts, grid, canOpen}) => {
                 </div>
 
                 <div className="pt-2">
+
                   {size.width < 768 && size.width > 480 ? <PostTitleSmall post={post?.postTitle} postId={post?._id}/> : <PostTitleMedium post={post?.postTitle} postId={post?._id}/> }
 
                   <span className='mt-1'>
-                    {post?.optional?.favourite === false ? "" : <span className='mr-4 inline-block'>
-                      <StarComponent color={"text-[#f7c90d]"} favourite={post?.optional?.favourite}/>
-                    </span>}
-                      <TimeComponentColor time={post?.createdAt} />
+
+                    {post?.optional?.favourite === false ? "" : 
+                      <span className='mr-4 inline-block'>
+                        <StarComponent color={"text-[#f7c90d]"} favourite={post?.optional?.favourite}/>
+                      </span>
+                    }
+
+                    <TimeComponentColor time={post?.createdAt} />
                   </span>              
                 </div>
               </li>
@@ -150,12 +164,14 @@ export const JustTimeComponetCatBlockStar = ({Posts, grid, canOpen}) => {
   )
 }
 
-export const PagesBlogPostComponent = ({Posts, users, Comments, currentPage, totalPages, canOpen}) => {
+export const PagesBlogPostComponent = ({Posts, users, Comments, currentPage, totalPages, canOpen, isFetching}) => {
   const size = useWindowSize()
 
   return (
-    <div>
+    <div className={`${isFecthingStyle(isFetching)}`}>
+
       {canOpen ?
+
         <ul className='mt-5 text-left'>
 
           {Posts?.map((post) => {
@@ -164,26 +180,33 @@ export const PagesBlogPostComponent = ({Posts, users, Comments, currentPage, tot
               <li key={post?._id} className="grid grid-cols-5 md:grid-cols-2 mt-3 first:mt-0 last:pb-0 pb-3">
 
                 <div className="mr-[2%] col-span-2 md:col-span-1 max-h-36 sm:max-h-48 lg:max-h-60">
+
                   <Link to={`/single/${post?._id}`}>
                     <img src={publicFolder + post?.postImage} alt={"game"} className="max-h-36 sm:max-h-48 lg:max-h-60" loading="lazy"/>
                   </Link>
+
                 </div>
 
                 <div className='ml-[2%] col-span-3 md:col-span-1'>
+
                   <PostTitleMedium2 post={post?.postTitle} postId={post?._id}/>
 
                   <span className="mb-2 inline-block">
+
                     {post?.optional?.favourite === false ? "" : 
                       <span className='mr-4 inline-block'>
                         <StarComponent color={"text-[#f7c90d]"} favourite={post?.optional?.favourite}/>  
                       </span>
                     }
+
                     <span className='mr-4'>
                       <AdminComponentColor user={post?.postAuthor} users={users}/>
                     </span>
+
                     <span className='mr-4'>
                       <TimeComponentColor time={post?.createdAt}/>
                     </span>
+
                       <CommentComponetColor Comments={Comments} postId={post?._id}/>
                   </span>
 
