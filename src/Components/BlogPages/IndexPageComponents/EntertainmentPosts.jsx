@@ -14,7 +14,7 @@ const EntertainmentPosts = ({Posts, categories, users, Comments, canOpen, isFetc
   const {allPost} = useParentcategories(parent, categories, Posts, canOpen)
 
   return (
-    <section className={`pb-10 ${isFecthingStyle(isFetching)}`}>                     
+    <section className="pb-10">                     
 
       {/* === Header title and possible categories === */}
       <CatSidebarHanbugar 
@@ -23,13 +23,14 @@ const EntertainmentPosts = ({Posts, categories, users, Comments, canOpen, isFetc
         parent={parent}
         blackletters={"Entertainment"} 
         redletters={"News"}
+        isFetching={isFetching}
       />
    
      {/* === Posts image and title start here === */}
 
       {/* first component start here */}
       {canOpen ?
-        <ul className="md:grid md:grid-cols-2 pt-2">
+        <ul className={`md:grid md:grid-cols-2 pt-2 ${isFecthingStyle(isFetching)}`}>
 
           {allPost?.slice(0, 2)?.map((post) => {
 
@@ -78,7 +79,7 @@ const EntertainmentPosts = ({Posts, categories, users, Comments, canOpen, isFetc
       }
 
       {/* Second component start here */}
-      <div className="my-7">
+      <div className={`my-7 ${isFecthingStyle(isFetching)}`}>
    
         <JustTimeComponetStar 
           Posts={canOpen && allPost?.slice(3, 7)}
@@ -90,7 +91,7 @@ const EntertainmentPosts = ({Posts, categories, users, Comments, canOpen, isFetc
 
       {/* Third component start here */}
       {canOpen ? 
-        <ul className='mt-4'>
+        <ul className={`mt-4 ${isFecthingStyle(isFetching)}`}>
           
           {allPost?.slice(7, 11)?.map((post) => {
 

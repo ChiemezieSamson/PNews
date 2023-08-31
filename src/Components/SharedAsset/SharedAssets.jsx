@@ -145,7 +145,7 @@ export const CategoriesComponentBotton = ({cat}) => {
 
 
 // hero page section navigation of few possible categories (Arround The world, Fashion & Trends, Entertainment News etc)
-export const CatSidebarHanbugar = ({initial, blackletters, redletters, parent, canOpen}) => {
+export const CatSidebarHanbugar = ({initial, blackletters, redletters, parent, canOpen, isFetching}) => {
   const [catSidebar, setCatSidebar] = useState(false) // display control
   const size = useWindowSize()
 
@@ -181,7 +181,7 @@ export const CatSidebarHanbugar = ({initial, blackletters, redletters, parent, c
               <ul className="grid grid-flow-col">
 
                 {/* All ie the main parent categories */}
-                <li className="text-stone-800 inline-block cursor-pointer uppercase">
+                <li className={`text-stone-800 inline-block cursor-pointer uppercase ${isFecthingStyle(isFetching)}`}>
 
                   <Link to={`/${parent}`} className='py-1 px-2 inline-block'>All</Link>
                 </li>
@@ -195,7 +195,7 @@ export const CatSidebarHanbugar = ({initial, blackletters, redletters, parent, c
                       ${size.width < 420 ? "[&:nth-child(2)]:hidden": "[&:nth-child(2)]:sxs:inline-block"}  
                       ${size.width < 520 ? "[&:nth-child(3)]:hidden" : "[&:nth-child(3)]:xs:inline-block "} 
                       ${size.width < 768 ? "[&:nth-child(4)]:hidden" : "[&:nth-child(4)]:md:inline-block"}
-                      ${size.width < 1000 ? "[&:nth-child(5)]:hidden" : "[&:nth-child(5)]:md:inline-block"}`}
+                      ${size.width < 1000 ? "[&:nth-child(5)]:hidden" : "[&:nth-child(5)]:md:inline-block"}  ${isFecthingStyle(isFetching)}`}
                     >
                       <Link to={`/categories?category=${cat?.title}`} className='hover:mainColor py-1 px-2 inline-block'>{cat?.title}</Link>
                     </li>
@@ -219,7 +219,7 @@ export const CatSidebarHanbugar = ({initial, blackletters, redletters, parent, c
                 
                 return (
 
-                  <li key={cat?.id} className="first:sxs:hidden [&:nth-child(2)]:xs:hidden [&:nth-child(3)]:md:hidden">
+                  <li key={cat?.id} className={`first:sxs:hidden [&:nth-child(2)]:xs:hidden [&:nth-child(3)]:md:hidden ${isFecthingStyle(isFetching)}`}>
 
                     <Link to={`/categories?category=${cat?.title}`} className='hover:mainColor py-1 px-2 inline-block'>{cat?.title}</Link>
                   </li>

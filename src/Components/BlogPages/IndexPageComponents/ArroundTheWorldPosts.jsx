@@ -13,7 +13,7 @@ const ArroundTheWorldPosts = ({Posts, categories, users, Comments, canOpen, isFe
   const {allPost} = useParentcategories(parent, categories, Posts, canOpen, isFetching)
 
   return (
-    <section className={`mt-7 ${isFecthingStyle(isFetching)}`}>
+    <section className="mt-7">
       <hr />
       
       {/* === Header title and possible categories === */}
@@ -22,11 +22,12 @@ const ArroundTheWorldPosts = ({Posts, categories, users, Comments, canOpen, isFe
         canOpen={canOpen}
         parent={parent}
         blackletters={"Arround the"} 
-        redletters={"world"} 
+        redletters={"world"}
+        isFetching={isFetching} 
       />
 
       {/* === Posts image and title start here === */}
-      <div className='md:grid md:grid-cols-2 pb-7 pt-2'>
+      <div className={`md:grid md:grid-cols-2 pb-7 pt-2 ${isFecthingStyle(isFetching)}`}>
 
         {canOpen ?
           <div className='mt-0.5 text-black md:mr-[2%]'>

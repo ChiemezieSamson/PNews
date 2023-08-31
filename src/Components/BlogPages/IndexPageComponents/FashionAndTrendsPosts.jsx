@@ -38,7 +38,7 @@ const FashionAndTrendsPosts = ({Posts, categories, canOpen, isFetching}) => {
   }
 
   return (
-    <section className={`${isFecthingStyle(isFetching)}`}>
+    <>
       <hr />
 
       {/* === Header title and possible categories === */}
@@ -48,10 +48,11 @@ const FashionAndTrendsPosts = ({Posts, categories, canOpen, isFetching}) => {
         parent={parent}        
         blackletters={"Fashion &"} 
         redletters={"Trends"}
+        isFetching={isFetching}
       />
         
       {/* === Posts image and title start here === */}
-      <div className='overflowScroll overflow-x-auto scroll-px-0 overscroll-x-contain snap-mandatory mb-2 pt-1.5'>
+      <div className={`overflowScroll overflow-x-auto scroll-px-0 overscroll-x-contain snap-mandatory mb-2 pt-1.5 ${isFecthingStyle(isFetching)}`}>
 
         {canOpen ?
           <ul className="grid grid-flow-col snap-start w-[800px]">
@@ -102,7 +103,7 @@ const FashionAndTrendsPosts = ({Posts, categories, canOpen, isFetching}) => {
       
         <span className='grid grid-flow-col justify-center text-stone-400 text-xs'>
 
-          <span className='bg-white rounded-md'>
+          <span className={`bg-white rounded-md ${isFecthingStyle(isFetching)}`}>
             <HomePageSlideNextAndPreviousButton 
               isSuccess={canOpen}
               handleBackward={handleBackward}
@@ -112,7 +113,7 @@ const FashionAndTrendsPosts = ({Posts, categories, canOpen, isFetching}) => {
 
         </span>
       </div>
-    </section>
+    </>
   )
 }
 

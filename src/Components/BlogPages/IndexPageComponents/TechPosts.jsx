@@ -9,7 +9,7 @@ const TechPosts = ({Posts, categories, canOpen, isFetching}) => {
   const {allPost} = useParentcategories(parent, categories, Posts, canOpen)
 
   return (
-    <section className={`${isFecthingStyle(isFetching)}`}>
+    <>
       <hr />                    
 
       {/* === Header title and possible categories === */}
@@ -19,16 +19,17 @@ const TechPosts = ({Posts, categories, canOpen, isFetching}) => {
         canOpen={canOpen}
         blackletters={"Tech"} 
         redletters={"News"}
+        isFetching={isFetching}
       />
 
-      <div className='mt-5'>
+      <div className={`mt-5 ${isFecthingStyle(isFetching)}`}>
         <JustTimeComponetStar 
           Posts={canOpen && allPost.slice(0, 6)}
           grid={"md:grid md:grid-cols-2 gap-x-[2%]"}
           action={canOpen}
         />
       </div>      
-    </section>
+    </>
   )
 }
 

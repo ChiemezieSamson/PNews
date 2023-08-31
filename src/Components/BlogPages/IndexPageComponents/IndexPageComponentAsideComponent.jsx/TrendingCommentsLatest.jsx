@@ -86,7 +86,7 @@ const TrendingCommentsLatest = ({posts, Comments, action, isFetching}) => {
   }
   
   return (
-    <div className={`${isFecthingStyle(isFetching)}`}>
+    <div >
       <ul className='grid grid-cols-3 text-center mt-7 mb-6 p-0 divide-x border border-solid boreder-neutral-100'>
 
         <li className="text-sm font-medium leading-9 hover:bg-neutral-50 cursor-pointer text-stone-700 activeTitle">
@@ -95,7 +95,7 @@ const TrendingCommentsLatest = ({posts, Comments, action, isFetching}) => {
             name="TrendingButton"
             id='TrendingButton'
             onClick={handleClick}
-            disabled={!action}
+            disabled={!action || isFetching}
             className="disabled:opacity-40"
             ref={ref}
           >
@@ -109,7 +109,7 @@ const TrendingCommentsLatest = ({posts, Comments, action, isFetching}) => {
             name="CommentsButton"
             id='CommentsButton'
             onClick={handleClick}
-            disabled={!action}
+            disabled={!action || isFetching}
             className="disabled:opacity-40"
             ref={ref2}
           >            
@@ -123,7 +123,7 @@ const TrendingCommentsLatest = ({posts, Comments, action, isFetching}) => {
             name="LatestButton"
             id='LatestButton'
             onClick={handleClick}
-            disabled={!action}
+            disabled={!action || isFetching}
             className="disabled:opacity-40"
             ref={ref3}
           >           
@@ -133,7 +133,7 @@ const TrendingCommentsLatest = ({posts, Comments, action, isFetching}) => {
       </ul>   
       
 
-      <div className='mb-5'>
+      <div className={`mb-5 ${isFecthingStyle(isFetching)}`}>
         {text !== "Comments" ? 
           <JustTimeComponetStar Posts={newPosts?.length ? newPosts : action && TrendingPosts?.slice(0, 4)} action={action}/> :
           <JustTimeComponet Posts={newPosts} Comments={Comments} action={action}/>

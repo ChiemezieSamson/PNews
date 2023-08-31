@@ -96,7 +96,12 @@ const IndexPage = () => {
               isFetching={isFetching}
             />
 
-            {canOpen && <EditorsChioceAndDontMiss Posts={Posts} Comments={Comments}/>}
+            <EditorsChioceAndDontMiss 
+              Posts={Posts} 
+              Comments={Comments}
+              isFetching={isFetching}
+              canOpen={canOpen}
+            />
           </StickyBox>
 
         </aside>
