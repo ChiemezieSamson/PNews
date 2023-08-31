@@ -76,6 +76,27 @@ export const HeroOneBussinessFavoriteImageSpinner = ({groupStyle, imageStyle, im
 }
 
 // Bussiness component hero Spinner
+export const PopularPostSpinner = ({groupStyle, numb}) => {
+  const EmptyValues = [...Array(numb)]
+  const content  = EmptyValues.map((title, id) => ({id: id, title: title}))
+
+  return (
+    <div>
+      <ul className={`${groupStyle}`}>
+        {content.map((post) => {
+          return (
+            <li key={post.id}>
+              <SkeletonTextTwo />
+              <div className='skeleton w-[25%] mb-4 mt-1.5 h-3  rounded-sm'></div>
+            </li>
+          )
+        })}        
+      </ul>     
+    </div>
+  )
+}
+
+// Bussiness component hero Spinner
 export const CatSidebarHanbugarSpinner = ({groupStyle, listgroupStyle, listStyle, num, blackletters, redletters}) => {
   const EmptyValues = [...Array(num)]
   const content  = EmptyValues.map((title, id) => ({id: id, title: title}))

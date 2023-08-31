@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { CategoriesComponentBotton, CatSidebarHanbugar, PostTitleMedium, PostTitleSmall, TimeComponentColor, useWindowSize } from '../../SharedAsset/SharedAssets'
+import { CategoriesComponentBotton, CatSidebarHanbugar, isFecthingStyle, PostTitleMedium, PostTitleSmall, TimeComponentColor, useWindowSize } from '../../SharedAsset/SharedAssets'
 import { publicFolder } from '../../../data'
 import { Link } from 'react-router-dom'
 import { ImageTopTitleTimeDownSpinner } from '../../SharedAsset/Spinners/Spinner'
@@ -8,7 +8,7 @@ import { HomePageSlideNextAndPreviousButton } from '../../ButtonAndOthers/Button
 
 
 
-const FashionAndTrendsPosts = ({Posts, categories, canOpen}) => {
+const FashionAndTrendsPosts = ({Posts, categories, canOpen, isFetching}) => {
   const size = useWindowSize()
   const [start, setStart] = useState(0)
   const [end, setEnd] = useState(6)
@@ -38,7 +38,7 @@ const FashionAndTrendsPosts = ({Posts, categories, canOpen}) => {
   }
 
   return (
-    <>
+    <section className={`${isFecthingStyle(isFetching)}`}>
       <hr />
 
       {/* === Header title and possible categories === */}
@@ -112,7 +112,7 @@ const FashionAndTrendsPosts = ({Posts, categories, canOpen}) => {
 
         </span>
       </div>
-    </>
+    </section>
   )
 }
 

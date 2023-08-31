@@ -1,19 +1,19 @@
 import React from 'react'
-import { AdminComponentColor, CategoriesComponentBotton, CatSidebarHanbugar, CommentComponetColor, PostsShortInfoComponent, PostTitleMedium, PostTitleMedium2, TimeComponentColor, useWindowSize } from '../../SharedAsset/SharedAssets'
+import { AdminComponentColor, CategoriesComponentBotton, CatSidebarHanbugar, CommentComponetColor, isFecthingStyle, PostsShortInfoComponent, PostTitleMedium, PostTitleMedium2, TimeComponentColor, useWindowSize } from '../../SharedAsset/SharedAssets'
 import { ReadmoreButton } from '../../ButtonAndOthers/Buttons';
 import { publicFolder } from '../../../data';
 import { Link } from 'react-router-dom';
 import useParentcategories from './useParentcategories/UseParentcategories';
 import { HomeFeaturedArroundSpinner } from '../../SharedAsset/Spinners/Spinner';
 
-const ArroundTheWorldPosts = ({Posts, categories, users, Comments, canOpen}) => {
+const ArroundTheWorldPosts = ({Posts, categories, users, Comments, canOpen, isFetching}) => {
   const size = useWindowSize()
   const parent = "lifestyle"
   
-  const {allPost} = useParentcategories(parent, categories, Posts, canOpen)
+  const {allPost} = useParentcategories(parent, categories, Posts, canOpen, isFetching)
 
   return (
-    <section className="mt-7">
+    <section className={`mt-7 ${isFecthingStyle(isFetching)}`}>
       <hr />
       
       {/* === Header title and possible categories === */}

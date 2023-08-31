@@ -14,7 +14,6 @@ import { useFetchedPostByPagination, useFetchedPosts } from "../SharedAsset/Spin
 import useFetchedUsers from "../SharedAsset/Spinners/userSpinner";
 import useFetchedCategories from "../SharedAsset/Spinners/categoriesSpinner";
 import useFetchedComments from "../SharedAsset/Spinners/commentSpinner";
-import { isFecthingStyle } from "../SharedAsset/SharedAssets";
 
 
 const IndexPage = () => {
@@ -29,13 +28,15 @@ const IndexPage = () => {
 
 
   const canOpen = [action, useraction, categoriesaction, commentaction, paginationAction].every(Boolean)
+
   return (
-    <div className={`text-left ${isFecthingStyle(isFetching)}`}> 
+    <div className="text-left"> 
 
       <HeroImages 
         Posts={Posts}
         categories={categoriesParents}
         canOpen={canOpen}
+        isFetching={isFetching}
       />
 
       <div className="md:grid md:grid-cols-3">
@@ -47,6 +48,7 @@ const IndexPage = () => {
             users={users}
             categories={categoriesParents}
             canOpen={canOpen}
+            isFetching={isFetching}
           />
 
         
@@ -56,12 +58,14 @@ const IndexPage = () => {
             categories={categoriesParents} 
             users={users}
             canOpen={canOpen}
+            isFetching={isFetching}
           />
             
           <FashionAndTrendsPosts 
             Posts={Posts} 
             canOpen={canOpen}
             categories={categoriesParents}
+            isFetching={isFetching}
           />
 
           <EntertainmentPosts 
@@ -70,27 +74,38 @@ const IndexPage = () => {
             categories={categoriesParents} 
             users={users}
             canOpen={canOpen}
+            isFetching={isFetching}
           />            
       
           <TechPosts 
             Posts={Posts} 
             categories={categoriesParents}
             canOpen={canOpen}
+            isFetching={isFetching}
           />     
         </div>
 
-        {canOpen &&
+        
         <aside className="col-span-1 hidden md:block md:ml-[4%]">
+
           <StickyBox offsetTop={0} offsetBottom={0}>
-            <PopularPost Posts={Posts}/>
-            <EditorsChioceAndDontMiss Posts={Posts} Comments={Comments}/>
+
+            <PopularPost 
+              Posts={Posts}
+              canOpen={canOpen}
+              isFetching={isFetching}
+            />
+
+            {canOpen && <EditorsChioceAndDontMiss Posts={Posts} Comments={Comments}/>}
           </StickyBox>
-        </aside>}
+
+        </aside>
       </div>
 
       <ImageComponent 
         Posts={Posts}  
         canOpen={canOpen}
+        isFetching={isFetching}
       />
 
       

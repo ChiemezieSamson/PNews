@@ -1,11 +1,11 @@
 import React from 'react'
 import { StarComponent } from '../../ButtonAndOthers/Buttons'
-import { CategoriesComponent, overLay, TimeComponent} from '../../SharedAsset/SharedAssets'
+import { CategoriesComponent, isFecthingStyle, overLay, TimeComponent} from '../../SharedAsset/SharedAssets'
 import { Link } from 'react-router-dom'
 import { publicFolder } from '../../../data'
 import { HeroOneBussinessFavoriteImageSpinner } from '../../SharedAsset/Spinners/Spinner'
 
-const ImageComponent = ({Posts, canOpen}) => {
+const ImageComponent = ({Posts, canOpen, isFetching}) => {
   const reversPost = []
   
   for (let i =  Posts?.length -1; i > 0; i-- ) {
@@ -16,7 +16,8 @@ const ImageComponent = ({Posts, canOpen}) => {
 
   
   return (
-    <section className='mb-7 mt-10'>
+    <section className={`mb-7 mt-10 ${isFecthingStyle(isFetching)}`}>
+      
       <div className="overflowScroll overflow-x-auto scroll-px-0 overscroll-x-contain snap-mandatory overflow-y-hidden">
 
         {canOpen ?

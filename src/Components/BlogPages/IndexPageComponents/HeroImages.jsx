@@ -1,5 +1,5 @@
 import { StarComponent } from '../../ButtonAndOthers/Buttons';
-import { CategoriesComponent, overLay, PostTitleLarge, TimeComponent, useWindowSize } from '../../SharedAsset/SharedAssets';
+import { CategoriesComponent, isFecthingStyle, overLay, PostTitleLarge, TimeComponent, useWindowSize } from '../../SharedAsset/SharedAssets';
 import { Link } from 'react-router-dom';
 import { publicFolder } from '../../../data';
 import TrendingPosts from './TrendingPosts';
@@ -7,7 +7,7 @@ import useParentcategories from './useParentcategories/UseParentcategories';
 import { HeroOneThreeImageSpinner } from '../../SharedAsset/Spinners/Spinner';
 
 
-const HeroImages = ({Posts, categories, canOpen}) => { 
+const HeroImages = ({Posts, categories, canOpen, isFetching}) => { 
   const size = useWindowSize()
 
   const parent = "lifestyle"
@@ -28,7 +28,8 @@ const HeroImages = ({Posts, categories, canOpen}) => {
 
       {/* Index Image block start here */}
       {canOpen ? 
-        <div className="md:grid md:grid-cols-3 my-12 text-white">
+
+        <div className={`md:grid md:grid-cols-3 my-12 text-white ${isFecthingStyle(isFetching)}`}>
 
           <div className={`col-span-2 HeroImageOneOverFlow group HeroImageOne`}>
 

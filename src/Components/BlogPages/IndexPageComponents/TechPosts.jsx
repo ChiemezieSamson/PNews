@@ -1,15 +1,15 @@
 import React from 'react'
-import { CatSidebarHanbugar } from '../../SharedAsset/SharedAssets'
+import { CatSidebarHanbugar, isFecthingStyle } from '../../SharedAsset/SharedAssets'
 import { JustTimeComponetStar } from './SharedComponents'
 import useParentcategories from './useParentcategories/UseParentcategories'
 
-const TechPosts = ({Posts, categories, canOpen}) => {
+const TechPosts = ({Posts, categories, canOpen, isFetching}) => {
   const parent = "books"
   
   const {allPost} = useParentcategories(parent, categories, Posts, canOpen)
 
   return (
-    <section>
+    <section className={`${isFecthingStyle(isFetching)}`}>
       <hr />                    
 
       {/* === Header title and possible categories === */}

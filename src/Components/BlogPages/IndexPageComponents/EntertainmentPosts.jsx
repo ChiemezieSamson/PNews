@@ -1,5 +1,5 @@
 import React from 'react'
-import { AdminComponentColor, CategoriesComponentBotton, CatSidebarHanbugar, CommentComponetColor, PostsShortInfoComponent, PostTitleMedium, PostTitleMedium2, PostTitleSmall, TimeComponentColor, useWindowSize } from '../../SharedAsset/SharedAssets'
+import { AdminComponentColor, CategoriesComponentBotton, CatSidebarHanbugar, CommentComponetColor, isFecthingStyle, PostsShortInfoComponent, PostTitleMedium, PostTitleMedium2, PostTitleSmall, TimeComponentColor, useWindowSize } from '../../SharedAsset/SharedAssets'
 import { JustTimeComponetStar } from './SharedComponents'
 import { StarComponent } from '../../ButtonAndOthers/Buttons'
 import { publicFolder } from '../../../data'
@@ -7,14 +7,14 @@ import { Link } from 'react-router-dom'
 import useParentcategories from './useParentcategories/UseParentcategories'
 import { HomeFeaturedArroundSpinner, SearchPostSpinner } from '../../SharedAsset/Spinners/Spinner'
 
-const EntertainmentPosts = ({Posts, categories, users, Comments, canOpen}) => {
+const EntertainmentPosts = ({Posts, categories, users, Comments, canOpen, isFetching}) => {
   const size = useWindowSize()
   const parent = "business"
   
   const {allPost} = useParentcategories(parent, categories, Posts, canOpen)
 
   return (
-    <section className='pb-10'>                     
+    <section className={`pb-10 ${isFecthingStyle(isFetching)}`}>                     
 
       {/* === Header title and possible categories === */}
       <CatSidebarHanbugar 
