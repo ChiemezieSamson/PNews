@@ -26,7 +26,6 @@ const IndexPage = () => {
   const Posts = content
   const Comments = commentsContent
 
-  console.log(action, useraction, categoriesaction, commentaction, paginationAction);
   const canOpen = [action, useraction, categoriesaction, commentaction, paginationAction].every(Boolean)
 
   return (

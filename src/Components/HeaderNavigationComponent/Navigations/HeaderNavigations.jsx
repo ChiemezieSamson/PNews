@@ -28,7 +28,15 @@ const HeaderNavigations = ({hideShowNavLinks, handleCloseNavLinks}) => {
   const [headerHoverTagsNav, setHeaderHoverTagsNav] = useState([])
   const [headerParentCategory, setHeaderParentCategory] = useState([])
   // fetching post based on a particular parent category
-  const { data = [], action, isFetching: isFetchingHoverPosts } = useGetPostsByPaginationTwoQuery(headerParentCategory ?  headerParentCategory : `${"?page=" + 1}&limit=${10}&parentCat="books"`);
+  const { data = [], isSuccess, isFetching: isFetchingHoverPosts } = useGetPostsByPaginationTwoQuery(headerParentCategory ?  headerParentCategory : `${"?page=" + 1}&limit=${10}&parentCat="books"`);
+
+  let action = false
+
+  if (isSuccess && data?.Posts?.length > 0) {
+
+    action = true
+  }
+
 
   const hoverPosts = data?.Posts
   const size = useWindowSize()
