@@ -33,7 +33,7 @@ const useFetchedComments = () => {
 
     commentaction = false
 
-  } else if (isSuccess && comments.length > 0) {
+  } else if (isSuccess && comments?.length > 0) {
 
     commentaction = true
     commentsContent = sortedComments
@@ -88,7 +88,7 @@ export const useFetchedCommentById = () => {
     singleContent = <CommentSpinner />
     contentAction = false
 
-  } else if (isSuccess && comment.length > 0) {
+  } else if (isSuccess && comment?.length > 0) {
 
     contentAction = true
     singleContent = comment

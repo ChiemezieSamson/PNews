@@ -36,7 +36,7 @@ export const useFetchedPosts = () => {
     content = <SkeletonTextTwo />
     action = false
 
-  } else if (isSuccess && posts.length > 0) {
+  } else if (isSuccess && posts?.length > 0) {
 
     action = true
     content = sortedPosts
@@ -74,7 +74,7 @@ export const useFetchedPostById = () => {
     singlePost = <SinglePostSpinner />
     postAction = false
 
-  } else if (isSuccess  && post._id) {
+  } else if (isSuccess && post._id) {
 
     postAction = true
     singlePost = post
@@ -111,7 +111,7 @@ export const useFetchedPostByUserId = (page = 1) => {
    
     postAction = false
 
-  } else if (isSuccess  && post.length > 0) {
+  } else if (isSuccess  && post?.length > 0) {
 
     postAction = true
     singlePost = post
@@ -164,7 +164,7 @@ export const useFetchedPostByQery = () => {
 
     action = false
 
-  } else if (isSuccess && posts.length > 0) {
+  } else if (isSuccess && posts?.posts?.length > 0) {
 
     action = true
     content = sortedPosts
@@ -218,7 +218,7 @@ export const useFetchedPostByPagination = () => {
 
     action = false
 
-  } else if (isSuccess && posts.length > 0) {
+  } else if (isSuccess && posts?.Posts?.length > 0) {
 
     action = true
     content = sortedPosts
@@ -280,7 +280,7 @@ export const useFetchedPostByPaginationTwo = () => {
 
     action = false
 
-  } else if (isSuccess && posts.length > 0) {
+  } else if (isSuccess && posts?.Posts?.length > 0) {
 
     action = true
     content = sortedPosts

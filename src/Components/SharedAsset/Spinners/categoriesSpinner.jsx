@@ -27,7 +27,7 @@ const useFetchedCategories = () => {
     categoriesContent = <div className='skeleton w-full h-4 mb-0.5 rounded-sm'></div>
     categoriesaction = false
 
-  } else if (isSuccess && Categories.length > 0) {
+  } else if (isSuccess && Categories?.length > 0) {
     let newCategories = Object.assign({}, Categories[0]); // copy just the first object
 
     let categories = [];

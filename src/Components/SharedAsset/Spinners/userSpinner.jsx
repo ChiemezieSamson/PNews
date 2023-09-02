@@ -23,7 +23,7 @@ const useFetchedUsers = () => {
 
     useraction = false
 
-  } else if (isSuccess && users.length > 0) {
+  } else if (isSuccess && users?.length > 0) {
 
     userContent = users
     useraction = true
@@ -57,7 +57,7 @@ export const useFetchedUserById = () => {
 
     userAction = false
 
-  } else if (isSuccess && user._id) {
+  } else if (isSuccess && user?._id) {
 
     userAction = true
     singleUser = user
@@ -92,7 +92,7 @@ export const useFetchedUserByPostId = () => {
 
     userAction = false
 
-  } else if (isSuccess  && user._id) {
+  } else if (isSuccess  && user?._id) {
 
     userAction = true
     singleUser = user
