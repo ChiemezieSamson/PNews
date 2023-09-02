@@ -1,13 +1,18 @@
+import { isFecthingStyle } from '../../../../../SharedAsset/SharedAssets';
 import useFetchedUsers from '../../../../../SharedAsset/Spinners/userSpinner';
 
 
-const Author = ({handlePostAuthor, postAuthor}) => {
-  const {userContent, useraction} = useFetchedUsers() // fetch all the user
+const Author = ({handlePostAuthor, postAuthor, userAction, isFetching}) => {
+  const {userContent, useraction, isFetching: allUserIsFetching} = useFetchedUsers() // fetch all the user
   const users = userContent
+
+  const isfectchingAll = isFetching || allUserIsFetching
+  const canOpen = [userAction, useraction].every(Boolean)
 
   return (
      //* Author selection start here */
-    <div className='pt-5 mb-3 max-w-[92%] mx-auto'>
+    <div className={`pt-5 mb-3 max-w-[92%] mx-auto ${isFecthingStyle(isfectchingAll)}`}>
+
       <label htmlFor="postAuthor" className='inline-block font-bold lg:mb-5 mb-3 text-lg text-stone-700'>Author</label>
 
       <select 
@@ -23,7 +28,7 @@ const Author = ({handlePostAuthor, postAuthor}) => {
 
         <option className="text-sm" value={""}></option>
 
-        {useraction && users?.map((user) => {
+        {canOpen && users?.map((user) => {
           
           return (
 

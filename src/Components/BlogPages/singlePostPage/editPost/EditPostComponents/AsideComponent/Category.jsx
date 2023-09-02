@@ -9,11 +9,11 @@ import { parentCategoriesAndTags } from '../../../../../../data'
 import { isFecthingStyle } from '../../../../../SharedAsset/SharedAssets'
 import { HeroOneBussinessFavoriteImageSpinner } from '../../../../../SharedAsset/Spinners/Spinner'
 
-const Category = ({updatePostCategories, handleSelectedParentCat, parentCat, handleSetCategory, category,
+const Category = ({updatePostCategories, handleSelectedParentCat, parentCat, handleSetCategory, category, userAction, isFetching,
   handlesetCheckedItemElements, checkedItemElemets}) => {
 
     // fetch all the categories and their parent for category listing
-  const {categoriesContent, categoriesParents, categoriesaction, isFetching} = useFetchedCategories()
+  const {categoriesContent, categoriesParents, categoriesaction, isFetching: allCategoriesIsFetching} = useFetchedCategories()
   
     // Update category using the id of the first created categories
   const [updateCategory, { isLoading: isUpdating, isFetching: UpdateIsFetching }] = useUpdateExistingCategoriesMutation()
@@ -34,10 +34,11 @@ const Category = ({updatePostCategories, handleSelectedParentCat, parentCat, han
   let categories  // list of all categorise arrary 
   const parent = parentCat // value of the selected parent
   const parentList  = parentCategoriesAndTags?.map((title, id) => ({id: id, title: title}) )// list of all categorise parent arrary 
-  const isfectchingAll = DeleteIsFetching || UpdateIsFetching || isFetching
+  const isfectchingAll = DeleteIsFetching || UpdateIsFetching || isFetching || allCategoriesIsFetching
+  const canOpen = [userAction, categoriesaction].every(Boolean)
 
   // make sure that the categories are all fetched before assigning
-  if(categoriesaction) {
+  if(canOpen) {
     
     categories = categoriesContent?.map((title, id) => ({id: id, title: title}) )
   }
@@ -121,7 +122,7 @@ const Category = ({updatePostCategories, handleSelectedParentCat, parentCat, han
 
   useEffect(() => { // making sure the user dont add an already existing category
 
-    if(categoriesaction) {
+    if(canOpen) {
 
       if(categoriesContent?.includes(category?.toLowerCase()) ) {
 
@@ -131,11 +132,12 @@ const Category = ({updatePostCategories, handleSelectedParentCat, parentCat, han
         setRequiredText(false)
       }
     }   
-  },[category, categoriesContent, categoriesaction])
+  },[category, categoriesContent, canOpen])
   
 
   // CREATE NEW CATEGORY
   const handleAddNewCat = async () => {
+
       if (canSave) {
 
         setErrorText(false)
@@ -233,7 +235,7 @@ const Category = ({updatePostCategories, handleSelectedParentCat, parentCat, han
 
       {errorText ? <p className='text-xs text-rose-500 tracking-wider font-lora'>Failed to save the Category</p> : "" }    
       
-      {categoriesaction ? 
+      {canOpen ? 
 
         <ul className='grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-2 gap-x-[2%] text-stone-700'>
 
@@ -313,7 +315,7 @@ const Category = ({updatePostCategories, handleSelectedParentCat, parentCat, han
             required
             className={`mb-0 aria-required:bg-rose-500 font-poppins disabled:opacity-40 ${(!isValid && category) ? "border-red-500 text-red-600 focus:border-red-500 focus:ring-red-500" : ""}`} 
             autoFocus={true}
-            disabled={!categoriesaction}
+            disabled={!canOpen}
             value={category}
             onChange={handleNewCategoryName}
           />
@@ -331,7 +333,7 @@ const Category = ({updatePostCategories, handleSelectedParentCat, parentCat, han
             aria-label='select'
             required
             value={parentCat} 
-            disabled={!categoriesaction}
+            disabled={!canOpen}
             onChange={handleParentCategory} 
           >
             <option className="text-sm prose inline-block">— Parent Category —</option>

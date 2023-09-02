@@ -69,16 +69,16 @@ const Optional = ({handlesetViewed, handlessetShared, handleCheckedTrendig, Tren
 
             <p className='pr-0.5 mr-4'>Add to trending posts:</p>
 
-              {Trending && !userAction ? 
+            {Trending && userAction ? 
 
-                <span className='px-2 inline-block text-2xl text-blue-400' >
-                  <FaToggleOn  className='inline-block'/>
-                </span> 
-                :
-                <span className='px-2 inline-block text-2xl  text-[#444]'>
-                  <FaToggleOff className='inline-block'/>
-                </span> 
-              }  
+              <span className='px-2 inline-block text-2xl text-blue-400' >
+                <FaToggleOn  className='inline-block cursor-pointer'/>
+              </span> 
+              :
+              <span className='px-2 inline-block text-2xl  text-[#444]'>
+                <FaToggleOff className='inline-block cursor-pointer'/>
+              </span> 
+            }  
           </label>
         </span>
       </div>

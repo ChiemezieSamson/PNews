@@ -14,11 +14,11 @@ const Tag = ({handleSetAddTag, addTag, handleSelectedParentTag, parentTag, userA
   // fetch all the tags and their parent for tags listing
   const {tagsContent, tagsParents, tagsaction, isFetching: allTagsIsFetching} = useFetchedTags()
   // Create new tag onec if none have been created before
-  const [addNewTags, { isLoading, isFetching: CreateIsFetching }] = useCreateNewTagsMutation()
+  const [addNewTags, { isLoading, isFetching: CreateIsFetching}] = useCreateNewTagsMutation()
   // Update tag using the id of the first created tags
   const [updatingTag, { isLoading: isUpdating, isFetching: UpdateIsFetching}] = useUpdateExistingTagMutation()
   // Delete tag makings sure that a tag,user and authorities are correct
-  const [deleteTag, { isLoading: isDeleting, isFetching: DeleteIsFetching }] = useDeleteExistingTagMutation()
+  const [deleteTag, { isLoading: isDeleting, isFetching: DeleteIsFetching}] = useDeleteExistingTagMutation()
  
   // Array of all the selected tags, coming from redux store
   const postTagArrays = useSelector(selectAllPostTags)
@@ -276,8 +276,10 @@ const Tag = ({handleSetAddTag, addTag, handleSelectedParentTag, parentTag, userA
                       type='checkbox' 
                       name="posttags" 
                       id={`"Tag" + ${tag?.id}`} 
-                      className='hidden' 
-                      onChange={handleCheckboxChange}/>
+                      className='disabled:opacity-40 hidden'
+                      disabled={!userAction}  
+                      onChange={handleCheckboxChange}
+                    />
                     
                     <button 
                       type='submit' 

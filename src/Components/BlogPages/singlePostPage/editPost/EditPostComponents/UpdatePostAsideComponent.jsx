@@ -9,7 +9,7 @@ import { optionalAdded } from '../../../../../Reduxstore/Slices/PostsComponentSl
 import { useDispatch } from 'react-redux'
 
 
-const UpdatePostAsideComponent = ({postTitle, handleAllPostContent, handleSetPostAuthor, postAuthor, canSave, handlePreview, preview,
+const UpdatePostAsideComponent = ({postTitle, handleAllPostContent, handleSetPostAuthor, postAuthor, canSave, handlePreview, preview, userAction, isFetching,
   handleShowBar, handleCloseSidebar, showSideBar, post}) => {
   const [postCategory, setPostCategory] = useState(post?.postCategory)
   const [postTag, setPostTag] = useState(post?.postTags)
@@ -217,6 +217,8 @@ const UpdatePostAsideComponent = ({postTitle, handleAllPostContent, handleSetPos
         <Author  
           handlePostAuthor={handlePostAuthor} 
           postAuthor={postAuthor}
+          userAction={userAction}
+          isFetching={isFetching}
         />
 
         <Category 
@@ -226,7 +228,9 @@ const UpdatePostAsideComponent = ({postTitle, handleAllPostContent, handleSetPos
            category={category}
            handlesetCheckedItemElements={handlesetCheckedItemElements}
            checkedItemElemets={checkedItemElemets}  
-          updatePostCategories={postCategory}                    
+          updatePostCategories={postCategory}
+          userAction={userAction}
+          isFetching={isFetching}                    
         />  
 
         <Tag 
@@ -234,7 +238,9 @@ const UpdatePostAsideComponent = ({postTitle, handleAllPostContent, handleSetPos
           addTag={addTag}
           handleSetAddTag={handleSetAddTag}
           handleSelectedParentTag={handleSelectedParentTag}          
-          updatePostTags={postTag}           
+          updatePostTags={postTag}
+          userAction={userAction}
+          isFetching={isFetching}           
         />    
 
         <Optional
@@ -244,6 +250,8 @@ const UpdatePostAsideComponent = ({postTitle, handleAllPostContent, handleSetPos
           trending={trending}
           shared={shared}
           viewed={viewed}
+          userAction={userAction}
+          isFetching={isFetching}
         />
       </div>       
     </div>

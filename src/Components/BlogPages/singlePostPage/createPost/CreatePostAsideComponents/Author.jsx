@@ -7,7 +7,7 @@ const Author = ({handlePostAuthor, postAuthor, userAction, isFetching}) => {
   const users = userContent
 
   const isfectchingAll = isFetching || allUserIsFetching
-  const canOpen = [userAction, userAction].every(Boolean)
+  const canOpen = [userAction, useraction].every(Boolean)
 
   return (
      //* Author selection start here */
@@ -29,7 +29,7 @@ const Author = ({handlePostAuthor, postAuthor, userAction, isFetching}) => {
 
         <option className="text-sm" value={""}></option>
 
-        {useraction && users?.map((user) => {
+        {canOpen && users?.map((user) => {
 
           return (
             

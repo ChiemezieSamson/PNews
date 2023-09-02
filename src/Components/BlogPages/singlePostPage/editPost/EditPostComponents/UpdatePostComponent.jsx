@@ -21,7 +21,7 @@ const UpdatePostComponent = ({state, post, postId}) => {
   const [postUpdated, { isLoading }] = useUpdateExistingPostMutation()// Redux function to update a new post
 
   // getting the user for authenticatin, authorisation and security
-  const {singleUser, userAction, isSuccess, isError} = useFetchedUserById()
+  const {singleUser, userAction, isSuccess, isError, isFetching} = useFetchedUserById()
 
   const [editorState, setEditorState] = useState(
     () => EditorState.createWithContent(state),
@@ -256,6 +256,7 @@ const UpdatePostComponent = ({state, post, postId}) => {
             file={file}
             User={User}
             userAction={userAction}
+            isFetching={isFetching}
           />
         }
       </div>
@@ -272,7 +273,9 @@ const UpdatePostComponent = ({state, post, postId}) => {
           handleShowBar={handleShowBar}
           handleCloseSidebar={handleCloseSidebar}
           showSideBar={showSideBar}          
-          post={post}     
+          post={post}
+          userAction={userAction}
+          isFetching={isFetching}     
         /> 
       </div>
     </div>
