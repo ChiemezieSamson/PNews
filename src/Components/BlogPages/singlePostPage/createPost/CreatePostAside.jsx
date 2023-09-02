@@ -10,7 +10,7 @@ import { useDispatch } from 'react-redux'
 
 
 const CreatePostAside = ({postTitle, handleAllPostContent, handleSetPostAuthor, postAuthor, canSave, handlePreview, preview,
-  handleShowBar, handleCloseSidebar, showSideBar}) => {
+  handleShowBar, handleCloseSidebar, showSideBar, userAction, isFetching}) => {
 
   const [parentCat, setSelectedParentCat] = useState("")
   const [parentTag, setSelectedParentTag] = useState("")
@@ -173,6 +173,8 @@ const CreatePostAside = ({postTitle, handleAllPostContent, handleSetPostAuthor, 
         <Author 
           handlePostAuthor={handlePostAuthor} 
           postAuthor={postAuthor}
+          userAction={userAction}
+          isFetching={isFetching}
         />
 
         <Category 
@@ -181,7 +183,9 @@ const CreatePostAside = ({postTitle, handleAllPostContent, handleSetPostAuthor, 
           handleSetCategory={handleSetCategory}
           category={category}
           handlesetCheckedItemElements={handlesetCheckedItemElements}
-          checkedItemElemets={checkedItemElemets}  
+          checkedItemElemets={checkedItemElemets}
+          userAction={userAction}
+          isFetching={isFetching}  
         />    
 
         <Tag 
@@ -189,6 +193,8 @@ const CreatePostAside = ({postTitle, handleAllPostContent, handleSetPostAuthor, 
           addTag={addTag}
           handleSetAddTag={handleSetAddTag}
           handleSelectedParentTag={handleSelectedParentTag}
+          userAction={userAction}
+          isFetching={isFetching}
         />    
 
         <Optional
@@ -197,7 +203,9 @@ const CreatePostAside = ({postTitle, handleAllPostContent, handleSetPostAuthor, 
           handleCheckedTrendig={handleCheckedTrendig}
           Trending={Trending}
           shared={shared}
-          viewed={viewed} 
+          viewed={viewed}
+          userAction={userAction}
+          isFetching={isFetching}
         />
       </div>       
     </div>

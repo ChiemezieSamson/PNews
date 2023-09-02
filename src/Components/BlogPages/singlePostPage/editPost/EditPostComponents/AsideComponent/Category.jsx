@@ -271,7 +271,7 @@ const Category = ({updatePostCategories, handleSelectedParentCat, parentCat, han
       {/* Add new category open and close section */}
       <div className='py-1'>
 
-        <span className='grid grid-cols-2 gap-x-3'> 
+        <span className={`${checkedItemElemets?.length > 0 ? "grid grid-cols-2 gap-x-3 text-left" : "inline"}`}> 
 
           {/* This button only opens and closes the addnew categories section */}
           <button
@@ -289,8 +289,8 @@ const Category = ({updatePostCategories, handleSelectedParentCat, parentCat, han
             type='button'
             name='updatedeletecategories'
             id='updatedeletecategories'
-            className={`text-stone-400/60 underline my-3 inline-block text-sm cursor-pointer
-            hover:text-red-400 TextHeadertransition ${checkedItemElemets.length === 0 ? "hidden" : "inline" } disabled:opacity-40`} 
+            className={`text-neutral-400 underline my-3 inline-block text-sm cursor-pointer
+            hover:text-red-400 TextHeadertransition ${checkedItemElemets?.length > 0 ? "inline" :"hidden"} disabled:opacity-40`} 
             onClick={handleDeletCat} 
             disabled={!canDelete}
           >Remove Category</button>

@@ -10,11 +10,11 @@ import { textAndNumberOnly } from '../../../../SharedAsset/Vaidations/RegularExp
 import { isFecthingStyle } from '../../../../SharedAsset/SharedAssets'
 import { HeroOneBussinessFavoriteImageSpinner } from '../../../../SharedAsset/Spinners/Spinner'
 
-const Category = ({handleSelectedParentCat, parentCat, handleSetCategory, category,
+const Category = ({handleSelectedParentCat, parentCat, handleSetCategory, category, userAction, isFetching, 
   handlesetCheckedItemElements, checkedItemElemets}) => {
 
     // fetch all the categories and their parent for category listing
-  const {categoriesContent, categoriesParents, categoriesaction, isFetching} = useFetchedCategories()
+  const {categoriesContent, categoriesParents, categoriesaction, isFetching: categoriesIsFetching} = useFetchedCategories()
     // Create new category onec if none have been created before
   const [addNewCategories, { isLoading, isFetching: CreateIsFetching}] = useCreateNewCategoriesMutation()
     // Update category using the id of the first created categories
@@ -35,10 +35,11 @@ const Category = ({handleSelectedParentCat, parentCat, handleSetCategory, catego
   let categories  // list of all categorise arrary 
   const parent = parentCat // value of the selected parent
   const parentList  = parentCategoriesAndTags?.map((title, id) => ({id: id, title: title}) )// list of all categorise parent arrary 
-  const isfectchingAll = DeleteIsFetching || CreateIsFetching || UpdateIsFetching || isFetching
+  const isfectchingAll = DeleteIsFetching || CreateIsFetching || UpdateIsFetching || isFetching || categoriesIsFetching
+  const canOpen = [userAction, categoriesaction].every(Boolean)
 
   // make sure that the categories are all fetched before assigning
-  if(categoriesaction) {
+  if(canOpen) {
 
     categories = categoriesContent?.map((title, id) => ({id: id, title: title}) )
   }
@@ -125,7 +126,7 @@ const Category = ({handleSelectedParentCat, parentCat, handleSetCategory, catego
 
   useEffect(() => { // making sure the user dont add an already existing category
 
-    if(categoriesaction) {
+    if(canOpen) {
 
       if(categoriesContent?.includes(category?.toLowerCase()) ) {
 
@@ -135,7 +136,7 @@ const Category = ({handleSelectedParentCat, parentCat, handleSetCategory, catego
         setRequiredText(false)
       }
     }   
-  },[category, categoriesContent, categoriesaction])
+  },[category, categoriesContent, canOpen])
   
 
   // CREATE NEW CATEGORY
@@ -216,7 +217,7 @@ const Category = ({handleSelectedParentCat, parentCat, handleSetCategory, catego
 
         {errorText ? <p className='text-xs text-rose-500 tracking-wider font-lora'>Failed to save the category</p> : "" }    
         
-        {categoriesaction ? 
+        {canOpen ? 
 
           <ul className='grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-2 gap-x-[2%] text-stone-700'>
 
@@ -254,7 +255,7 @@ const Category = ({handleSelectedParentCat, parentCat, handleSetCategory, catego
         {/* Add new category open and close section */}
         <div className='py-1'>
 
-          <span className='grid grid-cols-2 gap-x-3'> 
+          <span className={`${checkedItemElemets?.length > 0 ? "grid grid-cols-2 gap-x-3 text-left" : "inline"}`}> 
 
             {/* This button only opens and closes the addnew categories section */}
             <button 
@@ -272,8 +273,8 @@ const Category = ({handleSelectedParentCat, parentCat, handleSetCategory, catego
               type='button'
               name='deletecategories'
               id='deletecategories'
-              className={`text-stone-400/60 underline my-3 inline-block text-sm cursor-pointer
-              hover:text-red-400 TextHeadertransition ${checkedItemElemets.length === 0 ? "hidden" : "inline" } disabled:opacity-40`} 
+              className={`text-neutral-400 underline my-3 inline-block text-sm cursor-pointer
+              hover:text-red-400 TextHeadertransition ${checkedItemElemets?.length > 0 ? "inline" :"hidden"} disabled:opacity-40`} 
               onClick={handleDeletCat} 
               disabled={!canDelete}
             >Remove Category</button>
@@ -295,7 +296,7 @@ const Category = ({handleSelectedParentCat, parentCat, handleSetCategory, catego
               required
               className={`mb-0 aria-required:bg-rose-500 font-poppins disabled:opacity-40 ${(!isValid && category) ? "border-red-500 text-red-600 focus:border-red-500 focus:ring-red-500" : ""}`} 
               autoFocus={true}
-              disabled={!categoriesaction}
+              disabled={!canOpen}
               value={category}
               onChange={handleNewCategoryName}
             />
@@ -313,7 +314,7 @@ const Category = ({handleSelectedParentCat, parentCat, handleSetCategory, catego
               aria-label='select'
               required
               value={parentCat} 
-              disabled={!categoriesaction}
+              disabled={!canOpen}
               onChange={handleParentCategory} 
             >
 

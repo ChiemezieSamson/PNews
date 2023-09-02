@@ -19,7 +19,7 @@ const CreatePostComponents = ({state}) => {
   const [addNewPost, { isLoading }] = useCreateNewPostMutation() // Redux function to create a new post
 
   // getting the user for authenticatin, authorisation and security
-  const {singleUser, userAction, isSuccess, isError} = useFetchedUserById()
+  const {singleUser, userAction, isSuccess, isError, isFetching} = useFetchedUserById()
 
   const [editorState, setEditorState] = useState(() => state)
 
@@ -255,6 +255,7 @@ const CreatePostComponents = ({state}) => {
             file={file}
             User={User}
             userAction={userAction}
+            isFetching={isFetching}
           />
         }
       </div>
@@ -271,6 +272,8 @@ const CreatePostComponents = ({state}) => {
           handleShowBar={handleShowBar}
           handleCloseSidebar={handleCloseSidebar}
           showSideBar={showSideBar}
+          userAction={userAction}
+          isFetching={isFetching}
         />        
       </div>
     </div>
