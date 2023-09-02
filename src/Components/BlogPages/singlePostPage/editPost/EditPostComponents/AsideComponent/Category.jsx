@@ -6,6 +6,8 @@ import { useDeleteExistingCategoriesMutation, useUpdateExistingCategoriesMutatio
 import { catAdded, catUnchecked, emptyCategories, selectAllPostCat, updateCategories } from '../../../../../../Reduxstore/Slices/PostsComponentSlices/postcategory/PostcategoriesSlice'
 import { WritePostAsideOpenClosebar } from '../../../../../ButtonAndOthers/Buttons'
 import { parentCategoriesAndTags } from '../../../../../../data'
+import { isFecthingStyle } from '../../../../../SharedAsset/SharedAssets'
+import { HeroOneBussinessFavoriteImageSpinner } from '../../../../../SharedAsset/Spinners/Spinner'
 
 const Category = ({updatePostCategories, handleSelectedParentCat, parentCat, handleSetCategory, category,
   handlesetCheckedItemElements, checkedItemElemets}) => {
@@ -14,9 +16,9 @@ const Category = ({updatePostCategories, handleSelectedParentCat, parentCat, han
   const {categoriesContent, categoriesParents, categoriesaction, isFetching} = useFetchedCategories()
   
     // Update category using the id of the first created categories
-  const [updateCategory, { isLoading: isUpdating }] = useUpdateExistingCategoriesMutation()
+  const [updateCategory, { isLoading: isUpdating, isFetching: UpdateIsFetching }] = useUpdateExistingCategoriesMutation()
   // Delete category makings sure that a category,user and authorities are correct
-  const [deleteCategoris, { isLoading: isDeleting }] = useDeleteExistingCategoriesMutation()
+  const [deleteCategoris, { isLoading: isDeleting,  isFetching: DeleteIsFetching }] = useDeleteExistingCategoriesMutation()
 
   // Array of all the selected categories, coming from redux store
   const openCategoris = useSelector(selectAllPostCat) 
@@ -32,9 +34,11 @@ const Category = ({updatePostCategories, handleSelectedParentCat, parentCat, han
   let categories  // list of all categorise arrary 
   const parent = parentCat // value of the selected parent
   const parentList  = parentCategoriesAndTags?.map((title, id) => ({id: id, title: title}) )// list of all categorise parent arrary 
+  const isfectchingAll = DeleteIsFetching || UpdateIsFetching || isFetching
 
   // make sure that the categories are all fetched before assigning
   if(categoriesaction) {
+    
     categories = categoriesContent?.map((title, id) => ({id: id, title: title}) )
   }
 
@@ -42,6 +46,7 @@ const Category = ({updatePostCategories, handleSelectedParentCat, parentCat, han
 
    // handling the display or hidden of of add new category component
   const handleOpenAddNewCat = () => {
+
     setOpenAddnewCat((change) => !change)
   }
 
@@ -52,6 +57,7 @@ const Category = ({updatePostCategories, handleSelectedParentCat, parentCat, han
   // handling setting the value of the input for category name and 
   //sending it to CreatePostAside component
   const handleNewCategoryName = (e) => {
+
     const { value } = e.target;
     const isValid = alphanumericRegex.test(value);
     setIsValid(isValid);
@@ -61,18 +67,24 @@ const Category = ({updatePostCategories, handleSelectedParentCat, parentCat, han
   // handling setting the value of the parent slecte value  and 
   //sending it to CreatePostAside component
   const handleParentCategory = (e) => {
+
     handleSelectedParentCat(e)
   }
 
   // Check to see if the parent array is up to 5 
   useEffect(() => {
+
     if (parent) { // make sure the user have selected a parent first
-      if (categoriesParents[parent]?.category.length < 5) {
+
+      if (categoriesParents[parent]?.category?.length < 5) {
+
         setParentFullText(() => false)
       } else {
+
         setParentFullText(() => true)
       }     
     } else {
+
       setParentFullText(() => false)
     }
   },[categoriesParents, parent])
@@ -105,13 +117,17 @@ const Category = ({updatePostCategories, handleSelectedParentCat, parentCat, han
 
   /***************** CREATE */
 
-  const canSave = [parent, category, isValid].every(Boolean)  && !parentFullText && !categoriesContent?.includes(category.toLowerCase())
+  const canSave = [parent, category, isValid].every(Boolean)  && !parentFullText && !categoriesContent?.includes(category?.toLowerCase())
 
   useEffect(() => { // making sure the user dont add an already existing category
+
     if(categoriesaction) {
-      if(categoriesContent?.includes(category.toLowerCase()) ) {
+
+      if(categoriesContent?.includes(category?.toLowerCase()) ) {
+
         setRequiredText(true)
       } else {
+
         setRequiredText(false)
       }
     }   
@@ -125,8 +141,10 @@ const Category = ({updatePostCategories, handleSelectedParentCat, parentCat, han
         setErrorText(false)
 
         try {
+
             // run if the user have create any catgory before and the id for that is available (saving to database)
             if(!isUpdating) {
+
               await updateCategory({categoryId: categoriesParents?._id, parent, category})
 
                // function to empty this parent and category for next user action
@@ -134,8 +152,10 @@ const Category = ({updatePostCategories, handleSelectedParentCat, parentCat, han
               handleSelectedParentCat("")
           }         
         } catch (err) {
+
           setErrorText(true)
         } 
+
          // function to empty this parent and category for next user action
       handleSetCategory("")
       handleSelectedParentCat("")
@@ -150,15 +170,16 @@ const Category = ({updatePostCategories, handleSelectedParentCat, parentCat, han
   const handleDeletCat = async () => {
 
     if(canDelete) {
+
       let element = ""
       let action = "clear"
 
-      for(let i = 0; i < checkedItemElemets.length; i++) {
+      for(let i = 0; i < checkedItemElemets?.length; i++) {
         // for each of the collected parent element first uncheck them
         checkedItemElemets[i].checked = false 
       }
 
-      await deleteCategoris({categoryId: categoriesParents._id, openCategoris})
+      await deleteCategoris({categoryId: categoriesParents?._id, openCategoris})
 
       // function to empty all selected parent "li" element
       handlesetCheckedItemElements(element, action)
@@ -181,7 +202,8 @@ const Category = ({updatePostCategories, handleSelectedParentCat, parentCat, han
       allCategories.forEach((element) => {
         // check if the content of the element is found in updatePostCategories and 
         // if found change the check box to checked
-        if(updatePostCategories.includes(element.textContent.toLowerCase())) {
+        if(updatePostCategories?.includes(element.textContent.toLowerCase())) {
+
           element.previousSibling.checked = true
           
            // function to updates all selected parent "li" element
@@ -192,7 +214,9 @@ const Category = ({updatePostCategories, handleSelectedParentCat, parentCat, han
   }
 
   useEffect(() => {
+
     if (updatePostCategories?.length > 0) {
+
       dispatch(updateCategories(updatePostCategories))    
     }
   },[updatePostCategories, dispatch])
@@ -200,70 +224,86 @@ const Category = ({updatePostCategories, handleSelectedParentCat, parentCat, han
 
   return (    
    //* Category selection start here */
-   <div className='text-sm disabled:opacity-40' disabled={isFetching}>
+   <div className='text-sm'>
 
     {/* This is just the button for changing the diplay and hidden of the whole category component */}
-
     <WritePostAsideOpenClosebar BarName={"Categories"} handle={handleOpenCloseChild}/>
     
-    <div className={`${openCat ? "block" : "hidden"} px-3 mt-2 mb-10`}>  
+    <div className={`${openCat ? "block" : "hidden"} px-3 mt-2 mb-10 ${isFecthingStyle(isfectchingAll)}`}>  
+
       {errorText ? <p className='text-xs text-rose-500 tracking-wider font-lora'>Failed to save the Category</p> : "" }    
       
       {categoriesaction ? 
+
         <ul className='grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-2 gap-x-[2%] text-stone-700'>
 
-          {categories.map((cat) => {
+          {categories?.map((cat) => {
+
             return (
-              <li key={cat.id} className="hover:bg-neutral-100 capitalize">
+
+              <li key={cat?.id} className="hover:bg-neutral-100 capitalize">
 
                 {/* check box of list of categories */}
                 <input 
                   type="checkbox" 
                   aria-label='checkbox' 
-                  id={cat.id} 
+                  id={cat?.id} 
                   name="category" 
                   value={cat.title} 
                   className="appearance-none font-poppins checked:bg-blue-400 aria-checked:bg-sky-700 focus:outline-0 focus:ring-0" 
                   form="post_form" 
                   onChange={handleRemoveCatOnDoubleClick}
                 />
-                <label htmlFor={cat.title} className="ml-3 inline-block text-sm text-stone-700 allCategories">{cat.title}</label>
+
+                <label htmlFor={cat?.title} className="ml-3 inline-block text-sm text-stone-700 allCategories">{cat.title}</label>
               </li>
             )
           })}
-        </ul> : 
-        categoriesContent
+        </ul> 
+        : 
+        <HeroOneBussinessFavoriteImageSpinner
+          groupStyle={"grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-2 gap-x-[2%] text-stone-700"}
+          imageStyle={"h-5 w-[80%] mx-auto my-2"}
+          image={12}
+        />    
       }
 
       {/* Add new category open and close section */}
-
       <div className='py-1'>
+
         <span className='grid grid-cols-2 gap-x-3'> 
 
           {/* This button only opens and closes the addnew categories section */}
+          <button
+            type='button'
+            name='updateopencategories'
+            id='updateopencategories' 
+            className={`text-blue-400 underline my-3 inline-block text-sm cursor-pointer
+            hover:text-blue-600 TextHeadertransition ${openAddnewCat ? "text-left" : "text-center"}`} 
+            onClick={handleOpenAddNewCat}
+          >{openAddnewCat ? "Close" : "Add New Category"}</button>
+
+          {/* This button remove a list of already checked categories from the list it is only visible when a category is already checked) */}
 
           <button 
-          className={`text-blue-400 underline my-3 inline-block text-sm cursor-pointer
-          hover:text-blue-600 TextHeadertransition ${openAddnewCat ? "text-left" : "text-center"}`} 
-          onClick={handleOpenAddNewCat}>{openAddnewCat ? "Close" : "Add New Category"}</button>
-
-          {/* This button remove a list of already checked categories from the list 
-          (it is only visible when a category is already checked) */}
-
-          <button 
-          className={`text-stone-400/60 underline my-3 inline-block text-sm cursor-pointer
-          hover:text-red-400 TextHeadertransition ${checkedItemElemets.length === 0 ? "hidden" : "inline" } disabled:opacity-40`} 
-          onClick={handleDeletCat} disabled={!canDelete}>Remove Category</button>
+            type='button'
+            name='updatedeletecategories'
+            id='updatedeletecategories'
+            className={`text-stone-400/60 underline my-3 inline-block text-sm cursor-pointer
+            hover:text-red-400 TextHeadertransition ${checkedItemElemets.length === 0 ? "hidden" : "inline" } disabled:opacity-40`} 
+            onClick={handleDeletCat} 
+            disabled={!canDelete}
+          >Remove Category</button>
         </span>
         
 
         {/* The form for creating new category is here */}
 
-        <form name="new-category" className={`${openAddnewCat ? "block" : "hidden"} mt-3`} onSubmit={(e) => e.preventDefault()}>
+        <form name="new-category" className={`${openAddnewCat ? "block" : "hidden"} mt-3 ${isFecthingStyle(isfectchingAll)}`} onSubmit={(e) => e.preventDefault()}>
           
           {/* input to create new category */}
-
           <label htmlFor="new_cat" className='inline-block text-sm text-stone-700'>NEW CATEGORY NAME</label>
+        
           <input 
             type="text" 
             id='new_cat' 
@@ -271,34 +311,40 @@ const Category = ({updatePostCategories, handleSelectedParentCat, parentCat, han
             aria-label='text' 
             maxLength={13}              
             required
-            className={`mb-0 aria-required:bg-rose-500 font-poppins 
-            ${(!isValid && category) ? "border-red-500 text-red-600 focus:border-red-500 focus:ring-red-500" :
-              ""}`} 
+            className={`mb-0 aria-required:bg-rose-500 font-poppins disabled:opacity-40 ${(!isValid && category) ? "border-red-500 text-red-600 focus:border-red-500 focus:ring-red-500" : ""}`} 
             autoFocus={true}
+            disabled={!categoriesaction}
             value={category}
             onChange={handleNewCategoryName}
           />
+
           {requiredText ? <p className='text-xs text-rose-500 tracking-wider font-lora'>Category already exist!</p> : "" }
                     
           {/* select option to chose the parent the new created category will belong to */}
 
           <label htmlFor="parent_cat" className='inline-block text-sm text-stone-700 mt-5'>PARENT CATEGORY</label>
+          
           <select 
             name="parent_categories"               
             id="parent_cat" 
-            className='mb-0 aria-required:bg-rose-500 font-poppins'
+            className='mb-0 aria-required:bg-rose-500 font-poppins disabled:opacity-40'
             aria-label='select'
             required
             value={parentCat} 
+            disabled={!categoriesaction}
             onChange={handleParentCategory} 
           >
             <option className="text-sm prose inline-block">— Parent Category —</option>
-            {parentList.map((parent) => {
+            
+            {parentList?.map((parent) => {
+
               return (
-                <option value={parent.title} key={parent.id} className="text-sm inline-block prose">{parent.title}</option>
+
+                <option value={parent.title} key={parent?.id} className="text-sm inline-block prose">{parent.title}</option>
               )
             })}
           </select>
+
           {parentFullText ? <p className='text-xs text-rose-500 tracking-wider font-lora'>Maximum categories for this parent reached!</p> : "" }
 
           {/* Add New Category button */}
@@ -308,7 +354,8 @@ const Category = ({updatePostCategories, handleSelectedParentCat, parentCat, han
             className='text-sm text-blue-400 hover:text-blue-500 border disabled:hover:text-blue-400
             border-solid border-blue-400 mt-5 hover:border-blue-500 px-4 py-2 disabled:opacity-40' 
             onClick={handleAddNewCat} 
-            disabled={!canSave}>Add New Category</button>
+            disabled={!canSave}
+          >Add New Category</button>
         </form>         
        </div>        
     </div>     

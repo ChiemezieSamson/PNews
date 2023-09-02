@@ -28,7 +28,7 @@ const Author = ({handlePostAuthor, postAuthor}) => {
 
           return (
             
-            <option key={user?._id} value={user?._id} className="text-sm inline-block prose">{user?.username}</option>    
+            <option key={user?._id} value={user?._id} className="text-sm inline-block prose">{user.username}</option>    
           )
         })}
       </select>
