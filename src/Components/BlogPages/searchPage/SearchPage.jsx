@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { NavDirectionAndPageName } from "../../SharedAsset/SharedAssets";
+import { NavDirectionAndPageName, isFecthingStyle } from "../../SharedAsset/SharedAssets";
 import { PagesBlogPostComponent } from "../IndexPageComponents/SharedComponents";
 import Aside from "../asidePage/Aside";
 import StickyBox from "react-sticky-box";
@@ -22,7 +22,7 @@ const SearchPage = () => {
 
   const canOpen = [action, useraction, commentaction].every(Boolean)
 
-  let searchIcon = <FaSistrix className="inline-block "/>
+  let searchIcon = <FaSistrix className="inline-block"/>
 
   const handleInputSearch = (event) => {
     setSearch(() => event.target.value)
@@ -38,40 +38,54 @@ const SearchPage = () => {
   }
 
   return (
-    <div className='md:grid md:grid-cols-3 text-left disabled:opacity-40' disabled={isFetching}>
+    <div className="md:grid md:grid-cols-3 text-left">
       <div className="md:col-span-2 md:mr-[3%]">
         <NavDirectionAndPageName />
 
-        <form id="search-form" role="search" 
-          className='my-4 grid grid-cols-10 bg-neutral-200 p-3 mb-10'
-          onSubmit={handleButtonClick}>
+        <form id="search-form" role="search" className={`my-4 grid grid-cols-10 bg-neutral-200 p-3 mb-10 ${isFecthingStyle(isFetching)}`} onSubmit={handleButtonClick}>
 
-          <input id="s" type="search" placeholder='Search...' name='s'  aria-label="Search posts"
-            className='bg-neutral-50 focus:outline-none m-0 col-span-9 caret-[#f70d28] placeholder:text-stone-800 
-               focus:border-none border-none 
-              shadow-inner text-center lg:text-left rounded-none'
-              defaultValue={search}
-              onChange={handleInputSearch}/>
+          <input 
+            id="s" 
+            type="search" 
+            placeholder='Search...' 
+            name='s'  
+            aria-label="Search posts"
+            disabled={!canOpen}
+            className='bg-neutral-50 focus:outline-none m-0 col-span-9 caret-[#f70d28] placeholder:text-stone-800 focus:border-none border-none 
+              shadow-inner text-center lg:text-left rounded-none disabled:opacity-40'
+            defaultValue={search}
+            onChange={handleInputSearch}
+          />
 
-          <button type="submit" 
-            className='font-black col-span-1 m-0 p-0 text-sm md:text-lg text-neutral-100 bg-[rgb(247,13,40)]
-            hover:bg-[rgb(230,13,40)]'>{searchIcon}</button>
-        </form>
+          <button 
+            id="searchButton"
+            name="searchButton"
+            type="submit"
+            disabled={!canOpen} 
+            className='font-black col-span-1 m-0 p-0 text-sm md:text-lg text-neutral-100 bg-[rgb(247,13,40)] hover:bg-[rgb(230,13,40)] disabled:opacity-40'
+          >
+            {searchIcon}
+          </button>
+        </form>      
       
-        {canOpen && 
-          <PagesBlogPostComponent
-            users={users}
-            Comments={Comments}
-            Posts={Posts.slice(0,10)}
-            currentPage={currentPage}
-            totalPages={totalPages}
-            />}
-          
+        <PagesBlogPostComponent
+          users={users}
+          Comments={Comments}
+          Posts={canOpen && Posts.slice(0,10)}
+          currentPage={currentPage}
+          totalPages={totalPages}
+          canOpen={canOpen}
+          isFetching={isFetching}
+        />        
       </div>
 
       <aside className="md:col-span-1 mt-8 md:ml-[3%]">
         <StickyBox offsetTop={0} offsetBottom={0}>
-          <Aside Comments={Comments}/>
+
+          <Aside 
+            Comments={Comments}
+            commentaction={commentaction}
+          />
         </StickyBox>
       </aside>
     </div>       
