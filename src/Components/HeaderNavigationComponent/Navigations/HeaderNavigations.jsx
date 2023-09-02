@@ -28,7 +28,7 @@ const HeaderNavigations = ({hideShowNavLinks, handleCloseNavLinks}) => {
   const [headerHoverTagsNav, setHeaderHoverTagsNav] = useState([])
   const [headerParentCategory, setHeaderParentCategory] = useState([])
   // fetching post based on a particular parent category
-  const { data = [], isSuccess, isFetching: isFetchingHoverPosts } = useGetPostsByPaginationTwoQuery(headerParentCategory ?  headerParentCategory : `${"?page=" + 1}&limit=${10}&parentCat="books"`);
+  const { data = [], action, isFetching: isFetchingHoverPosts } = useGetPostsByPaginationTwoQuery(headerParentCategory ?  headerParentCategory : `${"?page=" + 1}&limit=${10}&parentCat="books"`);
 
   const hoverPosts = data?.Posts
   const size = useWindowSize()
@@ -215,9 +215,9 @@ const HeaderNavigations = ({hideShowNavLinks, handleCloseNavLinks}) => {
               CategoriesLink={headerHoverCategoriesNav} 
               TagsLink={headerHoverTagsNav}
               Parentlink={getTheNavlinkTextContent} 
-              blogPost={isSuccess && hoverPosts?.slice(0, 6)}
+              blogPost={action && hoverPosts?.slice(0, 6)}
               isFetchingHoverPosts={isFetchingHoverPosts}
-              isSuccess={isSuccess}
+              isSuccess={action}
               isFetchingTags={isFetchingTags}
               isFetching={isFetching}
               categoriesaction={categoriesaction}

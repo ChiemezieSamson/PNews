@@ -24,7 +24,7 @@ const useFetchedTags = () => {
 
     tagsaction = false
 
-  } else if (isSuccess) {
+  } else if (isSuccess && Tags.length > 0) {
     let newTags = Object.assign({}, Tags[0]); // copy just the first object
 
     let tags = [];
