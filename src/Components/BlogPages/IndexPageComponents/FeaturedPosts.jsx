@@ -64,7 +64,7 @@ const FeaturedPosts = ({Posts, users, canOpen, categories, isFetching}) => {
         {/* featured posts other post start here */}
         <div className='my-4 md:mt-1.5 md:ml-[2%]'>
           <JustTimeComponetStar 
-            Posts={canOpen && allPost?.slice(1, 5)}
+            Posts={canOpen && allPost?.slice(2, 6)}
             action={canOpen}
           />
         </div>

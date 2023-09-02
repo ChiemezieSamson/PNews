@@ -26,49 +26,61 @@ const CreatePostAside = ({postTitle, handleAllPostContent, handleSetPostAuthor, 
   // handling setting the value of the Author slecte value and 
   //sending it to CreatePostComponent
   const handlePostAuthor = (e) => {
+
     handleSetPostAuthor(e)
   }
 
   // handling setting the select value of category parent 
-  const handleSelectedParentCat = (e) => { 
+  const handleSelectedParentCat = (e) => {
+
     if(e?.target?.value === "— Parent Category —") {
+
       setSelectedParentCat(() => "")
     } else {
+
       setSelectedParentCat(() => e !== "" ? e?.target?.value : e)
     }
   }
 
   // handling setting the value of the input for category name
   const handleSetCategory = (e) => {
+
     setCategory(() => e !== "" ? e?.target?.value : e)
   }
 
   // handling setting the select value of tag parent 
   const handleSelectedParentTag = (e) => {
+
     if(e?.target?.value === "— Parent Tag —") {
+
       setSelectedParentTag(() => "")
     } else {
+
       setSelectedParentTag(() => e !== "" ? e?.target?.value : e)
     }
   }
 
   // handling setting the value of the input for tag name
   const handleSetAddTag = (e) => {
+
     setAddTag(() => e !== "" ? e?.target?.value : e)    
   }
 
   // Handle setting the number value for the views
   const handlesetViewed = (e) => {
+
     setViewed(()=> e.target.value)
   }
 
    // Handle setting the number value for the shares
   const handlessetShared = (e) => {
+
     setShared(()=> e.target.value)
   }
 
    // Handle setting the value for the trending posts
   const handleCheckedTrendig = (e) => {
+
     e.target.checked ? setTrending(() => true) : setTrending(() => false)
   }
   
@@ -78,11 +90,15 @@ const CreatePostAside = ({postTitle, handleAllPostContent, handleSetPostAuthor, 
 
     // If the checkbox is true add this element "li" parent to the array
     if (action === "create") {
+
       setCheckedItemElements((list) => {
+
         //first check if the element containing the checkbox of the value is already in the list
         if (list.includes(element.target)) {
+
           return [...list] // if so just return the list as it is
         } else {
+
           return [...list, element.target] // if not then add the new category parentelement to the list
         }
       })      
@@ -90,13 +106,16 @@ const CreatePostAside = ({postTitle, handleAllPostContent, handleSetPostAuthor, 
 
     // If the checkbox is false then filter out this element "li" parent from the array
     if (action === "delete") { 
+
       setCheckedItemElements((list) =>{
+
         let newElement = list.filter(item => item !== element.target)
         return newElement
       })  
     }
 
-    if(element === "" && action === "clear") {      
+    if(element === "" && action === "clear") { 
+
       setCheckedItemElements(() => [])     
     }
   }
@@ -105,7 +124,9 @@ const CreatePostAside = ({postTitle, handleAllPostContent, handleSetPostAuthor, 
     handleAllPostContent() // handling calling of the function that save each post to the data base 
 
     if (canSave) {
-      for(let i = 0; i < checkedItemElemets.length; i++) {
+
+      for(let i = 0; i < checkedItemElemets?.length; i++) {
+
         checkedItemElemets[i].checked = false // for each of the collected element first uncheck them
       }
     
@@ -121,7 +142,9 @@ const CreatePostAside = ({postTitle, handleAllPostContent, handleSetPostAuthor, 
   }
 
   useEffect(() => { // updating changes made
+
     dispatch(optionalAdded(shared, viewed, Trending))
+
   },[Trending, shared, viewed, dispatch])
   
   return (
@@ -131,43 +154,53 @@ const CreatePostAside = ({postTitle, handleAllPostContent, handleSetPostAuthor, 
       <div className={`grid grid-cols-5 xl:grid-cols-7 justify-between gap-x-[2%] px-1 my-2 font-poppins font-semibold ${showSideBar && "mb-10"} max-w-sm ml-auto`}>
 
         <span className={`col-span-4 xl:col-span-6 grid grid-cols-2 gap-x-[2%]`}>
+
           <button 
             type='button'
             name='preview'
             className='text-stone-700 bg-neutral-300 hover:bg-neutral-400 hover:text-neutral-50 border-0 p-2.5 
-            rounded-sm cursor-pointer text-base shadow-stone-700 shadow-sm TextHeadertransition'
-            onClick={handlePreview}>{preview ? "Back" : "Preview"}</button>
+            rounded-sm cursor-pointer text-base shadow-stone-700 shadow-sm TextHeadertransition disabled:opacity-40'
+            disabled={!canSave || !userAction || isFetching}
+            onClick={handlePreview}
+          >{preview ? "Back" : "Preview"}</button>
 
           <button 
-          className='text-neutral-50 bg-teal-600 hover:bg-teal-700 border-0 p-2.5 rounded-sm cursor-pointer text-base
-          shadow-stone-700 shadow-sm TextHeadertransition' 
-          type='submit' 
-          form="post_form" 
-          onClick={handleDispatched}>Publish</button>
+            className='text-neutral-50 bg-teal-600 hover:bg-teal-700 border-0 p-2.5 rounded-sm cursor-pointer text-base
+            shadow-stone-700 shadow-sm TextHeadertransition disabled:opacity-40' 
+            type='submit' 
+            form="post_form" 
+            disabled={!canSave || !userAction || isFetching}
+            onClick={handleDispatched}
+          >Publish</button>
         </span>
 
         <button 
           type='button'
           className={`text-stone-700 ${showSideBar ? "bg-neutral-400" : "bg-neutral-100"} hover:bg-neutral-300 col-span-1 
           hover:text-neutral-50 border-0 p-2.5 rounded-sm cursor-pointer text-base shadow-stone-700 shadow-sm`} 
-          onClick={handleShowBar}>
-            {showSideBar ?            
-              <FaGripVertical className="text-white  inline-block" />
-                :                             
-              <FaGripHorizontal className='inline-block'/>           
-            }
+          onClick={handleShowBar}
+        >
+          {showSideBar ?
+
+            <FaGripVertical className="text-white  inline-block" />
+              :                             
+            <FaGripHorizontal className='inline-block'/>           
+          }
         </button>
       </div>
 
       <div className={`${showSideBar ? "block" : "hidden"} bg-white lg:bg-neutral-100 divide-y divide-solid divide-slate-500`}>
 
-        <div className={`lg:hidden`}>         
+        <div className={`lg:hidden`}> 
+
           <span className='px-1'>
             <Hanbugar3 closesidebar={handleCloseSidebar}/>
           </span>
+
           <h3 className='pt-8 my-0 text-center mx-2 capitalize font-round font-medium text-stone-800 text-xl'>
             {postTitle ? postTitle : "(no title)"}
           </h3>
+
         </div>
 
         <Author 

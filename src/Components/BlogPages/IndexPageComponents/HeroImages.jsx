@@ -10,15 +10,19 @@ import { HeroOneThreeImageSpinner } from '../../SharedAsset/Spinners/Spinner';
 const HeroImages = ({Posts, categories, canOpen, isFetching}) => { 
   const size = useWindowSize()
 
+  console.log(Posts);
+
   const parent = "lifestyle"
   const parentRandom = "random"
   const parentBooks = "books"
+  const parentBusiness = "business"
   
   const {allPost} = useParentcategories(parent, categories, Posts, canOpen)
   const {allPost: parentTwo} = useParentcategories(parentRandom, categories, Posts, canOpen)
   const {allPost: parentThree} = useParentcategories(parentBooks, categories, Posts, canOpen)
+  const {allPost: parentLast} = useParentcategories(parentBusiness, categories, Posts, canOpen)
 
-  const displayedPost = canOpen && [parentTwo[5], parentThree[7], allPost[5]]
+  const displayedPost = canOpen && [parentLast[1], parentTwo[1], parentThree[0]]
 
   return (   
     <div className="pt-5">
@@ -33,28 +37,28 @@ const HeroImages = ({Posts, categories, canOpen, isFetching}) => {
 
           <div className={`col-span-2 HeroImageOneOverFlow group HeroImageOne`}>
 
-            <Link to={`/single/${allPost[4]?._id}`} className={overLay()}>
-              <img src={publicFolder + allPost[4]?.postImage}  alt="Mostrecent" className="Imagetransition HeroImageOne" loading="lazy"/>
+            <Link to={`/single/${allPost[0]?._id}`} className={overLay()}>
+              <img src={publicFolder + allPost[0]?.postImage}  alt="Mostrecent" className="Imagetransition HeroImageOne" loading="lazy"/>
             </Link>          
 
             <span className="absolute lg:-top-1.5 -top-2 left-0 z-30">
-              <CategoriesComponent cat={allPost[4]?.postCategory[0]}/>
+              <CategoriesComponent cat={allPost[0]?.postCategory[0]}/>
             </span>
 
             <span className="absolute bottom-[8%] inset-x-auto max-w-fit text-white z-30 mx-1">
 
-              <PostTitleLarge post={allPost[4]?.postTitle} postId={allPost[4]?._id}/>
+              <PostTitleLarge post={allPost[0]?.postTitle} postId={allPost[0]?._id}/>
 
               {size.width > 480 &&
                 <span className="mt-2 inline-block lg:block lg:text-left">
 
-                  {allPost[4]?.optional?.favourite === false ? "" : 
+                  {allPost[0]?.optional?.favourite === false ? "" : 
 
                   <span className='mr-4'>
-                    <StarComponent color={"text-white"} favourite={allPost[4]?.optional?.favourite}/>
+                    <StarComponent color={"text-white"} favourite={allPost[0]?.optional?.favourite}/>
                   </span>}     
 
-                  <TimeComponent time={allPost[4]?.createdAt} />
+                  <TimeComponent time={allPost[0]?.createdAt} />
                 </span>
               }
             </span>
