@@ -8,6 +8,7 @@ import { WritePostAsideOpenClosebar } from '../../../../../ButtonAndOthers/Butto
 import { parentCategoriesAndTags } from '../../../../../../data'
 import { isFecthingStyle } from '../../../../../SharedAsset/SharedAssets'
 import { HeroOneBussinessFavoriteImageSpinner } from '../../../../../SharedAsset/Spinners/Spinner'
+import { textAndNumberOnly } from '../../../../../SharedAsset/Vaidations/RegularExpression'
 
 const Category = ({updatePostCategories, handleSelectedParentCat, parentCat, handleSetCategory, category, userAction, isFetching,
   handlesetCheckedItemElements, checkedItemElemets}) => {
@@ -51,16 +52,12 @@ const Category = ({updatePostCategories, handleSelectedParentCat, parentCat, han
     setOpenAddnewCat((change) => !change)
   }
 
-
-  // regular expression that allows only letters and numbers (no symbols)
-  const alphanumericRegex = /^[a-zA-Z0-9]+$/
-
   // handling setting the value of the input for category name and 
   //sending it to CreatePostAside component
   const handleNewCategoryName = (e) => {
 
     const { value } = e.target;
-    const isValid = alphanumericRegex.test(value);
+    const { isValid } = textAndNumberOnly(value);
     setIsValid(isValid);
     handleSetCategory(e)
   }

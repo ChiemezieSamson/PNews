@@ -14,9 +14,9 @@ const WritePost = () => {
     const defaultState = EditorState.createWithContent(state)
 
   return (
-    <div>
-      <CreatePostComponents state={defaultState}/>
-    </div>
+
+    <CreatePostComponents state={defaultState}/>
+
   )
 }
 

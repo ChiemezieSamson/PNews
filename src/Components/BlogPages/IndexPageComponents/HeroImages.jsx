@@ -10,8 +10,6 @@ import { HeroOneThreeImageSpinner } from '../../SharedAsset/Spinners/Spinner';
 const HeroImages = ({Posts, categories, canOpen, isFetching}) => { 
   const size = useWindowSize()
 
-  console.log(Posts);
-
   const parent = "lifestyle"
   const parentRandom = "random"
   const parentBooks = "books"

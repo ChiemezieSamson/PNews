@@ -7,6 +7,7 @@ import { WritePostAsideOpenClosebar } from '../../../../../ButtonAndOthers/Butto
 import { parentCategoriesAndTags } from '../../../../../../data'
 import { isFecthingStyle } from '../../../../../SharedAsset/SharedAssets'
 import { HeroOneBussinessFavoriteImageSpinner } from '../../../../../SharedAsset/Spinners/Spinner'
+import { textAndNumberOnly } from '../../../../../SharedAsset/Vaidations/RegularExpression'
 
 
 const Tag = ({updatePostTags, parentTag, handleSelectedParentTag, handleSetAddTag, addTag, userAction, isFetching}) => {
@@ -66,15 +67,12 @@ const Tag = ({updatePostTags, parentTag, handleSelectedParentTag, handleSetAddTa
     } 
   }
 
-  // regular expression that allows only letters and numbers (no symbols)
-  const alphanumericRegex = /^[a-zA-Z0-9\s]+$/
-
   // handling setting the value of the input for tag name and 
   //sending it to CreatePostAside component
   const handleAddNewTag = (e) => {
 
     const { value } = e.target;
-    const isValid = alphanumericRegex.test(value);
+    const { isValid } = textAndNumberOnly(value);
     setIsValid(isValid);
     handleSetAddTag(e)
   }

@@ -1,12 +1,12 @@
 import { HeadTitle } from "../SharedAssets"
 
-const Spinner = ({ text = '', size = '2em' }) => {
-  const header = text ? <h4>{text}</h4> : null
+const Spinner = ({ text = '', size = 'w-24 h-24'}) => {
+  const header = text ? <h4 className="font-lora font-semibold text-xl skeleton inline-block px-1 rounded">{text}</h4> : null
   return (
-    <div className="text-center">
+    <div className="text-center m-7">
       {header}
-      <div className="animate-spin border-8 rounded-full border-solid border-r-rose-400 border-y-rose-400
-       border-l-rose-500 mx-auto" style={{ height: size, width: size }}></div>
+      <div className={`border-[12px] rounded-full border-solid border-r-rose-400 border-y-rose-400
+       border-l-rose-500 mt-6 ${size} mx-auto animate-spin`}></div>
     </div>
   )
 }
