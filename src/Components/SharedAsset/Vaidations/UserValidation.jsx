@@ -9,19 +9,22 @@ const UserValidation = ({openValidation, onSubmitValidation, onWrongUserPassword
   return (
     <div className={`${openValidation ? "fixed z-50 inset-0 p-0.5 -translate-x-[0] translate-y-0 grid place-content-center"
         : "-translate-x-[200%] translate-y-full hidden transition-all duration-500 ease-linear"}`}>
+
       <div className='shadow-md font-poppins shadow-neutral-400 max-w-[300px] bg-white py-7 px-5 rounded-md relative'>
 
         <h6 className='font-bold text-lg text-stone-800 mb-4'>Enter Password</h6>
+
         <p className='text-sm text-stone-700'>{message}</p>
 
         {/* The form to get the user inputed password */}
 
         <form className='mt-4' onSubmit={onSubmitValidation}>
+          
           {onWrongUserPassword ? <p className='text-xs text-rose-500 tracking-wider font-lora'>wrong credentials!</p> : "" }
 
           <label htmlFor="userpasswordformakeprimary" className='text-xs font-light'>
           
-            <span className="text-xs tracking-wider after:content-['*'] after:ml-0.5 after:text-red-500 font-bold block">
+            <span className="text-xs text-left tracking-wider after:content-['*'] after:ml-0.5 after:text-red-500 font-bold block">
               password
             </span>
 

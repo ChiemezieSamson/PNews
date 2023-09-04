@@ -1,12 +1,10 @@
 import { useEffect, useState } from "react";
 import { useCreateNewCommentMutation} from "../../../../../Reduxstore/Slices/comments/CommentsSlice";
-import useFetchedComments from "../../../../SharedAsset/Spinners/commentSpinner";
 import { nanoid } from "@reduxjs/toolkit";
 import { handleEmailPattern, handleUrlLinks, textAndNumberOnly } from "../../../../SharedAsset/Vaidations/RegularExpression";
+import { isFecthingStyle } from "../../../../SharedAsset/SharedAssets";
 
-const CommentForm = ({postId}) => {
-  // fetching all comment used to check if the user exist
-  const {commentsContent, commentaction, isFetching} = useFetchedComments() 
+const CommentForm = ({commentsContent, postId, onAnyIsfetching, canOpen}) => {
    // Create new comment 
   const [addNewComments, {isLoading}] = useCreateNewCommentMutation() 
 
@@ -39,12 +37,15 @@ const CommentForm = ({postId}) => {
 
     let validName 
 
-    if (commentaction) {// check if a user we this name already exist
+    if (canOpen) {// check if a user we this name already exist
+
       validName = commentsContent?.find(item => item?.author === value?.toLowerCase())
     }
 
     if (validName?.author && isValid ) {
+
       if (validName?.author !== commentAuthorName) {
+
         setRequiredText(() => true)
       }
     }     
@@ -55,6 +56,7 @@ const CommentForm = ({postId}) => {
 
   // handling save the textarea content
   const handleTextarea = (event) => {
+
     const { value } = event.target;    
     setContent(() => value)
   }
@@ -70,12 +72,15 @@ const CommentForm = ({postId}) => {
 
     let validEmail 
 
-    if (commentaction) {// check if a user we this name already exist
+    if (canOpen) {// check if a user we this name already exist
+
       validEmail = commentsContent?.find(item => item?.email === value.toLowerCase())
     }
 
     if (validEmail?.email && isValid ) {
+
       if (validEmail?.author !== commentAuthorName) {
+
         setRequiredText2(() => true)
       }      
     }
@@ -86,6 +91,7 @@ const CommentForm = ({postId}) => {
 
   // handling save the website content
   const handleWebsite = (event) => {
+
     const { value } = event.target;
     const { isValid } = handleUrlLinks(value); // function for texting the entered text format
 
@@ -111,13 +117,16 @@ const CommentForm = ({postId}) => {
       if (checkRandomIdComments?.onSaveId !== "" && randomCommentId) {
         
         try {
+
           await addNewComments({postId, author, content, email, website, saveInfo: true, randomId: randomCommentId}).unwrap()
+
           setAuthor(() => "");
           setContent(() => "");
           setEmail(() => "");
           setWebsite(() => "");
           setSaveInfo(() => "")
         } catch (err) {
+
           setErrorText(() => true)
           console.error('Failed to save the post: ', err)
         }       
@@ -125,17 +134,21 @@ const CommentForm = ({postId}) => {
       } else {
 
         if(saveInfo) {
+
           localStorage.setItem("commentId", randomId);
           localStorage.setItem("commentUserName", author);
 
           try {
+
             await addNewComments({postId, author, content, email, website, saveInfo, randomId}).unwrap()
+
             setAuthor(() => "");
             setContent(() => "");
             setEmail(() => "");
             setWebsite(() => "");
             setSaveInfo(() => "")
           } catch (err) {
+
             setErrorText(() => true)
             console.error('Failed to save the post: ', err)
           }
@@ -143,13 +156,16 @@ const CommentForm = ({postId}) => {
         } else {
 
           try {
+
             await addNewComments({postId, author, content, email}).unwrap()
+            
             setAuthor(() => "");
             setContent(() => "");
             setEmail(() => "");
             setWebsite(() => "");
             setSaveInfo(() => "")
           } catch (err) {
+
             setErrorText(() => true)
             console.error('Failed to save the post: ', err)
           }
@@ -160,25 +176,30 @@ const CommentForm = ({postId}) => {
 
 
   useEffect(() => {
+
     const randomCommentId = localStorage?.getItem("commentId")?.toLocaleLowerCase()
     const commentUserName = localStorage?.getItem("commentUserName")?.toLocaleLowerCase()
     let checkId
 
      // if there is an existing user 
-    if (commentaction && randomCommentId) {
+    if (canOpen && randomCommentId) {
+
       checkId  = commentsContent?.find(item => item?.onSaveId === randomCommentId)
     }
 
     if(checkId?.onSaveId === randomCommentId ) {
+
       setRandomCommentId(() => randomCommentId)
       setCommentAuthorName(() => commentUserName)
       setCheckRandomIdComments(() => checkId)
     }
-  }, [commentsContent, commentaction])
+  }, [commentsContent, canOpen])
 
 
   useEffect(() => {
+
     if(checkRandomIdComments?.author) {
+
       setAuthor(() => checkRandomIdComments?.author)
       setEmail(() => checkRandomIdComments?.email)
       setWebsite(() => checkRandomIdComments?.website)
@@ -187,12 +208,14 @@ const CommentForm = ({postId}) => {
 
 
   return (
-    <form onSubmit={handleSubmit} disabled={isFetching} className="disabled:opacity-40">
+    <form onSubmit={handleSubmit} className={isFecthingStyle(onAnyIsfetching)}>
+
       {errorText ? <p className='text-xs text-rose-500 tracking-wider font-lora'>Failed to save the comment</p> : "" }
 
       {/* comment user name */}
       <div className="mt-2">
-        <label htmlFor="author" className="after:content-['*'] after:ml-1 after:text-lg after:text-red-500  block text-sm font-medium text-gray-700">
+
+        <label htmlFor="author" className="after:content-['*'] after:ml-1 after:text-lg  after:text-red-500  block text-sm font-medium text-gray-700">
           Your Name
         </label>
 
@@ -204,8 +227,9 @@ const CommentForm = ({postId}) => {
           autoFocus={true} 
           value={author}
           onChange={handleAuthorName}
+          disabled={!canOpen}
           required
-          className={`mt-1 p-1 border border-gray-400 rounded-md w-full mb-0 
+          className={`mt-1 p-1 border border-gray-400 rounded-md w-full mb-0 disabled:opacity-40
           ${(!isValid && author) ? "border-red-500 text-red-600 focus:border-red-500 focus:ring-red-500" : ""}`}
         />
 
@@ -227,7 +251,8 @@ const CommentForm = ({postId}) => {
           required
           maxLength={1000}
           rows={4}
-          className="mt-1 p-1 border border-gray-400 rounded-md w-full mb-0 resize-none overflow-hidden"
+          disabled={!canOpen}
+          className="mt-1 p-1 border border-gray-400 rounded-md w-full mb-0 resize-none overflow-hidden disabled:opacity-40"
         ></textarea>
       </div>
 
@@ -236,6 +261,7 @@ const CommentForm = ({postId}) => {
 
         {/* email */}
         <span className="col-span-2 xs:col-span-1">
+
           <label htmlFor="email" className='after:content-["*"] after:ml-1 after:text-lg after:text-red-500 block text-sm font-medium text-gray-700'>
             Email
           </label>
@@ -247,15 +273,18 @@ const CommentForm = ({postId}) => {
             id="email" 
             value={email}
             required
-            className={`mt-1 p-1 border border-gray-400 rounded-md w-full mb-0
+            disabled={!canOpen}
+            className={`mt-1 p-1 border border-gray-400 rounded-md w-full mb-0 disabled:opacity-40
             ${(!emailIsValid && email) ? "border-red-500 text-red-600 focus:border-red-500 focus:ring-red-500" : ""}`}
             onChange={handleEmail}
           />
+
           {requiredText2 ? <p className='text-xs text-rose-500 tracking-wider font-lora'> Email already exist! </p> : "" }
         </span>
 
         {/* website */}
         <span className="col-span-2 xs:col-span-1 mt-5 xs:mt-0">
+
           <label htmlFor="website" className='after:ml-1 after:text-lg after:text-red-500 block text-sm font-medium text-gray-700'>
             Website
           </label>
@@ -266,7 +295,8 @@ const CommentForm = ({postId}) => {
             aria-label='url'
             value={website}
             name='website' 
-            className={`mt-1 p-1 border border-gray-400 rounded-md w-full mb-0
+            disabled={!canOpen}
+            className={`mt-1 p-1 border border-gray-400 rounded-md w-full mb-0 disabled:opacity-40
             ${(websiteIsValid !== true && website) ? "border-red-500 text-red-600 focus:border-red-500 focus:ring-red-500" : ""}`}
             onChange={handleWebsite}
            />
@@ -275,25 +305,35 @@ const CommentForm = ({postId}) => {
 
       {/* save name and email checkbox */}
       {(!randomCommentId && !commentAuthorName) && 
+
         <div className='grid grid-cols-12 lg:inline-block mt-5'>
+
           <input 
             type="checkbox" 
             name="save-data"
             aria-label="checkbox" 
             id="save-data" 
-            className='outline-0 focus:outline-0 focus:ring-0 align-text-top h-3 w-3 rounded-sm mt-2 sm:mt-1.5 lg:mt-px col-span-1'
+            disabled={!canOpen}
+            className='outline-0 focus:outline-0 focus:ring-0 align-text-top h-3 w-3 rounded-sm mt-2 sm:mt-1.5 lg:mt-px col-span-1 disabled:opacity-40'
             checked={saveInfo}
             onChange={() => setSaveInfo((change) => !change)}
           />
+
           <label htmlFor="save-data" className="inline-block mx-2 align-top leading-4 text-sm font-medium text-gray-700 col-span-11">
-            Save my name, email and website in this browser for the next time i comment.</label>
+            Save my name, email and website in this browser for the next time i comment.
+          </label>
         </div>
       }
       
       {/* Add comment button */}
       <div className="mt-7">
-        <button type="submit" className="py-2 px-2 disabled:opacity-40 uppercase rounded-md text-xs tracking-wider text-white bg-gray-700 hover:bg-[#f70d28]"
-         disabled={!canSave}>
+
+        <button 
+          type="submit" 
+          name="commentFormButton"
+          className="py-2 px-2 disabled:opacity-40 uppercase rounded-md text-xs tracking-wider text-white bg-gray-700 hover:bg-[#f70d28]"
+          disabled={!canSave}
+        >
           Add Comment
         </button>
       </div>
