@@ -34,6 +34,20 @@ export const SkeletonTextFour = () => {
   )
 }
 
+export const SinglePostPreviousNextButtonSpinner = ({text}) => {
+  return (
+    <div>
+      <span className='text-neutral-400 font-bold cursor-pointer'>
+        {text}
+      </span>
+
+      <div className='border-l-[10px] font-round border-solid w-[95%] border-neutral-200 mt-2.5 mb-2.5 pl-3 font-bold'>
+        <div className='skeleton h-4'></div>
+      </div>
+    </div>
+  )
+}
+
 // Book, qute, category etc component hero Spinner
 export const HeroOneThreeImageSpinner = ({groupStyle, oneimageStyle, threeimageStyle, threegroupStyle, threecoverStyle}) => {
   const EmptyValues = [...Array(3)]
@@ -225,32 +239,32 @@ export const SmallPostImageLeftTitleDateRightSpinner = ({groupStyle, listStyle, 
 export const SinglePostSpinner = () => {
   return (
     <>
-     <div className='skeleton w-full h-4 mb-0.5 rounded-sm'></div>
-     <div className='skeleton w-full h-4 mb-0.5 rounded-sm'></div>
-     <div className='skeleton w-full h-4 mb-0.5 rounded-sm'></div>
-     <div className='skeleton w-full h-4 mb-0.5 rounded-sm'></div>
-     <div className='skeleton w-full h-4 mb-0.5 rounded-sm'></div>
-     <div className='skeleton w-full h-4 mb-0.5 rounded-sm'></div>
-     <div className='skeleton w-full h-4 mb-0.5 rounded-sm'></div>
-     <div className='skeleton w-full h-4 mb-0.5 rounded-sm'></div>
+     <div className='skeleton w-full h-4 mb-1 rounded-sm'></div>
+     <div className='skeleton w-[99%] h-4 mb-1 rounded-sm'></div>
+     <div className='skeleton w-[98%] h-4 mb-1 rounded-sm'></div>
+     <div className='skeleton w-full h-4 mb-1 rounded-sm'></div>
+     <div className='skeleton w-[98%] h-4 mb-1 rounded-sm'></div>
+     <div className='skeleton w-[99%] h-4 mb-1 rounded-sm'></div>
+     <div className='skeleton w-full h-4 mb-1 rounded-sm'></div>
+     <div className='skeleton w-[97%] h-4 mb-1 rounded-sm'></div>
      <div className='skeleton w-[70%] h-4 mb-0 rounded-sm'></div>
-     <div className='skeleton w-full mt-3 h-4 mb-0.5 rounded-sm'></div>
-     <div className='skeleton w-full h-4 mb-0.5 rounded-sm'></div>
-     <div className='skeleton w-full h-4 mb-0.5 rounded-sm'></div>
-     <div className='skeleton w-full h-4 mb-0.5 rounded-sm'></div>
-     <div className='skeleton w-full h-4 mb-0.5 rounded-sm'></div>
-     <div className='skeleton w-full h-4 mb-0.5 rounded-sm'></div>
-     <div className='skeleton w-full h-4 mb-0.5 rounded-sm'></div>
-     <div className='skeleton w-full h-4 mb-0.5 rounded-sm'></div>
+     <div className='skeleton w-[98%] mt-3 h-4 mb-1 rounded-sm'></div>
+     <div className='skeleton w-[99%] h-4 mb-1 rounded-sm'></div>
+     <div className='skeleton w-full h-4 mb-1 rounded-sm'></div>
+     <div className='skeleton w-[97%] h-4 mb-1 rounded-sm'></div>
+     <div className='skeleton w-full h-4 mb-1 rounded-sm'></div>
+     <div className='skeleton w-full h-4 mb-1 rounded-sm'></div>
+     <div className='skeleton w-[97%] h-4 mb-1 rounded-sm'></div>
+     <div className='skeleton w-[80%] h-4 mb-1 rounded-sm'></div>
 
      {/* Image */}
      <div className='skeleton rounded-sm my-4 h-screen w-screen HeroImageOne'></div>
 
-     <div className='skeleton w-full h-4 mb-0.5 rounded-sm'></div>
-     <div className='skeleton w-full h-4 mb-0.5 rounded-sm'></div>
-     <div className='skeleton w-full h-4 mb-0.5 rounded-sm'></div>
-     <div className='skeleton w-full h-4 mb-0.5 rounded-sm'></div>
-     <div className='skeleton w-full h-4 mb-0.5 rounded-sm'></div>
+     <div className='skeleton w-full h-4 mb-1 rounded-sm'></div>
+     <div className='skeleton w-[97%] h-4 mb-1 rounded-sm'></div>
+     <div className='skeleton w-full h-4 mb-1 rounded-sm'></div>
+     <div className='skeleton w-full h-4 mb-1 rounded-sm'></div>
+     <div className='skeleton w-[97%] h-4 mb-1 rounded-sm'></div>
       <div className='skeleton w-[80%] h-4 mb-0 rounded-sm'></div>
     </>
   )

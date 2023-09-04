@@ -17,7 +17,7 @@ import { publicFolder } from '../../../../data';
 import UserValidation from '../../../SharedAsset/Vaidations/UserValidation';
 import { handelPassWordValidation } from '../../../SharedAsset/Vaidations/bcrypt';
 import { useFetchedCommentById } from '../../../SharedAsset/Spinners/commentSpinner';
-import { SkeletonTextTwo } from '../../../SharedAsset/Spinners/Spinner';
+import { SinglePostSpinner, SkeletonTextTwo } from '../../../SharedAsset/Spinners/Spinner';
 import { handleUserPassword } from '../../../SharedAsset/Vaidations/RegularExpression';
 
 
@@ -401,7 +401,6 @@ const SinglePost = () => {
             </div>
                 
             {/* post share component start here */}
-
             <SinglePostShareComponent
               Post={Post}
               size={size}
@@ -410,25 +409,34 @@ const SinglePost = () => {
 
             {/* post text start here */}
             <div className={`${textSize} tracking-wide text-stone-800`}>
-              {postAction ? <Preview postContent={Post?.postContent}/>
+
+              {canOpen ? 
+
+                <Preview postContent={Post?.postContent}/>
                 :
-                singlePost
+                <SinglePostSpinner />
               }
             </div>
 
             {/* post tags start here */}
             <span className='inline-block lg:py-5 mb-3 lg:text-sm text-xs'>
+
               <b className='mr-2 text-neutral-800'>Tags:</b>
-              {postAction ? TagsLinks?.map((tag) => {
-                return (
-                  <Link 
-                  to={`/tags?tag=${tag.title}`}
-                  key={tag.id} className="text-stone-700 bg-neutral-100 inline-block py-0.5 px-2.5 hover:bg-[#f70d28]
-                  hover:text-neutral-50 mb-1.5 mr-[3px] last:mr-0 tracking-wider TextHeadertransition cursor-pointer">{tag.title}</Link>
-                )
-              }) 
-              : 
-              <div className='skeleton h-3 w-60 inline-block'></div>
+
+              {canOpen ? 
+
+                <>
+                  {TagsLinks?.map((tag) => {
+                      return (
+                        <Link to={`/tags?tag=${tag?.title}`} key={tag?.id} className="text-stone-700 bg-neutral-100 inline-block py-0.5 px-2.5 hover:bg-[#f70d28]
+                          hover:text-neutral-50 mb-1.5 mr-[3px] last:mr-0 tracking-wider TextHeadertransition cursor-pointer"
+                        >{tag?.title}</Link>
+                      )
+                    }) 
+                  }
+                </>
+                : 
+                <div className='skeleton h-3 w-60 inline-block'></div>
               }
             </span>
           </article>
@@ -439,8 +447,8 @@ const SinglePost = () => {
             post={Post} 
             User={User} 
             userContent={singleUser} 
-            useraction={userAction}
-            postAction={postAction}
+            canOpen={canOpen}
+            onAnyIsfetching={onAnyIsfetching}
           />
 
           {/* Comments section start here */}            

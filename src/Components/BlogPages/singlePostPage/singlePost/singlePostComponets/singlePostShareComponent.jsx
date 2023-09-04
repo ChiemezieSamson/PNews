@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { FaEnvelope, FaFacebookSquare, FaLinkedin, FaShare, FaTwitter, FaWhatsapp } from 'react-icons/fa'
 import { FacebookShareButton, LinkedinShareButton, TwitterShareButton, WhatsappShareButton } from 'react-share'
 import { useUpDateSharedPostsMutation, useUpDateViewedPostsMutation } from '../../../../../Reduxstore/Slices/posts/PostsSlice'
+import { isFecthingStyle } from '../../../../SharedAsset/SharedAssets'
 
 const SinglePostShareComponent = ({canOpen, Post, size}) => {
   const [updateShared, { isLoading }] = useUpDateSharedPostsMutation() // redux toolkit mutation function
@@ -163,15 +164,17 @@ const SinglePostShareComponent = ({canOpen, Post, size}) => {
       <div className='col-span-4'>
         <div className='grid grid-flow-col gap-x-[1%]'>     
 
-          <a href={`mailto:?subject=${postTitle}&body=${shareUrl}`} className='relative after:absolute after:inset-0 after:z-10' 
-            onClick={handleShareUpdate} aria-label='email'>
+          <span className={isFecthingStyle(!canOpen)}>
+            <a href={`mailto:?subject=${postTitle}&body=${shareUrl}`} className='relative after:absolute after:inset-0 after:z-10' 
+              onClick={handleShareUpdate} aria-label='email'>
 
-            <span className='leading-10 whitespace-nowrap block rounded text-center text-white bg-[#eb4d3f]
-              cursor-pointer hover:bg-[rgba(235,77,63,.9)] TextHeadertransition' title='mail'>
+              <span className='leading-10 whitespace-nowrap block rounded text-center text-white bg-[#eb4d3f]
+                cursor-pointer hover:bg-[rgba(235,77,63,.9)] TextHeadertransition' title='mail'>
 
-              <FaEnvelope className='inline-block text-lg text-white align-middle mb-1'/>
-            </span>
-          </a>
+                <FaEnvelope className='inline-block text-lg text-white align-middle mb-1'/>
+              </span>
+            </a>
+          </span>
 
           {otherShare &&
 
@@ -216,8 +219,9 @@ const SinglePostShareComponent = ({canOpen, Post, size}) => {
 
           <button 
             type='button' 
-            className='leading-10 whitespace-nowrap inline-block rounded text-center text-white bg-[#bdbdbd] cursor-pointer hover:bg-[rgba(189,189,189,.9)] TextHeadertransition' 
+            className='leading-10 whitespace-nowrap inline-block rounded text-center text-white bg-[#bdbdbd] cursor-pointer hover:bg-[rgba(189,189,189,.9)] disabled:opacity-40 TextHeadertransition' 
             title='share'
+            disabled={!canOpen}
             onClick={() => setOtherShare((change) => !change)}
           >
 

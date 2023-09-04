@@ -104,11 +104,13 @@ const FashionAndTrendsPosts = ({Posts, categories, canOpen, isFetching}) => {
         <span className='grid grid-flow-col justify-center text-stone-400 text-xs'>
 
           <span className={`bg-white rounded-md ${isFecthingStyle(isFetching)}`}>
+
             <HomePageSlideNextAndPreviousButton 
               isSuccess={canOpen}
               handleBackward={handleBackward}
               handleNext={handleNext}
             />
+            
           </span>
 
         </span>
