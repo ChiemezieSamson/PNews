@@ -16,7 +16,7 @@ import { useDeleteExistingPostMutation, useMarkPostFavouriteStatusMutation } fro
 import { publicFolder } from '../../../../data';
 import UserValidation from '../../../SharedAsset/Vaidations/UserValidation';
 import { handelPassWordValidation } from '../../../SharedAsset/Vaidations/bcrypt';
-import { useFetchedCommentById } from '../../../SharedAsset/Spinners/commentSpinner';
+import useFetchedComments, { useFetchedCommentById } from '../../../SharedAsset/Spinners/commentSpinner';
 import { SinglePostSpinner, SkeletonTextTwo } from '../../../SharedAsset/Spinners/Spinner';
 import { handleUserPassword } from '../../../SharedAsset/Vaidations/RegularExpression';
 
@@ -34,6 +34,8 @@ const SinglePost = () => {
   const [markfavourite, {isLoading: favouriteIsLoading}] = useMarkPostFavouriteStatusMutation()
   // fetching all the comments made on a particural post and its replies
   const {singleContent, contentAction, isFetching: commentIsFetching, postId: commentPostId} = useFetchedCommentById() 
+  // fetching all comment for Aside comment display sction
+  const {commentsContent, commentaction,} = useFetchedComments()
 
   const [favourite, setFavourite] = useState(false)
   const [openValidation, setOpenValidation] = useState(false)
@@ -54,6 +56,7 @@ const SinglePost = () => {
   const User = singleUser
   const userByUserId = byUserId
   const comments = singleContent
+  const Comments = commentsContent
   const canOpen = [postAction, userAction, contentAction].every(Boolean)
   const onAnyIsfetching = isFetching || AuthorIsfetching || DeleteIsfetching || commentIsFetching
 
@@ -205,7 +208,7 @@ const SinglePost = () => {
   },[])
 
   return (
-    <div className='relative'>
+    <div className='relative text-left'>
       <article className='text-left md:grid md:grid-cols-3'>
 
         {/* Posts content start here */}
@@ -374,12 +377,10 @@ const SinglePost = () => {
 
                   <FaRegComment className="text-[#2e9fff] inline-block mr-1.5 align-middle"/> 
 
-                  {       canOpen ? 
-
-                    <span className='mb-0.5 text-[#7a7a7a]/80 leading-4 align-middle inline-block font-medium'>{comments?.length}</span>
-                    :
-                    <div className='skeleton h-3.5 w-3 inline-block -mb-0.5'></div>
-                  }
+                  <span className='mb-0.5 text-[#7a7a7a]/80 leading-4 align-middle inline-block font-medium'>
+                    {(canOpen && comments?.length) ? comments?.length : 0}
+                  </span>
+                    
                 </span>
               </span>
             </div>
@@ -454,14 +455,16 @@ const SinglePost = () => {
           {/* Comments section start here */}            
           <section className='pt-8 pb-4'>
         
-            <div className='mb-6 disabled:opacity-40' disabled={commentIsFetching}>              
+            <div className='mb-6'>  
+                        
               <Comment 
                 comments={comments}
                 postId={commentPostId} 
                 byUserId={byUserId}
                 postAuthor={Post?.postAuthor}
                 offsetOfForm={offsetOfForm}
-                contentAction={contentAction}
+                contentAction={canOpen}
+                onAnyIsfetching={onAnyIsfetching}
               />            
             </div> 
      
@@ -476,7 +479,11 @@ const SinglePost = () => {
 
         <aside className='md:col-span-1 lg:ml-[4%] mt-4'>
           <StickyBox offsetTop={0} offsetBottom={0}>
-            <Aside />
+
+            <Aside 
+              Comments={Comments}
+              commentaction={commentaction}
+            />
           </StickyBox>
         </aside>
       </article>

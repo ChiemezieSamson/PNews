@@ -272,15 +272,24 @@ export const SinglePostSpinner = () => {
 
 
 export const CommentSpinner = () => {
+  const EmptyValues = [...Array(4)]
+  const content  = EmptyValues.map((title, id) => ({id: id, title: title}))
   return (
-    <>
-      <div className='skeleton w-[30%] h-4 mb-0.5 rounded-sm'></div>
-      <div className='skeleton w-full h-4 mb-0.5 rounded-sm'></div>
-      <div className='skeleton w-full h-4 mb-0.5 rounded-sm'></div>
-      <div className='skeleton w-full h-4 mb-0.5 rounded-sm'></div>
-      <div className='skeleton w-[80%] h-4 mb-0 rounded-sm'></div>
-      <div className='skeleton w-[45%] h-4 mb-0 mt-2.5 rounded-sm'></div>
-    </>
+    <ul>
+      {content.map(comment => {
+
+        return (
+          <li key={comment.id} className="mb-5">
+            <div className='skeleton w-[30%] h-4 mb-0.5 rounded-sm'></div>
+            <div className='skeleton w-full h-4 mb-0.5 rounded-sm'></div>
+            <div className='skeleton w-full h-4 mb-0.5 rounded-sm'></div>
+            <div className='skeleton w-full h-4 mb-0.5 rounded-sm'></div>
+            <div className='skeleton w-[80%] h-4 mb-0 rounded-sm'></div>
+            <div className='skeleton w-[45%] h-4 mb-0 mt-2.5 rounded-sm'></div>
+          </li>
+        )
+      })}
+    </ul>
   )
 }
 

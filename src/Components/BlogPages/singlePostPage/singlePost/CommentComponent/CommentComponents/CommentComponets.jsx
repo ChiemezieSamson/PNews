@@ -61,6 +61,7 @@ export const EditAndDeleteComment = ({handleEdit, handleDelete, commentId, handl
 
     // onClick check if the side box for the reply comment was opened 
     if (editEllipsis && handleSetEditReply) {
+
       // if yes close the reply component and open the update component
       const createComponent = event.target.nextSibling.nextSibling
       createComponent.style.display = "block"
@@ -74,12 +75,15 @@ export const EditAndDeleteComment = ({handleEdit, handleDelete, commentId, handl
 
   // handle sending comment or reply id for deletion
   const handleDeleteButton = (event) => {
+
     handleDelete(event)
   }
 
   // make sure to close the edit, deleted side box when the form area is clicked
   useEffect(() => { 
+
     if (!closeEditComment) {
+
       setEditEllipsis(() => false)
     }
   },[closeEditComment])
@@ -90,10 +94,8 @@ export const EditAndDeleteComment = ({handleEdit, handleDelete, commentId, handl
     <EditAndDeleteButton handler={handleOpenandCloseEdit}/> 
 
     {/* Edit, Delete and Delete Message container */}
-    <div  id={replyId} 
-      className={`absolute bg-white w-full py-2 m-0 shadow-inner shadow-gray-400 rounded-md max-w-[8rem] top-6 right-0 
-      ${editEllipsis ? "translate-y-0 opacity-100 visible TextHeadertransition"
-      : "translate-y-32 opacity-0 invisible"}`}>
+    <div  id={replyId} className={`absolute bg-white w-full py-2 m-0 shadow-inner shadow-gray-400 rounded-md max-w-[8rem] top-6 right-0 
+      ${editEllipsis ? "translate-y-0 opacity-100 visible TextHeadertransition" : "translate-y-32 opacity-0 invisible"}`}>
 
       {/* Edit Button */}
       <button 
@@ -101,7 +103,8 @@ export const EditAndDeleteComment = ({handleEdit, handleDelete, commentId, handl
         type='button' 
         className={`${!deleteMessage ? "block" : "hidden"} 
         font-medium prose mb-1.5 block text-sm px-2 hover:text-red-400 focus:text-sky-400 TextHeadertransition`}
-        onClick={handleEdit}>
+        onClick={handleEdit}
+      >
           Edit 
         {size.width < 1028 && <span> text</span>}
       </button>
@@ -118,14 +121,14 @@ export const EditAndDeleteComment = ({handleEdit, handleDelete, commentId, handl
 
       {/* DeleteMessage */}
       <div className={`${deleteMessage ? "block" : "hidden"} font-poppins font-medium text-stone-700 text-center`}>
+
         <span>Are you sure?</span>
 
         <div className='grid grid-flow-col justify-around'>
-          <span onClick={handleDeleteButton}  id={commentId}
-          className='hover:mainColor TextHeadertransition cursor-pointer'>yes</span>
 
-          <span onClick={() => setDeleteMessage(() => false)}  
-          className='hover:text-blue-400 TextHeadertransition cursor-pointer'>no</span>
+          <span onClick={handleDeleteButton} id={commentId} className='hover:mainColor TextHeadertransition cursor-pointer'>yes</span>
+
+          <span onClick={() => setDeleteMessage(() => false)} className='hover:text-blue-400 TextHeadertransition cursor-pointer'>no</span>
         </div>
       </div>
     </div>

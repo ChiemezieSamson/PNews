@@ -8,10 +8,14 @@ const Reply = ({comment, comments, User, postId, offsetOfForm, byUserId, postAut
 
   return (
     <div className='mt-3'>
+
        {comment?.replies?.length > 0 &&
        
           <details>
-            <summary className='text-sm italic text-blue-500 cursor-pointer inline'>{comment?.replies?.length} replies</summary>
+
+            <summary className='text-sm italic text-blue-500 cursor-pointer inline'>
+              {comment?.replies?.length}  {comment?.replies?.length < 2 ? "reply" : "replies"}
+            </summary>
             
             {comment?.replies?.map((reply) => {
 
@@ -19,20 +23,24 @@ const Reply = ({comment, comments, User, postId, offsetOfForm, byUserId, postAut
               const {text} = commentText(reply?.content)
 
               // changing the string content to html so that the any link will be displayed
-              const renderHTML = (htmlString) => {        
+              const renderHTML = (htmlString) => {  
+
                 return { __html: htmlString };        
               };        
 
               // Render the data with the link as a clickable link
               const renderedData = (
+
                 <p dangerouslySetInnerHTML={renderHTML(text)}></p>
               )    
 
               return (
-                <div key={reply._id} className={`${reply.name && "bg-neutral-200 rounded-md my-2 px-4 py-2"}`}>
+                <div key={reply?._id} className={`${reply?.name && "bg-neutral-200 rounded-md my-2 px-4 py-2"}`}>
 
-                  {reply.name &&
+                  {reply?.name &&
+
                     <article className="relative font-round">
+                      
                       <h3 className="font-medium capitalize -mb-2.5 font-josefin text-stone-700" name={reply?.name}>
                         {reply?.name} 
                         <small className="text-neutral-500 mt-1 prose ml-1 normal-case"> - {formatDate(reply?.createdAt)}</small>

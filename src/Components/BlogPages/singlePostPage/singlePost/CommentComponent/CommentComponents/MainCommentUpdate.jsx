@@ -20,30 +20,34 @@ const MainCommentUpdate = ({comments, comment, postId, User, editEllipsis, postA
 
   // Open and close the update form function
   const handleSetEditComment = (text) => {
+
     setEditComment(() => text)
   }  
 
 
   // Open and close the delete and edit button box function
   const handleSetCloseEditComment = (text) => {
+
     setCloseEditComment(() => text)
   }  
 
 
   // UPADTE EXISTING MAIN COMMENT
   const handleUpdateComment = (event) => {
+
     const commentId = event.target.id
   
     // get the comment clicked on for edit
-    const userComment = comments.find((comment) => comment._id === commentId)
+    const userComment = comments?.find((comment) => comment?._id === commentId)
     
     if(userComment) {
+
       // hide the create reply component
       const createComponent = event.target.parentElement.nextSibling 
       createComponent.style.display = "none"
 
       setCommentId(() => commentId) // set the comment id
-      setReplyContent(() => userComment.content.trim()) // set the comment text content
+      setReplyContent(() => userComment?.content?.trim()) // set the comment text content
 
       handleSetEditComment(true)
     } else {
@@ -62,6 +66,7 @@ const MainCommentUpdate = ({comments, comment, postId, User, editEllipsis, postA
     const canDelete = [commentId].every(Boolean) && !deleting
 
     if(canDelete) {
+
       try {
 
         await  deleteComment({commentId})
@@ -75,6 +80,7 @@ const MainCommentUpdate = ({comments, comment, postId, User, editEllipsis, postA
 
   // Handle getting content entered to the form textarea
   const handleSetFormContent = (event) => {
+
     setReplyContent(() => event.target.value)
   }
 
@@ -88,6 +94,7 @@ const MainCommentUpdate = ({comments, comment, postId, User, editEllipsis, postA
     
     // Update just the main comment
     if(canSave) {
+
       try {
         const content = replyContent
 
@@ -124,6 +131,7 @@ const MainCommentUpdate = ({comments, comment, postId, User, editEllipsis, postA
   return (
     <>
       {EditComment &&
+      
         <div onClick={() => setCloseEditComment(() => false)}>
           
           {/* Reaction Buttons and reply Button for main comment */}
@@ -146,8 +154,9 @@ const MainCommentUpdate = ({comments, comment, postId, User, editEllipsis, postA
       }
         
       {(comment?.onSaveId === User?.onSaveId || byUserId?._id === postAuthor) &&
+
         <EditAndDeleteComment 
-          commentId={comment._id}
+          commentId={comment?._id}
           handleEdit={handleUpdateComment} 
           handleDelete={handleDeleteComment}
           editEllipsis={editEllipsis}

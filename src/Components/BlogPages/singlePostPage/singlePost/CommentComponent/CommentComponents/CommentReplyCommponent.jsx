@@ -20,7 +20,9 @@ const CommentReplyCommponent = ({reply, postId, User, comment, byUserId,  offset
 
   // CREATE NEW REPLY BY CLICK TO THE REPLY BUTTON ON THE MAIN COMMENT AND REPLY
   const handleCreateReplyOnComment = (e) => { 
+
     if (byUserId === postAuthor || User) {
+
       const CommentId = e.target.parentElement.id // get the comment id from the element
       const ReplyTo = e.target.parentElement.getAttribute("name") // get the author
 
@@ -28,6 +30,7 @@ const CommentReplyCommponent = ({reply, postId, User, comment, byUserId,  offset
 
       // check to see the textcontent of the button and toggle to reply or cancle accordingly
       if(e.target.textContent === "Reply") {
+
         e.target.textContent = "Cancle" // change the to cancle
 
         // disable the 3 dotted hambuger button
@@ -57,6 +60,7 @@ const CommentReplyCommponent = ({reply, postId, User, comment, byUserId,  offset
 
   // Handle getting content entered from the form component
   const handleSetFormContent = (event) => {
+    
     setReplyContent(() => event.target.value)
   }
 
@@ -72,8 +76,10 @@ const CommentReplyCommponent = ({reply, postId, User, comment, byUserId,  offset
     if(canSave) {
 
       try {
-        await createReply({commentId, replyTo, author: User.author, replyContent, postId}).unwrap()
+
+        await createReply({commentId, replyTo, author: User?.author, replyContent, postId}).unwrap()
       } catch (err) {
+
         console.error("Failed to save the reply: ", err)
       }          
     } 
@@ -89,6 +95,7 @@ const CommentReplyCommponent = ({reply, postId, User, comment, byUserId,  offset
 
 
   useEffect(() => {
+
     if(byUserId === postAuthor || User) {
 
       // open the button that will direct the new user to the form component
@@ -101,7 +108,7 @@ const CommentReplyCommponent = ({reply, postId, User, comment, byUserId,  offset
   
 
   return (
-    <div>
+    <>
       {reply ? 
 
         <ReactionAndReplyButtonForReply
@@ -137,7 +144,7 @@ const CommentReplyCommponent = ({reply, postId, User, comment, byUserId,  offset
           buttonText={"Reply"}
         />   
       }
-    </div>
+    </>
   )
   }
 

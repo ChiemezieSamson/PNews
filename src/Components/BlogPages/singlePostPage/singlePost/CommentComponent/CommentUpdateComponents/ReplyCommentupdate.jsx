@@ -21,24 +21,27 @@ const ReplyCommentupdate = ({comments, User, postId, reply, comment, byUserId, p
 
    // Open and close the update form function
   const handleSetEditReply = (text) => {
+
     setEditReply(() => text)
   }  
 
   // Open and close the delete and edit button box function
   const handleSetCloseEditComment = (text) => {
+
     setCloseEditComment(() => text)
   }  
 
 
   // UPADTE EXISTING REPLY
   const handleUpdateReply = (event) => {
+
     const commentId = event.target.id
     const replyId = event.target.parentElement.id
 
     // get the comment clicked on for edit
-    const CommentAuthor = comments.find((comment) => comment._id === commentId)
+    const CommentAuthor = comments.find((comment) => comment?._id === commentId)
     // find the reply clicked on for edit from the comment replies array
-    const userReply = CommentAuthor.replies.find((reply) => reply._id === replyId)
+    const userReply = CommentAuthor.replies.find((reply) => reply?._id === replyId)
     
     if(userReply) {
       // hide the create reply component
@@ -66,7 +69,7 @@ const ReplyCommentupdate = ({comments, User, postId, reply, comment, byUserId, p
   const handleDeleteReply = async (event) => {
     const commentId = event.target.id
     const replyId = event.target.parentElement.parentElement.parentElement.id
-    const author = User.author
+    const author = User?.author
 
     const canDelete = [commentId, replyId, author, postId].every(Boolean) && !replyDeleting
 
@@ -98,6 +101,7 @@ const ReplyCommentupdate = ({comments, User, postId, reply, comment, byUserId, p
     
     // Update existing reply
     if(canSave) {
+
       try {
         const content = replyContent
 
@@ -136,7 +140,9 @@ const ReplyCommentupdate = ({comments, User, postId, reply, comment, byUserId, p
   return (
     <>
       {EditReply &&
-        <div onClick={() => setCloseEditComment(() => false)}>          
+
+        <div onClick={() => setCloseEditComment(() => false)}>    
+
           <ReactionAndReplyButtonForReply
             handler={handleCancle}
             comment={comment}
@@ -157,9 +163,10 @@ const ReplyCommentupdate = ({comments, User, postId, reply, comment, byUserId, p
       }
 
       {(reply?.name === User?.author || byUserId?._id === postAuthor) &&
+
         <EditAndDeleteComment 
-          replyId={reply._id}
-          commentId={comment._id}
+          replyId={reply?._id}
+          commentId={comment?._id}
           handleEdit={handleUpdateReply} 
           handleDelete={handleDeleteReply}
           closeEditComment={closeEditComment}
