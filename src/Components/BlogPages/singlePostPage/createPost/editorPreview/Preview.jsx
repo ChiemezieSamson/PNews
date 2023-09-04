@@ -10,25 +10,23 @@ const Preview = ({editorText, postContent}) => {
    
 
   useEffect(() => {
+
     if (postContent) {
+
       setConvertedPosts(() => postContent)
     }
   },[postContent])
 
-
-
   useEffect(() => {
+
     const defaultText = {blocks:[{key:"9f98v",text:"My post ...! |",type:"unstyled",depth:0,inlineStyleRanges:[],entityRanges:[],data:{}}],entityMap:{}}
     let html = draftToHtml(convertedPosts !== "" ? JSON.parse(convertedPosts) : editorText  ? convertToRaw(editorText) : defaultText)
+
     setConvertedContent(html)  
   }, [convertedContent, editorText, convertedPosts])
 
-  // useEffect(() => {
-  //   console.log(convertedPosts);
-  // },[convertedPosts])
- 
-
   const  handleMarkUp = (html) => {
+    
     return {
       __html: DOMPurify.sanitize(html)
     }

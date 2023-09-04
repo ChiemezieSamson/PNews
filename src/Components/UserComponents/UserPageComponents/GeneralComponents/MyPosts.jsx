@@ -52,11 +52,11 @@ const MyPosts = ({userAction}) => {
                       <Link to={`/single/${post?._id}`} className='hover:mainColor cursor-pointer TextHeadertransition' title="title">
                         {post?.postTitle.substring(0, 70)}
                       </Link>
-                      &nbsp;&nbsp;&nbsp;
-                      <span className='inline-block align-top -mt-0.5'>
-                       <TimeComponentColor time={post?.createdAt}/>
-                      </span>
                     </h3>                   
+                     
+                    <span className='inline-block align-top -mt-0.5'>
+                      <TimeComponentColor time={post?.createdAt}/>
+                    </span>
                   </li>
                 )
               })}

@@ -111,7 +111,7 @@ export const useFetchedPostByUserId = (page = 1) => {
    
     postAction = false
 
-  } else if (isSuccess  && post?.length > 0) {
+  } else if (isSuccess  && post?.post?.length > 0) {
 
     postAction = true
     singlePost = post

@@ -20,7 +20,7 @@ const EditPost = () => {
   );}
   
   return (
-    <div className='my-32'>
+    <div className={postAction ? "" : `my-32`}>
 
     {postAction ? 
 

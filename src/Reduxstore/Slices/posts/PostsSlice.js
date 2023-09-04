@@ -138,15 +138,46 @@ export const extendedPostsApiSlice = apiSlice.injectEndpoints({
 			async onQueryStarted(initialPost, { dispatch, queryFulfilled }) {
 				const patchResult = dispatch(
 					extendedPostsApiSlice.util.updateQueryData(
-						"getPosts",
-						undefined,
+						`${initialPost.home ? "getPosts" : "getPostById"}`,
+						`${initialPost.home ? undefined : initialPost.postId}`,
 						(draft) => {
-							const post = draft.find(
-								(post) => post._id === initialPost.postId
-							);
+							const post = initialPost.home
+								? draft.find((post) => post._id === initialPost.postId)
+								: draft;
 
 							if (post) {
 								post.optional.socialmediashare[initialPost?.social]++;
+								post.optional.shared++;
+							}
+						}
+					)
+				);
+				try {
+					await queryFulfilled;
+				} catch {
+					patchResult.undo();
+				}
+			},
+		}),
+
+		upDateViewedPosts: builder.mutation({
+			query: (initialPost) => ({
+				url: `posts/viewed/${initialPost.postId}`,
+				method: "PUT",
+				body: initialPost,
+			}),
+
+			invalidatesTags: (result, error, arg) => [{ id: arg._id }],
+			async onQueryStarted(initialPost, { dispatch, queryFulfilled }) {
+				const patchResult = dispatch(
+					extendedPostsApiSlice.util.updateQueryData(
+						"getPostById",
+						initialPost.postId,
+						(draft) => {
+							const post = draft;
+
+							if (post) {
+								post.optional.viewed++;
 							}
 						}
 					)
@@ -181,6 +212,7 @@ export const {
 	useUpdateExistingPostMutation,
 	useMarkPostFavouriteStatusMutation,
 	useUpDateSharedPostsMutation,
+	useUpDateViewedPostsMutation,
 	useDeleteExistingPostMutation,
 } = extendedPostsApiSlice;
 

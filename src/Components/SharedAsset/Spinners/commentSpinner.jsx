@@ -81,14 +81,14 @@ export const useFetchedCommentById = () => {
   // Notify true only when the comments are ready
   let contentAction = false
 
-
   if (isFetching) {
 
     // show a background Spinner
     singleContent = <CommentSpinner />
     contentAction = false
+    
 
-  } else if (isSuccess && comment?.length > 0) {
+  } else if (isSuccess) {
 
     contentAction = true
     singleContent = comment

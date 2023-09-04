@@ -273,23 +273,22 @@ export const SocialMediaLinks = () => {
 
 // hero page Popular Post social media with share count
 const SocialMediaCount = ({text, bg, shareUrl, postTitle, postId, SocialSharedCount}) => {
-  let social // getting the name of the share button clicked
   const [updateSocial, { isLoading }] = useUpDateSharedPostsMutation() // redux toolkit mutation function
-
-  // handling setting of the clicked button
-  const handleSetSocial = (event) => {
-
-    social = event.target.ariaLabel
-  }
 
   const canShare = [postId, postTitle].every(Boolean) && !isLoading // making sure that every thing is ready
 
   // making a call to redux api slice
-  const handleShareUpdate = async() => {
+  const handleShareUpdate = async(event) => {
 
-    if (canShare && social) {
+    if (canShare) {
 
-      await updateSocial({ postId, postTitle, social})
+      try {
+
+        await updateSocial({ postId, postTitle, social: event.target.ariaLabel, home: "null"})
+      } catch (err) {
+        
+        console.error(err)
+      }
     }
   }
 
@@ -300,36 +299,36 @@ const SocialMediaCount = ({text, bg, shareUrl, postTitle, postId, SocialSharedCo
 
         <span id={text} className='absoluste left-1 top-[2px] mr-1'>
 
-        {text === "Share" ? 
+          {text === "Share" ? 
 
-          <FacebookShareButton 
-            url={shareUrl}  
-            quote={postTitle} 
-            disabled={!canShare}
-            disabledStyle={{opacity: 0.4}}
-            className={`my-0.5 mx-2 disabled:opacity-40`} 
-            onShareWindowClose={handleShareUpdate}
-            onClick={handleSetSocial}
-          >
+            <FacebookShareButton 
+              url={shareUrl}  
+              quote={postTitle} 
+              disabled={!canShare}
+              disabledStyle={{opacity: 0.4}}
+              resetButtonStyle={true}
+              className={`my-0.5 mx-2`} 
+              onClick={handleShareUpdate}
+            >
 
-          <FaFacebookSquare className='inline-block text-base align-text-top pr-1 TextHeadertransition'/> 
-            { text}
-          </FacebookShareButton>
-        : 
-          <TwitterShareButton         
-            url={shareUrl}
-            title={postTitle}
-            disabled={!canShare}
-            disabledStyle={{opacity: 0.4}}
-            className={`my-0.5 mx-2 disabled:opacity-40`} 
-            onShareWindowClose={handleShareUpdate}
-            onClick={handleSetSocial}
-          >
+            <FaFacebookSquare className='inline-block text-base align-text-top pr-1 TextHeadertransition'/> 
+              { text}
+            </FacebookShareButton>
+          : 
+            <TwitterShareButton         
+              url={shareUrl}
+              title={postTitle}
+              disabled={!canShare}
+              disabledStyle={{opacity: 0.4}}
+              resetButtonStyle={true}
+              className={`my-0.5 mx-2 disabled:opacity-40`} 
+              onClick={handleShareUpdate}
+            >
 
-          <FaTwitter className='inline-block text-base align-text-top pr-1'/>
-            { text}
-          </TwitterShareButton>
-        }
+            <FaTwitter className='inline-block text-base align-text-top pr-1'/>
+              { text}
+            </TwitterShareButton>
+          }
         </span>        
       </span>
 
@@ -532,7 +531,6 @@ export const NewsLetter = ({textColor}) => {
           type="email" 
           placeholder='Your email address' 
           name='newsletteremail' 
-          id='newsletteremail'
           className='bg-white focus:outline-none w-full h-16 max-h-11 col-span-6 md:w-auto py-0 focus:ring-0 my-0 focus:border border rounded-none'
         />
 
