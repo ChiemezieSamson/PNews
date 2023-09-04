@@ -23,19 +23,21 @@ const useFetchedCategories = () => {
 
   if (isLoading) {
 
-    // show a background Spinner
-    categoriesContent = <div className='skeleton w-full h-4 mb-0.5 rounded-sm'></div>
     categoriesaction = false
 
   } else if (isSuccess && Categories?.length > 0) {
+
     let newCategories = Object.assign({}, Categories[0]); // copy just the first object
 
     let categories = [];
 
     // getting the category in all the parent categories and pushing to "categories"
     for (const cats in newCategories) {
+
       if (newCategories[cats]?.category) {
+
         for (const eachCat of newCategories[cats]?.category) {
+          
           categories?.push(eachCat);
         }
       }

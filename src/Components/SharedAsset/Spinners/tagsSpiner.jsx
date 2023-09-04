@@ -25,14 +25,18 @@ const useFetchedTags = () => {
     tagsaction = false
 
   } else if (isSuccess && Tags?.length > 0) {
+
     let newTags = Object.assign({}, Tags[0]); // copy just the first object
 
     let tags = [];
 
      // getting the category in all the parent categories and pushing to "categories"
     for (const cats in newTags) {
+
       if (newTags[cats]?.tags) {
+
         for (const eachTag of newTags[cats]?.tags) {
+          
           tags?.push(eachTag);
         }
       }

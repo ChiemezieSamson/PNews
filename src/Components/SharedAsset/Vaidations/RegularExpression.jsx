@@ -1,5 +1,3 @@
-
-
 // regular expression that allows only text (no symbols, no numbers, no space)
 export const textOnly = (value) => {
   const textOnlyRegex = /^[a-zA-Z]{2,}$/;
@@ -8,8 +6,10 @@ export const textOnly = (value) => {
   let isValid 
 
   if(textOnlyRegex.test(value) && noEmailOrURLRegex.test(value)){
+
     isValid = true
   } else {
+
     isValid = false
   }
 
@@ -26,13 +26,16 @@ export const textSpaceAndNumber = (value) => {
   let isValid 
 
   if(alphanumericRegex.test(value) && noEmailOrURLRegex.test(value)){
+
     isValid = true
   } else {
+
     isValid = false
   }
 
   return {isValid: isValid}
 }
+
 
 // regular expression that allows only letters and numbers (no symbols)
 export const textAndNumberOnly = (value) => {
@@ -42,8 +45,10 @@ export const textAndNumberOnly = (value) => {
   let isValid 
 
   if(alphanumericRegex.test(value) && noEmailOrURLRegex.test(value)){
+
     isValid = true
   } else {
+
     isValid = false
   }
 
@@ -59,6 +64,7 @@ export const handleEmailPattern = (value) => {
 
   return {isValid: isValidEmail}
 }
+
 
 // A regular expression for phone numbers 
 export const handlePhoneNumbers = (value) => {
@@ -81,6 +87,7 @@ export const handleUrlLinks = (value) => {
   return {isValid: isValidWebsite}
 }
 
+
 // regular expression that allows Password of text,symblo,upperCase,LowerCase,number
 export const handleUserPassword = (value) => {
   const passwordRegex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
@@ -101,7 +108,6 @@ export const livingaddress = (value) => {
 }
 
 
-
 // searching for a link included into the comment box.
 export const commentText = (comment) => {
   const commentContent = comment
@@ -110,6 +116,7 @@ export const commentText = (comment) => {
 
   // if the textarea content has a link add it inside a link tag
   if (commentContent.match(linkPattern)) {
+    
     const modifiedText = commentContent.replace(linkPattern, 
       `<a href="$&" target={"_blank"}
           class="text-blue-500 active:text-blue-400 cursor-pointer visited:text-purple-400">$&</a>`);

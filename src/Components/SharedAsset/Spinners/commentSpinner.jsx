@@ -1,6 +1,5 @@
 import { useGetCommentsByPostIdQuery, useGetCommentsQuery } from "../../../Reduxstore/Slices/comments/CommentsSlice"
 import { useMemo } from "react"
-import { CommentSpinner } from "./Spinner"
 import { useParams } from "react-router-dom"
 
 // Use to fecth the comments when ever a call to the function is made
@@ -57,6 +56,7 @@ export const useFindThisUser = () => {
   let replyAuthor 
 
   if(commentaction && commentUserName && randomCommentId) {
+
     replyAuthor =  commentsContent?.find(item => item?.onSaveId === randomCommentId && item?.author === commentUserName)
   }
   
@@ -83,10 +83,7 @@ export const useFetchedCommentById = () => {
 
   if (isFetching) {
 
-    // show a background Spinner
-    singleContent = <CommentSpinner />
-    contentAction = false
-    
+    contentAction = false    
 
   } else if (isSuccess) {
 

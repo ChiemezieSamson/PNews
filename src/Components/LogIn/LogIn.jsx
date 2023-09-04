@@ -27,8 +27,10 @@ const LogIn = () => {
 
   // handling setting the value of Username
   const handleUserName = (e) => {
+
     // close the error message(if any), once the user change any input
     if(errMsgOn) {
+
       setErrMsg(() => "")
       setErrMsgOn(() => false)
     }
@@ -41,8 +43,10 @@ const LogIn = () => {
 
    // handling save the email content
    const handleEmail = (event) => {
+
     // close the error message(if any), once the user change any input
      if(errMsgOn) {
+
       setErrMsg(() => "")
       setErrMsgOn(() => false)
     }
@@ -55,8 +59,10 @@ const LogIn = () => {
 
    // handing getting and setting users password 
   const handleUserpassword = (e) => {
+
     // close the error message(if any), once the user change any input
     if(errMsgOn) {
+
       setErrMsg(() => "")
       setErrMsgOn(() => false)
     }
@@ -82,8 +88,8 @@ const LogIn = () => {
           dispatch(setCredentials(userData)) // send the update to redux store
 
           // get the access token and user id set back from the server and save it to the local storage
-          localStorage.setItem('userToken', userData.accessToken) 
-          localStorage.setItem('userId', userData._id)
+          localStorage.setItem('userToken', userData?.accessToken) 
+          localStorage.setItem('userId', userData?._id)
 
           setUsername(() => "")
           setConfirmPassword(() => "")
@@ -113,6 +119,7 @@ const LogIn = () => {
   }
 
   useEffect(() => {
+
     if (isSuccess) {
       
      navigate("/userpage", {replace: true}, [navigate])
@@ -124,6 +131,7 @@ const LogIn = () => {
     <div className={`pb-10 pt-3 text-left bg-gradient-to-b from-neutral-100 via-gray-50 to-neutral-100 ${isFecthingStyle(isLoading)}`}>
       
       <div className="md:w-[28rem] max-w-sm font-lora px-6 pb-3 rounded mx-auto">
+
         {errMsgOn && <p className='text-xs text-rose-500 tracking-wider font-lora'>{errMsg}</p>}
 
         {/* login title */}
@@ -228,10 +236,10 @@ const LogIn = () => {
 
             {/* login button */}
             <button
-            type='submit'
-            className='cursor-pointer w-full text-sm py-1 bg-rose-500 border-0 text-white rounded-md tracking-wide
-            hover:bg-rose-600 TextHeadertransition shadow-md shadow-gray-400 disabled:opacity-40'
-            disabled={!canSave}
+              type='submit'
+              className='cursor-pointer w-full text-sm py-1 bg-rose-500 border-0 text-white rounded-md tracking-wide
+              hover:bg-rose-600 TextHeadertransition shadow-md shadow-gray-400 disabled:opacity-40'
+              disabled={!canSave}
             >Sign In</button>
           </form>
         </div>

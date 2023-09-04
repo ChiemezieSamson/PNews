@@ -1,6 +1,5 @@
 import React, { useMemo } from 'react'
 import { useLocation, useParams } from 'react-router-dom'
-import { SinglePostSpinner, SkeletonTextTwo } from './Spinner'
 import { useGetPostByIdQuery, useGetPostByUserIdQuery, useGetPostsByPaginationQuery, 
   useGetPostsByPaginationTwoQuery, useGetPostsByQueryQuery, useGetPostsQuery } from '../../../Reduxstore/Slices/posts/PostsSlice'
 
@@ -32,8 +31,6 @@ export const useFetchedPosts = () => {
 
   if (isLoading) {
 
-    // show a background Spinner
-    content = <SkeletonTextTwo />
     action = false
 
   } else if (isSuccess && posts?.length > 0) {
@@ -70,8 +67,6 @@ export const useFetchedPostById = () => {
 
   if (isFetching) {
 
-    // show a background Spinner
-    singlePost = <SinglePostSpinner />
     postAction = false
 
   } else if (isSuccess && post._id) {

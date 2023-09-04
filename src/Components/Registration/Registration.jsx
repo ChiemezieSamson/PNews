@@ -41,8 +41,10 @@ const RegistrationForm = () => {
 
   // handling setting the value of first name
   const handleFirstName = (e) => {
+
     // close the error message(if any), once the user change any input
     if(errMsgOn) {
+
       setErrMsg(() => "")
       setErrMsgOn(() => false)
     }
@@ -55,8 +57,10 @@ const RegistrationForm = () => {
 
   // handling setting the value of last name
   const handleLastName = (e) => {
+
     // close the error message(if any), once the user change any input
     if(errMsgOn) {
+
       setErrMsg(() => "")
       setErrMsgOn(() => false)
     }
@@ -73,6 +77,7 @@ const RegistrationForm = () => {
 
     // close the error message(if any), once the user change any input
     if(errMsgOn) {
+
       setErrMsg(() => "")
       setErrMsgOn(() => false)
     }
@@ -85,6 +90,7 @@ const RegistrationForm = () => {
     setUsername(() => value)
 
     if (checkUserName?.includes(value?.toLowerCase())){ // checke if the entered value is in existence
+      
       setUserNameExist(() => true)
     }
   }
@@ -95,6 +101,7 @@ const RegistrationForm = () => {
 
     // close the error message(if any), once the user change any input
     if(errMsgOn) {
+
       setErrMsg(() => "")
       setErrMsgOn(() => false)
     }
@@ -107,6 +114,7 @@ const RegistrationForm = () => {
     setPrimary(() => value)
 
     if (checkUserEmail?.includes(value)){ // checke if the entered value is in existence
+      
       setEmailExist(() => true)
     }
    }
@@ -117,6 +125,7 @@ const RegistrationForm = () => {
 
     // close the error message(if any), once the user change any input
     if(errMsgOn) {
+
       setErrMsg(() => "")
       setErrMsgOn(() => false)
     }
@@ -127,6 +136,7 @@ const RegistrationForm = () => {
     setPassword(() => value)
 
     if(confirmPassword && value !== confirmPassword) {
+
       setPasswordNotSame(() => true)
     }
   }
@@ -137,6 +147,7 @@ const RegistrationForm = () => {
 
     // close the error message(if any), once the user change any input
     if(errMsgOn) {
+
       setErrMsg(() => "")
       setErrMsgOn(() => false)
     }
@@ -147,6 +158,7 @@ const RegistrationForm = () => {
     setConfirmPassword(() => value)
 
     if(value !== password) {
+
       setPasswordNotSame(() => true)
     }
   }
@@ -190,6 +202,7 @@ const RegistrationForm = () => {
     <div className={`pb-10 pt-3 text-left bg-gradient-to-b from-neutral-100 via-gray-50 to-neutral-100 ${isFecthingStyle(isFetching)}`}>
       
       <div className="md:w-[28rem] max-w-sm font-lora px-6 pb-3 rounded mx-auto">
+        
         {errMsgOn && <p className='text-xs text-rose-500 tracking-wider font-lora'>{errMsg}</p>}
 
         {/* Register title */}

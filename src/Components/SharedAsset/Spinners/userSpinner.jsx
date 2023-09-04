@@ -35,6 +35,7 @@ const useFetchedUsers = () => {
   return {userContent , useraction, isFetching}
 }
 
+
 // Use to fecth the user by thier Id when ever a call to the function is made
 export const useFetchedUserById = () => {
   let userId = localStorage.getItem("userId") // getting the user id from the localStorage

@@ -154,11 +154,14 @@ export const CatSidebarHanbugar = ({initial, blackletters, redletters, parent, c
 
   // open and close display control
   const handleShowCatSideBar = () => {
+
     setCatSidebar((open) => !open)
   }
 
   useEffect(() => {
+
     if (size.width >= 1000) {
+
       setCatSidebar(() => false)
     }
   }, [catSidebar, size])
@@ -339,6 +342,7 @@ const SocialMediaCount = ({text, bg, shareUrl, postTitle, postId, SocialSharedCo
         before:border-l-transparent after:absolute after:right-full  after:top-[40%] after:-mt-[1px]
         after:border-[3px] after:border-solid after:border-r-white  after:border-y-transparent 
         after:border-l-transparent '>
+
         {SocialSharedCount[text === "Share" ? "facebook" : "twitter"]}
       </span> 
     </span>
@@ -356,6 +360,7 @@ export const SharedCount = ({postId, postTitle, SocialSharedCount, canOpen}) => 
       <span ref={hoverRef}>
 
         {canOpen && isHovered ?
+
           <>
             <SocialMediaCount  
               text={"Share"} 
@@ -400,11 +405,13 @@ export const SocialLinks = ({others}) => {
       {(others ? others : SocialMediaIcons?.slice(0, 5))?.map((link) => {
 
         return (
-
           <li key={link?.id}>
+
             <a href={link?.link} target="_blank" rel="noopener noreferrer" className={`text-xl block ${others ? link?.bg : "bg-[#fff]"} font-bold ${others ? link?.hv : "hover:bg-slate-200/75"} cursor-pointer border border-solid border-[#e0e0e0]
               TextHeadertransition`} onClick={(e) => e.preventDefault()}>
+
               <span className={`${others ? "text-white" : "text-[#53585c]"}`}>
+
                 <span className={`block text-3xl ${others ? "text-white" : link?.socialLinks}`}>{link?.icon}</span>
                 <span className='block'>{link?.number}</span>
                 <small className={`${others ? "text-white" : "text-[#a0a0a0]"} prose text-xs`}>{link?.text}</small>
@@ -733,7 +740,7 @@ export const AdminComponentColor = ({user, users}) => {
 // Post body short introduction component
 export const PostsShortInfoComponent = ({post}) => {
   const postContent =  (<Preview postContent={post}/>)
-  const textExtract = JSON.parse(postContent.props.postContent).blocks[0].text
+  const textExtract = JSON.parse(postContent?.props?.postContent)?.blocks[0]?.text
 
   return (
     <div className="text-ellipsis prose text-stone-500 md:text-[13px] leading-[20px] text-sm imgxs:text-[15px] lg:text-base">
