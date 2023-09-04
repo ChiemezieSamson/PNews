@@ -308,7 +308,6 @@ const UpdatePostComponent = ({state, post, postId, postAction, isFetching}) => {
             editorText={editorState.getCurrentContent()} 
             postTitle={postTitle}
             postImage={postImage}
-            postAuthor={postAuthor}
             postTags={postTags}
             optional={optional}
             postCategory={postCategory?.length > 0 ? postCategory :  post?.postCategory}

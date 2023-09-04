@@ -1,8 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
-import {  FaMinus, FaPlus, FaRedo, FaRegComment, FaRegStar, FaStar} from 'react-icons/fa'
-import { BiFontFamily } from "react-icons/bi";
+import {  FaMinus, FaPlus, FaRedo, FaRegStar, FaStar} from 'react-icons/fa'
 import StickyBox from "react-sticky-box";
-import { isFecthingStyle, useHover, useWindowSize} from '../../../SharedAsset/SharedAssets';
+import { isFecthingStyle, useWindowSize} from '../../../SharedAsset/SharedAssets';
 import Aside from '../../asidePage/Aside';
 import CommentForm from './CommentComponent/CommentForm';
 import Comment from './CommentComponent/Comment';
@@ -19,6 +18,7 @@ import { handelPassWordValidation } from '../../../SharedAsset/Vaidations/bcrypt
 import useFetchedComments, { useFetchedCommentById } from '../../../SharedAsset/Spinners/commentSpinner';
 import { SinglePostSpinner, SkeletonTextTwo } from '../../../SharedAsset/Spinners/Spinner';
 import { handleUserPassword } from '../../../SharedAsset/Vaidations/RegularExpression';
+import TexSizeAdjuster from './singlePostComponets/TexSizeAdjuster';
 
 
 const SinglePost = () => {
@@ -43,8 +43,6 @@ const SinglePost = () => {
   const [isValid, setIsValid] = useState(false) // regular expressions
 
   const [userpassword, setGetUserpassword] = useState("")
-
-  const [hoverRef, isHovered] = useHover() // handling hovering of the textsize icon
 
   const [sizeLine, setSizeLine] = useState(20)
   const [textSize, setTextSize] = useState("prose-base")
@@ -329,60 +327,11 @@ const SinglePost = () => {
                 }
               </div>
               
-              
-              {/* Text size adjuster and comment number */}
-              <span className='align-top text-lg sm:mt-0.5 inline-block'>
-
-                {/* Text size adjuster */}
-                <span className='relative mx-3'>
-
-                  <span title='text size' ref={hoverRef}>
-
-                    <BiFontFamily  className='inline-block text-neutral-500'/>
-
-                    {isHovered &&
-
-                      <div className='absolute top-full -translate-x-[50%] pt-4 z-20 whitespace-nowrap w-48 max-h-[104px] text-center'>
-
-                        <div className='bg-neutral-50 relative rounded -translate-x-[30%] shadow-sm shadow-neutral-300 grid grid-cols-2 grid-rows-2 after:absolute after:right-2
-                          after:bottom-full after:bg-white after:-ml-1.5 after:border-b-[12px] after:border-x-[10px] after:border-solid after:border-b-white  after:border-x-[rgba(0,0,0,2%)]
-                          after:border-t-[rgba(0,0,0,2%)]'>
-
-                          {fontSizeButton.map((bnt) => {
-
-                            return (
-
-                              <button 
-                                key={bnt.id}
-                                name='textsizeButton' 
-                                className="last:col-span-2 text-sky-500 last:text-neutral-300 last:hover:text-neutral-500 py-1.5 last:border-t-2 last:border-solid 
-                                last:border-sky-500 first:border-r first:border-solid first:border-neutral-300 relative isolate after:absolute  after:inset-0 after:z-30" 
-                                title={bnt.title ? bnt.title : ""} 
-                                onClick={bnt.onClick}
-                              >
-                                {bnt.icon}
-                              </button>
-                            )
-                          })}                  
-                        </div> 
-
-                        <div className="absolute inset-x-0 z-30 h-[2px] top-[58%] -left-[30%] bg-red-500" style={{width:`${sizeLine}%`}}></div>
-                      </div>                                 
-                    }
-                  </span>                     
-                </span>
-
-                {/* Comment number */}
-                <span className='hidden sm:inline-block'>
-
-                  <FaRegComment className="text-[#2e9fff] inline-block mr-1.5 align-middle"/> 
-
-                  <span className='mb-0.5 text-[#7a7a7a]/80 leading-4 align-middle inline-block font-medium'>
-                    {(canOpen && comments?.length) ? comments?.length : 0}
-                  </span>
-                    
-                </span>
-              </span>
+              <TexSizeAdjuster 
+                fontSizeButton={fontSizeButton}
+                sizeLine={sizeLine}
+                comments={comments}
+              />
             </div>
 
             {/* post image */}

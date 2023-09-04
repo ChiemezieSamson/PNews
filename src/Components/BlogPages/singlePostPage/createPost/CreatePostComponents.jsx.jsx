@@ -270,7 +270,6 @@ const CreatePostComponents = ({state}) => {
           <PostWritePreview 
             editorText={editorState.getCurrentContent()} 
             postTitle={postTitle}
-            postAuthor={postAuthor}
             postTags={postTags}
             optional={optional}           
             postImage={postImage}        
