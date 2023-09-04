@@ -16,12 +16,14 @@ export const CommentReactionButtons = ({comment, authorId, postId}) => {
   const [reactionAddedComment, { isLoading }] = useUpdateCommentReactionMutation()
 
   const handleUpdateReaction = async (e) => {
-    const commentId = comment._id
+
+    const commentId = comment?._id
     const reaction = e.target.id
     
     const canSave = !isLoading && [commentId, reaction, authorId].every(Boolean)
 
     if(canSave) {
+
       try {
 
         await reactionAddedComment({commentId , reaction, authorId, postId})
@@ -45,7 +47,7 @@ export const CommentReactionButtons = ({comment, authorId, postId}) => {
         disabled={isLoading}
       >
         {emoji}
-        <span className='inline-block mx-2'>{comment.reactions[name]}</span>         
+        <span className='inline-block mx-2'>{comment?.reactions[name]}</span>         
       </button>
     )
   })
@@ -59,12 +61,14 @@ export const ReplyReactionButtons = ({reply, commentId, authorId, postId}) => {
   const [reactionAddedReply, { isLoading }] = useUpdateReplyReactionMutation()
   
   const handleUpdateReaction = async (e) => {
-    const replyId = reply._id
+
+    const replyId = reply?._id
     const reaction = e.target.id
    
     const canSave = !isLoading && [commentId, reaction, authorId, replyId].every(Boolean)
 
     if(canSave) {
+
       try {
 
         await  reactionAddedReply({commentId, replyId, reaction, authorId, postId})
@@ -76,6 +80,7 @@ export const ReplyReactionButtons = ({reply, commentId, authorId, postId}) => {
   } 
 
   const reactionButtons = Object.entries(reactionEmoji).map(([name, emoji]) => {
+
     return (
       <button 
         key={name} 
@@ -87,7 +92,7 @@ export const ReplyReactionButtons = ({reply, commentId, authorId, postId}) => {
         disabled={isLoading}
       >
         {emoji} 
-        <span className='inline-block mx-2'>{reply.reactions[name]}</span>         
+        <span className='inline-block mx-2'>{reply?.reactions[name]}</span>         
       </button>
     )
   })
