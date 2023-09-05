@@ -7,10 +7,10 @@ import { WritePostAsideOpenClosebar } from '../../../../../ButtonAndOthers/Butto
 import { parentCategoriesAndTags } from '../../../../../../data'
 import { isFecthingStyle } from '../../../../../SharedAsset/SharedAssets'
 import { HeroOneBussinessFavoriteImageSpinner } from '../../../../../SharedAsset/Spinners/Spinner'
-import { textAndNumberOnly } from '../../../../../SharedAsset/Vaidations/RegularExpression'
+import { textSpaceAndNumber } from '../../../../../SharedAsset/Vaidations/RegularExpression'
 
 
-const Tag = ({updatePostTags, parentTag, handleSelectedParentTag, handleSetAddTag, addTag, userAction, isFetching}) => {
+const Tag = ({updatePostTags, parentTag, handleSelectedParentTag, handleSetAddTag, addTag, userAction, isFetching, uncheckedTag, handleUncheckTag}) => {
   // fetch all the tags and their parent for tags listing
   const {tagsContent, tagsParents, tagsaction, isFetching: allTagsIsFetching} = useFetchedTags()
   // Update tag using the id of the first created tags
@@ -20,6 +20,8 @@ const Tag = ({updatePostTags, parentTag, handleSelectedParentTag, handleSetAddTa
  
   // Array of all the selected tags, coming from redux store
   const postTagArrays = useSelector(selectAllPostTags)
+
+  const [checkedItemElemets, setCheckedItemElements] = useState([])
 
   const [openCat, setOpenCat] = useState(false) // use to open and close the tag section
   const [requiredText, setRequiredText] = useState(false) // text used to indicate that an option is needed
@@ -72,7 +74,7 @@ const Tag = ({updatePostTags, parentTag, handleSelectedParentTag, handleSetAddTa
   const handleAddNewTag = (e) => {
 
     const { value } = e.target;
-    const { isValid } = textAndNumberOnly(value);
+    const { isValid } = textSpaceAndNumber(value);
     setIsValid(isValid);
     handleSetAddTag(e)
   }
@@ -84,12 +86,12 @@ const Tag = ({updatePostTags, parentTag, handleSelectedParentTag, handleSetAddTa
     handleSelectedParentTag(e)
   }
 
-  // Check to see if the parent array is up to 5 
+  // Check to see if the parent array is up to 6 
   useEffect(() => {
 
     if (parent) { // make sure the user have selected a parent first
 
-      if (tagsParents[parent]?.tags?.length < 5) {
+      if (tagsParents[parent]?.tags?.length < 6) {
 
         setParentFullText(() => false)
       } else {
@@ -101,6 +103,7 @@ const Tag = ({updatePostTags, parentTag, handleSelectedParentTag, handleSetAddTa
       setParentFullText(() => false)
     }
   },[tagsParents, parent])
+
 
   /************ TAGS SELECTION */
 
@@ -116,7 +119,13 @@ const Tag = ({updatePostTags, parentTag, handleSelectedParentTag, handleSetAddTa
 
       e.target.parentElement.lastChild.style.display = "none"
 
-      dispatch(tagUnchecked({uncheckedTag: element.target.parentElement.firstChild.textContent.toLowerCase()}))    
+      dispatch(tagUnchecked({uncheckedTag: element.target.parentElement.firstChild.textContent.toLowerCase()}))
+      
+      setCheckedItemElements((list) =>{
+
+        let newElement = list.filter(item => item !== element.target)
+        return newElement
+      })  
     } 
     
     // check to see if the tag is checked
@@ -126,6 +135,18 @@ const Tag = ({updatePostTags, parentTag, handleSelectedParentTag, handleSetAddTa
       e.target.parentElement.lastChild.style.display = "inline-block"
 
       dispatch(tagAdded({checkedTag: element.target.parentElement.firstChild.textContent.toLowerCase()}))     
+
+      setCheckedItemElements((list) => {
+
+        //first check if the element containing the checkbox of the value is already in the list
+        if (list.includes(element.target)) {
+
+          return [...list] // if so just return the list as it is
+        } else {
+
+          return [...list, element.target] // if not then add the new category parentelement to the list
+        }
+      })    
     }
   };
 
@@ -168,6 +189,7 @@ const Tag = ({updatePostTags, parentTag, handleSelectedParentTag, handleSetAddTa
         } catch (err) {
 
           setErrorText(true)
+          console.error(err)
         } 
       }
 
@@ -187,9 +209,21 @@ const Tag = ({updatePostTags, parentTag, handleSelectedParentTag, handleSetAddTa
 
       let remove = e.target.parentElement.firstChild.textContent.toLowerCase()
 
-      dispatch(tagUnchecked({uncheckedTag: remove}))
+      try {
 
-      await deleteTag({tagId: tagsParents._id, uncheckedTag: remove})
+        dispatch(tagUnchecked({uncheckedTag: remove}))
+
+        await deleteTag({tagId: tagsParents?._id, uncheckedTag: remove})
+
+        setCheckedItemElements((list) =>{
+  
+          let newElement = list.filter(item => item !== e.target.previousSibling)
+          return newElement
+        })  
+      } catch (err) {
+
+        console.error(err)
+      } 
     }
   }
 
@@ -200,6 +234,22 @@ const Tag = ({updatePostTags, parentTag, handleSelectedParentTag, handleSetAddTa
       dispatch(updateTag(updatePostTags)) 
     } 
   },[updatePostTags, dispatch])
+
+
+  useEffect(() => {
+
+    if(uncheckedTag) {
+
+      for(let i = 0; i < checkedItemElemets?.length; i++) {
+
+        checkedItemElemets[i].checked = false // for each of the collected element first uncheck them
+        checkedItemElemets[i].parentElement.style.borderColor = "#e2e2e2"
+
+        checkedItemElemets[i].parentElement.lastChild.style.display = "none"
+      }
+      handleUncheckTag()
+    }
+  }, [uncheckedTag, checkedItemElemets,  handleUncheckTag])
 
  
   return (

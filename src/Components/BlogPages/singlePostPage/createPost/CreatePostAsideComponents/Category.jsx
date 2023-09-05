@@ -79,9 +79,9 @@ const Category = ({handleSelectedParentCat, parentCat, handleSetCategory, catego
   // Check to see if the parent array is up to 5 
   useEffect(() => {
 
-    if (parent) { // make sure the user have selected a parent first
+    if (parent ) { // make sure the user have selected a parent first
 
-      if (categoriesParents[parent]?.category?.length < 5) {
+      if (categoriesParents[parent]?.category?.length < 5 || categoriesParents[parent]?.category?.length === undefined) {
 
         setParentFullText(() => false)
       } else {
@@ -239,7 +239,7 @@ const Category = ({handleSelectedParentCat, parentCat, handleSetCategory, catego
                     onChange={handleRemoveCatOnDoubleClick}
                   />
 
-                  <label htmlFor={cat?.title} className="ml-3 inline-block text-sm text-stone-700">{cat.title}</label>
+                  <label htmlFor={cat?.id} className="ml-3 inline-block text-sm text-stone-700">{cat.title}</label>
                 </li>
               )
             })}
@@ -294,9 +294,8 @@ const Category = ({handleSelectedParentCat, parentCat, handleSetCategory, catego
               aria-label='text' 
               maxLength={13}              
               required
-              className={`mb-0 aria-required:bg-rose-500 font-poppins disabled:opacity-40 ${(!isValid && category) ? "border-red-500 text-red-600 focus:border-red-500 focus:ring-red-500" : ""}`} 
+              className={`mb-0 aria-required:bg-rose-500 font-poppins ${(!isValid && category) ? "border-red-500 text-red-600 focus:border-red-500 focus:ring-red-500" : ""}`} 
               autoFocus={true}
-              disabled={!canOpen}
               value={category}
               onChange={handleNewCategoryName}
             />
@@ -310,11 +309,10 @@ const Category = ({handleSelectedParentCat, parentCat, handleSetCategory, catego
             <select 
               name="parent_categories"               
               id="parent_cat" 
-              className='mb-0 aria-required:bg-rose-500 font-poppins disabled:opacity-40'
+              className='mb-0 aria-required:bg-rose-500 font-poppins'
               aria-label='select'
               required
               value={parentCat} 
-              disabled={!canOpen}
               onChange={handleParentCategory} 
             >
 

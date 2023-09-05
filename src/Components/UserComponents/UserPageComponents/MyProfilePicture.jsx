@@ -1,4 +1,4 @@
-import React, {useState } from 'react'
+import React, {useEffect, useState } from 'react'
 import { useUpdateExistingUserImageMutation } from '../../../Reduxstore/Slices/users/UsersSlice'
 import axios from "axios"
 import { publicFolder } from '../../../data'
@@ -12,6 +12,7 @@ const MyProfilePicture = ({user, userAction, isFetching}) => {
   
   const [errorText, setErrorText] = useState(false) /// text used to indicate that your update didn't save or there is an erro
   const [errorText2, setErrorText2] = useState(false) /// text used to indicate that your update didn't save or there is an erro
+  const [onChangeMade, setOnChangeMade] = useState(false) // make sure a change is made before allowing the button to save
 
   
   const [profileImage, setProfileImage] = useState("")
@@ -22,6 +23,8 @@ const MyProfilePicture = ({user, userAction, isFetching}) => {
 
   // handling setting image once selected from the user device
   const handleImage = async (e) => {
+    setOnChangeMade(() => true)
+
     if(e.target.value) {
       setErrorText(() => false)
 
@@ -43,6 +46,7 @@ const MyProfilePicture = ({user, userAction, isFetching}) => {
         
         setProfileImage(() => filename)
         setFile(() => file)
+
         try {
 
           await axios.post("/upload", data)
@@ -56,7 +60,8 @@ const MyProfilePicture = ({user, userAction, isFetching}) => {
     }
   }
 
-  const canSave = [profileImage].every(Boolean) && !isLoading
+
+  const canSave = [profileImage, onChangeMade].every(Boolean) && !isLoading
 
 
   //handle form submmition and api calling
@@ -64,6 +69,7 @@ const MyProfilePicture = ({user, userAction, isFetching}) => {
     event.preventDefault();
 
     if(canSave) {
+
       setErrorText2(() => false)
 
       try{
@@ -80,15 +86,26 @@ const MyProfilePicture = ({user, userAction, isFetching}) => {
     }
   }
 
+  useEffect(() => {
+
+    if(userAction) {
+
+      setProfileImage(() =>  user?.profileImage)
+    }
+
+  }, [user, userAction])
+
   return (
     <div className={`px-3 mb-12 bg-gray-200/40 pb-5 pt-5 rounded-md ${isFecthingStyle(isFetching)}`}>
 
       {/* Head Introduction */}
       <div className='font-semibold px-3 mb-9'>
+
         <UserInfoHeading 
           head={"My Profile picture"}
           text={"Add a photo of you to be easily recognized"}
         />
+        
         {errorText2 && <p className='text-xs text-rose-500 mb-1 tracking-wider font-lora'>Failed to save the image</p>}
       </div>
 
@@ -96,11 +113,13 @@ const MyProfilePicture = ({user, userAction, isFetching}) => {
       <div className="max-w-[200px] mx-auto h-full max-h-52 border-4 border-inherit overflow-hidden rounded-full text-white text group cursor-pointer shadow-md shadow-[rgba(0,0,0,.25)] relative mb-7">
 
         <div className='relative after:absolute after:inset-0 after:bg-white/10 after:z-10 w-ful h-screen max-h-52'>
+
           {userAction ? 
           <>
             {file ? 
-              <img  src={URL?.createObjectURL(file)} alt="postImage" className='max-h-52' loading="lazy"/> :
-              <img src={publicFolder + user?.profileImage} alt="userprofileimage" className='max-h-52' loading="lazy"/>
+              <img  src={URL?.createObjectURL(file)} alt="userprofileimage" className='max-h-52' loading="lazy"/> 
+              :
+              <img src={publicFolder + profileImage} alt="userprofileimage" className='max-h-52' loading="lazy"/>
             }
           </>
           :
@@ -109,11 +128,12 @@ const MyProfilePicture = ({user, userAction, isFetching}) => {
         </div>      
 
         {userAction && 
-          <form 
-            id='profileImage'
-            onSubmit={handleSubmit} 
+
+          <form id='profileImage'  onSubmit={handleSubmit} 
             className='absolute inset-x-0 z-20 group-hover:top-2/3 bg-neutral-400/40 drop-shadow bottom-0 pt-3 TextHeadertransition opacity-0 group-hover:opacity-100'>
+
             <label htmlFor="userimage" className='text-xs uppercase tracking-widest'>Upload Image</label>
+
             <input 
               type="file" 
               id="userimage" 
@@ -121,7 +141,8 @@ const MyProfilePicture = ({user, userAction, isFetching}) => {
               accept="image/*" 
               required
               hidden 
-              onChange={handleImage}/>
+              onChange={handleImage}
+            />
           </form>
         }
       </div>
@@ -132,6 +153,7 @@ const MyProfilePicture = ({user, userAction, isFetching}) => {
       
       {/* user name and full name*/}
       <div className='px-3 pb-5'>
+
         {userAction ?
           <>
             <h3 className='text-xl font-semibold text-[#282a35] capitalize'>{user?.fullName}</h3>

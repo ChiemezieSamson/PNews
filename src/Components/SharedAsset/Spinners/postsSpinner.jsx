@@ -69,7 +69,7 @@ export const useFetchedPostById = () => {
 
     postAction = false
 
-  } else if (isSuccess && post._id) {
+  } else if (isSuccess && post?._id) {
 
     postAction = true
     singlePost = post

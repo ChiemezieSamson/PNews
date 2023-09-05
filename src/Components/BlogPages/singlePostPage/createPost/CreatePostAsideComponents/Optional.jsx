@@ -13,6 +13,16 @@ const Optional = ({handlesetViewed, handlessetShared, handleCheckedTrendig, Tren
     setOpenCat((change) => !change)
   }
 
+  const handleOnchange = (event) => {
+    
+    if (event.target.id === "sharedPost") {
+
+      handlessetShared(event)
+    } else {
+      handlesetViewed(event)
+    }
+  }
+
   return (
 
     <div className='text-sm bg-white lg:bg-[#eee]'>
@@ -28,14 +38,14 @@ const Optional = ({handlesetViewed, handlessetShared, handleCheckedTrendig, Tren
         <input 
           type="number" 
           name='shares'
-          defaultValue={shared}
+          value={shared}
           min={0}
           max={50000}
           id='sharedPost' 
           form="post_form" 
           className='disabled:opacity-40'
           disabled={!userAction}
-          onChange={handlessetShared}
+          onChange={handleOnchange}
         />
         
         <label htmlFor="viewedPost" className="inline-block text-sm text-stone-700">VIEWS</label>
@@ -44,13 +54,13 @@ const Optional = ({handlesetViewed, handlessetShared, handleCheckedTrendig, Tren
           type="number" 
           name='views' 
           id='viewedPost'
-          defaultValue={viewed}
+          value={viewed}
           min={0}
           max={50000} 
           form="post_form" 
           className='disabled:opacity-40'
           disabled={!userAction}
-          onChange={handlesetViewed}
+          onChange={handleOnchange}
         />
 
         <span className='inline-block mt-4'>

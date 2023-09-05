@@ -51,7 +51,6 @@ export const extendedUserApiSlice = apiSlice.injectEndpoints({
 								users.name.firstname = User.name.firstname;
 								users.name.lastname = User.name.lastname;
 								users.location = User.location;
-								users.profileImage = User.profileImage;
 							}
 						}
 					)

@@ -254,7 +254,7 @@ const Category = ({updatePostCategories, handleSelectedParentCat, parentCat, han
                   onChange={handleRemoveCatOnDoubleClick}
                 />
 
-                <label htmlFor={cat?.title} className="ml-3 inline-block text-sm text-stone-700 allCategories">{cat.title}</label>
+                <label htmlFor={cat?.id} className="ml-3 inline-block text-sm text-stone-700 allCategories">{cat.title}</label>
               </li>
             )
           })}

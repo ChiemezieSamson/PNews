@@ -17,6 +17,7 @@ const CreatePostAside = ({postTitle, handleAllPostContent, handleSetPostAuthor, 
   const [category , setCategory] = useState("")
   const [addTag, setAddTag] = useState("")
   const [Trending, setTrending] = useState(false)
+  const [uncheckedTag, setUncheckedTag] = useState(false)
   const [shared, setShared] = useState(0)
   const [viewed, setViewed] = useState(0)
   const [checkedItemElemets, setCheckedItemElements] = useState([])
@@ -119,6 +120,12 @@ const CreatePostAside = ({postTitle, handleAllPostContent, handleSetPostAuthor, 
       setCheckedItemElements(() => [])     
     }
   }
+
+  // handling reseting tag after publision
+  const handleUncheckTag = () => {
+
+    setUncheckedTag(() => false)
+  }
   
   const handleDispatched = () => {
     handleAllPostContent() // handling calling of the function that save each post to the data base 
@@ -129,6 +136,8 @@ const CreatePostAside = ({postTitle, handleAllPostContent, handleSetPostAuthor, 
 
         checkedItemElemets[i].checked = false // for each of the collected element first uncheck them
       }
+
+      setUncheckedTag(() => true)
     
       setSelectedParentCat(() => "")
       setSelectedParentTag(() => "")
@@ -228,6 +237,8 @@ const CreatePostAside = ({postTitle, handleAllPostContent, handleSetPostAuthor, 
           handleSelectedParentTag={handleSelectedParentTag}
           userAction={userAction}
           isFetching={isFetching}
+          uncheckedTag={uncheckedTag}
+          handleUncheckTag={handleUncheckTag}
         />    
 
         <Optional

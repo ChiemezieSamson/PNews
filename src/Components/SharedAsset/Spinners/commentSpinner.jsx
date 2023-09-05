@@ -32,7 +32,7 @@ const useFetchedComments = () => {
 
     commentaction = false
 
-  } else if (isSuccess && comments?.length > 0) {
+  } else if (isSuccess) {
 
     commentaction = true
     commentsContent = sortedComments

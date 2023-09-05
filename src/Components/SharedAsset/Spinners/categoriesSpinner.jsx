@@ -25,7 +25,7 @@ const useFetchedCategories = () => {
 
     categoriesaction = false
 
-  } else if (isSuccess && Categories?.length > 0) {
+  } else if (isSuccess) {
 
     let newCategories = Object.assign({}, Categories[0]); // copy just the first object
 

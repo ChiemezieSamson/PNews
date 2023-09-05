@@ -15,6 +15,7 @@ const Personal = () => {
   const [location, setLocation] = useState("");
   const [errMsg, setErrMsg] = useState('')
 
+  const [onChangeMade, setOnChangeMade] = useState(false) // make sure a change is made before allowing the button to save
   const [errMsgOn, setErrMsgOn] = useState(false) // Indicate that there is an error
 
   const [firstNameIsValid, setFirstNameIsValid] = useState(true); // regular expressions
@@ -25,6 +26,8 @@ const Personal = () => {
 
   // handling setting the value of first name
   const handleFirstName = (e) => {
+    setOnChangeMade(() => true)
+
     // close the error message(if any), once the user change any input
     if(errMsgOn) {
       setErrMsg(() => "")
@@ -39,6 +42,8 @@ const Personal = () => {
 
   // handling setting the value of last name
   const handleLastName = (e) => {
+    setOnChangeMade(() => true)
+
     // close the error message(if any), once the user change any input
     if(errMsgOn) {
       setErrMsg(() => "")
@@ -53,6 +58,8 @@ const Personal = () => {
 
   // handling setting the value of  living addresses
   const handlelivingaddresses = (e) => {
+    setOnChangeMade(() => true)
+
     // close the error message(if any), once the user change any input
     if(errMsgOn) {
       setErrMsg(() => "")
@@ -67,7 +74,7 @@ const Personal = () => {
 
 
   // UPDATE USER INFOR
-  const canSave = [firstName, lastName, location, firstNameIsValid, lastNameIsValid, locationIsValid].every(Boolean) && !isLoading
+  const canSave = [firstName, lastName, location, firstNameIsValid, lastNameIsValid, locationIsValid, onChangeMade].every(Boolean) && !isLoading
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -78,9 +85,10 @@ const Personal = () => {
 
         await userPersonalInfoUpdated({userId: user._id, name: {firstname: firstName, lastname: lastName}, location})
 
-        setFirstName(() => "")
-        setLastName(() => "")
-        setLocation(() => "")
+        setFirstName(() => firstName)
+        setLastName(() => lastName)
+        setLocation(() => location)
+        setOnChangeMade(() => false)
       } catch (err) {
 
         console.error('Failed to update: ', err)

@@ -9,6 +9,7 @@ const Optional = ({handlesetViewed, handlessetShared, handleCheckedTrendig, tren
 
  // handling the display or hidden of the whole optional component
   const handleOpenCloseChild = () => {
+    
     setOpenCat((change) => !change)
   }  
 

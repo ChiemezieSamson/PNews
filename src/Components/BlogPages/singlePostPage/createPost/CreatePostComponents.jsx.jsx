@@ -175,10 +175,9 @@ const CreatePostComponents = ({state}) => {
   return (
     <div className="grid lg:grid-cols-4 relative mb-10">
 
-      {errorText2 ? <p className='text-xs text-rose-500 tracking-wider font-lora'>Failed to save the post</p> : "" }
-
        {/* write post start here */}
       <div className={`text-left lg:col-span-3 order-2 lg:order-1 ${(size.width < 1024 && showSideBar) && "hidden"} ${isFecthingStyle(anyIsfetching)}`}>
+      {errorText2 ? <p className='text-xs text-rose-500 tracking-wider font-lora'>Failed to save the post</p> : "" }
 
         {!preview ? 
           <>

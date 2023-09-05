@@ -15,6 +15,7 @@ const UpdatePostAsideComponent = ({postTitle, handleAllPostContent, handleSetPos
   const [postTag, setPostTag] = useState(post?.postTags)
   const [trending, setTrending] = useState(false)
   const [favourite, setFavourite] = useState(false)
+  const [uncheckedTag, setUncheckedTag] = useState(false)
   const [shared, setShared] = useState(0)
   const [viewed, setViewed] = useState(0)
   const [parentCat, setSelectedParentCat] = useState("")
@@ -134,6 +135,12 @@ const UpdatePostAsideComponent = ({postTitle, handleAllPostContent, handleSetPos
       setCheckedItemElements((list) => [...list, element.previousSibling]);
     }
   }
+
+   // handling reseting tag after publision
+  const handleUncheckTag = () => {
+
+    setUncheckedTag(() => false)
+  }
   
   const handleDispatched = async () => {
 
@@ -145,6 +152,8 @@ const UpdatePostAsideComponent = ({postTitle, handleAllPostContent, handleSetPos
 
         checkedItemElemets[i].checked = false // for each of the collected element first uncheck them
       }
+
+      setUncheckedTag(() => true)
 
       setSelectedParentCat(() => "")
       setSelectedParentTag(() => "")
@@ -283,7 +292,9 @@ const UpdatePostAsideComponent = ({postTitle, handleAllPostContent, handleSetPos
           handleSelectedParentTag={handleSelectedParentTag}          
           updatePostTags={postTag}
           userAction={userAction}
-          isFetching={isFetching}           
+          isFetching={isFetching} 
+          uncheckedTag={uncheckedTag}
+          handleUncheckTag={handleUncheckTag}          
         />    
 
         <Optional

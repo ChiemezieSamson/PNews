@@ -23,11 +23,11 @@ const Comment = ({comments, postId, byUserId, postAuthor, offsetOfForm, contentA
 
       </span>  
 
-      {contentAction && comments?.length > 0  ?
+      {contentAction ?
 
         <div className={isFecthingStyle(onAnyIsfetching)}>
 
-          {comments?.map((comment) => { 
+          {comments?.length > 0 && comments?.map((comment) => { 
             // if the textarea content has a link add it inside a link tag funtion
             const {text} = commentText(comment?.content)
     
