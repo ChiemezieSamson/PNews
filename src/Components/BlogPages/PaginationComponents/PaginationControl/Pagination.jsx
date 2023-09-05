@@ -10,11 +10,12 @@ const Pagination = ({ currentPage , totalPages }) => {
   let totalPagesToNumber = parseInt(totalPages)
 
   let categoryRoute
-
+  
   if(pathname.split("/")[2] === "categories" 
   || pathname.split("/")[2] === "tags" 
   || routePathName === "/categories" 
   || routePathName === "/search") {
+
     categoryRoute = `${pathname}${search.split("&")[0]}`
   }
 
@@ -26,6 +27,7 @@ const Pagination = ({ currentPage , totalPages }) => {
 
     numberLink = "/"
   } else {
+
     if (categoryRoute) {
 
       route = `${categoryRoute}&page=`
@@ -45,23 +47,30 @@ const Pagination = ({ currentPage , totalPages }) => {
   let urlLink
 
   if(pageToNumber - 1 !== 1) {
+
     if(categoryRoute) {
+
       urlLink = `${categoryRoute}&page=${(pageToNumber - 1)}`
     } else {
+
       urlLink = `${route}${(pageToNumber - 1)}`
     }  
   } else {
     let newRoute 
 
     if (routePathName !== "/pages") {
+
       newRoute = routePathName
     } else {
+
         newRoute = "/"
     }
 
     if(categoryRoute) {
+
       newRoute = categoryRoute
     } 
+
     urlLink = newRoute
   }
 
@@ -97,12 +106,16 @@ const Pagination = ({ currentPage , totalPages }) => {
 
   return (
     <nav className=" my-4">
+
       <ul className="max-w-[355px] p-1">
 
         {/* previous button */}
         {pageToNumber > 1 && (
+
           <li className="inline-block">
+
             <Link to={urlLink}>
+
               <button
                 className="text-sm px-2.5 py-1 border border-solid border-gray-300 mx-1 shadow-sm shadow-slate-400 hover:bg-slate-200
                 TextHeadertransition">
@@ -114,8 +127,11 @@ const Pagination = ({ currentPage , totalPages }) => {
 
           {/* more post from the left button start here */}
         {startPage > 1 && (
+
           <li className="inline-block">
+
             <Link to={`${route}${startPage - 1}`}>
+
               <button type='button' className="text-sm px-2 pt-1 mx-0.5">
                 &hellip;
               </button>
@@ -124,9 +140,12 @@ const Pagination = ({ currentPage , totalPages }) => {
         )}
 
         {pageNumbers.slice(startPage - 1, endPage).map((pageNumber) =>{ 
+          
           return (
             <li key={pageNumber} className="inline-block">
+
               <Link to={`${pageNumber === 1 ? numberLink : route + pageNumber}`}>
+
                 <button
                   type='button'
                   className={`text-sm px-2.5 py-1 border border-solid border-gray-400 mx-1 shadow-sm shadow-slate-400 transition-all duration-200 ease-linear ${
@@ -140,8 +159,11 @@ const Pagination = ({ currentPage , totalPages }) => {
 
           {/* more post from the left button start here */}
         {(endPage < totalPagesToNumber && startPage <= 1) && (
+
           <li className="inline-block">
+
             <Link to={`${route}${endPage + 1}`}>
+
               <button
                 className="text-sm px-2 pt-1 mx-0.5">
                 &hellip;
@@ -152,8 +174,11 @@ const Pagination = ({ currentPage , totalPages }) => {
 
         {/* next button */}
         {pageToNumber < totalPagesToNumber && (
+
           <li className="inline-block">
-            <Link to={`${route}${pageToNumber + 1}`}>              
+
+            <Link to={`${route}${pageToNumber + 1}`}>     
+                     
               <button
                 className="text-sm px-2.5 py-1 border border-solid border-gray-300 mx-1 shadow-sm shadow-slate-400 hover:bg-slate-200
                 transition-all duration-200 ease-linear">

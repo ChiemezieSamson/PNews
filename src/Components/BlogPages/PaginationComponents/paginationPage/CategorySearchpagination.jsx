@@ -18,15 +18,20 @@ const CategorySearchpagination = () => {
   const canOpen = [action, useraction, commentaction].every(Boolean)
 
   return (
-    <div className={`grid grid-flow-row md:grid-cols-3 ${isFecthingStyle(isFetching)}`}>
+    <div className="grid grid-flow-row md:grid-cols-3">
 
       <aside className="md:col-span-1 mt-8 md:mr-[3%] order-last md:order-first">
+
         <StickyBox offsetTop={0} offsetBottom={0}>
-          <Aside Comments={Comments} commentaction={commentaction}/>
+
+          <Aside 
+            Comments={Comments} 
+            commentaction={commentaction}
+          />
         </StickyBox>
       </aside>
 
-      <div className="md:col-span-2 md:ml-[3%] text-left">
+      <div className={`md:col-span-2 md:ml-[3%] text-left ${isFecthingStyle(isFetching)}`}>
         <NavDirectionAndPageName />
       
         <PagesBlogPostComponent 

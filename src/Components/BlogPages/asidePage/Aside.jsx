@@ -15,7 +15,7 @@ const Aside = ({Comments, commentaction}) => {
   const canOpen = [action, commentaction].every(Boolean)
 
   return (
-    <>
+    <div className='text-left'>
       <div className='mb-5'>
         <PagesDivider text={"Stay Connected"} />
       </div>
@@ -69,7 +69,7 @@ const Aside = ({Comments, commentaction}) => {
           <JustTimeComponetStar Posts={canOpen && Posts?.slice(1,5)} action={canOpen}/>
         </div>
       </div>
-    </>
+    </div>
   )
 }
 

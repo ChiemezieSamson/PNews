@@ -107,7 +107,7 @@ export const extendedPostsApiSlice = apiSlice.injectEndpoints({
 				method: "PUT",
 				body: initialPost,
 			}),
-			invalidatesTags: (result, error, arg) => [{ id: arg._id }],
+			invalidatesTags: (result, error, arg) => [{ id: arg._id }, "ALLPOSTS"],
 			async onQueryStarted(initialPost, { dispatch, queryFulfilled }) {
 				const patchResult = dispatch(
 					extendedPostsApiSlice.util.updateQueryData(

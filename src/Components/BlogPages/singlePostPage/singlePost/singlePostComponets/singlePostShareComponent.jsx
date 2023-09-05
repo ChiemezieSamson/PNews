@@ -91,7 +91,7 @@ const SinglePostShareComponent = ({canOpen, Post, size}) => {
               {canOpen ?
 
                 <>
-                  { Post?.optional?.shared >= 1000 ? Post?.optional?.shared + "k" : Post?.optional?.shared}
+                  { Post?.optional?.shared >= 1000 ? `${Post?.optional?.shared}`[0] + "k" : Post?.optional?.shared}
                 </>
                 :
                 <div className='skeleton h-4 w-3.5 inline-block'></div>
@@ -105,7 +105,7 @@ const SinglePostShareComponent = ({canOpen, Post, size}) => {
             {canOpen ?
 
               <>
-                 { Post?.optional?.viewed >= 1000 ? Post?.optional?.viewed + "k" : Post?.optional?.viewed }           
+                 { Post?.optional?.viewed >= 1000 ? `${Post?.optional?.viewed}`[0] + "k" : Post?.optional?.viewed }           
               </>
               :
               <div className='skeleton h-4 w-3.5 inline-block'></div>

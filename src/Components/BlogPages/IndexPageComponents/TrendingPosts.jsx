@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 const TrendingPosts = ({ Posts, size, canOpen}) => {
   const [nextTrendingPost, setNextTrendingPost] = useState(0)
   
-  const trendingPostArry = canOpen && Posts?.filter(post => post?.optional?.Trending === true)
+  const trendingPostArry = canOpen && Posts?.filter(post => post?.optional?.trending === true)
 
   const firstSixPosts = canOpen && trendingPostArry?.slice(0, 6)
 
