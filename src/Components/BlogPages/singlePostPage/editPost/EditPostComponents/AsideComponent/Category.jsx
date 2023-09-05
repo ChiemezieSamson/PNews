@@ -74,7 +74,7 @@ const Category = ({updatePostCategories, handleSelectedParentCat, parentCat, han
 
     if (parent) { // make sure the user have selected a parent first
 
-      if (categoriesParents[parent]?.category?.length < 5) {
+      if (categoriesParents[parent]?.category?.length < 5 || categoriesParents[parent]?.category?.length === undefined) {
 
         setParentFullText(() => false)
       } else {

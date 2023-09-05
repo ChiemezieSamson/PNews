@@ -24,7 +24,7 @@ const TechPosts = ({Posts, categories, canOpen, isFetching}) => {
 
       <div className={`mt-5 ${isFecthingStyle(isFetching)}`}>
         <JustTimeComponetStar 
-          Posts={canOpen && allPost.slice(1, 7)}
+          Posts={canOpen && allPost.slice(2, 8)}
           grid={"md:grid md:grid-cols-2 gap-x-[2%]"}
           action={canOpen}
         />

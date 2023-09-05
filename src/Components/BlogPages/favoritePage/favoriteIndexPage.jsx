@@ -101,7 +101,7 @@ const FavoriteIndexPage = () => {
           <PagesBlogPostComponent 
             users={users}
             Comments={Comments}
-            Posts={canOpen && Posts?.slice(5, 10)}
+            Posts={canOpen && Posts?.slice(5, 12)}
             currentPage={currentPage}
             totalPages={totalPages}
             canOpen={canOpen}

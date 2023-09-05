@@ -32,7 +32,7 @@ const EntertainmentPosts = ({Posts, categories, users, Comments, canOpen, isFetc
       {canOpen ?
         <ul className={`md:grid md:grid-cols-2 pt-2 ${isFecthingStyle(isFetching)}`}>
 
-          {allPost?.slice(0, 2)?.map((post) => {
+          {allPost?.slice(2, 4)?.map((post) => {
 
             return (
               <li key={post?._id} className="first:md:mr-[2%] last:md:ml-[2%] first:mb-7 md:first:mb-0">
@@ -82,7 +82,7 @@ const EntertainmentPosts = ({Posts, categories, users, Comments, canOpen, isFetc
       <div className={`my-7 ${isFecthingStyle(isFetching)}`}>
    
         <JustTimeComponetStar 
-          Posts={canOpen && allPost?.slice(3, 7)}
+          Posts={canOpen && allPost?.slice(4, 8)}
           grid={"md:grid md:grid-cols-2 gap-x-[2%]"}
           action={canOpen} 
         />
@@ -93,7 +93,7 @@ const EntertainmentPosts = ({Posts, categories, users, Comments, canOpen, isFetc
       {canOpen ? 
         <ul className={`mt-4 ${isFecthingStyle(isFetching)}`}>
           
-          {allPost?.slice(7, 11)?.map((post) => {
+          {allPost?.slice(8, 13)?.map((post) => {
 
             return (
 

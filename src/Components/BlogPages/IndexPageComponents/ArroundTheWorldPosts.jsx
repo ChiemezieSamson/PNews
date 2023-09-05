@@ -69,7 +69,7 @@ const ArroundTheWorldPosts = ({Posts, categories, users, Comments, canOpen, isFe
 
         {canOpen ? 
           <ul className='mt-0.5 p-0 md:ml-[2%]'>
-            {allPost?.slice(1, 3)?.map((post) => {
+            {allPost?.slice(2, 4)?.map((post) => {
 
               return (
                 <li key={post?._id} className="mb-1.5 last:mb-0">

@@ -99,7 +99,7 @@ const BusinessIndexPage = () => {
           <PagesBlogPostComponent 
             users={users}
             Comments={Comments}
-            Posts={canOpen && Posts?.slice(4, 10)}
+            Posts={canOpen && Posts?.slice(4, 12)}
             currentPage={currentPage}
             totalPages={totalPages}
             canOpen={canOpen}

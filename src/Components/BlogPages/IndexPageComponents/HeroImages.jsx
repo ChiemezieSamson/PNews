@@ -20,8 +20,12 @@ const HeroImages = ({Posts, categories, canOpen, isFetching}) => {
   const {allPost: parentThree} = useParentcategories(parentBooks, categories, Posts, canOpen)
   const {allPost: parentLast} = useParentcategories(parentBusiness, categories, Posts, canOpen)
 
-  const displayedPost = canOpen && [parentLast[1], parentTwo[1], parentThree[0]]
-
+  parentTwo.shift()
+  parentThree.shift()
+  parentLast.shift()
+  const displayedPost = canOpen && [parentLast[0], parentTwo[0], parentThree[0]]
+  
+  allPost.shift()
   return (   
     <div className="pt-5">
 

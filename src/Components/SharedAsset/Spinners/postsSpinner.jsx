@@ -86,7 +86,7 @@ export const useFetchedPostById = () => {
 // Use to fecth the post by user Id when ever a call to the function is made
 export const useFetchedPostByUserId = (page = 1) => {
   const  getPostId  =  localStorage.getItem("userId") // getting the user id from the local storage
-  const postId = `${getPostId}?page=${page}&limit=${10}` // add a limit to the fetched post and managing it by page
+  const postId = `${getPostId}?page=${page}&limit=${page > 1 ? 10 : 12}` // add a limit to the fetched post and managing it by page
 
   const { // redux data flow and or returned information
     data: post = [],
@@ -126,7 +126,7 @@ export const useFetchedPostByQery = () => {
 
   // arrange the query in order for it not to return more than 10 posts for each search.
   // if no search was not found just return the first 10 post in descending order 
-  const newSearch = `${search ? search : "?s="}&limit=${10}`
+  const newSearch = `${search ? search : "?s="}&limit=${search ? 10 : 12}`
 
   const { // redux data flow and or returned information
     data: posts = [],
@@ -180,7 +180,7 @@ export const useFetchedPostByPagination = () => {
 
   // Arrange the query in order for it not to return more than 10 posts for each query.
   // if no search was not found just return the first 10 post in descending order taking page as one
-  let page = `${search ? search : "?page=" + 1}&limit=${10}` 
+  let page = `${search ? search : "?page=" + 1}&limit=${search ? 10 : 12}` 
 
   const { // redux data flow and or returned information
     data: posts = [],
@@ -241,7 +241,7 @@ export const useFetchedPostByPaginationTwo = () => {
    // Arrange the query in order for it not to return more than 10 posts for each query.
   // if no search was not found just return the first 10 post in descending order taking page as one
   // and also send the parent category name to the api
-  let page = `${search ? search : "?page=" + 1}&limit=${10}&parentCat=${parentRoute}` 
+  let page = `${search ? search : "?page=" + 1}&limit=${search ? 10 : 12}&parentCat=${parentRoute}` 
 
   const { // redux data flow and or returned information
     data: posts = [],
