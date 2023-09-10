@@ -24,6 +24,7 @@ const MyPublicProfile = () => {
   const [errMsg, setErrMsg] = useState("")
 
   const [errMsgOn, setErrMsgOn] = useState(false) // Indicate that there is an error
+  const [onChangeMade, setOnChangeMade] = useState(false) // make sure a change is made before allowing the button to save
 
   const [nickNameIsValid, setNickNameIsValid] = useState(true); // regular expressions
   const [emailIsValid, setEmailIsValid] = useState(true); // regular expressions
@@ -40,14 +41,18 @@ const MyPublicProfile = () => {
 
   // handling setting the value of nick name
   const handleNickName = (e) => {
+    setOnChangeMade(() => true) 
+
     // close the error message(if any), once the user change any input
     if(errMsgOn) {
+
       setErrMsg(() => "")
       setErrMsgOn(() => false)
     }
 
     const { value } = e.target;
     const { isValid } = textAndNumberOnly(value); // function for texting the entered text format
+
     setNickNameIsValid(isValid);
     setNickname(() => value)
   }
@@ -55,16 +60,21 @@ const MyPublicProfile = () => {
 
   // handling save the textarea content
   const handleTextarea = (event) => {
-    const { value } = event.target;    
+    setOnChangeMade(() => true)
+
+    const { value } = event.target;  
+
     setBiography(() => value)
   }
 
 
   // handling save the email content
   const handleSetSecondaryEmail = (event) => {
+    setOnChangeMade(() => true)
 
     // close the error message(if any), once the user change any input
     if(errMsgOn) {
+
       setErrMsg(() => "")
       setErrMsgOn(() => false)
     }
@@ -73,110 +83,142 @@ const MyPublicProfile = () => {
     const { isValid } = handleEmailPattern(value);// function for texting the entered text format
 
     setEmailIsValid(isValid)
-    setSecondaryEmail(() => value)
+
+    if (value) {
+
+      setSecondaryEmail(() => value)
+    }
   }
 
 
   // handling setting the value of phone number
   const handlePhone = (e) => {
+    setOnChangeMade(() => true) 
+
     // close the error message(if any), once the user change any input
     if(errMsgOn) {
+
       setErrMsg(() => "")
       setErrMsgOn(() => false)
     }
 
     const { value } = e.target;
     const { isValid } = handlePhoneNumbers(value); // function for texting the entered text format
+
     setPhoneNumberIsValid(isValid);
     setPhone(() => value)
   }
 
 
-  // handling setting the value of phone Linkedin
+  // handling setting the value of Linkedin
   const handleLinkedIn = (e) => {
+    setOnChangeMade(() => true)
+
     // close the error message(if any), once the user change any input
     if(errMsgOn) {
+
       setErrMsg(() => "")
       setErrMsgOn(() => false)
     }
 
     const { value } = e.target;
     const { isValid } = handleUrlLinks(value); // function for texting the entered text format
+
     setLinkedInIsValid(isValid);
     setLinkedIn(() => value)
   }
 
 
-  // handling setting the value of phone Linkedin
+  // handling setting the value of twitter
   const handleTwitter = (e) => {
+    setOnChangeMade(() => true)
+
     // close the error message(if any), once the user change any input
     if(errMsgOn) {
+
       setErrMsg(() => "")
       setErrMsgOn(() => false)
     }
 
     const { value } = e.target;
     const { isValid } = handleUrlLinks(value); // function for texting the entered text format
+
     setTwitterIsValid(isValid);
     setTwitter(() => value)
   }
 
 
-  // handling setting the value of phone Linkedin
+  // handling setting the value of facebook
   const handleFacebook = (e) => {
+    setOnChangeMade(() => true)
+
     // close the error message(if any), once the user change any input
     if(errMsgOn) {
+
       setErrMsg(() => "")
       setErrMsgOn(() => false)
     }
 
     const { value } = e.target;
     const { isValid } = handleUrlLinks(value); // function for texting the entered text format
+
     setFacebookIsValid(isValid);
     setFacebook(() => value)
   }
 
 
-  // handling setting the value of phone Linkedin
+  // handling setting the value of instagram
   const handleInstagram = (e) => {
+    setOnChangeMade(() => true)
+
     // close the error message(if any), once the user change any input
     if(errMsgOn) {
+
       setErrMsg(() => "")
       setErrMsgOn(() => false)
     }
 
     const { value } = e.target;
     const { isValid } = handleUrlLinks(value); // function for texting the entered text format
+
     setInstagramIsValid(isValid);
     setInstagram(() => value)
   }
 
 
-  // handling setting the value of phone Linkedin
+  // handling setting the value of youtube
   const handleYouTube = (e) => {
+    setOnChangeMade(() => true)
+
     // close the error message(if any), once the user change any input
     if(errMsgOn) {
+
       setErrMsg(() => "")
       setErrMsgOn(() => false)
     }
 
     const { value } = e.target;
     const { isValid } = handleUrlLinks(value); // function for texting the entered text format
+
     setYouTubeValid(isValid);
     setYouTube(() => value)
   }
 
 
-  // handling setting the value of phone Linkedin
+  // handling setting the value of website
   const handleWebsite = (e) => {
+    setOnChangeMade(() => true)
+
     // close the error message(if any), once the user change any input
     if(errMsgOn) {
+
       setErrMsg(() => "")
       setErrMsgOn(() => false)
     }
 
     const { value } = e.target;
     const { isValid } = handleUrlLinks(value); // function for texting the entered text format
+
     setwebsiteIsValid(isValid);
     setWebsite(() => value)
   }
@@ -184,7 +226,7 @@ const MyPublicProfile = () => {
 
  // UPDATE USER PUBLIC PROFILE
   const canSave = [nickname, biography, secondaryEmail, phone, linkedIn, twitter, facebook, instagram, youTube, website,
-    nickNameIsValid].every(Boolean) && !isLoading
+    nickNameIsValid, onChangeMade].every(Boolean) && !isLoading
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -206,6 +248,7 @@ const MyPublicProfile = () => {
         setInstagram(() => "")
         setYouTube(() => "")
         setWebsite(() => "")
+        setOnChangeMade(() => false)
       } catch (err) {
 
         console.error('Failed to update: ', err)
@@ -222,7 +265,12 @@ const MyPublicProfile = () => {
 
       setNickname(() => user?.username)
       setBiography(() => user?.bio)
-      setSecondaryEmail(() => user?.email?.secondary[user?.email?.secondary?.length - 1])
+
+      if(user?.email?.secondary.length > 0) {
+
+        setSecondaryEmail(() => user?.email?.secondary[user?.email?.secondary?.length - 1])
+      }
+
       setPhone(() => user?.phonenumber)
       setLinkedIn(() => user?.socialLinks?.linkedin)
       setTwitter(() => user?.socialLinks?.twitter)
@@ -236,10 +284,12 @@ const MyPublicProfile = () => {
 
   return (
     <div className={`text-left px-5 mt-8 font-source pt-7 pb-5 disabled:opacity-40 ${isFecthingStyle(isFetching)}`}>
+
       {/* introduction headers */}
       <UserInfoHeading head={"Public URL"} text={"Share your accomplishments with the world"}/>
 
       <small className='text-sm font-normal my-1 italic text-red-500'>
+
         <p className='p-px pl-0 mt-2'>
           Provide a 
           <span className='text-red-600 font-semibold'> "Nickname"</span>,
@@ -254,6 +304,7 @@ const MyPublicProfile = () => {
 
         {/* Nickname for the user start here */}
         <div className='py-2 mt-3'>
+
           <label htmlFor="usernickname" className='sm:flex sm:gap-x-2.5'>
 
             <span className='text-stone-800 sm:text-lg font-semibold mt-3'>NickName:</span>
@@ -278,7 +329,9 @@ const MyPublicProfile = () => {
 
               {/* notification on how adim name show be */}
               <p className='text-sm font-normal text-neutral-600 mx-4 italic'>
+
                 <small>This will be the name displayed as admin on your posts. </small>
+
                 <small>
                   No use of  
                   <span className='px-1'>
@@ -294,6 +347,7 @@ const MyPublicProfile = () => {
 
         {/* User Bio section start here */}
         <div className='my-10'>
+
           <UserInfoHeading head={"Bio"} text={"write a short introduction to best describe yourself to visitors"}/>
 
           <textarea 
@@ -313,13 +367,16 @@ const MyPublicProfile = () => {
         <label htmlFor="usercontactemail" className="sm:grid sm:grid-cols-4 sm:gap-x-4">
 
           <span className='text-stone-800 sm:text-lg py-1 mt-1 whitespace-nowrap sm:col-span-1'>
+
             <FaEnvelopeOpen className="inline-block align-text-top" />
+
             <span className='text-stone-800 min-w-fit p-1 ml-4 font-semibold inline-block'>
               Email
             </span>
           </span>
 
           <div className='w-full sm:col-span-3'>
+
             <input 
               type="email" 
               id="usercontactemail" 
@@ -331,6 +388,7 @@ const MyPublicProfile = () => {
               className={`${(!emailIsValid && secondaryEmail) ? "border-red-500 text-red-600 focus:border-red-500 focus:ring-red-500" : ""} placeholder:text-neutral-400 disabled:opacity-40 mb-0`}
               onChange={handleSetSecondaryEmail}
             />
+
           </div>
         </label>
 
@@ -338,13 +396,16 @@ const MyPublicProfile = () => {
         <label htmlFor="usercontactphone" className="sm:grid sm:grid-cols-4 sm:gap-x-4 mt-5">
 
           <span className='text-stone-800 sm:text-lg py-1 mt-1 whitespace-nowrap sm:col-span-1'>
+
             <FaPhoneAlt className="inline-block align-text-top" />
+
             <span className='text-stone-800 min-w-fit p-1 ml-4 font-semibold inline-block'>
               Phone
             </span>
           </span>
 
           <div className='w-full sm:col-span-3'>
+
             <input 
               type="tel" 
               aria-label="phone" 
@@ -356,6 +417,7 @@ const MyPublicProfile = () => {
               className={`${(!phoneNumberIsValid && phone) ? "border-red-500 text-red-600 focus:border-red-500 focus:ring-red-500" : ""} placeholder:text-neutral-400 disabled:opacity-40`}
               onChange={handlePhone}
             />
+
           </div>
         </label>
 
@@ -363,13 +425,16 @@ const MyPublicProfile = () => {
         <label htmlFor="usercontactlinkedin" className="sm:grid sm:grid-cols-4 sm:gap-x-4">
 
           <span className='text-stone-800 sm:text-lg py-1 mt-1 whitespace-nowrap sm:col-span-1'>
+
             <FaLinkedinIn className="inline-block align-text-top" />
+
             <span className='text-stone-800 min-w-fit p-1 ml-4 font-semibold inline-block'>
               Linkedin
             </span>
           </span>
 
           <div className='w-full sm:col-span-3'>
+
             <input 
               type="url"
               disabled={!userAction} 
@@ -381,6 +446,7 @@ const MyPublicProfile = () => {
               className={`${(!linkedInIsValid && linkedIn) ? "border-red-500 text-red-600 focus:border-red-500 focus:ring-red-500" : ""} placeholder:text-neutral-400 disabled:opacity-40`}
               onChange={handleLinkedIn}
             />
+
           </div>
         </label>
 
@@ -388,13 +454,16 @@ const MyPublicProfile = () => {
         <label htmlFor="usercontacttwitter" className="sm:grid sm:grid-cols-4 sm:gap-x-4">
 
           <span className='text-stone-800 sm:text-lg py-1 mt-1 whitespace-nowrap sm:col-span-1'>
+
             <FaTwitter className="inline-block align-text-top" />
+
             <span className='text-stone-800 min-w-fit p-1 ml-4 font-semibold inline-block'>
               Twitter
             </span>
           </span>
 
           <div className='w-full sm:col-span-3'>
+
             <input 
               type="url"
               disabled={!userAction}
@@ -406,6 +475,7 @@ const MyPublicProfile = () => {
               className={`${(!twitterIsValid && twitter) ? "border-red-500 text-red-600 focus:border-red-500 focus:ring-red-500" : ""} placeholder:text-neutral-400 disabled:opacity-40`}
               onChange={handleTwitter}
             />
+
           </div>
         </label>
 
@@ -413,13 +483,16 @@ const MyPublicProfile = () => {
         <label htmlFor="usercontactfacebook" className="sm:grid sm:grid-cols-4 sm:gap-x-4">
 
           <span className='text-stone-800 sm:text-lg py-1 mt-1 whitespace-nowrap sm:col-span-1'>
+
             <FaFacebookF className="inline-block align-text-top" />
+
             <span className='text-stone-800 min-w-fit p-1 ml-4 font-semibold inline-block'>
               Facebook
             </span>
           </span>
 
           <div className='w-full sm:col-span-3'>
+
             <input 
               type="url"
               disabled={!userAction} 
@@ -431,6 +504,7 @@ const MyPublicProfile = () => {
               className={`${(!facebookIsValid && facebook) ? "border-red-500 text-red-600 focus:border-red-500 focus:ring-red-500" : ""} placeholder:text-neutral-400 disabled:opacity-40`}
               onChange={handleFacebook}
             />
+
           </div>
         </label>
 
@@ -438,13 +512,16 @@ const MyPublicProfile = () => {
         <label htmlFor="usercontactinstagram" className="sm:grid sm:grid-cols-4 sm:gap-x-4">
 
           <span className='text-stone-800 sm:text-lg py-1 mt-1 whitespace-nowrap sm:col-span-1'>
+
             <FaInstagram className="inline-block align-text-top" />
+
             <span className='text-stone-800 min-w-fit p-1 ml-4 font-semibold inline-block'>
               Instagram
             </span>
           </span>
 
           <div className='w-full sm:col-span-3'>
+
             <input 
               type="url"
               disabled={!userAction} 
@@ -456,6 +533,7 @@ const MyPublicProfile = () => {
               className={`${(!instagramIsValid && instagram) ? "border-red-500 text-red-600 focus:border-red-500 focus:ring-red-500" : ""} placeholder:text-neutral-400 disabled:opacity-40`}
               onChange={handleInstagram}
             />
+
           </div>
         </label>
 
@@ -463,13 +541,16 @@ const MyPublicProfile = () => {
         <label htmlFor="usercontactyoutube" className="sm:grid sm:grid-cols-4 sm:gap-x-4">
 
           <span className='text-stone-800 sm:text-lg py-1 mt-1 whitespace-nowrap sm:col-span-1'>
+
               <FaYoutubeSquare className="inline-block align-text-top" />
+
             <span className='text-stone-800 min-w-fit p-1 ml-4 font-semibold inline-block'>
               YouTube
             </span>
           </span>
 
           <div className='w-full sm:col-span-3'>
+
             <input 
               type="url"
               disabled={!userAction} 
@@ -481,6 +562,7 @@ const MyPublicProfile = () => {
               className={`${(!youTubeIsValid && youTube) ? "border-red-500 text-red-600 focus:border-red-500 focus:ring-red-500" : ""} placeholder:text-neutral-400 disabled:opacity-40`}
               onChange={handleYouTube}
             />
+
           </div>
         </label>
 
@@ -488,13 +570,16 @@ const MyPublicProfile = () => {
         <label htmlFor="usercontactwebsite" className="sm:grid sm:grid-cols-4 sm:gap-x-4">
 
           <span className='text-stone-800 sm:text-lg py-1 mt-1 whitespace-nowrap sm:col-span-1'>
+
               <FaGlobe className="inline-block align-text-top" />
+
             <span className='text-stone-800 min-w-fit p-1 ml-4 font-semibold inline-block'>
               Website
             </span>
           </span>
 
           <div className='w-full sm:col-span-3'>
+
             <input 
               type="url"
               disabled={!userAction} 
@@ -506,17 +591,20 @@ const MyPublicProfile = () => {
               className={`${(!websiteValid && website) ? "border-red-500 text-red-600 focus:border-red-500 focus:ring-red-500" : ""} placeholder:text-neutral-400 disabled:opacity-40`}
               onChange={handleWebsite}
             />
+
           </div>
         </label>
 
 
         <div className='mt-5 p-2 grid place-items-end'>
+
           <button 
             className='text-neutral-600 bg-neutral-200 capitalize border-0 py-2.5 px-8 rounded-full cursor-pointer 
             text-base shadow-neutral-400 shadow-sm disabled:opacity-40 hover:bg-neutral-300 TextHeadertransition' 
             type='submit' 
             name="submit" 
-            disabled={!canSave}>Save</button>
+            disabled={!canSave}
+          >Save</button>
         </div>
       </form>
     </div>     

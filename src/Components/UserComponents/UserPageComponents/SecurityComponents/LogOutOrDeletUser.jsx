@@ -34,6 +34,7 @@ const LogOutOrDeletUser = ({user, refetch, userAction}) => {
 
   // handling the display or hidden of the whole log out component
   const handleOpenCloseChild = () => {
+
     setOpenLogOut((change) => !change)
   }
 
@@ -52,8 +53,10 @@ const LogOutOrDeletUser = ({user, refetch, userAction}) => {
 
  // getting the email clicked on, command clicked on and opening the comfirmation box
   const handleMakePrimaryButton = (e) => {
+
      // close the error message(if any), once the user change any input
      if(errMsgOn) {
+
       setErrMsg(() => "")
       setErrMsgOn(() => false)
     }  
@@ -65,8 +68,10 @@ const LogOutOrDeletUser = ({user, refetch, userAction}) => {
     
     
     if (commandClicked !== "Delete Account") {
+
       setMessage(() => "Enter your password for logout")
     } else {
+
       setMessage(() => "Enter your password to delete your account")
     }
   }
@@ -78,6 +83,7 @@ const LogOutOrDeletUser = ({user, refetch, userAction}) => {
 
      // close the error message(if any), once the user change any input
      if(errMsgOn) {
+
       setErrMsg(() => "")
       setErrMsgOn(() => false)
     }
@@ -86,6 +92,7 @@ const LogOutOrDeletUser = ({user, refetch, userAction}) => {
     const { isValid } = handleUserPassword(value)
 
     if(!isValid && value) {
+
       setWrongPassword(() => true)
     }
 
@@ -107,6 +114,7 @@ const LogOutOrDeletUser = ({user, refetch, userAction}) => {
 
     
     if (!handelPassWordValidation(password, user)){
+
       setWrongPassword(() => true)
       setPassword(() => "")
     }
@@ -156,7 +164,9 @@ const LogOutOrDeletUser = ({user, refetch, userAction}) => {
   }
 
   useEffect(() => {
+
     if (isSuccess && navigateTo){ 
+
       setNavigateTo(() => false)
       
       window.history.replaceState({}, document.title)
@@ -172,14 +182,16 @@ const LogOutOrDeletUser = ({user, refetch, userAction}) => {
     <div className='font-poppins relative'>
 
       <WritePostAsideOpenClosebar BarName={"Log Out Or Delete Account"} handle={handleOpenCloseChild}/>
+
       {errMsgOn && <p className='text-xs text-rose-500 tracking-wider font-lora'>{errMsg}</p>}
       
       <div className={`${openLogOut ? "block" : "hidden"} mt-2 mb-10 px-3 text-[#444]`}>
-        <SinginAndSecurityIntro text={"Deleting your account also delete all your posts and previous activities."} />
 
+        <SinginAndSecurityIntro text={"Deleting your account also delete all your posts and previous activities."} />
 
         {/* Log out or delete button section start here */}
         <div className={`grid grid-flow-col justify-between mt-12 py-5 ${isLoggingOut && "opacity-40 after:absolute after:inset-0 after:z-10"}`}>
+          
           <button 
             type='submit' 
             id='saveusernewpassword' 

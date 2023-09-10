@@ -42,8 +42,7 @@ const Email = ({user, userAction}) => {
   const ButtonRef = useRef();
 
   // handling the display or hidden of the whole Email component
-  const handleOpenCloseChild = () => {
-    
+  const handleOpenCloseChild = () => {    
     setOpenEmail((change) => !change)
     setOpenAddnewEmail(() => false)
 
@@ -80,8 +79,10 @@ const Email = ({user, userAction}) => {
 
   // getting the email clicked on, command clicked on and opening the comfirmation box
   const handleMakePrimaryButton = (e) => {
+
      // close the error message(if any), once the user change any input
      if(errMsgOn) {
+
       setErrMsg(() => "")
       setErrMsgOn(() => false)
     }  
@@ -95,16 +96,20 @@ const Email = ({user, userAction}) => {
     
     
     if (commandClicked === "Make primary") {
+
       setMessage(() => "Enter your password to make this the primary email")
     } else {
+
       setMessage(() => "Enter your password to delete this email")
     }
   }
 
   // handing getting and setting create  new email password 
   const handleUserpassword = (e) => {
+
     // close the error message(if any), once the user change any input
     if(errMsgOn) {
+
       setErrMsg(() => "")
       setErrMsgOn(() => false)
     }
@@ -119,8 +124,10 @@ const Email = ({user, userAction}) => {
    // handing getting and setting users password for before a user can make changes
    const handleSetGetUserpassword = (e) => {
     setWrongPassword2(() => false)
+
      // close the error message(if any), once the user change any input
      if(errMsgOn) {
+
       setErrMsg(() => "")
       setErrMsgOn(() => false)
     }
@@ -129,6 +136,7 @@ const Email = ({user, userAction}) => {
     const { isValid } = handleUserPassword(value)
 
     if(!isValid && value) {
+
       setWrongPassword2(() => true)
     }
 
@@ -143,6 +151,7 @@ const Email = ({user, userAction}) => {
 
     // close the error message(if any), once the user change any input
     if(errMsgOn) {
+
       setErrMsg(() => "")
       setErrMsgOn(() => false)
     }
@@ -169,6 +178,7 @@ const Email = ({user, userAction}) => {
 
     // check if the password entered is same as the user password 
     if (!handelPassWordValidation(password, user)){
+
       setWrongPassword(() => true)
       // empty the input boxs
       setNewEmail(() => "")
@@ -212,6 +222,7 @@ const Email = ({user, userAction}) => {
 
     // validating password with bycrpt
     if (!handelPassWordValidation(getUserpassword, user)){
+
       setWrongPassword2(() => true)
       setGetUserpassword(() => "")
     }
@@ -263,6 +274,7 @@ const Email = ({user, userAction}) => {
   useEffect(() => {
      
    if(userAction) {
+
       // Change each array to object with id for keys
       let userEmail = user?.email?.secondary?.map((title, id) => ({id: id, title: title}))
       setUserEmail(() => userEmail)
@@ -275,6 +287,7 @@ const Email = ({user, userAction}) => {
     <div className='font-poppins relative'>
 
       <WritePostAsideOpenClosebar BarName={"Email addresses"} handle={handleOpenCloseChild}/>
+
       {errMsgOn && <p className='text-xs text-rose-500 tracking-wider font-lora'>{errMsg}</p>}
 
       <div className={`${openEmail? "block" : "hidden"} mt-2 mb-10 px-3 text-[#444]`}>
@@ -285,61 +298,69 @@ const Email = ({user, userAction}) => {
         <div className='mt-5 py-1 tracking-wide'>
 
           <div className='py-0.5 mb-10'>
+
             <h6 className='text-sm font-bold text-stone-800 mb-4'>Primary email</h6>
-            {userAction ? <p>{user?.email?.primary}</p> : <p className='skeleton w-1/3 h-4 mb-0.5 rounded-sm'></p>}
+
+            {userAction ? <p>{user.email.primary ? user.email.primary : ""}</p> : <p className='skeleton w-1/3 h-4 mb-0.5 rounded-sm'></p>}
           </div>
 
           {/* secondary emails display here */}
           {userAction ?
+
             <ul className={`${user?.email?.secondary?.length <= 0 ? "hidden" : "block"}`}>
 
               <h6 className='text-sm font-bold text-stone-800 mb-4'>Secondary email</h6>
                               
-              {userEmail.map((email) => {
+              {userEmail?.map((email) => {
 
                 return (
 
-                  <li className='sm:grid sm:grid-flow-col sm:justify-between mt-5' key={email.id}> 
+                  <li className='sm:grid sm:grid-flow-col sm:justify-between mt-5' key={email?.id}> 
 
-                    <p>{email.title}</p>          
+                    <p>{email.title ? email.title : ""}</p>          
 
                     <span className='text-sm text-gray-400 inline-block'>   
 
                       {/* Make this email the primary email button section is here */}
                       <button 
                         type='button' 
-                        id={email.title}
+                        id={email?.title}
                         name='makeprimaryemailbutton'
                         className='sm:mx-2 mr-2 cursor-pointer hover:bg-[#e4e4e4] tracking-wider sm:px-1 pr-1 inline-block rounded-md
                           hover:shadow hover:shadow-gray-400 transition-all duration-200 ease-linear disabled:opacity-40'
-                          onClick={handleMakePrimaryButton}>Make primary</button>
+                        onClick={handleMakePrimaryButton}
+                      >Make primary</button>
                       
                       {/* Remove this email from secondary email button section is here */}
                       <button 
                         type='button' 
-                        id={email.title}
+                        id={email?.title}
                         name='removeemailbutton'
                         className='mx-2 cursor-pointer hover:bg-[#e4e4e4] tracking-wider px-1 inline-block rounded-md
                         hover:shadow hover:shadow-gray-400 transition-all duration-200 ease-linear' 
-                        onClick={handleMakePrimaryButton}>Remove</button>
+                        onClick={handleMakePrimaryButton}
+                      >Remove</button>
                     </span>
                   </li>   
                 )
               })}                       
             </ul> :
+
             <UserSecondaryEmailSpinner />
           }          
 
           {/* add new email address section start here */}
           <div className='mt-14 py-1'>
+
             <button 
               type='button' 
               id='addemailaddressbutton'
               name="addemailaddressbutton"
               className="text-blue-400  mt-3 mb-3 inline-block text-base cursor-pointer border border-solid border-blue-400
               hover:text-blue-500 py-1 px-3 rounded-full hover:border-blue-600 hover:bg-blue-100 transition-all 
-                duration-200 ease-linear" onClick={handleOpenAddEmail}>
-                {openAddnewEmail ? "Close" : "Add email address"}
+                duration-200 ease-linear" onClick={handleOpenAddEmail}
+            >
+              {openAddnewEmail ? "Close" : "Add email address"}
             </button>
           </div>
 
@@ -347,6 +368,7 @@ const Email = ({user, userAction}) => {
           <div className={`${openAddnewEmail? "block" : "hidden"}`}>
 
             <div className='mb-5 py-1'>
+
               <h6 className='text-sm font-bold text-stone-800 mb-4'>Add a new email</h6>
             </div>
               
@@ -414,14 +436,17 @@ const Email = ({user, userAction}) => {
 
 
               <div className='grid grid-flow-col justify-between mt-14'>
+
                 <button 
-                type='submit' 
-                id='addnewemailbutton' 
-                name='addnewemailbutton' 
-                className='mx-1 cursor-pointer bg-[#e4e4e4] tracking-wider px-2 py-1 rounded-md shadow shadow-gray-400 
-                text-sm hover:bg-rose-500 hover:text-white transition-all duration-200 ease-linear text-neutral-600 disabled:opacity-40'
-                disabled={!canSave}
-                >Add email</button>
+                  type='submit' 
+                  id='addnewemailbutton' 
+                  name='addnewemailbutton' 
+                  className='mx-1 cursor-pointer bg-[#e4e4e4] tracking-wider px-2 py-1 rounded-md shadow shadow-gray-400 
+                  text-sm hover:bg-rose-500 hover:text-white transition-all duration-200 ease-linear text-neutral-600 disabled:opacity-40'
+                  disabled={!canSave}
+                >
+                  Add email
+                </button>
 
                 <button 
                 type='button' 

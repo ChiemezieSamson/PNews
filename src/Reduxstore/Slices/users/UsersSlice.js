@@ -239,26 +239,27 @@ export const extendedUserApiSlice = apiSlice.injectEndpoints({
 				method: "PUT",
 				body: User,
 			}),
-			async onQueryStarted(User, { dispatch, queryFulfilled }) {
-				const patchResult = dispatch(
-					extendedUserApiSlice.util.updateQueryData(
-						"getUserById",
-						User.userId,
-						(draft) => {
-							const users = draft;
-							if (users) {
-								users.password = User.password;
-								users.confirmPassword = User.confirmPassword;
-							}
-						}
-					)
-				);
-				try {
-					await queryFulfilled;
-				} catch {
-					patchResult.undo();
-				}
-			},
+			invalidatesTags: (result, error, arg) => [{ type: "User", id: arg._id }],
+			// async onQueryStarted(User, { dispatch, queryFulfilled }) {
+			// 	const patchResult = dispatch(
+			// 		extendedUserApiSlice.util.updateQueryData(
+			// 			"getUserById",
+			// 			User.userId,
+			// 			(draft) => {
+			// 				const users = draft;
+			// 				if (users) {
+			// 					users.password = User.password;
+			// 					users.confirmPassword = User.confirmPassword;
+			// 				}
+			// 			}
+			// 		)
+			// 	);
+			// 	try {
+			// 		await queryFulfilled;
+			// 	} catch {
+			// 		patchResult.undo();
+			// 	}
+			// },
 		}),
 
 		deleteExistingUser: builder.mutation({

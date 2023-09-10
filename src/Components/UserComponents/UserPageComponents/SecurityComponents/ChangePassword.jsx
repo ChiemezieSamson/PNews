@@ -50,6 +50,7 @@ const ChangePassword = ({user, userAction}) => {
 
     // close the error message(if any), once the user change any input
     if(errMsgOn) {
+
       setErrMsg(() => "")
       setErrMsgOn(() => false)
     }
@@ -70,6 +71,7 @@ const ChangePassword = ({user, userAction}) => {
 
     // close the error message(if any), once the user change any input
     if(errMsgOn) {
+
       setErrMsg(() => "")
       setErrMsgOn(() => false)
     }
@@ -80,10 +82,12 @@ const ChangePassword = ({user, userAction}) => {
     setPassword(() => value)
 
     if(handelPassWordValidation(value, user) || value === currentPassword) {
+
       setPasswordCanNotSame(() => true)
     }
 
     if(confirmPassword && value !== confirmPassword) {
+
       setPasswordNotSame(() => true)
     }
   }
@@ -96,16 +100,19 @@ const ChangePassword = ({user, userAction}) => {
 
     // close the error message(if any), once the user change any input
     if(errMsgOn) {
+
       setErrMsg(() => "")
       setErrMsgOn(() => false)
     }
 
     const { value } = e.target;
     const { isValid } = handleUserPassword(value);// function for texting the entered text format    
+
     setConfirmPasswordIsValid(isValid);
     setConfirmPassword(() => value)
 
     if(value !== password) {
+
       setPasswordNotSame(() => true)
     }
   }
@@ -121,10 +128,12 @@ const ChangePassword = ({user, userAction}) => {
     event.preventDefault();
 
     if(!handelPassWordValidation(currentPassword, user)) {
+
       setRequiredText(() => true)
     } 
     
     if(canSave && handelPassWordValidation(currentPassword, user)){
+
       try {
 
         await changeUserPassword({userId: user?._id, currentPassword, password, confirmPassword})
@@ -153,11 +162,13 @@ const ChangePassword = ({user, userAction}) => {
     <div className='font-poppins relativ'>
 
       <WritePostAsideOpenClosebar BarName={"Change Password"} handle={handleOpenCloseChild}/>
+
       {errMsgOn && <p className='text-xs text-rose-500 tracking-wider font-lora'>{errMsg}</p>}
 
       <div className={`${openPassword? "block" : "hidden"} mt-2 mb-10 px-3 text-stone-800`}>
 
         <SinginAndSecurityIntro text={"Create a new password that is at least 8 characters long."} />
+
         {requiredText ? <p className='text-xs text-rose-500 tracking-wider font-lora'>Wrong credentials!</p> : "" }
  
         <form className='text-sm text-neutral-600 py-4 mt-4' onSubmit={handleSubmit}>
@@ -234,6 +245,7 @@ const ChangePassword = ({user, userAction}) => {
             </span>
             
             {passwordNotSame && <p className='text-xs text-rose-500 tracking-wider font-lora'>Passwords not same</p>}
+            
             <div className='relative'>
               
               <input 

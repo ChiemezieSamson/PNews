@@ -30,12 +30,14 @@ const Personal = () => {
 
     // close the error message(if any), once the user change any input
     if(errMsgOn) {
+
       setErrMsg(() => "")
       setErrMsgOn(() => false)
     }
 
     const { value } = e.target;
     const { isValid } = textOnly(value); // function for texting the entered text format
+
     setFirstNameIsValid(isValid);
     setFirstName(() => value)
   }
@@ -46,12 +48,14 @@ const Personal = () => {
 
     // close the error message(if any), once the user change any input
     if(errMsgOn) {
+
       setErrMsg(() => "")
       setErrMsgOn(() => false)
     }
 
     const { value } = e.target;
     const { isValid } = textOnly(value); // function for texting the entered text format
+
     setLastNameIsValid(isValid);
     setLastName(() => value)
   }
@@ -62,12 +66,14 @@ const Personal = () => {
 
     // close the error message(if any), once the user change any input
     if(errMsgOn) {
+
       setErrMsg(() => "")
       setErrMsgOn(() => false)
     }
 
     const { value } = e.target;
     const { isValid } = livingaddress(value); // function for texting the entered text format
+
     setLocationIsValid(isValid);
     setLocation(() => value)
   }
@@ -114,6 +120,7 @@ const Personal = () => {
 
       {/* User first name and last name are inside the form tag  */}
       <UserInfoHeading head={"User Name"} text={"For Account and Public Profile"}/>
+      
       {errMsgOn && <p className='text-xs text-rose-500 tracking-wider font-lora'>{errMsg}</p>}
     
       <form id='userinformation' name='userinfoform' className='py-3 my-0.5' onSubmit={handleSubmit}>
@@ -227,6 +234,7 @@ const Personal = () => {
 
         {/* The login password and email  */}
         <div className=' mt-5'>
+
           <UserInfoHeading head={"Login"} text={"Your Login Credentials"}/>
         </div>
 
@@ -271,6 +279,7 @@ const Personal = () => {
             </span>
 
             <div className='relative'>
+
               <input 
                 type="password" 
                 name="userpersonalpassword" 
@@ -294,12 +303,14 @@ const Personal = () => {
         </div>
 
         <div className='mt-5 p-2 grid place-items-end'>
+
           <button 
             className='text-neutral-600 bg-neutral-200 capitalize border-0 py-2.5 px-8 rounded-full TextHeadertransition
             cursor-pointer text-base shadow-neutral-400 shadow-sm disabled:opacity-40 hover:bg-neutral-300' 
             type='submit' 
             form='userinformation' 
-            disabled={!canSave}>Save</button>
+            disabled={!canSave}
+          >Save</button>
         </div>               
       </form>        
     </div> 

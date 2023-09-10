@@ -18,18 +18,23 @@ const MyPosts = ({userAction}) => {
 
   // handling the display or hidden of the whole log out component
   const handleOpenCloseChild = () => {
+
     setOpenUserPost((change) => !change)
   }
 
 
   const handleFecthMore = () => {
+
     if (currentPage < totalPage) {
+
       setPage(() => currentPage + 1)
     }
   }
 
   const handleReduceFecthedPosts = () => {
+
     if (currentPage > 1) {
+
       setPage(() => currentPage - 1)
     }
   }
@@ -40,21 +45,30 @@ const MyPosts = ({userAction}) => {
       <WritePostAsideOpenClosebar BarName={"Posts"} handle={handleOpenCloseChild}/>
 
        <div className={`${openUserPost ? "block" : "hidden"} mt-2 mb-10 px-3 text-[#444]`}>
+
         <SinginAndSecurityIntro text={"Manage the information associated with your posts."} />
 
         <div className='mt-7'>
+
           {postAction && userAction ? 
+
             <ul className='w-full max-w-2xl'>
-              {posts.map((post) => {
+
+              {posts?.map((post) => {
+
                 return (
                   <li key={post?._id} className='my-2'>
+
                     <h3 className="capitalize tracking-wide text-stone-900 font-lora text-base lg:text-lg font-extrabold">
+
                       <Link to={`/single/${post?._id}`} className='hover:mainColor cursor-pointer TextHeadertransition' title="title">
-                        {post?.postTitle.substring(0, 70)}
+
+                        {post?.postTitle?.substring(0, 70)}
                       </Link>
                     </h3>                   
                      
                     <span className='inline-block align-top -mt-0.5'>
+
                       <TimeComponentColor time={post?.createdAt}/>
                     </span>
                   </li>
@@ -66,6 +80,7 @@ const MyPosts = ({userAction}) => {
           }
 
           <div className='text-center mt-6'>
+
             <button 
               type='button' 
               id='reducefetchedpost' 
@@ -74,7 +89,8 @@ const MyPosts = ({userAction}) => {
               text-sm hover:bg-rose-500 hover:text-white transition-all duration-200 ease-linear text-neutral-600 disabled:opacity-40 
               ${(currentPage > 1) ? "inline-block" : "hidden"}`}
               disabled={!userAction && !postAction}
-             onClick={handleReduceFecthedPosts}>previous</button>
+              onClick={handleReduceFecthedPosts}
+            >previous</button>
 
             <button 
               type='button' 
@@ -84,7 +100,8 @@ const MyPosts = ({userAction}) => {
               text-sm hover:bg-rose-500 hover:text-white transition-all duration-200 ease-linear text-neutral-600 disabled:opacity-40 
               ${(totalPage > 1 && currentPage < totalPage) ? "inline-block" : "hidden"}`}
               disabled={!userAction && !postAction}
-             onClick={handleFecthMore}>next</button>
+              onClick={handleFecthMore}
+            >next</button>
           </div>
         </div>
        </div>      

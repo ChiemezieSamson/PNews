@@ -9,6 +9,7 @@ const AdditionalResources = () => {
 
   // handling the display or hidden of the whole log out component
   const handleOpenCloseChild = () => {
+
     setOpenUserPost((change) => !change)
   }
 
@@ -39,21 +40,29 @@ const AdditionalResources = () => {
   ]
 
   return (
-    <div>
+    <>
+
       <WritePostAsideOpenClosebar BarName={"Additional resources"} handle={handleOpenCloseChild}/>
 
       <div className={`${openUserPost ? "block" : "hidden"} mt-2 mb-10 px-3 text-stone-800`}>
+
         <SinginAndSecurityIntro text={"Check out other places for helpful information to learn more about CUmeh blog and services.."} />
 
         <div className='grid grid-flow-row divide-y my-7'>
 
           <ul>
+
             <b className='block font-bold text-lg text-stone-800 capitalize'>legal</b>
-            {legal.map((item) => {
+
+            {legal?.map((item) => {
+              
               return (
                 <li key={item.id}>
+
                   <Link to={item.link} className='grid grid-flow-col justify-between cursor-pointer py-2.5 hover:bg-neutral-200/60 pr-1'>
+
                     <span>{item.name}</span>
+                    
                     <FaRegPaperPlane  className='inline-block'/>
                   </Link>
                 </li>
@@ -62,13 +71,19 @@ const AdditionalResources = () => {
           </ul>
 
           <ul>
+
             <b className='block mt-2.5 font-bold text-lg text-stone-800 capitalize'>Miscellaneous</b>
-            {miscellaneous.map((item) => {
+
+            {miscellaneous?.map((item) => {
+
               return (
                 <li key={item.id}>
+
                   <Link to={item.link} className='grid grid-flow-col justify-between cursor-pointer py-2.5 hover:bg-neutral-200/60 pr-1'>
+
                     <span>{item.name}</span>
-                    <FaRegPaperPlane  className='inline-block'/>
+
+                    <FaRegPaperPlane  className='inline-block'/>                    
                   </Link>
                 </li>
               )
@@ -76,7 +91,7 @@ const AdditionalResources = () => {
           </ul>           
         </div>
       </div>      
-    </div>
+    </>
   )
 }
 

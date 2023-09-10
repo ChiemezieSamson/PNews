@@ -20,7 +20,9 @@ const UserPage = () => {
 
   // when on small screen open the profile picture only on my profile nav
   let hideshowProfilePicture 
+
   if (size.width < 1316 && path === undefined) { hideshowProfilePicture = true }
+
   // on lager screen always keep open
   if (size.width >= 1316) {hideshowProfilePicture = true}
 
@@ -51,6 +53,7 @@ const UserPage = () => {
 
    // making user that only authorized user can update
    useEffect(() => {
+
     if(!isSuccess && isError) {
       
       window.history.replaceState({}, document.title)
@@ -66,10 +69,13 @@ const UserPage = () => {
       <ul className={`text-left ${size.width >= 1316 ? "col-span-1 max-h-56 mt-6" : "order-first xs:grid xs:grid-cols-2 mb-7"}`}>
 
         {UserPages?.map((page) => {
+
             return (
               <li key={page.id} className = "mt-2">
-                <NavLink to={page.toUrl} end className={({ isActive }) => isActive ? `${style} border-[#f70d28] font-semibold` : style}
-                >{page.name}</NavLink>
+
+                <NavLink to={page.toUrl} end className={({ isActive }) => isActive ? `${style} border-[#f70d28] font-semibold` : style}>
+                  {page.name}
+                </NavLink>
               </li>              
             )
           })
@@ -78,14 +84,17 @@ const UserPage = () => {
 
       {/* user information content */}
       <div className={`${size.width >= 1316 ? "col-span-2" : "order-last"} bg-gray-200/40 overflow-x-hidden rounded-md`}>
+
         <Outlet  context={[user, userAction, isFetching]}/>
       </div>
       
       {/* user image */}
       <div className={`${hideshowProfilePicture ? "block" : "hidden"}`}>
+
         <div className={`${size.width >= 1316 ? "col-span-1" : "order-2"}`}>
           <MyProfilePicture user={user} userAction={userAction} isFetching={isFetching}/>
         </div>         
+        
       </div>
     </div>
   )
