@@ -4,12 +4,13 @@ import { HomeLink, NavDirectionAndPageName } from '../../SharedAsset/SharedAsset
 
 const PrivacyAndPolicy = () => {
 
-  return (
-    
+  return (    
     <section className='text-left'>
+
       <NavDirectionAndPageName page={"Privacy & Policy"} />
 
       <article className='mt-12 xl:max-w-[60%] prose-lg'>
+        
         <p>
           <strong>Chinonye Privacy Policy</strong>
         </p>

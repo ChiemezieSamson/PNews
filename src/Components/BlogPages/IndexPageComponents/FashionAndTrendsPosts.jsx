@@ -18,20 +18,26 @@ const FashionAndTrendsPosts = ({Posts, categories, canOpen, isFetching}) => {
   const {allPost} = useParentcategories(parent, categories, Posts, canOpen)
 
   const handleNext = () => {
+
     if(end < 10 && start < 4) {
+
       setEnd(() => end + 1)
       setStart(() => start + 1)
     } else {
+
       setEnd(() => 6)
       setStart(() => 0)
     }
   }
 
   const handleBackward = () => {
+
     if(start === 0 && end === 6) {
+
       setEnd(() => 10)
       setStart(() => 4)
     } else {
+
       setEnd(() => end - 1)
       setStart(() => start - 1)
     }
@@ -55,6 +61,7 @@ const FashionAndTrendsPosts = ({Posts, categories, canOpen, isFetching}) => {
       <div className={`overflowScroll overflow-x-auto scroll-px-0 overscroll-x-contain snap-mandatory mb-2 pt-1.5 ${isFecthingStyle(isFetching)}`}>
 
         {canOpen ?
+
           <ul className="grid grid-flow-col snap-start w-[800px]">
 
             {/* featured posts other post start here */}
@@ -75,6 +82,7 @@ const FashionAndTrendsPosts = ({Posts, categories, canOpen, isFetching}) => {
                   <div className="pt-1">
 
                     {size.width > 768 ? 
+
                       <PostTitleSmall post={post?.postTitle} postId={post?._id}/> 
                       : 
                       <PostTitleMedium post={post?.postTitle} postId={post?._id}/>
@@ -109,10 +117,8 @@ const FashionAndTrendsPosts = ({Posts, categories, canOpen, isFetching}) => {
               isSuccess={canOpen}
               handleBackward={handleBackward}
               handleNext={handleNext}
-            />
-            
+            />            
           </span>
-
         </span>
       </div>
     </>

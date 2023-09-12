@@ -43,7 +43,9 @@ const About = () => {
       </article>
 
       <div className='md:w-1/2 mt-8'>
+
         <div className='border-y-2 border-solid  border-gray-400/70 py-4 inline-block pr-5'>
+          
           <p className='imgxs:text-lg sxs:text-base text-sm font-lora italic font-bold'>
             For More Stories Like this,
             <span className='text-[#f70d28] underline underline-offset-4 inline-block mx-2'> sing up for our newsletter.</span>

@@ -11,7 +11,9 @@ export const JustTimeComponet = ({Posts, Comments, action}) => {
   
   return (    
     <>
+
       {action ?
+
         <ul className="min-w-[200px]">
            
           {Posts?.map((post) => {
@@ -24,7 +26,6 @@ export const JustTimeComponet = ({Posts, Comments, action}) => {
                   <Link to={`/single/${post?._id}`}>
                     <img src={publicFolder + post?.postImage} alt={"posts"} className="max-h-16 sm:max-h-24" loading="lazy"/>
                   </Link>
-
                 </div>
 
                 <div className="col-span-3 ml-1 pt-px">
@@ -61,7 +62,9 @@ export const JustTimeComponetStar = ({Posts, grid, action}) => {
 
   return (    
     <>
+
       {action ?
+
         <ul className={`min-w-[200px] ${grid ? grid: ""}`}>
 
           {Posts?.map((post) => {
@@ -74,7 +77,6 @@ export const JustTimeComponetStar = ({Posts, grid, action}) => {
                   <Link to={`/single/${post?._id}`}>
                     <img src={publicFolder + post?.postImage} alt={"posts"} className="max-h-16 sm:max-h-24" loading="lazy"/>
                   </Link>
-
                 </div>
 
                 <div className="col-span-3 ml-1 pt-px">
@@ -83,7 +85,8 @@ export const JustTimeComponetStar = ({Posts, grid, action}) => {
 
                   <span className='inline-block'>
 
-                    {post?.optional?.favourite === false ? "" : 
+                    {post?.optional?.favourite === false ? "" :
+
                       <span className='mr-4'>
                         <StarComponent color={"text-[#f7c90d]"} favourite={post?.optional?.favourite}/>
                       </span>
@@ -114,6 +117,7 @@ export const JustTimeComponetCatBlockStar = ({Posts, grid, canOpen}) => {
 
   return (
     <>
+
       {canOpen ? 
 
         <ul className={`min-w-[200px] ${grid ? grid: ""}`}>
@@ -139,6 +143,7 @@ export const JustTimeComponetCatBlockStar = ({Posts, grid, canOpen}) => {
                   <span className='mt-1'>
 
                     {post?.optional?.favourite === false ? "" : 
+
                       <span className='mr-4 inline-block'>
                         <StarComponent color={"text-[#f7c90d]"} favourite={post?.optional?.favourite}/>
                       </span>
@@ -194,6 +199,7 @@ export const PagesBlogPostComponent = ({Posts, users, Comments, currentPage, tot
                   <span className="mb-2 inline-block">
 
                     {post?.optional?.favourite === false ? "" : 
+                    
                       <span className='mr-4 inline-block'>
                         <StarComponent color={"text-[#f7c90d]"} favourite={post?.optional?.favourite}/>  
                       </span>

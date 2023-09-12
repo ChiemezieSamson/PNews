@@ -11,6 +11,7 @@ const Categories = () => {
   const size = useWindowSize()
 
   if (categoriesaction) {
+    
     categories = categoriesContent?.map((title, id) => ({id: id, title: title}))
   }
   

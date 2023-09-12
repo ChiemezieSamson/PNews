@@ -177,7 +177,7 @@ const App = createBrowserRouter([
 				errorElement: <NotFound />,
 			},
 			{
-				path: "contactus",
+				path: "contact_us",
 				element: <ContactUs />,
 				errorElement: <NotFound />,
 			},

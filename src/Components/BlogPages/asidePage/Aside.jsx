@@ -16,6 +16,7 @@ const Aside = ({Comments, commentaction}) => {
 
   return (
     <div className='text-left'>
+
       <div className='mb-5'>
         <PagesDivider text={"Stay Connected"} />
       </div>
@@ -33,6 +34,7 @@ const Aside = ({Comments, commentaction}) => {
       />
 
       <div className="my-10">
+        
         <PagesDivider text={"Recent Posts"} />
 
         <div className={`my-3 block ${isFecthingStyle(isFetching)}`}>

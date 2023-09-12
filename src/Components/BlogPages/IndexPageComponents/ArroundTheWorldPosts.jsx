@@ -30,6 +30,7 @@ const ArroundTheWorldPosts = ({Posts, categories, users, Comments, canOpen, isFe
       <div className={`md:grid md:grid-cols-2 pb-7 pt-2 ${isFecthingStyle(isFetching)}`}>
 
         {canOpen ?
+
           <div className='mt-0.5 text-black md:mr-[2%]'>
 
             <div className="relative mb-2 max-h-44 imgxs:max-h-52 sm:max-h-60 md:min-h-[420px] lg:min-h-[500px] xl:min-h-[600px]">
@@ -68,11 +69,14 @@ const ArroundTheWorldPosts = ({Posts, categories, users, Comments, canOpen, isFe
         }
 
         {canOpen ? 
+
           <ul className='mt-0.5 p-0 md:ml-[2%]'>
+
             {allPost?.slice(2, 4)?.map((post) => {
 
               return (
                 <li key={post?._id} className="mb-1.5 last:mb-0">
+                  
                   <div className="relative mb-2 topRetangleImage">
 
                     <Link to={`/single/${post?._id}`}>

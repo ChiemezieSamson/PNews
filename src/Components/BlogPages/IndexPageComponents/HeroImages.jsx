@@ -52,6 +52,7 @@ const HeroImages = ({Posts, categories, canOpen, isFetching}) => {
               <PostTitleLarge post={allPost[0]?.postTitle} postId={allPost[0]?._id}/>
 
               {size.width > 480 &&
+
                 <span className="mt-2 inline-block lg:block lg:text-left">
 
                   {allPost[0]?.optional?.favourite === false ? "" : 
@@ -74,8 +75,7 @@ const HeroImages = ({Posts, categories, canOpen, isFetching}) => {
 
               {displayedPost?.map((post) => {
 
-                return (
-                  
+                return (                  
                   <li key={post?._id} className={`HeroImageMultipleListOverFlow first:mt-0 md:mt-1 group HeroImageMultipleList`}>
 
                     <Link to={`/single/${post?._id}`} className={overLay()}>
@@ -89,8 +89,9 @@ const HeroImages = ({Posts, categories, canOpen, isFetching}) => {
                     <Link to={`/single/${post?._id}`} className="absolute bottom-[10%] max-w-fit inset-x-auto text-white z-30 mx-1">
 
                       <h3 className="HeroImageMultipleListH3">
+                        
                         <span>
-                          {post?.postTitle}
+                          {post?.postTitle ? post?.postTitle : ""}
                         </span>
                       </h3>
 

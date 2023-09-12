@@ -9,6 +9,7 @@ const EditorsChioceAndDontMiss = ({Posts, Comments, canOpen, isFetching}) => {
   let newPosts 
 
   if (canOpen) {
+
     newPosts = [...Posts]
   }
 
@@ -22,7 +23,7 @@ const EditorsChioceAndDontMiss = ({Posts, Comments, canOpen, isFetching}) => {
   });
 
   return (
-    <section>    
+    <>    
 
       <TrendingCommentsLatest 
         posts={Posts} 
@@ -32,6 +33,7 @@ const EditorsChioceAndDontMiss = ({Posts, Comments, canOpen, isFetching}) => {
       />
 
       <div className='mt-7 mb-12'>
+
         <MainDivider firstletter={"Editor's"} secondletter={"choice"} />
 
         <div className={`mt-4 ${isFecthingStyle(isFetching)}`}>
@@ -44,7 +46,8 @@ const EditorsChioceAndDontMiss = ({Posts, Comments, canOpen, isFetching}) => {
         
       </div>
 
-      <div>
+      <>
+
         <MainDivider firstletter={"Don't"} secondletter={"Miss"} />
 
         <div className={`mt-4 ${isFecthingStyle(isFetching)}`}>
@@ -54,8 +57,8 @@ const EditorsChioceAndDontMiss = ({Posts, Comments, canOpen, isFetching}) => {
             action={canOpen}
           />
         </div>
-      </div>
-    </section>
+      </>
+    </>
   )
 }
 

@@ -16,9 +16,11 @@ const Category = () => {
   const canOpen = [action, useraction, commentaction].every(Boolean)
 
   return (  
+
     <div className="m-0 p-0">
       
       {currentPage > 1 ?
+      
         <CategorySearchpagination isFetching={isFetching}/> 
           :
         <GeneralCategorisePages 

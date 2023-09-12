@@ -41,6 +41,7 @@ const Pagination = ({ currentPage , totalPages }) => {
   }
 
   for (let i = 1; i <= totalPagesToNumber; i++) {
+
     pageNumbers.push(i);
   }
 
@@ -148,9 +149,9 @@ const Pagination = ({ currentPage , totalPages }) => {
 
                 <button
                   type='button'
-                  className={`text-sm px-2.5 py-1 border border-solid border-gray-400 mx-1 shadow-sm shadow-slate-400 transition-all duration-200 ease-linear ${
-                    pageToNumber === pageNumber ? "bg-rose-500 text-white border-rose-400 hover:bg-rose-500" : "hover:bg-slate-200"
-                  }`}>
+                  className={`text-sm px-2.5 py-1 border border-solid border-gray-400 mx-1 shadow-sm shadow-slate-400 transition-all duration-200 ease-linear 
+                  ${pageToNumber === pageNumber ? "bg-rose-500 text-white border-rose-400 hover:bg-rose-500" : "hover:bg-slate-200"}`}
+                >
                   {pageNumber}
                 </button>
               </Link>

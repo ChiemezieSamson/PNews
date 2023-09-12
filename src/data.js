@@ -197,7 +197,7 @@ export const otherPages = [
 	{
 		id: 2,
 		page: "Contact Us",
-		to: "contactus",
+		to: "contact_us",
 	},
 	{
 		id: 3,

@@ -5,6 +5,7 @@ const PaginationFunctions = ({currentPage, totalPages}) => {
 
   return (
     <div>
+      
       <Pagination
         currentPage={currentPage}
         totalPages={totalPages}

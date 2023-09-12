@@ -23,7 +23,9 @@ const BusinessIndexPage = () => {
  
   return (
     <>
+
       {canOpen ?
+
         <div className={`${isFecthingStyle(isFetching)}`}>
 
           <ul className="hidden md:grid md:gap-1 md:grid-rows-6 md:grid-cols-7 mb-4 md:max-h-[450px] lg:max-h-[500px]">
@@ -46,17 +48,21 @@ const BusinessIndexPage = () => {
                   </span>                    
 
                   <Link to={`/single/${post?._id}`} className="absolute group-first:bottom-[8%] group-[&:nth-child(2)]:bottom-[8%] bottom-[12%] max-w-fit text-white inset-x-auto z-30 mx-1">
-                      <h4 className="group-first:text-lg group-first:lg:text-2xl HeroImageMultipleListH3" title='title'>
-                        <span>
-                          {post?.postTitle}
-                        </span>
-                      </h4>
+
+                    <h4 className="group-first:text-lg group-first:lg:text-2xl HeroImageMultipleListH3" title='title'>
+
+                      <span>
+                        {post?.postTitle ? post?.postTitle : ""}
+                      </span>
+                    </h4>
                   </Link>
 
                   <span className='absolute bottom-0 max-w-fit text-white right-0 z-30 mx-1 rounded-md group-hover:backdrop-blur-sm group-hover:bg-black/10 group-hover:bg-blend-burn px-px'>
+                   
                     <span className="inline-block mr-4 hover:mainColor TextHeadertransition"> 
                       <AdminComponent user={post?.postAuthor} users={users}/>
                     </span>
+
                     <TimeComponent time={post?.createdAt}/>
                   </span> 
                 </li>
@@ -76,6 +82,7 @@ const BusinessIndexPage = () => {
       }
 
       <div className="md:hidden">
+
         <SharedBlogPageStyleOne 
           Posts={canOpen && Posts?.slice(1, 4)} 
           users={users}
@@ -88,12 +95,15 @@ const BusinessIndexPage = () => {
       <div className='grid grid-flow-row md:grid-cols-3'>
 
         <aside className="md:col-span-1 mt-8 md:mr-[3%] order-last md:order-first">
+
           <StickyBox offsetTop={0} offsetBottom={0}>
+
             <Aside Comments={Comments} commentaction={commentaction}/>
           </StickyBox>
         </aside>
 
         <div className="md:col-span-2 md:ml-[3%]">
+          
           <NavDirectionAndPageName />
         
           <PagesBlogPostComponent 

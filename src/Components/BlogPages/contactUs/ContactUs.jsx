@@ -6,6 +6,7 @@ const ContactUs = () => {
  
   return (
     <section className='text-left'>
+
       <NavDirectionAndPageName />
 
       <p className='mt-7 prose-lg'>
@@ -17,7 +18,8 @@ const ContactUs = () => {
         <span dangerouslySetInnerHTML={{__html: Map ? Map :""}} className="p-1 shadow-sm w-full shadow-slate-500 inline-block"/>
       </div>
 
-      <article>      
+      <article>   
+
         <h5 className='font-bold text-lg font-round'>Get in touch</h5>
 
         <p className='prose-base'>
@@ -29,6 +31,7 @@ const ContactUs = () => {
         <div className='mb-12 mt-8 bg-white grid md:grid-cols-2 md:gap-x-4'>          
 
           <form className='mt-8 md:mt-0 order-last md:order-first'>
+
             <h5 className='font-bold text-xl font-round mb-8'>Your message</h5>
 
             <label htmlFor="name" className='after:content-["*"] after:ml-0.5 after:text-[#f70d28]'>Name</label>
@@ -49,11 +52,16 @@ const ContactUs = () => {
           </form>
 
           <div>
+
             <h5 className='font-bold text-xl font-round'>Contact Info</h5>
+
             <ul className='mt-8 prose-lg m-0 p-0'>
+
               {ContactInfo.map((info) => {
+
                 return (
                   <li key={info.id} className="inline-block md:block mx-3">
+                    
                     <span className='text-[#f70d28] inline-block hover:text-gray-400 TextHeadertransition'>{info.icon}</span>
                     <span className='text-[#54595f]/80 ml-4'>{info.text}</span>
                   </li>

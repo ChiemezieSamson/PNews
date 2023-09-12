@@ -53,6 +53,7 @@ const TrendingCommentsLatest = ({posts, Comments, action, isFetching}) => {
 
         // make sure that an empty post is not returned
         allComment?.forEach(item => {
+
           if (item?.length > 0) {
 
             allNewPost?.push(item[0]);
@@ -86,17 +87,19 @@ const TrendingCommentsLatest = ({posts, Comments, action, isFetching}) => {
   }
   
   return (
-    <div >
-      <ul className='grid grid-cols-3 text-center mt-7 mb-6 p-0 divide-x border border-solid boreder-neutral-100'>
+    <>
+
+      <ul className='grid grid-cols-3 mt-7 mb-6 p-0 divide-x border border-solid boreder-neutral-100'>
 
         <li className="text-sm font-medium leading-9 hover:bg-neutral-50 cursor-pointer text-stone-700 activeTitle">
+
           <button 
             type="button"
             name="TrendingButton"
             id='TrendingButton'
             onClick={handleClick}
             disabled={!action || isFetching}
-            className="disabled:opacity-40"
+            className="disabled:opacity-40 block w-full text-center"
             ref={ref}
           >
             Trending
@@ -104,13 +107,14 @@ const TrendingCommentsLatest = ({posts, Comments, action, isFetching}) => {
         </li>
 
         <li className="text-sm font-medium leading-9 hover:bg-neutral-50 cursor-pointer text-stone-700">
+
           <button 
             type="button"
             name="CommentsButton"
             id='CommentsButton'
             onClick={handleClick}
             disabled={!action || isFetching}
-            className="disabled:opacity-40"
+            className="disabled:opacity-40 block w-full text-center"
             ref={ref2}
           >            
             Comments
@@ -118,13 +122,14 @@ const TrendingCommentsLatest = ({posts, Comments, action, isFetching}) => {
         </li>
 
         <li className="text-sm font-medium leading-9 hover:bg-neutral-50 cursor-pointer text-stone-700">
+
            <button 
             type="button"
             name="LatestButton"
             id='LatestButton'
             onClick={handleClick}
             disabled={!action || isFetching}
-            className="disabled:opacity-40"
+            className="disabled:opacity-40 block w-full text-center"
             ref={ref3}
           >           
             Latest
@@ -134,12 +139,15 @@ const TrendingCommentsLatest = ({posts, Comments, action, isFetching}) => {
       
 
       <div className={`mb-5 ${isFecthingStyle(isFetching)}`}>
+
         {text !== "Comments" ? 
-          <JustTimeComponetStar Posts={newPosts?.length ? newPosts : action && TrendingPosts?.slice(0, 4)} action={action}/> :
+
+          <JustTimeComponetStar Posts={newPosts?.length ? newPosts : action && TrendingPosts?.slice(0, 4)} action={action}/> 
+          :
           <JustTimeComponet Posts={newPosts} Comments={Comments} action={action}/>
         }
       </div>
-    </div>
+    </>
   )
 }
 

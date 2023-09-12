@@ -20,7 +20,9 @@ const LatestPosts = ({Posts, isFetching, canOpen, currentPage, totalPages}) => {
       </div>
 
       <div className={`grid grid-flow-col justify-center w-full mt-3 ${isFecthingStyle(isFetching)}`}>
+
         {canOpen && 
+        
           <PaginationFunctions 
             currentPage={currentPage}
             totalPages={totalPages}

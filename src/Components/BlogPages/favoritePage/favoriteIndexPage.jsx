@@ -24,6 +24,7 @@ const FavoriteIndexPage = () => {
 
   return (
     <>
+
       {canOpen ? 
 
         <div className={`${isFecthingStyle(isFetching)}`}>
@@ -50,8 +51,9 @@ const FavoriteIndexPage = () => {
                   <Link to={`/single/${post?._id}`} className="absolute bottom-[10%] max-w-fit inset-x-auto z-30 mx-1">
 
                       <h4 className="group-first:text-lg group-first:lg:text-2xl HeroImageMultipleListH3" title='title'>
+
                         <span className="bg-white px-1 hover:text-[#f70d28] TextHeadertransition">
-                          {post?.postTitle}
+                          {post?.postTitle ? post?.postTitle : ""}
                         </span>
                       </h4>
 

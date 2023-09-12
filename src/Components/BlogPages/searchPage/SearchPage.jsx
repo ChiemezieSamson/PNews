@@ -25,21 +25,27 @@ const SearchPage = () => {
   let searchIcon = <FaSistrix className="inline-block"/>
 
   const handleInputSearch = (event) => {
+    
     setSearch(() => event.target.value)
   }
 
   const handleButtonClick = (e) => {
     e.preventDefault()
+
     if (search !== "") {
+
       navigate(`/search?s=${search}`, {replace: true}, [navigate])
     } else {
+
       navigate("/search", {replace: true}, [navigate])
     }
   }
 
   return (
     <div className="md:grid md:grid-cols-3 text-left">
+
       <div className="md:col-span-2 md:mr-[3%]">
+
         <NavDirectionAndPageName />
 
         <form id="search-form" role="search" className={`my-4 grid grid-cols-10 bg-neutral-200 p-3 mb-10 ${isFecthingStyle(isFetching)}`} onSubmit={handleButtonClick}>
@@ -80,6 +86,7 @@ const SearchPage = () => {
       </div>
 
       <aside className="md:col-span-1 mt-8 md:ml-[3%]">
+        
         <StickyBox offsetTop={0} offsetBottom={0}>
 
           <Aside 

@@ -13,6 +13,7 @@ const FeaturedPosts = ({Posts, users, canOpen, categories, isFetching}) => {
   
   const {allPost} = useParentcategories(parent, categories, Posts, canOpen)
   
+
   return (
     <section className="mt-3.5">
 
@@ -23,7 +24,9 @@ const FeaturedPosts = ({Posts, users, canOpen, categories, isFetching}) => {
         
         {/* featured posts first image and content start here */}
         {canOpen ?
+
           <div className="text-stone-800 md:mr-[2%]">
+
             <div className="relative mt-1.5 mb-2 topRetangleImage">
 
               <Link to={`/single/${allPost[0]?._id}`}>
@@ -38,6 +41,7 @@ const FeaturedPosts = ({Posts, users, canOpen, categories, isFetching}) => {
             <span className="mt-2 mb-2 inline-block">
 
               {allPost[0]?.optional?.favourite === false ? "" : 
+
                 <span className='mr-4 inline-block'>
                   <StarComponent color={"text-[#f7c90d]"} favourite={allPost[0]?.optional?.favourite}/>  
                 </span>
@@ -63,6 +67,7 @@ const FeaturedPosts = ({Posts, users, canOpen, categories, isFetching}) => {
 
         {/* featured posts other post start here */}
         <div className='my-4 md:mt-1.5 md:ml-[2%]'>
+          
           <JustTimeComponetStar 
             Posts={canOpen && allPost?.slice(2, 6)}
             action={canOpen}

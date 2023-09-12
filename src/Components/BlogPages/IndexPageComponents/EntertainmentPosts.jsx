@@ -30,6 +30,7 @@ const EntertainmentPosts = ({Posts, categories, users, Comments, canOpen, isFetc
 
       {/* first component start here */}
       {canOpen ?
+
         <ul className={`md:grid md:grid-cols-2 pt-2 ${isFecthingStyle(isFetching)}`}>
 
           {allPost?.slice(2, 4)?.map((post) => {
@@ -51,6 +52,7 @@ const EntertainmentPosts = ({Posts, categories, users, Comments, canOpen, isFetc
                 <span className="inline-block mt-2 mb-2">
 
                   {post?.optional?.favourite === false ? "" : 
+                  
                     <span className='mr-4 inline-block'>
                       <StarComponent color={"text-[#f7c90d]"} favourite={post?.optional?.favourite}/>  
                     </span>
@@ -85,18 +87,17 @@ const EntertainmentPosts = ({Posts, categories, users, Comments, canOpen, isFetc
           Posts={canOpen && allPost?.slice(4, 8)}
           grid={"md:grid md:grid-cols-2 gap-x-[2%]"}
           action={canOpen} 
-        />
- 
+        /> 
       </div>
 
       {/* Third component start here */}
       {canOpen ? 
+
         <ul className={`mt-4 ${isFecthingStyle(isFetching)}`}>
           
           {allPost?.slice(8, 13)?.map((post) => {
 
             return (
-
               <li key={post?._id} className="grid imgxs:grid-cols-5 grid-cols-3 mb-3.5">
 
                 <div className="imgxs:col-span-2 col-span-1 mr-[2%] max-h-24 imgxs:max-h-32 sm:max-h-40 lg:max-h-44">
@@ -104,7 +105,6 @@ const EntertainmentPosts = ({Posts, categories, users, Comments, canOpen, isFetc
                   <Link to={`/single/${post?._id}`}>
                     <img src={publicFolder + post?.postImage} alt={"game"} className="max-h-24 imgxs:max-h-32 sm:max-h-40 lg:max-h-44" loading="lazy"/>
                   </Link>
-
                 </div>
 
                 <div className='imgxs:col-span-3 col-span-2 md:max-w-md text-stone-800 ml-[2%]'>

@@ -25,7 +25,7 @@ const PaginationPages = () => {
         <div className={`mt-8 col-span-2 md:mr-[3%] ${isFecthingStyle(anyIsFetching)}`}>        
           
           <JustTimeComponetCatBlockStar 
-            Posts={canOpen && Posts.slice(0, 10)} 
+            Posts={canOpen && Posts?.slice(0, 10)} 
             grid={"imgxs:grid imgxs:grid-cols-2 gap-x-4"}
             canOpen={canOpen}
           />
@@ -33,8 +33,8 @@ const PaginationPages = () => {
           <div className='grid grid-flow-col justify-center w-full'>  
 
             <PaginationFunctions 
-                currentPage={currentPage}
-                totalPages={totalPages}
+              currentPage={currentPage}
+              totalPages={totalPages}
             />
           </div>
         </div>        
@@ -46,7 +46,6 @@ const PaginationPages = () => {
             <PagesDivider text={"Stay Connected"} />
 
             <div className='pt-3'>
-
               <SocialLinks />
             </div>
             
@@ -65,8 +64,6 @@ const PaginationPages = () => {
           </StickyBox>
         </aside>
       </div>
-
-
     </div>
   )
 }

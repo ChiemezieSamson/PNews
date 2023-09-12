@@ -32,6 +32,7 @@ const CategorySearchpagination = () => {
       </aside>
 
       <div className={`md:col-span-2 md:ml-[3%] text-left ${isFecthingStyle(isFetching)}`}>
+        
         <NavDirectionAndPageName />
       
         <PagesBlogPostComponent 

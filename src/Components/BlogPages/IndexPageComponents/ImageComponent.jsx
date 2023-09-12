@@ -9,7 +9,9 @@ const ImageComponent = ({Posts, canOpen, isFetching}) => {
   const reversPost = []
   
   for (let i =  Posts?.length -1; i > 0; i-- ) {
+
       if (canOpen) {
+
         reversPost.push(Posts[i])
       }
   }
@@ -21,25 +23,26 @@ const ImageComponent = ({Posts, canOpen, isFetching}) => {
       <div className="overflowScroll overflow-x-auto scroll-px-0 overscroll-x-contain snap-mandatory overflow-y-hidden">
 
         {canOpen ?
+
           <ul className="grid grid-flow-col">
            
             {reversPost?.slice(0, 7)?.map((post) => {
+
               return (
                 <li key={post?._id} className={`relative snap-start m-0 mr-0.5 last:mr-0 p-0 group overflow-clip max-h-80 min-w-[300px]`}>
 
                   <Link to={`/single/${post?._id}`} className={overLay()}>
-                    <img src={publicFolder + post?.postImage} alt="IndexImage"  
-                        className="scale-100 group-hover:scale-110 Imagetransition max-h-80 min-w-[300px]" loading="lazy"/>         
+                    <img src={publicFolder + post?.postImage} alt="IndexImage"  className="scale-100 group-hover:scale-110 Imagetransition max-h-80 min-w-[300px]" loading="lazy"/>         
                   </Link>
                           
-                  <div className="absolute bottom-[12%] text-white inset-x-auto text-center max-w-fit
-                        z-30 Imagetransition translate-y-10 group-hover:translate-y-0">
+                  <div className="absolute bottom-[12%] text-white inset-x-auto text-center max-w-fit z-30 Imagetransition translate-y-10 group-hover:translate-y-0">
                           
                     <CategoriesComponent cat={post?.postCategory[0]}/> 
                         
                     <h3 className="capitalize tracking-wide font-lora md:text-base text-lg lg:text-xl font-extrabold">
+
                       <Link to={`/single/${post?._id}`} className='cursor-pointer'>
-                        {post?.postTitle}
+                        {post?.postTitle ? post?.postTitle : ""}
                       </Link>
                     </h3>
 

@@ -7,6 +7,7 @@ import FollowUs from './footerComponent/FollowUs'
 
 const Footer = () => {
   const size = useWindowSize()
+
   return (
     <section className='bg-stone-800 divide-y divide-neutral-200 font-poppins px-1'>
       
@@ -17,6 +18,7 @@ const Footer = () => {
         <Categories />
 
         <div className='mt-2'>
+          
           <p>
             <b className='inline-block text-[#f93d53] font-bold text-lg'>NewsLetter</b>
           </p>

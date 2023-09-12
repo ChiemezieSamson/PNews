@@ -29,9 +29,9 @@ const PopularPost = ({Posts, canOpen, isFetching}) => {
   
 
 
-  return (
-    
+  return (    
     <section className='md:my-3 mt-12'>
+
       <MainDivider firstletter={"Popular Post"} />
 
       {/* First Hero Image and link start here */}
@@ -97,7 +97,7 @@ const PopularPost = ({Posts, canOpen, isFetching}) => {
 
                   <h4 className="capitalize col-span-7 font-lora tracking-wide font-extrabold text-stone-800 lg:text-base text-sm imgxs:text-base md:text-[13px]">
 
-                    <Link to={`/single/${post?._id}`} className='hover:text-[#f70d28] cursor-pointer'>{post.postTitle}</Link>
+                    <Link to={`/single/${post?._id}`} className='hover:text-[#f70d28] cursor-pointer'>{post?.postTitle ? post?.postTitle : ""}</Link>
 
                     <span className='block'>
 
@@ -108,7 +108,6 @@ const PopularPost = ({Posts, canOpen, isFetching}) => {
                         canOpen={canOpen}
                       />
                     </span>      
-
                   </h4>
                 </li>          
               )

@@ -6,6 +6,7 @@ const Favorite = () => {
   
   return (
     <section className="text-left">
+      
       <Outlet />
     </section>
   )

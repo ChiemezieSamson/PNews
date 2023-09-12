@@ -22,7 +22,9 @@ const OtherPaginationPages = () => {
   return (
     <div>
       <div className='md:grid md:grid-cols-3 text-left'>
+
           <div className={`md:col-span-2 md:mr-[3%] ${isFecthingStyle(anyIsFetching)}`}>
+            
             <NavDirectionAndPageName />
           
             <PagesBlogPostComponent

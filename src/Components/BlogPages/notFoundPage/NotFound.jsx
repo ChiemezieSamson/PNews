@@ -14,12 +14,16 @@ const NotFound = () => {
         <img src={bulbLight} alt="notFound"/>
       </div>
 
-      <div className="max-w-md mx-auto">
+      <div className="max-w-md mx-auto"> 
+
         <div className="prose">
+
           {error?.statusText &&
+
             <h1 className="relative text-neutral-100 text-9xl max-w-max mx-auto my-0 mb-4">
+
               <span>
-              {error?.status}
+                {error?.status}
               </span>
 
               <span className="absolute font-lora top-0 text-lg text-neutral-100 left-12">Oops!</span>
@@ -30,8 +34,10 @@ const NotFound = () => {
         </div>
         
         <div className="prose text-neutral-100 text-lg font-medium">
+
           <p className="py-1 my-0">we are sorry, an unexpected error has occurred.</p>
           <p className="py-1 my-0">The page you requested was {error?.statusText ? error?.statusText : "not found"}.</p>
+
           <p className="py-1 my-0">
             <i>{error?.error?.message || error?.data}</i>
           </p>
@@ -39,6 +45,7 @@ const NotFound = () => {
         
 
         <div className="text-neutral-100">
+          
           <HomeLink />
         </div>
       </div>

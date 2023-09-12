@@ -20,6 +20,7 @@ const BooksIndexPage = () => {
 
   return (
     <>
+
       <SharedBlogPageStyleOne
         users={users} 
         Posts={canOpen && Posts?.slice(0,4)} 
@@ -29,6 +30,7 @@ const BooksIndexPage = () => {
    
 
       <div className='md:grid md:grid-cols-3'>
+
         <div className="md:col-span-2 md:mr-[3%]">
           <NavDirectionAndPageName />
         
@@ -45,6 +47,7 @@ const BooksIndexPage = () => {
         </div>
 
         <aside className="md:col-span-1 mt-8 md:ml-[3%]">
+          
           <StickyBox offsetTop={0} offsetBottom={0}>
 
             <Aside 

@@ -75,6 +75,7 @@ const TrendingPosts = ({ Posts, size, canOpen}) => {
             <div className="mt-[6px] xs:col-span-4 relative bg-white col-span-9 md:text-sm text-base lg:text-base prose">
 
               {canOpen ?
+
               <>
                 {firstSixPosts?.map((post) => {
 
@@ -84,7 +85,7 @@ const TrendingPosts = ({ Posts, size, canOpen}) => {
                         ${post?._id === firstSixPosts[nextTrendingPost]?._id ? "block opacity-100 z-10 translate-y-0" : "opacity-0 -z-10 TextHeadertransition translate-y-full"}`}>                   
     
                         <Link to={`/single/${post?._id}`} className='hover:mainColor no-underline cursor-pointer TextHeadertransition text-neutral-700' title='title'>
-                          {post?.postTitle}
+                          {post?.postTitle ? post?.postTitle : ""}
                         </Link> 
     
                         <time dateTime='2022-11-3 4:45' className="whitespace-nowrap ml-3 text-neutral-300 cursor-pointer text-ellipsis" title='date'>
@@ -115,8 +116,9 @@ const TrendingPosts = ({ Posts, size, canOpen}) => {
                     id={icon.title}
                     className='pt-1'
                     disabled={!canOpen}
-                    onClick={icon.handler}>
-                      {icon.icon}
+                    onClick={icon.handler}
+                  >
+                    {icon.icon}
                   </button>
                 </li>
               )

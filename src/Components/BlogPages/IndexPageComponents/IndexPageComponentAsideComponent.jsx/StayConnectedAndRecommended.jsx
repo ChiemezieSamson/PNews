@@ -7,22 +7,23 @@ const Recommended = ({Posts, canOpen, isFetching}) => {
   return (
     <section className='mt-2.5'>
 
-      <div>
+      <>
+
         <MainDivider firstletter={"Stay Connected"} />
 
         <div className='pt-1'>
           <SocialLinks others={SocialMediaIcons}/>
-        </div>
-        
-      </div>
+        </div>        
+      </>
 
       <div className='mt-10'>
+
         <MainDivider firstletter={"Recommended"}/>
 
         <div className={`pt-4 ${isFecthingStyle(isFetching)}`}>
 
           <JustTimeComponetStar 
-            Posts={canOpen && Posts.slice(0, 5)}
+            Posts={canOpen && Posts?.slice(0, 5)}
             action={canOpen}
           />
         </div>
