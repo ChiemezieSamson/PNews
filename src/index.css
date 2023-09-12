@@ -132,11 +132,15 @@
   /* text editor styling start here */
 
   .postEditor img {
-    width: auto; 
-    height: auto;
     object-fit: fill;
     object-position: center;
     cursor: pointer;
+    max-height: 480px;
+  }
+
+  .postEditor .rdw-list-dropdown,
+  .postEditor .rdw-text-align-dropdown {
+    z-index: 30 !important;
   }
 
   .editor ins {
@@ -185,7 +189,7 @@
 
   .editor code { 
     overflow-wrap: break-word;
-    @apply font-mono bg-[#f1f1f1] rounded py-px px-0.5 
+    @apply font-mono bg-[#f1f1f1] rounded py-px px-0.5
   }
 
   .editor pre {
@@ -196,10 +200,6 @@
     margin: 1em 0;
     padding: 1px 3px;
     background-color: #f1f1f1;
-  }
-
-  .editor img {
-    @apply max-h-[480px] w-full object-cover cursor-pointer mb-4 rounded
   }
 
   .editor blockquote {
@@ -218,7 +218,7 @@
 
   .editor img,
   div[data-contents="true"] figure span {
-    @apply max-h-[480px] w-full object-cover cursor-pointer mb-4
+    @apply max-h-[480px] w-full object-cover cursor-pointer mb-4 rounded text-center
   }
 
   .editor ul li {

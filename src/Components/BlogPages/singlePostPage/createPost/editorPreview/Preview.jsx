@@ -28,12 +28,15 @@ const Preview = ({editorText, postContent}) => {
   const  handleMarkUp = (html) => {
     
     return {
+
       __html: DOMPurify.sanitize(html)
     }
   }
 
   return (
-    <div dangerouslySetInnerHTML={handleMarkUp(convertedContent)} className="editor"></div>
+    <>
+     <div dangerouslySetInnerHTML={handleMarkUp(convertedContent)} className="editor"></div>
+    </>
   )
 }
 

@@ -2,8 +2,7 @@ import { useEffect, useState } from "react";
 import {BiImageAdd} from "react-icons/bi";
 import { useDispatch, useSelector } from "react-redux";
 import CreatePostAside from "./CreatePostAside";
-import { convertToRaw} from 'draft-js';
-import { Editor } from 'react-draft-wysiwyg';
+import { convertToRaw } from 'draft-js';
 import "../../../../../node_modules/react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import { emptyCategories, selectAllPostCat } from '../../../../Reduxstore/Slices/PostsComponentSlices/postcategory/PostcategoriesSlice'
 import { emptyTag, selectAllPostTags } from '../../../../Reduxstore/Slices/PostsComponentSlices/postsTags/PostsTagsSlice'
@@ -15,6 +14,7 @@ import PostWritePreview from "./editorPreview/postWritePreview";
 import { useFetchedUserById } from "../../../SharedAsset/Spinners/userSpinner";
 import { useNavigate } from "react-router-dom";
 import { textSpaceAndNumber } from "../../../SharedAsset/Vaidations/RegularExpression";
+import TextEditor from "../editor/Editor";
 
 const CreatePostComponents = ({state}) => {
   const [addNewPost, { isLoading , isFetching: CreatePostsIsfetching}] = useCreateNewPostMutation() // Redux function to create a new post
@@ -124,8 +124,7 @@ const CreatePostComponents = ({state}) => {
     }
   }
 
-
-  const canSave = [postTitle, postImage, postAuthor,postCategory[0],postTags[0], isValid].every(Boolean) && !isLoading
+  const canSave = [postTitle, postImage, postAuthor, postCategory[0], postTags[0], isValid].every(Boolean) && !isLoading
 
   const handleAllPostContent = async () => {
 
@@ -236,33 +235,13 @@ const CreatePostComponents = ({state}) => {
             </form>
 
             <div className="postEditor">
-
-              <Editor 
-                toolbarOnFocus
-                editorState={editorState}                  
-                defaultEditorState={state}
-                onEditorStateChange={setEditorState}
-
-                wrapperClassName="p-0 focus-within:pt-4 mt-7 focus-within:bg-gray-200/40
-                border-0 border-t-1 border-x-0 border-solid border-neutral-100"
-                editorClassName="focus:py-4 px-4 bg-white text-base"
-                toolbarClassName="border border-solid border-[#eee] cursor-pointer mx-1.5 bg-red-300"
-
-                spellCheck
-                readOnly={!userAction}
-
-                hashtag={{
-                  separator: " ",
-                  trigger: "#"
-                }}
-                
-                toolbar={{
-                  list: { inDropdown: true },
-                  textAlign: { inDropdown: true },
-                  link: { inDropdown: true },
-                  history: { inDropdown: true },
-                }}
-              />       
+              
+              <TextEditor 
+                editorState={editorState}
+                state={state}
+                setEditorState={setEditorState}
+                userAction={userAction}
+              />
             </div>
           </> 
           :
@@ -275,6 +254,7 @@ const CreatePostComponents = ({state}) => {
             postCategory={postCategory?.length > 0 ? postCategory :  ["category"]}
             file={file}
             User={User}
+            preview={preview}
             userAction={userAction}
             isFetching={anyIsfetching}
           />

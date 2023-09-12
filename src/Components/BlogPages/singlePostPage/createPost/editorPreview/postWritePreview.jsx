@@ -6,7 +6,7 @@ import { isFecthingStyle, useWindowSize } from '../../../../SharedAsset/SharedAs
 import TexSizeAdjuster from '../../singlePost/singlePostComponets/TexSizeAdjuster';
 
 
-const PostWritePreview = ({editorText, postTitle, postImage, User, userAction, postTags, optional, postCategory, file, anyIsfetching}) => {
+const PostWritePreview = ({editorText, postTitle, postImage, User, userAction, postTags, optional, postCategory, file, anyIsfetching, preview}) => {
   const [sizeLine, setSizeLine] = useState(20)
   const [textSize, setTextSize] = useState("prose-base")
   const [otherShare, setOtherShare] = useState(false)
@@ -55,25 +55,44 @@ const PostWritePreview = ({editorText, postTitle, postImage, User, userAction, p
     }
   }, [size])
 
- // Text size Buttons
- const fontSizeButton = [
-  {
-    id: 1,
-    icon: <FaMinus className='inline-block mx-2'/>,
-    onClick: handleMinus
-  },
-  {
-    id: 2,
-    icon: <FaPlus className='inline-block mx-2'/>,
-    onClick: handlePlus
-  },
-  {
-    id: 3,
-    icon: <FaRedo className='inline-block mx-2'/>,
-    title: 'reset',
-    onClick: handleResetFontSize
-  },
-]
+  // Text size Buttons
+  const fontSizeButton = [
+    {
+      id: 1,
+      icon: <FaMinus className='inline-block mx-2'/>,
+      onClick: handleMinus
+    },
+    {
+      id: 2,
+      icon: <FaPlus className='inline-block mx-2'/>,
+      onClick: handlePlus
+    },
+    {
+      id: 3,
+      icon: <FaRedo className='inline-block mx-2'/>,
+      title: 'reset',
+      onClick: handleResetFontSize
+    },
+  ]
+
+    if (preview) {
+
+      const removerEditorTextStlye = document.querySelectorAll("span")
+      const removerEditorImageStlye = document.querySelectorAll("img")
+      
+      removerEditorImageStlye.forEach((img) => {
+  
+        img.style = ""
+        img.setAttribute("alt", "postimage")
+        img.setAttribute("loading", "lazy")
+      })    
+  
+      removerEditorTextStlye.forEach((span) => {
+  
+        span.style = ""
+      })
+    }
+
 
   return (
     <div className={isFecthingStyle(anyIsfetching)}>
@@ -119,9 +138,10 @@ const PostWritePreview = ({editorText, postTitle, postImage, User, userAction, p
 
         {/* Post Title start here */}   
         <h1 className="my-1.5 text-stone-900 tracking-wide lg:text-4xl text-3xl font-bold font-lora first-letter:capitalize" title='title'>
-            <strong>
-              {postTitle}
-            </strong>
+
+          <strong>
+            {postTitle}
+          </strong>
         </h1>
 
         {/*Admin image , name, post date and category , text size adjuster and comment number start here  */}
@@ -141,6 +161,7 @@ const PostWritePreview = ({editorText, postTitle, postImage, User, userAction, p
 
             {/* Admin name, Post date and category */}
             {(userAction) &&
+
               <address className='align-top mt-1.5 inline-block'>
 
                 <small className="text-neutral-500 mt-[3px] font-lora whitespace-nowrap tracking-wider font-extrabold text-xs lg:text-sm md:text-[11px] leading-4 inline-block"
@@ -154,6 +175,7 @@ const PostWritePreview = ({editorText, postTitle, postImage, User, userAction, p
                 <span className="mt-1 font-lora tracking-wide whitespace-nowrap" title='date'>    
 
                   <time dateTime={new Date().toDateString()} className="whitespace-nowrap cursor-pointer mt-0.5 ml-0.5 inline-block text-xs lg:text-sm md:text-xs">
+
                     {new Date().toDateString()}
                   </time>                    
 
@@ -253,7 +275,7 @@ const PostWritePreview = ({editorText, postTitle, postImage, User, userAction, p
             <div className='grid grid-flow-col gap-x-[1%]'>     
 
               <span className='leading-10 whitespace-nowrap inline-block rounded text-center text-white bg-[#eb4d3f]
-              cursor-pointer hover:bg-[rgba(235,77,63,.9)] TextHeadertransition' title='mail'>
+                cursor-pointer hover:bg-[rgba(235,77,63,.9)] TextHeadertransition' title='mail'>
 
                 <FaEnvelope className='inline-block text-lg text-white align-middle mb-1'/>
               </span>
@@ -298,7 +320,10 @@ const PostWritePreview = ({editorText, postTitle, postImage, User, userAction, p
 
             return (
               <span key={tag?.id} className="text-stone-700 bg-neutral-100 inline-block py-0.5 px-2.5 hover:bg-[#f70d28]
-              hover:text-neutral-50 mb-1.5 mr-[3px] last:mr-0 tracking-wider TextHeadertransition cursor-pointer">{tag?.title}</span>
+              hover:text-neutral-50 mb-1.5 mr-[3px] last:mr-0 tracking-wider TextHeadertransition cursor-pointer"
+              >
+                {tag?.title}
+              </span>
             )
           })}
         </span>

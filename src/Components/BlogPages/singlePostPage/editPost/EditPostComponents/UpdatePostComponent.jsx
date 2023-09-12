@@ -1,5 +1,4 @@
 import { ContentState, EditorState, convertFromHTML, convertToRaw } from 'draft-js'
-import { Editor } from 'react-draft-wysiwyg';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import React, { useEffect, useState } from 'react'
 import { BiImageAdd } from 'react-icons/bi'
@@ -17,6 +16,7 @@ import { isFecthingStyle, useWindowSize } from '../../../../SharedAsset/SharedAs
 import PostWritePreview from '../../createPost/editorPreview/postWritePreview';
 import { useFetchedUserById } from '../../../../SharedAsset/Spinners/userSpinner';
 import { textSpaceAndNumber } from '../../../../SharedAsset/Vaidations/RegularExpression';
+import TextEditor from '../../editor/Editor';
 
 
 const UpdatePostComponent = ({state, post, postId, postAction, isFetching}) => {
@@ -273,33 +273,12 @@ const UpdatePostComponent = ({state, post, postId, postAction, isFetching}) => {
 
             
             <div className="postEditor">
-
-              <Editor 
-                toolbarOnFocus
-                editorState={editorState}                  
-                defaultEditorState={ EditorState.createWithContent(state)}
-                onEditorStateChange={setEditorState}
-
-                wrapperClassName="p-0 focus-within:pt-4 mt-7 focus-within:bg-gray-200/40
-                border-0 border-t-1 border-x-0 border-solid border-neutral-100"
-                editorClassName="focus:py-4 px-4 bg-white text-base"
-                toolbarClassName="border border-solid border-[#eee] cursor-pointer mx-1.5 bg-red-300"
-
-                spellCheck
-                readOnly={!canOpen}
-
-                hashtag={{
-                  separator: " ",
-                  trigger: "#"
-                }}
-                
-                toolbar={{
-                  list: { inDropdown: true },
-                  textAlign: { inDropdown: true },
-                  link: { inDropdown: true },
-                  history: { inDropdown: true },
-                }}
-              />       
+              <TextEditor
+                editorState={editorState}
+                state={EditorState.createWithContent(state)}
+                setEditorState={setEditorState}
+                userAction={canOpen}
+              />  
             </div>
           
           </> 
@@ -313,6 +292,7 @@ const UpdatePostComponent = ({state, post, postId, postAction, isFetching}) => {
             postCategory={postCategory?.length > 0 ? postCategory :  post?.postCategory}
             file={file}
             User={User}
+            preview={preview}
             userAction={canOpen}
             isFetching={anyIsfetching}
           />
