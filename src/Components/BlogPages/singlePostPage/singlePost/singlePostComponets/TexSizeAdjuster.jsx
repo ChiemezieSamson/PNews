@@ -1,30 +1,48 @@
-import { useHover } from '@uidotdev/usehooks';
-import React from 'react'
+import React, { useState } from 'react'
 import { BiFontFamily } from 'react-icons/bi'
 import { FaRegComment } from 'react-icons/fa';
+import { useWindowSize } from '../../../../SharedAsset/SharedAssets';
 
 
 
 // { /* Text size adjuster and comment number */}
 const TexSizeAdjuster = ({fontSizeButton, sizeLine, comments}) => {
-  const [hoverRef, isHovered] = useHover();
+  const [hoverRef, setHovered] = useState(false);
+  const size = useWindowSize()
+
+  const handleLargeScreenOnHover = () => {
+    if (size.width < 1024) return
+    setHovered(() => true)
+  }
+
+  const handleLargeScreenOnHoverOut = () => {
+    if (size.width < 1024) return
+    setHovered(() => false)
+  }
+
+  const handlesmallScreenClick = () => {
+    if (size.width > 1023) return
+    setHovered((change) => !change)
+  }
 
   return (
     <span className='align-top text-lg sm:mt-0.5 inline-block'>
 
     {/* Text size adjuster */}
-    <span className='relative mx-3'>
+    <span className='relative mx-3'  onMouseOver={handleLargeScreenOnHover}  onMouseOut={handleLargeScreenOnHoverOut}>
 
-      <span title='text size' ref={hoverRef}>
+      <span title='text size' onClick={handlesmallScreenClick}>
 
         <BiFontFamily  className='inline-block text-neutral-500'/>
 
-        {isHovered &&
+      </span>  
+
+        {hoverRef &&
         
           <div className='absolute top-full -translate-x-[50%] pt-4 z-20 whitespace-nowrap w-48 max-h-[104px] text-center'>
 
             <div className='bg-neutral-50 relative rounded -translate-x-[30%] shadow-sm shadow-neutral-300 grid grid-cols-2 grid-rows-2 after:absolute after:right-2
-              after:bottom-full after:bg-white after:-ml-1.5 after:border-b-[12px] after:border-x-[10px] after:border-solid after:border-b-white  after:border-x-[rgba(0,0,0,2%)]
+              after:bottom-full after:bg-white after:-ml-1.5 after:border-b-[12px] after:border-x-[10px] after:border-solid after:border-b-neutral-50  after:border-white
               after:border-t-[rgba(0,0,0,2%)]'>
 
               {fontSizeButton.map((bnt) => {
@@ -49,7 +67,6 @@ const TexSizeAdjuster = ({fontSizeButton, sizeLine, comments}) => {
             <div className="absolute inset-x-0 z-30 h-[2px] top-[58%] -left-[30%] bg-red-500" style={{width:`${sizeLine}%`}}></div>
           </div>                                 
         }
-      </span>                     
     </span>
 
     {/* Comment number */}

@@ -100,7 +100,7 @@ const CommentForm = ({commentsContent, postId, onAnyIsfetching, canOpen}) => {
   }
 
   // CREATE COMMENT
-  const canSave = [postId, author, content, email, website, isValid, emailIsValid].every(Boolean) 
+  const canSave = [postId, author, content, email, isValid, emailIsValid].every(Boolean) 
     && !isLoading && requiredText === false && requiredText2 === false
 
 
@@ -299,7 +299,7 @@ const CommentForm = ({commentsContent, postId, onAnyIsfetching, canOpen}) => {
             className={`mt-1 p-1 border border-gray-400 rounded-md w-full mb-0 disabled:opacity-40
             ${(websiteIsValid !== true && website) ? "border-red-500 text-red-600 focus:border-red-500 focus:ring-red-500" : ""}`}
             onChange={handleWebsite}
-           />
+          />
         </span>
       </div>
 

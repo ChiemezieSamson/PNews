@@ -68,13 +68,13 @@ const SinglePost = () => {
   // handle substraction of the textsize
   const handleMinus = () => {
 
-    sizeLine !== 20 && setSizeLine((size) => size - 20)
+    if (sizeLine !== 20) return setSizeLine((size) => size - 20)
   }
 
   // handle addission of the textsize
   const handlePlus = () => {
 
-    sizeLine !== 100 && setSizeLine((size) => size + 20)
+    if (sizeLine !== 100) return setSizeLine((size) => size + 20)
   }
 
   // handle reset of the textsize
@@ -157,10 +157,10 @@ const SinglePost = () => {
 
     const handleTextSize = () => {
 
-      sizeLine >= 80 && setTextSize(() => "prose-2xl")
-      sizeLine === 60 && setTextSize(() => "prose-xl")
-      sizeLine === 40 && setTextSize(() => "prose-lg")
-      sizeLine === 20 && setTextSize(() => "prose-base")  
+      if (sizeLine >= 80) return setTextSize(() => "prose-2xl")
+      if (sizeLine === 60) return setTextSize(() => "prose-xl")
+      if (sizeLine === 40) return setTextSize(() => "prose-lg")
+      if (sizeLine === 20) return setTextSize(() => "prose-base")  
     }
 
     handleTextSize()

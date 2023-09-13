@@ -137,14 +137,23 @@ const HeaderNavigations = ({hideShowNavLinks, handleCloseNavLinks}) => {
       {/* ==== Home Hero section start here ==== */}
       <div className={`leading-8 font-poppins font-medium md:py-8 max-w-xl mx-auto my-0 bg-white relative
       ${(size.width >= 768 && scroll >= 300) ? "hidden" : "block"}`}>
-        <h1 className="text-stone-800 text-2xl xxs:text-4xl sm:text-6xl md:text-8xl font-extralight 
-          italic tracking-wider uppercase">Chinonye</h1>
+
+        <h1 className="text-stone-800 text-2xl xxs:text-4xl sm:text-6xl md:text-8xl font-extralight italic tracking-wider uppercase">
+
+          <strong className="text-[20vw] xxs:text-7xl font-bold italic relative after:absolute after:h-2.5 after:w-2.5 after:bg-[#f70d28] after:bottom-4">
+              PN<span className='lowercase'>ews</span>
+            <small className='xxs:text-[10px] absolute xxs:top-3 xxs:right-[20px] text-[8px] -top-[5px] right-2 italic tracking-normal'>news, blog &amp; magazine</small>
+          </strong> 
+        </h1>
 
         <small className="text-xs xxs:text-base font-thin tracking-widest text-stone-800 font-lora capitalize">Discover The Best</small>
 
-        <Link to={"/search"} 
-        className="absolute right-0 bottom-1 cursor-pointer md:hidden text-stone-800 text-xs pb-1 xxs:pb-0 xxs:right-2 xxs:text-lg font-bold hover:mainColor TextHeadertransition" 
-        title="posts search"  onClick={handleCloseNavLinks}>
+        <Link 
+          to={"/search"} 
+          className="absolute right-0 bottom-1 cursor-pointer md:hidden text-stone-800 text-xs pb-1 xxs:pb-0 xxs:right-2 xxs:text-lg font-bold hover:mainColor TextHeadertransition" 
+          title="posts search"  
+          onClick={handleCloseNavLinks}
+        >
           <FaSistrix className="inline-block"/>
         </Link>
       </div>
@@ -161,34 +170,42 @@ const HeaderNavigations = ({hideShowNavLinks, handleCloseNavLinks}) => {
 
           {/* === The Home link and style is here === */}
           <li className="md:inline-block relative hover:bg-stone-100 md:hover:bg-transparent mr-2">
-              <NavLink to="/" end 
+            
+            <NavLink to="/" end 
               className={({ isActive , isPending }) => 
               isActive ?  navStyle + " mainColor actives" : 
               isPending ? navStyle + " text-blue-400" : navStyle}
               onClick={handleCloseNavLinks}
-             >Home</NavLink>
-              <span className="nav-link md:inline-block transition-all duration-200 ease-linear"></span>
+            >Home</NavLink>
+
+            <span className="nav-link md:inline-block transition-all duration-200 ease-linear"></span>
           </li>
 
             {/* === The rest of the links start here === */}
           {navItems?.map((nav) => {
+
             return (
               <li key={nav.id} className="md:inline-block relative group hover:bg-stone-100 md:hover:bg-transparent">
+                
                 <NavLink to={nav.url}	className={({ isActive , isPending }) => 
                   isActive ?  navStyle + " mainColor" : 
                   isPending ? navStyle + " text-blue-400" : navStyle}
                   onClick={handleCloseNavLinks}>{nav.name}</NavLink>
+
                 <span id={nav.name} className="nav-link md:inline-block  transition-all duration-200 ease-linear"></span>{/* navlink hover underline design */}
 
                 {/* The hover arrow for sublinks display */}
                 {(scroll < 201 && size.width >= 768) ? 
+
                   <span id={nav.name} className="group-focus-within:mainColor text-[10px] py-4 px-4 hidden md:inline-block
                     relative after:absolute after:inset-0 after:z-20 transition-all duration-200 delay-100 ease-linear" 
                     onMouseOver={onHover} onMouseOut={onHover}> 
+
                     <FaChevronDown className="inline-block align-text-top mt-[2px] my-1"/> 
                   </span> : "" }                    
                   
                 {size.width < 768 && 
+
                   <NavLinksAndArrows 
                     opncategories={onHover} 
                     name={nav.name} 
@@ -197,7 +214,9 @@ const HeaderNavigations = ({hideShowNavLinks, handleCloseNavLinks}) => {
 
                 {/* ===== block of hoverable links small screen are here ====== */}
                 {size.width < 768 && 
-                <span className="hidden overflow-hidden hover:block">            
+
+                <span className="hidden overflow-hidden hover:block">    
+
                   <SmallScreenHoverLinsks 
                     handleCloseNavLinks={handleCloseNavLinks}
                     CategoriesLink={headerHoverCategoriesNav} 
@@ -217,7 +236,9 @@ const HeaderNavigations = ({hideShowNavLinks, handleCloseNavLinks}) => {
      {(scroll > 201 && size.width >= 768 ? false : showhoverlinks) && 
 
       <div className="relative" onMouseOver={onshowHoverlinks} onMouseOut={onshowHoverlinks}>
+
         <div className={`absolute top-0 inset-x-0 lg:inset-x-[5%] hidded md:block`}>
+
             <HoverLinsks 
               handleCloseHoverlinks={handleCloseHoverlinks}
               CategoriesLink={headerHoverCategoriesNav} 

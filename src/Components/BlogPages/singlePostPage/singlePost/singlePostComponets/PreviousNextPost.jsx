@@ -86,7 +86,7 @@ const PreviousNextPost = ({post, User, canOpen, size, onAnyIsfetching}) => {
       {/* user Bio and info */}
       <section className='lg:grid-cols-6 lg:grid p-7 mb-7 border border-solid border-neutral-200 font-poppins text-center sm:text-left rounded-sm'>
 
-        <span className={`w-[80px] h-20 block rounded-full align-bottom mr-2 col-span-1 border border-solid border-neutral-200 ${isFecthingStyle(onAnyIsfetching || isFetching)}`}>
+        <span className={`max-w-[80px] mx-auto text-center h-20 inline-block lg:block rounded-full align-bottom mr-2 col-span-1 border border-solid border-neutral-200 ${isFecthingStyle(onAnyIsfetching || isFetching)}`}>
 
           {canOpen ? 
 

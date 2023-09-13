@@ -49,7 +49,7 @@ const Comment = ({comments, postId, byUserId, postAuthor, offsetOfForm, contentA
 
                 <h3 className="font-medium capitalize font-josefin text-stone-700" name={comment?.author}>
                   {comment?.author} 
-                  <small className="text-neutral-500 mt-1 prose normal-case">&nbsp;-&nbsp;{formatDate(comment?.createdAt)}</small>
+                  <small className="text-neutral-500 mt-1 prose normal-case">&nbsp;-&nbsp;{formatDate(comment?.createdAt) !== "NaNyear" ? formatDate(comment?.createdAt) : "1sec"}</small>
                 </h3>
                 
                 {/* comment content */}

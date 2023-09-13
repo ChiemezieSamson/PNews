@@ -128,7 +128,7 @@ const LogIn = () => {
   }, [isSuccess, navigate])
 
   return (
-    <div className={`pb-10 pt-3 text-left bg-gradient-to-b from-neutral-100 via-gray-50 to-neutral-100 ${isFecthingStyle(isLoading)}`}>
+    <div className={`pb-10 pt-3 sm:my-10 md:my-14 lg:my-20 text-left bg-gradient-to-b from-neutral-100 via-gray-50 to-neutral-100 ${isFecthingStyle(isLoading)}`}>
       
       <div className="md:w-[28rem] max-w-sm font-lora px-6 pb-3 rounded mx-auto">
 

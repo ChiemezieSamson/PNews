@@ -149,7 +149,7 @@ export const EditAndDeleteButton = ({handler}) => {
 
 export const ReactionAndReplyButton = ({handler, comment, User, postId, buttonText, createUserFirstButton, offsetOfForm}) => {
 
-  const handleBackToTopClick = () => {
+  const handleBackToForm = () => {
 
     document.body.scrollTop = offsetOfForm.current.offsetTop; // For Safari
     window.scrollTo({left: 0, top: offsetOfForm.current.offsetTop, behavior: "smooth"})
@@ -167,7 +167,7 @@ export const ReactionAndReplyButton = ({handler, comment, User, postId, buttonTe
      {createUserFirstButton ?         
 
         <button type="button" className="text-neutral-700 hover:text-neutral-500 font-josefin tracking-wide mt-[5px] 
-          align-top mx-2 inline-block TextHeadertransition" onClick={handleBackToTopClick}>
+          align-top mx-2 inline-block TextHeadertransition" onClick={handleBackToForm}>
           {buttonText}
         </button>      
       :

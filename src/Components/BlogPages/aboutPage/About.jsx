@@ -14,7 +14,7 @@ const About = () => {
           <h6 className='font-round mb-5 tracking-widest'>Hello & Welcome</h6>
           
           <h2 className='xl:text-[50px] text-4xl lg:text-[42px] lg:leading-none font-bold font-lora 
-          mb-5'>Hi, I'm Umeh Chinonye</h2>
+          mb-5'>Hi, We're PNews</h2>
           
           <div>
             <div  className='py-4 prose text-lg'>

@@ -200,7 +200,7 @@ export const PagesBlogPostComponent = ({Posts, users, Comments, currentPage, tot
 
                     {post?.optional?.favourite === false ? "" : 
                     
-                      <span className='mr-4 inline-block'>
+                      <span className='mr-4 xs:inline-block hidden '>
                         <StarComponent color={"text-[#f7c90d]"} favourite={post?.optional?.favourite}/>  
                       </span>
                     }
@@ -213,10 +213,10 @@ export const PagesBlogPostComponent = ({Posts, users, Comments, currentPage, tot
                       <TimeComponentColor time={post?.createdAt}/>
                     </span>
 
-                      <CommentComponetColor Comments={Comments} postId={post?._id}/>
+                    {size.width > 520 && <CommentComponetColor Comments={Comments} postId={post?._id}/>}
                   </span>
 
-                  {size.width > 519 && 
+                  {size.width > 520 && 
                   <>
                     <PostsShortInfoComponent post={post?.postContent} />
 

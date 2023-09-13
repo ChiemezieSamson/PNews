@@ -84,7 +84,7 @@ const BusinessIndexPage = () => {
       <div className="md:hidden">
 
         <SharedBlogPageStyleOne 
-          Posts={canOpen && Posts?.slice(1, 4)} 
+          Posts={canOpen && Posts?.slice(0, 4)} 
           users={users}
           canOpen={canOpen}
           isFetching={isFetching}

@@ -43,7 +43,7 @@ const Reply = ({comment, comments, User, postId, offsetOfForm, byUserId, postAut
                       
                       <h3 className="font-medium capitalize -mb-2.5 font-josefin text-stone-700" name={reply?.name}>
                         {reply?.name} 
-                        <small className="text-neutral-500 mt-1 prose ml-1 normal-case"> - {formatDate(reply?.createdAt)}</small>
+                        <small className="text-neutral-500 mt-1 prose ml-1 normal-case"> - {formatDate(reply?.createdAt) !== "NaNyear" ? formatDate(reply?.createdAt) : "1sec"}</small>
                       </h3>
 
                       <small className='font-lora text-neutral-500 inline-block mb-1'>

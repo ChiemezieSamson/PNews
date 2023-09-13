@@ -19,10 +19,12 @@ const CopyWrite = () => {
           {otherPages.map((page) => {
 
             return (
-              <li key={page.id} className="group sm:text-sm xs:text-xs text-sm inline-block">
+              <li key={page.id} className="group sm:text-sm xs:text-xs text-sm inline">
                 
-                <Link to={page.to} className='text-neutral-100'>{page.page} 
-                <span className='group-last:hidden text-neutral-300 pl-1 pr-1.5'> &#8725;</span></Link>
+                <Link to={page.to} className='text-neutral-100'>
+                  {page.page} 
+                  <span className='group-last:hidden text-neutral-300 pl-1 pr-1.5'> &#8725;</span>
+                </Link>
               </li>
             )
           })}

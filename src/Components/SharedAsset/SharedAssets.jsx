@@ -544,7 +544,7 @@ export const NewsLetter = ({textColor}) => {
         <button 
          type="submit"
          name="newsletterButton"
-         className='w-full md:w-auto text-xs font-black my-0 text-white bg-[#f70d28] uppercase tracking-wider align-baseline col-span-2'>sing up</button>
+         className='w-full md:w-auto text-xs font-black my-0 text-white bg-[#f70d28] uppercase tracking-wider align-baseline col-span-2'>sign up</button>
       </form>
 
       <small className={`${textColor ? textColor : "text-stone-700"} block text-sm tracking-wide before:content-['*'] before:ml-0.5 before:text-lg before:text-red-500 before:pr-2`}>
@@ -634,10 +634,7 @@ export  const formatDate = (createdAt) => {
 
   const timeDiffInSeconds = Math.floor((currentDate - createdDate) / 1000);
 
-  if (timeDiffInSeconds < 2) {
-
-    return `${1}sec`;
-  } else if (timeDiffInSeconds < 60) {
+  if (timeDiffInSeconds < 60) {
 
     return `${timeDiffInSeconds}sec`;
 

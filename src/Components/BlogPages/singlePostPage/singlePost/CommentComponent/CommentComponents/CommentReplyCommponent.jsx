@@ -34,7 +34,7 @@ const CommentReplyCommponent = ({reply, postId, User, comment, byUserId,  offset
         e.target.textContent = "Cancle" // change the to cancle
 
         // disable the 3 dotted hambuger button
-        const editDelete = e.target.parentElement.parentElement.previousSibling.previousSibling
+        const editDelete = e.target.parentElement.previousSibling.previousSibling
         editDelete.style.pointerEvents = "none"
 
         // just set the comment author and id
@@ -46,7 +46,7 @@ const CommentReplyCommponent = ({reply, postId, User, comment, byUserId,  offset
         e.target.textContent = "Reply"
 
         // Enable the 3 dotted hambuger button
-        const editDelete = e.target.parentElement.parentElement.previousSibling.previousSibling
+        const editDelete = e.target.parentElement.previousSibling.previousSibling
         editDelete.style.pointerEvents = ""
 
         // Clear the data's
@@ -63,7 +63,6 @@ const CommentReplyCommponent = ({reply, postId, User, comment, byUserId,  offset
     
     setReplyContent(() => event.target.value)
   }
-
 
   const canSave = [commentId, replyTo, User?.author, replyContent].every(Boolean) && !replyCreating
 
