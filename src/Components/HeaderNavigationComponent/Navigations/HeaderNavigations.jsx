@@ -135,16 +135,18 @@ const HeaderNavigations = ({hideShowNavLinks, handleCloseNavLinks}) => {
     <div className={sticky}>
 
       {/* ==== Home Hero section start here ==== */}
-      <div className={`leading-8 font-poppins font-medium md:py-8 max-w-xl mx-auto my-0 bg-white relative
-      ${(size.width >= 768 && scroll >= 300) ? "hidden" : "block"}`}>
+      <div className={`leading-8 font-poppins font-medium md:py-8 max-w-xl mx-auto my-0 bg-white relative ${(size.width >= 768 && scroll >= 300) ? "hidden" : "block"}`}>
 
-        <h1 className="text-stone-800 text-2xl xxs:text-4xl sm:text-6xl md:text-8xl font-extralight italic tracking-wider uppercase">
+        <Link to={"/"}>
+          <h1 className="text-stone-800 text-[20vw] mt-5 mb-3 sxs:my-0 sxs:text-7xl italic tracking-wider uppercase">
 
-          <strong className="text-[20vw] xxs:text-7xl font-bold italic relative after:absolute after:h-2.5 after:w-2.5 after:bg-[#f70d28] after:bottom-4">
-              PN<span className='lowercase'>ews</span>
-            <small className='xxs:text-[10px] absolute xxs:top-3 xxs:right-[20px] text-[8px] -top-[5px] right-2 italic tracking-normal'>news, blog &amp; magazine</small>
-          </strong> 
-        </h1>
+            <strong className="relative after:absolute after:h-2.5 after:w-2.5 font-bold after:bg-[#f70d28] after:bottom-4">
+                PN<span className='lowercase'>ews</span>
+              <small className='xxs:text-[8px] sxs:text-[10px] absolute sxs:top-4 xxs:top-0 xxs:right-[4px] text-[7.5px] -top-[4px] right-0 italic tracking-normal'>news, blog &amp; magazine</small>
+            </strong> 
+          </h1>
+        </Link>
+
 
         <small className="text-xs xxs:text-base font-thin tracking-widest text-stone-800 font-lora capitalize">Discover The Best</small>
 

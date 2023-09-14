@@ -217,7 +217,7 @@ const SocialNewsletter = ({opensidebar, user, userAction, isFetching, userisSucc
           <SocialMediaLinks />
 
           {/*Hanbuger button use to open the side bar for instagram feed on large screen*/}
-          <div className="text-stone-800 text-lg pl-7 md:inline-block leading-3 hidden align-bottom">
+          <div className="text-stone-800 text-lg pl-7 md:inline-block leading-3 hidden align-bottom" title="Insta-feeds and search">
             <HanbugarTwo openSidebar={opensidebar}/>
           </div>
         </div> 
