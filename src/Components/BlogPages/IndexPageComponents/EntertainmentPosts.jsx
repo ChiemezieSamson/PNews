@@ -107,14 +107,14 @@ const EntertainmentPosts = ({Posts, categories, users, Comments, canOpen, isFetc
                   </Link>
                 </div>
 
-                <div className='imgxs:col-span-3 col-span-2 md:max-w-md text-stone-800 ml-[2%]'>
+                <div className='imgxs:col-span-3 col-span-2 md:max-w-md text-stone-800 ml-[2%] pt-0.5'>
 
-                {size.width > 768 ? 
+                  {size.width > 768 ? 
 
-                  <PostTitleMedium2 post={post?.postTitle}  postId={post?._id}/> 
-                  : 
-                  <span className='inline-block'> <PostTitleSmall post={post?.postTitle}  postId={post?._id}/> </span>
-                }
+                    <PostTitleMedium2 post={post?.postTitle}  postId={post?._id}/> 
+                    : 
+                    <span className='inline-block'> <PostTitleSmall post={post?.postTitle}  postId={post?._id}/> </span>
+                  }
 
                   <span className="mt-2 mb-4 inline-block">
 
