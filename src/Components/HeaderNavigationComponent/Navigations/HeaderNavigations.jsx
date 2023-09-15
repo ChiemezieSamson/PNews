@@ -148,9 +148,9 @@ const HeaderNavigations = ({hideShowNavLinks, handleCloseNavLinks}) => {
       {/* ==== Home Hero section start here ==== */}
       <div className={`leading-8 font-poppins font-medium md:py-8 max-w-xl mx-auto my-0 bg-white relative ${(size.width >= 768 && scroll >= 300) ? "hidden" : "block"}`}>
 
-        <Link to={"/"} className='mt-7 mb-2 inline-block'>
+        <Link to={"/"} className={`${(size.width <= 768 && scroll >= 300) ? "mt-7 mb-2 inline-block" : "sxs:my-0"}`}>
 
-          <h1 className="text-stone-800 text-[20vw] sxs:my-0 sxs:text-7xl italic sxs:tracking-wider uppercase inline-block">
+          <h1 className="text-stone-800 text-[20vw] sxs:text-7xl italic sxs:tracking-wider uppercase inline-block">
 
             <strong className="relative after:absolute after:h-2.5 after:w-2.5 font-bold after:bg-[#f70d28] after:bottom-4">
                 PN<span className='lowercase'>ews</span>
@@ -159,7 +159,7 @@ const HeaderNavigations = ({hideShowNavLinks, handleCloseNavLinks}) => {
           </h1>
         </Link>
 
-        <p>
+        <p className='mb-1.5'>
           <small className="text-xs xxs:text-base font-thin tracking-widest text-stone-800 font-lora capitalize">Discover The Best</small>
         </p>
 
