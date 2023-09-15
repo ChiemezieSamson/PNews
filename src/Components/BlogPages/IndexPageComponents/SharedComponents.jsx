@@ -28,7 +28,7 @@ export const JustTimeComponet = ({Posts, Comments, action}) => {
                   </Link>
                 </div>
 
-                <div className="col-span-3 ml-1 pt-px">
+                <div className="col-span-3 ml-1 pt-0.5">
 
                   <PostTitleSmall post={post?.postTitle} postId={post?._id}/>
 
@@ -79,7 +79,7 @@ export const JustTimeComponetStar = ({Posts, grid, action}) => {
                   </Link>
                 </div>
 
-                <div className="col-span-3 ml-1 pt-px">
+                <div className="col-span-3 ml-1 pt-0.5">
 
                   <PostTitleSmall post={post?.postTitle} postId={post?._id}/>
 
