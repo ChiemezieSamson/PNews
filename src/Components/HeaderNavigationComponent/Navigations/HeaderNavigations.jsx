@@ -43,21 +43,25 @@ const HeaderNavigations = ({hideShowNavLinks, handleCloseNavLinks}) => {
 
   // function for opening and closing the hover components
   const onshowHoverlinks = () => {
+
     setShowHoverlinks((showhoverlinks) => !showhoverlinks)
   }
 
   // Closing the hover component when any link or item is clicke
   const handleCloseHoverlinks = () => {
+
     setShowHoverlinks(() => false)
   }
   
   // if hovered get the textcontent of the hovered navigation so that it can be used to display 
   // the categories under it
   const onHover = (e) => {
+
     let elementtextContent = e.target.id.toLowerCase() // text content
 
     // make sure to only open the big hover component when the window size is bigger than 768
     if(size.width > 768) { 
+
       onshowHoverlinks()
     }
    
@@ -66,12 +70,14 @@ const HeaderNavigations = ({hideShowNavLinks, handleCloseNavLinks}) => {
 
     // Set the categories
     if (categoriesParents?._id) {
+
       // making sure to querry for particuarl post when the parent category is hovered on
       setHeaderParentCategory(() =>  `${"?page=" + 1}&limit=${10}&parentCat=${elementtextContent !== "quotes" ? elementtextContent : "random"}`)
 
       if (elementtextContent !== "quotes") {
 
         if (categoriesParents[elementtextContent]) {
+
           setHeaderHoverCategoriesNav(() => categoriesParents[elementtextContent]?.category)
         } 
 
@@ -87,6 +93,7 @@ const HeaderNavigations = ({hideShowNavLinks, handleCloseNavLinks}) => {
       if (elementtextContent !== "quotes") {
 
         if (tagsParents[elementtextContent]) {
+
           setHeaderHoverTagsNav(() => tagsParents[elementtextContent]?.tags)
         }
 
@@ -100,7 +107,9 @@ const HeaderNavigations = ({hideShowNavLinks, handleCloseNavLinks}) => {
 
   // Handling sticky header
   useEffect (() => {
+
     const isSticky = () => {
+
       const scrollTop = window?.scrollY;
       
       const stickyClass = scrollTop >= 300 ? is_sticky 
@@ -110,11 +119,13 @@ const HeaderNavigations = ({hideShowNavLinks, handleCloseNavLinks}) => {
       setScroll(() => scrollTop)
 
       if(scrollTop > 201) {
+
         setShowHoverlinks(() => false)
       }
     };
 
     if(size.width < 768) {
+      
       handleCloseHoverlinks()
     }
 
@@ -137,8 +148,9 @@ const HeaderNavigations = ({hideShowNavLinks, handleCloseNavLinks}) => {
       {/* ==== Home Hero section start here ==== */}
       <div className={`leading-8 font-poppins font-medium md:py-8 max-w-xl mx-auto my-0 bg-white relative ${(size.width >= 768 && scroll >= 300) ? "hidden" : "block"}`}>
 
-        <Link to={"/"}>
-          <h1 className="text-stone-800 text-[20vw] mt-5 mb-3 sxs:my-0 sxs:text-7xl italic tracking-wider uppercase">
+        <Link to={"/"} className='mt-7 mb-2 inline-block'>
+
+          <h1 className="text-stone-800 text-[20vw] sxs:my-0 sxs:text-7xl italic sxs:tracking-wider uppercase inline-block">
 
             <strong className="relative after:absolute after:h-2.5 after:w-2.5 font-bold after:bg-[#f70d28] after:bottom-4">
                 PN<span className='lowercase'>ews</span>
@@ -147,12 +159,14 @@ const HeaderNavigations = ({hideShowNavLinks, handleCloseNavLinks}) => {
           </h1>
         </Link>
 
-
-        <small className="text-xs xxs:text-base font-thin tracking-widest text-stone-800 font-lora capitalize">Discover The Best</small>
+        <p>
+          <small className="text-xs xxs:text-base font-thin tracking-widest text-stone-800 font-lora capitalize">Discover The Best</small>
+        </p>
 
         <Link 
           to={"/search"} 
-          className="absolute right-0 bottom-1 cursor-pointer md:hidden text-stone-800 text-xs pb-1 xxs:pb-0 xxs:right-2 xxs:text-lg font-bold hover:mainColor TextHeadertransition" 
+          className={`absolute bottom-1 cursor-pointer md:hidden text-stone-800 text-xs pb-1 xxs:pb-0 xxs:text-lg font-bold hover:mainColor TextHeadertransition
+            ${(size.width <= 768 && scroll >= 300) ? "bottom-0 right-2" : "right-0 xxs:right-2"}`} 
           title="posts search"  
           onClick={handleCloseNavLinks}
         >
