@@ -11,19 +11,23 @@ const Footer = () => {
   return (
     <section className='bg-stone-800 divide-y divide-neutral-200 font-poppins px-1'>
       
-      <div className={`${size.width > 820 ? "grid grid-cols-3 gap-x-[3%]" : "block "} text-left md:text-center lg:text-left `}>
+      <div className={`${size.width > 820 ? "grid grid-cols-3 gap-x-[3%]" : "block"} text-left md:text-center lg:text-left `}>
 
-        <FollowUs />
+          <FollowUs />
 
-        <Categories />
+        <div className={`${size.width < 820 ? "my-5" : "my-0"}`}>
 
-        <div className='mt-2'>
+          <Categories />
+        </div>
+
+
+        <div className='lg:mt-2'>
           
           <p>
             <b className='inline-block text-[#f93d53] font-bold text-lg'>NewsLetter</b>
           </p>
 
-          <NewsLetter textColor={"text-neutral-200"}/>
+          <NewsLetter textColor={"text-neutral-200"} margin={"my-6"}/>
         </div>
       </div>
       

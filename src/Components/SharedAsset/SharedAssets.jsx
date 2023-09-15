@@ -524,11 +524,11 @@ export const isFecthingStyle = (isFetching) => {
 
 
 // footer and aside newletter component
-export const NewsLetter = ({textColor}) => {
+export const NewsLetter = ({textColor, margin}) => {
 
   return (
 
-    <div className='mt-12 mb-12 bg-gray-300/30 p-5 shadow-sm shadow-gray-300/40 rounded-sm text-center sm:text-left inline-block'>
+    <div className={`${margin ? margin : "mt-12 mb-12"} bg-gray-300/30 p-5 shadow-sm shadow-gray-300/40 rounded-sm text-center sm:text-left inline-block`}>
 
       <p className={`font-round ${textColor ? textColor : "text-stone-700"} text-base lg:text-sm tracking-normal my-0.5`}>Subscribe to our mailing list to receives daily updates direct to your inbox!</p>
 

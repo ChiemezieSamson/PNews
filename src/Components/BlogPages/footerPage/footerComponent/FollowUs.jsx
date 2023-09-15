@@ -7,11 +7,11 @@ const FollowUs = () => {
   return (
     <section className='lg:pb-8 pb-4'>
 
-      <strong className="text-[20vw] xxs:text-7xl font-bold italic  text-white relative after:absolute after:h-2.5 after:w-2.5 after:bg-[#f70d28]
+      <strong className="text-[20vw] xxs:text-7xl font-bold italic text-white relative after:absolute after:h-2.5 after:w-2.5 after:bg-[#f70d28]
         after:bottom-4">
           PNews
         <small className='text-neutral-300 xxs:text-[10px] absolute xxs:top-3 xxs:right-[20px] 
-        text-[8px] -top-[5px] right-2 italic'> news,blog &amp; magazine</small>
+        text-[8px] -top-[5px] right-2 italic'> news, blog &amp; magazine</small>
       </strong> 
 
 
