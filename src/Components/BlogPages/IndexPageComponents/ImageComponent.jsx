@@ -1,11 +1,13 @@
-import React from 'react'
-import { StarComponent } from '../../ButtonAndOthers/Buttons'
+import React, { useState } from 'react'
+import { HomePageSlideNextAndPreviousButton2, StarComponent } from '../../ButtonAndOthers/Buttons'
 import { CategoriesComponent, isFecthingStyle, overLay, TimeComponent} from '../../SharedAsset/SharedAssets'
 import { Link } from 'react-router-dom'
 import { publicFolder } from '../../../data'
 import { HeroOneBussinessFavoriteImageSpinner } from '../../SharedAsset/Spinners/Spinner'
 
 const ImageComponent = ({Posts, canOpen, isFetching}) => {
+  const [start, setStart] = useState(0)
+  const [end, setEnd] = useState(6)
   const reversPost = []
   
   for (let i =  Posts?.length -1; i > 0; i-- ) {
@@ -16,9 +18,35 @@ const ImageComponent = ({Posts, canOpen, isFetching}) => {
       }
   }
 
+  const handleNext = () => {
+
+    if(end < 12 && start < 6) {
+
+      setEnd(() => end + 1)
+      setStart(() => start + 1)
+    } else {
+
+      setEnd(() => 6)
+      setStart(() => 0)
+    }
+  }
+
+  const handleBackward = () => {
+
+    if(start === 0 && end === 6) {
+
+      setEnd(() => 12)
+      setStart(() => 6)
+    } else {
+
+      setEnd(() => end - 1)
+      setStart(() => start - 1)
+    }
+  }
+
   
   return (
-    <section className={`mb-7 mt-10 ${isFecthingStyle(isFetching)}`}>
+    <section className={`mb-7 mt-10 ${isFecthingStyle(isFetching)} relative isolate`}>
       
       <div className="overflowScroll overflow-x-auto scroll-px-0 overscroll-x-contain snap-mandatory overflow-y-hidden">
 
@@ -26,7 +54,7 @@ const ImageComponent = ({Posts, canOpen, isFetching}) => {
 
           <ul className="grid grid-flow-col">
            
-            {reversPost?.slice(0, 7)?.map((post) => {
+            {reversPost?.slice(start, end)?.map((post) => {
 
               return (
                 <li key={post?._id} className={`relative snap-start m-0 mr-0.5 last:mr-0 p-0 group overflow-clip max-h-80 min-w-[300px]`}>
@@ -68,6 +96,12 @@ const ImageComponent = ({Posts, canOpen, isFetching}) => {
           />
         }
       </div>
+
+      <HomePageSlideNextAndPreviousButton2
+        isSuccess={canOpen}
+        handleBackward={handleBackward}
+        handleNext={handleNext}
+      />
     </section>
   )
 }

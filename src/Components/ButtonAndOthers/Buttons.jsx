@@ -252,27 +252,70 @@ export const HomePageSlideNextAndPreviousButton = ({isSuccess, handleBackward, h
 
     <div className='grid grid-cols-2 max-w-[90px] gap-1 text-neutral-500 text-xs p-2 mx-auto'>
       
-        <button 
-          type='button'
-          id='previouspost'
-          name='previouspost'
-          title='previous'
-          disabled={!isSuccess}
-          className='py-2 px-2.5 border border-solid border-neutral-300 hover:border-neutral-400 disabled:opacity-40 hover:text-neutral-600 cursor-pointer TextHeadertransition' 
-          onClick={handleBackward}>
-          <FaChevronLeft />
-        </button>
+      <button 
+        type='button'
+        id='previouspost'
+        name='previouspost'
+        title='previous'
+        disabled={!isSuccess}
+        className='py-2 px-2.5 border border-solid border-neutral-300 hover:border-neutral-400 disabled:opacity-40 hover:text-neutral-600 cursor-pointer TextHeadertransition' 
+        onClick={handleBackward}>
+        <FaChevronLeft />
+      </button>
+
+      <button 
+        type='button'
+        id='nextpost'
+        name='nextpost'
+        title='next'
+        disabled={!isSuccess}
+        className='py-2 px-2.5 border border-solid border-neutral-300 hover:border-neutral-400 disabled:opacity-40 hover:text-neutral-600 cursor-pointer TextHeadertransition'
+        onClick={handleNext}>
+        <FaChevronRight />
+      </button>
+    </div>
+  )
+}
+
+
+export const HomePageSlideNextAndPreviousButton2 = ({isSuccess, handleBackward, handleNext}) => {
+
+  return (
+
+    <>
+      
+      <span className='inline-block absolute top-[45%] left-1 z-[900]'>
 
         <button 
           type='button'
-          id='nextpost'
-          name='nextpost'
-          title='next'
+          name='previouspost'
+          title='previous'
           disabled={!isSuccess}
-          className='py-2 px-2.5 border border-solid border-neutral-300 hover:border-neutral-400 disabled:opacity-40 hover:text-neutral-600 cursor-pointer TextHeadertransition'
-          onClick={handleNext}>
-          <FaChevronRight />
+          className='text-neutral-100 text-xl pt-3 pb-3 rounded-md px-1.5 bg-neutral-100/30 text-center hover:backdrop-blur-sm
+            border border-solid border-stone-50 shadow-sm shadow-stone-300 opacity-70 transition-opacity hover:opacity-100 
+            duration-200 ease-in' 
+          onClick={handleBackward}
+        >
+          <FaChevronLeft className='inline-block'/>
         </button>
-      </div>
+      </span>
+      
+
+      <span className='inline-block absolute top-[45%] right-1 z-[900]'>
+
+        <button 
+          type='button'
+          name='previouspost'
+          title='previous'
+          disabled={!isSuccess}
+          className='text-neutral-100 text-xl pt-3 pb-3 rounded-md px-1.5 bg-neutral-100/30 text-center hover:backdrop-blur-sm
+            border border-solid border-stone-50 shadow-sm shadow-stone-300 opacity-70 transition-opacity hover:opacity-100 
+            duration-200 ease-in' 
+          onClick={handleNext}
+        >
+          <FaChevronRight className='inline-block'/>
+        </button>
+      </span>
+    </>
   )
 }

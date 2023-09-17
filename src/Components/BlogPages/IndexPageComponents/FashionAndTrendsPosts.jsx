@@ -11,7 +11,7 @@ import { HomePageSlideNextAndPreviousButton } from '../../ButtonAndOthers/Button
 const FashionAndTrendsPosts = ({Posts, categories, canOpen, isFetching}) => {
   const size = useWindowSize()
   const [start, setStart] = useState(0)
-  const [end, setEnd] = useState(6)
+  const [end, setEnd] = useState(4)
 
   const parent = "favorite"
   
@@ -19,23 +19,23 @@ const FashionAndTrendsPosts = ({Posts, categories, canOpen, isFetching}) => {
 
   const handleNext = () => {
 
-    if(end < 10 && start < 4) {
+    if(end < 10 && start < 6) {
 
       setEnd(() => end + 1)
       setStart(() => start + 1)
     } else {
 
-      setEnd(() => 6)
+      setEnd(() => 4)
       setStart(() => 0)
     }
   }
 
   const handleBackward = () => {
 
-    if(start === 0 && end === 6) {
+    if(start === 0 && end === 4) {
 
       setEnd(() => 10)
-      setStart(() => 4)
+      setStart(() => 6)
     } else {
 
       setEnd(() => end - 1)
