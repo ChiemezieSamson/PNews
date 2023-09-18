@@ -319,7 +319,7 @@ const MyPublicProfile = () => {
                 ""}`} 
                 placeholder={user?.username ? user?.username : ""}
                 aria-label='text' 
-                maxLength={9}
+                maxLength={10}
                 autoFocus={true}              
                 required
                 disabled={!userAction}

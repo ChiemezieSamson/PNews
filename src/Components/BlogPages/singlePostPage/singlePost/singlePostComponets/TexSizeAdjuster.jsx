@@ -1,44 +1,24 @@
-import React, { useState } from 'react'
 import { BiFontFamily } from 'react-icons/bi'
 import { FaRegComment } from 'react-icons/fa';
-import { useWindowSize } from '../../../../SharedAsset/SharedAssets';
-
+import { useHover } from '../../../../SharedAsset/SharedAssets';
 
 
 // { /* Text size adjuster and comment number */}
 const TexSizeAdjuster = ({fontSizeButton, sizeLine, comments}) => {
-  const [hoverRef, setHovered] = useState(false);
-  const size = useWindowSize()
-
-  const handleLargeScreenOnHover = () => {
-    if (size.width < 1024) return
-    setHovered(() => true)
-  }
-
-  const handleLargeScreenOnHoverOut = () => {
-    if (size.width < 1024) return
-    setHovered(() => false)
-  }
-
-  const handlesmallScreenClick = () => {
-    if (size.width > 1023) return
-    setHovered((change) => !change)
-  }
+  const [hoverRef, setHovered] = useHover();
 
   return (
     <span className='align-top text-lg sm:mt-0.5 inline-block'>
 
     {/* Text size adjuster */}
-    <span className='relative mx-3'  onMouseOver={handleLargeScreenOnHover}  onMouseOut={handleLargeScreenOnHoverOut}>
+    <span className={`relative isolate mx-3 ${setHovered ? "after:absolute after:inset-0 after:z-10 lg:after:static" : ""}`}>
 
-      <span title='text size' onClick={handlesmallScreenClick}>
+      <span title='text size' ref={hoverRef}>
 
         <BiFontFamily  className='inline-block text-neutral-500'/>
 
-      </span>  
+        {setHovered &&
 
-        {hoverRef &&
-        
           <div className='absolute top-full -translate-x-[50%] pt-4 z-20 whitespace-nowrap w-48 max-h-[104px] text-center'>
 
             <div className='bg-neutral-50 relative rounded -translate-x-[30%] shadow-sm shadow-neutral-300 grid grid-cols-2 grid-rows-2 after:absolute after:right-2
@@ -65,8 +45,9 @@ const TexSizeAdjuster = ({fontSizeButton, sizeLine, comments}) => {
             </div> 
 
             <div className="absolute inset-x-0 z-30 h-[2px] top-[58%] -left-[30%] bg-red-500" style={{width:`${sizeLine}%`}}></div>
-          </div>                                 
+          </div>                              
         }
+      </span>  
     </span>
 
     {/* Comment number */}

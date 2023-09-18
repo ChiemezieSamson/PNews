@@ -31,7 +31,7 @@ export const extendedUserApiSlice = apiSlice.injectEndpoints({
 				method: "POST",
 				body: initialUser,
 			}),
-			invalidatesTags: ["User"],
+			invalidatesTags: (result, error, arg) => [{ type: "User", id: arg._id }],
 		}),
 
 		updateExistingUser: builder.mutation({

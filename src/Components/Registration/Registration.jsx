@@ -293,7 +293,7 @@ const RegistrationForm = () => {
                   type="text"
                   placeholder="User Name"
                   aria-label='text' 
-                  maxLength={19}             
+                  maxLength={10}             
                   required
                   disabled={!useraction}
                   value={username}

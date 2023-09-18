@@ -231,14 +231,14 @@ const PostWritePreview = ({editorText, postTitle, postImage, User, userAction, p
 
                 <span className='font-extrabold text-[#f70d28] font-round text-2xl leading-none text-center'>
 
-                 {optional?.shared >= 1000 ? optional?.shared + "k" : optional?.shared}               
+                 {optional?.shared >= 1000 ? `${optional?.shared}`[0] + "k" : optional?.shared}               
 
                   <div className='text-neutral-500 uppercase text-xs font-lora font-normal -mt-0.5'>shares</div>
                 </span>        
 
               <span className='hidden font-extrabold lg:inline-block text-slate-500 font-round text-2xl leading-none text-center'>
 
-                {optional?.viewed >= 1000 ? optional?.viewed + "k" : optional?.viewed}           
+                {optional?.viewed >= 1000 ? `${optional?.viewed}`[0] + "k" : optional?.viewed}           
                
                 <div className='text-neutral-500 uppercase text-xs font-lora font-normal -mt-0.5'>views</div>
               </span>
