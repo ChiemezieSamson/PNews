@@ -1,14 +1,18 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { HomePageSlideNextAndPreviousButton2, StarComponent } from '../../ButtonAndOthers/Buttons'
-import { CategoriesComponent, isFecthingStyle, overLay, TimeComponent} from '../../SharedAsset/SharedAssets'
+import { CategoriesComponent, isFecthingStyle, overLay, TimeComponent, useWindowSize} from '../../SharedAsset/SharedAssets'
 import { Link } from 'react-router-dom'
 import { publicFolder } from '../../../data'
 import { HeroOneBussinessFavoriteImageSpinner } from '../../SharedAsset/Spinners/Spinner'
 
 const ImageComponent = ({Posts, canOpen, isFetching}) => {
   const [start, setStart] = useState(0)
-  const [end, setEnd] = useState(6)
+  const [end, setEnd] = useState(10)
+  const [imageStart, setImageStart] = useState(5)
+  const [imageEnd, setImageEnd] = useState(10)
   const reversPost = []
+
+  const size = useWindowSize()
   
   for (let i =  Posts?.length -1; i > 0; i-- ) {
 
@@ -20,29 +24,44 @@ const ImageComponent = ({Posts, canOpen, isFetching}) => {
 
   const handleNext = () => {
 
-    if(end < 12 && start < 6) {
+    if(end < imageEnd && start < imageStart) {
 
       setEnd(() => end + 1)
       setStart(() => start + 1)
     } else {
 
-      setEnd(() => 6)
+      setEnd(() => imageStart)
       setStart(() => 0)
     }
   }
 
   const handleBackward = () => {
 
-    if(start === 0 && end === 6) {
+    if(start === 0 && end === imageStart) {
 
-      setEnd(() => 12)
-      setStart(() => 6)
+      setEnd(() => imageEnd)
+      setStart(() => imageStart)
     } else {
 
       setEnd(() => end - 1)
       setStart(() => start - 1)
     }
   }
+
+  useEffect(() => {
+
+    if (size.width > 1536) {
+
+      setEnd(() => 5)
+      setStart(() => 0)
+    } else {
+
+      setEnd(() => 10)
+      setStart(() => 0)
+      setImageStart(() => 5)
+      setImageEnd(() => 10)
+    }
+  },[size])
 
   
   return (
@@ -96,12 +115,15 @@ const ImageComponent = ({Posts, canOpen, isFetching}) => {
           />
         }
       </div>
+      
+      <div className='hidden 2xl:block'>
 
-      <HomePageSlideNextAndPreviousButton2
-        isSuccess={canOpen}
-        handleBackward={handleBackward}
-        handleNext={handleNext}
-      />
+        <HomePageSlideNextAndPreviousButton2
+          isSuccess={canOpen}
+          handleBackward={handleBackward}
+          handleNext={handleNext}
+        />
+      </div>
     </section>
   )
 }
