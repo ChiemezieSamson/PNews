@@ -11,7 +11,7 @@ const reactionEmoji =  {
   funny: <FaLaughBeam className='inline-block text-amber-500 align-text-top mt-px'/>,
 }
 
-export const CommentReactionButtons = ({comment, authorId, postId}) => {
+export const CommentReactionButtons = ({comment, authorId, postId, createUserFirstButton, handleBackToForm}) => {
   // redux tool kit function for updating reactions
   const [reactionAddedComment, { isLoading }] = useUpdateCommentReactionMutation()
 
@@ -37,18 +37,37 @@ export const CommentReactionButtons = ({comment, authorId, postId}) => {
    const reactionButtons = Object.entries(reactionEmoji).map(([name, emoji]) => { // copy the reactionEmoji
     
     return (
-      <button 
-        key={name} 
-        type="button" 
-        id={name}
-        title={name}
-        className="mx-1 my-px mb-0.5 relative after:absolute after:inset-0 after:z-10 disabled:opacity-40"
-        onClick={handleUpdateReaction}
-        disabled={isLoading}
-      >
-        {emoji}
-        <span className='inline-block mx-2'>{comment?.reactions[name]}</span>         
-      </button>
+      <span key={name}>
+
+        {createUserFirstButton ?
+
+          <button 
+            type="button" 
+            id={name}
+            title={name}
+            className="mx-1 my-px mb-0.5 relative after:absolute after:inset-0 after:z-10 disabled:opacity-40"
+            onClick={handleBackToForm}
+            disabled={isLoading}
+          >
+            {emoji}
+            <span className='inline-block mx-2'>{comment?.reactions[name]}</span>         
+          </button>
+
+          :
+
+          <button 
+            type="button" 
+            id={name}
+            title={name}
+            className="mx-1 my-px mb-0.5 relative after:absolute after:inset-0 after:z-10 disabled:opacity-40"
+            onClick={handleUpdateReaction}
+            disabled={isLoading}
+          >
+            {emoji}
+            <span className='inline-block mx-2'>{comment?.reactions[name]}</span>         
+          </button>
+        }
+      </span>
     )
   })
 
@@ -56,7 +75,7 @@ export const CommentReactionButtons = ({comment, authorId, postId}) => {
 }
 
 
-export const ReplyReactionButtons = ({reply, commentId, authorId, postId}) => {
+export const ReplyReactionButtons = ({reply, commentId, authorId, postId, createUserFirstButton, handleBackToForm}) => {
   // redux tool kit function for updating reactions on reply comments
   const [reactionAddedReply, { isLoading }] = useUpdateReplyReactionMutation()
   
@@ -82,18 +101,37 @@ export const ReplyReactionButtons = ({reply, commentId, authorId, postId}) => {
   const reactionButtons = Object.entries(reactionEmoji).map(([name, emoji]) => {
 
     return (
-      <button 
-        key={name} 
-        id={name}
-        type="button" 
-        title={name}
-        className="mx-1 my-px mb-0.5 relative after:absolute after:inset-0 after:z-10 disabled:opacity-40"
-        onClick={handleUpdateReaction}
-        disabled={isLoading}
-      >
-        {emoji} 
-        <span className='inline-block mx-2'>{reply?.reactions[name]}</span>         
-      </button>
+      <span key={name}>
+
+        {createUserFirstButton ?
+
+          <button  
+            id={name}
+            type="button" 
+            title={name}
+            className="mx-1 my-px mb-0.5 relative after:absolute after:inset-0 after:z-10 disabled:opacity-40"
+            onClick={handleBackToForm}
+            disabled={isLoading}
+          >
+            {emoji} 
+            <span className='inline-block mx-2'>{reply?.reactions[name]}</span>         
+          </button>
+
+          :        
+          
+          <button 
+            id={name}
+            type="button" 
+            title={name}
+            className="mx-1 my-px mb-0.5 relative after:absolute after:inset-0 after:z-10 disabled:opacity-40"
+            onClick={handleUpdateReaction}
+            disabled={isLoading}
+          >
+            {emoji} 
+            <span className='inline-block mx-2'>{reply?.reactions[name]}</span>         
+          </button>
+        }
+      </span>
     )
   })
 

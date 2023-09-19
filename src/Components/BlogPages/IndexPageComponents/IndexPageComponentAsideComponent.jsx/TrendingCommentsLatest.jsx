@@ -4,7 +4,7 @@ import { isFecthingStyle } from '../../../SharedAsset/SharedAssets'
 
 
 const TrendingCommentsLatest = ({posts, Comments, action, isFetching}) => {
-  const [newPosts, setNewPosts] = useState("")
+  const [newPosts, setNewPosts] = useState([])
   const [text, setText] = useState("")
 
   const TrendingPosts = action && posts?.filter(post => post?.optional?.trending === true)
@@ -37,7 +37,7 @@ const TrendingCommentsLatest = ({posts, Comments, action, isFetching}) => {
     // find the post with commments on them
     if(ClickedHead.textContent === "Comments") {
 
-      if (Comments?.length) {
+      if (Comments?.length > 0) {
 
         const uniqueItems = new Map(); // used in making sure that a unqui array is returned
         let allComment = []
@@ -72,7 +72,7 @@ const TrendingCommentsLatest = ({posts, Comments, action, isFetching}) => {
         // Convert the map values to an array
         const uniqueItemsArray = Array.from(uniqueItems.values());
 
-        setNewPosts(() => uniqueItemsArray?.length ? uniqueItemsArray : "")
+        setNewPosts(() => uniqueItemsArray?.length > 0 ? uniqueItemsArray : "")
       
         setText(() => "Comments") 
       }
@@ -142,7 +142,7 @@ const TrendingCommentsLatest = ({posts, Comments, action, isFetching}) => {
 
         {text !== "Comments" ? 
 
-          <JustTimeComponetStar Posts={newPosts?.length ? newPosts : action && TrendingPosts?.slice(0, 4)} action={action}/> 
+          <JustTimeComponetStar Posts={newPosts?.length > 0 ? newPosts : action && TrendingPosts?.slice(0, 4)} action={action}/> 
           :
           <JustTimeComponet Posts={newPosts} Comments={Comments} action={action}/>
         }

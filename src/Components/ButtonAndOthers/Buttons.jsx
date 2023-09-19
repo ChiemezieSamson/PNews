@@ -161,7 +161,13 @@ export const ReactionAndReplyButton = ({handler, comment, User, postId, buttonTe
 
       <span className="inline-block mt-1">
 
-        <CommentReactionButtons comment={comment} authorId={User?._id} postId={postId}/>
+        <CommentReactionButtons 
+          comment={comment} 
+          authorId={User?._id} 
+          postId={postId}
+          handleBackToTopClick={handleBackToForm}
+          createUserFirstButton={createUserFirstButton}
+        />
       </span>      
 
      {createUserFirstButton ?         
@@ -183,7 +189,7 @@ export const ReactionAndReplyButton = ({handler, comment, User, postId, buttonTe
 
 export const ReactionAndReplyButtonForReply = ({handler, reply, comment, User, postId, buttonText, createUserFirstButton, offsetOfForm}) => {
 
-  const handleBackToTopClick = () => {
+  const handleBackToForm = () => {
 
     document.body.scrollTop = offsetOfForm.current.offsetTop; // For Safari
     window.scrollTo({left: 0, top: offsetOfForm.current.offsetTop, behavior: "smooth"})
@@ -194,13 +200,21 @@ export const ReactionAndReplyButtonForReply = ({handler, reply, comment, User, p
     <div className='max-w-xs py-1.5 mb-1.5' name={reply.name} id={comment._id}>
 
       <span  className="inline-block mt-1">
-        <ReplyReactionButtons reply={reply} commentId={comment._id} authorId={User?._id} postId={postId}/>
+
+        <ReplyReactionButtons 
+          reply={reply} 
+          commentId={comment._id} 
+          authorId={User?._id} 
+          postId={postId}
+          handleBackToTopClick={handleBackToForm}
+          createUserFirstButton={createUserFirstButton}
+        />
       </span>
 
       {createUserFirstButton ?
 
           <button type="button" className="text-neutral-700 hover:text-neutral-500 font-josefin tracking-wide mt-[5px] 
-              align-top mx-2 inline-block TextHeadertransition" onClick={handleBackToTopClick}>
+              align-top mx-2 inline-block TextHeadertransition" onClick={handleBackToForm}>
             {buttonText}
           </button>          
         :
