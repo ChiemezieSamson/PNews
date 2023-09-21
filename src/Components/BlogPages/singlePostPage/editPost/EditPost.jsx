@@ -20,25 +20,25 @@ const EditPost = () => {
   );}
   
   return (
-    <div className={postAction ? "" : `my-32`}>
+    <div className="md:mt-20 md:mb-60">
 
-    {postAction ? 
+      {postAction ? 
 
-      <UpdatePostComponent 
-        post={post} 
-        state={state} 
-        postId={postId}
-        isFetching={isFetching}
-        postAction={postAction}
-      /> 
+        <UpdatePostComponent 
+          post={post} 
+          state={state} 
+          postId={postId}
+          isFetching={isFetching}
+          postAction={postAction}
+        /> 
 
-      : 
+        : 
 
-      <Spinner  
-        text={'Loading...'}
-        size={"w-24 h-24"}
-      />      
-    }
+        <Spinner  
+          text={'Loading...'}
+          size={"w-24 h-24"}
+        />      
+      }
     </div>   
   )
 }

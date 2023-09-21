@@ -36,6 +36,7 @@ const UpdatePostComponent = ({state, post, postId, postAction, isFetching}) => {
   const [errorText, setErrorText] = useState(false) /// text used to indicate that your category didn't save or there is an erro
   const [errorText2, setErrorText2] = useState(false) /// text used to indicate that your category didn't save or there is an erro
   const [isValid, setIsValid] = useState(true); // regular expressions
+  const [runOnce, setRunOnce] = useState(false)
 
   const [postTitle, setPostTitle] = useState("")
   const [postImage, setPostImage] = useState("")
@@ -187,8 +188,18 @@ const UpdatePostComponent = ({state, post, postId, postAction, isFetching}) => {
   // using useEffect to dictect the changes in screen size
   useEffect(() => {
 
-    size.width >= 1024 ? setShowSideBar(() => true) : setShowSideBar(() => false)
-  },[size])
+    if (size.width < 1024 && !runOnce) {
+
+      setShowSideBar(() => false)
+      setRunOnce(() => true)
+    }
+
+    if (size.width >= 1024 && runOnce) {
+
+      setShowSideBar(() => true) 
+      setRunOnce(() => false)
+    }
+  },[size, runOnce])
 
 
   // making user that only authorized user can update
@@ -313,6 +324,7 @@ const UpdatePostComponent = ({state, post, postId, postAction, isFetching}) => {
           handleCloseSidebar={handleCloseSidebar}
           showSideBar={showSideBar}          
           post={post}
+          size={size}
           userAction={canOpen}
           isFetching={anyIsfetching}     
         /> 

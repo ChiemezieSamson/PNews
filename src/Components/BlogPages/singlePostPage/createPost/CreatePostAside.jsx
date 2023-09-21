@@ -10,7 +10,7 @@ import { useDispatch } from 'react-redux'
 
 
 const CreatePostAside = ({postTitle, handleAllPostContent, handleSetPostAuthor, postAuthor, canSave, handlePreview, preview,
-  handleShowBar, handleCloseSidebar, showSideBar, userAction, isFetching}) => {
+  handleShowBar, handleCloseSidebar, showSideBar, userAction, isFetching, size}) => {
 
   const [parentCat, setSelectedParentCat] = useState("")
   const [parentTag, setSelectedParentTag] = useState("")
@@ -20,6 +20,7 @@ const CreatePostAside = ({postTitle, handleAllPostContent, handleSetPostAuthor, 
   const [uncheckedTag, setUncheckedTag] = useState(false)
   const [shared, setShared] = useState(0)
   const [viewed, setViewed] = useState(0)
+  const [textSubstring, setTextSubstring] = useState(25)
   const [checkedItemElemets, setCheckedItemElements] = useState([])
 
   const dispatch = useDispatch()
@@ -155,6 +156,24 @@ const CreatePostAside = ({postTitle, handleAllPostContent, handleSetPostAuthor, 
     dispatch(optionalAdded(shared, viewed, Trending))
 
   },[Trending, shared, viewed, dispatch])
+
+
+  useEffect(() => {
+
+    if (size.width > 729) {
+
+      setTextSubstring(() => 70)
+    } else if(size.width > 509) {
+
+      setTextSubstring(() => 50)
+    } else if (size.width > 389) {
+
+      setTextSubstring(() => 35)
+    } else {
+
+      setTextSubstring(() => 25)
+    }
+  }, [size])
   
   return (
     <div className="lg:border lg:border-solid lg:border-slate-500 lg:shadow-stone-700 lg:shadow lg:ml-[4%] bg-white lg:bg-neutral-100">
@@ -206,8 +225,12 @@ const CreatePostAside = ({postTitle, handleAllPostContent, handleSetPostAuthor, 
             <Hanbugar3 closesidebar={handleCloseSidebar}/>
           </span>
 
-          <h3 className='pt-8 my-0 text-center mx-2 capitalize font-round font-medium text-stone-800 text-xl'>
-            {postTitle ? postTitle : "(no title)"}
+          <h3 className='pt-8 my-0 mx-1 text-center capitalize font-round font-medium text-stone-800 text-xl'>
+
+            <span className='px-2'>
+             {postTitle ? postTitle?.substring(0, textSubstring)  : "(no title)"} 
+             {postTitle?.substring(0, textSubstring).length < postTitle.length && "..."}
+            </span>
           </h3>
 
         </div>

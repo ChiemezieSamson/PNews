@@ -14,8 +14,10 @@ const WritePost = () => {
     const defaultState = EditorState.createWithContent(state)
 
   return (
+    <section className='md:mt-20 md:mb-60'>
 
-    <CreatePostComponents state={defaultState}/>
+      <CreatePostComponents state={defaultState}/>
+    </section>
 
   )
 }

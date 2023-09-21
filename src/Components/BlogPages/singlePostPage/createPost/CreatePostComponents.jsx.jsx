@@ -28,6 +28,7 @@ const CreatePostComponents = ({state}) => {
   const [errorText, setErrorText] = useState(false) /// text used to indicate that your category didn't save or there is an erro
   const [errorText2, setErrorText2] = useState(false) /// text used to indicate that your category didn't save or there is an erro
   const [isValid, setIsValid] = useState(false); // regular expressions
+  const [runOnce, setRunOnce] = useState(false)
 
   const [postTitle, setPostTitle] = useState("")
   const [postImage, setPostImage] = useState("")
@@ -156,8 +157,19 @@ const CreatePostComponents = ({state}) => {
   // using useEffect to dictect the changes in screen size
   useEffect(() => {
 
-    size.width >= 1024 ? setShowSideBar(() => true) : setShowSideBar(() => false)
-  },[size])
+    if (size.width < 1024 && !runOnce) {
+
+      setShowSideBar(() => false)
+      setRunOnce(() => true)
+    }
+
+    if (size.width >= 1024 && runOnce) {
+
+      setShowSideBar(() => true) 
+      setRunOnce(() => false)
+    }
+
+  },[size, runOnce])
 
 
    // making user that only authorized user can update
@@ -271,6 +283,7 @@ const CreatePostComponents = ({state}) => {
           postAuthor={postAuthor}
           handlePreview={handlePreview}
           preview={preview}
+          size={size}
           handleShowBar={handleShowBar}
           handleCloseSidebar={handleCloseSidebar}
           showSideBar={showSideBar}
