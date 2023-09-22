@@ -6,7 +6,7 @@ import { WritePostAsideOpenClosebar } from '../../../../ButtonAndOthers/Buttons'
 import useFetchedTags from '../../../../SharedAsset/Spinners/tagsSpiner'
 import { parentCategoriesAndTags } from '../../../../../data'
 import { textSpaceAndNumber } from '../../../../SharedAsset/Vaidations/RegularExpression'
-import { isFecthingStyle } from '../../../../SharedAsset/SharedAssets'
+import { CategoryAndtagRemoveMessage, isFecthingStyle } from '../../../../SharedAsset/SharedAssets'
 import { HeroOneBussinessFavoriteImageSpinner } from '../../../../SharedAsset/Spinners/Spinner'
 
 
@@ -24,12 +24,15 @@ const Tag = ({handleSetAddTag, addTag, handleSelectedParentTag, parentTag, userA
   const postTagArrays = useSelector(selectAllPostTags)
 
   const [checkedItemElemets, setCheckedItemElements] = useState([])
+  const [elementChoosed, setElementChoosed] = useState("")
 
   const [openCat, setOpenCat] = useState(false) // use to open and close the tag section
   const [requiredText, setRequiredText] = useState(false) // text used to indicate that an option is needed
   const [errorText, setErrorText] = useState(false) // text used to indicate that your tag didn't save or there is an erro
   const [parentFullText, setParentFullText] = useState(false) // text used to indicate that you have create up five item for this array
   const [isValid, setIsValid] = useState(false); // regular expressions
+  // open and close the remove Tag yes or no text when delete is clicked
+  const [deleteMessage , setDeleteMessage] = useState(false) 
 
   let MyTags  // list of all tags arrary
   let tag = addTag
@@ -50,6 +53,21 @@ const Tag = ({handleSetAddTag, addTag, handleSelectedParentTag, parentTag, userA
   const handleOpenCloseChild = () => {
 
     setOpenCat((change) => !change)
+    setDeleteMessage(() => false)
+  }
+
+  // handling the remove tag
+  const handleSetDeleteMessage = () => {
+
+    setDeleteMessage(() => false)
+  }
+
+  // handling the open to remove message
+  const handleRemoveMessageOpen = (e) => {
+    const value = e.target.parentElement.firstChild.textContent.toLowerCase()
+   
+    setElementChoosed(() => value)
+    setDeleteMessage(() => true)
   }
 
   // handling setting the value of the input for tag name and 
@@ -194,25 +212,28 @@ const Tag = ({handleSetAddTag, addTag, handleSelectedParentTag, parentTag, userA
 
   /***************** DELETE */
 
-  const canDelete = !isDeleting && Boolean(postTagArrays[0])
+  const canDelete = !isDeleting && Boolean(postTagArrays[0], elementChoosed)
 
   // DELETE TAG
   const handleDeletTag = async (e) => {
 
     if(canDelete) {
-      let remove = e.target.parentElement.firstChild.textContent.toLowerCase()
-
+     
       try {
 
-        dispatch(tagUnchecked({uncheckedTag: remove}))
+        dispatch(tagUnchecked({uncheckedTag: elementChoosed}))
   
-        await deleteTag({tagId: tagsParents?._id, uncheckedTag: remove})
+        await deleteTag({tagId: tagsParents?._id, uncheckedTag: elementChoosed})
+
+        handleSetDeleteMessage()
   
         setCheckedItemElements((list) =>{
   
           let newElement = list.filter(item => item !== e.target.previousSibling)
           return newElement
         })  
+
+        setElementChoosed(() => "")
       } catch (err) {
 
         console.error(err)
@@ -307,9 +328,10 @@ const Tag = ({handleSetAddTag, addTag, handleSelectedParentTag, parentTag, userA
 
         {/* list of tags start here */}
 
-        <form className='mt-5' onSubmit={(e) => e.preventDefault()}>
+        <form className='mt-5 relative' onSubmit={(e) => e.preventDefault()}>
 
           {canOpen ?
+          
             <ul className='text-stone-700 font-poppins'>
 
               {MyTags?.map((tag) => {
@@ -337,7 +359,7 @@ const Tag = ({handleSetAddTag, addTag, handleSelectedParentTag, parentTag, userA
                       name='deletetag' 
                       className='px-[2.5px] py-0.5 hover:bg-red-500 hover:text-white peer-hover:bg-[#b7b6b6] 
                       peer-hover:text-stone-600 hidden text-center disabled:opacity-40 TextHeadertransition' 
-                      onClick={handleDeletTag} 
+                      onClick={handleRemoveMessageOpen} 
                       disabled={!canDelete}
                     > &#10006;</button>                  
                   </li>
@@ -351,6 +373,13 @@ const Tag = ({handleSetAddTag, addTag, handleSelectedParentTag, parentTag, userA
               image={12}
             />    
           }
+
+          <CategoryAndtagRemoveMessage
+            deleteMessage={deleteMessage}
+            tag={elementChoosed}
+            handleDeletCat={handleDeletTag}
+            handleSetDeleteMessage={handleSetDeleteMessage}
+          />
         </form>
       </div>
     </div>

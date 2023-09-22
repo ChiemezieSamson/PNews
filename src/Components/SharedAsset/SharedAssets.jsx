@@ -805,7 +805,7 @@ export const PasswordDisplay = ({showPassword, handle}) => {
 }
 
 
-export const CategoryAndtagRemoveMessage = ({deleteMessage, checkedItemElemets, handleDeletCat, handleSetDeleteMessage}) => {
+export const CategoryAndtagRemoveMessage = ({deleteMessage, checkedItemElemets, handleDeletCat, handleSetDeleteMessage, tag}) => {
 
   return (
     <div className={`${deleteMessage ? "block" : "hidden"} font-poppins font-medium text-stone-700 text-center absolute inset-0`}>
@@ -814,7 +814,7 @@ export const CategoryAndtagRemoveMessage = ({deleteMessage, checkedItemElemets, 
 
       <strong>Are you sure!?</strong>
       <p className='mt-px'>
-        <small className='text-xs text-rose-500'>removing {checkedItemElemets?.length > 1 ? "categorise" : "category"} also removes it from all the posts!</small>
+        <small className='text-xs text-rose-500'>removing {tag ? "tag also remove it" : checkedItemElemets?.length > 1 ? "categorise also remove them" : "category also remove it"} from all the posts!</small>
       </p>
 
       <div className='grid grid-flow-col justify-around mt-3'>
