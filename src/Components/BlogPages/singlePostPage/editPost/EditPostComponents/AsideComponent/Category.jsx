@@ -6,7 +6,7 @@ import { useDeleteExistingCategoriesMutation, useUpdateExistingCategoriesMutatio
 import { catAdded, catUnchecked, emptyCategories, selectAllPostCat, updateCategories } from '../../../../../../Reduxstore/Slices/PostsComponentSlices/postcategory/PostcategoriesSlice'
 import { WritePostAsideOpenClosebar } from '../../../../../ButtonAndOthers/Buttons'
 import { parentCategoriesAndTags } from '../../../../../../data'
-import { isFecthingStyle } from '../../../../../SharedAsset/SharedAssets'
+import { CategoryAndtagRemoveMessage, isFecthingStyle } from '../../../../../SharedAsset/SharedAssets'
 import { HeroOneBussinessFavoriteImageSpinner } from '../../../../../SharedAsset/Spinners/Spinner'
 import { textAndNumberOnly } from '../../../../../SharedAsset/Vaidations/RegularExpression'
 
@@ -30,6 +30,8 @@ const Category = ({updatePostCategories, handleSelectedParentCat, parentCat, han
   const [errorText, setErrorText] = useState(false) /// text used to indicate that your category didn't save or there is an erro
   const [parentFullText, setParentFullText] = useState(false) // text used to indicate that you have create up five item for this array
   const [isValid, setIsValid] = useState(false); // regular expressions
+  // open and close the remove category yes or no text when delete is clicked
+  const [deleteMessage , setDeleteMessage] = useState(false) 
 
   
   let categories  // list of all categorise arrary 
@@ -50,6 +52,12 @@ const Category = ({updatePostCategories, handleSelectedParentCat, parentCat, han
   const handleOpenAddNewCat = () => {
 
     setOpenAddnewCat((change) => !change)
+  }
+
+   // handling the remove category
+   const handleSetDeleteMessage = () => {
+
+    setDeleteMessage(() => false)
   }
 
   // handling setting the value of the input for category name and 
@@ -180,6 +188,8 @@ const Category = ({updatePostCategories, handleSelectedParentCat, parentCat, han
 
       await deleteCategoris({categoryId: categoriesParents?._id, openCategoris})
 
+      handleSetDeleteMessage()
+
       // function to empty all selected parent "li" element
       handlesetCheckedItemElements(element, action)
 
@@ -191,6 +201,7 @@ const Category = ({updatePostCategories, handleSelectedParentCat, parentCat, han
   const handleOpenCloseChild = () => {
     setOpenCat((change) => !change)
     setOpenAddnewCat(() => false)
+    setDeleteMessage(() => false)
 
     if (openCategoris?.length > 0) {
       let action = "update"
@@ -228,7 +239,7 @@ const Category = ({updatePostCategories, handleSelectedParentCat, parentCat, han
     {/* This is just the button for changing the diplay and hidden of the whole category component */}
     <WritePostAsideOpenClosebar BarName={"Categories"} handle={handleOpenCloseChild}/>
     
-    <div className={`${openCat ? "block" : "hidden"} px-3 mt-2 mb-10 ${isFecthingStyle(isfectchingAll)}`}>  
+    <div className={`${openCat ? "block" : "hidden"} px-3 mt-2 mb-10 ${isFecthingStyle(isfectchingAll)} relative`}>  
 
       {errorText ? <p className='text-xs text-rose-500 tracking-wider font-lora'>Failed to save the Category</p> : "" }    
       
@@ -268,31 +279,36 @@ const Category = ({updatePostCategories, handleSelectedParentCat, parentCat, han
       }
 
       {/* Add new category open and close section */}
-      <div className='py-1'>
+      <div className='py-1 mt-4'>
 
-        <span className={`${checkedItemElemets?.length > 0 ? "grid grid-cols-2 gap-x-3 text-left" : "inline"}`}> 
+        <span className={`${checkedItemElemets?.length > 0 ? "grid grid-cols-2 gap-x-3 text-left max-w-sm mx-auto" : "inline"}`}> 
 
           {/* This button only opens and closes the addnew categories section */}
           <button
             type='button'
             name='updateopencategories'
             id='updateopencategories' 
-            className={`text-blue-400 underline my-3 inline-block text-sm cursor-pointer
-            hover:text-blue-600 TextHeadertransition ${openAddnewCat ? "text-left" : "text-center"}`} 
+            className="text-blue-400 underline my-3 inline-block text-sm cursor-pointer text-left hover:text-blue-600 TextHeadertransition"
             onClick={handleOpenAddNewCat}
           >{openAddnewCat ? "Close" : "Add New Category"}</button>
 
           {/* This button remove a list of already checked categories from the list it is only visible when a category is already checked) */}
-
           <button 
             type='button'
             name='updatedeletecategories'
             id='updatedeletecategories'
-            className={`text-neutral-400 underline my-3 inline-block text-sm cursor-pointer
-            hover:text-red-400 TextHeadertransition ${checkedItemElemets?.length > 0 ? "inline" :"hidden"} disabled:opacity-40`} 
-            onClick={handleDeletCat} 
+            className={`text-neutral-400 underline my-3 inline-block text-sm cursor-pointer text-right
+            hover:text-red-400 TextHeadertransition ${checkedItemElemets?.length > 0 ? "inline" : "hidden"} disabled:opacity-40`} 
+            onClick={() => setDeleteMessage(() => true)} 
             disabled={!canDelete}
           >Remove Category</button>
+
+          <CategoryAndtagRemoveMessage
+            deleteMessage={deleteMessage}
+            checkedItemElemets={checkedItemElemets}
+            handleDeletCat={handleDeletCat}
+            handleSetDeleteMessage={handleSetDeleteMessage}
+          />
         </span>
         
 

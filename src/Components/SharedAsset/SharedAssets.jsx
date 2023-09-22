@@ -804,3 +804,26 @@ export const PasswordDisplay = ({showPassword, handle}) => {
   )
 }
 
+
+export const CategoryAndtagRemoveMessage = ({deleteMessage, checkedItemElemets, handleDeletCat, handleSetDeleteMessage}) => {
+
+  return (
+    <div className={`${deleteMessage ? "block" : "hidden"} font-poppins font-medium text-stone-700 text-center absolute inset-0`}>
+
+    <div className='bg-white max-w-[250px] mx-auto p-2 rounded-md shadow shadow-slate-400/50'>
+
+      <strong>Are you sure!?</strong>
+      <p className='mt-px'>
+        <small className='text-xs text-rose-500'>removing {checkedItemElemets?.length > 1 ? "categorise" : "category"} also removes it from all the posts!</small>
+      </p>
+
+      <div className='grid grid-flow-col justify-around mt-3'>
+
+        <span onClick={handleDeletCat} id={"deletecategoriesMessage"} className='hover:mainColor TextHeadertransition uppercase cursor-pointer font-bold'>yes</span>
+
+        <span onClick={handleSetDeleteMessage} className='hover:text-blue-400 TextHeadertransition uppercase cursor-pointer font-bold'>no</span>
+      </div>
+    </div>
+  </div>
+  )
+}
