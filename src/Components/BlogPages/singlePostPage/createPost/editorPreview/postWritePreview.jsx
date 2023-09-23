@@ -102,7 +102,7 @@ const PostWritePreview = ({editorText, postTitle, postImage, User, userAction, p
 
         <div className="lg:mb-8 lg:mt-8 mb-4 grid grid-flow-col justify-between text-stone-800">
 
-          <small>Home &gt; preview</small>
+          <small>Home&nbsp;&gt;&nbsp;preview</small>
 
           {/* user make favourite, edit post and delete post buttons */}
             <div className='px-2 mx-0.5 -mt-[3px]'>
