@@ -40,11 +40,11 @@ const AdditionalResources = () => {
   ]
 
   return (
-    <>
+    <div>
 
       <WritePostAsideOpenClosebar BarName={"Additional resources"} handle={handleOpenCloseChild}/>
 
-      <div className={`${openUserPost ? "block" : "hidden"} mt-2 mb-10 px-3 text-stone-800`}>
+      <div className={`${openUserPost ? "block" : "hidden"} mt-3 mb-10 px-3 text-stone-800`}>
 
         <SinginAndSecurityIntro text={"Check out other places for helpful information to learn more about CUmeh blog and services.."} />
 
@@ -91,7 +91,7 @@ const AdditionalResources = () => {
           </ul>           
         </div>
       </div>      
-    </>
+    </div>
   )
 }
 

@@ -95,7 +95,7 @@ const PostWritePreview = ({editorText, postTitle, postImage, User, userAction, p
 
 
   return (
-    <div className={isFecthingStyle(anyIsfetching)}>
+    <div className={`${isFecthingStyle(anyIsfetching)} my-7`}>
 
        <article>
         {/* navigation display */}
@@ -105,7 +105,7 @@ const PostWritePreview = ({editorText, postTitle, postImage, User, userAction, p
           <small>Home &gt; preview</small>
 
           {/* user make favourite, edit post and delete post buttons */}
-            <div className='px-2 mx-0.5'>
+            <div className='px-2 mx-0.5 -mt-[3px]'>
 
               {/* Favourite */}
               <button
@@ -145,7 +145,7 @@ const PostWritePreview = ({editorText, postTitle, postImage, User, userAction, p
         </h1>
 
         {/*Admin image , name, post date and category , text size adjuster and comment number start here  */}
-        <div className='mt-5 grid grid-flow-col content-center justify-between'>          
+        <div className='mt-5 grid grid-flow-col content-center justify-between overflow-x-clip'>          
           
           <div className='text-neutral-400'>
 

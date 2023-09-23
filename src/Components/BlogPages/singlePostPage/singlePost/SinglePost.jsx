@@ -221,7 +221,7 @@ const SinglePost = () => {
 
               {/* user make favourite, edit post and delete post buttons */}
               {(byUserIdAction && Post?.postAuthor === userByUserId?._id) && 
-                <div className='px-2 mx-0.5'>
+                <div className='px-2 mx-0.5 -mt-[3px]'>
 
                   {/* Favourite */}
                   <button
@@ -277,7 +277,7 @@ const SinglePost = () => {
             </h1>
 
             {/*Admin image , name, post date and category , text size adjuster and comment number start here  */}
-            <div className='mt-5 grid grid-flow-col content-center justify-between'>              
+            <div className='mt-5 grid grid-flow-col content-center justify-between overflow-x-clip'>              
              
               <div className='text-neutral-400'>
 
