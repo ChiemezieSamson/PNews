@@ -5,7 +5,7 @@ const TextEditor = ({editorState, state, setEditorState, userAction}) => {
 
   return (
     <Editor 
-      toolbarOnFocus
+      // toolbarOnFocus
       editorState={editorState}                  
       defaultEditorState={state}
       onEditorStateChange={setEditorState}
@@ -29,13 +29,25 @@ const TextEditor = ({editorState, state, setEditorState, userAction}) => {
         link: { inDropdown: true },
         history: { inDropdown: true },
         alt: { present: true, mandatory: true },
+        colorPicker: {
+          className: "!hidden lg:!flex",
+          popupClassName: "!hidden lg:!grid lg:!grid-flow-row",
+        },
+        emoji: {
+          className: "!hidden lg:!flex",
+          popupClassName: "overflowScrolllgallScreen !hidden lg:!flex",
+        },
         image: {
+          className: "!hidden lg:!flex",
+          popupClassName: "!hidden lg:!grid lg:!grid-flow-row",
           defaultSize: {
             height: "auto",
             width: "auto",
           },
         },
         embedded: {
+          className: "!hidden lg:!flex",
+          popupClassName: "!hidden lg:!grid lg:!grid-flow-row",
           defaultSize: {
             height: "100%",
             width: "100%",

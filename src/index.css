@@ -141,8 +141,17 @@
   }
 
   .postEditor .rdw-list-dropdown,
-  .postEditor .rdw-text-align-dropdown {
+  .postEditor .rdw-text-align-dropdown,
+  .postEditor .rdw-image-modal,
+  .postEditor .rdw-colorpicker-modal,
+  .postEditor .rdw-embedded-modal,
+  .postEditor .rdw-emoji-modal,
+  .postEditor .rdw-dropdown-optionwrapper {
     z-index: 30 !important;
+  }
+
+  .postEditor .rdw-embedded-modal-header-option {
+    width: auto !important;
   }
 
   .editor ins {
@@ -351,7 +360,6 @@
 .overflowScroll::-webkit-scrollbar-thumb:hover {
   background-color: white;
 }
-
 
 .skeleton {
   opacity: .7;
