@@ -126,7 +126,7 @@ const HomeLinks = () => {
    
      {/* === Block for all the out let is here === */}
       <main className="w-full" onClick={handleCloseNavLinks}>
-        <div className="my-6 py-2 lg:max-w-[88%] max-w-[95%] xl:max-w-[82%] mx-auto">
+        <div className="my-6 py-2 lg:max-w-[88%] max-w-[95%] xl:max-w-[1300px] mx-auto">
           <Outlet />
         </div>
       </main> 

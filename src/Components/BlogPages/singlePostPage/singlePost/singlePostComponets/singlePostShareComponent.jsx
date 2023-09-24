@@ -20,7 +20,7 @@ const SinglePostShareComponent = ({canOpen, Post, size}) => {
 
     postId = Post?._id
     postTitle = Post?.postTitle
-    shareUrl = `/single/${Post?._id}`
+    shareUrl = `https://chinonye-umeh.netlify.app/single/${Post?._id}`
     
     canShare = [postId, postTitle].every(Boolean) && !isLoading // making sure that every thing is ready
     canUpdateView = [postId, postTitle].every(Boolean) && !viewedIsLoading // making sure that every thing is ready

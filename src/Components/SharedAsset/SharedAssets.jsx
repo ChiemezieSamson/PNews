@@ -353,6 +353,8 @@ const SocialMediaCount = ({text, bg, shareUrl, postTitle, postId, SocialSharedCo
 // hero page Popular Post social media with share count
 export const SharedCount = ({postId, postTitle, SocialSharedCount, canOpen}) => {
   const [hoverRef, isHovered] = useHover(); // hover hook
+  const location = useLocation()
+  console.log(location);
 
   return (
     <span className='text-[#d7d7d7] inline-block my-2 text-xs cursor-pointer '>
@@ -365,7 +367,7 @@ export const SharedCount = ({postId, postTitle, SocialSharedCount, canOpen}) => 
             <SocialMediaCount  
               text={"Share"} 
               bg={"bg-[#45629f]"} 
-              shareUrl={`/single/${postId}`} 
+              shareUrl={`https://chinonye-umeh.netlify.app/single/${postId}`} 
               postTitle={postTitle} 
               postId={postId} 
               SocialSharedCount={SocialSharedCount}
@@ -374,7 +376,7 @@ export const SharedCount = ({postId, postTitle, SocialSharedCount, canOpen}) => 
             <SocialMediaCount 
               text={"Tweet"} 
               bg={"bg-[#5eb2ef]"} 
-              shareUrl={`/single/${postId}`} 
+              shareUrl={`https://chinonye-umeh.netlify.app/single/${postId}`} 
               postTitle={postTitle}
               postId={postId}
               SocialSharedCount={SocialSharedCount}
