@@ -287,7 +287,7 @@ const SocialMediaCount = ({text, bg, shareUrl, postTitle, postId, SocialSharedCo
 
       try {
 
-        await updateSocial({ postId, postTitle, social: event.target.ariaLabel, home: "null"})
+        await updateSocial({ postId, postTitle, social: event.target.ariaLabel})
       } catch (err) {
         
         console.error(err)
@@ -353,8 +353,6 @@ const SocialMediaCount = ({text, bg, shareUrl, postTitle, postId, SocialSharedCo
 // hero page Popular Post social media with share count
 export const SharedCount = ({postId, postTitle, SocialSharedCount, canOpen}) => {
   const [hoverRef, isHovered] = useHover(); // hover hook
-  const location = useLocation()
-  console.log(location);
 
   return (
     <span className='text-[#d7d7d7] inline-block my-2 text-xs cursor-pointer '>

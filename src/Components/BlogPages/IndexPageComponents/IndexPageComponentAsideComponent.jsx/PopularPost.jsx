@@ -6,28 +6,30 @@ import { PopularPostSpinner, SmallPostImageLeftTitleDateRightSpinner } from '../
 
 const PopularPost = ({Posts, canOpen, isFetching}) => {
   let number = 2
-  const SharedPosts = canOpen && Posts?.filter(post => post?.optional?.socialmediashare?.facebook > 0 ||  post?.optional?.socialmediashare?.twitter > 0)
+  let SharedPosts 
 
-  canOpen && SharedPosts?.sort((a, b) => {
+  if (canOpen) {
 
-    const sumA = a.optional?.socialmediashare?.facebook + a.optional?.socialmediashare?.twitter;
-    const sumB = b.optional?.socialmediashare?.facebook + b.optional?.socialmediashare?.twitter;
+    const posts = Posts?.filter(post => post?.optional?.socialmediashare?.facebook > 0 ||  post?.optional?.socialmediashare?.twitter > 0)
 
-    return sumB - sumA; // Sort in descending order
-  });
+    SharedPosts = posts?.sort((a, b) => {
+  
+      const sumA = a.optional?.socialmediashare?.facebook + a.optional?.socialmediashare?.twitter;
+      const sumB = b.optional?.socialmediashare?.facebook + b.optional?.socialmediashare?.twitter;
+  
+      return sumB - sumA; // Sort in descending order
+    });
+  }
 
   let displayedPost 
 
-  if(canOpen &&  SharedPosts?.length > 4) {
+  if(canOpen &&  SharedPosts?.length > 1) {
 
     displayedPost = SharedPosts?.slice(0, 5)
   } else {
 
     displayedPost = canOpen && Posts?.slice(0, 5)
   }
-
-  
-
 
   return (    
     <section className='md:my-3 mt-12'>

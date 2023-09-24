@@ -134,16 +134,15 @@ export const extendedPostsApiSlice = apiSlice.injectEndpoints({
 				method: "PUT",
 				body: initialPost,
 			}),
-			invalidatesTags: (result, error, arg) => [{ id: arg._id }],
+			invalidatesTags: (result, error, arg) => [{ id: arg._id }, "ALLPOSTS"],
 			async onQueryStarted(initialPost, { dispatch, queryFulfilled }) {
 				const patchResult = dispatch(
 					extendedPostsApiSlice.util.updateQueryData(
-						`${initialPost.home ? "getPosts" : "getPostById"}`,
-						`${initialPost.home ? undefined : initialPost.postId}`,
+						"getPostById",
+						initialPost.postId,
 						(draft) => {
-							const post = initialPost.home
-								? draft.find((post) => post._id === initialPost.postId)
-								: draft;
+							const post = draft;
+							console.log(post);
 
 							if (post) {
 								post.optional.socialmediashare[initialPost?.social]++;
