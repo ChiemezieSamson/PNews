@@ -367,7 +367,7 @@ export const SharedCount = ({postId, postTitle, SocialSharedCount, canOpen}) => 
             <SocialMediaCount  
               text={"Share"} 
               bg={"bg-[#45629f]"} 
-              shareUrl={`https://chinonye-umeh.netlify.app/single/${postId}`} 
+              shareUrl={`https://p-news.netlify.app/single/${postId}`} 
               postTitle={postTitle} 
               postId={postId} 
               SocialSharedCount={SocialSharedCount}
@@ -376,7 +376,7 @@ export const SharedCount = ({postId, postTitle, SocialSharedCount, canOpen}) => 
             <SocialMediaCount 
               text={"Tweet"} 
               bg={"bg-[#5eb2ef]"} 
-              shareUrl={`https://chinonye-umeh.netlify.app/single/${postId}`} 
+              shareUrl={`https://p-news.netlify.app/single/${postId}`} 
               postTitle={postTitle}
               postId={postId}
               SocialSharedCount={SocialSharedCount}
