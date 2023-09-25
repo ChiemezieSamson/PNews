@@ -9,14 +9,21 @@ export const extendedAuthApiSlice = apiSlice.injectEndpoints({
 				method: "POST",
 				body: { ...credentials },
 			}),
-			invalidatesTags: ["User", "Post", "Categories", "Tag", "AllComment"],
+			invalidatesTags: [
+				"User",
+				"Post",
+				"Categories",
+				"Tag",
+				"AllComment",
+				"ALLPOSTS",
+			],
 		}),
 		sendLogout: builder.mutation({
 			query: () => ({
 				url: "logout",
 				method: "DELETE",
 			}),
-			invalidatesTags: ["Post", "Categories", "Tag", "AllComment"],
+			invalidatesTags: ["Post", "Categories", "Tag", "AllComment", "ALLPOSTS"],
 			async onQueryStarted(arg, { dispatch, queryFulfilled }) {
 				try {
 					await queryFulfilled;

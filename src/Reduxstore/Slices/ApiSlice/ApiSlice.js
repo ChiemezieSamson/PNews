@@ -3,6 +3,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { logOut, setCredentials } from "../authSlice/AuthSlice";
 import { Mutex } from "async-mutex";
 
+// Using async-mutex to prevent multiple calls to '/refreshToken' when multiple calls fail with 401 Unauthorized errors.
 // create a new mutex
 const mutex = new Mutex();
 
@@ -11,6 +12,7 @@ const baseQuery = fetchBaseQuery({
 	credentials: "include",
 	prepareHeaders: (headers, { getState }) => {
 		const token = getState().auth.token;
+
 		if (token) {
 			headers.set("authorization", `Bearer ${token}`);
 		} else {
@@ -56,12 +58,17 @@ const baseQueryWithReauth = async (args, api, extraOptions) => {
 					// retry the original query with new access token
 					result = await baseQuery(args, api, extraOptions);
 				} else {
-					if (refreshResult?.error?.status === 401) {
-						refreshResult.error.data.message = "Your login has expired.";
+					if (
+						refreshResult?.error?.originalStatus === 401 ||
+						refreshResult?.error?.status === "PARSING_ERROR"
+					) {
+						console.error(refreshResult?.error?.data);
 
 						localStorage.setItem("userToken", "");
-						await baseQuery("logout", api, extraOptions);
+
 						api.dispatch(logOut());
+
+						await baseQuery("logout", api, extraOptions);
 					}
 
 					return refreshResult;
