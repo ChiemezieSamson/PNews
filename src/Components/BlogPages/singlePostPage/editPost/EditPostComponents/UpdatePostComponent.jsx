@@ -43,6 +43,7 @@ const UpdatePostComponent = ({state, post, postId, postAction, isFetching}) => {
   const [postAuthor, setPostAuthor] = useState("") 
    const [errorMessage, setErrorMessage] = useState(''); 
   const [file, setFile] = useState("")
+  const [data, setData] = useState({})
 
   const size = useWindowSize()
   const canOpen = [postAction, userAction].every(Boolean)
@@ -111,23 +112,18 @@ const UpdatePostComponent = ({state, post, postId, postAction, isFetching}) => {
       } else {
 
         setErrorMessage('');
-
-        const filename = Date.now() + file.name; // making sure no two file have same name
-
-        data.append("name", filename)
-        data.append("file", file)
-
-        setPostImage(() => filename)
-        setFile(() => file)
-
+        
         try {
-   
-         await axios.post("/upload", data)
-
-          if (postImage) {
-            
-            await axios.delete(`/delete-image/${postImage}`)
-          }
+          
+          const filename = Date.now() + file.name; // making sure no two file have same name
+  
+          data.append("name", filename)
+          data.append("file", file)
+  
+          setPostImage(() => filename)
+          setFile(() => file)
+  
+          setData(() => data);         
    
         } catch (err) {
 
@@ -137,8 +133,6 @@ const UpdatePostComponent = ({state, post, postId, postAction, isFetching}) => {
       }       
     }
   }
-  console.log(postImage);
-
 
   const canSave = [postTitle, postImage, postAuthor, postCategory[0], postTags[0], isValid].every(Boolean) && !isLoading && !errorText
 
@@ -158,6 +152,13 @@ const UpdatePostComponent = ({state, post, postId, postAction, isFetching}) => {
       setErrorText2(() => false)
 
       try {
+
+        await axios.post("/upload", data)
+
+        if (post?.postImage) {
+          
+          await axios.delete(`/delete-image/${post?.postImage}`)
+        }
 
        await postUpdated({postId, postAuthor, postTitle, postImage, postContent, postCategory, postTags, optional})
 

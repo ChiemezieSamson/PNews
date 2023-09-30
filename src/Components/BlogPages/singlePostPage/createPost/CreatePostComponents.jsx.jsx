@@ -35,6 +35,7 @@ const CreatePostComponents = ({state}) => {
   const [postAuthor, setPostAuthor] = useState("")
   const [errorMessage, setErrorMessage] = useState('');
   const [file, setFile] = useState("")
+  const [data, setData] = useState({})
 
   const size = useWindowSize()
   const navigate = useNavigate();
@@ -104,22 +105,17 @@ const CreatePostComponents = ({state}) => {
 
         setErrorMessage('');
 
-        const filename = Date.now() + file.name; // making sure no two file have same name
-        
-        data.append("name", filename)
-        data.append("file", file)
-          
-        setPostImage(() => filename)
-        setFile(() => file)
-
         try {
-    
-          await axios.post("/upload", data)
-
-          if (postImage) {
+          
+          const filename = Date.now() + file.name; // making sure no two file have same name
+          
+          data.append("name", filename)
+          data.append("file", file)
             
-            await axios.delete(`/delete-image/${postImage}`)
-          }
+          setPostImage(() => filename)
+          setFile(() => file)
+  
+          setData(() => data);       
     
         } catch (err) {
 
@@ -139,6 +135,8 @@ const CreatePostComponents = ({state}) => {
       setErrorText2(() => false)
 
       try {
+
+        await axios.post("/upload", data)
         
         await addNewPost({ postAuthor, postTitle, postImage, postContent , postCategory, postTags, optional }).unwrap()
         

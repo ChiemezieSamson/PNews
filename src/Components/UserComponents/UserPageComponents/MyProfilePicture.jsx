@@ -18,6 +18,7 @@ const MyProfilePicture = ({user, userAction, isFetching}) => {
   const [profileImage, setProfileImage] = useState("")
   const [errorMessage, setErrorMessage] = useState("");
   const [file, setFile] = useState("")
+  const [data, setData] = useState({})
 
 
 
@@ -39,22 +40,18 @@ const MyProfilePicture = ({user, userAction, isFetching}) => {
       } else {
         setErrorMessage('');
 
-        const filename = Date.now() + file.name; // making sure no two file have same name
-        
-        data.append("name", filename)
-        data.append("file", file)
-        
-        setProfileImage(() => filename)
-        setFile(() => file)
         
         try {
           
-          await axios.post("/upload", data)
+          const filename = Date.now() + file.name; // making sure no two file have same name
           
-          if (profileImage) {
-            
-            await axios.delete(`/delete-image/${profileImage}`)
-          }
+          data.append("name", filename)
+          data.append("file", file)
+          
+          setProfileImage(() => filename)
+          setFile(() => file)
+  
+          setData(() => data);
           
         } catch (err) {
 
@@ -79,9 +76,15 @@ const MyProfilePicture = ({user, userAction, isFetching}) => {
 
       try{
 
+        await axios.post("/upload", data)
+          
+        if ( user?.profileImage) {
+          
+          await axios.delete(`/delete-image/${ user?.profileImage}`)
+        }
+
         await userProfilePicture({userId: user._id, profileImage})
   
-        setProfileImage(() => "")
         setFile(() => "")
       } catch (err) {
 
