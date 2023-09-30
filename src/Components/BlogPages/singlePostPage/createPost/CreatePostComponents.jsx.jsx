@@ -115,6 +115,11 @@ const CreatePostComponents = ({state}) => {
         try {
     
           await axios.post("/upload", data)
+
+          if (postImage) {
+            
+            await axios.delete(`/delete-image/${postImage}`)
+          }
     
         } catch (err) {
 
@@ -125,7 +130,7 @@ const CreatePostComponents = ({state}) => {
     }
   }
 
-  const canSave = [postTitle, postImage, postAuthor, postCategory[0], postTags[0], isValid].every(Boolean) && !isLoading
+  const canSave = [postTitle, postImage, postAuthor, postCategory[0], postTags[0], isValid].every(Boolean) && !isLoading && !errorText
 
   const handleAllPostContent = async () => {
 

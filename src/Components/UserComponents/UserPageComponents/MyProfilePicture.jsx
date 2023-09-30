@@ -46,11 +46,16 @@ const MyProfilePicture = ({user, userAction, isFetching}) => {
         
         setProfileImage(() => filename)
         setFile(() => file)
-
+        
         try {
-
+          
           await axios.post("/upload", data)
-
+          
+          if (profileImage) {
+            
+            await axios.delete(`/delete-image/${profileImage}`)
+          }
+          
         } catch (err) {
 
           setErrorText(() => true)
@@ -61,7 +66,7 @@ const MyProfilePicture = ({user, userAction, isFetching}) => {
   }
 
 
-  const canSave = [profileImage, onChangeMade].every(Boolean) && !isLoading
+  const canSave = [profileImage, onChangeMade].every(Boolean) && !isLoading && !errorText
 
 
   //handle form submmition and api calling
@@ -129,10 +134,10 @@ const MyProfilePicture = ({user, userAction, isFetching}) => {
 
         {userAction && 
 
-          <form id='profileImage'  onSubmit={handleSubmit} 
-            className='absolute inset-x-0 z-20 group-hover:top-2/3 bg-neutral-400/40 drop-shadow bottom-0 pt-3 TextHeadertransition opacity-0 group-hover:opacity-100'>
+          <form id='profileImage'  onSubmit={handleSubmit}>
 
-            <label htmlFor="userimage" className='text-xs uppercase tracking-widest'>Upload Image</label>
+            <label htmlFor="userimage" className='text-xs uppercase tracking-widest absolute inset-x-0 z-20 group-hover:top-2/3 bg-neutral-400/40 drop-shadow bottom-0 pt-3 
+            TextHeadertransition opacity-0 group-hover:opacity-100'>Upload Image</label>
 
             <input 
               type="file" 
