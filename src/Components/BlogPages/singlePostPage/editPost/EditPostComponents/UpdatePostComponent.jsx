@@ -152,15 +152,17 @@ const UpdatePostComponent = ({state, post, postId, postAction, isFetching}) => {
       setErrorText2(() => false)
 
       try {
-
-        await axios.post("/upload", data)
-
-        if (post?.postImage) {
+        
+        if (post?.postImage !== postImage) {
+          await axios.post("/upload", data)
           
-          await axios.delete(`/delete-image/${post?.postImage}`)
+          if (post?.postImage !== "") {
+
+            await axios.delete(`/delete-image/${post?.postImage}`)
+          }
         }
 
-       await postUpdated({postId, postAuthor, postTitle, postImage, postContent, postCategory, postTags, optional})
+        await postUpdated({postId, postAuthor, postTitle, postImage, postContent, postCategory, postTags, optional})
 
         navigate(`/single/${postId}`)
         setEditorState(() => EditorState.createWithContent(WritePoststate))
@@ -222,12 +224,12 @@ const UpdatePostComponent = ({state, post, postId, postAction, isFetching}) => {
   return (
     <div className="grid lg:grid-cols-4 relative">
 
-      {errorText2 ? <p className='text-xs text-rose-500 tracking-wider font-lora'>Failed to save the post</p> : "" }
       
       {/* write post start here */}
       <div className={`text-left lg:col-span-3 order-2 lg:order-1 ${(size.width < 1024 && showSideBar) && "hidden"} ${isFecthingStyle(anyIsfetching)}`}>
         {!preview ? 
           <>
+          {errorText2 ? <p className='text-xs text-rose-500 tracking-wider font-lora'>Failed to save the post</p> : "" }
             <div className="mt-5">
 
               {/* Title input is here */}

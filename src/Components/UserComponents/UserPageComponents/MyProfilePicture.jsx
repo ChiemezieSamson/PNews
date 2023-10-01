@@ -76,12 +76,14 @@ const MyProfilePicture = ({user, userAction, isFetching}) => {
 
       try{
 
-        await axios.post("/upload", data)
+        if ( user?.profileImage !== profileImage) {
+          await axios.post("/upload", data)
           
-        if ( user?.profileImage) {
-          
-          await axios.delete(`/delete-image/${ user?.profileImage}`)
-        }
+          if (user?.profileImage !== "") {
+
+            await axios.delete(`/delete-image/${ user?.profileImage}`)
+          }
+        }        
 
         await userProfilePicture({userId: user._id, profileImage})
   

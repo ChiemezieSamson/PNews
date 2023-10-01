@@ -191,10 +191,10 @@ const CreatePostComponents = ({state}) => {
 
        {/* write post start here */}
       <div className={`text-left lg:col-span-3 order-2 lg:order-1 ${(size.width < 1024 && showSideBar) && "hidden"} ${isFecthingStyle(anyIsfetching)}`}>
-      {errorText2 ? <p className='text-xs text-rose-500 tracking-wider font-lora'>Failed to save the post</p> : "" }
 
         {!preview ? 
           <>
+          {errorText2 ? <p className='text-xs text-rose-500 tracking-wider font-lora'>Failed to save the post</p> : "" }
             <div className="mt-5">
 
               {/* Title input is here */}
