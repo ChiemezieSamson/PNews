@@ -73,10 +73,10 @@ const HeroImages = ({Posts, categories, canOpen, isFetching}) => {
 
             <ul className="w-[900px] md:w-full grid md:grid-rows-3 grid-cols-3 auto-cols-fr md:auto-cols-auto md:grid-cols-none HeroImageMultiple">
 
-              {displayedPost?.map((post) => {
+              {displayedPost?.map((post, index) => {
 
                 return (                  
-                  <li key={post?._id} className={`HeroImageMultipleListOverFlow first:mt-0 md:mt-1 group HeroImageMultipleList`}>
+                  <li key={post?._id + index} className={`HeroImageMultipleListOverFlow first:mt-0 md:mt-1 group HeroImageMultipleList`}>
 
                     <Link to={`/single/${post?._id}`} className={overLay()}>
                       <img src={publicFolder + post?.postImage} alt="IndexImage" className="Imagetransition HeroImageMultipleList" loading="lazy"/>
