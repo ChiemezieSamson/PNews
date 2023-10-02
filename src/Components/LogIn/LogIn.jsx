@@ -9,7 +9,7 @@ import { CorrectTick, PasswordDisplay, isFecthingStyle } from '../SharedAsset/Sh
 
 const LogIn = () => {
   // Redux toolkit that calls the back end for a log in
-  const [login, { isLoading, isSuccess, isError, error }] = useLoginMutation()
+  const [login, { isLoading, isSuccess }] = useLoginMutation()
 
   const [username, setUsername] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
@@ -99,15 +99,15 @@ const LogIn = () => {
         if (!err?.originalStatus) {
           
           // isLoading: true until timeout occurs
-          setErrMsg(error.data);
+          setErrMsg('No Server Response');
           setErrMsgOn(() => true)
         } else if (err.originalStatus === 400) {
 
           setErrMsg('fill all the input form');
           setErrMsgOn(() => true)
-        } else if (err.originalStatus === 401 || isError) {
+        } else if (err.originalStatus === 401) {
 
-          setErrMsg(error.data);
+          setErrMsg('Unauthorized');
           setErrMsgOn(() => true)
         } else {
 
