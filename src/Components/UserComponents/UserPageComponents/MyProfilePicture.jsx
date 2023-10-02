@@ -2,6 +2,7 @@ import React, {useEffect, useState } from 'react'
 import { useUpdateExistingUserImageMutation } from '../../../Reduxstore/Slices/users/UsersSlice'
 import axios from "axios"
 import { publicFolder } from '../../../data'
+import userAvatar from "../../../asset/images/user-avatar.png"
 import { UserInfoHeading, isFecthingStyle } from '../../SharedAsset/SharedAssets'
 
 
@@ -88,6 +89,7 @@ const MyProfilePicture = ({user, userAction, isFetching}) => {
         await userProfilePicture({userId: user._id, profileImage})
   
         setFile(() => "")
+        setOnChangeMade(() => false)
       } catch (err) {
 
         setErrorText2(() => true)
@@ -129,7 +131,7 @@ const MyProfilePicture = ({user, userAction, isFetching}) => {
             {file ? 
               <img  src={URL?.createObjectURL(file)} alt="userprofileimage" className='max-h-52' loading="lazy"/> 
               :
-              <img src={publicFolder + profileImage} alt="userprofileimage" className='max-h-52' loading="lazy"/>
+              <img src={profileImage ? publicFolder + profileImage : userAvatar} alt="userprofileimage" className='max-h-52' loading="lazy"/>
             }
           </>
           :

@@ -19,6 +19,7 @@ import useFetchedComments, { useFetchedCommentById } from '../../../SharedAsset/
 import { SinglePostSpinner, SkeletonTextTwo } from '../../../SharedAsset/Spinners/Spinner';
 import { handleUserPassword } from '../../../SharedAsset/Vaidations/RegularExpression';
 import TexSizeAdjuster from './singlePostComponets/TexSizeAdjuster';
+import userAvatar from "../../../../asset/images/user-avatar.png"
 
 
 const SinglePost = () => {
@@ -284,8 +285,8 @@ const SinglePost = () => {
                 {/* Admin Image */}
                 {canOpen ?
 
-                  <Link to={`/categories?user=${User?._id}`} className="max-w-[40px] max-h-10 inline-block rounded-full align-bottom mr-2">
-                      <img loading='lazy' src={publicFolder + User?.profileImage} alt="AdminImage" className='rounded-full'/> 
+                  <Link to={`/categories?user=${User?._id}`} className="max-w-[40px] w-screen max-h-10 inline-block rounded-full align-bottom mr-2">
+                      <img loading='lazy' src={User?.profileImage ? publicFolder + User?.profileImage : userAvatar} alt="AdminImage" className='rounded-full max-h-10'/> 
                   </Link>
                   :
                   <div className='w-[40px] h-10 skeleton rounded-full inline-block mr-2'></div>

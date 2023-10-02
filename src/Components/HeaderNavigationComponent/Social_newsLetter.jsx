@@ -6,6 +6,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useSendLogoutMutation } from "../../Reduxstore/Slices/authSlice/authApiSlic";
 import { SocialMediaLinks, isFecthingStyle } from "../SharedAsset/SharedAssets";
 import { handleEmailPattern } from "../SharedAsset/Vaidations/RegularExpression";
+import userAvatar from "../../asset/images/user-avatar.png"
 
 
 const SocialNewsletter = ({opensidebar, user, userAction, isFetching, userisSuccess, isError, refetch}) => {
@@ -167,8 +168,8 @@ const SocialNewsletter = ({opensidebar, user, userAction, isFetching, userisSucc
             <Link to={"/userpage"} className={`rounded-full m-0 inline-block fixed left-px top-2 lg:inset-auto z-[500] bg-stone-100  ${isFecthingStyle(isFetching)}`}
               title="user profile">
                 {userAction ?
-                  <img src={publicFolder + user?.profileImage} alt="userImage" className="rounded-full border border-solid
-                  border-rose-400 p-px m-0 object-cover object-center cursor-pointer max-w-[3rem] w-auto max-h-[3rem] mx-auto"/>
+                  <img src={user?.profileImage ? publicFolder + user?.profileImage : userAvatar} alt="userImage" className="rounded-full border border-solid
+                  border-rose-400 p-px m-0 object-cover object-center cursor-pointer max-w-[3rem] w-screen max-h-[3rem] mx-auto"/>
                   :
                   <div className='skeleton h-screen w-screen rounded-full border border-solid
                   border-rose-400 p-px m-0 object-cover object-center cursor-pointer max-w-[3rem] max-h-[3rem] mx-auto'></div>

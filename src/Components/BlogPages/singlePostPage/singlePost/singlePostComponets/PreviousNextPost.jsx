@@ -3,6 +3,7 @@ import { SocialMediaIcons, publicFolder } from '../../../../../data'
 import { Link } from 'react-router-dom'
 import { useGetPostsByQueryQuery } from '../../../../../Reduxstore/Slices/posts/PostsSlice'
 import { ImageTopTitleTimeDownSpinner, SinglePostPreviousNextButtonSpinner, SkeletonTextFour } from '../../../../SharedAsset/Spinners/Spinner'
+import userAvatar from "../../../../../asset/images/user-avatar.png"
 
 
 const PreviousNextPost = ({post, User, canOpen, size, onAnyIsfetching}) => {
@@ -84,13 +85,13 @@ const PreviousNextPost = ({post, User, canOpen, size, onAnyIsfetching}) => {
       </div>
 
       {/* user Bio and info */}
-      <section className='lg:grid-cols-6 lg:grid p-7 mb-7 border border-solid border-neutral-200 font-poppins text-center sm:text-left rounded-sm'>
+      <section className='lg:grid-cols-6 lg:grid lg:text-left p-7 mb-7 border border-solid border-neutral-200 font-poppins text-center sm:text-left rounded-sm'>
 
-        <span className={`max-w-[80px] mx-auto text-center h-20 inline-block lg:block rounded-full align-bottom mr-2 col-span-1 border border-solid border-neutral-200 ${isFecthingStyle(onAnyIsfetching || isFetching)}`}>
+        <span className={`max-w-[80px] w-screen mx-auto lg:mx-0 text-center h-20 inline-block lg:block rounded-full align-bottom mr-2 col-span-1 border border-solid border-neutral-200 ${isFecthingStyle(onAnyIsfetching || isFetching)}`}>
 
           {canOpen ? 
 
-            <img loading='lazy' src={publicFolder + User?.profileImage} alt="AdminImage" className='rounded-full cursor-pointer'/>
+            <img loading='lazy' src={User?.profileImage ? publicFolder + User?.profileImage : userAvatar} alt="AdminImage" className='rounded-full cursor-pointer max-h-20'/>
             :
             <div className='skeleton rounded-full w-[80px] h-20'></div>
           }
