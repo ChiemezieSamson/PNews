@@ -65,7 +65,7 @@ export const extendedUserApiSlice = apiSlice.injectEndpoints({
 
 		updateExistingUserImage: builder.mutation({
 			query: (User) => ({
-				url: `users/${User.userId}`,
+				url: `users/image/${User.userId}`,
 				method: "PUT",
 				body: User,
 			}),

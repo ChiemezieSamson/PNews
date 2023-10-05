@@ -8,16 +8,17 @@ import { emptyCategories, selectAllPostCat } from '../../../../Reduxstore/Slices
 import { emptyTag, selectAllPostTags } from '../../../../Reduxstore/Slices/PostsComponentSlices/postsTags/PostsTagsSlice'
 import { emptyOptional, selectAllPostOptionals } from '../../../../Reduxstore/Slices/PostsComponentSlices/PostsOptional/PostsOptionalSlice'
 import { useCreateNewPostMutation } from "../../../../Reduxstore/Slices/posts/PostsSlice";
-import axios from "axios"
 import { isFecthingStyle, useWindowSize } from "../../../SharedAsset/SharedAssets";
 import PostWritePreview from "./editorPreview/postWritePreview";
 import { useFetchedUserById } from "../../../SharedAsset/Spinners/userSpinner";
 import { useNavigate } from "react-router-dom";
 import { textSpaceAndNumber } from "../../../SharedAsset/Vaidations/RegularExpression";
 import TextEditor from "../editor/Editor";
+import { useImageUploadMutation } from "../../../../Reduxstore/Slices/imageSlice/ImageSlice";
 
 const CreatePostComponents = ({state}) => {
   const [addNewPost, { isLoading , isFetching: CreatePostsIsfetching}] = useCreateNewPostMutation() // Redux function to create a new post
+  const [uploadImage, {isLoading: uploadIsLoding}] = useImageUploadMutation()
   // getting the user for authenticatin, authorisation and security
   const {singleUser, userAction, isSuccess, isError, isFetching} = useFetchedUserById()
 
@@ -126,7 +127,7 @@ const CreatePostComponents = ({state}) => {
     }
   }
 
-  const canSave = [postTitle, postImage, postAuthor, postCategory[0], postTags[0], isValid].every(Boolean) && !isLoading && !errorText
+  const canSave = [postTitle, postImage, postAuthor, postCategory[0], postTags[0], isValid].every(Boolean) && !isLoading && !errorText && !uploadIsLoding
 
   const handleAllPostContent = async () => {
 
@@ -136,7 +137,10 @@ const CreatePostComponents = ({state}) => {
 
       try {
 
-        await axios.post("/upload", data)
+        if (postImage !== "") {
+
+          await uploadImage({data})          
+        }    
         
         await addNewPost({ postAuthor, postTitle, postImage, postContent , postCategory, postTags, optional }).unwrap()
         

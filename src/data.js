@@ -12,7 +12,7 @@ import {
 	FaYoutube,
 } from "react-icons/fa";
 
-export const publicFolder = "https://newblog-api-pwju.onrender.com/images/";
+export const publicFolder = "https://pnews-uxov.onrender.com/images/";
 
 export const parentCategoriesAndTags = [
 	"books",

@@ -10,17 +10,19 @@ import { emptyOptional, selectAllPostOptionals } from '../../../../../Reduxstore
 import draftToHtml from 'draftjs-to-html';
 import { useNavigate } from 'react-router-dom';
 import { useUpdateExistingPostMutation } from '../../../../../Reduxstore/Slices/posts/PostsSlice';
-import axios from "axios"
 import { publicFolder } from '../../../../../data';
 import { isFecthingStyle, useWindowSize } from '../../../../SharedAsset/SharedAssets';
 import PostWritePreview from '../../createPost/editorPreview/postWritePreview';
 import { useFetchedUserById } from '../../../../SharedAsset/Spinners/userSpinner';
 import { textSpaceAndNumber } from '../../../../SharedAsset/Vaidations/RegularExpression';
 import TextEditor from '../../editor/Editor';
+import { useImageDeleteMutation, useImageUploadMutation } from '../../../../../Reduxstore/Slices/imageSlice/ImageSlice';
 
 
 const UpdatePostComponent = ({state, post, postId, postAction, isFetching}) => {
   const [postUpdated, { isLoading, updateIsfetching }] = useUpdateExistingPostMutation()// Redux function to update a new post
+  const [uploadImage, {isLoading: uploadIsLoding}] = useImageUploadMutation()
+  const [deleteImage, {isLoading: ImageDeleteIsLoding}] = useImageDeleteMutation()
 
   // getting the user for authenticatin, authorisation and security
   const {singleUser, userAction, isSuccess, isError, isFetching: userIsfetching} = useFetchedUserById()
@@ -96,6 +98,7 @@ const UpdatePostComponent = ({state, post, postId, postAction, isFetching}) => {
 
   // handling setting image once selected from the user device
   const handleImage = async (e) => {
+    setErrorText2(() => false)
 
     if(e.target.value) {
 
@@ -134,7 +137,7 @@ const UpdatePostComponent = ({state, post, postId, postAction, isFetching}) => {
     }
   }
 
-  const canSave = [postTitle, postImage, postAuthor, postCategory[0], postTags[0], isValid].every(Boolean) && !isLoading && !errorText
+  const canSave = [postTitle, postImage, postAuthor, postCategory[0], postTags[0], isValid].every(Boolean) && !isLoading && !errorText && !uploadIsLoding && !ImageDeleteIsLoding
 
   const handleAllPostContent = async () => {
 
@@ -152,17 +155,21 @@ const UpdatePostComponent = ({state, post, postId, postAction, isFetching}) => {
       setErrorText2(() => false)
 
       try {
-        
-        if (post?.postImage !== postImage) {
-          await axios.post("/upload", data)
-          
-          if (post?.postImage !== "") {
 
-            await axios.delete(`/delete-image/${post?.postImage}`)
-          }
-        }
+        if ( post?.postImage !== postImage) {
+
+          await uploadImage({data})          
+        }        
 
         await postUpdated({postId, postAuthor, postTitle, postImage, postContent, postCategory, postTags, optional})
+
+        if ( post?.postImage !== postImage) {
+
+          if (post?.postImage !== "") {
+
+            await deleteImage({profileImage:  post?.postImage})
+          }  
+        }
 
         navigate(`/single/${postId}`)
         setEditorState(() => EditorState.createWithContent(WritePoststate))

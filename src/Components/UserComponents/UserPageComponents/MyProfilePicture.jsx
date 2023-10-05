@@ -1,14 +1,16 @@
 import React, {useEffect, useState } from 'react'
 import { useUpdateExistingUserImageMutation } from '../../../Reduxstore/Slices/users/UsersSlice'
-import axios from "axios"
 import { publicFolder } from '../../../data'
 import userAvatar from "../../../asset/images/user-avatar.png"
 import { UserInfoHeading, isFecthingStyle } from '../../SharedAsset/SharedAssets'
+import { useImageDeleteMutation, useImageUploadMutation } from '../../../Reduxstore/Slices/imageSlice/ImageSlice'
 
 
 const MyProfilePicture = ({user, userAction, isFetching}) => { 
   // Redux function to update user profile pictur changes
   const [userProfilePicture, {isLoading}] = useUpdateExistingUserImageMutation()
+  const [uploadImage, {isLoading: uploadIsLoding}] = useImageUploadMutation()
+  const [deleteImage, {isLoading: ImageDeleteIsLoding}] = useImageDeleteMutation()
 
   
   const [errorText, setErrorText] = useState(false) /// text used to indicate that your update didn't save or there is an erro
@@ -26,6 +28,7 @@ const MyProfilePicture = ({user, userAction, isFetching}) => {
   // handling setting image once selected from the user device
   const handleImage = async (e) => {
     setOnChangeMade(() => true)
+    setErrorText2(() => false)
 
     if(e.target.value) {
       setErrorText(() => false)
@@ -64,7 +67,7 @@ const MyProfilePicture = ({user, userAction, isFetching}) => {
   }
 
 
-  const canSave = [profileImage, onChangeMade].every(Boolean) && !isLoading && !errorText
+  const canSave = [profileImage, onChangeMade, userAction].every(Boolean) && !isLoading && !errorText && !uploadIsLoding && !ImageDeleteIsLoding
 
 
   //handle form submmition and api calling
@@ -72,21 +75,22 @@ const MyProfilePicture = ({user, userAction, isFetching}) => {
     event.preventDefault();
 
     if(canSave) {
-
       setErrorText2(() => false)
 
       try{
 
         if ( user?.profileImage !== profileImage) {
-          await axios.post("/upload", data)
+
+          await uploadImage({data})
           
           if (user?.profileImage !== "") {
 
-            await axios.delete(`/delete-image/${ user?.profileImage}`)
-          }
-        }        
+            await deleteImage({profileImage:  user?.profileImage})
+          }          
 
-        await userProfilePicture({userId: user._id, profileImage})
+          await userProfilePicture({userId: user._id, profileImage})
+
+        }        
   
         setFile(() => "")
         setOnChangeMade(() => false)
