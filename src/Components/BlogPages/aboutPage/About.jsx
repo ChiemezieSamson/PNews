@@ -5,6 +5,7 @@ import { NavDirectionAndPageName, NewsLetter } from '../../SharedAsset/SharedAss
 const About = () => {
   return (
     <section className='text-left'>
+      
       <NavDirectionAndPageName />
 
       <article className='grid grid-flow-row md:grid-cols-5 md:gap-x-4 mt-20'>
