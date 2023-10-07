@@ -112,7 +112,7 @@ export const SocialMediaIcons = [
 			 group-hover:bg-[#ff6f00]"
 			/>
 		),
-		link: "https://www.mywebsite.com/",
+		link: "@https://www.mywebsite@&&.com/",
 		socialLinks: "text-[#ff6f00]",
 		number: 99,
 		text: "Subscribers",

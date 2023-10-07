@@ -408,7 +408,7 @@ export const SocialLinks = ({others}) => {
           <li key={link?.id}>
 
             <a href={link?.link} target="_blank" rel="noopener noreferrer" className={`text-xl block ${others ? link?.bg : "bg-[#fff]"} font-bold ${others ? link?.hv : "hover:bg-slate-200/75"} cursor-pointer border border-solid border-[#e0e0e0]
-              TextHeadertransition`} onClick={(e) => e.preventDefault()}>
+              TextHeadertransition`}>
 
               <span className={`${others ? "text-white" : "text-[#53585c]"}`}>
 
