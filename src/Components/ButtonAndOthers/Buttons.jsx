@@ -150,8 +150,6 @@ export const EditAndDeleteButton = ({handler}) => {
 export const ReactionAndReplyButton = ({handler, comment, User, postId, buttonText, createUserFirstButton, offsetOfForm}) => {
 
   const handleBackToForm = () => {
-    console.log("me");
-
     document.body.scrollTop = offsetOfForm.current.offsetTop; // For Safari
     window.scrollTo({left: 0, top: offsetOfForm.current.offsetTop, behavior: "smooth"})
     return
