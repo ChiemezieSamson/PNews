@@ -292,7 +292,7 @@ const Tag = ({updatePostTags, parentTag, handleSelectedParentTag, handleSetAddTa
             id='post_tag' 
             name='posttag' 
             aria-label='text' 
-            maxLength={22}              
+            maxLength={24}              
             required
             className={`mb-0 aria-required:bg-rose-500 font-poppins disabled:opacity-40 ${(!isValid && addTag) ? "border-red-500 text-red-600 focus:border-red-500 focus:ring-red-500" : ""}`} 
             autoFocus={true}

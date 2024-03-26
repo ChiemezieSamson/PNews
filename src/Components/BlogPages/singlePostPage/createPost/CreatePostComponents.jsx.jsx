@@ -12,7 +12,7 @@ import { isFecthingStyle, useWindowSize } from "../../../SharedAsset/SharedAsset
 import PostWritePreview from "./editorPreview/postWritePreview";
 import { useFetchedUserById } from "../../../SharedAsset/Spinners/userSpinner";
 import { useNavigate } from "react-router-dom";
-import { textSpaceAndNumber } from "../../../SharedAsset/Vaidations/RegularExpression";
+import { textSpaceNumberAndSpecialCharater } from "../../../SharedAsset/Vaidations/RegularExpression";
 import TextEditor from "../editor/Editor";
 import { useImageUploadMutation } from "../../../../Reduxstore/Slices/imageSlice/ImageSlice";
 
@@ -58,7 +58,8 @@ const CreatePostComponents = ({state}) => {
   const handlePostTitle = (e) => {
 
     const { value } = e.target;
-    const { isValid }= textSpaceAndNumber(value);
+    const { isValid }= textSpaceNumberAndSpecialCharater(value);
+
     setIsValid(isValid);
 
     setPostTitle(() => value)
@@ -207,7 +208,7 @@ const CreatePostComponents = ({state}) => {
                 aria-label='text'
                 placeholder='My Title ...' 
                 id="title" 
-                maxLength={70}
+                maxLength={100}
                 name="head_title"  
                 className={`text-2xl sm:text-3xl xl:text-4xl text-stone-800 border-0 focus:border-b focus:outline-0 shadow-none disabled:opacity-40
                   p-5 pb-px font-round ${(!isValid && postTitle) ? "border-red-500 text-red-600 focus:border-red-500 focus:ring-red-500" : ""}`}

@@ -32,31 +32,34 @@ const ArroundTheWorldPosts = ({Posts, categories, users, Comments, canOpen, isFe
         {canOpen ?
 
           <div className='mt-0.5 text-black md:mr-[2%]'>
-
-            <div className="relative mb-2 max-h-44 imgxs:max-h-52 sm:max-h-60 md:min-h-[420px] lg:min-h-[500px] xl:min-h-[600px]">
-
-              <Link to={`/single/${allPost[0]?._id}`}>
-                <img src={publicFolder + allPost[0]?.postImage} alt="game" className="max-h-44 imgxs:max-h-52 sm:max-h-60 md:min-h-[420px] lg:min-h-[500px] xl:min-h-[600px]" loading="lazy"/>
-              </Link>
-
-                <CategoriesComponentBotton cat={allPost[0]?.postCategory[0]} />
-            </div>
-
-            <PostTitleMedium2 post={allPost[0]?.postTitle} postId={allPost[0]?._id}/>
-
-            <span className="mt-2 mb-2 inline-block">
-
-              <span className='mr-4 inline-block'>
-                <AdminComponentColor user={allPost[0]?.postAuthor} users={users}/>
-              </span>
-              
-              <TimeComponentColor time={allPost[0]?.createdAt}/>
-            </span>
-
-            {size.width > 519 && 
+            {allPost[0] && 
               <>
-                <PostsShortInfoComponent post={allPost[0]?.postContent}/>
-                <ReadmoreButton postId={allPost[0]?._id}/>
+                <div className="relative mb-2 max-h-44 imgxs:max-h-52 sm:max-h-60 md:min-h-[420px] lg:min-h-[500px] xl:min-h-[600px]">
+
+                  <Link to={`/single/${allPost[0]?._id}`}>
+                    <img src={publicFolder + allPost[0]?.postImage} alt="game" className="max-h-44 imgxs:max-h-52 sm:max-h-60 md:min-h-[420px] lg:min-h-[500px] xl:min-h-[600px]" loading="lazy"/>
+                  </Link>
+
+                    <CategoriesComponentBotton cat={allPost[0]?.postCategory[0]} />
+                </div>
+
+                <PostTitleMedium2 post={allPost[0]?.postTitle} postId={allPost[0]?._id}/>
+
+                <span className="mt-2 mb-2 inline-block">
+
+                  <span className='mr-4 inline-block'>
+                    <AdminComponentColor user={allPost[0]?.postAuthor} users={users}/>
+                  </span>
+                  
+                  <TimeComponentColor time={allPost[0]?.createdAt}/>
+                </span>
+
+                {size.width > 519 && 
+                  <>
+                    <PostsShortInfoComponent post={allPost[0]?.postContent}/>
+                    <ReadmoreButton postId={allPost[0]?._id}/>
+                  </>
+                }
               </>
             }
           </div>

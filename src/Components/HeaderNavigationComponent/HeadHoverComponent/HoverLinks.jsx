@@ -28,7 +28,7 @@ export const HoverLinsks = ({CategoriesLink, TagsLink, blogPost, Parentlink, han
 
         {/* === Posts Images and title component handler === */}
         <div className={`${(Parentlink === "favorite") ? "col-span-5" : "col-span-4"} 
-          ${(Parentlink === "quotes") ? "col-span-6" : "col-span-6"} p-4`}>
+          ${(Parentlink === "quotes") ? "col-span-6" : "col-span-4"} p-4`}>
 
           <PostImageComponent 
             blogPost={blogPost} 

@@ -12,7 +12,8 @@ import {
 	FaYoutube,
 } from "react-icons/fa";
 
-export const publicFolder = "https://pnews-uxov.onrender.com/images/";
+export const publicFolder = "http://localhost:5001/images/";
+// "https://pnews-uxov.onrender.com/images/";
 
 export const parentCategoriesAndTags = [
 	"books",

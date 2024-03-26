@@ -37,6 +37,24 @@ export const textSpaceAndNumber = (value) => {
 }
 
 
+// regular expression that allows only letters, space and numbers (no symbols)
+export const textSpaceNumberAndSpecialCharater = (value) => {  
+  const noEmailOrURLRegex = /^((?!(www\.|http:\/\/|https:\/\/))[^\s@]+[^\s@]*[^@]+)$/i
+
+  let isValid 
+
+  if(noEmailOrURLRegex.test(value)){
+
+    isValid = true
+  } else {
+
+    isValid = false
+  }
+
+  return {isValid: isValid}
+}
+
+
 // regular expression that allows only letters and numbers (no symbols)
 export const textAndNumberOnly = (value) => {
   const alphanumericRegex = /^[a-zA-Z0-9]{2,}$/

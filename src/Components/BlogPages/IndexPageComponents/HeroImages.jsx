@@ -39,32 +39,37 @@ const HeroImages = ({Posts, categories, canOpen, isFetching}) => {
 
           <div className={`col-span-2 HeroImageOneOverFlow group HeroImageOne`}>
 
-            <Link to={`/single/${allPost[0]?._id}`} className={overLay()}>
-              <img src={publicFolder + allPost[0]?.postImage}  alt="Mostrecent" className="Imagetransition HeroImageOne" loading="lazy"/>
-            </Link>          
+            {allPost[0] && 
+              <>
+                <Link to={`/single/${allPost[0]?._id}`} className={overLay()}>
+                  <img src={publicFolder + allPost[0]?.postImage}  alt="Mostrecent" className="Imagetransition HeroImageOne" loading="lazy"/>
+                </Link>          
 
-            <span className="absolute lg:-top-1.5 -top-2 left-0 z-30">
-              <CategoriesComponent cat={allPost[0]?.postCategory[0]}/>
-            </span>
-
-            <span className="absolute bottom-[8%] inset-x-auto max-w-fit text-white z-30 mx-1">
-
-              <PostTitleLarge post={allPost[0]?.postTitle} postId={allPost[0]?._id}/>
-
-              {size.width > 480 &&
-
-                <span className="mt-2 inline-block lg:block lg:text-left">
-
-                  {allPost[0]?.optional?.favourite === false ? "" : 
-
-                  <span className='mr-4'>
-                    <StarComponent color={"text-white"} favourite={allPost[0]?.optional?.favourite}/>
-                  </span>}     
-
-                  <TimeComponent time={allPost[0]?.createdAt} />
+                <span className="absolute lg:-top-1.5 -top-2 left-0 z-30">
+                  <CategoriesComponent cat={allPost[0]?.postCategory[0]}/>
                 </span>
-              }
-            </span>
+
+                <span className="absolute bottom-[8%] inset-x-auto max-w-fit text-white z-30 mx-1">
+
+                  <PostTitleLarge post={allPost[0]?.postTitle} postId={allPost[0]?._id}/>
+
+                  {size.width > 480 &&
+
+                    <span className="mt-2 inline-block lg:block lg:text-left">
+
+                      {allPost[0]?.optional?.favourite === false ? "" : 
+
+                      <span className='mr-4'>
+                        <StarComponent color={"text-white"} favourite={allPost[0]?.optional?.favourite}/>
+                      </span>}     
+
+                      <TimeComponent time={allPost[0]?.createdAt} />
+                    </span>
+                  }
+                </span>
+              </>
+            }
+
           </div>
 
 

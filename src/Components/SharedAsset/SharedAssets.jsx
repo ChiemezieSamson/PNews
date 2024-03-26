@@ -15,7 +15,7 @@ export const PostTitleLarge = ({post, postId}) => (
   <h2 className="tracking-wide capitalize font-lora text-lg imgxs:text-xl md:text-lg lg:text-2xl font-bold">
 
     <Link to={`/single/${postId}`} className='cursor-pointer'  title='title'>
-      {post?.substring(0, 50)}
+      {post?.substring(0, 50)}{post.length > 50 && "..."}
     </Link>
 
   </h2>
@@ -28,7 +28,7 @@ export const PostTitleMedium = ({post, postId}) => (
   <h3 className="capitalize tracking-wide text-stone-900 font-lora md:text-base text-base imgxs:text-xl lg:text-lg font-extrabold">
 
     <Link to={`/single/${postId}`} className='hover:mainColor cursor-pointer TextHeadertransition' title="title">
-      {post?.substring(0, 50)}
+      {post?.substring(0, 50)}{post.length > 50 && "..."}
     </Link>
 
   </h3>
@@ -41,7 +41,7 @@ export const PostTitleMedium2 = ({post, postId}) => (
   <h3 className="capitalize tracking-wide font-lora text-base imgxs:text-xl md:text-lg lg:text-xl font-extrabold">
 
     <Link to={`/single/${postId}`} className='hover:mainColor cursor-pointer TextHeadertransition'  title='title'>      
-      {post?.substring(0, 50)}
+      {post?.substring(0, 50)}{post.length > 50 && "..."}
     </Link>
 
   </h3>
@@ -53,7 +53,7 @@ export const PostTitleSmall = ({post, postId}) => (
   <h4 className="capitalize font-lora tracking-wide font-extrabold text-stone-900 lg:text-base text-sm imgxs:text-base -mt-1.5 pb-1 md:text-[13px]">
 
     <Link to={`/single/${postId}`} className='hover:mainColor cursor-pointer TextHeadertransition' title='title'>
-      {post?.substring(0, 50)}
+      {post?.substring(0, 50)}{post.length > 50 && "..."}
     </Link>
 
   </h4>
@@ -737,7 +737,7 @@ export const AdminComponentColor = ({user, users}) => {
 // Post body short introduction component
 export const PostsShortInfoComponent = ({post}) => {
   const postContent =  (<Preview postContent={post}/>)
-  const textExtract = JSON.parse(postContent?.props?.postContent)?.blocks[0]?.text
+  const textExtract = postContent? JSON.parse(postContent?.props?.postContent)?.blocks[0]?.text : ""
 
   return (
     <div className="text-ellipsis prose text-stone-500 md:text-[13px] leading-[20px] text-sm imgxs:text-[15px] lg:text-base">
