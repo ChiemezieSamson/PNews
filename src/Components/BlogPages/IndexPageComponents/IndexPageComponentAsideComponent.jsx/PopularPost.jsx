@@ -53,7 +53,7 @@ const PopularPost = ({Posts, canOpen, isFetching}) => {
             
             <h4 className="font-lora tracking-wide grid grid-cols-12 text-neutral-800 lg:text-lg font-extrabold text-base md:text-sm">
 
-              <Link to={`/single/${displayedPost[0]?._id}`} className='hover:text-[#f70d28] col-span-11 TextHeadertransition'>{displayedPost[0]?.postTitle}</Link>
+              <Link to={`/single/${displayedPost[0]?._id}`} className='hover:text-[#f70d28] col-span-11 capitalize TextHeadertransition'>{displayedPost[0]?.postTitle}</Link>
 
               <span className='inline-block text-center text-4xl border-l px-2 border-solid border-[#eee] text-[#d7d7d7] col-span-1
               top-0 italic cursor-pointer'>{`${"0" + (number - 1)}`}</span>

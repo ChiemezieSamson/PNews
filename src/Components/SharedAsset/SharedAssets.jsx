@@ -14,7 +14,7 @@ export const PostTitleLarge = ({post, postId}) => (
 
   <h2 className="tracking-wide capitalize font-lora text-lg imgxs:text-xl md:text-lg lg:text-2xl font-bold">
 
-    <Link to={`/single/${postId}`} className='cursor-pointer'  title='title'>
+    <Link to={`/single/${postId}`} className='cursor-pointer'  title={post.length > 50 ? post : "title"}>
       {post?.substring(0, 50)}{post.length > 50 && "..."}
     </Link>
 
@@ -27,7 +27,7 @@ export const PostTitleMedium = ({post, postId}) => (
 
   <h3 className="capitalize tracking-wide text-stone-900 font-lora md:text-base text-base imgxs:text-xl lg:text-lg font-extrabold">
 
-    <Link to={`/single/${postId}`} className='hover:mainColor cursor-pointer TextHeadertransition' title="title">
+    <Link to={`/single/${postId}`} className='hover:mainColor cursor-pointer TextHeadertransition' title={post.length > 50 ? post : "title"}>
       {post?.substring(0, 50)}{post.length > 50 && "..."}
     </Link>
 
@@ -40,7 +40,7 @@ export const PostTitleMedium2 = ({post, postId}) => (
 
   <h3 className="capitalize tracking-wide font-lora text-base imgxs:text-xl md:text-lg lg:text-xl font-extrabold">
 
-    <Link to={`/single/${postId}`} className='hover:mainColor cursor-pointer TextHeadertransition'  title='title'>      
+    <Link to={`/single/${postId}`} className='hover:mainColor cursor-pointer TextHeadertransition'  title={post.length > 50 ? post : "title"}>      
       {post?.substring(0, 50)}{post.length > 50 && "..."}
     </Link>
 
@@ -52,7 +52,7 @@ export const PostTitleSmall = ({post, postId}) => (
 
   <h4 className="capitalize font-lora tracking-wide font-extrabold text-stone-900 lg:text-base text-sm imgxs:text-base -mt-1.5 pb-1 md:text-[13px]">
 
-    <Link to={`/single/${postId}`} className='hover:mainColor cursor-pointer TextHeadertransition' title='title'>
+    <Link to={`/single/${postId}`} className='hover:mainColor cursor-pointer TextHeadertransition' title={post.length > 50 ? post : "title"}>
       {post?.substring(0, 50)}{post.length > 50 && "..."}
     </Link>
 
