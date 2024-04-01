@@ -57,13 +57,14 @@ const HeroImages = ({Posts, categories, canOpen, isFetching}) => {
 
                     <span className="mt-2 inline-block lg:block lg:text-left">
 
+                      <TimeComponent time={allPost[0]?.createdAt} />
+
                       {allPost[0]?.optional?.favourite === false ? "" : 
 
-                      <span className='mr-4'>
-                        <StarComponent color={"text-white"} favourite={allPost[0]?.optional?.favourite}/>
-                      </span>}     
-
-                      <TimeComponent time={allPost[0]?.createdAt} />
+                        <span className='ml-4'>
+                          <StarComponent color={"text-white"} favourite={allPost[0]?.optional?.favourite}/>
+                        </span>
+                      }     
                     </span>
                   }
                 </span>

@@ -40,18 +40,19 @@ const FeaturedPosts = ({Posts, users, canOpen, categories, isFetching}) => {
 
             <span className="mt-2 mb-2 inline-block">
 
-              {allPost[0]?.optional?.favourite === false ? "" : 
-
-                <span className='mr-4 inline-block'>
-                  <StarComponent color={"text-[#f7c90d]"} favourite={allPost[0]?.optional?.favourite}/>  
-                </span>
-              }
 
               <span className='mr-4 inline-block'>
                 <AdminComponentColor user={allPost[0]?.postAuthor} users={users}/>
               </span>
 
               <TimeComponentColor time={allPost[0]?.createdAt}/>
+
+              {allPost[0]?.optional?.favourite === false ? "" : 
+
+                <span className='ml-4 inline-block'>
+                  <StarComponent color={"text-[#f7c90d]"} favourite={allPost[0]?.optional?.favourite}/>  
+                </span>
+              }
             </span>
 
             <PostsShortInfoComponent post={allPost[0]?.postContent} />

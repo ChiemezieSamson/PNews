@@ -50,19 +50,17 @@ const EntertainmentPosts = ({Posts, categories, users, Comments, canOpen, isFetc
                 <PostTitleMedium post={post?.postTitle} postId={post?._id}/>
 
                 <span className="inline-block mt-2 mb-2">
-
-                  {post?.optional?.favourite === false ? "" : 
-                  
-                    <span className='mr-4 inline-block'>
-                      <StarComponent color={"text-[#f7c90d]"} favourite={post?.optional?.favourite}/>  
-                    </span>
-                  }
-
                   <span className='mr-4 inline-block'>
                     <AdminComponentColor user={post?.postAuthor} users={users}/>
                   </span>
 
                   <TimeComponentColor time={post?.createdAt} />          
+                  {post?.optional?.favourite === false ? "" : 
+                  
+                    <span className='ml-4 inline-block'>
+                      <StarComponent color={"text-[#f7c90d]"} favourite={post?.optional?.favourite}/>  
+                    </span>
+                  }
                 </span>
 
                 <PostsShortInfoComponent post={post?.postContent} />  

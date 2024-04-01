@@ -7,7 +7,7 @@ const TrendingCommentsLatest = ({posts, Comments, action, isFetching}) => {
   const [newPosts, setNewPosts] = useState([])
   const [text, setText] = useState("")
 
-  const TrendingPosts = action && posts?.filter(post => post?.optional?.trending === true)
+  const TrendingPosts = action && posts?.sort(() => Math.random() - 0.5)?.filter(post => post?.optional?.trending === true)
 
   const ref = useRef()
   const ref2 = useRef()
