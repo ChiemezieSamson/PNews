@@ -2,9 +2,10 @@
 const useParentcategories = (parent, categories, Posts, canOpen) => {
   const uniqueItems = new Map(); // used in making sure that a unqui array is returned
   const FindParentArray = canOpen && categories[parent]?.category
+  const CopiedPosts =  canOpen &&  [...Posts]
   const newPost = []
   
-  canOpen && Posts?.filter(post => {
+  canOpen && CopiedPosts?.sort(() => Math.random() - 0.5)?.filter(post => {
 
     for (const category of FindParentArray) {
 

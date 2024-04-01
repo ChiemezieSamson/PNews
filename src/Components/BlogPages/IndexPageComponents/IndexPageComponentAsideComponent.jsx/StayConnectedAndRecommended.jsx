@@ -8,7 +8,6 @@ const Recommended = ({Posts, canOpen, isFetching}) => {
     <section className='mt-2.5'>
 
       <>
-
         <MainDivider firstletter={"Stay Connected"} />
 
         <div className='pt-1'>

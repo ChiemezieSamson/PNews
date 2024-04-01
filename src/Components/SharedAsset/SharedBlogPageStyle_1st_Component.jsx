@@ -6,6 +6,7 @@ import { AdminComponent, CategoriesComponent, HomeLink, isFecthingStyle, NavDire
 import { Link } from 'react-router-dom';
 import { publicFolder } from '../../data';
 import { HeroOneThreeImageSpinner } from './Spinners/Spinner';
+import ImageBg from "./../../asset/images/imagebg.jpg"
 
 // Hero Image component for Book, Lifestyle, Qute, Category etc
 export const SharedBlogPageStyleOne = ({Posts, users, canOpen, isFetching}) => {
@@ -22,7 +23,7 @@ export const SharedBlogPageStyleOne = ({Posts, users, canOpen, isFetching}) => {
               <div className={`HeroImageOneOverFlow group HeroImageOne md:col-span-4`}>
 
                 <Link to={`/single/${Posts[0]?._id}`} className={overLay()}>
-                  <img src={publicFolder + Posts[0]?.postImage || null} alt="Post" className="Imagetransition HeroImageOne" loading="lazy"/>
+                  <img src={Posts[0]?.postImage ? publicFolder + Posts[0]?.postImage : ImageBg} alt="Post" className="Imagetransition HeroImageOne" loading="lazy"/>
                 </Link>            
                         
                 <span className="bottom-[14%] md:bottom-[14%] lg:bottom-[8%] ImageTextTranslateY">   
@@ -48,7 +49,7 @@ export const SharedBlogPageStyleOne = ({Posts, users, canOpen, isFetching}) => {
                       <li key={post?._id} className="HeroImageMultipleListOverFlow group md:first:col-span-2 md:last:col-span-1 HeroImageMultipleList">
 
                         <Link to={`/single/${post?._id}`} className={overLay()}>
-                          <img src={publicFolder + post?.postImage} alt="IndexImage" className="Imagetransition HeroImageMultipleList" loading="lazy"/>
+                          <img src={post?.postImage ? publicFolder + post?.postImage : ImageBg} alt="IndexImage" className="Imagetransition HeroImageMultipleList" loading="lazy"/>
                         </Link>                  
                       
                         <span className="ImageTextTranslateY bottom-[35%] md:bottom-[14%] lg:bottom-[10%]">
@@ -113,7 +114,7 @@ export const GeneralCategorisePages = ({ThreeFirstPost, Comments, commentaction,
       
       <div className='md:grid md:grid-cols-3'>
         <div className="md:col-span-2 md:mr-[3%]">
-          <NavDirectionAndPageName/>
+          <NavDirectionAndPageName users={users}/>
         
           {/* Posts display component */}
           <PagesBlogPostComponent 

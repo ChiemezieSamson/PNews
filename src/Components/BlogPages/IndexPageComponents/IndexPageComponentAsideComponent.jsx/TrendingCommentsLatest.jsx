@@ -81,7 +81,26 @@ const TrendingCommentsLatest = ({posts, Comments, action, isFetching}) => {
 
     if(ClickedHead.textContent === "Latest") {
 
-      setNewPosts(() => posts?.slice(0, 4))
+      // Convert the updatedAt strings to Date objects
+      const postsWithDates = posts.map(post => ({
+        ...post,
+        updatedAt: new Date(post.updatedAt)
+      }));
+
+      // Find the most recent post
+      const mostRecentPost = postsWithDates.reduce((acc, curr) => {
+        return curr.updatedAt > acc.updatedAt ? curr : acc;
+      });
+
+      // Calculate the 30-day threshold
+      const thirtyDaysAgo = new Date();
+      thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
+
+      // Filter out posts older than 30 days
+      const recentPosts = postsWithDates.filter(post => post.updatedAt >= thirtyDaysAgo);
+
+      const finalResult = mostRecentPost[0] ? mostRecentPost?.slice(0, 4) : recentPosts[0] ? recentPosts?.slice(0, 4) : posts?.slice(0, 4)
+      setNewPosts(() => finalResult)
       setText(() => "Latest")
     }
   }

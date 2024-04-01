@@ -4,13 +4,13 @@ import { Link } from 'react-router-dom'
 import { useGetPostsByQueryQuery } from '../../../../../Reduxstore/Slices/posts/PostsSlice'
 import { ImageTopTitleTimeDownSpinner, SinglePostPreviousNextButtonSpinner, SkeletonTextFour } from '../../../../SharedAsset/Spinners/Spinner'
 import userAvatar from "../../../../../asset/images/user-avatar.png"
+import ImageBg from "./../../../../../asset/images/imagebg.jpg"
 
 
 const PreviousNextPost = ({post, User, canOpen, size, onAnyIsfetching}) => {
   const {data: posts = [], isFetching, isSuccess} = useGetPostsByQueryQuery(`?category=${canOpen && (post?.postCategory[0])}`)
  
   const Posts = posts.posts
-  const userSocialMedia = []
 
   let Id 
   let SimilarPost
@@ -24,17 +24,6 @@ const PreviousNextPost = ({post, User, canOpen, size, onAnyIsfetching}) => {
     start = Id + 6 > SimilarPost?.length ? 0 : Id
     end = Id + 6 > SimilarPost?.length ? 6 : Id + 6      
   }
-
-  SocialMediaIcons.forEach(social => {
-
-    if(canOpen) {
-      if (User?.socialLinks[social.name]) {
-        social.link = User?.socialLinks[social.name]
-        userSocialMedia.push(social)
-      }
-    }
-  })
-
 
   return (
     <div className="p-2">
@@ -96,11 +85,10 @@ const PreviousNextPost = ({post, User, canOpen, size, onAnyIsfetching}) => {
             <div className='skeleton rounded-full w-[80px] h-20'></div>
           }
         </span>
-
+          
         <div className='col-span-5'>
 
           <span className={isFecthingStyle(onAnyIsfetching || isFetching)}>
-
             <Link to={`/categories?user=${canOpen && (User?._id)}`} className='mb-2.5 inline-block text-lg font-bold'>
 
               {canOpen ?
@@ -124,13 +112,13 @@ const PreviousNextPost = ({post, User, canOpen, size, onAnyIsfetching}) => {
 
           <ul className="pt-1 list-none m-0 p-0 inline-block">
 
-            {userSocialMedia?.map((icon) => {
+            {SocialMediaIcons?.map((icon) => {
 
               return (
 
                 <li key={icon?.id} className="inline-block first:pl-0 last:pr-0 group cursor-pointer" title={icon?.name}>
 
-                  <a href={icon?.link} target="_blank" rel={"noreferrer"} className={`no-underline mx-1.5 text-xl ${icon?.socialLinks} leading-3 
+                  <a href={User?.socialLinks[icon.name]} target="_blank" rel={"noreferrer"} className={`no-underline mx-1.5 text-xl ${icon?.socialLinks} leading-3 
                     group-hover:text-white TextHeadertransition inline-block relative after:absolute after:inset-0 after:z-10`}>
 
                     {icon?.icon}
@@ -163,7 +151,7 @@ const PreviousNextPost = ({post, User, canOpen, size, onAnyIsfetching}) => {
                   <div className="mb-1 topRetangleImage relative">   
 
                     <Link to={`/single/${post?._id}`}>
-                      <img src={publicFolder + post?.postImage} alt={"posts"} className="topRetangleImage" loading="lazy"/>
+                      <img src={post?.postImage ? publicFolder + post?.postImage : ImageBg} alt={"posts"} className="topRetangleImage aspect-video" loading="lazy"/>
                     </Link>
 
                     <CategoriesComponentBotton cat={post?.postCategory[0]} />                              

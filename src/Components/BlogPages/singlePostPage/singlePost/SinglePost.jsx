@@ -363,7 +363,7 @@ const SinglePost = () => {
 
               {canOpen ? 
 
-                <Preview postContent={Post?.postContent}/>
+                <Preview postContent={Post?.postContent} textSize={textSize}/>
                 :
                 <SinglePostSpinner />
               }

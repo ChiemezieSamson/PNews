@@ -12,8 +12,9 @@ import {
 	FaYoutube,
 } from "react-icons/fa";
 
-export const publicFolder = "http://localhost:5001/images/";
-// "https://pnews-uxov.onrender.com/images/";
+export const publicFolder = "https://pnews-uxov.onrender.com/images/";
+// "http://localhost:5001/images/";
+// "proxy": "http://localhost:5001/api",
 
 export const parentCategoriesAndTags = [
 	"books",
@@ -33,7 +34,7 @@ export const SocialMediaIcons = [
 			 group-hover:bg-[#e4405f]"
 			/>
 		),
-		link: "https://www.instagram.com",
+		link: "https://www.instagram.com/pnews",
 		socialLinks: "text-[#e4405f]",
 		number: 87.1 + "k",
 		text: "Followers",
@@ -49,7 +50,7 @@ export const SocialMediaIcons = [
 			 group-hover:bg-[#4267B2]"
 			/>
 		),
-		link: "https://www.facebook.com",
+		link: "https://www.facebook.com/pnews",
 		socialLinks: "text-[#4267B2]",
 		number: 649,
 		text: "Followers",
@@ -65,7 +66,7 @@ export const SocialMediaIcons = [
 			 group-hover:bg-[#1DA1F2]"
 			/>
 		),
-		link: "https://twitter.com",
+		link: "https://twitter.com/pnews",
 		socialLinks: "text-[#1DA1F2]",
 		number: 23.7 + "k",
 		text: "Followers",
@@ -81,7 +82,7 @@ export const SocialMediaIcons = [
 			 group-hover:bg-[#FF0000]"
 			/>
 		),
-		link: "https://www.youtube.com/",
+		link: "https://www.youtube.com/pnews",
 		socialLinks: "text-[#FF0000]",
 		number: 25.7 + "k",
 		text: "Followers",
@@ -97,7 +98,7 @@ export const SocialMediaIcons = [
 			 group-hover:bg-[#0e76a8]"
 			/>
 		),
-		link: "https://www.linkedin.com/",
+		link: "https://www.linkedin.com/pnews",
 		socialLinks: "text-[#0e76a8]",
 		number: 28.7 + "k",
 		text: "Followers",
@@ -113,7 +114,6 @@ export const SocialMediaIcons = [
 			 group-hover:bg-[#ff6f00]"
 			/>
 		),
-		link: "@https://www.mywebsite@&&.com/",
 		socialLinks: "text-[#ff6f00]",
 		number: 99,
 		text: "Subscribers",
@@ -165,12 +165,12 @@ export const ContactInfo = [
 	{
 		id: 1,
 		icon: <FaMapMarkerAlt className="inline-block" />,
-		text: "639,Longmei Avenue Jiangning Campus, Nanjing",
+		text: "Pnews Headquarters 123 Main Street, Seoul, South Korea",
 	},
 	{
 		id: 2,
 		icon: <FaPhoneAlt className="inline-block" />,
-		text: "(0361) 888 1234",
+		text: "+1 (555) 123-4567",
 	},
 	{
 		id: 3,
@@ -180,7 +180,7 @@ export const ContactInfo = [
 	{
 		id: 4,
 		icon: <FaEnvelope className="inline-block" />,
-		text: "contact@yourwebsite.com",
+		text: "info@pnews.com",
 	},
 	{
 		id: 5,

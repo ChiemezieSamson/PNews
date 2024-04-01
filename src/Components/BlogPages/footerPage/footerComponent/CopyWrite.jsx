@@ -11,7 +11,7 @@ const CopyWrite = () => {
       <div className='grid text-center grid-flow-row xs:grid-flow-col content-center xs:justify-between pb-7 pt-3 '>
 
         <small className='order-last xs:order-first font-round text-neutral-300 text-xs pt-1.5 xs:pt-1'>
-          &copy; 2022-Blog posts by <span className='text-neutral-100'> Nebe-Samson.</span>
+          &copy; 2021-Blog posts by <span className='text-neutral-100'> PNews.</span>
         </small>
 
         <ul>

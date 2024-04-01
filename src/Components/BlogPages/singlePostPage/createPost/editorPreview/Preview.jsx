@@ -35,7 +35,7 @@ const Preview = ({editorText, postContent}) => {
 
   return (
     <>
-     <div dangerouslySetInnerHTML={handleMarkUp(convertedContent)} className="editor"></div>
+     <div dangerouslySetInnerHTML={handleMarkUp(convertedContent)} className={`editor`}></div>
     </>
   )
 }

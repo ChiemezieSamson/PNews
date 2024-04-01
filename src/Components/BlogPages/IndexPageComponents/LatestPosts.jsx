@@ -4,6 +4,7 @@ import { MainDivider, isFecthingStyle } from '../../SharedAsset/SharedAssets'
 import PaginationFunctions from '../PaginationComponents/PaginationControl/PaginationFunctions/PaginationFunctions'
 
 const LatestPosts = ({Posts, isFetching, canOpen, currentPage, totalPages}) => {
+  const CopiedPosts =  canOpen && [...Posts]
             
   return (
     <section className={`mt-2.5`}>
@@ -13,7 +14,7 @@ const LatestPosts = ({Posts, isFetching, canOpen, currentPage, totalPages}) => {
       <div className={`mt-3 ${isFecthingStyle(isFetching)}`}>
         
         <JustTimeComponetCatBlockStar 
-          Posts={Posts} 
+          Posts={canOpen && CopiedPosts.sort(() => Math.random() - 0.5)} 
           grid={"imgxs:grid imgxs:grid-cols-2 gap-x-[2%]"}
           canOpen={canOpen}
         /> 

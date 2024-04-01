@@ -24,7 +24,7 @@ export const JustTimeComponet = ({Posts, Comments, action}) => {
                 <div className="col-span-1 max-h-16 sm:max-h-24 sm:col-span-2 mb-1 mr-1">
 
                   <Link to={`/single/${post?._id}`}>
-                    <img src={publicFolder + post?.postImage} alt={"posts"} className="max-h-16 sm:max-h-24" loading="lazy"/>
+                    <img src={post?.postImage ? publicFolder + post?.postImage : "../../../asset/images/imagebg.jpg"} alt={"posts"} className="max-h-16 sm:max-h-24" loading="lazy"/>
                   </Link>
                 </div>
 
@@ -75,7 +75,7 @@ export const JustTimeComponetStar = ({Posts, grid, action}) => {
                 <div className="col-span-1 max-h-16 sm:max-h-24 sm:col-span-2 mb-1 mr-1">
                   
                   <Link to={`/single/${post?._id}`}>
-                    <img src={publicFolder + post?.postImage} alt={"posts"} className="max-h-16 sm:max-h-24" loading="lazy"/>
+                    <img src={post?.postImage ? publicFolder + post?.postImage : "../../../asset/images/imagebg.jpg"} alt={"posts"} className="max-h-16 sm:max-h-24" loading="lazy"/>
                   </Link>
                 </div>
 
@@ -84,15 +84,14 @@ export const JustTimeComponetStar = ({Posts, grid, action}) => {
                   <PostTitleSmall post={post?.postTitle} postId={post?._id}/>
 
                   <span className='inline-block'>
+                    <TimeComponentColor time={post?.createdAt}/>
 
                     {post?.optional?.favourite === false ? "" :
 
-                      <span className='mr-4'>
+                      <span className='ml-4'>
                         <StarComponent color={"text-[#f7c90d]"} favourite={post?.optional?.favourite}/>
                       </span>
                     }
-
-                    <TimeComponentColor time={post?.createdAt}/>
                   </span>
                 </div>
               </li>
@@ -130,7 +129,7 @@ export const JustTimeComponetCatBlockStar = ({Posts, grid, canOpen}) => {
                 <div className="mb-1 relative topRetangleImage">
 
                   <Link to={`/single/${post?._id}`}>
-                    <img src={publicFolder + post?.postImage} alt={"posts"} className="topRetangleImage" loading="lazy"/>
+                    <img src={post?.postImage ? publicFolder + post?.postImage : "../../../asset/images/imagebg.jpg"} alt={"posts"} className="topRetangleImage" loading="lazy"/>
                   </Link>
 
                   <CategoriesComponentBotton cat={post?.postCategory[0]} />
@@ -141,15 +140,14 @@ export const JustTimeComponetCatBlockStar = ({Posts, grid, canOpen}) => {
                   {size.width < 768 && size.width > 480 ? <PostTitleSmall post={post?.postTitle} postId={post?._id}/> : <PostTitleMedium post={post?.postTitle} postId={post?._id}/> }
 
                   <span className='mt-1'>
+                    <TimeComponentColor time={post?.createdAt} />
 
                     {post?.optional?.favourite === false ? "" : 
 
-                      <span className='mr-4 inline-block'>
+                      <span className='ml-4 inline-block'>
                         <StarComponent color={"text-[#f7c90d]"} favourite={post?.optional?.favourite}/>
                       </span>
                     }
-
-                    <TimeComponentColor time={post?.createdAt} />
                   </span>              
                 </div>
               </li>
@@ -187,7 +185,7 @@ export const PagesBlogPostComponent = ({Posts, users, Comments, currentPage, tot
                 <div className="mr-[2%] col-span-2 md:col-span-1 max-h-36 sm:max-h-48 lg:max-h-60">
 
                   <Link to={`/single/${post?._id}`}>
-                    <img src={publicFolder + post?.postImage} alt={"game"} className="max-h-36 sm:max-h-48 lg:max-h-60" loading="lazy"/>
+                    <img src={post?.postImage ? publicFolder + post?.postImage : "../../../asset/images/imagebg.jpg"} alt={"game"} className="max-h-36 sm:max-h-48 lg:max-h-60" loading="lazy"/>
                   </Link>
 
                 </div>
@@ -202,18 +200,18 @@ export const PagesBlogPostComponent = ({Posts, users, Comments, currentPage, tot
                       <AdminComponentColor user={post?.postAuthor} users={users}/>
                     </span>
 
-                    {post?.optional?.favourite === false ? "" : 
-                    
-                      <span className='mr-4'>
-                        <StarComponent color={"text-[#f7c90d]"} favourite={post?.optional?.favourite}/>  
-                      </span>
-                    }
-
-                    <div className='mr-4 xs:hidden block'></div>
-                    
                     <span className='mr-4'>
                       <TimeComponentColor time={post?.createdAt}/>
                     </span>
+
+                    <div className='mr-4 xs:hidden block'></div>
+                    
+                    {post?.optional?.favourite === false ? "" : 
+                    
+                    <span className='mr-4'>
+                      <StarComponent color={"text-[#f7c90d]"} favourite={post?.optional?.favourite}/>  
+                    </span>
+                  }
 
                     <CommentComponetColor Comments={Comments} postId={post?._id}/>
                   </span>

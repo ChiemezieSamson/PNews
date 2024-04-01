@@ -197,7 +197,7 @@ const CreatePostAside = ({postTitle, handleAllPostContent, handleSetPostAuthor, 
             shadow-stone-700 shadow-sm TextHeadertransition disabled:opacity-40' 
             type='submit' 
             form="post_form" 
-            disabled={!canSave || !userAction || isFetching}
+            disabled={!canSave || !userAction || isFetching || preview}
             onClick={handleDispatched}
           >Publish</button>
         </span>

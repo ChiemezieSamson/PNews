@@ -42,7 +42,7 @@ const HeroImages = ({Posts, categories, canOpen, isFetching}) => {
             {allPost[0] && 
               <>
                 <Link to={`/single/${allPost[0]?._id}`} className={overLay()}>
-                  <img src={publicFolder + allPost[0]?.postImage}  alt="Mostrecent" className="Imagetransition HeroImageOne" loading="lazy"/>
+                  <img src={allPost[0]?.postImage ? publicFolder + allPost[0]?.postImage :  "../../../asset/images/imagebg.jpg"}  alt="Mostrecent" className="Imagetransition HeroImageOne" loading="lazy"/>
                 </Link>          
 
                 <span className="absolute lg:-top-1.5 -top-2 left-0 z-30">
@@ -84,7 +84,7 @@ const HeroImages = ({Posts, categories, canOpen, isFetching}) => {
                   <li key={post?._id + index} className={`HeroImageMultipleListOverFlow first:mt-0 md:mt-1 group HeroImageMultipleList`}>
 
                     <Link to={`/single/${post?._id}`} className={overLay()}>
-                      <img src={publicFolder + post?.postImage} alt="IndexImage" className="Imagetransition HeroImageMultipleList" loading="lazy"/>
+                      <img src={post?.postImage ? publicFolder + post?.postImage : "../../../asset/images/imagebg.jpg"} alt="IndexImage" className="Imagetransition HeroImageMultipleList" loading="lazy"/>
                     </Link>
 
                     <span className='absolute lg:-top-1.5 -top-2 left-0 z-30'>

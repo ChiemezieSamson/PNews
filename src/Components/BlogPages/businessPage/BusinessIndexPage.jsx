@@ -40,7 +40,7 @@ const BusinessIndexPage = () => {
                     md:last:col-start-6 md:last:col-end-8 md:last:row-start-4 md:last:row-end-7 relative group">
 
                   <Link to={`/single/${post?._id}`}  className={overLay()}>
-                    <img src={publicFolder + post?.postImage} alt="post"  loading="lazy"/>
+                    <img src={post?.postImage ? publicFolder + post?.postImage : "../../../asset/images/imagebg.jpg"} alt="post"  loading="lazy"/>
                   </Link>
 
                   <span className="text-white absolute -top-[6px] left-0 z-30 max-w-fit inset-x-auto">

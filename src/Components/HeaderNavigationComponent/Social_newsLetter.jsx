@@ -166,7 +166,7 @@ const SocialNewsletter = ({opensidebar, user, userAction, isFetching, userisSucc
           {/* user profile image serving as a linke to he user page */}
           {(userisSuccess &&  buttonText !== "LogOut") &&
             <Link to={"/userpage"} className={`rounded-full m-0 inline-block fixed left-px top-2 lg:inset-auto z-[500] bg-stone-100  ${isFecthingStyle(isFetching)}`}
-              title="user profile">
+              title={`${user?.username} profile`}>
                 {userAction ?
                   <img src={user?.profileImage ? publicFolder + user?.profileImage : userAvatar} alt="userImage" className="rounded-full border border-solid
                   border-rose-400 p-px m-0 object-cover object-center cursor-pointer max-w-[3rem] w-screen max-h-[3rem] mx-auto"/>

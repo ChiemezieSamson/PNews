@@ -20,19 +20,43 @@ const About = () => {
           <div>
             <div  className='py-4 prose text-lg'>
               <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur laudantium, culpa quam voluptates vel ullam officiis officia tempore voluptatibus quia! Perspiciatis fugiat officia illo quaerat labore deleniti odio saepe veniam. 
+                Pnews is a leading online news and media platform dedicated to delivering accurate, timely, and unbiased information to a global audience. Established in 2021, 
+                our mission is to empower people with knowledge and foster a well-informed society.
               </p>
 
+              <h4>Our Team</h4>
               <p>              
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Hic reprehenderit, earum exercitationem quas aliquam enim vitae quaerat, dolores quos iure debitis doloremque voluptatum magnam alias tempora quisquam eum dolor autem.
+                Behind Pnews is a team of passionate journalists, editors, and media professionals who are committed to upholding the highest standards of journalism. 
+                Our reporters are based around the world, providing on-the-ground coverage of major events and uncovering stories that matter. With diverse backgrounds 
+                and expertise, our team brings a wealth of experience and perspectives to every story we publish
               </p>
 
+              <h4>Our Approach</h4>
               <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Consectetur laudantium, culpa quam voluptates vel ullam officiis officia tempore voluptatibus quia! Perspiciatis fugiat officia illo quaerat labore deleniti odio saepe veniam.
+                At Pnews, we believe in the power of honest and ethical journalism. Our writers and editors strive to present well-researched, fact-based articles that 
+                offer multiple viewpoints on complex issues. We value transparency and accountability, and we are committed to correcting any errors or inaccuracies promptly.
               </p>
 
+              <h4>Our Values</h4>
+              <ul>
+                <li>
+                  <strong>Integrity:</strong>We uphold the highest ethical standards in our reporting, ensuring accuracy, fairness, and objectivity.
+                </li>
+                <li>
+                  <strong>Independence:</strong>Our editorial decisions are free from external influences, allowing us to report without fear or favor.
+                </li>
+                <li>
+                  <strong>Credibility:</strong>We strive to be a trusted source of information by consistently delivering high-quality, well-sourced content.
+                </li>
+                <li>
+                  <strong>Innovation:</strong>We embrace technological advancements and continuously explore new ways to enhance our storytelling and reader experience.
+                </li>
+              </ul>
+
+              <h4>Our Commitment</h4>
               <p>              
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Hic reprehenderit, earum exercitationem quas aliquam enim vitae quaerat, dolores quos iure debitis doloremque voluptatum magnam.
+                Pnews is dedicated to serving the public interest by providing reliable news and information that empowers individuals to make informed decisions. We aim to foster 
+                a well-informed society by promoting transparency, encouraging critical thinking, and facilitating open dialogue on important issues.
               </p>              
             </div>                     
           </div>

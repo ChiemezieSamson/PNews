@@ -30,7 +30,7 @@ const FeaturedPosts = ({Posts, users, canOpen, categories, isFetching}) => {
             <div className="relative mt-1.5 mb-2 topRetangleImage">
 
               <Link to={`/single/${allPost[0]?._id}`}>
-                <img src={publicFolder + allPost[0]?.postImage} alt={"game"} className="topRetangleImage" loading="lazy"/>
+                <img src={allPost[0]?.postImage ? publicFolder + allPost[0]?.postImage : "../../../asset/images/imagebg.jpg"} alt={"game"} className="topRetangleImage" loading="lazy"/>
               </Link>
 
               <CategoriesComponentBotton cat={allPost[0]?.postCategory[0]} />

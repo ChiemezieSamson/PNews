@@ -253,7 +253,7 @@ const UpdatePostAsideComponent = ({postTitle, handleAllPostContent, handleSetPos
             type='submit' 
             form="post_form" 
             onClick={handleDispatched}
-            disabled={!canSave || !userAction || isFetching}
+            disabled={!canSave || !userAction || isFetching || preview}
           >Publish</button>
         </span>
 

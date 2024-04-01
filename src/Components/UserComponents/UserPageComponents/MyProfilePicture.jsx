@@ -133,7 +133,7 @@ const MyProfilePicture = ({user, userAction, isFetching}) => {
           {userAction ? 
           <>
             {file ? 
-              <img  src={URL?.createObjectURL(file)} alt="userprofileimage" className='max-h-52' loading="lazy"/> 
+              <img  src={file ? URL?.createObjectURL(file) : userAvatar} alt="userprofileimage" className='max-h-52' loading="lazy"/> 
               :
               <img src={profileImage ? publicFolder + profileImage : userAvatar} alt="userprofileimage" className='max-h-52' loading="lazy"/>
             }

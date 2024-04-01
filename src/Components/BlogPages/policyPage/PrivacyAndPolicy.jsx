@@ -12,7 +12,7 @@ const PrivacyAndPolicy = () => {
       <article className='mt-12 xl:max-w-[60%] prose-lg'>
         
         <p>
-          <strong>Chinonye Privacy Policy</strong>
+          <strong>Pnews Privacy Policy</strong>
         </p>
 
         <p>
@@ -221,7 +221,7 @@ const PrivacyAndPolicy = () => {
 
       <span className='py-4 inline-block prose-lg'>
         <span className='py-4 inline-block'>
-          Yourcontact@example.com
+          info@pnews.com
         </span>
         <br />
         <span className='py-4 inline-block'>

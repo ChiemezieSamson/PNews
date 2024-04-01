@@ -44,7 +44,7 @@ const PopularPost = ({Posts, canOpen, isFetching}) => {
           <div className="pt-3.5 my-1 md:max-h-44 lg:max-h-52 xl:max-h-60">
 
             <Link to={`/single/${displayedPost[0]?._id}`}>
-              <img src={publicFolder + displayedPost[0]?.postImage} alt={"posts"} className="md:max-h-44 lg:max-h-52 xl:max-h-60" loading="lazy"/>
+              <img src={displayedPost[0]?.postImage ? publicFolder + displayedPost[0]?.postImage : "../../../../asset/images/imagebg.jpg"} alt={"posts"} className="md:max-h-44 lg:max-h-52 xl:max-h-60" loading="lazy"/>
             </Link>
 
           </div>

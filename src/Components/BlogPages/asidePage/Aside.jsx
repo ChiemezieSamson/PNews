@@ -21,7 +21,7 @@ const Aside = ({Comments, commentaction}) => {
         <PagesDivider text={"Stay Connected"} />
       </div>
      
-      {/* the social media component main oweren of the site */}
+      {/* the social media component main owner of the site */}
       <SocialLinks />
 
       <NewsLetter />
@@ -44,7 +44,7 @@ const Aside = ({Comments, commentaction}) => {
             <div className='text-white relative mt-4 mb-7'>
             
               <Link to={`/single/${Posts[0]?._id}`} className='topRetangleImage block after:absolute after:inset-0 after:bg-neutral-700/20'>                
-                <img src={publicFolder + Posts[0]?.postImage} alt="recentPost" className="topRetangleImage" loading="lazy"/>
+                <img src={Posts[0]?.postImage ? publicFolder + Posts[0]?.postImage : "../../../asset/images/imagebg.jpg"} alt="recentPost" className="topRetangleImage" loading="lazy"/>
               </Link>        
               
               <span className="absolute bottom-[8%] inset-x-0 z-20 max-w-fit mx-1">

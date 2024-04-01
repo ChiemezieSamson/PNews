@@ -14,8 +14,8 @@ export const PostTitleLarge = ({post, postId}) => (
 
   <h2 className="tracking-wide capitalize font-lora text-lg imgxs:text-xl md:text-lg lg:text-2xl font-bold">
 
-    <Link to={`/single/${postId}`} className='cursor-pointer'  title={post.length > 50 ? post : "title"}>
-      {post?.substring(0, 50)}{post.length > 50 && "..."}
+    <Link to={`/single/${postId}`} className='cursor-pointer'  title={post.length > 80 ? post : "title"}>
+      {post?.substring(0, 80)}{post.length > 80 && "..."}
     </Link>
 
   </h2>
@@ -548,7 +548,7 @@ export const NewsLetter = ({textColor, margin}) => {
       </form>
 
       <small className={`${textColor ? textColor : "text-stone-700"} block text-sm tracking-wide before:content-['*'] before:ml-0.5 before:text-lg before:text-red-500 before:pr-2`}>
-        we hate spam as much as you do
+        We hate spam as much as you do
       </small>
     </div>
   )
@@ -556,7 +556,7 @@ export const NewsLetter = ({textColor, margin}) => {
 
 
 // single page introduction newletter component
-export const NavDirectionAndPageName = () => {
+export const NavDirectionAndPageName = ({users}) => {
   const location = useLocation() 
   let page
   let pages
@@ -573,18 +573,23 @@ export const NavDirectionAndPageName = () => {
     let path = location.search.replace(/[?=]/g, ",")
     let searchReturned = path.split(",")[path.split(",").length - 1]
 
-    search = searchReturned.replace(/[%]\d+/g, " ")
+    if(path.split(",")[1] === "user") {
+      search = users?.find(user => user._id === searchReturned)
+    } else {
+
+      search = searchReturned.replace(/[%]\d+/g, " ")
+    }
   }
 
   return (
     <>
       <span className="inline-block mb-5 mt-8">
 
-        <small>Home {pages} {search && 
-        <span> &gt; {search} </span>}</small>
+        <small className='capitalize'>Home {pages} {search && 
+        <span> &gt; {search?.username ? search?.username : search} </span>}</small>
       </span>
       
-      <h2 className="font-black font-round tracking-wide text-3xl">
+      <h2 className="font-black font-round tracking-wide text-3xl capitalize">
         <strong>
           {page !== "pages" ? page : ""}
         </strong> 
@@ -708,7 +713,7 @@ export const AdminComponent = ({user, users}) => {
     title='post admin'
     >
       By
-      <span className="cursor-pointer"> {adminName?.username ? adminName.username : " Admin"}</span>
+      <span className="cursor-pointer capitalize"> {adminName?.username ? adminName.username : " Admin"}</span>
     </Link>
   )
 }
@@ -728,7 +733,7 @@ export const AdminComponentColor = ({user, users}) => {
       title='post admin'
     >
       By
-      <span className="mainColor cursor-pointer"> {adminName?.username ? adminName.username : "Admin"}</span>
+      <span className="mainColor cursor-pointer capitalize"> {adminName?.username ? adminName.username : "Admin"}</span>
     </Link>
   )
 }

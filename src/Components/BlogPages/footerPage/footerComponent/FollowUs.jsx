@@ -16,9 +16,7 @@ const FollowUs = () => {
 
 
       <p className='font-round text-neutral-300 md:text-xs text-xs xxs:text-sm lg:text-sm my-4'>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
-        mollitia ea adipisci sequi ipsam pariatur iusto tempore
-        dignissimos perspiciatis.
+        Our mission is to provide you with a comprehensive and reliable source of information, delivering the latest news, insightful analysis, and captivating stories from across the globe.
       </p>
       
       <b className='my-3 inline-block capitalize text-neutral-300 font-bold'>Follow Us</b>

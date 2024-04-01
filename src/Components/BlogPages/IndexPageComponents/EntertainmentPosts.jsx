@@ -41,7 +41,7 @@ const EntertainmentPosts = ({Posts, categories, users, Comments, canOpen, isFetc
                 <div className="relative mb-2 topRetangleImage">
 
                   <Link to={`/single/${post?._id}`}>
-                    <img src={publicFolder + post?.postImage} alt={"game"} className="topRetangleImage" loading="lazy"/>
+                    <img src={post?.postImage ? publicFolder + post?.postImage : "../../../asset/images/imagebg.jpg"} alt={"game"} className="topRetangleImage" loading="lazy"/>
                   </Link>
 
                   <CategoriesComponentBotton cat={post?.postCategory[0]} />
@@ -103,7 +103,7 @@ const EntertainmentPosts = ({Posts, categories, users, Comments, canOpen, isFetc
                 <div className="imgxs:col-span-2 col-span-1 mr-[2%] max-h-24 imgxs:max-h-32 sm:max-h-40 lg:max-h-44">
 
                   <Link to={`/single/${post?._id}`}>
-                    <img src={publicFolder + post?.postImage} alt={"game"} className="max-h-24 imgxs:max-h-32 sm:max-h-40 lg:max-h-44" loading="lazy"/>
+                    <img src={post?.postImage ? publicFolder + post?.postImage : "../../../asset/images/imagebg.jpg"} alt={"game"} className="max-h-24 imgxs:max-h-32 sm:max-h-40 lg:max-h-44" loading="lazy"/>
                   </Link>
                 </div>
 

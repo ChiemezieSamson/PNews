@@ -151,7 +151,7 @@ const Personal = () => {
             />
 
             <p className="mt-0.5 hidden peer-invalid:block text-red-400 text-sm">
-                Please provide your first name.
+              Please provide your first name.
             </p>
 
             <CorrectTick 
@@ -233,8 +233,7 @@ const Personal = () => {
 
 
         {/* The login password and email  */}
-        <div className=' mt-5'>
-
+        <div className='mt-5'>
           <UserInfoHeading head={"Login"} text={"Your Login Credentials"}/>
         </div>
 
@@ -291,7 +290,7 @@ const Personal = () => {
               />
 
               <p className="mt-0.5 hidden peer-invalid:block text-red-400 text-sm">
-              Please provide a valid password.
+                Please provide a valid password.
               </p>
 
               <CorrectTick 

@@ -79,7 +79,7 @@ const ImageComponent = ({Posts, canOpen, isFetching}) => {
                 <li key={post?._id} className={`relative snap-start m-0 mr-0.5 last:mr-0 p-0 group overflow-clip max-h-80 min-w-[300px]`}>
 
                   <Link to={`/single/${post?._id}`} className={overLay()}>
-                    <img src={publicFolder + post?.postImage} alt="IndexImage"  className="scale-100 group-hover:scale-110 Imagetransition max-h-80 min-w-[300px]" loading="lazy"/>         
+                    <img src={post?.postImage ? publicFolder + post?.postImage : "../../../asset/images/imagebg.jpg"} alt="IndexImage"  className="scale-100 group-hover:scale-110 Imagetransition max-h-80 min-w-[300px] aspect-square" loading="lazy"/>         
                   </Link>
                           
                   <div className="absolute bottom-[12%] text-white inset-x-auto text-center max-w-fit z-30 Imagetransition translate-y-10 group-hover:translate-y-0">

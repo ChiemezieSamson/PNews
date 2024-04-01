@@ -27,9 +27,9 @@ const Categories = () => {
           {categories?.map((cat) => {
 
             return (
-              <li key={cat?.id} className={`text-base xxs:inline-block pr-1 tracking-wider ml-px mb-px max-w-[80px] overflow-hidden ${isFecthingStyle(isFetching)}`} title={cat?.title}>
+              <li key={cat?.id} className={`text-base xxs:inline-block pr-1 tracking-wider ml-px mb-px max-w-[130px] overflow-hidden ${isFecthingStyle(isFetching)}`} title={cat?.title}>
 
-                <Link to={`/categories?category=${cat?.title}`} className='font-bold inline-block hover:mainColor py-1 TextHeadertransition'>
+                <Link to={`/categories?category=${cat?.title}`} className='font-bold inline-block hover:mainColor py-1 TextHeadertransition capitalize'>
                   {cat.title ? cat.title : ""}
                 </Link>
               </li>

@@ -37,7 +37,7 @@ const ArroundTheWorldPosts = ({Posts, categories, users, Comments, canOpen, isFe
                 <div className="relative mb-2 max-h-44 imgxs:max-h-52 sm:max-h-60 md:min-h-[420px] lg:min-h-[500px] xl:min-h-[600px]">
 
                   <Link to={`/single/${allPost[0]?._id}`}>
-                    <img src={publicFolder + allPost[0]?.postImage} alt="game" className="max-h-44 imgxs:max-h-52 sm:max-h-60 md:min-h-[420px] lg:min-h-[500px] xl:min-h-[600px]" loading="lazy"/>
+                    <img src={allPost[0]?.postImage ? publicFolder + allPost[0]?.postImage : "../../../asset/images/imagebg.jpg"} alt="game" className="max-h-44 imgxs:max-h-52 sm:max-h-60 md:min-h-[420px] lg:min-h-[500px] xl:min-h-[600px]" loading="lazy"/>
                   </Link>
 
                     <CategoriesComponentBotton cat={allPost[0]?.postCategory[0]} />
@@ -83,7 +83,7 @@ const ArroundTheWorldPosts = ({Posts, categories, users, Comments, canOpen, isFe
                   <div className="relative mb-2 topRetangleImage">
 
                     <Link to={`/single/${post?._id}`}>
-                      <img src={publicFolder + post?.postImage} alt={"game"} className="topRetangleImage" loading="lazy"/>
+                      <img src={post?.postImage ? publicFolder + post?.postImage : "../../../asset/images/imagebg.jpg"} alt={"game"} className="topRetangleImage" loading="lazy"/>
                     </Link>
                     
                       <CategoriesComponentBotton cat={post?.postCategory[0]}/>
