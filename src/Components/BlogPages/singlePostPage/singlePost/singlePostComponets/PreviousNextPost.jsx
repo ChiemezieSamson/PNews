@@ -100,11 +100,11 @@ const PreviousNextPost = ({post, User, canOpen, size, onAnyIsfetching}) => {
             </Link>
           </span>
 
-          <div className={`text-stone-700 font-josefin leading-5 mb-4 ${isFecthingStyle(onAnyIsfetching || isFetching)}`}>
+          <div className={`text-stone-700 leading-5 mb-4 ${isFecthingStyle(onAnyIsfetching || isFetching)}`}>
 
             {canOpen ?
 
-             <p>{User?.bio}</p> 
+             <p className='prose-base'>{User?.bio}</p> 
               :
               <SkeletonTextFour />
             }

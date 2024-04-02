@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useMemo, useRef, useState } from 'react'
 import {  FaMinus, FaPlus, FaRedo, FaRegStar, FaStar} from 'react-icons/fa'
 import StickyBox from "react-sticky-box";
 import { isFecthingStyle, useWindowSize} from '../../../SharedAsset/SharedAssets';
@@ -46,7 +46,6 @@ const SinglePost = () => {
   const [userpassword, setGetUserpassword] = useState("")
 
   const [sizeLine, setSizeLine] = useState(20)
-  const [textSize, setTextSize] = useState("prose-base")
 
   // getting the offsetTop value of the form in to create users first comment
   const offsetOfForm = useRef(null)
@@ -154,18 +153,16 @@ const SinglePost = () => {
   }
 
 
-  useEffect(() => {
+  const handleTextSize = useMemo(() => {
+    let textSize 
 
-    const handleTextSize = () => {
+    if (sizeLine >= 80) {textSize = "prose-2xl"}
+    if (sizeLine === 60) {textSize = "prose-xl"}
+    if (sizeLine === 40) {textSize = "prose-lg"}
+    if (sizeLine === 20) {textSize = "prose-base"}
 
-      if (sizeLine >= 80) return setTextSize(() => "prose-2xl")
-      if (sizeLine === 60) return setTextSize(() => "prose-xl")
-      if (sizeLine === 40) return setTextSize(() => "prose-lg")
-      if (sizeLine === 20) return setTextSize(() => "prose-base")  
-    }
-
-    handleTextSize()
-  },[sizeLine, textSize])
+    return textSize
+  }, [sizeLine])
 
   // Text size Buttons
   const fontSizeButton = [
@@ -359,11 +356,11 @@ const SinglePost = () => {
             />
 
             {/* post text start here */}
-            <div className={`${textSize} tracking-wide text-stone-800`}>
+            <div className={`${handleTextSize} tracking-wide text-stone-800`}>
 
               {canOpen ? 
 
-                <Preview postContent={Post?.postContent} textSize={textSize}/>
+                <Preview postContent={Post?.postContent}/>
                 :
                 <SinglePostSpinner />
               }

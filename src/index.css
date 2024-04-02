@@ -157,38 +157,32 @@
 
   .editor h1,
   div[data-contents="true"] h1 {
-    @apply text-4xl;
-    @apply font-bold;
+    @apply text-4xl font-bold;
   }
 
   .editor h2,
   div[data-contents="true"] h2 {
-    @apply text-3xl;
-    @apply font-bold;
+    @apply text-3xl font-bold;
   }
 
   .editor h3,
   div[data-contents="true"] h3 {
     @apply text-2xl font-lora font-normal text-[#212121] mb-5;
-    @apply font-bold ;
   }
 
   .editor h4,
   div[data-contents="true"] h4 {
-    @apply text-xl;
-    @apply font-semibold;
+    @apply text-xl font-semibold;
   }
 
   .editor h5,
   div[data-contents="true"] h5 {
-    @apply text-lg;
-    @apply font-semibold;
+    @apply text-lg font-semibold;
   }
 
   .editor h6,
   div[data-contents="true"] h6 {
-    @apply text-sm;
-    @apply font-semibold;
+    @apply text-sm font-semibold;
   }
 
   .editor code { 

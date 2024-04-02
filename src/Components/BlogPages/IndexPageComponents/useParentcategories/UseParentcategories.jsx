@@ -5,7 +5,7 @@ const useParentcategories = (parent, categories, Posts, canOpen) => {
   const CopiedPosts =  canOpen &&  [...Posts]
   const newPost = []
   
-  canOpen && CopiedPosts?.sort(() => Math.random() - 0.5)?.filter(post => {
+  canOpen && CopiedPosts?.filter(post => {
 
     for (const category of FindParentArray) {
 

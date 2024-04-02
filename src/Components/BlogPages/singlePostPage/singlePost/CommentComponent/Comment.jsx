@@ -11,7 +11,7 @@ const Comment = ({comments, postId, byUserId, postAuthor, offsetOfForm, contentA
   const User = useFindThisUser() // Get the user from the local storage
 
   return ( 
-    <div className="my-2 px-4 py-2 bg-neutral-100 rounded-md">
+    <div className="my-2 py-2 bg-neutral-100 rounded-md">
 
       <span className='my-4 inline-block'>
 

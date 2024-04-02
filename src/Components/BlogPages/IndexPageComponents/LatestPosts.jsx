@@ -14,7 +14,7 @@ const LatestPosts = ({Posts, isFetching, canOpen, currentPage, totalPages}) => {
       <div className={`mt-3 ${isFecthingStyle(isFetching)}`}>
         
         <JustTimeComponetCatBlockStar 
-          Posts={canOpen && CopiedPosts.sort(() => Math.random() - 0.5)} 
+          Posts={canOpen && CopiedPosts} 
           grid={"imgxs:grid imgxs:grid-cols-2 gap-x-[2%]"}
           canOpen={canOpen}
         /> 
