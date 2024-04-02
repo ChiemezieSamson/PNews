@@ -156,10 +156,10 @@ const SinglePost = () => {
   const handleTextSize = useMemo(() => {
     let textSize 
 
-    if (sizeLine >= 80) {textSize = "prose-2xl"}
-    if (sizeLine === 60) {textSize = "prose-xl"}
-    if (sizeLine === 40) {textSize = "prose-lg"}
-    if (sizeLine === 20) {textSize = "prose-base"}
+    if (sizeLine >= 80) {textSize = "prose-2xl text-2xl"}
+    if (sizeLine === 60) {textSize = "prose-xl text-xl"}
+    if (sizeLine === 40) {textSize = "prose-lg text-lg"}
+    if (sizeLine === 20) {textSize = "prose-base text-base"}
 
     return textSize
   }, [sizeLine])
