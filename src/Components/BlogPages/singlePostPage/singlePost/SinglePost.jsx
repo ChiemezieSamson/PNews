@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef, useState } from 'react'
+import React, { useMemo, useRef, useState } from 'react'
 import {  FaMinus, FaPlus, FaRedo, FaRegStar, FaStar} from 'react-icons/fa'
 import StickyBox from "react-sticky-box";
 import { isFecthingStyle, useWindowSize} from '../../../SharedAsset/SharedAssets';
@@ -20,7 +20,6 @@ import { SinglePostSpinner, SkeletonTextTwo } from '../../../SharedAsset/Spinner
 import { handleUserPassword } from '../../../SharedAsset/Vaidations/RegularExpression';
 import TexSizeAdjuster from './singlePostComponets/TexSizeAdjuster';
 import userAvatar from "../../../../asset/images/user-avatar.png"
-import { log } from 'console';
 
 
 const SinglePost = () => {
@@ -47,6 +46,7 @@ const SinglePost = () => {
   const [userpassword, setGetUserpassword] = useState("")
 
   const [sizeLine, setSizeLine] = useState(20)
+  const [removeStyleOnce, setRemoveStyleOnce] = useState(true)
 
   // getting the offsetTop value of the form in to create users first comment
   const offsetOfForm = useRef(null)
@@ -186,24 +186,30 @@ const SinglePost = () => {
   ]
 
   // getting all the possible image on the post and adding style to them
-  useEffect(() => {
+  if (canOpen && removeStyleOnce) {
 
-    const removerEditorTextStlye = document.querySelectorAll("span")
+    const removerEditorTextStlye = document.querySelectorAll(".editor span")
    
-    const removerEditorImageStlye = document.querySelectorAll("img")
+    const removerEditorImageStlye = document.querySelectorAll(".editor img")
+  
+    console.log(removerEditorTextStlye, removerEditorImageStlye);
    
     removerEditorTextStlye.forEach((span) => {
-
-      span.style = ""
-    },[])
+  
+      span.removeAttribute('style');
+    })
      
     removerEditorImageStlye.forEach((img) => {
-
-      img.style = ""
+  
+      img.removeAttribute('style');
       img.setAttribute("alt", "postimage")
       img.setAttribute("loading", "lazy")
     })    
-  },[])
+
+    if(removerEditorTextStlye[0] || removerEditorImageStlye[0]) {
+      setRemoveStyleOnce(() => false) 
+    }
+  }
 
   return (
     <div className='relative text-left'>
