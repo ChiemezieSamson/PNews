@@ -20,6 +20,7 @@ import { SinglePostSpinner, SkeletonTextTwo } from '../../../SharedAsset/Spinner
 import { handleUserPassword } from '../../../SharedAsset/Vaidations/RegularExpression';
 import TexSizeAdjuster from './singlePostComponets/TexSizeAdjuster';
 import userAvatar from "../../../../asset/images/user-avatar.png"
+import { log } from 'console';
 
 
 const SinglePost = () => {
@@ -188,12 +189,13 @@ const SinglePost = () => {
   useEffect(() => {
 
     const removerEditorTextStlye = document.querySelectorAll("span")
+   
     const removerEditorImageStlye = document.querySelectorAll("img")
-
+   
     removerEditorTextStlye.forEach((span) => {
 
       span.style = ""
-    })
+    },[])
      
     removerEditorImageStlye.forEach((img) => {
 

@@ -5,31 +5,21 @@
 
 @layer  base{
   html {
-    scroll-behavior: smooth;
-    overscroll-behavior-block: contain;
-    overflow-x: hidden;
-  }
-
-  * , *::before, *::after{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    text-decoration: none;
-  }
-
-  body {
-    margin: 0;
-    padding: 0;
+    @apply scroll-smooth overflow-x-hidden overscroll-contain m-0 p-0;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
 
+  * , *::before, *::after{
+    @apply m-0 p-0 box-border no-underline 
+  }
+
+  body {
+    @apply m-0 p-0
+  }
+
   img {
-    width: 100%; 
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-    cursor: pointer;
+    @apply w-full h-full object-cover object-center cursor-pointer
   }
 
   [type='text'],
@@ -38,7 +28,6 @@
   [type='password'],
   [type='number'],
   [type='date'],
-  [type='datetime-local'],
   [type='month'],
   [type='search'],
   [type='tel'],
@@ -46,8 +35,7 @@
   [type='week'],
   [multiple],
   textarea,
-  select {
-    
+  select {    
     @apply bg-transparent w-full border-slate-400 shadow-inner focus:shadow-slate-400/60
     focus:outline-none focus:border-gray-400 focus:ring-0 mb-5 mt-1.5 caret-black rounded
   }
@@ -125,12 +113,7 @@
   /* text editor styling start here */
 
   .postEditor img {
-    object-fit: fill;
-    object-position: center;
-    cursor: pointer;
-    width: auto;
-    height: auto;
-    max-height: 480px;
+    @apply w-full h-full max-h-[480px] object-cover object-center cursor-pointer
   }
 
   .postEditor .rdw-list-dropdown,
@@ -140,19 +123,19 @@
   .postEditor .rdw-embedded-modal,
   .postEditor .rdw-emoji-modal,
   .postEditor .rdw-dropdown-optionwrapper {
-    z-index: 30 !important;
+    @apply !z-30
   }
 
   .postEditor .rdw-embedded-modal-header-option {
-    width: auto !important;
+    @apply !w-auto
   }
 
   .editor ins {
-    text-decoration: underline;
+    @apply underline
   }
 
   .editor del {
-    text-decoration: line-through;
+    @apply line-through
   }
 
   .editor h1,
@@ -191,13 +174,8 @@
   }
 
   .editor pre {
+    @apply text-left relative whitespace-pre-wrap my-[1em] py-px px-[3px] bg-[#f1f1f1];
     direction: ltr;
-    text-align: left;
-    position: relative;
-    white-space: pre-wrap;
-    margin: 1em 0;
-    padding: 1px 3px;
-    background-color: #f1f1f1;
   }
 
   .editor blockquote {
@@ -241,12 +219,10 @@
     @apply text-[#f70d28] active:text-blue-600 visited:text-purple-600
   } 
 
-
   .editor p:first-child {
     @apply first-letter:uppercase first-letter:text-3xl first-letter:text-slate-500
    first-letter:align-bottom
   }
-
   
   /* textEditor Styling stop here */
 
@@ -257,95 +233,72 @@
   }
 
   .nav-link{
-    display: none;
-    width: 0;
-    height: 2px;
-    background-color: var(--main-color);;
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    border-radius: 50px;
-    opacity: 0;
-    visibility: hidden;
+    @apply hidden w-0 h-0.5 absolute bg-[var(--main-color)] left-0 bottom-0 rounded-[50px] opacity-0 invisible;
     transition: all 0.3s ease-out 0s;
-  }
+    -webkit-transition: all 0.3s ease-out 0s;
+    -moz-transition: all 0.3s ease-out 0s;
+    -ms-transition: all 0.3s ease-out 0s;
+    -o-transition: all 0.3s ease-out 0s;
+}
 
  .nav-link::before, 
  .nav-link::after{
-    position: absolute;
+   @apply absolute w-0 h-0.5 bg-[var(--main-color)];
     content: " ";
-    width: 0;
-    height: 2px;
-    background-color: var(--main-color);
   }
 
   .nav-link::before {
-    left: 110%;
+    @apply left-[110%]
   }
 
   .actives + .nav-link::before,
   li:hover > .nav-link::before {
-    width: 20%;
+    @apply w-[20%]
   }
 
   .nav-link::after {
-    left: 140%;
+    @apply left-[140%]
   }
 
   .actives + .nav-link::after,
   li:hover > .nav-link::after {
-    width: 15%;
+    @apply w-[15%]
   }
 
   .actives + .nav-link, 
   li:hover > .nav-link {
-    opacity: 1;
-    visibility: visible;
-    width: 60%;
+    @apply opacity-100 visible w-[60%];
   } 
 
   /* Home page Navigation settings and style end here */
 
+
   /* scroll bar for some components settings and style start here */
 
 .overflowScrollSmallScreen::-webkit-scrollbar {
-  width: 0.1px;
-}
-
-.overflowScrollSmallScreen::-webkit-scrollbar-track {
-  background-color: pink;
-  border-radius: 50vw;
-  margin-block: 0.5em;
-}
-
-.overflowScrollSmallScreen::-webkit-scrollbar-thumb {
-  background-color: white;
-  border: 0.25em solid white;
-  border-radius: 100vw;
-}
-
-.overflowScrollSmallScreen::-webkit-scrollbar-thumb:hover {
-  background-color: white;
+  @apply w-[0.1px]
 }
 
 .overflowScroll::-webkit-scrollbar {
-  height: 12px;
+  @apply h-3
+}
+
+.overflowScrollSmallScreen::-webkit-scrollbar-track {
+  @apply bg-pink-400 rounded-[50vw] my-[0.5em]
+}
+
+.overflowScrollSmallScreen::-webkit-scrollbar-thumb,
+.overflowScroll::-webkit-scrollbar-thumb  {
+  @apply bg-white border-[0.25em] border-solid border-white rounded-[100vw]
+}
+
+.overflowScrollSmallScreen::-webkit-scrollbar-thumb:hover,
+.overflowScroll::-webkit-scrollbar-thumb:hover  {
+  @apply bg-white
 }
 
 .overflowScroll::-webkit-scrollbar-track {
-  background-color: white;
-  border-radius: 50vw;
-  margin-block: 0.5em;
-}
-
-.overflowScroll::-webkit-scrollbar-thumb {
-  background-color: white;
-  border: 0.25em solid white;
-  border-radius: 100vw;
-}
-
-.overflowScroll::-webkit-scrollbar-thumb:hover {
-  background-color: white;
+  @apply bg-white rounded-[50vw] my-[0.5em]
 }
 
 .skeleton {
@@ -367,6 +320,6 @@
  /* scroll bar for some components settings and style start here */
 
 .activeTitle {
-  border-bottom: 2px solid #f70d28;
+  @apply border-b-2 border-solid border-[#f70d28]
 }
 }
