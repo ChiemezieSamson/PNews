@@ -16,7 +16,7 @@ const TrendingTagscomponent = ({TagsLink, Parentlink, handleCloseHoverlinks, tag
       <span className="py-2 text-stone-800 uppercase font-normal text-sm mb-1.2 inline-block">Trending tags</span>
 
       {(tagsaction && !isFetchingTags) ?
-        TagsLinks?.map((tag) => {
+        TagsLinks?.slice(0,8)?.map((tag) => {
 
           return(
             <li key={tag?.id} className="py-1.5 capitalize text-xs">

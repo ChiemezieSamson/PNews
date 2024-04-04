@@ -94,7 +94,7 @@ export const SmallScreenHoverLinsks = ({CategoriesLink, Parentlink, handleCloseN
         </li>
         
         {(categoriesaction && !isFetching) ?          
-          categoriesLinks?.map((category) => {
+          categoriesLinks?.slice(0,6)?.map((category) => {
             return(
               <li key={category?.id} className="py-1.5 px-1 text-stone-700 uppercase font-normal text-xs
               hover:mainColor TextHeadertransition focus-within:bg-white hover:bg-white" 

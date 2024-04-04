@@ -34,7 +34,7 @@ const MainTagComponent = ({CategoriesLink, Parentlink, handleCloseHoverlinks, is
         </li>
 
         {(categoriesaction && !isFetching) ?
-          CategoriesLinks?.map((category) => {
+          CategoriesLinks?.slice(0,6)?.map((category) => {
           return(
             <li key={category?.id} className="py-1.5 px-4 text-stone-500 uppercase font-normal 
               text-sm focus-within:bg-white hover:bg-white hover:text-stone-900 TextHeadertransition"

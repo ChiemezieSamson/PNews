@@ -16,7 +16,7 @@ const Categories = () => {
   }
   
   return (
-    <section className="pb-4 lg:mt-2 max-w-[380px] lg:max-w-[420px] lg:mx-0 md:mx-auto">
+    <section className="pb-4 lg:mt-2 max-w-[380px] lg:max-w-md lg:mx-0 md:mx-auto">
       
       <b className='inline-block text-[#f93d53] font-bold lg:mb-5 mb-3 text-lg'>Browse by Category</b>
 
@@ -24,7 +24,7 @@ const Categories = () => {
 
         <ul className='grid grid-cols-2 xxs:grid-rows-8 xxs:grid-flow-col overflow-hidden text-left md:text-center lg:text-left text-white m-0 p-0'>
       
-          {categories?.map((cat) => {
+          {categories?.slice(0, 24)?.map((cat) => {
 
             return (
               <li key={cat?.id} className={`text-sm xxs:inline-block pr-1 tracking-wider ml-px mb-px max-w-[130px] overflow-hidden ${isFecthingStyle(isFetching)}`} title={cat?.title}>

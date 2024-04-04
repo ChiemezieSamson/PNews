@@ -90,7 +90,7 @@ const Category = ({handleSelectedParentCat, parentCat, handleSetCategory, catego
 
     if (parent ) { // make sure the user have selected a parent first
 
-      if (categoriesParents[parent]?.category?.length < 5 || categoriesParents[parent]?.category?.length === undefined) {
+      if (categoriesParents[parent]?.category?.length < 10 || categoriesParents[parent]?.category?.length === undefined) {
 
         setParentFullText(() => false)
       } else {

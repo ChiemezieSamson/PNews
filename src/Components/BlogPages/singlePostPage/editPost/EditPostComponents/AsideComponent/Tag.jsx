@@ -109,7 +109,7 @@ const Tag = ({updatePostTags, parentTag, handleSelectedParentTag, handleSetAddTa
 
     if (parent) { // make sure the user have selected a parent first
 
-      if (tagsParents[parent]?.tags?.length < 8) {
+      if (tagsParents[parent]?.tags?.length < 10) {
 
         setParentFullText(() => false)
       } else {

@@ -92,7 +92,7 @@ const Tag = ({handleSetAddTag, addTag, handleSelectedParentTag, parentTag, userA
 
     if (parent) { // make sure the user have selected a parent first
 
-      if (tagsParents[parent]?.tags?.length < 8  || tagsParents[parent]?.tags?.length === undefined) {
+      if (tagsParents[parent]?.tags?.length < 10 || tagsParents[parent]?.tags?.length === undefined) {
 
         setParentFullText(() => false)
       } else {
