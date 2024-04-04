@@ -7,6 +7,7 @@ import Preview from '../BlogPages/singlePostPage/createPost/editorPreview/Previe
 import { Link, useLocation } from 'react-router-dom';
 import { useUpDateSharedPostsMutation } from '../../Reduxstore/Slices/posts/PostsSlice';
 import { CatSidebarHanbugarSpinner } from './Spinners/Spinner';
+import useFetchedUsers from './Spinners/userSpinner';
 
 
 // HeroImage one image title
@@ -365,7 +366,7 @@ export const SharedCount = ({postId, postTitle, SocialSharedCount, canOpen}) => 
             <SocialMediaCount  
               text={"Share"} 
               bg={"bg-[#45629f]"} 
-              shareUrl={`https://p-news.netlify.app/single/${postId}`} 
+              shareUrl={`https://newblog-cdkg.onrender.com/single/${postId}`} 
               postTitle={postTitle} 
               postId={postId} 
               SocialSharedCount={SocialSharedCount}
@@ -374,7 +375,7 @@ export const SharedCount = ({postId, postTitle, SocialSharedCount, canOpen}) => 
             <SocialMediaCount 
               text={"Tweet"} 
               bg={"bg-[#5eb2ef]"} 
-              shareUrl={`https://p-news.netlify.app/single/${postId}`} 
+              shareUrl={`https://newblog-cdkg.onrender.com/single/${postId}`} 
               postTitle={postTitle}
               postId={postId}
               SocialSharedCount={SocialSharedCount}
@@ -831,4 +832,64 @@ export const CategoryAndtagRemoveMessage = ({deleteMessage, checkedItemElemets, 
     </div>
   </div>
   )
+}
+
+export const PageTitleUpdate = ({canOpen, Post}) => {
+  const {userContent, useraction} = useFetchedUsers()
+  const location = useLocation() 
+  let home
+  let page
+  let pages
+  let search
+
+  if (location?.pathname) {
+    home = location.pathname
+    page = location.pathname.split("/")[1]
+    pages = location.pathname.replace(/[/]/g, " ")
+  }
+
+  if(location?.search) {
+
+    let path = location.search.replace(/[?=]/g, ",")
+    let searchReturned = path.split(",")[path.split(",").length - 1]
+
+    if(path.split(",")[1] === "user" && useraction) {
+      search = userContent?.find(user => user._id === searchReturned)
+    } else {
+
+      search = searchReturned.replace(/[%]\d+/g, " ")
+    }
+  }
+
+  // Set the title based on the current page
+  if (!canOpen) {
+
+    if (home === "/" && !page) {
+      document.title = "PNews";
+    }
+  
+    if(page === pages.trim() && !search && home !== "/") {
+      document.title = `PNews - ${page}`
+    }
+  
+    if(home !== "/" && search && pages.split(" ").pop() === "categories") {
+      document.title = `PNews: category - ${search}`
+    }
+  
+    if(home !== "/" && search && pages.split(" ").pop() === "tags") {
+      document.title = `PNews: tag - ${search}`
+    }
+  
+    if(home !== "/" && search && pages.split(" ").pop() === "pages") {
+      document.title = `PNews: ${page} - page ${search}`
+    }
+
+    if (useraction && search?.username) {
+      document.title = `PNews: user - ${search.username}`
+    }
+  } else {
+    if(canOpen && Post?.postTitle) {
+      document.title = Post?.postTitle;
+    }
+  }
 }

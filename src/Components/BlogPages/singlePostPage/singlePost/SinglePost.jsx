@@ -1,7 +1,7 @@
 import React, { useMemo, useRef, useState } from 'react'
 import {  FaMinus, FaPlus, FaRedo, FaRegStar, FaStar} from 'react-icons/fa'
 import StickyBox from "react-sticky-box";
-import { isFecthingStyle, useWindowSize} from '../../../SharedAsset/SharedAssets';
+import { PageTitleUpdate, isFecthingStyle, useWindowSize} from '../../../SharedAsset/SharedAssets';
 import Aside from '../../asidePage/Aside';
 import CommentForm from './CommentComponent/CommentForm';
 import Comment from './CommentComponent/Comment';
@@ -191,8 +191,6 @@ const SinglePost = () => {
     const removerEditorTextStlye = document.querySelectorAll(".editor span")
    
     const removerEditorImageStlye = document.querySelectorAll(".editor img")
-  
-    console.log(removerEditorTextStlye, removerEditorImageStlye);
    
     removerEditorTextStlye.forEach((span) => {
   
@@ -223,7 +221,7 @@ const SinglePost = () => {
 
             <div className="lg:mb-8 lg:mt-8 mb-4 grid grid-flow-col justify-between text-stone-800">
 
-              <small>Home &gt; single &gt; {canOpen ? Post?.postCategory[0] : <div className='skeleton h-2 w-14 inline-block'></div>}</small>
+              <small className='capitalize'>Home &gt; single &gt; {canOpen ? Post?.postCategory[0] : <div className='skeleton h-2 w-14 inline-block'></div>}</small>
 
               {/* user make favourite, edit post and delete post buttons */}
               {(byUserIdAction && Post?.postAuthor === userByUserId?._id) && 
@@ -274,7 +272,7 @@ const SinglePost = () => {
 
               {canOpen ? 
 
-                <strong>
+                <strong >
                   {Post?.postTitle}
                 </strong> 
                 :
@@ -306,7 +304,7 @@ const SinglePost = () => {
                       title='post-admin'>
                         By &nbsp;
 
-                        <Link to={`/categories?user=${User?._id}`} className="text-[#f70d28] cursor-pointer">{User.username}</Link>
+                        <Link to={`/categories?user=${User?._id}`} className="text-[#f70d28] cursor-pointer capitalize">{User.username}</Link>
                     </small>
 
                     <span className='mx-2 align-text-top inline-block'>&#9473;</span>
@@ -321,7 +319,7 @@ const SinglePost = () => {
                       <span className='mx-2 text-sm md:text-sm lg:text-base text-neutral-500 cursor-pointer'>
                         in 
 
-                        <Link to={`/categories?category=${Post?.postCategory[0]}`}className='font-extrabold hover:text-neutral-700'>
+                        <Link to={`/categories?category=${Post?.postCategory[0]}`}className='font-extrabold hover:text-neutral-700 capitalize'>
                           &nbsp;{Post.postCategory[0]}
                         </Link>              
                       </span>                      
@@ -466,7 +464,10 @@ const SinglePost = () => {
         isValid={isValid}
         message={"Enter your password to delete this post"}
       />
+
+      <PageTitleUpdate canOpen={canOpen} Post={Post}/>
     </div>
+
   )
 }
 

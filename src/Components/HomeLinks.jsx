@@ -6,7 +6,7 @@ import { FaBars, FaChevronUp, FaSistrix, FaTimes } from "react-icons/fa";
 import Footer from "./BlogPages/footerPage/Footer";
 import HeaderNavigations from "./HeaderNavigationComponent/Navigations/HeaderNavigations";
 import { Hanbugar3 } from "./ButtonAndOthers/Buttons";
-import { useWindowSize } from "./SharedAsset/SharedAssets";
+import { PageTitleUpdate, useWindowSize } from "./SharedAsset/SharedAssets";
 import { useWindowScroll, useClickAway } from "@uidotdev/usehooks"
 import { useFetchedUserById } from "./SharedAsset/Spinners/userSpinner";
 
@@ -161,6 +161,8 @@ const HomeLinks = () => {
               location.key;
         }}
       />
+
+      <PageTitleUpdate />
     </div>
   )
 }

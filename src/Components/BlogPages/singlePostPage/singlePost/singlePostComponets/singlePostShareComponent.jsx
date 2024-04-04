@@ -20,7 +20,7 @@ const SinglePostShareComponent = ({canOpen, Post, size}) => {
 
     postId = Post?._id
     postTitle = Post?.postTitle
-    shareUrl = `https://p-news.netlify.app/single/${Post?._id}`
+    shareUrl = `https://newblog-cdkg.onrender.com/single/${Post?._id}`
     
     canShare = [postId, postTitle].every(Boolean) && !isLoading // making sure that every thing is ready
     canUpdateView = [postId, postTitle].every(Boolean) && !viewedIsLoading // making sure that every thing is ready

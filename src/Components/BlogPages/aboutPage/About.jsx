@@ -78,7 +78,7 @@ const About = () => {
         </div>
 
         <NewsLetter />
-      </div>    
+      </div> 
     </section>
   )
 }

@@ -133,7 +133,6 @@ export const extendedPostsApiSlice = apiSlice.injectEndpoints({
 						initialPost.postId,
 						(draft) => {
 							const post = draft;
-							console.log(post);
 
 							if (post) {
 								post.optional.socialmediashare[initialPost?.social]++;

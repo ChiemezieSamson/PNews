@@ -320,7 +320,7 @@ const CommentForm = ({commentsContent, postId, onAnyIsfetching, canOpen}) => {
           />
 
           <label htmlFor="save-data" className="inline-block mx-2 align-top leading-4 text-sm font-medium text-gray-700 col-span-11">
-            Save my name, email and website in this browser for the next time i comment.
+            Save my name, email and website in this browser for the next time I comment.
           </label>
         </div>
       }

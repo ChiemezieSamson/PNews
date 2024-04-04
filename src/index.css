@@ -194,7 +194,7 @@
 
   .editor img,
   div[data-contents="true"] figure span {
-    @apply max-h-[480px] w-full object-cover cursor-pointer mb-4 rounded text-center
+    @apply max-h-[480px] w-full object-contain cursor-pointer mb-4 rounded text-center
   }
 
   .editor ul li {
@@ -315,11 +315,5 @@
   100% {
     background-color: hsl(200, 20%, 95%)
   }
-}
-
- /* scroll bar for some components settings and style start here */
-
-.activeTitle {
-  @apply border-b-2 border-solid border-[#f70d28]
 }
 }

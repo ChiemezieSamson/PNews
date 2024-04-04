@@ -1,35 +1,23 @@
-import React, { useRef, useState } from 'react'
+import React, { useState } from 'react'
 import { JustTimeComponet, JustTimeComponetStar } from '../SharedComponents'
 import { isFecthingStyle } from '../../../SharedAsset/SharedAssets'
 
 
 const TrendingCommentsLatest = ({posts, Comments, action, isFetching}) => {
   const [newPosts, setNewPosts] = useState([])
-  const [text, setText] = useState("")
+  const [text, setText] = useState("Trending")
+  const trendCommentLatest = [{id: 0, name: "Trending"}, {id: 1, name: "Comments"}, {id: 2, name: "Latest"}]
 
   const TrendingPosts = action && posts?.filter(post => post?.optional?.trending === true)
-
-  const ref = useRef()
-  const ref2 = useRef()
-  const ref3 = useRef()
 
   // handling Tab selection
   const handleClick = (e) => {
     const ClickedHead = e.target
 
-    //  first remove the active style from all
-    ref.current.parentElement.classList.remove("activeTitle")
-    ref2.current.parentElement.classList.remove("activeTitle")
-    ref3.current.parentElement.classList.remove("activeTitle")
-
-    // make the clicked button the active
-    ClickedHead.parentElement.classList.add("activeTitle")
-
-
     // Find only the Trend posts
     if(ClickedHead.textContent === "Trending") {
 
-      setNewPosts(() => TrendingPosts?.slice(0, 4))
+      setNewPosts(() => TrendingPosts?.sort(() => Math.random() - 0.5)?.slice(0, 4))
       setText(() => "Trending")
     }
     
@@ -99,7 +87,7 @@ const TrendingCommentsLatest = ({posts, Comments, action, isFetching}) => {
       // Filter out posts older than 30 days
       const recentPosts = postsWithDates.filter(post => post.updatedAt >= thirtyDaysAgo);
 
-      const finalResult = mostRecentPost[0] ? mostRecentPost?.slice(0, 4) : recentPosts[0] ? recentPosts?.slice(0, 4) : posts?.slice(0, 4)
+      const finalResult = mostRecentPost[0] ? mostRecentPost?.sort(() => Math.random() - 0.5)?.slice(0, 4) : recentPosts[0] ? recentPosts?.sort(() => Math.random() - 0.5)?.slice(0, 4) : posts?.slice(0, 4)
       setNewPosts(() => finalResult)
       setText(() => "Latest")
     }
@@ -107,53 +95,25 @@ const TrendingCommentsLatest = ({posts, Comments, action, isFetching}) => {
   
   return (
     <>
+      <ul className='grid grid-cols-3 mt-7 mb-6 p-0'>
+        {trendCommentLatest.map(item => {
 
-      <ul className='grid grid-cols-3 mt-7 mb-6 p-0 divide-x border border-solid boreder-neutral-100'>
-
-        <li className="text-sm font-medium leading-9 hover:bg-neutral-50 cursor-pointer text-stone-700 activeTitle">
-
-          <button 
-            type="button"
-            name="TrendingButton"
-            id='TrendingButton'
-            onClick={handleClick}
-            disabled={!action || isFetching}
-            className="disabled:opacity-40 block w-full text-center"
-            ref={ref}
-          >
-            Trending
-          </button>
-        </li>
-
-        <li className="text-sm font-medium leading-9 hover:bg-neutral-50 cursor-pointer text-stone-700">
-
-          <button 
-            type="button"
-            name="CommentsButton"
-            id='CommentsButton'
-            onClick={handleClick}
-            disabled={!action || isFetching}
-            className="disabled:opacity-40 block w-full text-center"
-            ref={ref2}
-          >            
-            Comments
-          </button>
-        </li>
-
-        <li className="text-sm font-medium leading-9 hover:bg-neutral-50 cursor-pointer text-stone-700">
-
-           <button 
-            type="button"
-            name="LatestButton"
-            id='LatestButton'
-            onClick={handleClick}
-            disabled={!action || isFetching}
-            className="disabled:opacity-40 block w-full text-center"
-            ref={ref3}
-          >           
-            Latest
-          </button>
-        </li>
+          return (
+            <li key={item.id} className={`text-sm font-medium leading-9 hover:bg-neutral-50 cursor-pointer text-stone-700 border-2 border-solid first:border-r-0 last:border-l-0 
+              ${text === item.name ? "border-b-[#f70d28]" : "boreder-neutral-100"}`}>
+              <button 
+                type="button"
+                name={item.name + "Button"}
+                id={item.name + "Button"}
+                onClick={handleClick}
+                disabled={!action || isFetching}
+                className="disabled:opacity-40 block w-full text-center"
+              >
+                {item.name}
+              </button>
+            </li>
+          )
+        })}
       </ul>   
       
 
