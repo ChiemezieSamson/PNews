@@ -1,27 +1,36 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { SocialMediaIcons, publicFolder} from "../../data"
 import { useFetchedPosts } from "../SharedAsset/Spinners/postsSpinner";
-import { FaRegCircle } from "react-icons/fa";
+import { FaCertificate, FaRegCircle } from "react-icons/fa";
 import { isFecthingStyle } from "../SharedAsset/SharedAssets";
 import ImageBg from "./../../asset/images/imagebg.jpg"
+import PNews from "./../../asset/images/PNews.webp"
+import { Link } from "react-router-dom";
 
 
 const FullSreenSidebar = ({closesidebar}) => {
   const {content , action, isFetching} = useFetchedPosts()
-  const Posts = content
   
-  const Words = ["Get in touch", "Instagram Feeds", "Live events"]
-  const texts = Words?.map((text,i) => ({id: i, name: text}))
+  const Words = [{id: 0, name: "Get in touch", url: "/contact_us"}, {id: 1, name: "About Pnews", url: "/about"}, {id: 2, name: "Privacy & Policy", url: "privacy&policy"}]
+
+  const selectedItems = useMemo(() => {
+    let Posts
+    if (action) {
+       Posts = [...content]
+    }
+
+    return Posts?.sort(() => Math.random() - 0.5)
+  }, [action, content])
 
   return (
     <section className={`overflowScrollSmallScreen hidden md:block h-screen overflow-y-scroll ${isFecthingStyle(isFetching)}
-      scroll-py-4 overscroll-y-contain snap-mandatory p-8 px-12 bg-neutral-100 font-lora text-stone-800`}>
+      scroll-py-4 overscroll-y-contain snap-mandatory p-8 px-12 bg-neutral-100 font-lora text-stone-800 shadow-md shadow-black/30`}>
 
       {/* === Site owner image and name === */}
-      <div className="mb-14 text-center">
+      <div className="mb-14 text-center mt-10">
 
       {action ?
-        <img src={(Posts.length > 0 && Posts[0]?.postImage) ? publicFolder + (Posts.length > 0 && Posts[0]?.postImage) : ImageBg} alt="FirstImage" className="rounded max-w-[160px] max-h-[160px] mx-auto" loading="lazy"/>
+        <img src={PNews} alt="FirstImage" className="rounded max-w-[160px] max-h-[160px] mx-auto aspect-square" loading="lazy"/>
         : 
         <div className="skeleton rounded-sm h-screen max-w-[160px] max-h-[160px] mx-auto"></div>
        }
@@ -33,7 +42,7 @@ const FullSreenSidebar = ({closesidebar}) => {
   
         {/* === Company instagram account name === */}
       <div className="mb-4 mt-8 text-4xl mx-auto w-60 text-center">  
-         {SocialMediaIcons[0]?.icon }     
+         <FaCertificate className="inline-block rounded-md px-0.5 mainColor"/>    
         <span className="inline-block text-2xl mx-2">
           @PNews
         </span>
@@ -42,12 +51,14 @@ const FullSreenSidebar = ({closesidebar}) => {
       {/* ==== the Instagram Image start here ==== */}
       {action ? 
         <ul className="grid grid-cols-3 gap-0 mb-4 mx-0">
-          {Posts?.slice(0, 9)?.map((post) => {
+          {selectedItems?.slice(0, 9)?.map((post) => {
               return (
-              <li key={post?._id} className="relative max-h-28 group">
-                <img src={post?.postImage ? publicFolder + post?.postImage : ImageBg} alt={"social"}  className="m-0" loading="lazy"/>
+              <li key={post?._id} className="relative max-h-28 group cursor-pointer" onClick={closesidebar}>
+                <Link to={`/single/${post?._id}`}>
+                  <img src={post?.postImage ? publicFolder + post?.postImage : ImageBg} alt={"social"}  className="m-0 aspect-square" loading="lazy"/>
 
-                <div className="absolute inset-0 bg-black opacity-0 group-hover:opacity-20 TextHeadertransition"/>
+                  <div className="absolute inset-0 bg-black opacity-0 group-hover:opacity-20 TextHeadertransition"/>
+                </Link>
               </li>
               )
             })
@@ -59,13 +70,13 @@ const FullSreenSidebar = ({closesidebar}) => {
 
       {/* === Ways to get in touch to the company === */}
       <ul className="m-0 list-none grid grid-cols-2 text-center mb-7">
-        {texts?.map((text) => {
+        {Words?.map((text) => {
           return (
             <li key={text?.id} className="last:col-span-2">
               <FaRegCircle className="text-sm inline-block p-0.5 mx-2.5 text-stone-800"/>
-                <span className="">
+                <Link to={text.url} className="hover:mainColor TextHeadertransition cursor-pointer">
                   {text?.name}
-                </span>                
+                </Link>                
             </li>
           )
         })}
@@ -81,8 +92,8 @@ const FullSreenSidebar = ({closesidebar}) => {
                 href={icon?.link} 
                 target="_blank" 
                 rel={"noreferrer"} 
-                className={`no-underline text-lg ${icon?.socialLinks} group-hover:text-stone-100 inline-block TextHeadertransition ease-linear border 
-                border-solid border-stone-800 rounded-full px-1 pb-px`}>{icon?.icon}</a>
+                className={`no-underline text-lg ${icon?.socialLinks} group-hover:text-stone-100 TextHeadertransition ease-linear border 
+                border-solid border-stone-800 rounded-full p-1 grid items-center justify-center`}>{icon?.icon}</a>
             </li>
           )
         })}

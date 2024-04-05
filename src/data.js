@@ -30,7 +30,7 @@ export const SocialMediaIcons = [
 		name: "instagram",
 		icon: (
 			<FaInstagram
-				className="inline-block rounded-md px-0.5  transition-all duration-200 ease-linear
+				className="inline-block rounded-md px-0.5 transition-all duration-200 ease-linear
 			 group-hover:bg-[#e4405f]"
 			/>
 		),
@@ -46,7 +46,7 @@ export const SocialMediaIcons = [
 		name: "facebook",
 		icon: (
 			<FaFacebook
-				className="inline-block rounded-md px-0.5  transition-all duration-200 ease-linear
+				className="inline-block rounded-md px-0.5 transition-all duration-200 ease-linear
 			 group-hover:bg-[#4267B2]"
 			/>
 		),
@@ -62,7 +62,7 @@ export const SocialMediaIcons = [
 		name: "twitter",
 		icon: (
 			<FaTwitter
-				className="inline-block rounded-md px-0.5  transition-all duration-200 ease-linear
+				className="inline-block rounded-md px-0.5 transition-all duration-200 ease-linear
 			 group-hover:bg-[#1DA1F2]"
 			/>
 		),
@@ -78,7 +78,7 @@ export const SocialMediaIcons = [
 		name: "youtube",
 		icon: (
 			<FaYoutube
-				className="inline-block rounded-md px-0.5  transition-all duration-200 ease-linear
+				className="inline-block rounded-md px-0.5 transition-all duration-200 ease-linear
 			 group-hover:bg-[#FF0000]"
 			/>
 		),
@@ -94,7 +94,7 @@ export const SocialMediaIcons = [
 		name: "linkedin",
 		icon: (
 			<FaLinkedin
-				className="inline-block rounded-md px-0.5  transition-all duration-200 ease-linear
+				className="inline-block rounded-md px-0.5 transition-all duration-200 ease-linear
 			 group-hover:bg-[#0e76a8]"
 			/>
 		),
@@ -110,7 +110,7 @@ export const SocialMediaIcons = [
 		name: "website",
 		icon: (
 			<FaRss
-				className="inline-block rounded-md px-0.5  transition-all duration-200 ease-linear
+				className="inline-block rounded-md px-0.5 transition-all duration-200 ease-linear
 			 group-hover:bg-[#ff6f00]"
 			/>
 		),

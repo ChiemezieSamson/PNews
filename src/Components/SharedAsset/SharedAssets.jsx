@@ -190,7 +190,7 @@ export const CatSidebarHanbugar = ({initial, blackletters, redletters, parent, c
                   <Link to={`/${parent}`} className='py-1 px-2 inline-block'>All</Link>
                 </li>
 
-                {CategoriesLinks?.map((cat) => {
+                {CategoriesLinks?.slice(0, 5)?.map((cat) => {
 
                   return (
 
@@ -307,7 +307,7 @@ const SocialMediaCount = ({text, bg, shareUrl, postTitle, postId, SocialSharedCo
 
             <FacebookShareButton 
               url={shareUrl}  
-              quote={postTitle} 
+              quote={postTitle?.toUpperCase()} 
               disabled={!canShare}
               disabledStyle={{opacity: 0.4}}
               resetButtonStyle={true}
@@ -315,13 +315,13 @@ const SocialMediaCount = ({text, bg, shareUrl, postTitle, postId, SocialSharedCo
               onClick={handleShareUpdate}
             >
 
-            <FaFacebookSquare className='inline-block text-base align-text-top pr-1 TextHeadertransition'/> 
+              <FaFacebookSquare className='inline-block text-base align-text-top pr-1 TextHeadertransition'/> 
               { text}
             </FacebookShareButton>
           : 
             <TwitterShareButton         
               url={shareUrl}
-              title={postTitle}
+              title={postTitle?.toUpperCase()}
               disabled={!canShare}
               disabledStyle={{opacity: 0.4}}
               resetButtonStyle={true}
@@ -590,9 +590,9 @@ export const NavDirectionAndPageName = ({users}) => {
         <span> &gt; {search?.username ? search?.username : search} </span>}</small>
       </span>
       
-      <h2 className="font-black font-round tracking-wide text-3xl capitalize">
+      <h2 className="font-black font-lora tracking-wide text-3xl uppercase">
         <strong>
-          {page !== "pages" ? page : ""}
+          {page !== "pages" ? search?.username ? search?.username : search : ""}
         </strong> 
       </h2>
     </>
@@ -889,7 +889,7 @@ export const PageTitleUpdate = ({canOpen, Post}) => {
     }
   } else {
     if(canOpen && Post?.postTitle) {
-      document.title = Post?.postTitle;
+      document.title = Post?.postTitle?.toUpperCase();
     }
   }
 }
