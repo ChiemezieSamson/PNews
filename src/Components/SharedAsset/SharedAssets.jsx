@@ -167,7 +167,7 @@ export const CatSidebarHanbugar = ({initial, blackletters, redletters, parent, c
     }
   }, [catSidebar, size])
 
-  const CatSideBarStyle = `absolute right-0 top-full z-20 shadow-sm shadow-black/5 bg-white py-1 px-2 uppercase cursor-pointer hover:mainColor ${catSidebar ? "translate-y-0 opacity-100 visible TextHeadertransition" : "translate-y-32 opacity-0 invisible"}`
+  const CatSideBarStyle = `absolute right-0 top-full z-20 shadow-sm shadow-black/5 bg-white py-1 px-2 uppercase ${catSidebar ? "translate-y-0 opacity-100 visible TextHeadertransition" : "translate-y-32 opacity-0 invisible"}`
 
   return (
     <>
@@ -223,7 +223,7 @@ export const CatSidebarHanbugar = ({initial, blackletters, redletters, parent, c
                 
                 return (
 
-                  <li key={cat?.id} className={`first:sxs:hidden [&:nth-child(2)]:xs:hidden [&:nth-child(3)]:md:hidden ${isFecthingStyle(isFetching)}`}>
+                  <li key={cat?.id} className={`cursor-pointer first:sxs:hidden [&:nth-child(2)]:xs:hidden [&:nth-child(3)]:md:hidden ${isFecthingStyle(isFetching)}`}>
 
                     <Link to={`/categories?category=${cat?.title}`} className='hover:mainColor py-1 px-2 inline-block'>{cat?.title}</Link>
                   </li>
