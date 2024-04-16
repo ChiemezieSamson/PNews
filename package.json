@@ -57,7 +57,7 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "https://pnews-uxov.onrender.com/api",
+  "proxy": "https://newblog-api-pwju.onrender.com/api",
   "devDependencies": {
     "@tailwindcss/forms": "^0.5.3",
     "@tailwindcss/typography": "^0.5.9",

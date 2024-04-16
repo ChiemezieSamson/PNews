@@ -1,4 +1,16 @@
 [build]
   command = "npm run build"
+  functions = "functions"
   publish = "build"
-  node_version = "20"
+
+[build.environment]
+  NODE_VERSION = "20.11.0"
+
+[build.context]
+  env = "production"
+
+[context.production.environment]
+  NODE_ENV = "production"
+
+[context.deploy-preview]
+  command = "make preview"
