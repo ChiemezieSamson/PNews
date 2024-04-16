@@ -59,7 +59,7 @@
   },
   "proxy": "https://newblog-api-pwju.onrender.com/api",
   "devDependencies": {
-    "@tailwindcss/forms": "^0.5.3",
+    "@tailwindcss/forms": "^0.5.7",
     "@tailwindcss/typography": "^0.5.9",
     "autoprefixer": "^10.4.13",
     "postcss": "^8.4.21",
