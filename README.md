@@ -102,8 +102,8 @@ npm run build
 
 ## Dev Dependencies
 
-- [react-icons](https://react-icons.github.io/react-icons/)
-- [react-toastify](https://fkhadra.github.io/react-toastify/introduction)
-- [dotenv](https://www.npmjs.com/package/dotenv)
-- [react-router-dom](https://reactrouter.com/en/main)
-- [@uidotdev/usehooks](https://usehooks.com/)
+- [@tailwindcss/forms](https://github.com/tailwindlabs/tailwindcss-forms)
+- [@tailwindcss/typography](https://github.com/tailwindlabs/tailwindcss-typography)
+- [autoprefixer](https://www.npmjs.com/package/autoprefixer)
+- [postcss](https://postcss.org/)
+- [tailwindcss](https://tailwindcss.com/)

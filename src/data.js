@@ -13,7 +13,7 @@ import {
 } from "react-icons/fa";
 
 export const publicFolder = "https://pnews-uxov.onrender.com/images/";
-// "http://localhost:5001/images/";
+// export const publicFolder = "http://localhost:5001/images/";
 // "proxy": "http://localhost:5001/api",
 
 export const parentCategoriesAndTags = [
