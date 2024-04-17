@@ -1,6 +1,6 @@
 ### Discover The Best
 
-# <h1 align='center'>[PNEWS](https://newblog-cdkg.onrender.com/)</h1>
+# <h1 align='center'>[PNEWS](https://pnews-sc7h.onrender.com/)</h1>
 
 <div align="center">
   <table>
