@@ -55,7 +55,7 @@ We recognize that human expertise and editorial oversight are crucial in providi
 
 ## Current Status
 
-**LIVE LINK:** https://newblog-cdkg.onrender.com/
+**LIVE LINK:** https://pnews-sc7h.onrender.com/
 
 ## Future Plans
 
