@@ -20,7 +20,7 @@ const SinglePostShareComponent = ({canOpen, Post, size}) => {
 
     postId = Post?._id
     postTitle = Post?.postTitle
-    shareUrl = `https://newblog-api-pwju.onrender.com/single/${Post?._id}`
+    shareUrl = `https://pnews-sc7h.onrender.com/single/${Post?._id}`
     
     canShare = [postId, postTitle].every(Boolean) && !isLoading // making sure that every thing is ready
     canUpdateView = [postId, postTitle].every(Boolean) && !viewedIsLoading // making sure that every thing is ready
