@@ -9,6 +9,7 @@
     "@lexical/selection": "^0.12.6",
     "@reduxjs/toolkit": "^1.9.3",
     "@tailwindcss/forms": "^0.5.7",
+    "@tailwindcss/typography": "^0.5.12",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
@@ -60,7 +61,6 @@
   },
   "proxy": "https://newblog-api-pwju.onrender.com/api",
   "devDependencies": {
-    "@tailwindcss/typography": "^0.5.9",
     "autoprefixer": "^10.4.19",
     "postcss": "^8.4.38",
     "tailwindcss": "^3.4.3"
