@@ -3,6 +3,7 @@ import { FaEnvelope, FaFacebookSquare, FaLinkedin, FaShare, FaTwitter, FaWhatsap
 import { FacebookShareButton, LinkedinShareButton, TwitterShareButton, WhatsappShareButton } from 'react-share'
 import { useUpDateSharedPostsMutation, useUpDateViewedPostsMutation } from '../../../../../Reduxstore/Slices/posts/PostsSlice'
 import { isFecthingStyle } from '../../../../SharedAsset/SharedAssets'
+import Preview from '../../createPost/editorPreview/Preview'
 
 const SinglePostShareComponent = ({canOpen, Post, size}) => {
   const [updateShared, { isLoading }] = useUpDateSharedPostsMutation() // redux toolkit mutation function
@@ -15,6 +16,12 @@ const SinglePostShareComponent = ({canOpen, Post, size}) => {
   let shareUrl
   let canShare
   let canUpdateView 
+  let textExtract
+  
+
+  
+  // const postContent =  (<Preview postContent={Post}/>)
+  
 
   if (canOpen) {
 
@@ -24,6 +31,9 @@ const SinglePostShareComponent = ({canOpen, Post, size}) => {
     
     canShare = [postId, postTitle].every(Boolean) && !isLoading // making sure that every thing is ready
     canUpdateView = [postId, postTitle].every(Boolean) && !viewedIsLoading // making sure that every thing is ready
+
+    const postContent =  (<Preview postContent={Post?.postContent}/>)
+     textExtract = postContent? JSON.parse(postContent?.props?.postContent)?.blocks[0]?.text : ""
   }
 
    
@@ -123,7 +133,7 @@ const SinglePostShareComponent = ({canOpen, Post, size}) => {
 
           <FacebookShareButton 
             url={shareUrl}  
-            quote={postTitle} 
+            quote={postTitle?.toUpperCase()} 
             disabled={!canOpen}
             disabledStyle={{opacity: 0.4}}
             className='relative after:absolute after:inset-0 after:z-10'
@@ -141,7 +151,7 @@ const SinglePostShareComponent = ({canOpen, Post, size}) => {
 
           <TwitterShareButton
             url={shareUrl}  
-            title={postTitle} 
+            title={postTitle?.toUpperCase()} 
             disabled={!canOpen}
             disabledStyle={{opacity: 0.4}}
             className='relative after:absolute after:inset-0 after:z-10'
@@ -165,7 +175,7 @@ const SinglePostShareComponent = ({canOpen, Post, size}) => {
         <div className='grid grid-flow-col gap-x-[1%]'>     
 
           <span className={isFecthingStyle(!canOpen)}>
-            <a href={`mailto:?subject=${postTitle}&body=${shareUrl}`} className='relative after:absolute after:inset-0 after:z-10' 
+            <a href={`mailto:?subject=${postTitle?.toUpperCase()}&body=${shareUrl}`} className='relative after:absolute after:inset-0 after:z-10' 
               onClick={handleShareUpdate} aria-label='email'>
 
               <span className='leading-10 whitespace-nowrap block rounded text-center text-white bg-[#eb4d3f]
@@ -180,9 +190,9 @@ const SinglePostShareComponent = ({canOpen, Post, size}) => {
 
             <LinkedinShareButton
               url={shareUrl}  
-              title={postTitle} 
-              summary={shareUrl}
-              source={shareUrl}
+              title={postTitle?.toUpperCase()} 
+              summary={textExtract?.substring(0, 200) + "..."}
+              source={`PNEWS: ${postTitle?.toUpperCase()}`}
               disabled={!canOpen}
               disabledStyle={{opacity: 0.4}}
               className='relative after:absolute after:inset-0 block after:z-10 w-full'
@@ -200,8 +210,8 @@ const SinglePostShareComponent = ({canOpen, Post, size}) => {
           {otherShare &&
             <WhatsappShareButton
               url={shareUrl}  
-              title={postTitle} 
-              separator=""
+              title={postTitle?.toUpperCase()} 
+              separator=":: "
               disabled={!canOpen}
               disabledStyle={{opacity: 0.4}}
               className='relative after:absolute after:inset-0 block after:z-10 w-full'
