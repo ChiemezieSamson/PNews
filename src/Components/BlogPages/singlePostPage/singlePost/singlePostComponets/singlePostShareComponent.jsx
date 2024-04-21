@@ -18,11 +18,6 @@ const SinglePostShareComponent = ({canOpen, Post, size}) => {
   let canUpdateView 
   let textExtract
   
-
-  
-  // const postContent =  (<Preview postContent={Post}/>)
-  
-
   if (canOpen) {
 
     postId = Post?._id

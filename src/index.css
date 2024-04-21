@@ -113,7 +113,7 @@
   /* text editor styling start here */
 
   .postEditor img {
-    @apply w-full h-full max-h-[480px] object-cover object-center cursor-pointer
+    @apply w-auto h-auto max-h-[480px] object-cover object-center cursor-pointer
   }
 
   .postEditor .rdw-list-dropdown,
