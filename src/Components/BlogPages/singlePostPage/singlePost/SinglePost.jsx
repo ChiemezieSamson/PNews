@@ -45,8 +45,7 @@ const SinglePost = () => {
 
   const [userpassword, setGetUserpassword] = useState("")
 
-  const [sizeLine, setSizeLine] = useState(20)
-  const [removeStyleOnce, setRemoveStyleOnce] = useState(true)
+  const [sizeLine, setSizeLine] = useState(40)
 
   // getting the offsetTop value of the form in to create users first comment
   const offsetOfForm = useRef(null)
@@ -81,7 +80,7 @@ const SinglePost = () => {
   // handle reset of the textsize
   const handleResetFontSize = () => {
 
-    setSizeLine(() =>  20)
+    setSizeLine(() =>  40)
   }
 
   // handing getting and setting users password for before a user can delete a post
@@ -156,11 +155,11 @@ const SinglePost = () => {
 
   const handleTextSize = useMemo(() => {
     let textSize 
-
-    if (sizeLine >= 80) {textSize = "prose-2xl"}
-    if (sizeLine === 60) {textSize = "prose-xl"}
-    if (sizeLine === 40) {textSize = "prose-lg"}
-    if (sizeLine === 20) {textSize = "prose-base"}
+    if(sizeLine === 100) {textSize = "prose-2xl"}
+    if (sizeLine === 80) {textSize = "prose-xl"}
+    if (sizeLine === 60) {textSize = "prose-lg"}
+    if (sizeLine === 40) {textSize = "prose-base"}
+    if (sizeLine === 20) {textSize = "prose-sm"}
 
     return textSize
   }, [sizeLine])
@@ -185,29 +184,6 @@ const SinglePost = () => {
     },
   ]
 
-  // getting all the possible image on the post and adding style to them
-  if (canOpen && removeStyleOnce) {
-
-    const removerEditorTextStlye = document.querySelectorAll(".editor span")
-   
-    const removerEditorImageStlye = document.querySelectorAll(".editor img")
-   
-    removerEditorTextStlye.forEach((span) => {
-  
-      span.removeAttribute('style');
-    })
-     
-    removerEditorImageStlye.forEach((img) => {
-  
-      img.removeAttribute('style');
-      img.setAttribute("alt", "postimage")
-      img.setAttribute("loading", "lazy")
-    })    
-
-    if(removerEditorTextStlye[0] || removerEditorImageStlye[0]) {
-      setRemoveStyleOnce(() => false) 
-    }
-  }
 
   return (
     <div className='relative text-left'>

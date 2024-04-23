@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import draftToHtml from 'draftjs-to-html';
-import DOMPurify from 'dompurify';
-import { convertToRaw } from 'draft-js';
+import { EditorState, convertToRaw } from 'draft-js';
+import parse from 'html-react-parser';
 
 
 const Preview = ({editorText, postContent}) => {
@@ -19,23 +19,29 @@ const Preview = ({editorText, postContent}) => {
 
   useEffect(() => {
 
-    const defaultText = {blocks:[{key:"9f98v",text:"My post ...! |",type:"unstyled",depth:0,inlineStyleRanges:[],entityRanges:[],data:{}}],entityMap:{}}
+    const defaultText = EditorState.createEmpty()
     let html = draftToHtml(convertedPosts !== "" ? JSON.parse(convertedPosts) : editorText  ? convertToRaw(editorText) : defaultText)
 
     setConvertedContent(html)  
   }, [convertedContent, editorText, convertedPosts])
 
-  const  handleMarkUp = (html) => {
-    
-    return {
-
-      __html: DOMPurify.sanitize(html)
-    }
-  }
 
   return (
     <>
-     <div dangerouslySetInnerHTML={handleMarkUp(convertedContent)} className={`editor`}></div>
+      <div className="editor">
+        {parse(convertedContent, {
+            replace(domNode) {
+              if (domNode.attribs) {
+                if(domNode.name === "img") {
+                  domNode.attribs.alt = "postimage"
+                  domNode.attribs.loading = "lazy"
+                }
+                return domNode.attribs.style = "";
+              }              
+            },
+          })
+        }          
+      </div>
     </>
   )
 }

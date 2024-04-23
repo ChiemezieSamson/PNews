@@ -45,6 +45,8 @@ const TextEditor = ({editorState, state, setEditorState, userAction}) => {
             height: "auto",
             width: "auto",
           },
+          alt: { present: true, mandatory: true },
+          inputAccept: 'image/gif,image/jpeg,image/jpg,image/png,image/svg',
         },
         embedded: {
           className: "!hidden lg:!flex",

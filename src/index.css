@@ -194,7 +194,7 @@
 
   .editor img,
   div[data-contents="true"] figure span {
-    @apply max-h-[480px] w-full object-contain cursor-pointer mb-4 rounded text-center
+    @apply max-h-[480px] w-full object-cover cursor-pointer mb-4 rounded text-center
   }
 
   .editor ul li {
