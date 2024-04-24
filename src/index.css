@@ -197,6 +197,11 @@
     @apply max-h-[480px] w-full object-cover cursor-pointer mb-4 rounded text-center
   }
 
+  .editor iframe,
+  .editor video {
+    @apply aspect-video
+  }
+
   .editor ul li {
     @apply list-disc
   }

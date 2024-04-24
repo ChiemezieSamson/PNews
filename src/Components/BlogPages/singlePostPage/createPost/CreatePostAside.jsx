@@ -7,16 +7,18 @@ import Optional from './CreatePostAsideComponents/Optional'
 import Tag from './CreatePostAsideComponents/Tag'
 import { optionalAdded } from '../../../../Reduxstore/Slices/PostsComponentSlices/PostsOptional/PostsOptionalSlice'
 import { useDispatch } from 'react-redux'
+import { useLocation } from 'react-router-dom'
 
 
 const CreatePostAside = ({postTitle, handleAllPostContent, handleSetPostAuthor, postAuthor, canSave, handlePreview, preview,
-  handleShowBar, handleCloseSidebar, showSideBar, userAction, isFetching, size}) => {
+  handleShowBar, handleCloseSidebar, showSideBar, userAction, post, isFetching, size}) => {
 
   const [parentCat, setSelectedParentCat] = useState("")
   const [parentTag, setSelectedParentTag] = useState("")
   const [category , setCategory] = useState("")
   const [addTag, setAddTag] = useState("")
   const [Trending, setTrending] = useState(false)
+  const [favourite, setFavourite] = useState(false)
   const [uncheckedTag, setUncheckedTag] = useState(false)
   const [shared, setShared] = useState(0)
   const [viewed, setViewed] = useState(0)
@@ -24,6 +26,8 @@ const CreatePostAside = ({postTitle, handleAllPostContent, handleSetPostAuthor, 
   const [checkedItemElemets, setCheckedItemElements] = useState([])
 
   const dispatch = useDispatch()
+  const location = useLocation()
+  const Path = location.pathname === "/writepost"
 
   // handling setting the value of the Author slecte value and 
   //sending it to CreatePostComponent
@@ -72,18 +76,24 @@ const CreatePostAside = ({postTitle, handleAllPostContent, handleSetPostAuthor, 
   const handlesetViewed = (e) => {
 
     setViewed(()=> e.target.value)
+
+    dispatch(optionalAdded(shared, viewed, Trending))
   }
 
    // Handle setting the number value for the shares
   const handlessetShared = (e) => {
 
     setShared(()=> e.target.value)
+
+    dispatch(optionalAdded(shared, viewed, Trending))
   }
 
    // Handle setting the value for the trending posts
   const handleCheckedTrendig = (e) => {
 
     e.target.checked ? setTrending(() => true) : setTrending(() => false)
+
+    dispatch(optionalAdded(shared, viewed, Trending))
   }
   
 
@@ -153,9 +163,47 @@ const CreatePostAside = ({postTitle, handleAllPostContent, handleSetPostAuthor, 
 
   useEffect(() => { // updating changes made
 
-    dispatch(optionalAdded(shared, viewed, Trending))
+    if (!Path && post) {
+      if(post?.optional?.shared === null || post?.optional?.shared === "") {
 
-  },[Trending, shared, viewed, dispatch])
+        setShared(() => 0)
+      } else {
+  
+        setShared(() => post?.optional?.shared)
+      }
+  
+      if(post?.optional?.viewed === null || post?.optional?.viewed === "") {
+  
+        setViewed(() => 0)
+      }else {
+  
+        setViewed(() => post?.optional?.viewed)
+      }
+  
+      if(post?.optional?.trending === undefined || post?.optional?.trending === "") {
+  
+  
+        setTrending(() => false)
+      } else {
+  
+        setTrending(() => post?.optional?.trending)
+      }
+  
+      if(post?.optional?.favourite === undefined || post?.optional?.trending === "") {
+  
+        setFavourite(() => false)
+      }else {
+  
+        setFavourite(() => post?.optional?.favourite)
+      }
+    }
+  },[Path, post])
+
+  useEffect(() => {
+
+    dispatch(optionalAdded(shared, viewed, Trending, favourite))
+
+  },[shared, viewed, Trending, favourite, dispatch])
 
 
   useEffect(() => {
@@ -240,6 +288,7 @@ const CreatePostAside = ({postTitle, handleAllPostContent, handleSetPostAuthor, 
           postAuthor={postAuthor}
           userAction={userAction}
           isFetching={isFetching}
+          Path={Path}
         />
 
         <Category 

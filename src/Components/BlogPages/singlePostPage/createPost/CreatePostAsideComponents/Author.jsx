@@ -2,12 +2,13 @@ import { isFecthingStyle } from '../../../../SharedAsset/SharedAssets';
 import useFetchedUsers from '../../../../SharedAsset/Spinners/userSpinner';
 
 
-const Author = ({handlePostAuthor, postAuthor, userAction, isFetching}) => {
+const Author = ({handlePostAuthor, postAuthor, userAction, isFetching, Path}) => {
   const {userContent, useraction, isFetching: allUserIsFetching} = useFetchedUsers() // fetch all the user
   const users = userContent
 
   const isfectchingAll = isFetching || allUserIsFetching
   const canOpen = [userAction, useraction].every(Boolean)
+  const enable = !canOpen === (Path === "/writepost")
 
   return (
      //* Author selection start here */
@@ -22,7 +23,7 @@ const Author = ({handlePostAuthor, postAuthor, userAction, isFetching}) => {
         aria-label="select"
         className='capitalize aria-required:bg-rose-500 font-poppins disabled:opacity-40'
         onChange={handlePostAuthor}
-        disabled={!canOpen} 
+        disabled={enable} 
         form="post_form" 
         required
       >

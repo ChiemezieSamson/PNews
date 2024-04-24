@@ -1,19 +1,20 @@
 import React, { useEffect, useState } from 'react'
 import { FaGripHorizontal, FaGripVertical } from 'react-icons/fa'
 import { Hanbugar3 } from '../../../../ButtonAndOthers/Buttons'
-import Author from './AsideComponent/Author'
 import Category from './AsideComponent/Category'
 import Tag from './AsideComponent/Tag'
-import Optional from './AsideComponent/Optional'
 import { optionalAdded } from '../../../../../Reduxstore/Slices/PostsComponentSlices/PostsOptional/PostsOptionalSlice'
 import { useDispatch } from 'react-redux'
+import Author from '../../createPost/CreatePostAsideComponents/Author'
+import { useLocation } from 'react-router-dom'
+import Optional from '../../createPost/CreatePostAsideComponents/Optional'
 
 
 const UpdatePostAsideComponent = ({postTitle, handleAllPostContent, handleSetPostAuthor, postAuthor, canSave, handlePreview, preview, userAction, isFetching,
   handleShowBar, handleCloseSidebar, showSideBar, post, size}) => {
   const [postCategory, setPostCategory] = useState(post?.postCategory)
   const [postTag, setPostTag] = useState(post?.postTags)
-  const [trending, setTrending] = useState(false)
+  const [Trending, setTrending] = useState(false)
   const [favourite, setFavourite] = useState(false)
   const [uncheckedTag, setUncheckedTag] = useState(false)
   const [shared, setShared] = useState(0)
@@ -26,6 +27,9 @@ const UpdatePostAsideComponent = ({postTitle, handleAllPostContent, handleSetPos
   const [checkedItemElemets, setCheckedItemElements] = useState([])
 
   const dispatch = useDispatch()
+  const location = useLocation()
+  const Path = location.pathname === "/writepost"
+  console.log(Path);
 
   // handling setting the value of the Author slecte value and 
   //sending it to CreatePostComponent
@@ -76,7 +80,7 @@ const UpdatePostAsideComponent = ({postTitle, handleAllPostContent, handleSetPos
     
     setViewed(()=> e.target.value)
 
-    dispatch(optionalAdded(shared, viewed, trending))
+    dispatch(optionalAdded(shared, viewed, Trending))
   }
 
    // Handle setting the number value for the shares
@@ -84,7 +88,7 @@ const UpdatePostAsideComponent = ({postTitle, handleAllPostContent, handleSetPos
 
     setShared(()=> e.target.value)
 
-    dispatch(optionalAdded(shared, viewed, trending))
+    dispatch(optionalAdded(shared, viewed, Trending))
   }
 
    // Handle setting the value for the trending posts
@@ -92,7 +96,7 @@ const UpdatePostAsideComponent = ({postTitle, handleAllPostContent, handleSetPos
 
     e.target.checked ? setTrending(() => true) : setTrending(() => false)
 
-    dispatch(optionalAdded(shared, viewed, trending))
+    dispatch(optionalAdded(shared, viewed, Trending))
   }
 
   // handleing setting CheckedItemElements for categories checkbox
@@ -161,8 +165,8 @@ const UpdatePostAsideComponent = ({postTitle, handleAllPostContent, handleSetPos
       setTrending(() => false)
       setPostCategory(() => [])
       setPostTag(() => [])
-      setViewed(()=> "")
-      setShared(()=> "")
+      setViewed(()=> 0)
+      setShared(()=> 0)
       setAddTag(() => "")
       setCategory(() => "")
       setCheckedItemElements(() => [])
@@ -208,9 +212,9 @@ const UpdatePostAsideComponent = ({postTitle, handleAllPostContent, handleSetPos
 
   useEffect(() => {
 
-    dispatch(optionalAdded(shared, viewed, trending, favourite))
+    dispatch(optionalAdded(shared, viewed, Trending, favourite))
 
-  },[shared, viewed, trending, favourite, dispatch])
+  },[shared, viewed, Trending, favourite, dispatch])
 
 
   useEffect(() => {
@@ -324,7 +328,7 @@ const UpdatePostAsideComponent = ({postTitle, handleAllPostContent, handleSetPos
           handlessetShared={handlessetShared}
           handlesetViewed={handlesetViewed}
           handleCheckedTrendig={handleCheckedTrendig}
-          trending={trending}
+          Trending={Trending}
           shared={shared}
           viewed={viewed}
           userAction={userAction}

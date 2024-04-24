@@ -36,6 +36,14 @@ const Preview = ({editorText, postContent}) => {
                   domNode.attribs.alt = "postimage"
                   domNode.attribs.loading = "lazy"
                 }
+                if(domNode.name === "iframe" ) {
+                  domNode.attribs.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  domNode.attribs.referrerpolicy = "strict-origin-when-cross-origin" 
+                  domNode.attribs.allowfullscreen = true 
+                  if(domNode.attribs.height === "100%" || domNode.attribs.height === "auto") {
+                    domNode.attribs.height = "400px"
+                  }
+                }
                 return domNode.attribs.style = "";
               }              
             },

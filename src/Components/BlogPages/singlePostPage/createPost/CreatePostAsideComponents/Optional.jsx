@@ -85,7 +85,7 @@ const Optional = ({handlesetViewed, handlessetShared, handleCheckedTrendig, Tren
                 <FaToggleOn  className='inline-block cursor-pointer'/>
               </span> 
               :
-              <span className='px-2 inline-block text-2xl  text-[#444]'>
+              <span className='px-2 inline-block text-2xl text-[#444]'>
                 <FaToggleOff className='inline-block cursor-pointer'/>
               </span> 
             }  
