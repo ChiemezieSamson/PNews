@@ -1,8 +1,8 @@
 import { ContentState,convertFromHTML} from 'draft-js';
 import draftToHtml from 'draftjs-to-html';
-import UpdatePostComponent from './EditPostComponents/UpdatePostComponent';
 import { useFetchedPostById } from '../../../SharedAsset/Spinners/postsSpinner';
 import Spinner from '../../../SharedAsset/Spinners/Spinner';
+import CreatePostComponents from '../createPost/CreatePostComponents.jsx';
 
 const EditPost = () => {
   const {singlePost , postAction, postId, isFetching} = useFetchedPostById()
@@ -24,7 +24,7 @@ const EditPost = () => {
 
       {postAction ? 
 
-        <UpdatePostComponent 
+        <CreatePostComponents 
           post={post} 
           state={state} 
           postId={postId}

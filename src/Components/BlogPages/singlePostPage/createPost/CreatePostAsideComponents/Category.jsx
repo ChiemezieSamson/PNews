@@ -1,17 +1,17 @@
 import React, { useEffect } from 'react'
 import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { WritePostAsideOpenClosebar } from '../../../../ButtonAndOthers/Buttons'
-import {catAdded, catUnchecked, emptyCategories, selectAllPostCat} from "../../../../../Reduxstore/Slices/PostsComponentSlices/postcategory/PostcategoriesSlice"
-import { useCreateNewCategoriesMutation, useDeleteExistingCategoriesMutation, useUpdateExistingCategoriesMutation, } from '../../../../../Reduxstore/Slices/categories/Categories'
 import useFetchedCategories from '../../../../SharedAsset/Spinners/categoriesSpinner'
+import { useCreateNewCategoriesMutation, useDeleteExistingCategoriesMutation, useUpdateExistingCategoriesMutation } from '../../../../../Reduxstore/Slices/categories/Categories'
+import {catAdded, catUnchecked, emptyCategories, selectAllPostCat, updateCategories} from "../../../../../Reduxstore/Slices/PostsComponentSlices/postcategory/PostcategoriesSlice"
+import { WritePostAsideOpenClosebar } from '../../../../ButtonAndOthers/Buttons'
 import { parentCategoriesAndTags } from '../../../../../data'
-import { textAndNumberOnly } from '../../../../SharedAsset/Vaidations/RegularExpression'
 import { CategoryAndtagRemoveMessage, isFecthingStyle } from '../../../../SharedAsset/SharedAssets'
 import { HeroOneBussinessFavoriteImageSpinner } from '../../../../SharedAsset/Spinners/Spinner'
+import { textAndNumberOnly } from '../../../../SharedAsset/Vaidations/RegularExpression'
 
 const Category = ({handleSelectedParentCat, parentCat, handleSetCategory, category, userAction, isFetching, 
-  handlesetCheckedItemElements, checkedItemElemets}) => {
+  handlesetCheckedItemElements, checkedItemElemets, updatePostCategories, postId}) => {
 
     // fetch all the categories and their parent for category listing
   const {categoriesContent, categoriesParents, categoriesaction, isFetching: categoriesIsFetching} = useFetchedCategories()
@@ -19,7 +19,7 @@ const Category = ({handleSelectedParentCat, parentCat, handleSetCategory, catego
   const [addNewCategories, { isLoading, isFetching: CreateIsFetching}] = useCreateNewCategoriesMutation()
     // Update category using the id of the first created categories
   const [updateCategory, { isLoading: isUpdating, isFetching: UpdateIsFetching}] = useUpdateExistingCategoriesMutation()
-   // Delete category makings sure that a category,user and authorities are correct
+    // Delete category makings sure that a category,user and authorities are correct
   const [deleteCategoris, { isLoading: isDeleting, isFetching: DeleteIsFetching}] = useDeleteExistingCategoriesMutation()
 
   // Array of all the selected categories, coming from redux store
@@ -54,6 +54,28 @@ const Category = ({handleSelectedParentCat, parentCat, handleSetCategory, catego
     setOpenCat((change) => !change)
     setOpenAddnewCat(() => false)
     setDeleteMessage(() => false)
+
+    if (postId && openCategoris?.length > 0) {
+      let action = "update"
+
+      if(updatePostCategories !== undefined) {
+
+        // get all the category elements
+        const allCategories = document.querySelectorAll(".allCategories")
+  
+        allCategories.forEach((element) => {
+          // check if the content of the element is found in updatePostCategories and 
+          // if found change the check box to checked
+          if(updatePostCategories?.includes(element.textContent.toLowerCase())) {
+  
+            element.previousSibling.checked = true
+            
+             // function to updates all selected parent "li" element
+            handlesetCheckedItemElements(element, action)
+          }
+        })
+      }
+    } 
   }
 
    // handling the display or hidden of add new category component
@@ -85,7 +107,7 @@ const Category = ({handleSelectedParentCat, parentCat, handleSetCategory, catego
     handleSelectedParentCat(e)
   }
 
-  // Check to see if the parent array is up to 5 
+  // Check to see if the parent array is up to 10
   useEffect(() => {
 
     if (parent ) { // make sure the user have selected a parent first
@@ -116,7 +138,7 @@ const Category = ({handleSelectedParentCat, parentCat, handleSetCategory, catego
 
       dispatch(catUnchecked({uncheckedCategory : event.target.value}))
 
-      // function to  filter out this element "li" parent from the array If the checkbox is false
+      // function to filter out this element "li" parent from the array If the checkbox is false
       handlesetCheckedItemElements(element, action) 
 
     } else {
@@ -124,7 +146,7 @@ const Category = ({handleSelectedParentCat, parentCat, handleSetCategory, catego
 
       dispatch(catAdded({checkedCategory: event.target.value}))
 
-      // function to  add this element "li" parent to the array If the checkbox is true
+      // function to add this element "li" parent to the array If the checkbox is true
       handlesetCheckedItemElements(element, action)
     }
   }
@@ -217,6 +239,17 @@ const Category = ({handleSelectedParentCat, parentCat, handleSetCategory, catego
     }    
   }
 
+  useEffect(() => {
+
+    if (postId && updatePostCategories?.length > 0) {
+
+      if(updatePostCategories !== undefined) {
+
+        dispatch(updateCategories(updatePostCategories))    
+      }
+    }
+  },[updatePostCategories, dispatch, postId])
+
   return (    
     //* Category selection start here */
     <div className="text-sm">
@@ -250,7 +283,7 @@ const Category = ({handleSelectedParentCat, parentCat, handleSetCategory, catego
                     onChange={handleRemoveCatOnDoubleClick}
                   />
 
-                  <label htmlFor={cat?.id} className="ml-3 inline-block text-sm text-stone-700">{cat.title}</label>
+                  <label htmlFor={cat?.id} className="ml-3 inline-block text-sm text-stone-700 allCategories">{cat.title}</label>
                 </li>
               )
             })}
@@ -310,8 +343,9 @@ const Category = ({handleSelectedParentCat, parentCat, handleSetCategory, catego
               aria-label='text' 
               maxLength={13}              
               required
-              className={`mb-0 aria-required:bg-rose-500 font-poppins ${(!isValid && category) ? "border-red-500 text-red-600 focus:border-red-500 focus:ring-red-500" : ""}`} 
+              className={`mb-0 aria-required:bg-rose-500 font-poppins disabled:opacity-40 ${(!isValid && category) ? "border-red-500 text-red-600 focus:border-red-500 focus:ring-red-500" : ""}`} 
               autoFocus={true}
+              disabled={!canOpen}
               value={category}
               onChange={handleNewCategoryName}
             />
@@ -325,10 +359,11 @@ const Category = ({handleSelectedParentCat, parentCat, handleSetCategory, catego
             <select 
               name="parent_categories"               
               id="parent_cat" 
-              className='mb-0 aria-required:bg-rose-500 font-poppins'
+              className='mb-0 aria-required:bg-rose-500 font-poppins disabled:opacity-40'
               aria-label='select'
               required
               value={parentCat} 
+              disabled={!canOpen}
               onChange={handleParentCategory} 
             >
 

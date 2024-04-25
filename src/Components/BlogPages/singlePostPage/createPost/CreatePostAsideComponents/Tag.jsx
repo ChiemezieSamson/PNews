@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { selectAllPostTags, tagAdded, tagUnchecked } from '../../../../../Reduxstore/Slices/PostsComponentSlices/postsTags/PostsTagsSlice'
+import { selectAllPostTags, tagAdded, tagUnchecked, updateTag } from '../../../../../Reduxstore/Slices/PostsComponentSlices/postsTags/PostsTagsSlice'
+import useFetchedTags from '../../../../SharedAsset/Spinners/tagsSpiner'
 import { useCreateNewTagsMutation, useDeleteExistingTagMutation, useUpdateExistingTagMutation } from '../../../../../Reduxstore/Slices/tags/TagsSlice'
 import { WritePostAsideOpenClosebar } from '../../../../ButtonAndOthers/Buttons'
-import useFetchedTags from '../../../../SharedAsset/Spinners/tagsSpiner'
 import { parentCategoriesAndTags } from '../../../../../data'
 import { textSpaceAndNumber } from '../../../../SharedAsset/Vaidations/RegularExpression'
 import { CategoryAndtagRemoveMessage, isFecthingStyle } from '../../../../SharedAsset/SharedAssets'
 import { HeroOneBussinessFavoriteImageSpinner } from '../../../../SharedAsset/Spinners/Spinner'
 
 
-const Tag = ({handleSetAddTag, addTag, handleSelectedParentTag, parentTag, userAction, isFetching, uncheckedTag, handleUncheckTag}) => {
+const Tag = ({handleSetAddTag, addTag, handleSelectedParentTag, parentTag, userAction, isFetching, uncheckedTag, handleUncheckTag, updatePostTags, postId}) => {
   // fetch all the tags and their parent for tags listing
   const {tagsContent, tagsParents, tagsaction, isFetching: allTagsIsFetching} = useFetchedTags()
   // Create new tag onec if none have been created before
@@ -54,6 +54,27 @@ const Tag = ({handleSetAddTag, addTag, handleSelectedParentTag, parentTag, userA
 
     setOpenCat((change) => !change)
     setDeleteMessage(() => false)
+
+    if(postId && postTagArrays?.length > 0) {
+
+      if (updatePostTags !== undefined) {
+
+        const alltags = document.querySelectorAll(".alltags")
+        alltags.forEach((element) => {
+  
+          element.parentElement.style.borderColor = "#e2e2e2"
+          element.nextSibling.checked = false
+          element.parentElement.lastChild.style.display = "none"
+          
+          if(updatePostTags?.includes(element.textContent.toLowerCase())){
+  
+            element.parentElement.style.borderColor = "#60a5fa"
+            element.nextSibling.checked = true
+            element.parentElement.lastChild.style.display = "inline-block"
+          }
+        })     
+      }
+    } 
   }
 
   // handling the remove tag
@@ -87,7 +108,7 @@ const Tag = ({handleSetAddTag, addTag, handleSelectedParentTag, parentTag, userA
     handleSelectedParentTag(e)
   }
 
-  // Check to see if the parent array is up to 6
+  // Check to see if the parent array is up to 10
   useEffect(() => {
 
     if (parent) { // make sure the user have selected a parent first
@@ -241,6 +262,17 @@ const Tag = ({handleSetAddTag, addTag, handleSelectedParentTag, parentTag, userA
       }
   }
 
+  useEffect(() => {    
+
+    if (updatePostTags?.length > 0 && postId) {
+
+      if (updatePostTags !== undefined) {
+
+        dispatch(updateTag(updatePostTags)) 
+      }
+    } 
+  },[updatePostTags, dispatch, postId])
+
 
   useEffect(() => {
 
@@ -265,7 +297,6 @@ const Tag = ({handleSetAddTag, addTag, handleSelectedParentTag, parentTag, userA
 
       {/* form to enter new tag start here */}
       <div className={`${openCat? "block" : "hidden"} px-3 mt-2 mb-10 ${isFecthingStyle(isfectchingAll)}`}>
-
 
         {errorText ? <p className='text-xs text-rose-500 tracking-wider font-lora'>Failed to save the Tag</p> : "" }
 
@@ -340,7 +371,7 @@ const Tag = ({handleSetAddTag, addTag, handleSelectedParentTag, parentTag, userA
 
                   <li key={tag?.id} className={`bg-[#e2e2e2] inline-block mr-2 mt-2 cursor-pointer text-sm border border-solid`}>
 
-                    <label htmlFor={`"Tag" + ${tag?.id}`} className='peer p-0.5 mr-1.5 inline-block capitalize text-center cursor-pointer'> 
+                    <label htmlFor={`"Tag" + ${tag?.id}`} className='peer p-0.5 mr-1.5 inline-block capitalize text-center alltags cursor-pointer'> 
                       {tag.title}
                     </label>
 

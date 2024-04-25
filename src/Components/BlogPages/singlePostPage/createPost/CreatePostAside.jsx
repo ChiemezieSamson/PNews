@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from 'react'
 import { FaGripHorizontal, FaGripVertical } from 'react-icons/fa'
 import { Hanbugar3 } from "../../../ButtonAndOthers/Buttons"
-import Author from './CreatePostAsideComponents/Author'
-import Category from './CreatePostAsideComponents/Category'
-import Optional from './CreatePostAsideComponents/Optional'
-import Tag from './CreatePostAsideComponents/Tag'
 import { optionalAdded } from '../../../../Reduxstore/Slices/PostsComponentSlices/PostsOptional/PostsOptionalSlice'
 import { useDispatch } from 'react-redux'
-import { useLocation } from 'react-router-dom'
+import Author from './CreatePostAsideComponents/Author'
+import Optional from './CreatePostAsideComponents/Optional'
+import Tag from './CreatePostAsideComponents/Tag'
+import Category from './CreatePostAsideComponents/Category'
 
 
 const CreatePostAside = ({postTitle, handleAllPostContent, handleSetPostAuthor, postAuthor, canSave, handlePreview, preview,
-  handleShowBar, handleCloseSidebar, showSideBar, userAction, post, isFetching, size}) => {
-
+  handleShowBar, handleCloseSidebar, showSideBar, userAction, post, postId, isFetching, size}) => {
+  const [postCategory, setPostCategory] = useState(post?.postCategory)
+  const [postTag, setPostTag] = useState(post?.postTags)
   const [parentCat, setSelectedParentCat] = useState("")
   const [parentTag, setSelectedParentTag] = useState("")
   const [category , setCategory] = useState("")
@@ -26,8 +26,6 @@ const CreatePostAside = ({postTitle, handleAllPostContent, handleSetPostAuthor, 
   const [checkedItemElemets, setCheckedItemElements] = useState([])
 
   const dispatch = useDispatch()
-  const location = useLocation()
-  const Path = location.pathname === "/writepost"
 
   // handling setting the value of the Author slecte value and 
   //sending it to CreatePostComponent
@@ -95,7 +93,6 @@ const CreatePostAside = ({postTitle, handleAllPostContent, handleSetPostAuthor, 
 
     dispatch(optionalAdded(shared, viewed, Trending))
   }
-  
 
   // handleing setting CheckedItemElements for categories checkbox
   const handlesetCheckedItemElements = (element, action) => {
@@ -130,16 +127,24 @@ const CreatePostAside = ({postTitle, handleAllPostContent, handleSetPostAuthor, 
 
       setCheckedItemElements(() => [])     
     }
+
+     // If the "li" of the lable for each category is present set the setCheckedItemElements to the input 
+    // element of the checkbox
+    if (element.parentElement && action === "update") { 
+
+      setCheckedItemElements((list) => [...list, element.previousSibling]);
+    }
   }
 
-  // handling reseting tag after publision
+  // handling reseting tag after publish
   const handleUncheckTag = () => {
 
     setUncheckedTag(() => false)
   }
   
-  const handleDispatched = () => {
-    handleAllPostContent() // handling calling of the function that save each post to the data base 
+  const handleDispatched = async () => {
+
+    await handleAllPostContent() // handling calling of the function that save each post to the data base 
 
     if (canSave) {
 
@@ -153,6 +158,8 @@ const CreatePostAside = ({postTitle, handleAllPostContent, handleSetPostAuthor, 
       setSelectedParentCat(() => "")
       setSelectedParentTag(() => "")
       setTrending(() => false)
+      setPostCategory(() => [])
+      setPostTag(() => [])
       setViewed(()=> 0)
       setShared(()=> 0)
       setAddTag(() => "")
@@ -163,7 +170,7 @@ const CreatePostAside = ({postTitle, handleAllPostContent, handleSetPostAuthor, 
 
   useEffect(() => { // updating changes made
 
-    if (!Path && post) {
+    if (postId) {
       if(post?.optional?.shared === null || post?.optional?.shared === "") {
 
         setShared(() => 0)
@@ -197,7 +204,7 @@ const CreatePostAside = ({postTitle, handleAllPostContent, handleSetPostAuthor, 
         setFavourite(() => post?.optional?.favourite)
       }
     }
-  },[Path, post])
+  },[postId, post])
 
   useEffect(() => {
 
@@ -258,7 +265,7 @@ const CreatePostAside = ({postTitle, handleAllPostContent, handleSetPostAuthor, 
         >
           {showSideBar ?
 
-            <FaGripVertical className="text-white  inline-block" />
+            <FaGripVertical className="text-white inline-block" />
               :                             
             <FaGripHorizontal className='inline-block'/>           
           }
@@ -273,14 +280,13 @@ const CreatePostAside = ({postTitle, handleAllPostContent, handleSetPostAuthor, 
             <Hanbugar3 closesidebar={handleCloseSidebar}/>
           </span>
 
-          <h3 className='pt-8 my-0 mx-1 text-center capitalize font-round font-medium text-stone-800 text-xl'>
+          <h3 className='pt-8 my-0 mx-1 text-center capitalize font-round font-medium text-stone-800 text-lg sm:text-xl'>
 
             <span className='px-2'>
              {postTitle ? postTitle?.substring(0, textSubstring)  : "(no title)"} 
              {postTitle?.substring(0, textSubstring).length < postTitle.length && "..."}
             </span>
           </h3>
-
         </div>
 
         <Author 
@@ -288,7 +294,7 @@ const CreatePostAside = ({postTitle, handleAllPostContent, handleSetPostAuthor, 
           postAuthor={postAuthor}
           userAction={userAction}
           isFetching={isFetching}
-          Path={Path}
+          postId={postId} 
         />
 
         <Category 
@@ -300,6 +306,8 @@ const CreatePostAside = ({postTitle, handleAllPostContent, handleSetPostAuthor, 
           checkedItemElemets={checkedItemElemets}
           userAction={userAction}
           isFetching={isFetching}  
+          updatePostCategories={postCategory}
+          postId={postId} 
         />    
 
         <Tag 
@@ -307,10 +315,12 @@ const CreatePostAside = ({postTitle, handleAllPostContent, handleSetPostAuthor, 
           addTag={addTag}
           handleSetAddTag={handleSetAddTag}
           handleSelectedParentTag={handleSelectedParentTag}
+          updatePostTags={postTag}
           userAction={userAction}
           isFetching={isFetching}
           uncheckedTag={uncheckedTag}
           handleUncheckTag={handleUncheckTag}
+          postId={postId} 
         />    
 
         <Optional

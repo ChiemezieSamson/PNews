@@ -2,13 +2,13 @@ import { isFecthingStyle } from '../../../../SharedAsset/SharedAssets';
 import useFetchedUsers from '../../../../SharedAsset/Spinners/userSpinner';
 
 
-const Author = ({handlePostAuthor, postAuthor, userAction, isFetching, Path}) => {
+const Author = ({handlePostAuthor, postAuthor, userAction, isFetching, postId}) => {
   const {userContent, useraction, isFetching: allUserIsFetching} = useFetchedUsers() // fetch all the user
   const users = userContent
 
   const isfectchingAll = isFetching || allUserIsFetching
   const canOpen = [userAction, useraction].every(Boolean)
-  const enable = !canOpen === (Path === "/writepost")
+  const enable = !canOpen === !postId
 
   return (
      //* Author selection start here */

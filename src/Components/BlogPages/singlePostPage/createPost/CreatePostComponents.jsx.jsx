@@ -2,33 +2,38 @@ import { useEffect, useState } from "react";
 import {BiImageAdd} from "react-icons/bi";
 import { useDispatch, useSelector } from "react-redux";
 import CreatePostAside from "./CreatePostAside";
-import { convertToRaw } from 'draft-js';
+import { ContentState, EditorState, convertFromHTML, convertToRaw } from 'draft-js'
+import draftToHtml from 'draftjs-to-html';
 import "../../../../../node_modules/react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
+import { useNavigate } from "react-router-dom";
 import { emptyCategories, selectAllPostCat } from '../../../../Reduxstore/Slices/PostsComponentSlices/postcategory/PostcategoriesSlice'
 import { emptyTag, selectAllPostTags } from '../../../../Reduxstore/Slices/PostsComponentSlices/postsTags/PostsTagsSlice'
 import { emptyOptional, selectAllPostOptionals } from '../../../../Reduxstore/Slices/PostsComponentSlices/PostsOptional/PostsOptionalSlice'
-import { useCreateNewPostMutation } from "../../../../Reduxstore/Slices/posts/PostsSlice";
+import { useCreateNewPostMutation, useUpdateExistingPostMutation } from "../../../../Reduxstore/Slices/posts/PostsSlice";
 import { isFecthingStyle, useWindowSize } from "../../../SharedAsset/SharedAssets";
 import PostWritePreview from "./editorPreview/postWritePreview";
 import { useFetchedUserById } from "../../../SharedAsset/Spinners/userSpinner";
-import { useNavigate } from "react-router-dom";
 import { textSpaceNumberAndSpecialCharater } from "../../../SharedAsset/Vaidations/RegularExpression";
 import TextEditor from "../editor/Editor";
-import { useImageUploadMutation } from "../../../../Reduxstore/Slices/imageSlice/ImageSlice";
+import { useImageDeleteMutation, useImageUploadMutation } from "../../../../Reduxstore/Slices/imageSlice/ImageSlice";
+import { publicFolder } from "../../../../data";
 
-const CreatePostComponents = ({state}) => {
+const CreatePostComponents = ({state, post, postId, postAction, isFetching}) => {
   const [addNewPost, { isLoading , isFetching: CreatePostsIsfetching}] = useCreateNewPostMutation() // Redux function to create a new post
+  const [postUpdated, { isLoading: postUpdatedIsLoading, updateIsfetching }] = useUpdateExistingPostMutation()// Redux function to update a new post
   const [uploadImage, {isLoading: uploadIsLoding}] = useImageUploadMutation()
-  // getting the user for authenticatin, authorisation and security
-  const {singleUser, userAction, isSuccess, isError, isFetching} = useFetchedUserById()
+  const [deleteImage, {isLoading: ImageDeleteIsLoding}] = useImageDeleteMutation()
 
-  const [editorState, setEditorState] = useState(() => state)
+  // getting the user for authenticatin, authorisation and security
+  const {singleUser, userAction, isSuccess, isError, isFetching: userIsFetching} = useFetchedUserById()
+
+  const [editorState, setEditorState] = useState(() => postId ? EditorState.createWithContent(state) : state)
 
   const [preview, setPreview] = useState(false) // handling the preview of the post preview component page design
   const [showSideBar, setShowSideBar] = useState(false) // handling the display action of the aside components
   const [errorText, setErrorText] = useState(false) /// text used to indicate that your category didn't save or there is an erro
   const [errorText2, setErrorText2] = useState(false) /// text used to indicate that your category didn't save or there is an erro
-  const [isValid, setIsValid] = useState(false); // regular expressions
+  const [isValid, setIsValid] = useState(true); // regular expressions
   const [runOnce, setRunOnce] = useState(false)
 
   const [postTitle, setPostTitle] = useState("")
@@ -40,8 +45,11 @@ const CreatePostComponents = ({state}) => {
 
   const size = useWindowSize()
   const navigate = useNavigate();
+  const dispatch = useDispatch()
   const User = singleUser
-  const anyIsfetching = CreatePostsIsfetching || isFetching
+  const canOpen = [postAction, userAction].every(Boolean)
+  const CreateIsfetching = CreatePostsIsfetching || isFetching
+  const UpdateIsfetching = userIsFetching || isFetching || updateIsfetching
 
   // Array of all the selected categories, tags, and options coming from redux store
   const postCategory = useSelector(selectAllPostCat)
@@ -58,7 +66,7 @@ const CreatePostComponents = ({state}) => {
   const handlePostTitle = (e) => {
 
     const { value } = e.target;
-    const { isValid }= textSpaceNumberAndSpecialCharater(value);
+    const { isValid } = textSpaceNumberAndSpecialCharater(value);
 
     setIsValid(isValid);
 
@@ -86,10 +94,10 @@ const CreatePostComponents = ({state}) => {
   // stringify the editor object before sending to the database
   const postContent = JSON.stringify(convertToRaw(editorState.getCurrentContent()))
 
-  const dispatch = useDispatch()
 
   // handling setting image once selected from the user device
   const handleImage = async (e) => {
+    setErrorText2(() => false)
 
     if(e.target.value) {
 
@@ -126,11 +134,23 @@ const CreatePostComponents = ({state}) => {
         }
       }
     }
-  }
+  } 
 
-  const canSave = [postTitle, postImage, postAuthor, postCategory[0], postTags[0], isValid].every(Boolean) && !isLoading && !errorText && !uploadIsLoding
+  const canSave = [postTitle, postImage, postAuthor, postCategory[0], postTags[0], isValid].every(Boolean) && !postUpdatedIsLoading && !isLoading && !errorText && !uploadIsLoding && !ImageDeleteIsLoding
 
   const handleAllPostContent = async () => {
+    let WritePoststate
+
+    if(postId) {
+      const sampleMarkup = '<p>My post ...! |</p>'
+      let html = draftToHtml(sampleMarkup);
+      const blocksFromHTML = convertFromHTML(html);
+      
+     WritePoststate = ContentState.createFromBlockArray(
+        blocksFromHTML.contentBlocks,
+        blocksFromHTML.entityMap,
+      );
+    }
 
     if (canSave) {
 
@@ -138,12 +158,34 @@ const CreatePostComponents = ({state}) => {
 
       try {
 
-        if (postImage !== "") {
+        if(postId) {
+          if ( post?.postImage !== postImage) {
 
-          await uploadImage({data})          
-        }    
-        
-        await addNewPost({ postAuthor, postTitle, postImage, postContent , postCategory, postTags, optional }).unwrap()
+            await uploadImage({data})          
+          }        
+  
+          await postUpdated({postId, postAuthor, postTitle, postImage, postContent, postCategory, postTags, optional})
+  
+          if ( post?.postImage !== postImage) {
+  
+            if (post?.postImage !== "") {
+  
+              await deleteImage({profileImage:  post?.postImage})
+            }  
+          }
+  
+          navigate(`/single/${postId}`)
+          setEditorState(() => EditorState.createWithContent(WritePoststate))
+        } else {
+
+          if (postImage !== "") {
+  
+            await uploadImage({data})          
+          }    
+
+          await addNewPost({ postAuthor, postTitle, postImage, postContent , postCategory, postTags, optional }).unwrap()
+        }
+
         
         dispatch(emptyCategories())
         dispatch(emptyTag())
@@ -162,6 +204,18 @@ const CreatePostComponents = ({state}) => {
     }
   }
 
+  // update the usestates once post is fetched
+  useEffect(() => {
+
+    if(canOpen && post._id) {
+      
+      setPostTitle(() => post?.postTitle)
+      setPostImage(() => post?.postImage)
+      setPostAuthor(() => post?.postAuthor)
+    }
+   }, [canOpen, post])
+
+
   // using useEffect to dictect the changes in screen size
   useEffect(() => {
 
@@ -176,11 +230,10 @@ const CreatePostComponents = ({state}) => {
       setShowSideBar(() => true) 
       setRunOnce(() => false)
     }
-
   },[size, runOnce])
 
 
-   // making user that only authorized user can update
+   // making sure that only authorized user can update
    useEffect(() => {
 
     if(!isSuccess && isError) {
@@ -195,7 +248,7 @@ const CreatePostComponents = ({state}) => {
     <div className="grid lg:grid-cols-4 relative mb-10">
 
        {/* write post start here */}
-      <div className={`text-left lg:col-span-3 order-2 lg:order-1 ${(size.width < 1024 && showSideBar) && "hidden"} ${isFecthingStyle(anyIsfetching)}`}>
+      <div className={`text-left lg:col-span-3 order-2 lg:order-1 ${(size.width < 1024 && showSideBar) && "hidden"} ${isFecthingStyle(postId ? CreateIsfetching : UpdateIsfetching)}`}>
 
         {!preview ? 
           <>
@@ -211,18 +264,26 @@ const CreatePostComponents = ({state}) => {
                 maxLength={100}
                 name="head_title"  
                 className={`text-2xl sm:text-3xl xl:text-4xl text-stone-800 border-0 focus:border-b focus:outline-0 shadow-none disabled:opacity-40
-                  p-5 pb-px font-round ${(!isValid && postTitle) ? "border-red-500 text-red-600 focus:border-red-500 focus:ring-red-500" : ""}`}
+                  p-5 pb-px font-round uppercase ${(!isValid && postTitle) ? "border-red-500 text-red-600 focus:border-red-500 focus:ring-red-500" : ""}`}
                 autoFocus={true} 
-                disabled={!userAction}
+                disabled={postId ? !canOpen : !userAction}
                 form="post_form" 
                 value={postTitle}  
                 onChange={handlePostTitle}/>
             </div>
 
             {/* image to be display when an image is selected from user device */}
-            {(postImage && file) && 
+            { file ? 
               <img  
                 src={URL.createObjectURL(file)} 
+                alt="postImage" 
+                className='rounded-md max-h-64 imgxs:max-h-72 sm:max-h-80 md:max-h-96 xl:max-h-[400px] 2xl:max-h-[450px]' 
+                loading="lazy"
+              /> 
+              :
+              (postImage && postId) && 
+              <img 
+                src={publicFolder + postImage} 
                 alt="postImage" 
                 className='rounded-md max-h-64 imgxs:max-h-72 sm:max-h-80 md:max-h-96 xl:max-h-[400px] 2xl:max-h-[450px]' 
                 loading="lazy"
@@ -246,7 +307,7 @@ const CreatePostComponents = ({state}) => {
                 hover:file:bg-neutral-200 focus:outline-none focus:border-0 TextHeadertransition' 
                 name="image" 
                 required
-                disabled={!userAction}
+                disabled={postId ? !canOpen : !userAction}
                 onChange={handleImage}
               />
 
@@ -258,9 +319,9 @@ const CreatePostComponents = ({state}) => {
               
               <TextEditor 
                 editorState={editorState}
-                state={state}
+                state={postId ? EditorState.createWithContent(state) : state}
                 setEditorState={setEditorState}
-                userAction={userAction}
+                userAction={postId ? canOpen : userAction}
               />
             </div>
           </> 
@@ -268,36 +329,38 @@ const CreatePostComponents = ({state}) => {
           <PostWritePreview 
             editorText={editorState.getCurrentContent()} 
             postTitle={postTitle}
+            postImage={postImage}        
             postTags={postTags}
             optional={optional}           
-            postImage={postImage}        
-            postCategory={postCategory?.length > 0 ? postCategory :  ["category"]}
+            postCategory={postCategory?.length > 0 ? postCategory : postId ?  post?.postCategory : ["category"]}
             file={file}
             User={User}
             preview={preview}
-            userAction={userAction}
-            isFetching={anyIsfetching}
+            userAction={postId ? canOpen : userAction}
+            isFetching={postId ? CreateIsfetching : UpdateIsfetching}
           />
         }
       </div>
       
       <div className="lg:order-2 order-1 text-left lg:col-span-1">
 
-        <CreatePostAside 
-          postTitle={postTitle}
-          canSave={canSave}
-          handleAllPostContent={handleAllPostContent} 
-          handleSetPostAuthor={handleSetPostAuthor} 
-          postAuthor={postAuthor}
-          handlePreview={handlePreview}
-          preview={preview}
-          size={size}
-          handleShowBar={handleShowBar}
-          handleCloseSidebar={handleCloseSidebar}
-          showSideBar={showSideBar}
-          userAction={userAction}
-          isFetching={anyIsfetching}
-        />        
+          <CreatePostAside 
+            postTitle={postTitle}
+            canSave={canSave}
+            handleAllPostContent={handleAllPostContent} 
+            handleSetPostAuthor={handleSetPostAuthor} 
+            postAuthor={postAuthor}
+            handlePreview={handlePreview}
+            preview={preview}
+            handleShowBar={handleShowBar}
+            handleCloseSidebar={handleCloseSidebar}
+            showSideBar={showSideBar}
+            post={post}
+            postId={postId}
+            size={size}
+            userAction={postId ? canOpen : userAction}
+            isFetching={postId ? CreateIsfetching : UpdateIsfetching}
+          />        
       </div>
     </div>
   )
