@@ -21,8 +21,8 @@ import { publicFolder } from "../../../../data";
 const CreatePostComponents = ({state, post, postId, postAction, isFetching}) => {
   const [addNewPost, { isLoading , isFetching: CreatePostsIsfetching}] = useCreateNewPostMutation() // Redux function to create a new post
   const [postUpdated, { isLoading: postUpdatedIsLoading, updateIsfetching }] = useUpdateExistingPostMutation()// Redux function to update a new post
-  const [uploadImage, {isLoading: uploadIsLoding}] = useImageUploadMutation()
-  const [deleteImage, {isLoading: ImageDeleteIsLoding}] = useImageDeleteMutation()
+  const [uploadImage, {isLoading: uploadIsLoding}] = useImageUploadMutation() // Redux function to uploadImage to storage
+  const [deleteImage, {isLoading: ImageDeleteIsLoding}] = useImageDeleteMutation() // Redux function to deleteImage to storage
 
   // getting the user for authenticatin, authorisation and security
   const {singleUser, userAction, isSuccess, isError, isFetching: userIsFetching} = useFetchedUserById()
@@ -245,10 +245,31 @@ const CreatePostComponents = ({state, post, postId, postAction, isFetching}) => 
 
 
   return (
-    <div className="grid lg:grid-cols-4 relative mb-10">
+    <div className="lg:grid lg:grid-cols-4 relative mb-10">
+
+      <div className="lg:order-2 text-left lg:col-span-1">
+
+        <CreatePostAside 
+          postTitle={postTitle}
+          canSave={canSave}
+          handleAllPostContent={handleAllPostContent} 
+          handleSetPostAuthor={handleSetPostAuthor} 
+          postAuthor={postAuthor}
+          handlePreview={handlePreview}
+          preview={preview}
+          handleShowBar={handleShowBar}
+          handleCloseSidebar={handleCloseSidebar}
+          showSideBar={showSideBar}
+          post={post}
+          postId={postId}
+          size={size}
+          userAction={postId ? canOpen : userAction}
+          isFetching={postId ? CreateIsfetching : UpdateIsfetching}
+        />        
+      </div>
 
        {/* write post start here */}
-      <div className={`text-left lg:col-span-3 order-2 lg:order-1 ${(size.width < 1024 && showSideBar) && "hidden"} ${isFecthingStyle(postId ? CreateIsfetching : UpdateIsfetching)}`}>
+      <div className={`text-left lg:col-span-3 lg:order-1 ${(size.width < 1024 && showSideBar) && "hidden"} ${isFecthingStyle(postId ? CreateIsfetching : UpdateIsfetching)}`}>
 
         {!preview ? 
           <>
@@ -264,7 +285,7 @@ const CreatePostComponents = ({state, post, postId, postAction, isFetching}) => 
                 maxLength={100}
                 name="head_title"  
                 className={`text-2xl sm:text-3xl xl:text-4xl text-stone-800 border-0 focus:border-b focus:outline-0 shadow-none disabled:opacity-40
-                  p-5 pb-px font-round uppercase ${(!isValid && postTitle) ? "border-red-500 text-red-600 focus:border-red-500 focus:ring-red-500" : ""}`}
+                  p-5 pb-px font-round ${(!isValid && postTitle) ? "border-red-500 text-red-600 focus:border-red-500 focus:ring-red-500" : ""}`}
                 autoFocus={true} 
                 disabled={postId ? !canOpen : !userAction}
                 form="post_form" 
@@ -340,27 +361,6 @@ const CreatePostComponents = ({state, post, postId, postAction, isFetching}) => 
             isFetching={postId ? CreateIsfetching : UpdateIsfetching}
           />
         }
-      </div>
-      
-      <div className="lg:order-2 order-1 text-left lg:col-span-1">
-
-          <CreatePostAside 
-            postTitle={postTitle}
-            canSave={canSave}
-            handleAllPostContent={handleAllPostContent} 
-            handleSetPostAuthor={handleSetPostAuthor} 
-            postAuthor={postAuthor}
-            handlePreview={handlePreview}
-            preview={preview}
-            handleShowBar={handleShowBar}
-            handleCloseSidebar={handleCloseSidebar}
-            showSideBar={showSideBar}
-            post={post}
-            postId={postId}
-            size={size}
-            userAction={postId ? canOpen : userAction}
-            isFetching={postId ? CreateIsfetching : UpdateIsfetching}
-          />        
       </div>
     </div>
   )

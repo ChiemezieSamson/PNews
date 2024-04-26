@@ -73,7 +73,7 @@ const FashionAndTrendsPosts = ({Posts, categories, canOpen, isFetching}) => {
                   <div className="mb-2 relative topRetangleImage min-w-[250px] imgxs:min-w-[280px]">
                     
                     <Link to={`/single/${post?._id}`}>
-                      <img src={post?.postImage ? publicFolder + post?.postImage : "../../../asset/images/imagebg.jpg"} alt={"posts"} className="topRetangleImage max-h-44 imgxs:h-52 sm:h-60 md:h-44 lg:h-52" loading="lazy"/>
+                      <img src={post?.postImage ? publicFolder + post?.postImage : "../../../asset/images/imagebg.jpg"} alt={"posts"} className="topRetangleImage aspect-video max-h-44 imgxs:h-52 sm:h-60 md:h-44 lg:h-52" loading="lazy"/>
                     </Link>
 
                     <CategoriesComponentBotton cat={post?.postCategory[0]} />

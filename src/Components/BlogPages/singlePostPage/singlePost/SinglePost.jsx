@@ -20,6 +20,7 @@ import { SinglePostSpinner, SkeletonTextTwo } from '../../../SharedAsset/Spinner
 import { handleUserPassword } from '../../../SharedAsset/Vaidations/RegularExpression';
 import TexSizeAdjuster from './singlePostComponets/TexSizeAdjuster';
 import userAvatar from "../../../../asset/images/user-avatar.png"
+import { useImageDeleteMutation } from '../../../../Reduxstore/Slices/imageSlice/ImageSlice';
 
 
 const SinglePost = () => {
@@ -37,6 +38,8 @@ const SinglePost = () => {
   const {singleContent, contentAction, isFetching: commentIsFetching, postId: commentPostId} = useFetchedCommentById() 
   // fetching all comment for Aside comment display sction
   const {commentsContent, commentaction, isFetching: commentAllIsFetching} = useFetchedComments()
+  //Delete Image when post author deletes post
+  const [deleteImage, {isLoading: ImageDeleteIsLoding}] = useImageDeleteMutation()
 
   const [favourite, setFavourite] = useState(false)
   const [openValidation, setOpenValidation] = useState(false)
@@ -105,7 +108,6 @@ const SinglePost = () => {
     setGetUserpassword(() => "")
   }
 
-
   const canDelete = [userpassword, postId, isValid].every(Boolean) && !isLoading && Post?.postAuthor === userByUserId?._id
 
   // user validation and posts deletion if user is authentic
@@ -122,7 +124,16 @@ const SinglePost = () => {
 
       try {
 
+        if ( Post?.postImage && !ImageDeleteIsLoding) {
+  
+          if (Post?.postImage !== "") {
+
+            await deleteImage({profileImage:  Post?.postImage})
+          }  
+        }
+
         await postDeleted({postId, postAuthor: userByUserId?._id})
+
       } catch (err) {
 
         console.error("Something went wrong!", err)
@@ -195,19 +206,19 @@ const SinglePost = () => {
           <article className={isFecthingStyle(onAnyIsfetching)}>
             {/* navigation display */}
 
-            <div className="lg:mb-8 lg:mt-8 mb-4 grid grid-flow-col justify-between text-stone-800">
+            <div className="lg:mb-8 lg:mt-8 mb-4 grid sxs:grid-flow-col sxs:justify-between text-stone-800">
 
               <small className='capitalize'>Home &gt; single &gt; {canOpen ? Post?.postCategory[0] : <div className='skeleton h-2 w-14 inline-block'></div>}</small>
 
               {/* user make favourite, edit post and delete post buttons */}
               {(byUserIdAction && Post?.postAuthor === userByUserId?._id) && 
-                <div className='px-2 mx-0.5 -mt-[3px]'>
+                <div className='sxs:px-2 sxs:mx-0.5 -mt-[3px] pt-3 sxs:pt-0'>
 
                   {/* Favourite */}
                   <button
                     type='button'
                     name="favouriteButton"
-                    className="text-[#f7c90d] cursor-pointer whitespace-nowrap font-lora tracking-wide font-semibold lg:text-base text-base md:text-sm mx-2 disabled:opacity-40" 
+                    className="text-[#f7c90d] cursor-pointer whitespace-nowrap font-lora tracking-wide font-semibold lg:text-base text-base md:text-sm sxs:mx-2 disabled:opacity-40" 
                     disabled={!canOpen}
                     title="favourite"
                     onClick={handleMarkFavourite}
@@ -244,7 +255,7 @@ const SinglePost = () => {
             </div>
 
             {/* Post Title start here */}   
-            <h1 className="my-1.5 text-stone-900 tracking-wide lg:text-4xl text-3xl font-bold font-lora first-letter:capitalize" title='title'>
+            <h1 className="my-1.5 text-stone-900 tracking-wide text-2xl lg:text-4xl sxs:text-3xl font-bold font-lora first-letter:capitalize" title='title'>
 
               {canOpen ? 
 
@@ -291,10 +302,8 @@ const SinglePost = () => {
                         dateTime={new Date(Post?.createdAt).toDateString()} 
                         className="whitespace-nowrap cursor-pointer mt-0.5 ml-0.5 inline-block text-xs lg:text-sm md:text-xs"
                       >{new Date(Post?.createdAt).toDateString()}</time>                    
-
-                      <span className='mx-2 text-sm md:text-sm lg:text-base text-neutral-500 cursor-pointer'>
-                        in 
-
+                        &nbsp;in
+                      <span className='text-sm md:text-sm lg:text-base text-neutral-500 cursor-pointer'>
                         <Link to={`/categories?category=${Post?.postCategory[0]}`}className='font-extrabold hover:text-neutral-700 capitalize'>
                           &nbsp;{Post.postCategory[0]}
                         </Link>              

@@ -4,6 +4,24 @@ import { MainDivider, SocialLinks, isFecthingStyle } from '../../../SharedAsset/
 import { JustTimeComponetStar } from '../SharedComponents'
 
 const Recommended = ({Posts, canOpen, isFetching}) => {
+
+  let newPosts 
+
+  if (canOpen) {
+
+    let getPosts = [...Posts]
+    newPosts = getPosts
+  }
+
+  canOpen && newPosts?.sort((a, b) => {
+
+    const A = a.optional?.shared
+    
+    const B = b.optional?.shared
+
+    return B - A; // Sort in descending order
+  });
+
   return (
     <section className='mt-2.5'>
 
@@ -22,7 +40,7 @@ const Recommended = ({Posts, canOpen, isFetching}) => {
         <div className={`pt-4 ${isFecthingStyle(isFetching)}`}>
 
           <JustTimeComponetStar 
-            Posts={canOpen && Posts?.slice(0, 5)}
+            Posts={newPosts?.slice(5, 10)}
             action={canOpen}
           />
         </div>

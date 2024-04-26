@@ -19,7 +19,8 @@ const FullSreenSidebar = ({closesidebar}) => {
        Posts = [...content]
     }
 
-    return Posts?.sort(() => Math.random() - 0.5)
+    Posts?.sort(() => Math.random() - 0.5)
+    return Posts
   }, [action, content])
 
   return (

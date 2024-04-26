@@ -10,7 +10,8 @@ const EditorsChioceAndDontMiss = ({Posts, Comments, canOpen, isFetching}) => {
 
   if (canOpen) {
 
-    newPosts = [...Posts?.sort(() => Math.random() - 0.5)]
+    let getPosts = [...Posts]
+    newPosts = getPosts
   }
 
   canOpen && newPosts?.sort((a, b) => {
