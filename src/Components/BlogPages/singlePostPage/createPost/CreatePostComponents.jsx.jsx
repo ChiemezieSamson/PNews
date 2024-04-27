@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
 import {BiImageAdd} from "react-icons/bi";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import CreatePostAside from "./CreatePostAside";
 import { ContentState, EditorState, convertFromHTML, convertToRaw } from 'draft-js'
 import draftToHtml from 'draftjs-to-html';
 import "../../../../../node_modules/react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import { useNavigate } from "react-router-dom";
-import { emptyCategories, selectAllPostCat } from '../../../../Reduxstore/Slices/PostsComponentSlices/postcategory/PostcategoriesSlice'
-import { emptyTag, selectAllPostTags } from '../../../../Reduxstore/Slices/PostsComponentSlices/postsTags/PostsTagsSlice'
-import { emptyOptional, selectAllPostOptionals } from '../../../../Reduxstore/Slices/PostsComponentSlices/PostsOptional/PostsOptionalSlice'
+import { selectAllPostCat } from '../../../../Reduxstore/Slices/PostsComponentSlices/postcategory/PostcategoriesSlice'
+import { selectAllPostTags } from '../../../../Reduxstore/Slices/PostsComponentSlices/postsTags/PostsTagsSlice'
+import { selectAllPostOptionals } from '../../../../Reduxstore/Slices/PostsComponentSlices/PostsOptional/PostsOptionalSlice'
 import { useCreateNewPostMutation, useUpdateExistingPostMutation } from "../../../../Reduxstore/Slices/posts/PostsSlice";
 import { isFecthingStyle, useWindowSize } from "../../../SharedAsset/SharedAssets";
 import PostWritePreview from "./editorPreview/postWritePreview";
@@ -20,7 +20,7 @@ import { publicFolder } from "../../../../data";
 
 const CreatePostComponents = ({state, post, postId, postAction, isFetching}) => {
   const [addNewPost, { isLoading , isFetching: CreatePostsIsfetching}] = useCreateNewPostMutation() // Redux function to create a new post
-  const [postUpdated, { isLoading: postUpdatedIsLoading, updateIsfetching }] = useUpdateExistingPostMutation()// Redux function to update a new post
+  const [postUpdated, { isLoading: postUpdatedIsLoading, updateIsfetching}] = useUpdateExistingPostMutation()// Redux function to update a new post
   const [uploadImage, {isLoading: uploadIsLoding}] = useImageUploadMutation() // Redux function to uploadImage to storage
   const [deleteImage, {isLoading: ImageDeleteIsLoding}] = useImageDeleteMutation() // Redux function to deleteImage to storage
 
@@ -32,7 +32,7 @@ const CreatePostComponents = ({state, post, postId, postAction, isFetching}) => 
   const [preview, setPreview] = useState(false) // handling the preview of the post preview component page design
   const [showSideBar, setShowSideBar] = useState(false) // handling the display action of the aside components
   const [errorText, setErrorText] = useState(false) /// text used to indicate that your category didn't save or there is an erro
-  const [errorText2, setErrorText2] = useState(false) /// text used to indicate that your category didn't save or there is an erro
+  const [errorText2, setErrorText2] = useState("") /// text used to indicate that your category didn't save or there is an erro
   const [isValid, setIsValid] = useState(true); // regular expressions
   const [runOnce, setRunOnce] = useState(false)
 
@@ -45,7 +45,6 @@ const CreatePostComponents = ({state, post, postId, postAction, isFetching}) => 
 
   const size = useWindowSize()
   const navigate = useNavigate();
-  const dispatch = useDispatch()
   const User = singleUser
   const canOpen = [postAction, userAction].every(Boolean)
   const CreateIsfetching = CreatePostsIsfetching || isFetching
@@ -58,8 +57,16 @@ const CreatePostComponents = ({state, post, postId, postAction, isFetching}) => 
 
    // handling setting the select value of Author
   const handleSetPostAuthor = (author) => {
+    
+    setPostAuthor(() => author?.target ? author?.target?.value : "")
+  }
 
-    setPostAuthor(() => author?.target?.value)
+
+  const handleResetAfterErro = () => {
+    if (errorText2) {
+
+      setErrorText2(() => "")
+    }
   }
 
   // handling setting the post title
@@ -97,7 +104,7 @@ const CreatePostComponents = ({state, post, postId, postAction, isFetching}) => 
 
   // handling setting image once selected from the user device
   const handleImage = async (e) => {
-    setErrorText2(() => false)
+    setErrorText2(() => "")
 
     if(e.target.value) {
 
@@ -154,51 +161,46 @@ const CreatePostComponents = ({state, post, postId, postAction, isFetching}) => 
 
     if (canSave) {
 
-      setErrorText2(() => false)
+      setErrorText2(() => "")
 
       try {
+        let empty 
 
         if(postId) {
-          if ( post?.postImage !== postImage) {
+          const sendPost = await postUpdated({postId, postAuthor, postTitle, postImage, postContent, postCategory, postTags, optional})
+          empty = sendPost
 
-            await uploadImage({data})          
-          }        
-  
-          await postUpdated({postId, postAuthor, postTitle, postImage, postContent, postCategory, postTags, optional})
-  
           if ( post?.postImage !== postImage) {
   
-            if (post?.postImage !== "") {
-  
-              await deleteImage({profileImage:  post?.postImage})
+            if (post?.postImage !== "" && sendPost) {
+              await uploadImage({data}) // upload the new image
+
+              await deleteImage({profileImage:  post?.postImage}) // delete the old image
             }  
           }
   
           navigate(`/single/${postId}`)
           setEditorState(() => EditorState.createWithContent(WritePoststate))
         } else {
+         const sendPost = await addNewPost({ postAuthor, postTitle, postImage, postContent , postCategory, postTags, optional }).unwrap()
+         empty = sendPost
 
-          if (postImage !== "") {
+          if (postImage !== "" && sendPost) {
   
             await uploadImage({data})          
           }    
-
-          await addNewPost({ postAuthor, postTitle, postImage, postContent , postCategory, postTags, optional }).unwrap()
         }
 
-        
-        dispatch(emptyCategories())
-        dispatch(emptyTag())
-        dispatch(emptyOptional())
-
-        setPostImage(() => "")
-        setPostTitle(() => "")
-        setPostAuthor(() => "")
-        setFile(() => "")
-        setEditorState(() => state)
+        if (empty) {
+          setPostImage(() => "")
+          setPostTitle(() => "")
+          setPostAuthor(() => "")
+          setFile(() => "")
+          setEditorState(() => state)
+        }
       } catch (err) {
 
-        setErrorText2(() => true)
+        setErrorText2(() => err)
         console.error(err)
       }
     }
@@ -243,11 +245,10 @@ const CreatePostComponents = ({state, post, postId, postAction, isFetching}) => 
     }
   },[isSuccess, isError, navigate])
 
-
   return (
     <div className="lg:grid lg:grid-cols-4 relative mb-10">
 
-      <div className="lg:order-2 text-left lg:col-span-1">
+      <div className="lg:order-2 text-left lg:col-span-1" onClick={handleResetAfterErro}>
 
         <CreatePostAside 
           postTitle={postTitle}
@@ -273,7 +274,12 @@ const CreatePostComponents = ({state, post, postId, postAction, isFetching}) => 
 
         {!preview ? 
           <>
-          {errorText2 ? <p className='text-xs text-rose-500 tracking-wider font-lora'>Failed to save the post</p> : "" }
+            {errorText2 ? 
+              <p className='text-xs text-rose-500 tracking-wider font-lora'>
+                {errorText2?.data?._message === 'Post validation failed' ? errorText2?.data?.message.slice(24, ) : "Failed to save the post"}
+              </p> : 
+              "" 
+            }
             <div className="mt-5">
 
               {/* Title input is here */}

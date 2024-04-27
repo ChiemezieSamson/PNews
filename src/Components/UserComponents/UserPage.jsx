@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react';
 import { NavLink, Outlet, useLocation, useNavigate} from 'react-router-dom';
-import { useWindowSize } from '../SharedAsset/SharedAssets';
+import { isFecthingStyle, useWindowSize } from '../SharedAsset/SharedAssets';
 import MyProfilePicture from './UserPageComponents/MyProfilePicture';
 import { useFetchedUserById } from '../SharedAsset/Spinners/userSpinner';
+import { WritePostButton } from '../ButtonAndOthers/Buttons';
 
 const UserPage = () => {
    // getting the user for authenticatin, authorisation and security
@@ -63,7 +64,7 @@ const UserPage = () => {
 
 
   return (
-    <div className={`${size.width >= 1316 ? "grid grid-cols-4 gap-x-4" : "grid grid-flow-row "} font-poppins`}>
+    <div className={`${size.width >= 1316 ? "grid grid-cols-4 gap-x-4" : "grid grid-flow-row "} font-poppins lg:mb-20`}>
 
       {/* user navigation list */}
       <ul className={`text-left ${size.width >= 1316 ? "col-span-1 max-h-56 mt-6" : "order-first xs:grid xs:grid-cols-2 mb-7"}`}>
@@ -84,7 +85,7 @@ const UserPage = () => {
 
       {/* user information content */}
       <div className={`${size.width >= 1316 ? "col-span-2" : "order-last"} bg-gray-200/40 overflow-x-hidden rounded-md`}>
-
+        {path !== "General" &&  <WritePostButton isFecthingStyle={isFecthingStyle} isFetching={isFetching} userAction={userAction}/>}
         <Outlet  context={[user, userAction, isFetching]}/>
       </div>
       

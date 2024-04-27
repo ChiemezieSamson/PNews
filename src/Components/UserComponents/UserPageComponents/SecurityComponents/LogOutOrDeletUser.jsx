@@ -52,7 +52,7 @@ const LogOutOrDeletUser = ({user, refetch, userAction}) => {
 
 
  // getting the email clicked on, command clicked on and opening the comfirmation box
-  const handleMakePrimaryButton = (e) => {
+  const handleGetTextContent = (e) => {
 
      // close the error message(if any), once the user change any input
      if(errMsgOn) {
@@ -122,35 +122,40 @@ const LogOutOrDeletUser = ({user, refetch, userAction}) => {
     
     if(canMakeChanges) {
 
-      if(canDelete && handelPassWordValidation(password, user)){
-  
-        try {
-          
-          await deleteUser({userId: user?._id, password})
+      if(canDelete) {
 
-          await loggingOut()
+        if(handelPassWordValidation(password, user)) {
 
-          setNavigateTo(() => true)
-        } catch (err) {
+          try {
+            
+            await deleteUser({userId: user?._id, password})
   
-          console.error("Something went wrong!", err)
-          setErrMsg('Failed to delete!');
-          setErrMsgOn(() => true)
-        }
+            await loggingOut()
+  
+            setNavigateTo(() => true)
+          } catch (err) {
+    
+            console.error("Something went wrong!", err)
+            setErrMsg('Failed to delete!');
+            setErrMsgOn(() => true)
+          }
+        }  
       } 
 
-      if (canLogOut && handelPassWordValidation(password, user)) {
+      if (canLogOut) {
+        if(handelPassWordValidation(password, user)) {
 
-        try {
-
-          await loggingOut()
-
-          setNavigateTo(() => true)
-        } catch (err) {
+          try {
   
-          console.error("Something went wrong!", err)
-          setErrMsg('Failed to logout!');
-          setErrMsgOn(() => true)
+            await loggingOut()
+  
+            setNavigateTo(() => true)
+          } catch (err) {
+    
+            console.error("Something went wrong!", err)
+            setErrMsg('Failed to logout!');
+            setErrMsgOn(() => true)
+          }
         }
       }
     }
@@ -198,7 +203,7 @@ const LogOutOrDeletUser = ({user, refetch, userAction}) => {
             name='saveusernewpassword' 
             className="mx-1 cursor-pointer text-sm sm:text-xl bg-[#bbbbbb] hover:bg-[#e4e4e4] text-neutral-600 tracking-wider px-5 py-2 rounded-md shadow 
             shadow-gray-400 transition-all duration-200 ease-linear capitalize font-extrabold disabled:opacity-40"
-            onClick={handleMakePrimaryButton}
+            onClick={handleGetTextContent}
             disabled={!userAction}
           >LogOut</button>
             
@@ -208,7 +213,7 @@ const LogOutOrDeletUser = ({user, refetch, userAction}) => {
             name='saveusernewpassword' 
             className='mx-1 cursor-pointer text-sm bg-rose-600 tracking-wider px-5 py-2 rounded-md shadow shadow-gray-400 
             sm:text-xl hover:bg-rose-400 text-white transition-all duration-200 ease-linear capitalize font-bold disabled:opacity-40'
-            onClick={handleMakePrimaryButton}
+            onClick={handleGetTextContent}
             disabled={!userAction}
           >Delete Account</button>
         </div>
@@ -220,7 +225,7 @@ const LogOutOrDeletUser = ({user, refetch, userAction}) => {
           onSubmitValidation={handleDelete}
           onWrongUserPassword={wrongPassword}
           handleClose={handleCloseGetUserPasswordForMakeAndRemove}
-          canDelete={canMakeChanges &&  handelPassWordValidation(password, user)}          
+          canDelete={canMakeChanges}          
           Userpassword={password}
           handleSetGetUserpassword={handleSetGetUserpassword}
           ButtonRef={ButtonRef}

@@ -15,6 +15,8 @@ const MyPosts = ({userAction}) => {
   const currentPage = parseInt(singlePost?.currentPage) 
   const totalPage = parseInt(singlePost?.totalPages)
 
+  console.log(posts);
+
 
   // handling the display or hidden of the whole log out component
   const handleOpenCloseChild = () => {

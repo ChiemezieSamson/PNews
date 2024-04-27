@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import { FaGripHorizontal, FaGripVertical } from 'react-icons/fa'
 import { Hanbugar3 } from "../../../ButtonAndOthers/Buttons"
-import { optionalAdded } from '../../../../Reduxstore/Slices/PostsComponentSlices/PostsOptional/PostsOptionalSlice'
+import { emptyOptional, optionalAdded } from '../../../../Reduxstore/Slices/PostsComponentSlices/PostsOptional/PostsOptionalSlice'
 import { useDispatch } from 'react-redux'
 import Author from './CreatePostAsideComponents/Author'
 import Optional from './CreatePostAsideComponents/Optional'
 import Tag from './CreatePostAsideComponents/Tag'
 import Category from './CreatePostAsideComponents/Category'
+import { emptyCategories } from '../../../../Reduxstore/Slices/PostsComponentSlices/postcategory/PostcategoriesSlice'
+import { emptyTag } from '../../../../Reduxstore/Slices/PostsComponentSlices/postsTags/PostsTagsSlice'
 
 
 const CreatePostAside = ({postTitle, handleAllPostContent, handleSetPostAuthor, postAuthor, canSave, handlePreview, preview,
@@ -147,6 +149,10 @@ const CreatePostAside = ({postTitle, handleAllPostContent, handleSetPostAuthor, 
     await handleAllPostContent() // handling calling of the function that save each post to the data base 
 
     if (canSave) {
+      dispatch(emptyCategories())
+      dispatch(emptyTag())
+      dispatch(emptyOptional())
+      handleSetPostAuthor("")
 
       for(let i = 0; i < checkedItemElemets?.length; i++) {
 
