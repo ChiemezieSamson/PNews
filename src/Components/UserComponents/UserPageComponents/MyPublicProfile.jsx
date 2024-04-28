@@ -26,7 +26,7 @@ const MyPublicProfile = () => {
   const [errMsgOn, setErrMsgOn] = useState(false) // Indicate that there is an error
   const [onChangeMade, setOnChangeMade] = useState(false) // make sure a change is made before allowing the button to save
 
-  const [nickNameIsValid, setNickNameIsValid] = useState(true); // regular expressions
+  const [nickNameIsValid, setNickNameIsValid] = useState(false); // regular expressions
   const [emailIsValid, setEmailIsValid] = useState(true); // regular expressions
   const [phoneNumberIsValid, setPhoneNumberIsValid] = useState(true); // regular expressions
   const [linkedInIsValid, setLinkedInIsValid] = useState(true); // regular expressions
@@ -37,7 +37,6 @@ const MyPublicProfile = () => {
   const [websiteValid, setwebsiteIsValid] = useState(true); // regular expressions
 
   const user = singleUser
-
 
   // handling setting the value of nick name
   const handleNickName = (e) => {
@@ -225,8 +224,7 @@ const MyPublicProfile = () => {
 
 
  // UPDATE USER PUBLIC PROFILE
-  const canSave = [nickname, biography, secondaryEmail, phone, linkedIn, twitter, facebook, instagram, youTube, website,
-    nickNameIsValid, onChangeMade].every(Boolean) && !isLoading
+  const canSave = [nickname, nickNameIsValid, onChangeMade].every(Boolean) && !isLoading
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -264,9 +262,13 @@ const MyPublicProfile = () => {
     if (userAction) {
 
       setNickname(() => user?.username)
+
+      if (user?.username) {
+        setNickNameIsValid(() => true)
+      }
       setBiography(() => user?.bio)
 
-      if(user?.email?.secondary.length > 0) {
+      if(user?.email?.secondary?.length > 0) {
 
         setSecondaryEmail(() => user?.email?.secondary[user?.email?.secondary?.length - 1])
       }

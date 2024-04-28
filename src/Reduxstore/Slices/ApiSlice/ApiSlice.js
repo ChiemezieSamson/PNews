@@ -8,8 +8,8 @@ import { Mutex } from "async-mutex";
 const mutex = new Mutex();
 
 const baseQuery = fetchBaseQuery({
-	baseUrl: "https://newblog-api-pwju.onrender.com/api/",
-	// baseUrl: "/",
+	// baseUrl: "https://newblog-api-pwju.onrender.com/api/",
+	baseUrl: "/",
 	credentials: "include",
 	prepareHeaders: (headers, { getState }) => {
 		const token = getState().auth.token;
