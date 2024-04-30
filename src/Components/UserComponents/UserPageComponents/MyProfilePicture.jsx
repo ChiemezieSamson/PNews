@@ -126,9 +126,10 @@ const MyProfilePicture = ({user, userAction, isFetching}) => {
       </div>
 
       {/* Image and image form */}
-      <div className="max-w-[200px] mx-auto h-full max-h-52 border-4 border-inherit overflow-hidden rounded-full text-white text group cursor-pointer shadow-md shadow-[rgba(0,0,0,.25)] relative mb-7">
+      <div className="max-w-[200px] mx-auto h-full max-h-52 border-4 border-inherit overflow-hidden rounded-full text-white text group cursor-pointer shadow-md shadow-[rgba(0,0,0,.25)] relative mb-7 
+      grid items-center justify-center">
 
-        <div className='relative after:absolute after:inset-0 after:bg-white/10 after:z-10 w-ful h-screen max-h-52'>
+        <div className='relative after:absolute after:inset-0 after:bg-white/10 after:z-10 w-ful h-screen max-h-52 grid items-center justify-center'>
 
           {userAction ? 
           <>

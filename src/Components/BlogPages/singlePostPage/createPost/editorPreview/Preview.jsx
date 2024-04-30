@@ -37,9 +37,12 @@ const Preview = ({editorText, postContent}) => {
                   domNode.attribs.loading = "lazy"
                 }
                 if(domNode.name === "iframe" ) {
+                  domNode.attribs.title = "YouTube Video"
                   domNode.attribs.allow = "accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                   domNode.attribs.referrerpolicy = "strict-origin-when-cross-origin" 
                   domNode.attribs.allowfullscreen = true 
+                  domNode.attribs.sandbox = "allow-same-origin allow-scripts allow-presentation"
+                  domNode.attribs.frameBorder = "0"
                   if(domNode.attribs.height === "100%" || domNode.attribs.height === "auto") {
                     domNode.attribs.height = "400px"
                   }

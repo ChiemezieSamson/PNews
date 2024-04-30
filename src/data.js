@@ -12,8 +12,8 @@ import {
 	FaYoutube,
 } from "react-icons/fa";
 
-export const publicFolder = "https://newblog-api-pwju.onrender.com/images/";
-// export const publicFolder = "http://localhost:5001/images/";
+// export const publicFolder = "https://newblog-api-pwju.onrender.com/images/";
+export const publicFolder = "http://localhost:5001/images/";
 // "proxy": "http://localhost:5001/api",
 
 export const parentCategoriesAndTags = [

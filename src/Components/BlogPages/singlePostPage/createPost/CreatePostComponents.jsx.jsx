@@ -343,7 +343,6 @@ const CreatePostComponents = ({state, post, postId, postAction, isFetching}) => 
             </form>
 
             <div className="postEditor">
-              
               <TextEditor 
                 editorState={editorState}
                 state={postId ? EditorState.createWithContent(state) : state}

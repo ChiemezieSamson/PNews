@@ -3,7 +3,7 @@ import { Editor } from 'react-draft-wysiwyg'
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 
 const TextEditor = ({editorState, state, setEditorState, userAction}) => {
-
+  
   return (
     <Editor 
       toolbarOnFocus

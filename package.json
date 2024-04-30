@@ -17,6 +17,7 @@
     "bcryptjs-react": "^2.4.6",
     "dompurify": "^2.4.3",
     "draft-js": "^0.11.7",
+    "draft-js-import-html": "^1.4.1",
     "draftjs-to-html": "^0.9.1",
     "eslint-config-react-app": "^7.0.1",
     "get-video-id": "^4.1.5",
@@ -57,7 +58,8 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "https://newblog-api-pwju.onrender.com/api",
+  "proxy1": "https://newblog-api-pwju.onrender.com/api",
+  "proxy": "http://localhost:5001/api",
   "devDependencies": {
     "autoprefixer": "^10.4.19",
     "postcss": "^8.4.38",

@@ -1,4 +1,4 @@
-import { ContentState,convertFromHTML} from 'draft-js';
+import { ContentState, convertFromHTML} from 'draft-js';
 import draftToHtml from 'draftjs-to-html';
 import { useFetchedPostById } from '../../../SharedAsset/Spinners/postsSpinner';
 import Spinner from '../../../SharedAsset/Spinners/Spinner';
@@ -21,6 +21,7 @@ const EditPost = () => {
   
   return (
     <div className="md:mt-20 md:mb-60">
+      {postId ? <p className='text-sm text-left text-rose-500 tracking-wider font-lora mt-6'>Remember to re-update your videos</p> : "" }
 
       {postAction ? 
 
