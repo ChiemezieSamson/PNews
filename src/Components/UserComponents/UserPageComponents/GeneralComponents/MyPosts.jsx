@@ -9,13 +9,10 @@ const MyPosts = ({userAction}) => {
   const [page, setPage] = useState(1)
   const [openUserPost, setOpenUserPost] = useState(false) // use to open and close the Posts section
   const {singlePost, postAction, isFetching} = useFetchedPostByUserId(page)
- 
 
   const posts = singlePost?.post
   const currentPage = parseInt(singlePost?.currentPage) 
   const totalPage = parseInt(singlePost?.totalPages)
-
-  console.log(posts);
 
 
   // handling the display or hidden of the whole log out component

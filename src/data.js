@@ -202,6 +202,11 @@ export const otherPages = [
 	},
 	{
 		id: 3,
+		page: "Terms of Service",
+		to: "termsofservice",
+	},
+	{
+		id: 4,
 		page: "Privacy & Policy",
 		to: "privacy&policy",
 	},

@@ -22,7 +22,7 @@ const AdditionalResources = () => {
     {
       id: 2,
       name: "Terms of Service",
-      link: "",
+      link: "/termsofservice",
     }
   ]
 

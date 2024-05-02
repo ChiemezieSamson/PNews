@@ -29,6 +29,7 @@ import PaginationPages from "./Components/BlogPages/PaginationComponents/paginat
 import OtherPaginationPages from "./Components/BlogPages/PaginationComponents/paginationPage/OtherPaginationPages";
 import SearchPage from "./Components/BlogPages/searchPage/SearchPage";
 import General from "./Components/UserComponents/UserPageComponents/General";
+import TermsOfService from "./Components/BlogPages/TermsOfService/TermsOfService";
 
 const App = createBrowserRouter([
 	{
@@ -169,6 +170,11 @@ const App = createBrowserRouter([
 			{
 				path: "about",
 				element: <About />,
+				errorElement: <NotFound />,
+			},
+			{
+				path: "termsofservice",
+				element: <TermsOfService />,
 				errorElement: <NotFound />,
 			},
 			{

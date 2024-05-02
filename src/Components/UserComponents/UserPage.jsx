@@ -64,7 +64,7 @@ const UserPage = () => {
 
 
   return (
-    <div className={`${size.width >= 1316 ? "grid grid-cols-4 gap-x-4" : "grid grid-flow-row "} font-poppins lg:mb-20`}>
+    <div className={`${size.width >= 1316 ? "grid grid-cols-4 gap-x-4" : "grid grid-flow-row "} font-poppins lg:mb-32`}>
 
       {/* user navigation list */}
       <ul className={`text-left ${size.width >= 1316 ? "col-span-1 max-h-56 mt-6" : "order-first xs:grid xs:grid-cols-2 mb-7"}`}>
